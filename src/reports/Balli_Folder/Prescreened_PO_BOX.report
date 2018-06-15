@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Lead.Call_Center_Agent__c</field>
+    </columns>
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>STREET</field>
+    </columns>
+    <columns>
+        <field>EMAIL</field>
+    </columns>
+    <columns>
+        <field>Lead.Pre_Screen__c</field>
+    </columns>
+    <columns>
+        <field>Lead.LeadScore__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>STREET</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>contains</operator>
+            <value>PO BOX</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Pre_Screen__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>PO Box</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Call_Center_Agent__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>,Pat Greenwood,Kelley Village,&quot; &quot;</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Prescreened PO BOX</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadList</reportType>
+    <scope>org</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Lead.Call_Center_Agent__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <interval>INTERVAL_LAST30</interval>
+    </timeFrameFilter>
+</Report>

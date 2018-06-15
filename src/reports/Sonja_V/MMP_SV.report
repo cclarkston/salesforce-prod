@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>number</bucketType>
+        <developerName>BucketField_4641818</developerName>
+        <masterLabel>In/Out Market (50 miles)</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Lead$Distance_To_Center__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <to>50</to>
+            </sourceValues>
+            <value>In Market</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>50</from>
+            </sourceValues>
+            <value>Out of Market</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_96083454</developerName>
+        <masterLabel>Pre Screen</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Pre_Screen__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Green</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Yellow</sourceValue>
+            </sourceValues>
+            <value>GY</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Red</sourceValue>
+            </sourceValues>
+            <value>Red</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Not Checked</sourceValue>
+            </sourceValues>
+            <value>Not Checked</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Insufficient Information</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>PO Box</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Website Down-No Prescreen</sourceValue>
+            </sourceValues>
+            <value>Other</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Blue (No Hit)</sourceValue>
+            </sourceValues>
+            <value>Blue</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_99336774</developerName>
+        <masterLabel>Team</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Contact_Agency__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Infocision</sourceValue>
+            </sourceValues>
+            <value>Infocision</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>number</bucketType>
+        <developerName>BucketField_96778142</developerName>
+        <masterLabel>isScheduled</masterLabel>
+        <nullTreatment>z</nullTreatment>
+        <sourceColumnName>Lead.Consult_Inventory__r$isConsultScheudled__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <to>0</to>
+            </sourceValues>
+            <value>Not Scheduled</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>0</from>
+            </sourceValues>
+            <value>Scheduled</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>Lead$Name</field>
+    </columns>
+    <columns>
+        <field>Lead.Consult_Inventory__r$Name</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Lead$Inbound_Call__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Dental Inquiry</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Call_Result__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Consultation Scheduled,Not Scheduled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Last_Marketing_Source__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>CCWebsiteOS,CCWebsiteCC,CCWebsitePK</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Center_Name__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notContain</operator>
+            <value>Monterrey,Tampa – Affiliate,Metro Detroit,New Jersey - Dental Arts of South Jersey,Philadelphia - By Design Dental Implant Center</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Sales_Alert__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notContain</operator>
+            <value>CONTACT-CM</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_99336774</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_96083454</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_4641818</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_96778142</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>MMP - SV</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Prospective_Patients_with_Consult_Inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead$CreatedDate</dateColumn>
+        <endDate>2018-03-31</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2018-01-01</startDate>
+    </timeFrameFilter>
+</Report>

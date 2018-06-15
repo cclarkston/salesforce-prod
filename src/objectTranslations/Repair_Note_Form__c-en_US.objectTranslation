@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Repair Note Form</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Repair Note Forms</value>
+    </caseValues>
+    <fields>
+        <label><!-- Abutment Screw Fracture Location --></label>
+        <name>Abutment_Screw_Fracture_Location__c</name>
+    </fields>
+    <fields>
+        <label><!-- Abutment Screw Loosening Location --></label>
+        <name>Abutment_Screw_Loosening_Location__c</name>
+    </fields>
+    <fields>
+        <label><!-- Abutment Screw Tightening Location --></label>
+        <name>Abutment_Screw_Tightening_Location__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Repair Note Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Age of Prosthesis Months --></label>
+        <name>Age_of_Prosthesis_Months__c</name>
+    </fields>
+    <fields>
+        <label><!-- Age of Prosthesis Years --></label>
+        <name>Age_of_Prosthesis_Years__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bar Fracture Location --></label>
+        <name>Bar_Fracture_Location__c</name>
+    </fields>
+    <fields>
+        <label><!-- Clinical Apt Calendar --></label>
+        <name>Clinical_Apt_Calendar__c</name>
+        <relationshipLabel><!-- Repair Note Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Clinical Note Instance --></label>
+        <name>Clinical_Note_Instance__c</name>
+        <relationshipLabel><!-- Repair Note Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Denture Base Fracture Location --></label>
+        <name>Denture_Base_Fracture_Location__c</name>
+    </fields>
+    <fields>
+        <label><!-- IsActive --></label>
+        <name>IsActive__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opposing Arch --></label>
+        <name>Opposing_Arch__c</name>
+        <picklistValues>
+            <masterLabel>Complete Denture</masterLabel>
+            <translation><!-- Complete Denture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Crown/Bridge</masterLabel>
+            <translation><!-- Crown/Bridge --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Full arch implant prosthesis</masterLabel>
+            <translation><!-- Full arch implant prosthesis --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Natural Dentition</masterLabel>
+            <translation><!-- Natural Dentition --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Partial Denture</masterLabel>
+            <translation><!-- Partial Denture --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Prosthesis Stage --></label>
+        <name>Prosthesis_Stage__c</name>
+        <picklistValues>
+            <masterLabel>Final-Bar Acrylic</masterLabel>
+            <translation><!-- Final-Bar Acrylic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Final-Zirconia</masterLabel>
+            <translation><!-- Final-Zirconia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Interim</masterLabel>
+            <translation><!-- Interim --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Trial-PMMA</masterLabel>
+            <translation><!-- Trial-PMMA --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Prosthesis Type Other --></label>
+        <name>Prosthesis_Type_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prosthesis Type --></label>
+        <name>Prosthesis_Type__c</name>
+        <picklistValues>
+            <masterLabel>CD</masterLabel>
+            <translation><!-- CD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mandibular Arch</masterLabel>
+            <translation><!-- Mandibular Arch --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Maxillary Arch</masterLabel>
+            <translation><!-- Maxillary Arch --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>RPD</masterLabel>
+            <translation><!-- RPD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>S/M</masterLabel>
+            <translation><!-- S/M --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Prosthetic Screw Fracture Location --></label>
+        <name>Prosthetic_Screw_Fracture_Location__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prosthetic Screw Tightening Location --></label>
+        <name>Prosthetic_Screw_Tightening_Location__c</name>
+    </fields>
+    <fields>
+        <label><!-- Repair Apt Type --></label>
+        <name>Repair_Apt_Type__c</name>
+        <picklistValues>
+            <masterLabel>Redeliver</masterLabel>
+            <translation><!-- Redeliver --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Repair</masterLabel>
+            <translation><!-- Repair --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rework</masterLabel>
+            <translation><!-- Rework --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unknown</masterLabel>
+            <translation><!-- Unknown --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Repair Reason Other --></label>
+        <name>Repair_Reason_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Repair Reason --></label>
+        <name>Repair_Reason__c</name>
+        <picklistValues>
+            <masterLabel>Material Overload</masterLabel>
+            <translation><!-- Material Overload --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Trauma</masterLabel>
+            <translation><!-- Trauma --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wear: Bruxism</masterLabel>
+            <translation><!-- Wear: Bruxism --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wear: Normal</masterLabel>
+            <translation><!-- Wear: Normal --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Repair Work Type Other --></label>
+        <name>Repair_Work_Type_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Repair Work Type --></label>
+        <name>Repair_Work_Type__c</name>
+        <picklistValues>
+            <masterLabel>Abutment Fracture</masterLabel>
+            <translation><!-- Abutment Fracture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Abutment screw fracture</masterLabel>
+            <translation><!-- Abutment screw fracture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Abutment screw loosening</masterLabel>
+            <translation><!-- Abutment screw loosening --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bar Fracture</masterLabel>
+            <translation><!-- Bar Fracture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denture Base Fracture</masterLabel>
+            <translation><!-- Denture Base Fracture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prosthetic screw fracture</masterLabel>
+            <translation><!-- Prosthetic screw fracture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tooth Debonding</masterLabel>
+            <translation><!-- Tooth Debonding --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tooth Fracture</masterLabel>
+            <translation><!-- Tooth Fracture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Zirconia Chip / Fracture</masterLabel>
+            <translation><!-- Zirconia Chip / Fracture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Zirconia Coping Failure</masterLabel>
+            <translation><!-- Zirconia Coping Failure --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Requested By --></label>
+        <name>Requested_By__c</name>
+        <picklistValues>
+            <masterLabel>Patient</masterLabel>
+            <translation><!-- Patient --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prosthodontist</masterLabel>
+            <translation><!-- Prosthodontist --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Rework Completed Other --></label>
+        <name>Rework_Completed_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rework Completed --></label>
+        <name>Rework_Completed__c</name>
+        <picklistValues>
+            <masterLabel>Abutment screw tightening</masterLabel>
+            <translation><!-- Abutment screw tightening --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Add Acrylic</masterLabel>
+            <translation><!-- Add Acrylic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Occlusal Adjustment</masterLabel>
+            <translation><!-- Occlusal Adjustment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prosthetic screw tightening</masterLabel>
+            <translation><!-- Prosthetic screw tightening --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Reduce Acrylic</masterLabel>
+            <translation><!-- Reduce Acrylic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Retread</masterLabel>
+            <translation><!-- Retread --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Rework Reason Other --></label>
+        <name>Rework_Reason_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rework Reason --></label>
+        <name>Rework_Reason__c</name>
+        <picklistValues>
+            <masterLabel>Bite Modification</masterLabel>
+            <translation><!-- Bite Modification --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Esthetic Correction</masterLabel>
+            <translation><!-- Esthetic Correction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Excess Wear</masterLabel>
+            <translation><!-- Excess Wear --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inadequate Cantilever Support</masterLabel>
+            <translation><!-- Inadequate Cantilever Support --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inadequate Framework Support</masterLabel>
+            <translation><!-- Inadequate Framework Support --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Screw Loosening</masterLabel>
+            <translation><!-- Screw Loosening --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Structural Modification</masterLabel>
+            <translation><!-- Structural Modification --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Time in Lab Minutes --></label>
+        <name>Time_in_Lab_Minutes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Time in Lab Hours --></label>
+        <name>Time_in_Lab__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tooth Debonding Location --></label>
+        <name>Tooth_Debonding_Location__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tooth Fracture Location --></label>
+        <name>Tooth_Fracture_Location__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

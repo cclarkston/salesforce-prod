@@ -1,0 +1,2007 @@
+<apex:page controller="ctrl_pecscorecard" sidebar="false"  action="{!check_for_actions}">
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}"  />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+
+<style type="text/css" media="print">  
+  span.patient_name {
+    display:none;
+  }
+  
+  span.patient_initials {
+    visibility: visible !important;
+  }
+  
+  table.print_break {
+    page-break-after:always;  
+  }
+  
+  td.right_border {
+    border:0px; 
+    right-border:0px;
+  }
+
+  img.skiplink {
+    display:none;
+  }
+
+  div.bodyDiv {
+    border:0px;
+  }
+      
+  div.bPageHeader {
+    display:none;
+  }  
+  
+  div.bPageFooter {
+    display:none;
+  } 
+  
+  div.no_print {
+    display:none; 
+  }    
+</style>
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+
+
+<script>
+var ie_check = false;
+var ie_ver; 
+
+function getInternetExplorerVersion()
+// Returns the version of Internet Explorer or a -1
+// (indicating the use of another browser).
+{
+  var rv = -1; // Return value assumes failure.
+  if (navigator.appName == 'Microsoft Internet Explorer') {
+    var ua = navigator.userAgent;
+    var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+    if (re.exec(ua) != null)
+      rv = parseFloat( RegExp.$1 );
+  }
+  return rv;
+}
+
+function ietruebody(){
+return (document.compatMode && document.compatMode!="BackCompat")? document.documentElement : document.body
+}
+
+var ie=document.all;
+var ns6=document.getElementById && !document.all
+var offsetxpoint=-250;
+var offsetypoint=20;
+
+function apt_modal(e) {
+  getScrollXY() ;
+  alertSize();
+  if(!ie_check)
+    ie_ver = getInternetExplorerVersion();    
+//  alert('Height : ' + scrH + ' Width : ' + scrW + ' X Pos : ' + scrX + ' Y Pos : ' + scrY + ' PageY : ' + e.pageY + ' PageX : ' + e.pageX);  
+  if (! document.styleSheets) return
+    var CSSRules;  // IE uses rules...
+    for (var i = 0; i < (document.styleSheets.length -1); i++) {
+        (document.styleSheets[0].cssRules) ? CSSRules = 'cssRules' : CSSRules = 'rules';
+        var my_ref = document.styleSheets[i].href || 'Unknown';
+        //alert(my_ref);
+        if(my_ref.indexOf("modal") != -1) {     
+        for (var j = 0; j < document.styleSheets[i][CSSRules].length; j++) {                             
+            if (document.styleSheets[i][CSSRules][j].selectorText == '.modalPopup_outer') {  
+             // alert(my_ref);
+             // alert('Test');                        
+              var curX=(ns6)?e.pageX : e.clientX+ietruebody().scrollLeft;
+              var curY=(ns6)?e.pageY : e.clientY+ietruebody().scrollTop;
+    //          alert('Cur X: ' + curX + ' Cur Y : ' + curY);
+      //        alert('ietruebody.clientwidth : ' + ietruebody().clientWidth + ' Client X : ' + e.clientX + ' Offset : ' + offsetxpoint );
+              var rightedge=ie&&!window.opera? e.clientX+offsetxpoint + 500 : e.clientX+offsetxpoint-20 + 500;
+              var bottomedge=ie&&!window.opera? ietruebody().clientHeight-e.clientY-offsetypoint : window.innerHeight-e.clientY-offsetypoint-20
+        //      alert('Right Edge : ' + rightedge + ' bottom edge : ' + bottomedge);
+          //    alert('Width : ' + document.styleSheets[i][CSSRules][j].style.width );              
+              var leftedge=(offsetxpoint<0)? offsetxpoint*(-1) : -1000
+            //  alert('Left Edge : ' + leftedge);
+              var newleft;
+              var newtop;             
+               
+              if (rightedge>scrW)
+                newleft = curX-500+"px";   
+              else if (curX<leftedge)
+                newleft = curX;
+              else
+                newleft = curX+offsetxpoint+"px"; 
+       //       alert(newleft);
+              document.styleSheets[i][CSSRules][j].style.left = newleft; 
+              if(curY-scrY<300) 
+                newtop = scrY-75;
+              else
+                newtop = curY-300;
+              document.styleSheets[i][CSSRules][j].style.top = newtop+"px";                                          
+      }
+    } 
+    }  
+  }
+  display_consult_list();       
+}
+
+function task_modal(e) {
+  getScrollXY() ;
+  alertSize();
+  if(!ie_check)
+    ie_ver = getInternetExplorerVersion();    
+//  alert('Height : ' + scrH + ' Width : ' + scrW + ' X Pos : ' + scrX + ' Y Pos : ' + scrY + ' PageY : ' + e.pageY + ' PageX : ' + e.pageX);  
+  if (! document.styleSheets) return
+    var CSSRules;  // IE uses rules...
+    for (var i = 0; i < (document.styleSheets.length -1); i++) {
+        (document.styleSheets[0].cssRules) ? CSSRules = 'cssRules' : CSSRules = 'rules';
+        var my_ref = document.styleSheets[i].href || 'Unknown';
+        //alert(my_ref);
+        if(my_ref.indexOf("modal") != -1) {     
+        for (var j = 0; j < document.styleSheets[i][CSSRules].length; j++) {                             
+            if (document.styleSheets[i][CSSRules][j].selectorText == '.modalPopup_outer') {  
+             // alert(my_ref);
+             // alert('Test');                        
+              var curX=(ns6)?e.pageX : e.clientX+ietruebody().scrollLeft;
+              var curY=(ns6)?e.pageY : e.clientY+ietruebody().scrollTop;
+    //          alert('Cur X: ' + curX + ' Cur Y : ' + curY);
+      //        alert('ietruebody.clientwidth : ' + ietruebody().clientWidth + ' Client X : ' + e.clientX + ' Offset : ' + offsetxpoint );
+              var rightedge=ie&&!window.opera? e.clientX+offsetxpoint + 500 : e.clientX+offsetxpoint-20 + 500;
+              var bottomedge=ie&&!window.opera? ietruebody().clientHeight-e.clientY-offsetypoint : window.innerHeight-e.clientY-offsetypoint-20
+        //      alert('Right Edge : ' + rightedge + ' bottom edge : ' + bottomedge);
+          //    alert('Width : ' + document.styleSheets[i][CSSRules][j].style.width );              
+              var leftedge=(offsetxpoint<0)? offsetxpoint*(-1) : -1000
+            //  alert('Left Edge : ' + leftedge);
+              var newleft;
+              var newtop;             
+               
+              if (rightedge>scrW)
+                newleft = curX-500+"px";   
+              else if (curX<leftedge)
+                newleft = curX;
+              else
+                newleft = curX+offsetxpoint+"px"; 
+       //       alert(newleft);
+              document.styleSheets[i][CSSRules][j].style.left = newleft; 
+              if(curY-scrY<300) 
+                newtop = scrY-75;
+              else
+                newtop = curY-300;
+              document.styleSheets[i][CSSRules][j].style.top = newtop+"px";                                          
+      }
+    } 
+    }  
+  }
+  display_callback_list();       
+}
+</script>
+
+<style>
+  span.patient_initials {
+    visibility: hidden;
+  }
+
+  hr.style-fade {
+    border: 0;
+    height: 2px;
+    width:1000px;
+    display:block;  
+  background-image: -webkit-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0)); 
+    background-image:    -moz-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0)); 
+    background-image:     -ms-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0)); 
+    background-image:      -o-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0)); 
+  }
+
+  p.print_apt {
+    display:block;
+    border:1px solid black;
+    padding-top:5px;
+    padding-bottom:10px;
+    margin-bottom:10px;    
+    padding-right:7px;
+    padding-left:7px;
+    
+  }
+
+  div.bPageHeader {
+    z-index:-1;  
+  }
+  
+  div.searchBoxClearContainer {
+    z-index: 5;   
+  }
+  
+  div#tabContainer {
+    z-index:-1;
+  } 
+ 
+ span.blank {
+    font-style:italic;
+    font-weight:bold;    
+  }    
+  
+  table.history {
+    font-family:verdana,arial;
+  }
+   
+  table.history tr.control {
+    font-weight:bold;
+    font-size:10pt;
+  }
+   
+  table.history tr.control td {
+    border-bottom:1px solid black;
+    padding-bottom:3px;    
+    empty-cells:hide;  
+  }
+     
+  table.history tr.hodd td {
+    text-align:left;  
+    padding-top:2px; padding-bottom:3px;
+    font-size:10pt;
+    border-bottom:1px dashed #5789AE; 
+    empty-cells:hide;      
+  }
+  
+  table.history tr.heven {
+    background-color:#C9E4E4;
+  }
+   
+  table.history tr.heven td {
+    text-align:left;  
+    padding-top:2px; padding-bottom:3px;
+    font-size:10pt;
+    border-bottom:1px dashed #5789AE; 
+    empty-cells:hide;       
+  }
+
+  .modalPopup_history{
+     display:inline-block;    
+     background-color: white;
+     border-width: 1px;
+     border-style: solid;
+     padding:0px;     
+     width:100%;
+     position:relative;
+     left:-1px;
+     height:200px;
+     overflow:auto;  
+  }    
+     
+  input:focus {
+        background:#E8E8D0;  
+  }
+  
+  tr.what_top {
+    background-color:#5789AE;
+  }
+  
+  tr.what_top td {
+    font-weight:bold;
+    color:white;
+    text-align:center;
+    font-size:14pt;
+    padding-top:6px;
+    padding-bottom:6px;
+  }
+  
+  tr.what_sub {
+    background-color:#d7eff2;
+  }
+  
+  tr.what_sub td {
+    padding-top:4px;
+    padding-left:10px;
+    text-align:left;
+    font-size:11pt;
+    padding-bottom:4px;
+    font-weight:bold;
+    font-family:arial;
+  }
+  
+  tr.score_header {
+    background-color:#eff2d7;
+  }
+  
+  tr.score_header td {
+    font-size:11pt;
+    padding-bottom:3px;
+  }
+  
+  tr.score_header td.score_name {
+    padding-left:5px;
+    font-weight:bold;
+  }
+  
+  tr.score_header td.score_cell {
+    text-align:center;
+  }
+  
+  tr.score_header td.score_description {
+    padding-left:5px;
+    line-height:20px;
+  }
+  
+  tr.score_feedback td {
+    padding-left:10px;
+    font-style:italic;
+    padding-top:2px;
+    padding-bottom:2px;
+  }
+  
+  p.navbar {
+    border-top:1px solid black;
+    border-bottom:1px solid black;
+    font-weight:bold;
+    font-size:14pt;
+    padding-top:1px;
+    padding-bottom:1px;
+  }
+  
+  span.selected-gradient {
+    display:inline-block;
+    height:25px;
+    padding-top:3px;
+    padding-left:50px;
+    padding-right:50px;    
+    background: #4588b2; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzQ1ODhiMiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjM0JSIgc3RvcC1jb2xvcj0iI2JiZTlmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjY2JSIgc3RvcC1jb2xvcj0iI2JiZTlmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0YThhYjIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #4588b2 0%, #bbe9ff 34%, #bbe9ff 66%, #4a8ab2 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4588b2), color-stop(34%,#bbe9ff), color-stop(66%,#bbe9ff), color-stop(100%,#4a8ab2)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #4588b2 0%,#bbe9ff 34%,#bbe9ff 66%,#4a8ab2 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #4588b2 0%,#bbe9ff 34%,#bbe9ff 66%,#4a8ab2 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #4588b2 0%,#bbe9ff 34%,#bbe9ff 66%,#4a8ab2 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #4588b2 0%,#bbe9ff 34%,#bbe9ff 66%,#4a8ab2 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4588b2', endColorstr='#4a8ab2',GradientType=0 ); /* IE6-8 */
+  }
+  
+  span.non-gradient {
+    display:inline-block;
+    height:25px;
+    padding-top:3px;
+            vertical-align:center;
+    padding-left:50px;
+    padding-right:50px;
+    background: #408080; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzQwODA4MCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjM0JSIgc3RvcC1jb2xvcj0iI2M5ZTRlNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjY2JSIgc3RvcC1jb2xvcj0iI2M5ZTRlNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0MDgwODAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #408080 0%, #c9e4e4 34%, #c9e4e4 66%, #408080 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#408080), color-stop(34%,#c9e4e4), color-stop(66%,#c9e4e4), color-stop(100%,#408080)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #408080 0%,#c9e4e4 34%,#c9e4e4 66%,#408080 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #408080 0%,#c9e4e4 34%,#c9e4e4 66%,#408080 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #408080 0%,#c9e4e4 34%,#c9e4e4 66%,#408080 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #408080 0%,#c9e4e4 34%,#c9e4e4 66%,#408080 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#408080', endColorstr='#408080',GradientType=0 ); /* IE6-8 */
+  }
+</style>
+
+<!--[if gte IE 9]>
+  <style type="text/css">
+    .non-gradient {
+       filter: none;
+    }
+    
+    .selected-gradient {
+       filter: none;
+    }
+  </style>
+<![endif]-->
+
+
+<apex:form >
+<apex:actionFunction oncomplete="default_cursor(this);"  action="{!display_apt_list}" name="display_consult_list" reRender="modal_holder" />
+<apex:actionFunction oncomplete="default_cursor(this);"  action="{!display_task_list}" name="display_callback_list" reRender="modal_holder" />
+<apex:actionFunction oncomplete="default_cursor(this);"  action="{!view_pec_consult_tab}" name="pec_consult_tab" reRender="main_holder" />
+<apex:actionFunction oncomplete="default_cursor(this);"  action="{!view_pec_doctor_download_tab}" name="pec_doctor_download_tab" reRender="main_holder" />
+<apex:actionFunction oncomplete="default_cursor(this);"  action="{!view_pec_solutions_dialogue_tab}" name="pec_solutions_dialogue_tab" reRender="main_holder" />
+<apex:actionFunction oncomplete="default_cursor(this);"  action="{!view_doctor_consult_tab}" name="doctor_consult_tab" reRender="main_holder" />
+<apex:actionFunction oncomplete="default_cursor(this);"  action="{!view_financial_needs_tab}" name="financial_needs_tab" reRender="main_holder" />
+<apex:actionFunction oncomplete="default_cursor(this);" action="{!quick_save_scorecard}" name="auto_save" rerender="" />
+
+<apex:outputpanel id="scorecard_header_holder">
+
+<apex:outputPanel layout="block" id="scorecard_header_view" rendered="{!if(display_mode=='View',true,false)}" style="padding-bottom:1em;">
+<span style="font-weight:bold;font-size:18pt;padding-left:80px;"><apex:outputText value="{!card_type}" /> Coaching for :&nbsp;&nbsp;<apex:outputfield value="{!pscore.Pec_Scored__c}" /></span>
+<hr class="style-fade" /><br />
+<table style="width:1000px;">
+<tr>
+  <td width="40%" style="padding-left:50px;">
+    <apex:outputpanel rendered="{!if(card_type=='Consult',true,false)}">
+      <span style="display:block;padding-bottom:7px;">
+      <span style="font-weight:bold;display:inline-block;width:75px;">Consult :</span>
+        <apex:outputtext value="{!consult_desc}" /> 
+      </span>
+      <span style="display:block;padding-bottom:7px;">
+      <span style="font-weight:bold;display:inline-block;width:75px;">Patient :</span>
+        <span class="patient_name"><apex:outputfield value="{!pscore.Account__c}" /></span>
+        <span class="patient_initials">{!patient_initials}</span>
+      </span>
+      
+    </apex:outputPanel>
+    
+    <apex:outputpanel rendered="{!if(card_type=='Call Back',true,false)}">
+      <span style="display:block;padding-bottom:7px;">
+      <span style="font-weight:bold;display:inline-block;width:75px;">Task Date :</span>
+        <apex:outputtext value="{!task_time}" /> 
+      </span>
+      <span style="display:block;padding-bottom:7px;">
+      <span style="font-weight:bold;display:inline-block;width:75px;">Subject :</span>
+        <apex:outputfield value="{!callback_task.subject}" />
+      </span>
+      <span style="display:block;padding-bottom:7px;">
+      <span style="font-weight:bold;display:inline-block;width:75px;">Outcome :</span>
+        <apex:outputfield value="{!callback_task.Outcome__c}" />
+      </span>
+      <span style="display:block;padding-bottom:7px;">
+      <span style="font-weight:bold;display:inline-block;width:75px;">Comments :</span>
+        <apex:outputfield value="{!callback_task.description}" />
+      </span>
+    </apex:outputPanel>
+    <br />
+      <span style="display:block;padding-bottom:7px;font-weight:bold;font-size:14pt;">
+      <span style="display:inline-block;width:75px;">Score : </span>
+        <apex:outputText value="{0,number,##0.0 %}"  style="color:red;">
+          <apex:param value="{!if(pscore.Total_Possible_Score__c==0,0,pscore.Total_Score__c/pscore.Total_Possible_Score__c)}" />     
+        </apex:outputtext>
+      </span>
+  </td>
+  <td style="padding-left:10px;">
+    <apex:variable var="rowclassname" value="accs" />
+    <table style="width:100%" class="accs_details">
+      <tr class="control">
+        <td width="40%">Score Date :&nbsp;<apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+          <apex:param value="{!pscore.Score_Date__c}" /> 
+        </apex:outputText>
+        </td>
+        <td width="20%">This Month</td>
+        <td width="20%">Last Month</td>
+        <td width="20%">YTD</td>
+      </tr>
+      <tr class="{!rowclassname}">
+      <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+        <td class="indent">True Close Rate</td>
+        <td class="right"><apex:outputText value="{0,number,##0.0}" >
+          <apex:param value="{!if(consults_mtd==0,0,(starts_mtd + cancels_mtd)/consults_mtd * 100)}" />     
+        </apex:outputtext></td> 
+        <td class="right"><apex:outputText value="{0,number,##0.0}" >
+          <apex:param value="{!if(consults_last_month==0,0,(starts_last_month + cancels_last_month)/consults_last_month * 100)}" />     
+        </apex:outputtext></td>
+        <td class="right"><apex:outputText value="{0,number,##0.0}" >
+          <apex:param value="{!if(consults_ytd==0,0,(starts_ytd + cancels_ytd)/consults_ytd * 100)}" />     
+        </apex:outputtext></td>  
+      </tr>
+      <!--<tr class="{!rowclassname}">
+      <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+        <td class="indent">Cancellation Rate</td>
+        <td class="right"><apex:outputText value="{0,number,##0.0}" >
+          <apex:param value="{!if(cancels_mtd==0,0,(starts_mtd / cancels_mtd) * 100)}" />     
+        </apex:outputtext></td> 
+        <td class="right"><apex:outputText value="{0,number,##0.0}" >
+          <apex:param value="{!if(cancels_last_month==0,0,(starts_last_month / cancels_last_month) * 100)}" />     
+        </apex:outputtext></td>
+        <td class="right"><apex:outputText value="{0,number,##0.0}" >
+          <apex:param value="{!if(cancels_ytd==0,0,(starts_ytd / cancels_ytd) * 100)}" />     
+        </apex:outputtext></td>  
+      </tr>-->
+      <tr class="{!rowclassname}">
+      <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+        <td class="indent">RainMaker Score</td>
+        <td class="right"><apex:outputText value="{0,number,##0.0 %}" >
+          <apex:param value="{!rainmaker_mtd}" />     
+        </apex:outputtext></td> 
+        <td class="right"><apex:outputText value="{0,number,##0.0 %}" >
+          <apex:param value="{!rainmaker_last_month}" />     
+        </apex:outputtext></td>
+        <td class="right"><apex:outputText value="{0,number,##0.0 %}" >
+          <apex:param value="{!rainmaker_ytd}" />     
+        </apex:outputtext></td>  
+      </tr>      
+      <tr class="{!rowclassname}">
+      <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+        <td class="indent">Callbacks</td>
+        <td class="right"><apex:outputText value="{0,number,##0}" >
+          <apex:param value="{!callbacks_mtd}" />     
+        </apex:outputtext></td> 
+        <td class="right"><apex:outputText value="{0,number,##0}" >
+          <apex:param value="{!callbacks_last_month}" />     
+        </apex:outputtext></td>
+        <td class="right"><apex:outputText value="{0,number,##0}" >
+          <apex:param value="{!callbacks_ytd}" />     
+        </apex:outputtext></td>  
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+</apex:outputpanel>
+
+<apex:outputPanel layout="block" id="scorecard_header_edit" rendered="{!if(display_mode=='Edit',true,false)}" style="padding-bottom:1em;padding-top:5px;padding-left:50px;">
+<span style="font-weight:bold;font-size:18pt;padding-left:80px;"><apex:outputText value="{!card_type}" /> Scorecard</span>
+<hr class="style-fade" /><br />
+<apex:actionfunction rerender="scorecard_header_edit" name="update_doc_list" />
+
+<table style="width:1000px;">
+<tr>
+  <td style="padding-left:15px;font-size:11pt;" width="50%">
+    <apex:outputpanel rendered="{!if(card_type=='Role Play Consult' || card_type=='Role Play Call Back',true,false)}" > 
+      <span style="display:block;padding-bottom:7px;">
+        <span style="font-weight:bold;display:inline-block;width:80px;">PEC :</span> 
+        <apex:inputfield value="{!pscore.Pec_Scored__c}" onchange="update_doc_list();auto_save();" />      
+      </span>
+    </apex:outputpanel>
+    <apex:outputpanel rendered="{!if(card_type=='Role Play Consult' || card_type=='Role Play Call Back',false,true)}" >
+      <span style="display:block;padding-bottom:7px;">
+        <span style="font-weight:bold;display:inline-block;width:80px;">PEC :</span> 
+        <apex:outputField value="{!pscore.Pec_Scored__c}" />      
+      </span>    
+    </apex:outputpanel>
+    <span style="display:block;padding-bottom:7px;">
+      <span style="font-weight:bold;display:inline-block;width:80px;">Date :</span> 
+      <apex:inputfield value="{!pscore.Score_Date__c}" onchange="auto_save();" />
+    </span>
+    <span style="display:block;padding-bottom:7px;">      
+      <span style="font-weight:bold;display:inline-block;width:80px;">Coach :</span> 
+      <apex:outputtext value="{!coach_name}" />
+    </span>
+  </td>    
+  <td style="padding-left:15px;font-size:11pt;vertical-align:top;" width="50%">
+    <apex:outputpanel rendered="{!if(card_type=='Role Play Consult' || card_type=='Role Play Call Back',false,true)}" >
+    <span style="display:block;padding-bottom:7px;">
+      <span style="font-weight:bold;display:inline-block;width:150px;">Patient :</span>
+      <span class="patient_name"><apex:outputfield value="{!pscore.Account__c}" /></span>
+      <span class="patient_initials">{!patient_initials}</span>
+    </span>
+    </apex:outputpanel>
+    <apex:outputpanel rendered="{!if(card_type=='Consult',true,false)}" >
+    <span style="display:block;padding-bottom:7px;">
+      <span style="font-weight:bold;display:inline-block;width:150px;">Consult :</span>
+      <apex:outputtext value="{!consult_desc}" /> <span style="display:inline-block;width:30px;">&nbsp;</span> 
+      <span style="color:blue;" onclick="use_fancy_cursor(this);apt_modal(event);">Select</span>
+    </span>    
+    </apex:outputpanel> 
+    <apex:outputpanel rendered="{!if(card_type=='Consult' || card_type=='Role Play Consult',true,false)}" >
+    <span style="display:block;padding-bottom:7px;">
+      <span style="font-weight:bold;display:inline-block;width:150px;">Doctor :</span>
+      <apex:selectList value="{!pscore.ClearChoice_Doctor__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!DoctorList}"></apex:selectoptions>
+      </apex:selectList>
+    </span>    
+    </apex:outputpanel> 
+    <span style="display:block;padding-bottom:7px;">
+      <span style="font-weight:bold;display:inline-block;width:150px;">Viewing Method :</span>
+      <apex:inputfield value="{!pscore.Viewing_Method__c}" onchange="auto_save();" />
+    </span>  
+  </td>
+</tr>
+<tr>
+  <td colspan="2" style="padding-left:15px;font-size:11pt;">
+    <apex:outputpanel rendered="{!if(card_type=='Call Back',true,false)}" >
+    <apex:outputpanel rendered="{!if(callback_task.createddate==null,false,true)}">
+    <span style="display:block;padding-bottom:7px;">
+      <span style="font-weight:bold;display:inline-block;width:50px;">Task :</span>
+      <apex:outputfield value="{!callback_task.createddate}" /> 
+      <span style="display:inline-block;width:50px;">&nbsp;</span> 
+      <span style="font-weight:bold;display:inline-block;width:75px;">Subject :</span>
+      <apex:outputfield value="{!callback_task.subject}" /> 
+      <span style="display:inline-block;width:50px;">&nbsp;</span> 
+      <span style="font-weight:bold;display:inline-block;width:75px;">Outcome :</span>
+      <apex:outputfield value="{!callback_task.Outcome__c}" />
+    </span>
+    <span style="display:block;padding-left:20px;font-style:italic;padding-bottom:7px;"><b>Callback Comments - </b><apex:outputfield value="{!callback_task.description}" /></span>
+    <span style="color:blue;" onclick="use_fancy_cursor(this);task_modal(event);">Select</span>      
+    </apex:outputpanel>
+    <apex:outputpanel rendered="{!if(callback_task.createddate==null,true,false)}">
+      <span style="font-weight:bold;display:inline-block;width:50px;">Task :</span><span style="font-style:italic;color:red;">No Callback has been selected</span>
+      <span style="display:inline-block;width:20px;">&nbsp;</span><span style="color:blue;" onclick="use_fancy_cursor(this);task_modal(event);">Select</span>  
+    </apex:outputpanel>
+
+    </apex:outputpanel> 
+  </td>
+</tr>
+</table>    
+</apex:outputPanel>
+
+</apex:outputpanel>
+
+<apex:outputpanel layout="block" id="main_holder" style="padding-left:50px;">
+<hr class="style-fade" /><br />
+<apex:messages style="color:red;font-weight:bold;" /><br />
+
+<!--------Consult Scorecard - Edit Mode------------------------------------------>
+<apex:outputpanel rendered="{!if((card_type=='Consult' || card_type=='Role Play Consult') && display_mode=='Edit',true,false)}" >
+<table style="width:1000px;" cellspacing="0">
+   <tr class="what_top">
+    <td width="10%">PEC Consult</td></tr>
+</table><br />
+<table style="width:1000px;" cellspacing="0" border="1">
+  <tr class="score_header">
+    <td width="15%" class="score_name"><span onmouseover="tooltip.show('1. Introduction & Greeting<br />2. Build Rapport<br />3. Invite Purpose of Visit<br />4. Reassure Consult<br />5. Confirm Agenda<br />6.Confirm Time Contract', 350);" onmouseout="tooltip.hide();">Framing<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+    <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+  
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();">
+    <b>What</b><br />  
+      <apex:selectList value="{!pscore.Framing_What_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();">
+    <b>How</b><br />
+      <apex:selectList value="{!pscore.Framing_How_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>      
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments :</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:inputfield value="{!pscore.Framing_Positive_Feedback__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>
+  <!--<tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Stop :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Framing_Stop__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Start :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Framing_Positive_Ideas__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>-->
+  
+  
+  <tr class="score_header">
+    <td width="15%" class="score_name"><span onmouseover="tooltip.show('1. Framing the Needs Dialogue<br /><ul><li>Invite Permission</li></ul><br /><span style=font-weight:bold;font-size:11pt;>Consult History</span><br />2. Tell me about your dental condition?<br /><br /><span style=font-weight:bold;font-size:11pt;>Consult Future</span><br />3. What would you like to be different? (Objectives)<br />4. What would you like to see in the mirror? (Objectives)<br />5. How would that impact you socially? Personally? (Vision)<br /><br /><span style=font-weight:bold;font-size:11pt;>Consult Challenges</span><br />6. Why now? (Challenges)', 410);" onmouseout="tooltip.hide();">Needs Dialogue<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+    <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+      <apex:selectList value="{!pscore.Needs_Dialogue_What_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+      <apex:selectList value="{!pscore.Needs_Dialogue_How_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments :</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:inputfield value="{!pscore.Needs_Dialogue_Positive_Feedback__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();"/>
+    </td>
+  </tr>
+  <!--  <tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Stop :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Needs_Dialogue_Stop__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Start :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Needs_Dialogue_Positive_Ideas__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>-->
+
+  <tr class="score_header">
+    <td width="15%" class="score_name"><span onmouseover="tooltip.show('1. Confirm Understanding<ol type=\'a\' style=padding-left:5px;><li>I Message</li><li>Paraphrase</li><ul style=padding-left:10px;><li>Consult History</li><li>Consult Future</li><li>Consult Challenges</li></ul><li>Confirm Accuracy &amp; Completeness</li></ol>2. Reassure Consult<br />3. Summarize Next Step', 410);" onmouseout="tooltip.hide();">Wrap Up<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+    <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+      <apex:selectList value="{!pscore.PEC_Consult_Wrap_Up_What_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+      <apex:selectList value="{!pscore.PEC_Consult_Wrap_up_how_score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments :</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:inputfield value="{!pscore.PEC_Consult_Wrap_Up_Continue__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>
+  <!--  <tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Stop :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.PEC_Consult_Wrap_Up_Stop__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>  
+  <tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Start :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.PEC_Consult_Wrap_Up_Start__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>-->
+
+</table>
+<br /><br />
+
+<table style="width:1000px;" cellspacing="0">
+   <tr class="what_top">
+    <td width="10%">PEC Doctor Download</td></tr>
+</table><br />
+<table style="width:1000px;" cellspacing="0" border="1">
+  <tr class="score_header">
+    <td width="15%" class="score_name"><span onmouseover="tooltip.show('1. Summarize<br /><span style=font-weight:bold;font-size:11pt;padding-left:5px;>Consult History</span><ol type=a style=padding-left:7px;><li>Consult\'s dental condition</li><span style=font-weight:bold;font-size:11pt;>Consult Future</span><li>What would they like to be different? (Objectives)</li><li>What would they like to see in the mirror? (Objectives)</li><li>How would that impact them socially? Personally? (Vision)</li><span style=font-weight:bold;font-size:11pt;>Consult Challenges</span> <li>Why now?</li></ol><br />2. Recommend<ol type=a style=padding-left:7px;><li>Connection Point</li><li>Role-Playing with Doctor</li></ol>', 410);" onmouseout="tooltip.hide();">PEC<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+    <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+      <apex:selectList value="{!pscore.Doctor_Download_What_Score__c}" multiselect="false" size="1" onchange="auto_save();" >
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+      <apex:selectList value="{!pscore.Doctor_Download_How_Score__c}" multiselect="false" size="1" onchange="auto_save();" >
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments :</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:inputfield value="{!pscore.Doctor_Download_Positive_Feedback__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>
+  <!--<tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Stop :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Doctor_Download_Stop__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr> 
+  <tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Start :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Doctor_Download_Positive_Ideas__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>-->
+ 
+  <tr class="score_header">
+    <td width="15%" class="score_name"><span onmouseover="tooltip.show('1. <span style=color:yellow;font-weight:bold;>Role-play with PEC</span><ol type=a style=padding-left:5px><li>Consult Connection Point</li><li>Confirm Consult Needs</li><ul style=padding-left:5px;><li>Consult History</li><li>Consult Future</li><li>Consult Challenges</li></ul><li>Frame TX Plan</li><ul><li>Frame with the <span style=color:cyan;font-weight:bold;>Vision</span></li><li>Offer <span style=color:cyan;font-weight:bold;>Specific</span> ideal Treatment</li><li>Link TX features to Consult\'s vision</li><li><span style=color:cyan;font-weight:bold;>Invite Response</span></li></ul></ol><br />2. <span style=color:yellow;font-weight:bold;>Discuss with PEC</span><ol type=a><li>Price (if out of norm)</li><li>Alternative Treatment Plan (e.g. GBB)</li></ol><br />3. <span style=color:yellow;font-weight:bold;>Invite Other PEC Ideas</span>', 410);" onmouseout="tooltip.hide();">Doctor Role-Plays<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+    <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+      <apex:selectList value="{!pscore.Doctor_Role_Play_What_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList> </span> 
+    </td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+      <apex:selectList value="{!pscore.Doctor_Role_Play_How_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList> </span> 
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments :</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:inputfield value="{!pscore.Doctor_Role_Play_Continue__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>
+  <!--<tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Stop :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Doctor_Role_Play_Stop__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr> 
+  <tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Start :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Doctor_Role_Play_Start__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>-->
+ 
+</table>
+<br /><br />
+
+<table style="width:1000px;" cellspacing="0">
+   <tr class="what_top">
+    <td width="10%">Doctor Consult Scorecard</td></tr>
+</table><br />
+<table style="width:1000px;" cellspacing="0" border="1">  <tr class="score_header">
+    <td width="15%" class="score_name"><span onmouseover="tooltip.show('<ol><li>Introduction & Greeting</li><li>Build Rapport</li><li>Confirm Purpose of Visit</li><li>Reassure Onsult</li><li>Confirm Agenda</li></ol>', 310);" onmouseout="tooltip.hide();">Framing<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+    <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+      <apex:selectList value="{!pscore.Doctor_Consult_Framing_What_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+      <apex:selectList value="{!pscore.Doctor_Consult_Framing_How_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments :</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:inputfield value="{!pscore.Doctor_Consult_Framing_Continue__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>
+<!--  <tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Stop :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Doctor_Consult_Framing_Stop__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>  
+  <tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Start :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Doctor_Consult_Framing_Start__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>-->
+  
+  <tr class="score_header">
+    <td width="15%" class="score_name"><span onmouseover="tooltip.show('<ol><li><span style=font-weight:bold;color:yellow>Confirm Consult Needs</span></li><ol type=a style=padding-left:5px><li>Consult History</li><ul style=padding-left:5px><li>Consult\'s dental condition</li></ul><li>Consult Future</li><ul style=padding-left:5px;><li>What they would like to be different</li><li>What they would like to see in the mirror</li><li>How that would impact them socially.  Personally.</li></ul><li>Consult Challenges</li><ul style=padding-left:5px;><li>What\'s kept them from coming in until now.</ul></ol><br /> <li><span style=font-weight:bold;color:yellow>Confirmation Process</span></li><ol type=a style=padding-left:5px;><li>I message</li><ul style=padding-left:5px;><li>If I understood correctly what Susie told me</li></ul><li>Paraphrase</li><ul style=padding-left:5px;><li>Consult History</li><li>Consult Future</li><li>Consult Challenge</li></ul><li>Confirm Accuracy &amp; Completeness</ol></ol>', 310);" onmouseout="tooltip.hide();">Needs Dialogue<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span>  </span></td>
+    <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+    <td width="10%" class="score_cell"><b>What</b><br />  
+      <apex:selectList value="{!pscore.Doctor_Consult_Needs_Dialogue_What_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  
+    </td>
+    <td width="10%" class="score_cell"><b>How</b><br />
+      <apex:selectList value="{!pscore.Doctor_Consult_Needs_Dialogue_How_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments :</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:inputfield value="{!pscore.Doctor_Consult_Needs_Dialogue_Continue__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>
+  <!--<tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Stop :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Doctor_Consult_Needs_Dialogue_Stop__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>    
+  <tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Start :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Doctor_Consult_Needs_Dialogue_Start__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>-->
+
+  <tr class="score_header">
+    <td width="15%" class="score_name"><span onmouseover="tooltip.show('<ol><li>Reassure the Consult</li><ul style=padding-left:5px;><li>You are an excellent Candidate</li></ul><br /><li>Frame <span style=font-weight:bold;color:cyan>Specific</span> Treatment Recommendation with</li><ol type=a style=padding-left:5px><li>Consult\'s Vision</li><li>Consult\'s Objectives</li><li>Consult\'s Challenges</li><ul style=padding-left:5px;><li><span style=font-weight:bold;color:cyan>Invite</span> Consult <span style=font-weight:bold;color:cyan>Response</span></li><li>Resolve Objections</li><li><span style=font-weight:bold;color:cyan>Frame</span> Value of <span style=font-weight:bold;color:cyan>Prosth Exam</span></li></ul></ol></ol>', 310);" onmouseout="tooltip.hide();">Solutions Dialogue<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span>  </span></td>
+    <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+      <apex:selectList value="{!pscore.Solutions_Dialogue_What_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+      <apex:selectList value="{!pscore.Solutions_Dialogue_How_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments :</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:inputfield value="{!pscore.Solutions_Dialogue_Positive_Feedback__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>
+  <!--<tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Stop :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Solutions_Dialogue_Stop__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>   
+  <tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Start :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Solutions_Dialogue_Positive_Ideas__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>-->
+
+  <tr class="score_header">
+    <td width="15%" class="score_name"><span onmouseover="tooltip.show('<ol><li>Frame Value of PEC as Financing Expert</li><li>Invite Additional Questions</li><li>Thank the Consult</li></ol>', 310);" onmouseout="tooltip.hide();">Wrap Up<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span>  </span></td>
+    <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+      <apex:selectList value="{!pscore.Wrap_Up_What_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+      <apex:selectList value="{!pscore.Wrap_Up_How_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments :</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:inputfield value="{!pscore.Wrap_Up_Positive_Feedback__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>
+  <!--<tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Stop :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Wrap_Up_Stop__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();"/>
+    </td>
+  </tr>   
+  <tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Start :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Wrap_Up_Positive_Ideas__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>-->
+
+</table>
+<br /><br />
+
+<table style="width:1000px;" cellspacing="0">
+   <tr class="what_top">
+    <td width="10%">PEC Solutions Dialogue</td></tr>
+</table><br />
+<table style="width:1000px;" cellspacing="0" border="1">  <tr class="score_header">
+    <td width="20%" class="score_name"><span onmouseover="tooltip.show('<ol><li>Congratulate Consult</li><li>Build a bridge from Consult\'s</li><ol type=a style=padding-left:5px;><li>Vision</li><li>Objectives</li><li>Challenges..to treatment plan features and Doctor\'s recommendation</li></ol><li>Invite Consult Response</li></ol>', 310);" onmouseout="tooltip.hide();">Rebuild Treatment Plan Value<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+    <td width="60%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+      <apex:selectList value="{!pscore.Treatment_Value_What_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+      <apex:selectList value="{!pscore.Treatment_Value_How_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments :</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:inputfield value="{!pscore.Treatment_Value_Continue__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();"/>
+    </td>
+  </tr>
+  <!--<tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Stop :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Treatment_Value_Stop__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();"/>
+    </td>
+  </tr> 
+  <tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Start :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Treatment_Value_Start__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>-->
+     
+  <tr class="score_header">
+    <td width="20%" class="score_name"><span onmouseover="tooltip.show('<ol><li>Summarize treatment procedure</li><ol type=a style=padding-left:5px;><li>Before procedure</li><li>During procedure</li><li>After procedure</li></ol><li>Offer Investment</li><li>Invite Consult Response</li></ol>', 310);" onmouseout="tooltip.hide();">Frame Price<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+    <td width="60%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+      <apex:selectList value="{!pscore.Frame_Price_What_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+      <apex:selectList value="{!pscore.Frame_Price_How_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments :</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:inputfield value="{!pscore.Frame_Price_Continue__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();"/>
+    </td>
+  </tr>
+  <!--<tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Stop :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Frame_Price_Stop__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();"/>
+    </td>
+  </tr> 
+  <tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Start :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Frame_Price_Start__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();"/>
+    </td>
+  </tr>-->
+    
+  <tr class="score_header">
+    <td width="20%" class="score_name"><span onmouseover="tooltip.show('<ol><li>Empathize</li><li>Double-Click n times</li><li>Reframe as a how to you can resolve</li><li>Frame solution</li></ol><br /><span style=display:inline-block;text-align:center;width:300px;font-style:italic;color:yellow>Repeat process as necessary</span>', 310);" onmouseout="tooltip.hide();">Resolve Objections<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+    <td width="60%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+      <apex:selectList value="{!pscore.Resolve_Objections_What_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+      <apex:selectList value="{!pscore.Resolve_Objections_How_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments :</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:inputfield value="{!pscore.Resolve_Objections_Continue__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();"/>
+    </td>
+  </tr>
+  <!--<tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Stop :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Resolve_Objections_Stop__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();"/>
+    </td>
+  </tr> 
+  <tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Start :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Resolve_Objections_Start__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>-->
+    
+  <tr class="score_header">
+    <td width="20%" class="score_name"><span onmouseover="tooltip.show('<ol><li>Frame Value of Financial Worksheet</li><li>Use social proof to frame value of</li><ol type=a style=padding-left:5px;><li>Liquid Asset questions</li><li>Near Liquid Asset questions</li><li>Fized asset questions</li><li>Unsecured credit questions</li><li>Credit application questions</li></ol><li>Frame Value of Funding Recommendations</li><li>Invite a response</li><li>Resolve Objections</li></ol>', 310);" onmouseout="tooltip.hide();">Financial Conversation<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+    <td width="60%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+      <apex:selectList value="{!pscore.Financial_Conversation_What_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+      <apex:selectList value="{!pscore.Financial_Conversation_How_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments :</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:inputfield value="{!pscore.Financial_Conversation_Continue__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();"/>
+    </td>
+  </tr>
+  <!--<tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Stop :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Financial_Conversation_Stop__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();"/>
+    </td>
+  </tr>  
+  <tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Start :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.Financial_Conversation_Start__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>-->
+   
+  <tr class="score_header">
+    <td width="20%" class="score_name"><span onmouseover="tooltip.show('<ol><li>Frame Prosth Exam</li><li>Invite Questions</li><li>Summarize Next Steps</li><li>Thank the Consult</li></ol>', 310);" onmouseout="tooltip.hide();">Wrap Up<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+    <td width="60%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+      <apex:selectList value="{!pscore.PEC_Solutions_Wrap_Up_What_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+      <apex:selectList value="{!pscore.PEC_Solutions_Wrap_Up_How_Score__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments :</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:inputfield value="{!pscore.PEC_Solutions_Wrap_Up_Continue__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>
+  <!--<tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Stop :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.PEC_Solutions_Wrap_Up_Stop__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr> 
+  <tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Start :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:inputfield value="{!pscore.PEC_Solutions_Wrap_Up_Start__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" onchange="auto_save();" />
+    </td>
+  </tr>-->
+   
+</table>  
+<br /><br />
+
+<table style="width:1000px;" cellspacing="0">
+   <tr class="what_top">
+    <td>PEC Financial Needs Dialogue</td></tr>
+</table><br />
+<table style="width:1000px;" cellspacing="0" border="1">
+  <tr class="score_header">
+    <td width="30%" class="score_name"><span onmouseover="tooltip.show('<ol><li><b>Double-Click on Financial trigger Word</b></li>
+        <ul><li>Tell me more about...</li></ul>      
+      <li><b>Reassure Patient</b></li>
+        <ul><li>We can help most patients find a way to pay for treatment.</li></ul>      
+      <li><b>Frame Your Role</b></li>
+        <ul><li>My role is to help you determine the best payment strategy for you.</li></ul>      
+      <li><b>Identify Funding Source Buckets</b></li>
+        To do that, tell me what <b>funding</b> options are available to you:
+        <ul>
+          <li>Cash and Investments</li>
+          <li>Low Interest Loan Sources</li>
+          <li>Support Person and Other</li>
+          <li>High Interest Loan Sources</li>
+        </ul>              
+    </ol>', 310);" onmouseout="tooltip.hide();">Financial Needs Dialogue<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+    <td width="40%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+  
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();">
+    <b>What</b><br />  
+      <apex:selectList value="{!pscore.Financial_Needs_Dialogue_What__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();">
+    <b>How</b><br />
+      <apex:selectList value="{!pscore.Financial_Needs_Dialogue_How__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>      
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:inputfield value="{!pscore.Financial_Needs_Dialogue_Comment__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:775px" onchange="auto_save();" />
+    </td>
+  </tr>
+ 
+  <tr class="score_header">
+    <td width="30%" class="score_name"><span onmouseover="tooltip.show('<ol><li><b>Confirm Understanding</b></li>
+     <ol type=a>
+      <li>I message</li>
+      <li>Paraphrase :</li>
+      <ul>
+          <li>Cash and Investments</li>
+          <li>Low Interest Loan Sources</li>
+          <li>Support Person and Other</li>
+          <li>High Interest Loan Sources</li>
+        </ul>  
+      <li>Confirm Accuracy and Completeness</li>
+    </ol>
+  <li><b>Reassure Patient</b></li>
+        <b>Option A:</b>
+        <ul><li>It certainly sounds like you have some <b>funding options</b> to work with...</li></ul>      
+<b>Option B:</b>
+        <ul><li>It sounds like you are hoping to finance the procedure or spread payments over time. Many of our patients pay for treatment using Health Care Financing</li></ul>                
+<li><b>Summarize Next Steps</b></li>
+     <ul>
+          <li>Once we do the scan and the doctor recommends the ideal treatment plan for you, we will be able to determine the price and develop a more specific payment strategy for you.</li>
+        </ul>                                  
+    </ol>', 310);" onmouseout="tooltip.hide();">Confirm Understanding of Financial Needs<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+    <td width="40%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+  
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();">
+    <b>What</b><br />  
+      <apex:selectList value="{!pscore.Confirm_Financial_Needs_What__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();">
+    <b>How</b><br />
+      <apex:selectList value="{!pscore.Confirm_Financial_Needs_How__c}" multiselect="false" size="1" onchange="auto_save();">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>      
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:inputfield value="{!pscore.Confirm_Financial_Needs_Comment__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:775px" onchange="auto_save();" />
+    </td>
+  </tr>
+</table>
+<br /><br />
+</apex:outputpanel>
+
+<!--------Consult Scorecard - View Mode------------------------------------------>
+<apex:outputpanel id="consult_view_holder" rendered="{!if((card_type=='Consult' || card_type=='Role Play Consult') && display_mode=='View',true,false)}" >
+
+<p class="navbar">
+  <apex:outputpanel styleClass="{!if(consult_view_tab=='PEC Consult','selected-gradient','non-gradient')}" onmouseover="tooltip.show('Click to view the PEC Consult Scorecard', 270);" onmouseout="tooltip.hide();" onclick="tooltip.hide();use_fancy_cursor(this);pec_consult_tab();">PEC Consult</apex:outputpanel>
+  &nbsp;<apex:outputpanel styleClass="{!if(consult_view_tab=='PEC Doctor Download','selected-gradient','non-gradient')}" onmouseover="tooltip.show('Click to view the PEC Doctor Download Scorecard', 270);" onmouseout="tooltip.hide();" onclick="tooltip.hide();use_fancy_cursor(this);pec_doctor_download_tab();">PEC Doctor Download</apex:outputpanel>
+  &nbsp;<apex:outputpanel styleClass="{!if(consult_view_tab=='Doctor Consult','selected-gradient','non-gradient')}" onmouseover="tooltip.show('Click to view the Doctor Consult Scorecard', 270);" onmouseout="tooltip.hide();" onclick="tooltip.hide();use_fancy_cursor(this);doctor_consult_tab();">Doctor Consult</apex:outputpanel>
+  &nbsp;<apex:outputpanel styleClass="{!if(consult_view_tab=='PEC Solutions Dialogue','selected-gradient','non-gradient')}" onmouseover="tooltip.show('Click to view the PEC Solutions Dialogue Scorecard', 270);" onmouseout="tooltip.hide();" onclick="tooltip.hide();use_fancy_cursor(this);pec_solutions_dialogue_tab();">PEC Solutions Dialogue</apex:outputpanel>
+  &nbsp;<apex:outputpanel styleClass="{!if(consult_view_tab=='PEC Financial Needs','selected-gradient','non-gradient')}" onmouseover="tooltip.show('Click to view the PEC Financial Needs Scorecard', 270);" onmouseout="tooltip.hide();" onclick="tooltip.hide();use_fancy_cursor(this);financial_needs_tab();">PEC Financial Needs Dialogue</apex:outputpanel>
+</p>
+<br /><br />
+
+  <!--------Consult Scorecard - View Mode - PEC Consult------------------------------------------>
+  <apex:outputpanel rendered="{!if(consult_view_tab=='PEC Consult',true,false)}">
+    <table style="width:1000px;" cellspacing="0">
+   <tr class="what_top">
+    <td width="10%">PEC Consult</td></tr>
+    </table><br />
+    <table style="width:1000px;" cellspacing="0" border="1">
+      <tr class="score_header">
+        <td width="15%" class="score_name"><span onmouseover="tooltip.show('1. Introduction & Greeting<br />2. Build Rapport<br />3. Invite Purpose of Visit<br />4. Reassure Consult<br />5. Confirm Agenda<br />6.Confirm Time Contract', 350);" onmouseout="tooltip.hide();">Framing<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+        <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+      
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();">
+        <b>What</b><br />  <apex:outputfield value="{!pscore.Framing_What_Score__c}" />
+           </span>
+        </td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();">
+        <b>How</b><br /> <apex:outputfield value="{!pscore.Framing_How_Score__c}" /> 
+          </span>      
+        </td>
+      </tr>
+      <tr class="score_feedback">
+        <td style="border-bottom:0px;">Comments :</td>
+        <td colspan="3" style="border-bottom:0px;">
+          <apex:outputfield value="{!pscore.Framing_Positive_Feedback__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>
+      <!--<tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Stop :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Framing_Stop__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>
+      <tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Start :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Framing_Positive_Ideas__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>-->
+      
+      
+      <tr class="score_header">
+        <td width="15%" class="score_name"><span onmouseover="tooltip.show('1. Framing the Needs Dialogue<br /><ul><li>Invite Permission</li></ul><br /><span style=font-weight:bold;font-size:11pt;>Consult History</span><br />2. Tell me about your dental condition?<br /><br /><span style=font-weight:bold;font-size:11pt;>Consult Future</span><br />3. What would you like to be different? (Objectives)<br />4. What would you like to see in the mirror? (Objectives)<br />5. How would that impact you socially? Personally? (Vision)<br /><br /><span style=font-weight:bold;font-size:11pt;>Consult Challenges</span><br />6. Why now? (Challenges)', 410);" onmouseout="tooltip.hide();">Needs Dialogue<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+        <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+          <apex:outputfield value="{!pscore.Needs_Dialogue_What_Score__c}" /> </span>
+        </td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+          <apex:outputfield value="{!pscore.Needs_Dialogue_How_Score__c}" /> </span>
+        </td>
+      </tr>
+      <tr class="score_feedback">
+        <td style="border-bottom:0px;">Comments :</td>
+        <td colspan="3" style="border-bottom:0px;">
+          <apex:outputfield value="{!pscore.Needs_Dialogue_Positive_Feedback__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>
+      <!--<tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Stop :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Needs_Dialogue_Stop__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>
+      <tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Start :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Needs_Dialogue_Positive_Ideas__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>-->
+      
+      <tr class="score_header">
+        <td width="15%" class="score_name"><span onmouseover="tooltip.show('1. Confirm Understanding<ol type=\'a\' style=padding-left:5px;><li>I Message</li><li>Paraphrase</li><ul style=padding-left:10px;><li>Consult History</li><li>Consult Future</li><li>Consult Challenges</li></ul><li>Confirm Accuracy &amp; Completeness</li></ol>2. Reassure Consult<br />3. Summarize Next Step', 410);" onmouseout="tooltip.hide();">Wrap Up<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+        <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+          <apex:outputfield value="{!pscore.PEC_Consult_Wrap_Up_What_Score__c}" /> </span>
+        </td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+          <apex:outputfield value="{!pscore.PEC_Consult_Wrap_up_how_score__c}" /> </span>
+        </td>
+      </tr>
+      <tr class="score_feedback">
+        <td style="border-bottom:0px;">Comments :</td>
+        <td colspan="3" style="border-bottom:0px;">
+          <apex:outputfield value="{!pscore.PEC_Consult_Wrap_Up_Continue__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>
+      <!--<tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Stop :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.PEC_Consult_Wrap_Up_Stop__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>  
+      <tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Start :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.PEC_Consult_Wrap_Up_Start__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr> -->     
+    </table>
+    <br /><br />
+  </apex:outputpanel>
+  
+  <!--------Consult Scorecard - View Mode - PEC Doctor Download------------------------------------------>
+  <apex:outputpanel rendered="{!if(consult_view_tab=='PEC Doctor Download',true,false)}">
+    <table style="width:1000px;" cellspacing="0">
+       <tr class="what_top">
+        <td width="10%">PEC Doctor Download</td></tr>
+    </table><br />
+    <table style="width:1000px;" cellspacing="0" border="1">
+      <tr class="score_header">
+        <td width="15%" class="score_name"><span onmouseover="tooltip.show('1. Summarize<br /><span style=font-weight:bold;font-size:11pt;padding-left:5px;>Consult History</span><ol type=a style=padding-left:7px;><li>Consult\'s dental condition</li><span style=font-weight:bold;font-size:11pt;>Consult Future</span><li>What would they like to be different? (Objectives)</li><li>What would they like to see in the mirror? (Objectives)</li><li>How would that impact them socially? Personally? (Vision)</li><span style=font-weight:bold;font-size:11pt;>Consult Challenges</span> <li>Why now?</li></ol><br />2. Recommend<ol type=a style=padding-left:7px;><li>Connection Point</li><li>Role-Playing with Doctor</li></ol>', 410);" onmouseout="tooltip.hide();">PEC<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+        <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+          <apex:outputfield value="{!pscore.Doctor_Download_What_Score__c}"/>  </span>
+        </td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+          <apex:outputfield value="{!pscore.Doctor_Download_How_Score__c}" /> </span>
+        </td>
+      </tr>
+      <tr class="score_feedback">
+        <td style="border-bottom:0px;">Comments :</td>
+        <td colspan="3" style="border-bottom:0px;">
+          <apex:outputfield value="{!pscore.Doctor_Download_Positive_Feedback__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>
+      <!--<tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Stop :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Doctor_Download_Stop__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>        
+      <tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Start :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Doctor_Download_Positive_Ideas__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>-->
+
+      <tr class="score_header">
+        <td width="15%" class="score_name"><span onmouseover="tooltip.show('1. <span style=color:yellow;font-weight:bold;>Role-play with PEC</span><ol type=a style=padding-left:5px><li>Consult Connection Point</li><li>Confirm Consult Needs</li><ul style=padding-left:5px;><li>Consult History</li><li>Consult Future</li><li>Consult Challenges</li></ul><li>Frame TX Plan</li><ul><li>Frame with the <span style=color:cyan;font-weight:bold;>Vision</span></li><li>Offer <span style=color:cyan;font-weight:bold;>Specific</span> ideal Treatment</li><li>Link TX features to Consult\'s vision</li><li><span style=color:cyan;font-weight:bold;>Invite Response</span></li></ul></ol><br />2. <span style=color:yellow;font-weight:bold;>Discuss with PEC</span><ol type=a><li>Price (if out of norm)</li><li>Alternative Treatment Plan (e.g. GBB)</li></ol><br />3. <span style=color:yellow;font-weight:bold;>Invite Other PEC Ideas</span>', 410);" onmouseout="tooltip.hide();">Doctor Role-Plays<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+        <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+          <apex:outputfield value="{!pscore.Doctor_Role_Play_What_Score__c}" /></span> 
+        </td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+          <apex:outputfield value="{!pscore.Doctor_Role_Play_How_Score__c}" /></span> 
+        </td>
+      </tr>
+      <tr class="score_feedback">
+        <td style="border-bottom:0px;">Comments :</td>
+        <td colspan="3" style="border-bottom:0px;">
+          <apex:outputfield value="{!pscore.Doctor_Role_Play_Continue__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>
+      <!--<tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Stop :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Doctor_Role_Play_Stop__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>       
+      <tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Start :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Doctor_Role_Play_Start__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>-->
+ 
+    </table>
+  </apex:outputpanel>
+  
+  <!--------Consult Scorecard - View Mode - Doctor Consult------------------------------------------>
+  <apex:outputpanel rendered="{!if(consult_view_tab=='Doctor Consult',true,false)}">
+    <table style="width:1000px;" cellspacing="0">
+       <tr class="what_top">
+        <td width="10%">Doctor Consult Scorecard</td></tr>
+    </table><br />
+    <table style="width:1000px;" cellspacing="0" border="1">  <tr class="score_header">
+        <td width="15%" class="score_name"><span onmouseover="tooltip.show('<ol><li>Introduction & Greeting</li><li>Build Rapport</li><li>Confirm Purpose of Visit</li><li>Reassure Onsult</li><li>Confirm Agenda</li></ol>', 310);" onmouseout="tooltip.hide();">Framing<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+        <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+          <apex:outputfield value="{!pscore.Doctor_Consult_Framing_What_Score__c}" />  </span>
+        </td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+          <apex:outputfield value="{!pscore.Doctor_Consult_Framing_How_Score__c}" />  </span>
+        </td>
+      </tr>
+      <tr class="score_feedback">
+        <td style="border-bottom:0px;">Comments :</td>
+        <td colspan="3" style="border-bottom:0px;">
+          <apex:outputfield value="{!pscore.Doctor_Consult_Framing_Continue__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>
+      <!--<tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Stop :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Doctor_Consult_Framing_Stop__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>          
+      <tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Start :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Doctor_Consult_Framing_Start__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>-->
+
+      <tr class="score_header">
+        <td width="15%" class="score_name"><span onmouseover="tooltip.show('<ol><li><span style=font-weight:bold;color:yellow>Confirm Consult Needs</span></li><ol type=a style=padding-left:5px><li>Consult History</li><ul style=padding-left:5px><li>Consult\'s dental condition</li></ul><li>Consult Future</li><ul style=padding-left:5px;><li>What they would like to be different</li><li>What they would like to see in the mirror</li><li>How that would impact them socially.  Personally.</li></ul><li>Consult Challenges</li><ul style=padding-left:5px;><li>What\'s kept them from coming in until now.</ul></ol><br /> <li><span style=font-weight:bold;color:yellow>Confirmation Process</span></li><ol type=a style=padding-left:5px;><li>I message</li><ul style=padding-left:5px;><li>If I understood correctly what Susie told me</li></ul><li>Paraphrase</li><ul style=padding-left:5px;><li>Consult History</li><li>Consult Future</li><li>Consult Challenge</li></ul><li>Confirm Accuracy &amp; Completeness</ol></ol>', 310);" onmouseout="tooltip.hide();">Needs Dialogue<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span>  </span></td>
+        <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+        <td width="10%" class="score_cell"><b>What</b><br />  
+          <apex:outputfield value="{!pscore.Doctor_Consult_Needs_Dialogue_What_Score__c}" />
+        </td>
+        <td width="10%" class="score_cell"><b>How</b><br />
+          <apex:outputfield value="{!pscore.Doctor_Consult_Needs_Dialogue_How_Score__c}" />
+        </td>
+      </tr>
+      <tr class="score_feedback">
+        <td style="border-bottom:0px;">Comments :</td>
+        <td colspan="3" style="border-bottom:0px;">
+          <apex:outputfield value="{!pscore.Doctor_Consult_Needs_Dialogue_Continue__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>
+      <!--<tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Stop :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Doctor_Consult_Needs_Dialogue_Stop__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>        
+      <tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Start :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Doctor_Consult_Needs_Dialogue_Start__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>-->
+
+      <tr class="score_header">
+        <td width="15%" class="score_name"><span onmouseover="tooltip.show('<ol><li>Reassure the Consult</li><ul style=padding-left:5px;><li>You are an excellent Candidate</li></ul><br /><li>Frame <span style=font-weight:bold;color:cyan>Specific</span> Treatment Recommendation with</li><ol type=a style=padding-left:5px><li>Consult\'s Vision</li><li>Consult\'s Objectives</li><li>Consult\'s Challenges</li><ul style=padding-left:5px;><li><span style=font-weight:bold;color:cyan>Invite</span> Consult <span style=font-weight:bold;color:cyan>Response</span></li><li>Resolve Objections</li><li><span style=font-weight:bold;color:cyan>Frame</span> Value of <span style=font-weight:bold;color:cyan>Prosth Exam</span></li></ul></ol></ol>', 310);" onmouseout="tooltip.hide();">Solutions Dialogue<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span>  </span></td>
+        <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+          <apex:outputfield value="{!pscore.Solutions_Dialogue_What_Score__c}" />  </span>
+        </td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+          <apex:outputfield value="{!pscore.Solutions_Dialogue_How_Score__c}" /> </span>
+        </td>
+      </tr>
+      <tr class="score_feedback">
+        <td style="border-bottom:0px;">Comments :</td>
+        <td colspan="3" style="border-bottom:0px;">
+          <apex:outputfield value="{!pscore.Solutions_Dialogue_Positive_Feedback__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>
+      <!--<tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Stop :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Solutions_Dialogue_Stop__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>       
+      <tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Start :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Solutions_Dialogue_Positive_Ideas__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>-->
+
+      <tr class="score_header">
+        <td width="15%" class="score_name"><span onmouseover="tooltip.show('<ol><li>Frame Value of PEC as Financing Expert</li><li>Invite Additional Questions</li><li>Thank the Consult</li></ol>', 310);" onmouseout="tooltip.hide();">Wrap Up<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span>  </span></td>
+        <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+          <apex:outputfield value="{!pscore.Wrap_Up_What_Score__c}" /> </span>
+        </td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+          <apex:outputfield value="{!pscore.Wrap_Up_How_Score__c}" /> </span>
+        </td>
+      </tr>
+      <tr class="score_feedback">
+        <td style="border-bottom:0px;">Comments :</td>
+        <td colspan="3" style="border-bottom:0px;">
+          <apex:outputfield value="{!pscore.Wrap_Up_Positive_Feedback__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>
+      <!--<tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Stop :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Wrap_Up_Stop__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>       
+      <tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Start :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Wrap_Up_Positive_Ideas__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>-->
+
+    </table>
+  </apex:outputpanel>
+  
+  <!--------Consult Scorecard - View Mode - PEC Solutions Dialogue------------------------------------------>
+  <apex:outputpanel rendered="{!if(consult_view_tab=='PEC Solutions Dialogue',true,false)}">
+    <table style="width:1000px;" cellspacing="0">
+       <tr class="what_top">
+        <td width="10%">PEC Solutions Dialogue</td></tr>
+    </table><br />
+    <table style="width:1000px;" cellspacing="0" border="1">  <tr class="score_header">
+        <td width="20%" class="score_name"><span onmouseover="tooltip.show('<ol><li>Congratulate Consult</li><li>Build a bridge from Consult\'s</li><ol type=a style=padding-left:5px;><li>Vision</li><li>Objectives</li><li>Challenges..to treatment plan features and Doctor\'s recommendation</li></ol><li>Invite Consult Response</li></ol>', 310);" onmouseout="tooltip.hide();">Rebuild Treatment Plan Value<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+        <td width="60%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+          <apex:outputfield value="{!pscore.Treatment_Value_What_Score__c}" /> </span>
+        </td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+          <apex:outputfield value="{!pscore.Treatment_Value_How_Score__c}" />  </span>
+        </td>
+      </tr>
+      <tr class="score_feedback">
+        <td style="border-bottom:0px;">Continue :</td>
+        <td colspan="3" style="border-bottom:0px;">
+          <apex:outputfield value="{!pscore.Treatment_Value_Continue__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>
+      <!--<tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Stop :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Treatment_Value_Stop__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>        
+      <tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Start :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Treatment_Value_Start__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>-->
+    
+      <tr class="score_header">
+        <td width="20%" class="score_name"><span onmouseover="tooltip.show('<ol><li>Summarize treatment procedure</li><ol type=a style=padding-left:5px;><li>Before procedure</li><li>During procedure</li><li>After procedure</li></ol><li>Offer Investment</li><li>Invite Consult Response</li></ol>', 310);" onmouseout="tooltip.hide();">Frame Price<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+        <td width="60%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+          <apex:outputfield value="{!pscore.Frame_Price_What_Score__c}" /></span>
+        </td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+          <apex:outputfield value="{!pscore.Frame_Price_How_Score__c}" /></span>
+        </td>
+      </tr>
+      <tr class="score_feedback">
+        <td style="border-bottom:0px;">Comments :</td>
+        <td colspan="3" style="border-bottom:0px;">
+          <apex:outputfield value="{!pscore.Frame_Price_Continue__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>
+      <!--<tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Stop :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Frame_Price_Stop__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>        
+      <tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Start :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Frame_Price_Start__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>-->
+ 
+      <tr class="score_header">
+        <td width="20%" class="score_name"><span onmouseover="tooltip.show('<ol><li>Empathize</li><li>Double-Click n times</li><li>Reframe as a how to you can resolve</li><li>Frame solution</li></ol><br /><span style=display:inline-block;text-align:center;width:300px;font-style:italic;color:yellow>Repeat process as necessary</span>', 310);" onmouseout="tooltip.hide();">Resolve Objections<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+        <td width="60%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+          <apex:outputfield value="{!pscore.Resolve_Objections_What_Score__c}" /></span>
+        </td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+          <apex:outputfield value="{!pscore.Resolve_Objections_How_Score__c}" /> </span>
+        </td>
+      </tr>
+      <tr class="score_feedback">
+        <td style="border-bottom:0px;">Comments :</td>
+        <td colspan="3" style="border-bottom:0px;">
+          <apex:outputfield value="{!pscore.Resolve_Objections_Continue__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>
+      <!--<tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Stop :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Resolve_Objections_Stop__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>         
+      <tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Start :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Resolve_Objections_Start__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>-->
+
+      <tr class="score_header">
+        <td width="20%" class="score_name"><span onmouseover="tooltip.show('<ol><li>Frame Value of Financial Worksheet</li><li>Use social proof to frame value of</li><ol type=a style=padding-left:5px;><li>Liquid Asset questions</li><li>Near Liquid Asset questions</li><li>Fized asset questions</li><li>Unsecured credit questions</li><li>Credit application questions</li></ol><li>Frame Value of Funding Recommendations</li><li>Invite a response</li><li>Resolve Objections</li></ol>', 310);" onmouseout="tooltip.hide();">Financial Conversation<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+        <td width="60%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+          <apex:outputfield value="{!pscore.Financial_Conversation_What_Score__c}" /> </span>
+        </td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+          <apex:outputfield value="{!pscore.Financial_Conversation_How_Score__c}" />  </span>
+        </td>
+      </tr>
+      <tr class="score_feedback">
+        <td style="border-bottom:0px;">Comments :</td>
+        <td colspan="3" style="border-bottom:0px;">
+          <apex:outputfield value="{!pscore.Financial_Conversation_Continue__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>
+      <!--<tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Stop :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Financial_Conversation_Stop__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>        
+      <tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Start :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.Financial_Conversation_Start__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>-->
+ 
+      <tr class="score_header">
+        <td width="20%" class="score_name"><span onmouseover="tooltip.show('<ol><li>Frame Prosth Exam</li><li>Invite Questions</li><li>Summarize Next Steps</li><li>Thank the Consult</li></ol>', 310);" onmouseout="tooltip.hide();">Wrap Up<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+        <td width="60%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+          <apex:outputfield value="{!pscore.PEC_Solutions_Wrap_Up_What_Score__c}" />  </span>
+        </td>
+        <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+          <apex:outputfield value="{!pscore.PEC_Solutions_Wrap_Up_How_Score__c}" /> </span>
+        </td>
+      </tr>
+      <tr class="score_feedback">
+        <td style="border-bottom:0px;">Comments :</td>
+        <td colspan="3" style="border-bottom:0px;">
+          <apex:outputfield value="{!pscore.PEC_Solutions_Wrap_Up_Continue__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>
+      <!--<tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Stop :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.PEC_Solutions_Wrap_Up_Stop__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>        
+      <tr class="score_feedback">
+        <td style="border-top:1px dotted grey;">Start :</td>
+        <td style="border-top:1px dotted grey;" colspan="3">
+          <apex:outputfield value="{!pscore.PEC_Solutions_Wrap_Up_Start__c}" rendered="{!if(display_mode=='View',true,false)}" />
+        </td>
+      </tr>-->
+
+    </table>  
+  </apex:outputpanel>
+  
+  <!--------Consult Scorecard - View Mode - PEC Financial Needs Dialogue------------------------------------------>
+  <apex:outputpanel rendered="{!if(consult_view_tab=='PEC Financial Needs',true,false)}">
+  <table style="width:1000px;" cellspacing="0">
+   <tr class="what_top">
+    <td>PEC Financial Needs Dialogue</td></tr>
+</table><br />
+<table style="width:1000px;" cellspacing="0" border="1">
+  <tr class="score_header">
+    <td width="30%" class="score_name"><span onmouseover="tooltip.show('<ol><li><b>Double-Click on Financial trigger Word</b></li>
+        <ul><li>Tell me more about...</li></ul>      
+      <li><b>Reassure Patient</b></li>
+        <ul><li>We can help most patients find a way to pay for treatment.</li></ul>      
+      <li><b>Frame Your Role</b></li>
+        <ul><li>My role is to help you determine the best payment strategy for you.</li></ul>      
+      <li><b>Identify Funding Source Buckets</b></li>
+        To do that, tell me what <b>funding</b> options are available to you:
+        <ul>
+          <li>Cash and Investments</li>
+          <li>Low Interest Loan Sources</li>
+          <li>Support Person and Other</li>
+          <li>High Interest Loan Sources</li>
+        </ul>              
+    </ol>', 310);" onmouseout="tooltip.hide();">Financial Needs Dialogue<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+    <td width="40%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+  
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();">
+    <b>What</b><br />  
+      <apex:outputfield value="{!pscore.Financial_Needs_Dialogue_What__c}" />  </span>
+    </td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();">
+    <b>How</b><br />
+      <apex:outputfield value="{!pscore.Financial_Needs_Dialogue_How__c}" />  </span>      
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:outputfield value="{!pscore.Financial_Needs_Dialogue_Comment__c}" rendered="{!if(display_mode=='View',true,false)}" style="width:775px"  />
+    </td>
+  </tr>
+ 
+  <tr class="score_header">
+    <td width="30%" class="score_name"><span onmouseover="tooltip.show('<ol><li><b>Confirm Understanding</b></li>
+     <ol type=a>
+      <li>I message</li>
+      <li>Paraphrase :</li>
+      <ul>
+          <li>Cash and Investments</li>
+          <li>Low Interest Loan Sources</li>
+          <li>Support Person and Other</li>
+          <li>High Interest Loan Sources</li>
+        </ul>  
+      <li>Confirm Accuracy and Completeness</li>
+    </ol>
+  <li><b>Reassure Patient</b></li>
+        <b>Option A:</b>
+        <ul><li>It certainly sounds like you have some <b>funding options</b> to work with...</li></ul>      
+<b>Option B:</b>
+        <ul><li>It sounds like you are hoping to finance the procedure or spread payments over time. Many of our patients pay for treatment using Health Care Financing</li></ul>                
+<li><b>Summarize Next Steps</b></li>
+     <ul>
+          <li>Once we do the scan and the doctor recommends the ideal treatment plan for you, we will be able to determine the price and develop a more specific payment strategy for you.</li>
+        </ul>                                  
+    </ol>', 310);" onmouseout="tooltip.hide();">Confirm Understanding of Financial Needs<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+    <td width="40%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+  
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();">
+    <b>What</b><br />  
+      <apex:outputfield value="{!pscore.Confirm_Financial_Needs_What__c}" />  </span>
+    </td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();">
+    <b>How</b><br />
+      <apex:outputfield value="{!pscore.Confirm_Financial_Needs_How__c}" />  </span>      
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:outputfield value="{!pscore.Confirm_Financial_Needs_Comment__c}" rendered="{!if(display_mode=='View',true,false)}" style="width:775px"  />
+    </td>
+  </tr>
+</table>
+<br /><br />
+
+  </apex:outputpanel>
+
+</apex:outputpanel>
+
+<!--------Call Back View/Edit Mode----------------------------------------------->
+<apex:outputpanel rendered="{!if(card_type=='Consult' || card_type=='Role Play Consult',false,true)}" >
+<table style="width:1000px;" cellspacing="0" border="1">
+  <tr class="score_header">
+    <td width="15%" class="score_name"><span onmouseover="tooltip.show('1. Introduction & Greeting<br />2. Build Rapport<br />3. Invite Purpose of Visit<br />4. Reassure Consult<br />5. Confirm Agenda<br />6.Confirm Time Contract', 350);" onmouseout="tooltip.hide();">Framing<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+    <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+  
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();">
+    <b>What</b><br />  
+      <apex:outputfield value="{!pscore.Framing_What_Score__c}" rendered="{!if(display_mode=='View',true,false)}" />
+      <apex:selectList value="{!pscore.Framing_What_Score__c}" rendered="{!if(display_mode=='Edit',true,false)}" multiselect="false" size="1">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();">
+    <b>How</b><br />
+      <apex:outputfield value="{!pscore.Framing_How_Score__c}" rendered="{!if(display_mode=='View',true,false)}" />
+      <apex:selectList value="{!pscore.Framing_How_Score__c}" rendered="{!if(display_mode=='Edit',true,false)}" multiselect="false" size="1">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>      
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments :</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:outputfield value="{!pscore.Framing_Positive_Feedback__c}" rendered="{!if(display_mode=='View',true,false)}" />
+      <apex:inputfield value="{!pscore.Framing_Positive_Feedback__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" />
+    </td>
+  </tr>
+  <!--<tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Stop :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:outputfield value="{!pscore.Framing_Stop__c}" rendered="{!if(display_mode=='View',true,false)}" />
+      <apex:inputfield value="{!pscore.Framing_Stop__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" />
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Start :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:outputfield value="{!pscore.Framing_Positive_Ideas__c}" rendered="{!if(display_mode=='View',true,false)}" />
+      <apex:inputfield value="{!pscore.Framing_Positive_Ideas__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" />
+    </td>
+  </tr>-->
+
+<tr class="score_header">
+    <td width="15%" class="score_name"><span onmouseover="tooltip.show('1. Framing the Needs Dialogue<br /><ul><li>Invite Permission</li></ul><br /><span style=font-weight:bold;font-size:11pt;>Consult History</span><br />2. Tell me about your dental condition?<br /><br /><span style=font-weight:bold;font-size:11pt;>Consult Future</span><br />3. What would you like to be different? (Objectives)<br />4. What would you like to see in the mirror? (Objectives)<br />5. How would that impact you socially? Personally? (Vision)<br /><br /><span style=font-weight:bold;font-size:11pt;>Consult Challenges</span><br />6. Why now? (Challenges)', 410);" onmouseout="tooltip.hide();">Needs Dialogue<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span></span></td>
+    <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+      <apex:outputfield value="{!pscore.Needs_Dialogue_What_Score__c}" rendered="{!if(display_mode=='View',true,false)}" />
+      <apex:selectList value="{!pscore.Needs_Dialogue_What_Score__c}" rendered="{!if(display_mode=='Edit',true,false)}" multiselect="false" size="1">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+      <apex:outputfield value="{!pscore.Needs_Dialogue_How_Score__c}" rendered="{!if(display_mode=='View',true,false)}" />
+      <apex:selectList value="{!pscore.Needs_Dialogue_How_Score__c}" rendered="{!if(display_mode=='Edit',true,false)}" multiselect="false" size="1">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments :</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:outputfield value="{!pscore.Needs_Dialogue_Positive_Feedback__c}" rendered="{!if(display_mode=='View',true,false)}" />
+      <apex:inputfield value="{!pscore.Needs_Dialogue_Positive_Feedback__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" />
+    </td>
+  </tr>
+  <!--<tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Stop :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:outputfield value="{!pscore.Needs_Dialogue_Stop__c}" rendered="{!if(display_mode=='View',true,false)}" />
+      <apex:inputfield value="{!pscore.Needs_Dialogue_Stop__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" />
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Start :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:outputfield value="{!pscore.Needs_Dialogue_Positive_Ideas__c}" rendered="{!if(display_mode=='View',true,false)}" />
+      <apex:inputfield value="{!pscore.Needs_Dialogue_Positive_Ideas__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" />
+    </td>
+  </tr>-->
+
+<tr class="score_header">
+    <td width="15%" class="score_name"><span onmouseover="tooltip.show('<ol><li>Reassure the Consult</li><ul style=padding-left:5px;><li>You are an excellent Candidate</li></ul><br /><li>Frame <span style=font-weight:bold;color:cyan>Specific</span> Treatment Recommendation with</li><ol type=a style=padding-left:5px><li>Consult\'s Vision</li><li>Consult\'s Objectives</li><li>Consult\'s Challenges</li><ul style=padding-left:5px;><li><span style=font-weight:bold;color:cyan>Invite</span> Consult <span style=font-weight:bold;color:cyan>Response</span></li><li>Resolve Objections</li><li><span style=font-weight:bold;color:cyan>Frame</span> Value of <span style=font-weight:bold;color:cyan>Prosth Exam</span></li></ul></ol></ol>', 310);" onmouseout="tooltip.hide();">Solutions Dialogue<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span>  </span></td>
+    <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+          <apex:outputfield value="{!pscore.Solutions_Dialogue_What_Score__c}" rendered="{!if(display_mode=='View',true,false)}" />
+      <apex:selectList value="{!pscore.Solutions_Dialogue_What_Score__c}" rendered="{!if(display_mode=='Edit',true,false)}"  multiselect="false" size="1">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+            <apex:outputfield value="{!pscore.Solutions_Dialogue_How_Score__c}" rendered="{!if(display_mode=='View',true,false)}" />
+      <apex:selectList value="{!pscore.Solutions_Dialogue_How_Score__c}" rendered="{!if(display_mode=='Edit',true,false)}"  multiselect="false" size="1">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments :</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:outputfield value="{!pscore.Solutions_Dialogue_Positive_Feedback__c}" rendered="{!if(display_mode=='View',true,false)}" />
+      <apex:inputfield value="{!pscore.Solutions_Dialogue_Positive_Feedback__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" />
+    </td>
+  </tr>
+  <!--<tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Stop :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:outputfield value="{!pscore.Solutions_Dialogue_Stop__c}" rendered="{!if(display_mode=='View',true,false)}" />
+      <apex:inputfield value="{!pscore.Solutions_Dialogue_Stop__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" />
+    </td>
+  </tr>   
+  <tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Start :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:outputfield value="{!pscore.Solutions_Dialogue_Positive_Ideas__c}" rendered="{!if(display_mode=='View',true,false)}" />
+      <apex:inputfield value="{!pscore.Solutions_Dialogue_Positive_Ideas__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" />
+    </td>
+  </tr>-->
+
+ <tr class="score_header">
+    <td width="15%" class="score_name"><span onmouseover="tooltip.show('<ol><li>Frame Value of PEC as Financing Expert</li><li>Invite Additional Questions</li><li>Thank the Consult</li></ol>', 310);" onmouseout="tooltip.hide();">Wrap Up<br /><span style="font-size:8pt;font-style:italic;font-weight:normal;font-weight:normal;text-decoration: underline;color:blue">hover for details</span>  </span></td>
+    <td width="65%" class="score_description"><b>Summary Feedback &amp; Ideas</b></td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are the steps <span style=color:yellow;font-weight:bold;font-style:italic;>complete</span> and <span style=color:yellow;font-weight:bold;font-style:italic;>in order</span>', 270);" onmouseout="tooltip.hide();"><b>What</b><br />  
+                 <apex:outputfield value="{!pscore.Wrap_Up_What_Score__c}" rendered="{!if(display_mode=='View',true,false)}" />
+      <apex:selectList value="{!pscore.Wrap_Up_What_Score__c}" rendered="{!if(display_mode=='Edit',true,false)}" multiselect="false" size="1">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+    <td width="10%" class="score_cell"><span onmouseover="tooltip.show('To what extent are you <b><i><span style=color:cyan>empathetic</span>, <span style=color:yellow>connected</span>,</b></i> and <span style=color:orange;font-weight:bold;font-style:italic>authentic</span><br /><br /><span style=color:yellow;font-weight:bold;>Connectedness</span> is earned through double clicking. Connectedness requires more than a single double click. It requires thorough, curious double clicking along the branches of the Needs Tree continuing until they identify the fruit at the end of each branch (the patient\'s greatest fears or passions)<br /><br /><span style=color:cyan;font-weight:bold;>Empathy</span> is earned through confirming understanding of patient Vision, objectives and Challenges in a way that the patient feels is accurate, complete and tonally/nonverbally compassionate.<br/><br /> <span style=color:orange;font-weight:bold;>Authenticity</span> is earned by sounding like a human being having a conversation (contrast that with sounding like salesy)',350);" onmouseout="tooltip.hide();"><b>How</b><br />
+                  <apex:outputfield value="{!pscore.Wrap_Up_How_Score__c}" rendered="{!if(display_mode=='View',true,false)}" />
+      <apex:selectList value="{!pscore.Wrap_Up_How_Score__c}" rendered="{!if(display_mode=='Edit',true,false)}" multiselect="false" size="1">
+        <apex:selectOptions value="{!ScoreOptions}"></apex:selectoptions>
+      </apex:selectList>  </span>
+    </td>
+  </tr>
+  <tr class="score_feedback">
+    <td style="border-bottom:0px;">Comments :</td>
+    <td colspan="3" style="border-bottom:0px;">
+      <apex:outputfield value="{!pscore.Wrap_Up_Positive_Feedback__c}" rendered="{!if(display_mode=='View',true,false)}" />
+      <apex:inputfield value="{!pscore.Wrap_Up_Positive_Feedback__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" />
+    </td>
+  </tr>
+  <!--<tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Stop :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:outputfield value="{!pscore.Wrap_Up_Stop__c}" rendered="{!if(display_mode=='View',true,false)}" />
+      <apex:inputfield value="{!pscore.Wrap_Up_Stop__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" />
+    </td>
+  </tr>   
+  <tr class="score_feedback">
+    <td style="border-top:1px dotted grey;">Start :</td>
+    <td style="border-top:1px dotted grey;" colspan="3">
+      <apex:outputfield value="{!pscore.Wrap_Up_Positive_Ideas__c}" rendered="{!if(display_mode=='View',true,false)}" />
+      <apex:inputfield value="{!pscore.Wrap_Up_Positive_Ideas__c}" rendered="{!if(display_mode=='Edit',true,false)}" style="width:825px" />
+    </td>
+  </tr>-->
+
+</table>
+</apex:outputpanel>
+
+<br />
+
+<apex:commandButton action="{!save_scorecard}" value="Save Scorecard" rerender="main_holder" rendered="{!if(display_mode=='Edit',true,false)}" />
+<span style="display:inline-block;width:100px;">&nbsp;</span>
+<span onmouseover="tooltip.show('<span style=display:block;font-weight:bold;color:yellow;>Warning</span>Saving like this will not trigger the validation check or record a final score', 310);" onmouseout="tooltip.hide();">
+<apex:commandButton action="{!quick_save_scorecard}" value="Partial Save Scorecard" rerender="main_holder" rendered="{!if(display_mode=='Edit',true,false)}" onclick="tooltip.hide();"/>
+</span>
+<span style="display:inline-block;width:100px;">&nbsp;</span>
+<apex:commandbutton action="{!toggle_view}" value="Toggle View Mode" rerender="scorecard_header_holder,main_holder" rendered="{!if(display_mode=="Edit",true,false)}" />
+<span style="display:inline-block;width:100px;">&nbsp;</span>
+<apex:commandbutton action="{!toggle_edit}" value="Toggle Edit Mode" rerender="scorecard_header_holder,main_holder" rendered="{!if(display_mode=="View" && allow_edit,true,false)}" />
+<span style="display:inline-block;width:100px;">&nbsp;</span>
+
+
+
+
+<span style="display:inline-block;width:100px;">&nbsp;</span>
+<apex:outputtext escape="false" value="{!scorecard_valid_errors}" />
+</apex:outputpanel>
+
+<apex:outputPanel id="modal_holder" style="z-index:3000;" >
+<apex:actionRegion >
+  <apex:actionFunction oncomplete="default_cursor(this);" action="{!close_modal}" name="close_pop" rerender="modal_holder" />  
+  <apex:actionFunction oncomplete="default_cursor(this);" name="score_apt_block" action="{!score_apt}" reRender="modal_holder,scorecard_header_holder">   
+    <apex:param name="cid" value="" />
+  </apex:actionFunction>
+  <apex:actionFunction oncomplete="default_cursor(this);" name="score_task_record" action="{!score_task}" reRender="modal_holder,scorecard_header_holder">   
+    <apex:param name="tid" value="" />
+  </apex:actionFunction>  
+
+   <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!modal_display}"/>
+    <apex:outputPanel styleClass="modalPopup_outer" layout="block" rendered="{!modal_display}" id="outerpop">
+    <span class="modalPopup_outerheader" onclick="use_fancy_cursor(this);close_pop();">Close X</span> 
+    
+    <apex:outputPanel styleClass="modalPopup_history" rendered="{!if(modal_display && modal_type=='apt_view',true,false)}" id="historypop">    
+      <span style="font-weight:bold;font-size:11pt;">Select a consult from the list</span><br/><br />
+      <apex:variable var="rowclassname" value="hodd" /> 
+      <table class="history" width="100%">
+      <tr class="control">
+        <td width="25%">Apt Time</td>
+        <td width="30%">Consult PEC</td>
+        <td width="35%">Status</td>
+        <td width="10%">&nbsp;</td>
+      </tr> 
+      <apex:repeat value="{!consult_list}" var="clist">
+        <tr class="{!rowclassname}" style="line-height:30px;">
+        <apex:variable var="rowclassname" value="{!if(rowclassname=='hodd','heven','hodd')}" />
+          <td><apex:outputfield value="{!clist.Apt_Date__c}" />&nbsp;<apex:outputfield value="{!clist.Start_Hour__c}" />:<apex:outputfield value="{!clist.Start_Minute__c}" /></td>
+          <td><apex:outputtext value="{!clist.Consult_PEC__r.name}" /></td>
+          <td><apex:outputfield value="{!clist.Consult_Show_Status__c}" /></td>
+          <td><span style="color:blue;font-weight:bold;" onclick="use_fancy_cursor(this);score_apt_block('{!clist.id}')">Score</span></td>
+        </tr>
+      </apex:repeat>
+      </table>
+       <apex:outputtext escape="false" value="{!modal_out}" />   
+    </apex:outputPanel>   
+
+    <apex:outputPanel styleClass="modalPopup_history" rendered="{!if(modal_display && modal_type=='task_view',true,false)}" id="historypop2">    
+      <span style="font-weight:bold;font-size:11pt;">Select a call back from the list</span><br/><br />
+      <apex:variable var="rowclassname" value="hodd" /> 
+      <table class="history" width="100%">
+      <tr class="control">
+        <td width="25%">Task Time</td>
+        <td width="30%">Subject</td>
+        <td width="35%">Outcome</td>
+        <td width="10%">&nbsp;</td>
+      </tr> 
+      <apex:repeat value="{!task_list}" var="tlist">
+        <tr class="{!rowclassname}" style="line-height:30px;">
+          <td><apex:outputfield value="{!tlist.createddate}" /></td>
+          <td><apex:outputfield value="{!tlist.subject}" /></td>
+          <td><apex:outputfield value="{!tlist.Outcome__c}" /></td>
+          <td><span style="color:blue;font-weight:bold;" onclick="use_fancy_cursor(this);score_task_record('{!tlist.id}')">Score</span></td>
+        </tr>
+        <tr class="{!rowclassname}" style="line-height:30px;">
+          <td colspan="4"><apex:outputfield value="{!tlist.createdbyid}" />&nbsp;<b>Notes : </b><apex:outputfield value="{!tlist.description}" /></td>
+        </tr>
+        <apex:variable var="rowclassname" value="{!if(rowclassname=='hodd','heven','hodd')}" />
+      </apex:repeat>
+      </table>
+       <apex:outputtext escape="false" value="{!modal_out}" />   
+    </apex:outputPanel>    
+    
+ </apex:outputpanel>
+ </apex:actionRegion>    
+</apex:outputPanel> 
+ 
+</apex:form>
+</apex:page>

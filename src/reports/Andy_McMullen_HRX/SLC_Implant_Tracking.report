@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Surgical_Note_Implant__c$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Surgical_Note_Implant__c$Implant_System_Value__c</field>
+    </columns>
+    <columns>
+        <field>Surgical_Note_Implant__c$Implant_Type__c</field>
+    </columns>
+    <columns>
+        <field>Surgical_Note_Implant__c$Abutment_Straight__c</field>
+    </columns>
+    <columns>
+        <field>Surgical_Note_Implant__c$Abutment_Collar_Height__c</field>
+    </columns>
+    <columns>
+        <field>Surgical_Note_Implant__c$Name</field>
+    </columns>
+    <columns>
+        <field>Surgical_Note_Implant__c$Buried_Implant__c</field>
+    </columns>
+    <columns>
+        <field>Surgical_Note_Implant__c$Bone_Density__c</field>
+    </columns>
+    <format>Tabular</format>
+    <name>SLC- Implant Tracking</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Surgical_Notes_Implants__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Surgical_Note_Implant__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CURRENT</interval>
+    </timeFrameFilter>
+</Report>

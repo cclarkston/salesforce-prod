@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>PHONE</field>
+    </columns>
+    <columns>
+        <field>Lead.Pre_Screen__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Center_Location__c</field>
+    </columns>
+    <columns>
+        <field>CREATED_DATE</field>
+    </columns>
+    <columns>
+        <field>Lead.Fees_Quoted__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Lead.Center_Location__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>,Chicago,Chicago Naperville,Chicago Schaumburg,Dallas,Houston Woodlands,Portland,San Jose,St. Louis</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Pre_Screen__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Not Checked,Blue (No Hit),Website Down-No Prescreen,Insufficient Information</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Call_Result__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Not Scheduled,Pending Reschedule</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.StrikeForce4__DNC_Phone_Status_Display__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>contains</operator>
+            <value>ok</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.OBJECTION__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>2 Step Close,Calling for Someone Else,Cost Prohibitive,Hung Up,Location/Distance</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Fees_Quoted__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>,No Quote Given</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>FIRST_NAME</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>,unknown,na,n/a</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>LAST_NAME</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>,unknown,na,n/a</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Considered Blues</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadList</reportType>
+    <scope>org</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Lead.Center_Location__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <endDate>2012-12-14</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2012-09-28</startDate>
+    </timeFrameFilter>
+</Report>

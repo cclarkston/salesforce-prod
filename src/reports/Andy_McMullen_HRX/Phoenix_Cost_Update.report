@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Patient_POT_Apt_Procedure__c$Patient_POT_Apt__c.Clinical_Appointment__c.Center_Information__c</field>
+    </columns>
+    <columns>
+        <field>Patient_POT_Apt_Procedure__c$Patient_POT_Apt__c.Patient_POT__c.Account__c.Name</field>
+    </columns>
+    <columns>
+        <field>Patient_POT_Apt_Procedure__c$Patient_POT_Apt__c</field>
+    </columns>
+    <columns>
+        <field>Patient_POT_Apt_Procedure__c$Name</field>
+    </columns>
+    <columns>
+        <field>Patient_POT_Apt_Procedure__c$Target_Teeth__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Patient_POT_Apt_Procedure__c$Cost__c</field>
+    </columns>
+    <columns>
+        <field>Patient_POT_Apt_Procedure__c$Id</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Patient_POT_Apt_Procedure__c$Patient_POT_Apt__c.Clinical_Appointment__c.Center_Information__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Phoenix,Phoenix Mesa</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Patient_POT_Apt_Procedure__c$Patient_POT_Apt__c.Patient_POT__c.Account__c.Name</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Phoenix DoseSpot</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Phoenix Cost Update</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Patient_POT_Apt_Procedures__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Patient_POT_Apt_Procedure__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

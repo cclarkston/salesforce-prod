@@ -1,0 +1,2456 @@
+<apex:page controller="ctrl_consultschedule_development" sidebar="false" showHeader="true" docType="html-5.0" action="{!check_for_weather_data}">
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}"  />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/fonts.css')}"/>
+
+<script>
+    function use_fancy_cursor(t) {
+      document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+      t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+    }
+
+    function default_cursor(t) {
+      document.body.style.cursor = 'default';
+      t.style.cursor='default';
+    }
+</script>
+
+
+<style type="text/css" media="print">
+  div.calendar_holder {
+    display:none;
+  }
+
+  table.print_break {
+    page-break-after:always;
+  }
+
+  td.right_border {
+    border:0px;
+    right-border:0px;
+  }
+
+  img.skiplink {
+    display:none;
+  }
+
+  div.bodyDiv {
+    border:0px;
+  }
+
+  div.bPageHeader {
+    display:none;
+  }
+
+  div.bPageFooter {
+    display:none;
+  }
+
+  div.no_print {
+    display:none;
+  }
+</style>
+
+<style>
+	.weather_tooltip {
+	  position: relative;
+	}
+
+	.weather_tooltip .weather_tiptext {
+	  visibility: hidden;
+	  width: 150px;
+	  background-color: white;
+	  text-align: center;
+	  padding: 5px 0;
+	  border-radius: 6px;
+	  border:1px solid black;
+
+	  position: absolute;
+	  z-index: 1;
+	  top: 100%;
+	  left: 50%;
+	  margin-left: -75px;
+	  font-size:11pt;
+	}
+
+	.weather_tooltip:hover .weather_tiptext {
+	  visibility: visible;
+	}
+
+  p.print_apt {
+    display:block;
+    border:1px solid black;
+    padding-top:5px;
+    padding-bottom:10px;
+    margin-bottom:10px;
+    padding-right:7px;
+    padding-left:7px;
+
+  }
+
+  div.bPageHeader {
+    z-index:-1;
+  }
+
+  div.searchBoxClearContainer {
+    z-index: 5;
+  }
+
+  div#tabContainer {
+    z-index:-1;
+  }
+
+  table.history {
+    font-family:verdana,arial;
+  }
+
+  table.history tr.control {
+    font-weight:bold;
+    font-size:10pt;
+  }
+
+  table.history tr.control td {
+    border-bottom:1px solid black;
+    padding-bottom:3px;
+    empty-cells:hide;
+  }
+
+  table.history tr.hodd td {
+    text-align:left;
+    padding-top:2px; padding-bottom:3px;
+    font-size:10pt;
+    border-bottom:1px dashed #5789AE;
+    empty-cells:hide;
+  }
+
+  table.history tr.heven {
+    background-color:#C9E4E4;
+  }
+
+  table.history tr.heven td {
+    text-align:left;
+    padding-top:2px; padding-bottom:3px;
+    font-size:10pt;
+    border-bottom:1px dashed #5789AE;
+    empty-cells:hide;
+  }
+
+    span.button_spacer {
+      display:inline-block;
+      width:20px;
+    }
+
+    span.blank {
+        font-style:italic;
+        font-weight:bold;
+      }
+
+    span.scheduling_header {
+      display:block;
+      color:black;
+      font-weight:bold;
+      padding-left:10px;
+    }
+
+
+  .room_note_header {
+     display:none;
+     font-weight:normal;
+
+  }
+
+  .modalPopup_history{
+     display:inline-block;
+     background-color: white;
+     border-width: 1px;
+     border-style: solid;
+     padding:0px;
+     width:100%;
+     position:relative;
+     left:-1px;
+     height:200px;
+     overflow:auto;
+  }
+
+  .modalPopup_action{
+        display:inline-block;
+        background-color: white;
+        border-width: 1px;
+        border-style: solid;
+        padding:0px;
+        margin-top:5px;
+        width:100%;
+        position:relative;
+        left:-1px;
+    }
+
+  .room_note {
+    display:block;
+    font-style:italic;
+     width:210px;
+  }
+
+  .room_holder {
+    display:inline;
+    padding-right:75px;
+    float:left;
+  }
+
+  span.room_manual {
+    font-weight:bold;
+    font-size:12pt;
+    color:red;
+    display:block;
+    padding-bottom:.5em;
+    text-align:center;
+  }
+
+  span.room_header {
+    font-weight:bold;
+    font-size:12pt;
+    color:#5789AE;
+    display:block;
+    padding-bottom:.5em;
+    text-align:center;
+  }
+
+  table.calendar_view {
+      <!--    background-image:url('https://cs12.salesforce.com/resource/1336491391000/LinesBackground'); -->
+    empty-cells: show;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  table.calendar_view td {
+    height:15px;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  table.calendar_view tr.maintick {
+
+  }
+
+  table.calendar_view tr.maintick td {
+    vertical-align:top;
+    padding:0;
+    margin:0;
+    padding-left:2px;
+    padding-right:2px;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  table.calendar_view tr.maintick td.hour {
+    border-top:1px solid black;
+    font-weight:bold;
+    height:15px;
+    width:75px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    padding:0;
+    margin:0;
+  }
+
+  table.calendar_view tr.subtick {
+
+  }
+
+  table.calendar_view tr.subtick td {
+    vertical-align:top;
+    padding:0;
+    margin:0;
+    padding-left:2px;
+    padding-right:2px;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  table.calendar_view tr.subtick td.hour {
+    border-top:1px dashed #cccccc;
+    font-weight:bold;
+    height:15px;
+    color:white;
+    width:75px;
+    border-collapse: collapse;
+    border-spacing: 0;
+        padding:0;
+    margin:0;
+  }
+
+  span.apt_blue {
+    min-width:65px;
+    background:#9BDEFF;
+    border-collapse: collapse;
+    border-spacing: 0;
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;
+    text-align:center;
+  }
+
+  span.apt_blue:hover {
+    box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black;
+    border-collapse: separate;
+  }
+
+  span.apt_purple {
+    min-width:65px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background:#C9CEE4;
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;
+    text-align:center;
+  }
+
+  span.apt_purple:hover {
+    box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black;
+    border-collapse: separate;
+  }
+
+  span.apt_brown {
+    min-width:65px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background:#CECE9D;
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;
+    text-align:center;
+  }
+
+  span.apt_brown:hover {
+    box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black;
+    border-collapse: separate;
+  }
+
+  span.apt_red {
+    min-width:65px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background:#FFA4A4;
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;
+    text-align:center;
+  }
+
+  span.apt_red:hover {
+    box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black;
+    border-collapse: separate;
+  }
+
+  span.apt_green {
+    min-width:65px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background:#C7E1C4;
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;
+    text-align:center;
+  }
+
+  span.apt_green:hover {
+    box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black;
+    border-collapse: separate;
+  }
+
+  span.apt_grey {
+    min-width:65px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background:#D2D2D2;
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;
+    text-align:center;
+  }
+
+  span.apt_grey:hover {
+    box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black;
+    border-collapse: separate;
+  }
+
+  span.apt_yellow {
+    min-width:65px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background:#FFFFAA;
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;
+    text-align:center;
+  }
+
+  span.apt_yellow:hover {
+    box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black;
+    border-collapse: separate;
+  }
+
+  span.apt_white {
+    min-width:65px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background:white;
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;
+    text-align:center;
+    border:3px dashed #5789AE;
+  }
+
+  span.apt_white:hover {
+    box-shadow: 5px 5px 5px #5789AE, inset 0px 0px 3px #5789AE;
+    border-collapse: separate;
+    border: 3px solid #5789AE;
+  }
+
+  span.apt_orange {
+    min-width:65px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background:#FED681;
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;
+    text-align:center;
+  }
+
+  span.apt_orange:hover {
+    box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black;
+    border-collapse: separate;
+  }
+
+  span.apt_barney {
+    min-width:65px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background:#9d04ef;
+    color:white;
+    font-weight:normal;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;
+    text-align:center;
+  }
+
+  span.apt_barney:hover {
+    box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black;
+    border-collapse: separate;
+  }
+
+  span.calendar_name {
+    width:200px;
+    font-size:12pt;
+    font-weight:normal;
+    font-family:verdana;
+    display:block;
+    padding-bottom:10px;
+  }
+
+  .cal_commands {
+    font-size:10pt;
+    font-weight:bold;
+    color:blue;
+    display:block;
+    padding-left:10px;
+    text-decoration:none;
+    padding-bottom:1em;
+  }
+
+  .cal_commands:hover {
+    color:red;
+    text-decoration:none;
+    border:0;
+  }
+
+  span.center_line {
+    display:block;
+    padding-bottom:5px;
+    text-align:center;
+    width:200px;
+  }
+
+  span.center_tag {
+    font-weight:bold;
+    width:75px;
+  }
+
+  span.month_name {
+    text-align:left;
+    width:145px;
+    display:inline-block;
+  }
+
+  span.year_name {
+    text-align:right;
+    width:40px;
+    display:inline-block;
+  }
+
+  table.calendar {
+    width:200px;
+  }
+
+  table.calendar tr.cheader {
+    font-weight:bold;
+  }
+
+  table.calendar tr.cheader td {
+    border-bottom:1px solid black;
+  }
+
+  table.calendar td {
+    text-align:right;
+    margin-left:1px;
+    padding-right:5px;
+  }
+
+  table.calendar td.selected {
+    border:1px dotted black;
+    background : #ECF9FF;
+    font-weight:bold;
+  }
+
+  table.calendar td.no_apt {
+    color:gray;
+  }
+
+  table.calendar td.empty {
+    color:green;
+    font-weight:bold;
+  }
+
+  table.calendar td.near_full {
+    color:blue;
+    font-weight:bold;
+  }
+
+  table.calendar td.full {
+    color:red;
+    font-weight:bold;
+  }
+
+  table.calendar tr.mname td {
+    font-size:10pt;
+    text-align:center;
+    height:20px;
+  }
+
+  table.calendar tr.year td {
+    font-size:10pt;
+    text-align:center;
+    height:20px;
+  }
+
+  span.form_header {
+    display:block;
+    margin-bottom:1em;
+    color:#5789AE;
+    font-size:12pt;
+    font-weight:bold;
+    padding-left:20px;
+    margin-left:20px;
+    border-bottom:1px solid black;
+    width:400px;
+  }
+  span.form_line {
+    display:block;
+    padding-bottom:1em;
+  }
+  span.apt_line {
+    display:block;
+    padding-bottom:5px;
+  }
+  span.form_tag {
+    font-weight:bold;
+    width:125px;
+    display:inline-block;
+  }
+  span.apt_tag {
+    font-weight:bold;
+    width:100px;
+    display:inline-block;
+  }
+  input:focus {
+        background:#E8E8D0;
+  }
+  span.unconfirmed {
+      background-color: pink;
+      color: black;
+      text-transform: uppercase;
+      padding: .25em;
+  }
+  span.unconfirmed ~ span {
+      background-color: pink;
+  }
+  td.hour:hover {
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+  }
+  .room_note {
+	font-weight: bold;
+	background-color: pink;
+  }
+</style>
+
+<!-- Confirmation Summary -->
+	<style>
+		.appointment {
+			position: relative;
+		}
+		.confirmation-summary, .confirmation-dot {
+			box-sizing: border-box;
+		}
+		.confirmation-summary {
+			width: 15px;
+		    height: 45px;
+		    position: absolute;
+		    right: -10px;
+		    top: 2px;
+		    padding: 2px;
+		    background-color: lightgray;
+		    border-radius: 10px;
+		}
+		.confirmation-dot {
+			width: 11px;
+			height: 11px;
+			border-radius: 50%;
+			margin-bottom: 4px;
+		}
+		.confirmation-dot.none {
+			background-color: transparent;
+			border: 2px solid gray;
+		}
+		.confirmation-dot.confirmed {
+			background-color: green;
+		}
+		.confirmation-dot.not-confirmed {
+			background-color: red;
+		}
+		.confirmation-dot.left-a-message {
+			background-color: orange;
+		}
+		.confirmation-dot.skeptical {
+			background-color: gray;
+		}
+		.icon-lock {
+			position: absolute;
+			top: 3px;
+			left: 1px;
+		}
+    .callback-phone {
+      position: absolute;
+      right: -12px;
+      top: -4px;
+    }
+
+	</style>
+<!-- Confirmation Summary -->
+<apex:form id="calendar_form">
+<table>
+	<tr>
+		<td style="width:210px;border-right:1px solid black;vertical-align:top;">
+			<apex:actionRegion >
+				<apex:actionFunction name="view_months" oncomplete="default_cursor(this);" action="{!display_months}" rerender="calendar_holder" />
+				<apex:actionFunction name="view_years" oncomplete="default_cursor(this);" action="{!display_years}" rerender="calendar_holder" />
+				<apex:actionFunction name="next_month" oncomplete="default_cursor(this);" action="{!add_month}" rerender="calendar_holder,main_holder, action_holder" />
+				<apex:actionFunction name="prev_month" oncomplete="default_cursor(this);" action="{!subtract_month}" rerender="calendar_holder,main_holder, action_holder" />
+
+				<apex:actionFunction oncomplete="default_cursor(this);" name="change_calendar_month" action="{!change_month}" rerender="calendar_holder,main_holder,action_holder">
+				  <apex:param name="mnum" value="" />
+				</apex:actionFunction>
+				<apex:actionFunction oncomplete="default_cursor(this);" name="change_calendar_day" action="{!change_calendar_day}" rerender="calendar_holder,main_holder,action_holder">
+				  <apex:param name="mday" value="" />
+				</apex:actionFunction>
+				<apex:actionFunction oncomplete="default_cursor(this);" name="change_calendar_year" action="{!change_calendar_year}" rerender="calendar_holder,main_holder,action_holder">
+				  <apex:param name="cyear" value="" />
+				</apex:actionFunction>
+				<apex:actionFunction oncomplete="default_cursor(this);" name="change_center" action="{!change_center}" rerender="calendar_holder,main_holder,action_holder" />
+
+
+				<apex:outputPanel layout="block" id="calendar_holder" style="padding-bottom:1em;" styleClass="no_print">
+				<!--Confirmation : {!display_confirmation}<br />-->
+				  <apex:outputPanel >
+				  <span class="center_line"><apex:selectList value="{!selected_center}" onchange="use_fancy_cursor(this);change_center();" size="1" >
+				      <apex:selectOptions value="{!center_list}"></apex:selectOptions>
+				    </apex:selectList></span>
+				  </apex:outputPanel>
+				  <!-- <apex:outputPanel rendered="{!if((display_admin || display_cc_sup || display_cc_lead || display_confirmation || doc_exception) && !network_center_user,false,true)}">
+				    <span class="center_line"><apex:outputText value="{!selected_center_calendar_name}" /></span>
+				  </apex:outputPanel> -->
+				  <span class="calendar_name"><span class="month_name" >
+				  <apex:image url="{!$Resource.LArrow}" style="position:relative;top:2px;" onclick="use_fancy_cursor(this);prev_month();"/>
+				    <span onclick="use_fancy_cursor(this);view_months();" >{!cmonth.monthname}</span>
+				  <apex:image url="{!$Resource.RArrow}" style="position:relative;top:3px;" onclick="use_fancy_cursor(this);next_month();"/></span>
+				  <span class="year_name" onclick="use_fancy_cursor(this);view_years();">{!cmonth.yearnum}</span></span>
+				  <apex:outputPanel id="calendar_view" rendered="{!if(calendar_view=='calendar','true','false')}">
+				  <table class="calendar">
+				  <tr class="cheader">
+				    <td>Su</td>
+				    <td>M</td>
+				    <td>Tu</td>
+				    <td>W</td>
+				    <td>Th</td>
+				    <td>F</td>
+				    <td>Sa</td>
+				  </tr>
+				  <apex:repeat value="{!cmonth.weeks}" var="week">
+				    <tr>
+				    <apex:repeat value="{!week.days}" var="day">
+				      <td class="{!day.css_style}" onclick="{!if(day.display_date,'use_fancy_cursor(this);change_calendar_day(' + text(day.date_num) + ');','return false;')}"><apex:outputText rendered="{!day.display_date}" escape="false;" value="{!day.date_num}" /></td>
+				    </apex:repeat>
+				    </tr>
+				  </apex:repeat>
+				  </table>
+				  </apex:outputPanel>
+				  <apex:outputPanel id="month_view" rendered="{!if(calendar_view=='months','true','false')}">
+				    <table class="calendar" >
+				    <apex:variable var="mnum" value="1" />
+				    <apex:repeat value="{!month_list}" var="mrow">
+				      <tr class="mname">
+				        <apex:repeat value="{!mrow}" var="mname">
+				          <td class="{!if(mname==selected_monthname,'selected','none')}"><span onclick="use_fancy_cursor(this);change_calendar_month({!mnum});">{!mname}</span></td>
+				          <apex:variable var="mnum" value="{!(value(mnum)+1)}" />
+				        </apex:repeat>
+				      </tr>
+				    </apex:repeat>
+				    </table>
+				  </apex:outputPanel>
+				  <apex:outputPanel id="year_view" rendered="{!if(calendar_view=='years','true','false')}">
+				    <table class="calendar">
+				    <apex:repeat value="{!year_list}" var="yrow">
+				      <tr class="year">
+				        <apex:repeat value="{!yrow}" var="yvalue">
+				          <td class="{!if(yvalue==selected_year,'selected','none')}"><span onclick="use_fancy_cursor(this);change_calendar_year({!yvalue})">{!yvalue}</span></td>
+				        </apex:repeat>
+				      </tr>
+				    </apex:repeat>
+				    </table>
+				  </apex:outputPanel>
+				</apex:outputPanel>
+			</apex:actionRegion>
+
+<script>
+	// function confirm_unreserve() {
+	//   var my_confirmed = confirm('Are you sure you want to unreserve the seminar holds for this Center and date?');
+	//   if(my_confirmed) {
+	//     unreserve_all();
+	//   }
+	// }
+</script>
+
+<apex:outputPanel layout="block" id="action_holder"  style="padding-top:1em;border-top:1px solid #5789AE;" styleClass="no_print">
+  <apex:actionRegion >
+  <!-- <apex:actionFunction oncomplete="default_cursor(this);" name="unreserve_all" action="{!seminar_unreserve_all}" rerender="main_holder,action_holder" /> -->
+  <span style="font-weight:bold;font-size:10pt;font-family:georgia;">Center is &nbsp;<apex:outputText escape="false" value="{!formatted_status_text}" /></span><br /><br />
+  <apex:commandLink value="{!today_text}" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);" action="{!display_today}" rerender="calendar_holder,main_holder,action_holder" styleClass="cal_commands" onmouseover="tooltip.show('<p>This option will return you to the current day on the consult calendar</p>');" onmouseout="tooltip.hide();"  />
+  <apex:commandLink value="Display Consult Schedule" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  action="{!display_consults}" rerender="main_holder,modal_holder" styleClass="cal_commands" onmouseover="tooltip.show('<p>This option will return you to the main consult calendar view at any point in time.  Any unsaved work will be lost</p>');" onmouseout="tooltip.hide();" />
+  <apex:commandLink value="Create New Consult Room" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  action="{!display_room_form}" reRender="main_holder" rendered="{!display_admin}" styleClass="cal_commands" onmouseover="tooltip.show('<p>This option will allow you to add a new consult room to the currently selected center</p>');" onmouseout="tooltip.hide();"/>
+  <apex:commandLink onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);" value="Display Print View" action="{!display_printview}" rerender="main_holder,modal_holder" styleClass="cal_commands" onmouseover="tooltip.show('<p>This option will display a printer friendly version of the consult calendar.  Any unsaved work will be lost</p>');" onmouseout="tooltip.hide();" />    <!--  Check to see if we are currently working on scheduling a lead - -->
+  <apex:outputLink rendered="{!display_admin || display_confirmation}" target="clinic_calendar" value="{!clinic_link}" styleClass="cal_commands" >Open Clinic Calendar</apex:outputLink>
+  <hr />
+  <div style="color: gray; padding: 10px 40px 10px;">
+    Development Version
+  </div>
+  <hr />
+  <apex:outputPanel rendered="{!scheduling_lead.id !=null}">
+   <span onmouseover="tooltip.show('<p><span class=\'blank\'>Click on an open appointment block to schedule this patient</span></p>');" onmouseout="tooltip.hide();">
+   <span class="scheduling_header">Currently Scheduling : </span>
+   <apex:outputLink value="../{!scheduling_lead.id}" id="ppt_link" style="color:blue;font-weight:bold;"><apex:outputText value="{!scheduling_lead.name}" style="text-align:center;display:block;" /></apex:outputLink>
+   <apex:outputText value="{!scheduling_lead.LeadScore__c}" style="text-align:center;display:block;font-style:italic;" rendered="{!if(!network_center_user && display_prescreen,true,false)}" />
+   <apex:outputText value="{!schedule_warnings}" escape="false" style="text-align:center;color:red;display:block;" />
+   </span>
+   <span style="display:block;text-align:center;"><apex:commandButton rendered="{!if(display_confirmation || display_admin || display_cc_sup || display_cc_lead,true,false)}" onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);"  value="Stop Scheduling" action="{!clear_schedule_leadaccount}" reRender="main_holder,action_holder"/></span>
+  </apex:outputPanel>
+  <!-- check to see if we are currently working on scheduling an account---- -->
+  <apex:outputPanel rendered="{!scheduling_account.id != null}">
+   <span onmouseover="tooltip.show('<p><span class=\'blank\'>Click on an open appointment block to schedule this patient</span></p>');" onmouseout="tooltip.hide();">
+   <span class="scheduling_header">Currently Scheduling : </span>
+   <apex:outputLink value="../{!scheduling_account.id}" id="acntt_link" style="color:blue;font-weight:bold;"><apex:outputText value="{!scheduling_account.FirstName} {!scheduling_account.LastName}" style="text-align:center;display:block;" /></apex:outputLink>
+   <apex:outputText value="{!scheduling_account.Pre_Screen__c}" style="text-align:center;display:block;font-style:italic;" />
+   <apex:outputText value="{!schedule_warnings}" escape="false" style="text-align:center;color:red;display:block;" />
+   </span>
+   <span style="display:block;text-align:center;"><apex:commandButton rendered="{!if(display_confirmation || display_admin || display_cc_sup || display_cc_lead,true,false)}" onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);"  value="Stop Scheduling" action="{!clear_schedule_leadaccount}" reRender="main_holder,action_holder"/></span>
+  </apex:outputPanel>
+  <!-- check to see if we are currently scheduling a private practice patient -- -->
+  <apex:outputPanel rendered="{!scheduling_patient.id != null}">
+   <span onmouseover="tooltip.show('<p><span class=\'blank\'>Click on an open appointment block to schedule this patient</span></p>');" onmouseout="tooltip.hide();">
+   <span class="scheduling_header">Currently Scheduling : </span>
+   <apex:outputLink value="../{!scheduling_patient.id}" id="pp_link" style="color:blue;font-weight:bold;"><apex:outputText value="{!scheduling_patient.Full_Name__c}" style="text-align:center;display:block;" /></apex:outputLink>
+   <apex:outputText value="{!schedule_warnings}" escape="false" style="text-align:center;color:red;display:block;" />
+   </span>
+   <span style="display:block;text-align:center;"><apex:commandButton rendered="{!if(display_confirmation || display_admin || display_cc_sup || display_cc_lead,true,false)}" onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);"  value="Stop Scheduling" action="{!clear_schedule_leadaccount}" reRender="main_holder,action_holder"/></span>
+  </apex:outputPanel>
+  <br /><br />
+
+	<style>
+		.row {
+			display: block;
+		}
+		.clickable {
+			cursor: pointer;
+		}
+		.bulk-change-container {
+			border: 1px solid black;
+			border-radius: 4px;
+			margin-right: 5px;
+			padding-right: 2px;
+		}
+		.bulk-change-container *:not(.row):not(script):not(hr) {
+			display: inline-block;
+			margin: 2px 0 2px 2px;
+		}
+		.bulk-change-container .label {
+			width: 5em;
+			font-weight: bold;
+		}
+		.bulk-change-container .date {
+			width: 118px;
+		}
+		.bulk-change-container .submit {
+			text-align: right;
+		}
+		.bulk-change-container .submit .row:not(:first-child) {
+			margin-top: 10px;
+		}
+		.bulk-change-container .submit .btn {
+			min-width: 12em;
+		}
+		.bulk-change-container hr {
+			width: 90%;
+			margin: 1em auto;
+		}
+		.bulk-change-container #start-date {
+			padding-left: 1em;
+			font-weight: bold;
+		}
+		.appointment.highlighted {
+			box-shadow: 0 0 5px 5px red;
+		}
+		.center {
+			text-align: center;
+		}
+		#highlight-button {
+			background-color: red;
+			color: white;
+			font-weight: bold;
+			padding: 8px;
+			box-shadow: inset 0 0 3px 4px white;
+			cursor: pointer;
+		}
+	</style>
+
+	<!-- Permanent Hold applet -->
+	<apex:outputPanel rendered="{!display_schedule_admin}" styleClass="bulk-change-container" layout="block">
+		<div class="row">
+			<div class="label">Start date</div>
+			<div id="start-date">
+				<apex:outputText value="{0, date, M/d/yyyy}"><apex:param value="{!selected_date}" /></apex:outputText>
+			</div>
+		</div>
+		<div id="bulk-change-end-date" class="row">
+			<div class="label clickable" onclick="set_end_date_to_selected_date()">End date</div>
+			<apex:input value="{!bulk_change_end_date}" type="date" styleClass="date" onchange="fix_end_date()"/>
+		</div>
+		<hr />
+		<div id="bulk-change-room" class="row">
+			<div class="label">Room</div>
+			<apex:selectList value="{!bulk_change_room_filter}" size="1" onchange="highlight_selected_appointments()">
+				<apex:selectOptions value="{!room_options_with_all}" />
+			</apex:selectList>
+		</div>
+		<div id="bulk-change-scheduled-status" class="row">
+			<div class="label">Status</div>
+			<apex:selectList value="{!bulk_change_scheduled_status}" size="1" onchange="highlight_selected_appointments()">
+				<apex:selectOptions value="{!scheduled_status_options}" />
+			</apex:selectList>
+		</div>
+		<div id="bulk-change-earliest" class="row">
+			<div class="label">Earliest</div>
+			<apex:selectList value="{!bulk_change_start_hour}" size="1" styleClass="hour" onchange="fix_latest_time(); highlight_selected_appointments()">
+				<apex:selectOptions value="{!hour_options}" />
+			</apex:selectList>
+			<apex:selectList value="{!bulk_change_start_minute}" size="1" styleClass="minute" onchange="fix_latest_time(); highlight_selected_appointments()">
+				<apex:selectOptions value="{!minute_options}" />
+			</apex:selectList>
+		</div>
+		<div id="bulk-change-latest" class="row">
+			<div class="label">Latest</div>
+			<apex:selectList value="{!bulk_change_end_hour}" size="1" styleClass="hour" onchange="fix_latest_time(); highlight_selected_appointments()">
+				<apex:selectOptions value="{!hour_options}" />
+			</apex:selectList>
+			<apex:selectList value="{!bulk_change_end_minute}" size="1" styleClass="minute" onchange="fix_latest_time(); highlight_selected_appointments()">
+				<apex:selectOptions value="{!minute_options}" />
+			</apex:selectList>
+		</div>
+		<div class="row center">
+			<div id="highlight-button" onclick="highlight_selected_appointments()">Highlight Selected</div>
+		</div>
+		<hr />
+		<div class="row submit">
+			<div class="row">
+				<apex:commandButton value="Apply Holds" action="{!bulk_add_permanent_hold}" reRender="main_holder, action_holder" />
+			</div>
+			<div class="row">
+				<apex:commandButton value="Remove Holds" action="{!bulk_remove_permanent_hold}" reRender="main_holder, action_holder" />
+			</div>
+			<div class="row">
+				<apex:commandButton value="Delete Unscheduled" action="{!bulk_remove_unscheduled_appointments}" reRender="main_holder, action_holder" />
+			</div>
+			<!-- <div class="row">
+				<apex:commandButton value="Clear Today's Holds" onclick="confirm_unreserve();return false;" rendered="{!display_seminar_unreserve_all}" onmouseover="tooltip.show('<p>This sets all seminar blocks for the current Center and date to Any</p>');" onmouseout="tooltip.hide();"/>
+			</div> -->
+			<div class="row">
+				<apex:selectList value="{!bulk_change_time_shift}" size="1">
+					<apex:selectOptions value="{!time_shift_options}" />
+				</apex:selectList>
+				<apex:commandButton value="Time Shift" action="{!bulk_time_shift}" reRender="main_holder, action_holder" />
+			</div>
+			<!-- <div class="row">
+				<apex:selectList value="{!bulk_change_room_target}" size="1">
+					<apex:selectOptions value="{!room_options_no_all}" />
+				</apex:selectList>
+				<apex:commandButton value="Room Change" action="{!bulk_room_change}" reRender="main_holder, action_holder" />
+			</div> -->
+		</div>
+		<script>
+			function fix_end_date() {
+				var start_date = new Date('{!selected_date}');
+				var end_date_element = document.getElementById('bulk-change-end-date').getElementsByTagName('input')[0];
+				var end_date = new Date(end_date_element.value);
+				console.log('start date: ' + start_date);
+				console.log('end date: ' + end_date);
+
+				if (end_date < start_date) {
+					end_date_element.value = input_date_from_formatted_date(start_date);
+				}
+			}
+					function input_date_from_formatted_date(date) {
+						return date.getUTCFullYear() + '-' + ((date.getUTCMonth() + 1) < 10 ? '0' : '') + (date.getUTCMonth() + 1) + '-' + (date.getUTCDate() < 10 ? '0' : '') + date.getUTCDate();
+					}
+			function set_end_date_to_selected_date() {
+				var start_date = new Date('{!selected_date}');
+				var end_date_element = document.getElementById('bulk-change-end-date').getElementsByTagName('input')[0];
+				end_date_element.value = input_date_from_formatted_date(start_date);
+			}
+
+			function fix_latest_time() {
+				var earliest_hour   = document.getElementById('bulk-change-earliest').getElementsByClassName('hour')[0];
+				var earliest_minute = document.getElementById('bulk-change-earliest').getElementsByClassName('minute')[0];
+				var latest_hour     = document.getElementById('bulk-change-latest').getElementsByClassName('hour')[0];
+				var latest_minute   = document.getElementById('bulk-change-latest').getElementsByClassName('minute')[0];
+				if (Number(latest_hour.value) <= Number(earliest_hour.value)) {
+					latest_hour.value = earliest_hour.value;
+					if (Number(latest_minute.value) < Number(earliest_minute.value)) {
+						latest_minute.value = earliest_minute.value;
+					}
+				}
+			}
+
+			function highlight_selected_appointments() {
+				var earliest_hour   = document.getElementById('bulk-change-earliest').getElementsByClassName('hour')[0];
+				var earliest_minute = document.getElementById('bulk-change-earliest').getElementsByClassName('minute')[0];
+				var latest_hour     = document.getElementById('bulk-change-latest').getElementsByClassName('hour')[0];
+				var latest_minute   = document.getElementById('bulk-change-latest').getElementsByClassName('minute')[0];
+
+				var earliest_time = Number(earliest_hour.value) + (Number(earliest_minute.value) / 60);
+				var latest_time   = Number(latest_hour.value)   + (Number(latest_minute.value) / 60);
+
+				var appointments;
+				clear_all_highlights();
+				apply_highlights();
+
+
+						function clear_all_highlights() {
+							appointments = document.getElementsByClassName('appointment');
+							for (var i = 0; i < appointments.length; i++) {
+								appointments[i].className = appointments[i].className.replace(/\b highlighted\b/,'');
+							}
+						}
+						function apply_highlights() {
+							var room = document.getElementById('bulk-change-room').getElementsByTagName('select')[0]
+							var room_name = room.options[room.selectedIndex].text.replace(/\s+/g, '');
+
+							appointments = (room_name.toLowerCase() === 'all') ? document.getElementsByClassName('appointment') : document.getElementById(room_name).getElementsByClassName('appointment');
+							var start_time;
+							for (var i = 0; i < appointments.length; i++) {
+								start_time = Number(appointments[i].getAttribute('data-start'));
+								if (start_time >= earliest_time && start_time <= latest_time && scheduled_status_ok(appointments[i])) {
+									appointments[i].className += ' highlighted';
+								}
+							}
+
+									function scheduled_status_ok(appointment) {
+										var scheduled_status = document.getElementById('bulk-change-scheduled-status').getElementsByTagName('select')[0].value;
+										if (scheduled_status === 'any') {return true;}
+										else {
+											var is_scheduled = appointment.className.indexOf('apt_white') != -1 ? true : false;
+											if ((scheduled_status === 'not scheduled' && !is_scheduled) || (scheduled_status === 'scheduled' && is_scheduled)) {return true;}
+										}
+										return false;
+									}
+						}
+			}
+
+			fix_end_date();
+		</script>
+	</apex:outputPanel>
+	<!-- end Permanent Hold applet -->
+
+
+  <!-- display weather info -->
+  <apex:outputpanel layout="block" rendered="{!if(current_weather!='',true,false)}" styleclass="weather_tooltip" style="font-size:14pt;">
+    <apex:image value="{!URLFOR($Resource.WeatherIcons, current_weather.Icon__c + '.gif')}" style="height:30px;width:30px;margin-left:10px;" />
+    &nbsp;
+    <apex:outputText value="{0,number,##0}" style="color:red;margin-left:5px;"><apex:param value="{!current_weather.Temp_High__c}" /></apex:outputtext>&deg;
+    <apex:outputText value="{0,number,##0}" style="color:blue;margin-left:5px;"><apex:param value="{!current_weather.Temp_Low__c}" /></apex:outputtext>&deg;
+    <apex:outputpanel layout="block" styleclass="weather_tiptext" style="opacity: 1; z-index: 5100;','')} ">
+      <div style="text-align:center;width:100%;">
+        <div style="padding-bottom:5px;">
+          <apex:outputText value="{0,number,##0}" style="color:red;margin-left:5px;"><apex:param value="{!current_weather.Temp_High__c}" /></apex:outputtext>&deg;
+            &nbsp;&#124;&nbsp;
+          <apex:outputText value="{0,number,##0}" style="color:blue;margin-left:5px;"><apex:param value="{!current_weather.Temp_Low__c}" /></apex:outputtext>&deg;
+        </div>
+        <div style="padding-bottom:5px;">
+          <apex:image value="{!URLFOR($Resource.WeatherIcons, current_weather.Icon__c + '.gif')}" /><br />
+          <span style="font-size:9pt;font-weight:bold;">{!current_weather.conditions__c}</span>
+        </div>
+        <apex:outputpanel layout="block" rendered="{!if(current_weather.Snow_AllDay__c>0,true,false)}">Snow : {!current_weather.Snow_AllDay__c} in <span style="font-size:9pt;">({!current_weather.POP__c}%)</span></apex:outputpanel>
+        <apex:outputpanel layout="block" rendered="{!if(current_weather.QPF_Allday__c>0,true,false)}">Rain : {!current_weather.QPF_Allday__c} in <span style="font-size:9pt;">({!current_weather.POP__c}%)</span></apex:outputpanel>
+      </div>
+    </apex:outputpanel><br />
+    <apex:image id="WULogo" value="{!URLFOR($Resource.WeatherIcons, 'WUndergroundLogo.png')}" style="width:90px;padding-left:10px;" />
+  </apex:outputPanel>
+  </apex:actionregion>
+</apex:outputpanel>
+</td>
+<td style="vertical-align:top;padding-left:20px;">
+<apex:outputPanel id="main_holder" layout="block" style="width:3800px;overflow:auto;">
+	<!-- ------Form to create a new appointment block ------------------------ -->
+	<apex:outputPanel id="aptblock_holder" rendered="{!main_view == 'new_apt_form'}">
+		<apex:actionRegion >
+			<span class="form_header" >New Consult Appointment</span>
+			<table>
+				<tr>
+					<td style="padding-left:40px;">
+						<apex:outputText escape="false" value="{!new_room_issues}" /><br />
+						<span class="form_line">
+							<span class="form_tag">Room Name : </span><apex:outputField value="{!new_room.name}" />
+						</span>
+						<span class="form_line">
+							<table>
+								<tr>
+									<td><span class="form_tag">Date : </span></td><td><apex:inputField value="{!view_apt.Apt_Date__c}" /></td>
+								</tr>
+							</table>
+						</span>
+						<span class="form_line">
+							<table>
+								<tr>
+									<td><span class="form_tag">Start Time :</span></td>
+									<td><apex:inputField value="{!view_apt.Start_Hour__c}" style="width:20px;text-align:right;display:inline-block;"  /></td>
+									<td style="width:5px;text-align:center;"> : </td>
+									<td><apex:inputField value="{!view_apt.Start_Minute__c}" style="width:20px;text-align:right;display:inline-block;"  /></td>
+								</tr>
+							</table>
+						</span>
+						<span class="form_line">
+							<table>
+								<tr>
+									<td><span class="form_tag">End Time :</span></td>
+									<td><apex:inputField value="{!view_apt.End_Hour__c}" style="width:20px;text-align:right;display:inline-block;"  /></td>
+									<td style="width:5px;text-align:center;"> : </td>
+									<td>
+										<apex:inputField value="{!view_apt.End_Minute__c}" style="width:20px;text-align:right;display:inline-block;"  />
+										<!-- {! ((VALUE(view_apt.End_Hour__c) - VALUE(view_apt.Start_Hour__c)) * 60) + (VALUE(view_apt.End_Minute__c) - VALUE(view_apt.Start_Minute__c))} -->
+									</td>
+								</tr>
+							</table>
+						</span>
+						<span class="form_line">
+							<span class="form_tag">Pre-Screen Type : </span>
+							<apex:inputField value="{!view_apt.Pre_Screen_Type__c}" rendered="{! !network_center_user}" />
+							<apex:outputtext value="{!view_apt.Pre_Screen_Type__c}" rendered="{!  network_center_user}" />
+						</span>
+						<span class="form_line">
+							<span class="form_tag">Color : </span>
+							<apex:inputField value="{!view_apt.Color__c}" rendered="{! !network_center_user}" />
+							<apex:outputtext value="{!view_apt.Color__c}" rendered="{!  network_center_user}" />
+						</span>
+						<apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);" reRender="main_holder" value="Create Consult Apt" action="{!create_new_aptblock}" /> <span style="display:inline-block;width:50px;"></span>
+						<apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);" reRender="main_holder" value="Cancel" action="{!display_consults}" />
+					</td>
+				</tr>
+			</table>
+		</apex:actionRegion>
+	</apex:outputPanel>
+	<!-- ----- End Form to create a new consult room--------------------------------------------- -->
+
+
+	<!-- ------Form to create a new consult room ------------------------ -->
+	<apex:outputPanel id="room_holder" rendered="{!if(main_view=='room_form','true','false')}">
+		<apex:actionRegion >
+		  <span class="form_header" >New Consult Room</span>
+		<div style="padding-left:40px;">
+		<apex:outputText escape="false" value="{!new_room_issues}" /><br />
+		<span class="form_line">
+		  <span class="form_tag">Room Name : </span><apex:inputField value="{!new_room.name}" /></span>
+		<span class="form_line">
+		  <span class="form_tag">Room Type : </span>
+		    <apex:selectList value="{!new_room.Room_Type__c}" size="1" >
+		      <apex:selectOption itemLabel="Normal" itemvalue="Normal" />
+		      <apex:selectOption itemLabel="OverFlow" itemvalue="OverFlow" />
+		      <apex:selectOption itemLabel="Manual" itemvalue="Manual" />
+		      <apex:selectOption itemLabel="Unconfirmed" itemvalue="Unconfirmed" />
+		      <apex:selectOption itemLabel="Practice" itemvalue="Practice" />
+		    </apex:selectList>
+		</span>
+		<span class="form_line">
+		  <span class="form_tag">Schedule Template : </span>
+		    <apex:selectList value="{!new_room.Schedule_Template__c}" size="1" >
+		      <apex:selectOptions value="{!Templatelist}" />
+		    </apex:selectList>
+		</span>
+		<span class="form_line">
+		  <span class="form_tag">Api Visible : </span>
+		    <apex:inputfield value="{!new_room.API_Visible__c}" />
+		</span>
+		<span class="form_line">
+		  <span class="form_tag">IMC SF Visible : </span>
+		  <apex:inputfield value="{!new_room.Infocision_SF_Visible__c}" />
+		</span>
+		<span class="form_line">
+		<table><tr><td><span class="form_tag">Days Built Out : </span></td><td><apex:inputField value="{!new_room.Days_Built_Out__c}"  style="width:40px;text-align:right;" /></td></tr></table></span>
+		<span class="form_line">
+		<table><tr><td><span class="form_tag">Sort Order : </span></td><td><apex:inputField value="{!new_room.Sort_Order__c}"  style="width:40px;text-align:right;" /></td></tr></table></span>
+		<span class="form_line">
+		  <span class="form_tag">Center : </span><apex:outputText value="{!centername}" /></span>
+		<apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);" reRender="main_holder" value="Create Consult Room" action="{!create_new_room}" rendered="{!display_admin}" /> <span style="display:inline-block;width:50px;"></span>
+		<apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);" reRender="main_holder" value="Cancel" action="{!display_consults}" />
+		</div>
+		</apex:actionRegion>
+	</apex:outputPanel>
+	<!-- ----- End Form to create a new consult room--------------------------------------------- -->
+
+	<!-- ----- Start Form to modify an existing consult room / Create a new room note ------------------- -->
+	<apex:outputPanel id="mroom_holder" rendered="{!if(main_view=='modify_room' && new_room.Room_Type__c!='Practice','true','false')}">
+		<apex:actionRegion >
+		 <span class="form_header" >Modify Consult Room</span>
+		 <div style="padding-left:40px;" width="600px;">
+		 <apex:outputText escape="false" value="{!new_room_issues}" /><br />
+		<span class="form_line">
+		  <span class="form_tag">Room Name : </span><apex:inputField value="{!new_room.name}" /></span>
+		<span class="form_line">
+		  <span class="form_tag">Room Type : </span>
+		    <apex:selectList value="{!new_room.Room_Type__c}" size="1" rendered="{! !CONTAINS(new_room.Name, 'Overflow')}">
+		      <apex:selectOption itemLabel="Normal" itemvalue="Normal" />
+		      <apex:selectOption itemLabel="OverFlow" itemvalue="OverFlow" />
+		      <apex:selectOption itemLabel="Manual" itemvalue="Manual" />
+		      <apex:selectOption itemLabel="Unconfirmed" itemvalue="Unconfirmed" />
+		      <apex:selectOption itemLabel="Practice" itemvalue="Practice" />
+		    </apex:selectList>
+		    <apex:selectList value="{!new_room.Room_Type__c}" size="1" rendered="{! CONTAINS(new_room.Name, 'Overflow')}">
+		      <apex:selectOption itemLabel="OverFlow" itemvalue="OverFlow" />
+		      <apex:selectOption itemLabel="Manual" itemvalue="Manual" />
+		    </apex:selectList>
+		</span>
+		<span class="form_line">
+		  <span class="form_tag">Schedule Template : </span>
+		    <apex:selectList value="{!new_room.Schedule_Template__c}" size="1" >
+		      <apex:selectOptions value="{!Templatelist}" />
+		    </apex:selectList>
+		</span>
+		<span class="form_line">
+		  <span class="form_tag">Center : </span><apex:outputText value="{!centername}" /></span>
+		<span class="form_line">
+		  <span class="form_tag">Api Visible : </span><apex:inputfield value="{!new_room.API_Visible__c}" /></span>
+		<span class="form_line">
+		  <span class="form_tag">IMC SF Visible : </span><apex:inputfield value="{!new_room.Infocision_SF_Visible__c}" /></span>
+		<span class="form_line">
+		  <table><tr><td><span class="form_tag">Days Built Out : </span></td><td><apex:inputField value="{!new_room.Days_Built_Out__c}"  style="width:40px;text-align:right;" /></td></tr></table></span>
+		<span class="form_line">
+		  <table><tr><td><span class="form_tag">Sort Order : </span></td><td><apex:inputField value="{!new_room.Sort_Order__c}"  style="width:40px;text-align:right;" /></td></tr></table></span>
+		<apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);" reRender="main_holder" value="Modify Consult Room" action="{!update_consult_room}" rendered="{! display_admin || display_cc_sup}" /><span style="display:inline-block;width:50px;">&nbsp;</span>
+		<apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);" reRender="main_holder" value="Cancel" action="{!display_consults}" /><span style="display:inline-block;width:50px;">&nbsp;</span>
+		<apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);" rendered="{! num_futureapts == 0 && display_admin}" reRender="main_holder" value="Deactivate Room" action="{!deactivate_room}" /></div><br />
+		<apex:outputpanel style="padding-left:40px;" layout="block"  rendered="{! num_dayapt == 0 && !display_seminar}"  >
+		  <span class="form_line">
+		    <span class="form_tag">Clear Reason : </span><apex:selectList value="{!delete_reason}" size="1">
+		      <apex:selectoptions value="{!delete_reason_list}"></apex:selectoptions>
+		    </apex:selectList></span>
+		<span class="form_line">
+		    <span class="form_tag">Clear Note : </span><apex:inputtext value="{!delete_note}" />
+		    <span style="display:inline-block;width:20px;">&nbsp;</span>
+		<apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);" reRender="main_holder" value="Clear Apts for {!selected_date}" action="{!clear_dayapts}" /></span>
+		</apex:outputpanel>
+		</apex:actionRegion> <br /><br /><br />
+
+
+		<apex:outputpanel rendered="{! display_admin || display_cc_sup || display_seminar}" >
+		<apex:actionRegion >
+		<span class="form_header" >New Room Note</span>
+		<p style="padding-left:40px;">
+		  <apex:outputText escape="false" value="{!new_room_note_issues}" /><br />
+		  <span class="form_line">
+		  <span class="form_tag">Start Date : </span><apex:inputField value="{!new_note.Note_Date__c}" /></span>
+		  <span class="form_line">
+		  <span class="form_tag">End Date : </span><apex:inputField value="{!end_note.Note_Date__c}" /></span>
+		  <span class="form_line">
+		  <span class="form_tag" style="vertical-align:top;">Note : </span><apex:inputField value="{!new_note.Comment__c}" style="width:200px;height:40px;" /></span>
+		  <apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);" reRender="main_holder" value="Add Note" action="{!add_room_note}" /><span style="display:inline-block;width:50px;"></span>
+		</p>
+		</apex:actionRegion>
+		</apex:outputpanel> <br /><br />
+
+		<apex:outputpanel rendered="{!display_admin}"  >
+		<apex:actionRegion >
+		<apex:actionFunction oncomplete="default_cursor(this);" name="change_mass_dates" action="{!change_mass_dates}" rerender="clear_holder" />
+		<span class="form_header" >Mass Apt Clear</span>
+		<p style="padding-left:40px;">
+		  <span class="form_line">
+		  <span class="form_tag">Start Date : </span><apex:inputField value="{!mass_start.Note_Date__c}" onchange="use_fancy_cursor(this);change_mass_dates();" /></span>
+		  <span class="form_line">
+		  <span class="form_tag">End Date : </span><apex:inputField value="{!mass_end.Note_Date__c}" onchange="use_fancy_cursor(this);change_mass_dates();" /></span>
+		  <span class="form_line">
+		    <span class="form_tag">Clear Reason : </span><apex:selectList value="{!mass_delete_reason}" size="1">
+		      <apex:selectoptions value="{!delete_reason_list}"></apex:selectoptions>
+		    </apex:selectList></span>
+		  <span class="form_line">
+		    <span class="form_tag">Clear Note : </span><apex:inputtext value="{!mass_delete_note}" />
+		  </span>
+		  <apex:outputpanel id="clear_holder" >
+		    <apex:commandButton rendered="{!mass_clear_check}" onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);" reRender="clear_holder" value="Check Range" action="{!check_mass_clear}" />
+		       <span style="display:inline-block;width:50px;">&nbsp;</span>
+		    <apex:commandButton rendered="{!mass_clear_verified}" onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);" reRender="clear_holder" value="Confirm Clear" action="{!verify_mass_clear}" /><br /><br />
+
+
+
+		    <apex:outputText escape="false" value="{!mass_clear_message}" /><br />
+		  </apex:outputpanel>
+		</p>
+		</apex:actionRegion>
+		</apex:outputpanel>
+	</apex:outputpanel>
+
+	<apex:outputPanel id="mroom_practice_holder" rendered="{!if(main_view=='modify_room' && new_room.Room_Type__c=='Practice','true','false')}">
+		<apex:actionRegion >
+		 <span class="form_header" >Modify Consult Room</span>
+		 <div style="padding-left:40px;" width="600px;">
+		 <apex:outputText escape="false" value="{!new_room_issues}" /><br />
+		<span class="form_line">
+		  <span class="form_tag">Room Name : </span><apex:inputField value="{!new_room.name}" /></span>
+		<span class="form_line">
+		  <span class="form_tag">Room Type : </span><apex:outputfield value="{!new_room.Room_Type__c}" />
+		</span>
+		<span class="form_line">
+		  <span class="form_tag">Center : </span><apex:outputText value="{!centername}" /></span>
+		<span class="form_line">
+		  <span class="form_tag">Api Visible : </span><apex:outputfield value="{!new_room.API_Visible__c}" /></span>
+		<span class="form_line">
+		  <span class="form_tag">IMC SF Visible : </span><apex:outputfield value="{!new_room.Infocision_SF_Visible__c}" /></span>
+		<span class="form_line">
+		  <table><tr><td><span class="form_tag">Days Built Out : </span></td><td><apex:outputField value="{!new_room.Days_Built_Out__c}"  style="width:40px;text-align:right;" /></td></tr></table></span>
+		<span class="form_line">
+		  <table><tr><td><span class="form_tag">Sort Order : </span></td><td><apex:outputField value="{!new_room.Sort_Order__c}"  style="width:40px;text-align:right;" /></td></tr></table></span>
+		<apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);" reRender="main_holder" value="Modify Consult Room" action="{!update_consult_room}" rendered="{! display_admin || display_cc_sup}" /><span style="display:inline-block;width:50px;">&nbsp;</span>
+		<apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);" reRender="main_holder" value="Cancel" action="{!display_consults}" /><span style="display:inline-block;width:50px;">&nbsp;</span>
+		</div><br />
+		</apex:actionRegion>
+		 <br /><br /><br />
+
+		<apex:outputpanel rendered="{! display_admin || display_practice}"  >
+		<apex:actionRegion >
+		<span class="form_header" >New Room Note</span>
+		<p style="padding-left:40px;">
+		  <apex:outputText escape="false" value="{!new_room_note_issues}" /><br />
+		  <span class="form_line">
+		  <span class="form_tag">Start Date : </span><apex:inputField value="{!new_note.Note_Date__c}" /></span>
+		  <span class="form_line">
+		  <span class="form_tag">End Date : </span><apex:inputField value="{!end_note.Note_Date__c}" /></span>
+		  <span class="form_line">
+		  <span class="form_tag" style="vertical-align:top;">Note : </span><apex:inputField value="{!new_note.Comment__c}" style="width:200px;height:40px;" /></span>
+		  <apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);" reRender="main_holder" value="Add Note" action="{!add_room_note}" /><span style="display:inline-block;width:50px;"></span>
+		</p>
+		</apex:actionRegion>
+		</apex:outputpanel> <br /><br />
+	</apex:outputpanel>
+	<!-- ----- End form to modify an existing consult room / Create a new room note --------------------- -->
+
+	<!-- ----- Start Modify note form ------------------------------------------------------------------- -->
+	<apex:outputPanel id="mnote_holder" rendered="{! main_view == 'note_form'}">
+		<apex:actionRegion >
+		<span class="form_header" >Modify Room Note</span>
+		<p style="padding-left:40px;">
+		  <apex:outputText escape="false" value="{!new_room_note_issues}" /><br />
+		  <span class="room_note">To delete a note,  just leave the note blank</span><br /><br />
+		  <span class="form_line">
+		  <span class="form_tag">Room : </span><apex:outputField value="{!new_note.Consult_room__r.Name}" /></span>
+		  <span class="form_line">
+		  <span class="form_tag">Date : </span><apex:outputField value="{!new_note.Note_Date__c}" /></span>
+		  <span class="form_line">
+		  <span class="form_tag" style="vertical-align:top;">Note : </span><apex:inputField value="{!new_note.Comment__c}" style="width:200px;height:40px;" /></span>
+		  <apex:commandButton onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);" reRender="main_holder" value="Modify Note" action="{!modify_room_note}" rendered="{! display_admin || display_cc_sup}" /><span style="display:inline-block;width:50px;"></span>
+		  <apex:commandButton onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);" reRender="main_holder" value="Back to Consults" action="{!display_consults}" />
+		</p>
+		</apex:actionRegion>
+	</apex:outputPanel>
+	<!-- ----- End Modify Note form --------------------------------------------------------------------- -->
+
+	<!-- -----  Start main consult schedule view -------------------------------------------------------- -->
+    <apex:outputPanel id="consultview_holder" rendered="{!if(main_view=='consult_view','true','false')}">
+        <apex:actionRegion >
+            <apex:actionFunction oncomplete="default_cursor(this);"  name="display_modify_room_form" action="{!modify_room_form}"  rerender="main_holder" >
+                <apex:param name="rnum" value="" />
+            </apex:actionFunction>
+            <apex:actionFunction oncomplete="default_cursor(this);"  name="modify_note_form" action="{!modify_note_form}" rerender="main_holder">
+                <apex:param name="nnum" value="" />
+            </apex:actionFunction>
+            <apex:actionFunction oncomplete="default_cursor(this);"  action="{!display_apt_details}" name="display_apt" reRender="modal_holder" >
+                <apex:param name="anum" value="" />
+            </apex:actionFunction>
+            <apex:actionFunction oncomplete="default_cursor(this);"  action="{!display_new_apt_form}" name="new_apt_form" reRender="main_holder" >
+                <apex:param name="shour" value="" />
+                <apex:param name="smin" value="" />
+                <apex:param name="rid" value="" />
+            </apex:actionFunction>
+            <apex:repeat value="{!view_allrooms}" var="consult_room">
+                <div id="{!SUBSTITUTE(consult_room.room.name, ' ', '')}" class="room_holder {!consult_room.room.Room_Type__c}">
+                    <!--Room header for a practice room-->
+                    <apex:outputpanel rendered="{!if(consult_room.room.Room_Type__c=='Practice',true,false)}">
+                        <span class="{!if(consult_room.room.room_type__c=='Manual','room_manual','room_header')}" style="padding-bottom:0;margin-bottom:0;" onclick="tooltip.hide();use_fancy_cursor(this);display_modify_room_form('{!consult_room.room.id}');" onmouseover="tooltip.show('<p style=\'padding-left:50px;padding-bottom:1em;\'><span style=\'color:yellow;width:75px;display:inline-block;\'>Type : </span>{!consult_room.room.room_type__c}<br /><span style=\'color:yellow;width:75px;display:inline-block;\'>Template : </span>{!consult_room.room.schedule_template__r.name}</p><p>Click here to modify the room or to add a new note<p>');" onmouseout="tooltip.hide();">{!consult_room.room.name}</span> <br />
+                    </apex:outputpanel>
+                    <!--Room header for a non-practice room-->
+                    <apex:outputpanel rendered="{!if(consult_room.room.Room_Type__c=='Practice',false,true)}">
+                        <apex:outputPanel rendered="{! display_admin || display_cc_sup || display_confirmation || display_seminar}">
+                            <span class="{!if(consult_room.room.room_type__c=='Manual','room_manual','room_header')} {!IF(consult_room.room.Room_Type__c == 'Unconfirmed','unconfirmed','')}" style="padding-bottom:0;margin-bottom:0;" onclick="tooltip.hide();use_fancy_cursor(this);display_modify_room_form('{!consult_room.room.id}');" onmouseover="tooltip.show('<p style=\'padding-left:50px;padding-bottom:1em;\'><span style=\'color:yellow;width:75px;display:inline-block;\'>Type : </span>{!consult_room.room.room_type__c}<br /><span style=\'color:yellow;width:75px;display:inline-block;\'>Template : </span>{!consult_room.room.schedule_template__r.name}</p><p>Click here to modify the room or to add a new note<p>');" onmouseout="tooltip.hide();">{!consult_room.room.name}</span>
+                            <span class="{!if(consult_room.room.days_built_out__c>0,'room_manual','room_header')}" style="font-size:10pt;"><span style="color:black;padding-right:5px;">Days Built Out :</span><apex:outputText value="{0,number,##,##,##0}"><apex:param value="{!consult_room.room.Days_Built_Out__c}" /></apex:outputtext> </span>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{! display_cc || display_cc_lead || display_ca}">
+                            <span class="{!if(consult_room.room.Room_Type__c=='Manual','room_manual','room_header')} {!IF(consult_room.room.Room_Type__c == 'Unconfirmed','unconfirmed','')}">{!consult_room.room.name}</span>
+                        </apex:outputPanel>
+                    </apex:outputpanel>
+
+                    <!-- <apex:outputText rendered="{!if(consult_room.num_notes=0,'false','true')}"><span style='font-weight:bold;vertical-align:top;'>Notes : </span></apex:outputText> -->
+                    <apex:repeat value="{!consult_room.all_notes}" var="room_notes">
+                        <span class="room_note_header">{!room_notes.createdby.name} -&nbsp; <apex:outputField value="{!room_notes.createddate}" /></span>
+                        <apex:outputPanel rendered="{!if(display_admin || display_cc_sup || display_seminar || (consult_room.room.Room_Type__c=='Practice' && (display_practice || display_ca)),true,false)}"><span class="room_note" onclick="use_fancy_cursor(this);modify_note_form('{!room_notes.id}');"><apex:outputText value="{!room_notes.Comment__c}" escape="false"/></span></apex:outputPanel>
+                        <apex:outputPanel rendered="{!if(display_admin || display_cc_sup || display_seminar || (consult_room.room.Room_Type__c=='Practice' && (display_practice || display_ca)),false,true)}"><span class="room_note"><apex:outputtext value="{!room_notes.Comment__c}" escape="false" /></span></apex:outputPanel>
+                        <br />
+                    </apex:repeat>
+                    <br /><br />
+                    <table class="calendar_view">
+                        <apex:repeat value="{!consult_room.consult_view}" var="crows">
+                            <tr class="{!crows.cclass}">
+                                <td style="height:15px;border-collaps:collapse;" class="hour">
+                                    <apex:outputPanel rendered="{!if(consult_room.room.Room_Type__c=='Practice',true,false)}">
+                                        <apex:outputPanel rendered="{!  display_practice}" onclick="use_fancy_cursor(this);new_apt_form('{!crows.chours}','{!crows.cminutes}','{!consult_room.room.id}');" >{!crows.row_label}</apex:outputPanel>
+                                        <apex:outputPanel rendered="{! !display_practice}" >{!crows.row_label}</apex:outputPanel>
+                                    </apex:outputpanel>
+                                    <apex:outputPanel rendered="{!if(consult_room.room.Room_Type__c=='Practice',false,true)}">
+                                        <apex:outputPanel rendered="{! !display_cc}" onclick="use_fancy_cursor(this);new_apt_form('{!crows.chours}','{!crows.cminutes}','{!consult_room.room.id}');" >{!crows.row_label}</apex:outputPanel>
+                                        <apex:outputPanel rendered="{!  display_cc}" >{!crows.row_label}</apex:outputPanel>
+                                    </apex:outputPanel>
+                                </td>
+                                <apex:repeat value="{!crows.row_apts}" var="appointment">
+	                                <td rowspan="{!appointment.crowspan}" >
+	                                    <!-- <span class="{!appointment.cclass}" style="font-size:{!appointment.fontsize};line-height:{!appointment.lheight};padding-left:5px;padding-right:5px;height:{!appointment.cheight}px;position:relative;top:{!appointment.ctop}px;display:block;" onclick="use_fancy_cursor(this);apt_modal(event,'{!appointment.capt.id}');" > -->
+										<span class="appointment {!appointment.cclass}" data-start="{!appointment.capt.Start_Hour__c}{!SUBSTITUTE(TEXT(VALUE(appointment.capt.Start_Minute__c)/60), '0', '')}" style="font-size:{!appointment.fontsize};line-height:{!appointment.lheight};padding-left:5px;padding-right:5px;height:{!appointment.cheight}px;position:relative;top:{!appointment.ctop}px;display:block;" onclick="use_fancy_cursor(this);display_apt('{!appointment.capt.id}');" >
+	                                        <apex:outputPanel rendered="{!if(appointment.capt.Scheduled_Lead__c==null && appointment.capt.Scheduled_Account__c==null && appointment.capt.Scheduled_Patient__c==null,'true','false')}">
+	                                            <!-- -figure out if the block is avaliable or not
+	                                            <span class="blank">Available</span><br />{!appointment.capt.pre_screen_type__c}              - -->
+	                                            <apex:outputText escape="false" value="{!appointment.avail_text}" style="position:relative;top:3px;" />
+	                                        </apex:outputPanel>
+	                                        <apex:outputPanel rendered="{!if(appointment.capt.Scheduled_Lead__c==null && appointment.capt.Scheduled_Account__c==null && appointment.capt.Scheduled_Patient__c==null,'false','true')}">
+	                                            <apex:outputText escape="false"  value="{!appointment.block_text}" style="position:relative;top:3px;" />
+	                                        </apex:outputPanel>
+											<apex:outputPanel rendered="{! (appointment.capt.Scheduled_Lead__c != null || appointment.capt.Scheduled_Account__c != null)}">
+												<div class="confirmation-summary">
+													<div class="confirmation-dot {!appointment.note_statuses[0]}"></div>
+													<div class="confirmation-dot {!appointment.note_statuses[1]}"></div>
+													<div class="confirmation-dot {!appointment.note_statuses[2]}"></div>
+												</div>
+											</apex:outputPanel>
+											<apex:outputPanel rendered="{!appointment.capt.Pre_Screen_Type__c == 'Seminar'}" layout="block" styleClass="icon-lock">
+												<i class="ccf-lock"></i>
+											</apex:outputPanel>
+                      <apex:outputPanel rendered="{! if(appointment.capt.callback_consult__c, true, false)}" layout="block" styleClass="callback-phone">
+                        <p class="callback-phone">&#9742;</p>
+                      </apex:outputPanel>
+											<!-- {!appointment.capt.Pre_Screen_Type__c} -->
+	                                    </span>
+	                                </td>
+                                </apex:repeat>
+                            </tr>
+                        </apex:repeat>
+                    </table>
+                </div>
+            </apex:repeat>
+        </apex:actionRegion>
+    </apex:outputPanel>
+	<!-- -----  End main consult schedule view -------------------------------------------------------- -->
+
+	<!-- -----  Print View Holder --------------------------------------------------------------------- -->
+	<apex:outputPanel id="printview_holder" layout="block" styleClass="print_div" rendered="{!if(main_view=='print_view',true,false)}">
+		<apex:variable var="row_count" value="{!0}" />
+		<table class="print_break" style="page-break-after:always;">
+			<tr>
+				<td>
+					<span class="print_header">{!selected_center_name} - Consult Room Schedule ({!formatted_sdate}) </span>
+					<br />
+					<apex:repeat value="{!view_allprintrooms}" var="consult_room">
+						<div class="room_holder">
+							<apex:outputPanel >
+								<span class="room_header">{!consult_room.room.name}</span>
+							</apex:outputPanel>
+
+							<apex:outputText rendered="{!if(consult_room.num_notes=0,'false','true')}">
+								<span style='font-weight:bold;'>Notes : </span>
+							</apex:outputText>
+							<apex:repeat value="{!consult_room.all_notes}" var="room_notes">
+								<span class="room_note_header">{!room_notes.createdby.name} -&nbsp; <apex:outputField value="{!room_notes.createddate}" /></span>
+								<span class="room_note">{!room_notes.Comment__c}</span><br />
+							</apex:repeat>
+							<br />
+							<br />
+							<table class="calendar_view">
+								<tr>
+									<td>
+										<apex:repeat value="{!consult_room.all_apts}" var="ablocks">
+											<p class="print_apt">
+												<apex:outputPanel rendered="{!if(ablocks.capt.Patient_Name__c=='' && ablocks.capt.Scheduled_Account__c==null && ablocks.capt.Scheduled_Patient__c==null,'true','false')}">
+													<apex:outputText escape="false" value="{!ablocks.avail_text}" style="position:relative;top:3px;" />
+												</apex:outputPanel>
+												<apex:outputPanel rendered="{!if(ablocks.capt.Patient_Name__c=='' && ablocks.capt.Scheduled_Account__c==null && ablocks.capt.Scheduled_Patient__c==null,'false','true')}">
+													<apex:outputText escape="false"  value="{!ablocks.block_text}" style="position:relative;top:3px;" />
+												</apex:outputPanel>
+											</p>
+										</apex:repeat>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<!--pulled the header out until I can keep it from printing when we only have 4 rooms.-->
+						<!--<span class='print_header'>{!selected_center_name} - Consult Room Schedule ({!formatted_sdate}) </span>-->
+						<apex:outputText rendered="{!if(row_count>=3,true,false)}" value="</td></tr></table><div style='page-break-after:always;'>&nbsp;</div><br /><table><tr><td>" escape="false" />
+						<apex:variable var="row_count" value="{!0}" rendered="{!if(row_count>=3,true,false)}"/>
+						<apex:variable var="row_count" value="{!row_count+1}" />
+					</apex:repeat>
+				</td>
+			</tr>
+		</table>
+	</apex:outputPanel>
+	<!-- -----  End Print View Holder ------ -->
+
+</apex:outputPanel>
+</td></tr></table>
+
+<!-- -----  Modal pop-up holder ------------------------------------------------------------------- -->
+<script>
+function confirm_delete() {
+  var delete_confirmed=confirm('Are you sure you want to delete this block?');
+  if(delete_confirmed) {
+    document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+    delete_apt_block();
+  }
+}
+
+function confirm_schedule() {
+  var schedule_confirmed = confirm('You are attempting to schedule a consult for the current day.  Are you certain this consult is not being scheduled in the past?');
+  if(schedule_confirmed)   {
+      document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+      schedule_apt_block();
+  }
+}
+</script>
+<apex:outputPanel id="modal_holder" style="z-index:3000;" >
+<apex:actionRegion >
+  <apex:actionFunction oncomplete="default_cursor(this);" action="{!close_modal}" name="close_pop" rerender="modal_holder" />
+  <apex:actionFunction oncomplete="default_cursor(this);" name="schedule_apt_block" action="{!schedule_consult}" reRender="main_holder,modal_holder,action_holder"  />
+  <apex:actionFunction oncomplete="default_cursor(this);" name="delete_apt_block" action="{!delete_aptblock}" rerender="main_holder,modal_holder" />
+  <apex:actionFunction oncomplete="default_cursor(this);" name="init_update" action="{!update_initiative}" rerender="main_holder" />
+   <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!modal_display}"/>
+    <apex:outputPanel styleClass="modalPopup_outer" layout="block" rendered="{!modal_display}" id="outerpop">
+    <span class="modalPopup_outerheader" onclick="use_fancy_cursor(this);close_pop();"><div id="close-symbol">✕</div></span>
+    <!-- ✕ ✖ ✘-->
+
+    <!-- Alon's CSS for modalPopup_inner -->
+    <style>
+        .modalPopup_outer {
+            width: 700px;
+			position: fixed;
+			top: 120px;
+			left: 100px;
+        }
+        #close-symbol {
+            font-size: medium;
+            color: white;
+            float: right;
+            cursor: pointer;
+        }
+        .column {
+            display: inline-block;
+            vertical-align: top;
+            padding: .5em;
+            box-sizing: border-box;
+        }
+        #person-column {
+            width: 27em;
+			margin-right: 2em;
+        }
+		#consult-column {
+		}
+		#consult-column .data {
+			max-width: 17em;
+		}
+        .confirmation-conflict {
+            font-size: x-large;
+            margin-left: 1em;
+            color: red;
+            font-weight: bold;
+            font-style: italic;
+        }
+        .column.outbound {
+            width: 100%;
+            /*height: 12em;*/
+            text-align: center;
+        }
+        .data-row {
+            display: block;
+            margin-bottom: .5em;
+        }
+        .label {
+            display: inline-block;;
+            font-size: small;
+            font-weight: bold;
+        }
+        #person-column .label {
+            width: 10em;
+        }
+        #consult-column .label {
+            width: 10em;
+        }
+        #person-column .wide {
+            width: 16em;
+        }
+        .data {
+            display: inline-block;
+        }
+        .data img {
+            margin-bottom: -4px;
+        }
+        .data a {
+            color: blue;
+            font-weight: bold;
+        }
+
+		.data-row.notes {
+			margin-bottom: 0;
+			text-align: left;
+		}
+		.data-row.notes .label {
+			width: 8em;
+		}
+		.column.data-row .label {
+			width: 9em;
+		}
+        .data-row.notes .data {
+            width: 40em;
+        }
+        .data-row.notes input {
+            width: 100%;
+        }
+        .time-input {
+            width: 1.5em;
+            text-align: right
+        }
+        .time-separator {
+            margin: 0 2px;
+        }
+        .blank {
+            font-style: italic;
+            font-weight: bold;
+        }
+        .warning {
+            color: red;
+        }
+        .button-save {
+			float: right;
+			padding-right: .5em;
+        }
+    </style>
+
+    <!-- Outbound/Confirmation Buttons -->
+    <style>
+        .button-notes-holder {
+            display: inline-block;
+            margin-right: .5em;
+            /*height: 8em;*/
+			font-size: small;
+            text-align: center;
+            vertical-align: top;
+        }
+        .button-notes-holder:last-child {
+            margin-right: 0;
+        }
+        .button-notes-row {
+            display: block;
+        }
+        .button-notes {
+            display: inline-block;
+            width: 8.5em;
+            padding: .5em;
+            text-align: center;
+            /*font-size: small;*/
+            font-weight: bold;
+            /*color: gray;*/
+            background-repeat: white;
+            cursor: pointer;
+            box-sizing: border-box;
+            border-color: gray;
+            border-style: solid;
+            /*opacity: .5;*/
+        }
+        .button-notes.button1 {
+            /*background-color: green;*/
+            color: green;
+            /*border-color: green;*/
+            border-radius: .5em 0 0 0;
+            border-width: 1px 0 0 1px;
+        }
+        .button-notes.button2 {
+            /*background-color: red;*/
+            color: red;
+            /*border-color: red;*/
+            border-radius: 0 .5em 0 0;
+            border-width: 1px 1px 0 0;
+        }
+        .button-notes.button3 {
+            /*background-color: orange;*/
+            color: orange;
+            /*border-color: orange;*/
+            border-radius: 0 0 0 .5em;
+            border-width: 0 0 1px 1px;
+        }
+        .button-notes.button4 {
+            /*background-color: pink;*/
+            color: gray;
+            /*border-color: gray;*/
+            border-radius: 0 0 .5em 0;
+            border-width: 0 1px 1px 0;
+        }
+        .button-notes:hover {
+            /*opacity: 1;*/
+            color: white;
+        }
+        .button-notes.dead, .button-notes.dead:hover {
+            border-color: gray;
+            background-color: white;
+            /*opacity: .5;*/
+            cursor: default;
+        }
+        .button-notes.selected {
+            /*opacity: 1;*/
+            font-weight: bold;
+            color: white;
+            /*background-color: cornflowerblue;*/
+        }
+        .locked {
+            box-sizing: border-box;
+            height: 58px;
+            width: 221px;
+            border-radius: 6px;
+            padding: 16px;
+            font-weight: bold;
+            font-size: x-large;
+            color: white;
+            background-color: gray;
+        }
+        .button1:hover, .button1.selected, .button1.locked {
+            /*border-color: green;*/
+            background-color: green;
+        }
+        .button2:hover, .button2.selected, .button2.locked {
+            /*border-color: red;*/
+            background-color: red;
+        }
+        .button3:hover, .button3.selected, .button3.locked {
+            /*border-color: orange;*/
+            background-color: orange;
+        }
+        .button4:hover, .button4.selected, .button4.locked {
+            /*border-color: gray;*/
+            background-color: gray;
+        }
+        .outbound-heading {
+            font-weight: bold;
+            margin-bottom: .5em;
+        }
+        .outbound-date {
+            margin-top: .5em;
+        }
+    </style>
+
+	<!-- Double consult modal -->
+	<style>
+	.double-consult-link {
+		cursor: pointer;
+	}
+	.double-consult-modal {
+	    position: fixed;
+	    left: 100px;
+	    top: 200px;
+	    box-sizing: border-box;
+	    width: 500px;
+	    height: 500px;
+	    padding: 1em;
+	    background-color: white;
+	    border: 2px solid gray;
+	    border-radius: 10px;
+	    z-index: 9999;
+	}
+	</style>
+
+    <apex:actionFunction name="set_notes" action="{!set_notes}" reRender="outbound_column, confirmation">
+        <apex:param name="notes_number"          assignTo="{!notes_number}"          value=""/>
+        <apex:param name="notes_selection_index" assignTo="{!notes_selection_index}" value=""/>
+    </apex:actionFunction>
+
+    <apex:outputPanel id="innerpop" rendered="{!modal_display && modal_type=='apt_view' && view_apt.consult_room__r.Room_Type__c != 'Practice'}" styleClass="modalPopup_inner">
+        <!-- lead scheduled -->
+		<div>
+	        <div id="person-column" class="column">
+	            <apex:outputPanel rendered="{!view_apt.Scheduled_Lead__r.id == null && view_apt.Scheduled_Account__r.id == null}">
+	                <div class="data-row">
+	                    <div class="label"></div>
+	                    <div class="data blank warning">Consult Available</div>
+	                </div>
+	                <div class="data-row">
+	                    <apex:outputText rendered="{!if(allow_hold,false,true)}" value="{!hold_message}" escape="false" />
+	                </div>
+	            </apex:outputPanel>
+
+	            <apex:outputPanel rendered="{!view_apt.Scheduled_Lead__r.id != null}">
+	                <div class="data-row">
+	                    <div class="label">
+	                        Lead
+	                    </div>
+	                    <div class="data">
+	                        <apex:outputLink value="../{!view_apt.Scheduled_Lead__r.id}">
+	                            <apex:outputText value="{!view_apt.Scheduled_Lead__r.name}"/>
+	                        </apex:outputLink>
+	                    </div>
+	                </div>
+	                <!-- <apex:outputpanel rendered="{! !display_ca}" layout="block" styleClass="data-row">
+	                    <div class="label">
+	                        Scheduled By
+	                    </div>
+	                    <div class="data">
+	                        {!view_apt.Scheduled_By__r.Name}
+	                    </div>
+	                </apex:outputpanel> -->
+	                <apex:outputpanel rendered="{! !network_center_user && display_prescreen}" layout="block" styleClass="data-row">
+	                    <div class="label">
+	                        PPT Leadscore
+	                    </div>
+	                    <div class="data">
+	                        <apex:outputtext value="{!view_apt.Leadscore_At_Schedule_Time__c}" rendered="{!display_admin || display_cc_lead || display_cc || display_cc_sup || display_confirmation}"/>
+	                    </div>
+	                </apex:outputpanel>
+	                <div class="data-row">
+	                    <div class="label">
+	                        Phone #
+	                    </div>
+	                    <div class="data">
+	                        {!view_apt.Scheduled_Lead__r.Phone}
+	                    </div>
+	                </div>
+	                <div class="data-row">
+	                    <div class="label">
+	                        Mobile #
+	                    </div>
+	                    <div class="data">
+	                        {!view_apt.Scheduled_Lead__r.MobilePhone}
+	                    </div>
+	                </div>
+	                <div class="data-row">
+	                    <div class="label">
+	                        Email
+	                    </div>
+	                    <div class="data">
+	                        {!view_apt.Scheduled_Lead__r.Email}
+	                    </div>
+	                </div>
+	                <div class="data-row">
+	                    <div class="label">
+	                        Date of Birth
+	                    </div>
+	                    <div class="data">
+	                        <apex:inputField value="{!view_apt.Scheduled_Lead__r.Date_of_Birth__c}" rendered="{!    display_admin || display_cc || display_cc_sup || display_confirmation || display_cc_lead}"/>
+	                        <apex:outputField value="{!view_apt.Scheduled_Lead__r.Date_of_Birth__c}" rendered="{! !(display_admin || display_cc || display_cc_sup || display_confirmation || display_cc_lead)}"/>
+	                    </div>
+	                </div>
+	                <div class="data-row">
+	                    <div class="label">
+	                        Distance
+	                    </div>
+	                    <div class="data">
+	                        <apex:outputText value="{!FLOOR(view_apt.Scheduled_Lead__r.Distance_To_Center__c)} mile{!if(view_apt.Scheduled_Lead__r.Distance_To_Center__c != 1, 's', '')}"/>
+	                    </div>
+	                </div>
+	            </apex:outputPanel>
+
+
+
+
+
+
+
+
+
+
+	            <apex:outputPanel rendered="{!view_apt.Scheduled_Account__r.id != null}">
+	                <div class="data-row">
+	                    <div class="label">
+	                        Consult
+	                    </div>
+	                    <div class="data">
+	                        <apex:outputLink value="../{!view_apt.Scheduled_Account__r.id}">
+	                            <!-- <apex:outputText value="{!view_apt.Scheduled_Account__r.Name}"/> -->
+	                            <apex:outputText value="{!view_apt.Scheduled_Account__r.FirstName + ' ' + view_apt.Scheduled_Account__r.LastName}" />
+	                        </apex:outputLink>
+	                    </div>
+	                </div>
+	                <!-- <apex:outputpanel rendered="{! !display_ca}" layout="block" styleClass="data-row">
+	                    <div class="label">
+	                        Scheduled By
+	                    </div>
+	                    <div class="data">
+	                        {!view_apt.Scheduled_By__r.Name}
+	                    </div>
+	                </apex:outputpanel> -->
+	                <apex:outputpanel rendered="{! !network_center_user && display_prescreen}" layout="block" styleClass="data-row">
+	                    <div class="label">
+	                        PPT Leadscore
+	                    </div>
+	                    <div class="data">
+	                        <apex:outputtext value="{!view_apt.Leadscore_At_Schedule_Time__c}" rendered="{!display_admin || display_cc_lead || display_cc || display_cc_sup || display_confirmation}"/>
+	                    </div>
+	                </apex:outputpanel>
+	                <div class="data-row">
+	                    <div class="label">
+	                        Phone #
+	                    </div>
+	                    <div class="data">
+	                        {!view_apt.Scheduled_Account__r.Phone}
+	                    </div>
+	                </div>
+	                <div class="data-row">
+	                    <div class="label">
+	                        Mobile #
+	                    </div>
+	                    <div class="data">
+	                        {!view_apt.Scheduled_Account__r.PersonMobilePhone}
+	                    </div>
+	                </div>
+	                <div class="data-row">
+	                    <div class="label">
+	                        Email
+	                    </div>
+	                    <div class="data">
+	                        {!view_apt.Scheduled_Account__r.PersonEmail}
+	                    </div>
+	                </div>
+	                <div class="data-row">
+	                    <div class="label">
+	                        Date of Birth
+	                    </div>
+	                    <div class="data">
+	                        <apex:inputField value="{!view_apt.Scheduled_Account__r.Date_of_Birth__c}" rendered="{!   display_admin || display_cc || display_cc_sup || display_confirmation || display_cc_lead}"/>
+	                        <apex:outputField value="{!view_apt.Scheduled_Account__r.Date_of_Birth__c}" rendered="{! !(display_admin || display_cc || display_cc_sup || display_confirmation || display_cc_lead)}"/>
+	                    </div>
+	                </div>
+	                <div class="data-row">
+	                    <div class="label">
+	                        Distance
+	                    </div>
+	                    <div class="data">
+	                        <apex:outputText value="{!FLOOR(view_apt.Scheduled_Account__r.Distance_To_Center__c)} mile{!if(view_apt.Scheduled_Account__r.Distance_To_Center__c != 1, 's', '')}"/>
+	                    </div>
+	                </div>
+	            </apex:outputPanel>
+
+				<apex:outputPanel rendered="{! !reschedule && (view_apt.isConsultScheudled__c == 1 || !ISBLANK(scheduling_lead) || !ISBLANK(scheduling_account))}">
+					<div class="data-row">
+						<div class="label">
+							Automated Call?
+						</div>
+						<div class="data">
+							<apex:outputPanel rendered="{!view_apt.isConsultScheudled__c == 1}">
+								<apex:outputPanel rendered="{! !ISBLANK(view_apt.Scheduled_Lead__c)}">
+									<apex:inputField value="{!view_apt.Scheduled_Lead__r.Reminder_Call__c}" />
+								</apex:outputPanel>
+								<apex:outputPanel rendered="{! !ISBLANK(view_apt.Scheduled_Account__c)}">
+									<apex:inputField value="{!view_apt.Scheduled_Account__r.Reminder_Call__c}" />
+								</apex:outputPanel>
+							</apex:outputPanel>
+							<apex:outputPanel rendered="{!view_apt.isConsultScheudled__c != 1}">
+								<apex:outputPanel rendered="{! !ISBLANK(scheduling_lead)}">
+									<apex:inputField value="{!scheduling_lead.Reminder_Call__c}" />
+								</apex:outputPanel>
+								<apex:outputPanel rendered="{! !ISBLANK(scheduling_account)}">
+									<apex:inputField value="{!scheduling_account.Reminder_Call__c}" />
+								</apex:outputPanel>
+							</apex:outputPanel>
+						</div>
+					</div>
+					<div class="data-row">
+						<div class="label">
+							Text Reminder?
+						</div>
+						<div class="data">
+							<apex:outputPanel rendered="{!view_apt.isConsultScheudled__c == 1}">
+								<apex:outputPanel rendered="{! !ISBLANK(view_apt.Scheduled_Lead__c)}">
+									<apex:inputField value="{!view_apt.Scheduled_Lead__r.Reminder_Text__c}" />
+								</apex:outputPanel>
+								<apex:outputPanel rendered="{! !ISBLANK(view_apt.Scheduled_Account__c)}">
+									<apex:inputField value="{!view_apt.Scheduled_Account__r.Reminder_Text__c}" />
+								</apex:outputPanel>
+							</apex:outputPanel>
+							<apex:outputPanel rendered="{!view_apt.isConsultScheudled__c != 1}">
+								<apex:outputPanel rendered="{! !ISBLANK(scheduling_lead)}">
+									<apex:inputField value="{!scheduling_lead.Reminder_Text__c}" />
+								</apex:outputPanel>
+								<apex:outputPanel rendered="{! !ISBLANK(scheduling_account)}">
+									<apex:inputField value="{!scheduling_account.Reminder_Text__c}" />
+								</apex:outputPanel>
+							</apex:outputPanel>
+						</div>
+					</div>
+				</apex:outputPanel>
+
+				<apex:outputPanel rendered="{!view_apt.isConsultScheudled__c == 1}">
+					<apex:outputPanel rendered="{!display_admin || display_confirmation}" layout="block" styleClass="data-row">
+						<div class="label">
+							Star Rating
+						</div>
+						<div class="data">
+							<apex:image url="{!star_URL}" height="25" width="136"/>
+						</div>
+					</apex:outputPanel>
+		            <div class="data-row">
+		                <div class="label">
+		                    Age of Ticket
+		                </div>
+		                <div class="data">
+		                    <apex:outputtext value="{!age_of_ticket} day{!if(age_of_ticket != 1, 's', '')}"/>
+		                </div>
+		            </div>
+		            <div class="data-row">
+		                <div class="label">
+		                    Confirmation
+		                </div>
+		                <div class="data">
+		                    <apex:inputField id="confirmation" value="{!view_apt.Confirmation_Status__c}" rendered="{!   display_admin || display_cc || display_cc_sup || display_confirmation || display_cc_lead}"/>
+		                    <apex:outputField value="{!view_apt.Confirmation_Status__c}" rendered="{! !(display_admin || display_cc || display_cc_sup || display_confirmation || display_cc_lead)}"/>
+		                </div>
+		                <apex:outputPanel rendered="{! (display_admin || display_confirmation) && confirmation_conflict}" layout="block" styleClass="data confirmation-conflict">
+		                    !
+		                </apex:outputPanel>
+		            </div>
+				</apex:outputPanel>
+	        </div>
+	        <div id="consult-column" class="column">
+				<apex:outputpanel rendered="{! !display_ca}" layout="block" styleClass="data-row">
+					<div class="label">
+						Scheduled By
+					</div>
+					<div class="data">
+						{!view_apt.Scheduled_By__r.Name}
+					</div>
+				</apex:outputpanel>
+	            <div class="data-row">
+	                <div class="label">
+	                    Room
+	                </div>
+	                <div class="data">
+	                    {!view_apt.consult_room__r.name}
+	                </div>
+	            </div>
+	            <div class="data-row">
+	                <div class="label">
+	                    Date
+	                </div>
+	                <div class="data">
+	                    <apex:outputField value="{!view_apt.Apt_Date__c}"/>
+	                </div>
+	            </div>
+	            <apex:outputPanel rendered="{! !(display_admin || display_confirmation)}">
+	                <div class="data-row">
+	                    <div class="label">
+	                        Start Time
+	                    </div>
+	                    <div class="data">
+	                        {!apt_starttime}
+	                    </div>
+	                </div>
+	                <div class="data-row">
+	                    <div class="label">
+	                        End Time
+	                    </div>
+	                    <div class="data">
+	                        {!apt_endtime}
+	                    </div>
+	                </div>
+	            </apex:outputPanel>
+	            <apex:outputPanel rendered="{!display_admin || display_confirmation}">
+	                <div class="data-row">
+	                    <div class="label">
+	                        Start Time
+	                    </div>
+	                    <div class="data"><apex:inputField value="{!view_apt.Start_Hour__c}" styleClass="time-input"/></div>
+	                    <div class="data time-separator">:</div>
+	                    <div class="data"><apex:inputField value="{!view_apt.Start_Minute__c}" styleClass="time-input"/></div>
+	                </div>
+	                <div class="data-row">
+	                    <div class="label">
+	                        End Time
+	                    </div>
+	                    <div class="data"><apex:inputField value="{!view_apt.End_Hour__c}" styleClass="time-input"/></div>
+	                    <div class="data time-separator">:</div>
+	                    <div class="data"><apex:inputField value="{!view_apt.End_Minute__c}" styleClass="time-input"/></div>
+	                </div>
+	            </apex:outputPanel>
+				<apex:outputPanel rendered="{! !network_center_user && display_prescreen}">
+					<div class="data-row">
+						<div class="label">
+							Pre-Screen
+						</div>
+						<div class="data">
+							<apex:inputField value="{!view_apt.Pre_Screen_Type__c}" rendered="{!   display_admin || display_confirmation}"/>
+							<apex:outputField value="{!view_apt.Pre_Screen_Type__c}" rendered="{! !(display_admin || display_confirmation)}"/>
+						</div>
+					</div>
+					<div class="data-row">
+						<div class="label">
+							Color
+						</div>
+						<div class="data">
+							<apex:inputField value="{!view_apt.Color__c}"  rendered="{!   display_admin || display_confirmation}"/>
+							<apex:outputField value="{!view_apt.Color__c}"  rendered="{! !(display_admin || display_confirmation)}"/>
+						</div>
+					</div>
+				</apex:outputPanel>
+				<apex:outputPanel rendered="{!view_apt.isConsultScheudled__c == 1}">
+					<div class="data-row">
+						<div class="label">
+							Double Consult
+						</div>
+						<div class="data">
+							<apex:outputPanel layout="block" rendered="{! display_admin || display_cc || display_cc_sup || display_confirmation || display_cc_lead}">
+								<apex:selectList value="{!view_apt.Double_Consult__c}" size="1">
+									<apex:selectOptions value="{!double_consult_options}"></apex:selectOptions>
+								</apex:selectList>
+							</apex:outputPanel>
+							<apex:outputPanel layout="block" rendered="{! !(display_admin || display_cc || display_cc_sup || display_confirmation || display_cc_lead) && view_apt.Double_Consult__c != null}" styleClass="data-row">
+								<apex:outputField value="{!view_apt.Double_Consult__r.Scheduled_Lead__r.Name}"    rendered="{!view_apt.Double_Consult__r.Scheduled_Lead__c    != null}"/>
+								<apex:outputField value="{!view_apt.Double_Consult__r.Scheduled_Account__r.Name}" rendered="{!view_apt.Double_Consult__r.Scheduled_Account__c != null}"/>
+							</apex:outputPanel>
+						</div>
+					</div>
+
+					<div class="data-row">
+						<div class="label">
+							Show Status
+						</div>
+						<div class="data">
+							<apex:inputField value="{!view_apt.Consult_Show_Status__c}"  rendered="{!  display_admin}"/>
+							<apex:outputField value="{!view_apt.Consult_Show_Status__c}" rendered="{! !display_admin}"/>
+						</div>
+					</div>
+				</apex:outputPanel>
+	        </div>
+		</div>
+
+    <!-- confirmation buttons -->
+		<apex:outputPanel id="outbound_column" rendered="{! (display_admin || display_cc ||
+       display_cc_lead || display_cc_sup) && view_apt.isConsultScheudled__c == 1}" layout="block" styleClass="column outbound">
+            <div class="data-row">
+                <apex:variable var="button_number" value="{!1}"/>
+                <div class="button-notes-holder">
+                    <div class="outbound-heading">Confirmation 1</div>
+                    <apex:outputPanel rendered="{! note_dates[button_number] == ' ' || note_dates[button_number] == today}" styleClass="button-collage">
+                        <div class="button-notes-row">
+                            <apex:outputPanel onclick="set_notes({!button_number}, 0)" layout="block" styleClass="button-notes button1 {!if(note_statuses[button_number] == note_possible_statuses[0], 'selected', '')}">
+                                {!note_possible_statuses[0]}
+                            </apex:outputPanel>
+                            <apex:outputPanel onclick="set_notes({!button_number}, 1)" layout="block" styleClass="button-notes button2 {!if(note_statuses[button_number] == note_possible_statuses[1], 'selected', '')}">
+                                {!note_possible_statuses[1]}
+                            </apex:outputPanel>
+                        </div>
+                        <div class="button-notes-row">
+                            <apex:outputPanel onclick="set_notes({!button_number}, 2)" layout="block" styleClass="button-notes button3 {!if(note_statuses[button_number] == note_possible_statuses[2], 'selected', '')}">
+                                {!note_possible_statuses[2]}
+                            </apex:outputPanel>
+                            <apex:outputPanel onclick="set_notes({!button_number}, 3)" layout="block" styleClass="button-notes button4 {!if(note_statuses[button_number] == note_possible_statuses[3], 'selected', '')}">
+                                {!note_possible_statuses[3]}
+                            </apex:outputPanel>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!note_dates[button_number] != ' ' && note_dates[button_number] != today}" layout="block" styleClass="locked {!CASE(note_statuses[button_number], note_possible_statuses[0], 'button1', note_possible_statuses[1], 'button2', note_possible_statuses[2], 'button3', note_possible_statuses[3], 'button4', '')}">
+                        {!note_statuses[button_number]}
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!note_dates[button_number] != ' '}" layout="block" styleClass="outbound-date">
+                        {!note_dates[button_number] + ' ' + user_initials}
+                    </apex:outputPanel>
+                </div>
+
+                <apex:variable var="button_number" value="{!2}"/>
+                <div class="button-notes-holder">
+                    <div class="outbound-heading">Confirmation 2</div>
+                    <apex:outputPanel rendered="{! first_confirmation_complete && !confirmed_on_first_call && (note_dates[button_number] == ' ' || note_dates[button_number] == today)}" styleClass="button-collage">
+                        <div class="button-notes-row">
+                            <apex:outputPanel onclick="set_notes({!button_number}, 0)" layout="block" styleClass="button-notes button1 {!if(note_statuses[button_number] == note_possible_statuses[0], 'selected', '')}">
+                                {!note_possible_statuses[0]}
+                            </apex:outputPanel>
+                            <apex:outputPanel onclick="set_notes({!button_number}, 1)" layout="block" styleClass="button-notes button2 {!if(note_statuses[button_number] == note_possible_statuses[1], 'selected', '')}">
+                                {!note_possible_statuses[1]}
+                            </apex:outputPanel>
+                        </div>
+                        <div class="button-notes-row">
+                            <apex:outputPanel onclick="set_notes({!button_number}, 2)" layout="block" styleClass="button-notes button3 {!if(note_statuses[button_number] == note_possible_statuses[2], 'selected', '')}">
+                                {!note_possible_statuses[2]}
+                            </apex:outputPanel>
+                            <apex:outputPanel onclick="set_notes({!button_number}, 3)" layout="block" styleClass="button-notes button4 {!if(note_statuses[button_number] == note_possible_statuses[3], 'selected', '')}">
+                                {!note_possible_statuses[3]}
+                            </apex:outputPanel>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{! !first_confirmation_complete || confirmed_on_first_call || (note_dates[button_number] != ' ' && note_dates[button_number] != today)}" layout="block" styleClass="locked {!CASE(note_statuses[button_number], note_possible_statuses[0], 'button1', note_possible_statuses[1], 'button2', note_possible_statuses[2], 'button3', note_possible_statuses[3], 'button4', '')}">
+                        {!note_statuses[button_number]}
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!note_dates[button_number] != ' '}" layout="block" styleClass="outbound-date">
+                        {!note_dates[button_number] + ' ' + user_initials}
+                    </apex:outputPanel>
+                </div>
+
+                <apex:variable var="button_number" value="{!3}"/>
+                <div class="button-notes-holder">
+                    <div class="outbound-heading">Reminder</div>
+                    <apex:outputPanel rendered="{! note_dates[button_number] == ' ' || note_dates[button_number] == today}" styleClass="button-collage">
+                        <div class="button-notes-row">
+                            <apex:outputPanel onclick="set_notes({!button_number}, 0)" layout="block" styleClass="button-notes button1 {!if(note_statuses[button_number] == note_possible_statuses[0], 'selected', '')}">
+                                {!note_possible_statuses[0]}
+                            </apex:outputPanel>
+                            <apex:outputPanel onclick="set_notes({!button_number}, 1)" layout="block" styleClass="button-notes button2 {!if(note_statuses[button_number] == note_possible_statuses[1], 'selected', '')}">
+                                {!note_possible_statuses[1]}
+                            </apex:outputPanel>
+                        </div>
+                        <div class="button-notes-row">
+                            <apex:outputPanel onclick="set_notes({!button_number}, 2)" layout="block" styleClass="button-notes button3 {!if(note_statuses[button_number] == note_possible_statuses[2], 'selected', '')}">
+                                {!note_possible_statuses[2]}
+                            </apex:outputPanel>
+                            <apex:outputPanel layout="block" styleClass="button-notes button4 dead">
+                                &nbsp;
+                            </apex:outputPanel>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{! note_dates[button_number] != ' ' && note_dates[button_number] != today}" layout="block" styleClass="locked {!CASE(note_statuses[button_number], note_possible_statuses[0], 'button1', note_possible_statuses[1], 'button2', note_possible_statuses[2], 'button3', note_possible_statuses[3], 'button4', '')}">
+                        {!note_statuses[button_number]}
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!note_dates[button_number] != ' '}" layout="block" styleClass="outbound-date">
+                        {!note_dates[button_number] + ' ' + user_initials}
+                    </apex:outputPanel>
+                </div>
+            </div>
+
+            <div class="data-row notes">
+				<div class="label">
+                    RoboNotes
+                </div>
+                <div class="data">
+                    <apex:outputField value="{!view_apt.Apt_Notes__c}"/>
+                    <!-- <apex:inputField id="notes" value="{!view_apt.Apt_Notes__c}"  rendered="{!   display_admin || view_apt.scheduled_lead__r.id != null || view_apt.scheduled_account__r.id != null}" /> -->
+                    <!-- <apex:outputField value="{!view_apt.Apt_Notes__c}" rendered="{! !(display_admin || view_apt.scheduled_lead__r.id != null || view_apt.scheduled_account__r.id != null)}" /> -->
+                </div>
+			</div>
+			<apex:outputPanel layout="block"  styleClass="data-row notes" rendered="{! display_schedule_admin || display_admin || display_confirmation}">
+				<div class="label">
+					Consult Notes
+				</div>
+				<div class="data">
+					<apex:outputPanel rendered="{!display_schedule_admin}">
+						<apex:inputField value="{!view_apt.Admin_Notes__c}"/>
+					</apex:outputPanel>
+					<apex:outputPanel rendered="{! !display_schedule_admin}">
+						<apex:outputField value="{!view_apt.Admin_Notes__c}"/>
+					</apex:outputPanel>
+				</div>
+			</apex:outputPanel>
+
+            <apex:outputPanel id="debug" layout="block" rendered="false">
+                Notes: <apex:outputText value="{!notes[0] + ' - ' + notes[1] + ' - ' + notes[2] + ' - ' + notes[3]}"/><br/>
+                Note Statuses: <apex:outputText value="{!note_statuses[0] + ' - ' + note_statuses[1] + ' - ' + note_statuses[2] + ' - ' + note_statuses[3]}"/><br/>
+                Note Dates: <apex:outputText value="{!note_dates[0] + ' - ' + note_dates[1] + ' - ' + note_dates[2] + ' - ' + note_dates[3]}"/><br/>
+                TEST: SIZE:{!note_dates.size} - 1{!note_dates[3]} - 2{!ISBLANK(note_dates[3])} - 3{!note_dates[3] == ' '} - 4{!BLANKVALUE(note_dates[3], 'EMPTY STRING IS BLANK')}<br/>
+                Possible Statuses: <apex:outputText value="{!note_possible_statuses[0] + ' - ' + note_possible_statuses[1] + ' - ' + note_possible_statuses[2] + ' - ' + note_possible_statuses[3]}"/><br/>
+                DEBUG: <apex:outputText value="{!notes_selection_index}"/>
+            </apex:outputPanel>
+
+        </apex:outputPanel>
+		<apex:outputPanel rendered="{!display_schedule_admin && view_apt.Scheduled_Lead__c != null}" layout="block" styleClass="column data-row">
+			<div class="label">
+				Consult Datetime
+			</div>
+			<div class="data">
+				<apex:inputField value="{!view_apt.Scheduled_Lead__r.DateTime_Consult_Scheduled__c}" />
+			</div>
+		</apex:outputPanel>
+		<div class="data-row button-save">
+	        <apex:commandButton id="save_changes" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);" value="Save Changes" action="{!modify_aptblock}" rendered="{!display_admin || display_confirmation || view_apt.Scheduled_Lead__r.id != null || view_apt.Scheduled_Account__r.id != null}" reRender="main_holder,modal_holder"/>
+		</div>
+
+        <apex:outputpanel rendered="{!if(view_apt.consult_room__r.center_information__r.Type__c=='Network Center' && !(view_apt.scheduled_lead__r.id==null && view_apt.scheduled_account__r.id==null),true,false)}">
+            <span class="apt_tag" style="width:175px;" >Procedure(s) Interested In :</span><apex:outputField value="{!view_apt.scheduled_lead__r.Procedure_Interested_In__c}" /><br />
+        </apex:outputpanel>
+        <apex:outputtext escape="false" value="{!modal_out}" />
+    </apex:outputPanel>
+
+
+
+
+
+
+  <!-- Private Practice Apt View ------------------------------------------------------------- -->
+   <apex:outputPanel styleClass="modalPopup_inner" rendered="{!if(modal_display && modal_type=='apt_view' && view_apt.consult_room__r.Room_Type__c=='Practice',true,false)}" id="ppinnerpop">
+      <table><tr><td style="width:250px;vertical-align:top;">
+      <span class="apt_line">
+      <span class="apt_tag">Patient : </span>
+        <apex:outputpanel rendered="{!if(view_apt.scheduled_lead__r.id==null && view_apt.scheduled_account__r.id==null && view_apt.scheduled_patient__r.id==null,true,false)}"><span class="blank" style="color:red;">Consult Available</span></apex:outputpanel>
+        <apex:outputfield value="{!view_apt.Scheduled_Lead__c}" rendered="{!if(view_apt.scheduled_lead__r.id!=null,true,false)}"  />
+        <apex:outputfield value="{!view_apt.Scheduled_Account__c}" rendered="{!if(view_apt.scheduled_account__r.id!=null,true,false)}" />
+        <apex:outputfield value="{!view_apt.Scheduled_Patient__c}" rendered="{!if(view_apt.scheduled_patient__r.id!=null,true,false)}"  />
+      </span>
+      <apex:outputText rendered="{!if(allow_hold,false,true)}" value="{!hold_message}" escape="false" />
+
+      <apex:outputpanel rendered="{!if(view_apt.scheduled_lead__r.id!=null,true,false)}">
+        <span class="apt_line">
+        <span class="apt_tag">Phone # : </span>{!view_apt.scheduled_lead__r.phone}</span>
+      </apex:outputpanel>
+      <apex:outputpanel rendered="{!if(view_apt.scheduled_account__r.id!=null,true,false)}">
+        <span class="apt_line">
+        <span class="apt_tag">Phone # : </span>{!view_apt.scheduled_account__r.phone}</span>
+      </apex:outputpanel>
+      <apex:outputpanel rendered="{!if(view_apt.scheduled_patient__r.id!=null,true,false)}">
+        <span class="apt_line">
+        <span class="apt_tag">Phone # : </span>{!view_apt.scheduled_patient__r.Main_Phone__c}</span>
+      </apex:outputpanel>
+
+      <apex:outputpanel rendered="{!if(view_apt.scheduled_lead__r.id!=null,true,false)}">
+        <span class="apt_line">
+        <span class="apt_tag">Mobile # : </span>{!view_apt.scheduled_lead__r.mobilephone}</span>
+      </apex:outputpanel>
+      <apex:outputpanel rendered="{!if(view_apt.scheduled_account__r.id!=null,true,false)}">
+        <span class="apt_line">
+        <span class="apt_tag">Mobile # : </span>{!view_apt.scheduled_account__r.personmobilephone}</span>
+      </apex:outputpanel>
+      <apex:outputpanel rendered="{!if(view_apt.scheduled_patient__r.id!=null,true,false)}">
+        <span class="apt_line">
+        <span class="apt_tag">Alt Phone # : </span>{!view_apt.scheduled_patient__r.Alt_Phone__c}</span>
+      </apex:outputpanel>
+
+      <apex:outputpanel rendered="{!if(view_apt.scheduled_lead__r.id==null && view_apt.scheduled_account__r.id==null && view_apt.scheduled_patient__r.id==null,false,true)}">
+        <span class="apt_line">
+        <span class="apt_tag">Scheduled By : </span>{!view_apt.scheduled_by__r.name}</span>
+      </apex:outputpanel>
+      </td>
+      <td style="vertical-align:top;">
+        <span class="apt_line">
+        <span class="apt_tag" >Room : </span>{!view_apt.consult_room__r.name}</span>
+        <span class="apt_line">
+        <span class="apt_tag" >Date : </span><apex:outputField value="{!view_apt.Apt_Date__c}" /></span>
+        <span class="apt_line">
+        <table><tr><td><span class="apt_tag" >Start Time : </span></td><td><apex:inputField value="{!view_apt.Start_Hour__c}" style="text-align:right;width:20px;display:inline-block;" /></td><td>:</td><td><apex:inputField value="{!view_apt.Start_Minute__c}" style="text-align:right;width:20px;display:inline;" /></td></tr></table></span>
+        <span class="apt_line">
+        <table><tr><td><span class="apt_tag" >End Time : </span></td><td><apex:inputField value="{!view_apt.End_Hour__c}" style="text-align:right;width:20px;display:inline;" /></td><td>:</td><td><apex:inputField value="{!view_apt.End_Minute__c}" style="text-align:right;width:20px;display:inline;" /></td></tr></table></span>
+      </td></tr></table>
+      <table>
+        <tr><td style="width:100px;"><span class="apt_tag">Treatment :</span></td><td><apex:inputfield value="{!view_apt.Treatment__c}" /></td></tr>
+        <tr><td style="width:100px;"><span class="apt_tag">Add-Ons :</span></td><td><apex:outputfield value="{!view_apt.Add_Ons__c}" /></td></tr>
+        <tr><td><span class="apt_tag">Change <br /> Add-Ons :</span></td><td><apex:inputfield value="{!view_apt.Add_Ons__c}" /></td></tr>
+      </table>
+      <table>
+        <tr><td style="width:125px;"><apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);" value="Save Changes" action="{!modify_aptblock}" reRender="main_holder,modal_holder"  /></td>
+        <td style="width:75px;font-weight:bold;">Notes :</td>
+        <td><apex:inputField value="{!view_apt.Apt_Notes__c}" style="width:260px;height:20px;"  />
+        </td></tr></table>
+      <apex:outputtext escape="false" value="{!modal_out}" />
+   </apex:outputPanel>
+   <!-- END Private Practice Apt View    -------------------------------------------------------- -->
+
+    <apex:outputPanel styleClass="modalPopup_history" rendered="{!if(modal_display && modal_type=='history_view',true,false)}" id="historypop">
+      <apex:variable var="rowclassname" value="hodd" />
+      <table class="history" width="100%">
+        <tr class="control">
+          <td width="30%">Change By</td>
+          <td width="30%">Action/Patient</td>
+          <td>Notes</td></tr>
+          <apex:repeat value="{!apt_history}" var="ahist">
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='hodd','heven','hodd')}" />
+              <td>          <apex:outputpanel rendered="{!if(display_ca,false,true)}" ><apex:outputField value="{!ahist.createdbyid}"/></apex:outputpanel><br /><apex:outputfield value="{!ahist.createddate}" /></td>
+              <td><span style="font-weight:bold;">{!ahist.action__c}</span><br /><apex:outputField value="{!ahist.Lead__c}" rendered="{!if(ahist.Lead__c==null,false,true)}" /><apex:outputField value="{!ahist.Account__c}" rendered="{!if(ahist.Account__c==null,false,true)}" /><apex:outputField value="{!ahist.Private_Practice_Patient__c}" rendered="{!if(ahist.Private_Practice_Patient__c==null,false,true)}" /></td>
+              <td><apex:outputtext escape="false" value="{!ahist.Notes__c}" /></td>
+            </tr>
+          </apex:repeat>
+       </table>
+    </apex:outputPanel>
+
+    <apex:outputPanel styleClass="modalPopup_inner" rendered="{!if(modal_display && modal_type=='delete_view',true,false)}" id="deletepop">
+      <table><tr><td style="width:450px;vertical-align:top;padding-left:10px;">
+        <span class="apt_line">
+        <span class="apt_tag" style="width:150px;">Delete Reason : </span>
+          <apex:selectList value="{!delete_reason}" size="1">
+            <apex:selectoptions value="{!delete_reason_list}"></apex:selectoptions>
+          </apex:selectList>
+        </span>
+        <span class="apt_line">
+          <span class="apt_tag" style="width:150px;">Delete Note : </span>
+            <apex:inputtext value="{!delete_note}" /></span>
+      </td></tr>
+      </table>
+      <apex:outputtext escape="false" value="{!modal_out}" /><br /><br /><br />
+    </apex:outputPanel>
+
+    <apex:outputPanel styleClass="modalPopup_inner" rendered="{!if(modal_display && modal_type=='reschedule_view',true,false)}" id="reschedulepop">
+      <table><tr><td style="width:450px;vertical-align:top;padding-left:10px;">
+        <span class="apt_line">
+        <span class="apt_tag" style="width:150px;">Reschedule Reason : </span>
+          <apex:selectList value="{!reschedule_reason}" size="1">
+            <apex:selectoptions value="{!reschedule_reason_list}"></apex:selectoptions>
+          </apex:selectList>
+        </span>
+      </td></tr>
+      </table>
+      <apex:outputtext escape="false" value="{!modal_out}" /><br /><br /><br />
+    </apex:outputPanel>
+
+	<apex:outputPanel styleClass="modalPopup_inner" rendered="{!if(modal_display && modal_type=='cancel_view',true,false)}" id="cancelpop">
+		<table>
+			<tr>
+				<td style="width:450px;vertical-align:top;padding-left:10px;">
+					<span class="apt_line">
+						<span class="apt_tag" style="width:270px; margin-bottom: 1em;">Cancellation Reason</span>
+						<apex:selectList value="{!cancel_reason}" size="1">
+							<apex:selectoptions value="{!cancel_reason_list}"></apex:selectoptions>
+						</apex:selectList>
+					</span>
+					<apex:outputPanel rendered="{!is_double_consult}" styleClass="apt_line">
+						<span class="apt_tag" style="width:270px;">Also cancel Double Consult appointment?<br/>({!IF(view_apt.Scheduled_Lead__c != null, view_apt.Double_Consult__r.Scheduled_Lead__r.Name, view_apt.Double_Consult__r.Scheduled_Account__r.Name)})</span>
+						<apex:selectList value="{!cancel_double_consult_partner}" size="1" style="vertical-align: top;">
+							<apex:selectoptions value="{!yes_no_list}"></apex:selectoptions>
+						</apex:selectList>
+					</apex:outputPanel>
+				</td>
+			</tr>
+		</table>
+		<apex:outputtext escape="false" value="{!modal_out}" />
+		<br /><br /><br />
+	</apex:outputPanel>
+
+     <apex:outputPanel styleClass="modalPopup_inner" rendered="{!if(modal_display && modal_type=='callback_consult_view',true,false)}" id="callbackpop">
+      <table><tr><td style="width:450px;vertical-align:top;padding-left:10px;">
+        <span class="apt_line">
+        <span class="apt_tag" style="width:150px;">Callback Consult PEC : </span>
+          <apex:selectList value="{!view_apt.Callback_Consult_PEC__c}" size="1">
+            <apex:selectoptions value="{!pec_list}"></apex:selectoptions>
+          </apex:selectList>
+        </span>
+      </td></tr>
+      </table>
+      <apex:outputtext escape="false" value="{!modal_out}" /><br /><br /><br />
+    </apex:outputPanel>
+
+
+      <!-- -displaying action buttons--- -->
+    <apex:outputPanel styleClass="modalPopup_action" rendered="{!modal_display}" id="modaction">
+      <p style="padding:2px;">
+        <apex:outputPanel rendered="{!if(isLeadValid && modal_type!='reschedule_view' && modal_type!='cancel_view' && modal_type!='delete_view' && modal_type!='callback_consult_view',true,false)}" >
+          <apex:outputPanel rendered="{!allow_scheduling}" ><apex:commandButton onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  value="Schedule Consult" action="{!schedule_consult}" reRender="main_holder,modal_holder,action_holder" rendered="{!if(view_apt.Apt_Date__c==today(),false,true)}" /><apex:outputpanel rendered="{!if(view_apt.Apt_Date__c==today(),true,false)}"> <apex:commandButton value="Schedule Consult" onclick="confirm_schedule();return false;"  rendered="{!if(allow_sd_sched,true,false)}" /> <apex:outputtext value="{!sd_sched_blocked}" escape="false" rendered="{!if(allow_sd_sched,false,true)}" /></apex:outputpanel><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+          <apex:outputPanel rendered="{!allow_cancel}" ><apex:commandButton onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  value="Cancel Consult" action="{!cancel_consult_view}" rerender="action_holder,main_holder,modal_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+          <apex:outputPanel rendered="{!allow_reschedule}" ><apex:commandButton onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  value="Reschedule Consult" action="{!reschedule_consult_view}" rerender="main_holder,modal_holder,action_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+<!--          <apex:outputPanel rendered="{!allow_reschedule}" ><apex:commandButton onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  value="Reschedule Consult" action="{!reschedule_consult}" rerender="main_holder,modal_holder,action_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>                      -->
+          <apex:outputPanel rendered="{!allow_hold}" ><apex:commandButton value="Place Hold" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);" action="{!place_hold}" rerender="modal_holder,action_holder,main_holder" rendered="{!if(view_apt.Apt_Date__c==today(),false,true)}"  /> <apex:commandButton value="Place Hold" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);" action="{!place_hold}" rerender="modal_holder,action_holder,main_holder"  rendered="{!if(view_apt.Apt_Date__c==today() && allow_sd_sched,true,false)}"   /> <span class="button_spacer">&nbsp;</span></apex:outputPanel>
+          <apex:outputPanel rendered="{!allow_remove_hold}" ><apex:commandButton style="color:red;" value="Remove Hold" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);" action="{!remove_hold}" rerender="modal_holder,action_holder,main_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+<!--        <apex:outputPanel rendered="{!allow_delete}" ><apex:commandButton value="Delete Apt" action="{!delete_aptblock}" rerender="main_holder,modal_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>                    -->
+<!--        <apex:outputPanel rendered="{!if(view_apt.scheduled_lead__r.id==null && view_apt.scheduled_account__r.id==null,false,true)}" ><apex:commandButton value="Send Reminder" action="{!send_confirmation_sms}" rerender="main_holder,modal_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>                    -->
+          <apex:outputPanel rendered="{!allow_history}" ><apex:commandButton onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  value="View History" action="{!history_view}" rerender="modal_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+          <apex:outputPanel rendered="{!if(modal_type=='history_view',true,false)}" ><apex:commandButton onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);" value="View Apt Info" action="{!apt_view}" rerender="modal_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+          <!-- <apex:outputPanel rendered="{!allow_seminar_reserve}" ><apex:commandButton onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  value="Reserve for Seminar" action="{!seminar_reserve}" rerender="modal_holder,main_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+          <apex:outputPanel rendered="{!allow_seminar_unreserve}" ><apex:commandButton onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  value="Unreserve for Seminar" action="{!seminar_unreserve}" rerender="modal_holder,main_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel> -->
+          <apex:outputPanel rendered="{!allow_delete}" ><apex:commandButton value="Delete Apt" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);" action="{!delete_consult_view}" rerender="action_holder,main_holder,modal_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+          <!-- <apex:outputPanel rendered="{!allow_clone}" ><apex:commandButton onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  value="Add Green Slot" action="{!clone_block}" rerender="action_holder,main_holder,modal_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel> -->
+          <apex:outputPanel rendered="{!allow_callback_consult}"><apex:commandButton onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  value="Callback Consult" action="{!callback_consult_view}" rerender="action_holder,main_holder,modal_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!if(isLeadValid && modal_type=='reschedule_view',true,false)}" >
+          <apex:outputPanel rendered="{!allow_reschedule}" ><apex:commandButton onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  value="Reschedule Consult" action="{!reschedule_consult}" rerender="main_holder,modal_holder,action_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+          <apex:commandButton onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  value="Cancel Reschedule" action="{!reschedule_cancel}" rerender="main_holder,modal_holder,action_holder"/><span class="button_spacer">&nbsp;</span>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!if(isLeadValid && modal_type=='cancel_view',true,false)}" >
+          <apex:outputPanel rendered="{!allow_cancel}" ><apex:commandButton onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  value="Cancel Consult" action="{!cancel_consult}" rerender="action_holder,main_holder,modal_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+          <apex:commandButton onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  value="Back to Consult" action="{!reschedule_cancel}" rerender="main_holder,modal_holder,action_holder"/><span class="button_spacer">&nbsp;</span>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!if(isLeadValid && modal_type=='delete_view',true,false)}" >
+          <apex:outputPanel rendered="{!allow_delete}" ><apex:commandButton value="Delete Apt" onclick="confirm_delete();return false;" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+          <apex:commandButton onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  value="Cancel Delete" action="{!reschedule_cancel}" rerender="main_holder,modal_holder,action_holder"/><span class="button_spacer">&nbsp;</span>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!if(isLeadValid && modal_type=='callback_consult_view',true,false)}" >
+          <apex:outputPanel rendered="{!allow_callback_consult}" ><apex:commandButton value="Schedule Callback Consult" onclick="use_fancy_cursor(this);" action="{!schedule_callback}" rerender="main_holder,modal_holder,action_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+          <apex:commandButton onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  value="Cancel Callback Schedule" action="{!reschedule_cancel}" rerender="main_holder,modal_holder,action_holder"/><span class="button_spacer">&nbsp;</span>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!if(isleadValid,false,true)}"><span style="font-weight:bold;color:red;">Lead record needs to be updated before you can schedule</span></apex:outputpanel>
+      </p>
+    </apex:outputPanel>
+  </apex:outputPanel>
+</apex:actionRegion>
+</apex:outputPanel>
+
+
+<!-- -------- End Modal Pop-up Holder ------------------------------------ -->
+</apex:form>
+</apex:page>

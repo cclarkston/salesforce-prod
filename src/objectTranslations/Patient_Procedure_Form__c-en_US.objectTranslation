@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Patient Procedure Form</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Patient Procedure Forms</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Patient Procedure Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Form Name --></label>
+        <name>Form_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form Status --></label>
+        <name>Form_Status__c</name>
+        <picklistValues>
+            <masterLabel>Incomplete</masterLabel>
+            <translation><!-- Incomplete --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Scanned</masterLabel>
+            <translation><!-- Scanned --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Forms Category --></label>
+        <name>Forms_Category__c</name>
+        <picklistValues>
+            <masterLabel>Additional Uploads</masterLabel>
+            <translation><!-- Additional Uploads --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>General</masterLabel>
+            <translation><!-- General --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medical Records</masterLabel>
+            <translation><!-- Medical Records --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phased Forms</masterLabel>
+            <translation><!-- Phased Forms --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Post OP Instruction</masterLabel>
+            <translation><!-- Post OP Instruction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prosth Consent</masterLabel>
+            <translation><!-- Prosth Consent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Release Forms</masterLabel>
+            <translation><!-- Release Forms --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Surgical Consent</masterLabel>
+            <translation><!-- Surgical Consent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Treatment Completion</masterLabel>
+            <translation><!-- Treatment Completion --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Office Form --></label>
+        <name>Office_Form__c</name>
+        <relationshipLabel><!-- Patient Procedure Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Patient POT --></label>
+        <name>Patient_POT__c</name>
+        <relationshipLabel><!-- Patient Procedure Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Upload Date --></label>
+        <name>Upload_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- isActive --></label>
+        <name>isActive__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

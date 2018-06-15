@@ -1,0 +1,116 @@
+<apex:page controller="ctrl_CCT_Bulk_SMS" standardStylesheets="false" docType="html-5.0" title="CCT Bulk SMS">
+
+    <style>
+        #bodyCell {
+            background-color: lightgray;
+        }
+        #bodyCell * {
+            box-sizing: border-box;
+            font-size: x-large;
+        }
+        .row {
+            display: block;
+            background-color: white;
+            padding: .5em;
+            margin: 10px 20px;
+            border-radius: 4px;
+        }
+
+        .message-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: .5em;
+        }
+        .message-row * {
+            font-size: medium !important;
+        }
+        .message-content {
+            flex: 1;
+            padding: .5em;
+            margin-right: .5em;
+        }
+        .characters {
+            flex-basis: 2em;
+            text-align: right;
+            font-size: x-large !important;
+        }
+        input.full-button {
+            background: indianred;
+            color: white;
+            text-align: center;
+            padding: .25em !important;
+            margin: 0;
+            border: none;
+            cursor: pointer;
+        }
+        input:disabled {
+            background: lightgray;
+            cursor: not-allowed;
+        }
+        .response {
+            font-weight: bold;
+            color: indianred;
+            text-align: center;
+        }
+        .name, .phone {
+            display: inline-block;
+            margin: .2em .4em;
+        }
+        .name {
+            width: 13em;
+        }
+        .phone {
+            width: 9em;
+        }
+        #bodyCell h2 {
+            color: gray;
+            text-transform: uppercase;
+            border-bottom: 3px solid gray;
+            padding-bottom: .5em;
+            margin-bottom: 1em;
+            display: block;
+            text-align: center;
+        }
+        #bodyCell h2, input.full-button {
+            width: calc(100% - 2em - 8px); /* Trying to match the size of the input box... 2em is the size of the characters_remaining component and 8px is the right margin of the input box */
+        }
+    </style>
+
+    <script>
+        function disable_button(setting) {
+            document.getElementsByClassName('full-button')[0].disabled = setting;
+        }
+    </script>
+
+    <apex:form >
+        <apex:actionFunction name="refresh_characters" reRender="characters" />
+
+        <div class="row">
+            <div class="message-row">
+                <apex:input value="{!message}" html-placeholder="message" styleClass="message-content" onkeyup="refresh_characters(); disable_button(false);"/>
+                <apex:outputText id="characters" value="{!characters_remaining}" styleClass="characters"/>
+            </div>
+            <apex:commandButton value="SEND ALL THE MESSAGES!" action="{!send_messages}" onclick="disable_button(true)" reRender="response" styleClass="full-button" />
+        </div>
+
+        <apex:outputPanel id="response">
+            <apex:outputPanel rendered="{! response != null}" layout="block" styleClass="response">
+                <div class="row response">{!response}</div>
+            </apex:outputPanel>
+        </apex:outputPanel>
+
+        <div class="row">
+            <h2>Message recipients</h2>
+            <apex:repeat value="{!agents}" var="agent">
+                <div class="agent">
+                    <div class="name">
+                        <apex:outputField value="{!agent.Name}" />
+                    </div>
+                    <div class="phone">
+                        <apex:outputField value="{!agent.mobilePhone}" />
+                    </div>
+                </div>
+            </apex:repeat>
+        </div>
+    </apex:form>
+</apex:page>

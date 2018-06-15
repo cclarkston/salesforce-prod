@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>STAGE_NAME</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Opportunity.Negotiated_Total_Amount__c</field>
+    </columns>
+    <columns>
+        <field>OPP_CREATED_DATE</field>
+    </columns>
+    <columns>
+        <field>Lead.Center_Location__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Trigger_Referral_Source__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Referral_Source__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>STAGE_NAME</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Scheduled,Paid In Full,Completed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>OWNER_ROLE</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>contains</operator>
+            <value>dental implant consultant,call center manager</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Trigger_Referral_Source__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Website,Web to Lead</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>STAGE_NAME</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Paid In Full</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <name>Web to Lead Prostho Exam Report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>OpportunityLead</reportType>
+    <scope>org</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <endDate>2009-02-28</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2008-08-01</startDate>
+    </timeFrameFilter>
+</Report>

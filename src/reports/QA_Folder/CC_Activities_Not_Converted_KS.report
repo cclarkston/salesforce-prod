@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_42606216</developerName>
+        <masterLabel>Outcome_Field</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Activity.Outcome__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Busy/No Answer</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Disconnect/Not in Service</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Wrong Number</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>VM - LM</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>VM - no message</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>VM - full</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>LM - 3rd Party</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Supervisor</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Non-Sales Call</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Other</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Sent</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>No Call Elected</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>PPT will call back</sourceValue>
+            </sourceValues>
+            <value>Non Sales</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Refused Reschedule</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Consult Rescheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Consult Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Not Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Consult Cancelled</sourceValue>
+            </sourceValues>
+            <value>Sales</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>CREATED_DATE</field>
+    </columns>
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>PHONE</field>
+    </columns>
+    <columns>
+        <field>BucketField_42606216</field>
+    </columns>
+    <columns>
+        <field>Activity.Outcome__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>ASSIGNED</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Alexandra Chavez,Alycia Torrez,Barb Emerick,Barbara Harshman,Chasity Martinez,Danny Herrera,David Cardenas,David Rodriguez,Devonne Espinoza,Emily Fickinger,Eowyn Suchan,Jennifer Keever,Jorge Herrera,Karen Martinez,Karen Winckler,Kelly Sequera,Kim Goehring,Kris Karge,Kristin Yoelin-Lindhe,Lance Marney,Luciano Rocha,Marcella Velasquez,Maria Jimenez,Mariann Maestas,Marianne Mills,Matthew Wade,Melissa Padilla,Rochelle Hart,Stacie Zimmerman,Stan Morr,Stephanie Palombi,Travis Quest,Vanessa Soderstrom,Wendy Castellano</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Activity.Activity_Type__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Inbound Call,Outbound Call</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>BucketField_42606216</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Sales</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>CC Activities - Not Converted KS</name>
+    <params>
+        <name>closed</name>
+        <value>all</value>
+    </params>
+    <params>
+        <name>type</name>
+        <value>te</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadActivity</reportType>
+    <roleHierarchyFilter>DentalImplantConsultant</roleHierarchyFilter>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <endDate>2013-05-28</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2013-05-01</startDate>
+    </timeFrameFilter>
+</Report>

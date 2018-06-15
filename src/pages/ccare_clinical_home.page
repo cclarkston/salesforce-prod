@@ -1,0 +1,78 @@
+<apex:page showheader="false" sidebar="false" standardStylesheets="false" controller="dp_navigation_header" >
+<head>
+  <meta charset="UTF-8" />
+  <title>HopeRx</title>       
+</head>
+
+<style>
+html, body, .container {
+    height: 80%;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.main-line {
+  text-shadow:9px 7px 5px rgba(217,217,217,0.6);
+  font-weight:bold;
+  color:#51B1E0 !important;
+  letter-spacing:1pt;
+  word-spacing:2pt;
+  font-size:67px;
+  text-align:left;
+  font-family:tahoma, verdana, arial, sans-serif;
+  line-height:1;
+  margin:0;
+  text-decoration:none;
+}
+
+.link-line {
+font-weight:bold;
+color:#c4c4c4 !important;
+letter-spacing:1pt;
+word-spacing:2pt;
+font-size:16px;
+text-align:left;
+font-family:tahoma, verdana, arial, sans-serif;
+line-height:1;
+text-decoration:none;
+}
+</style>
+
+<script type="text/javascript">
+    function hideChatterFeed() {
+        for (var i = 0; i < document.getElementsByTagName('h2').length; i++) {
+            if (document.getElementsByTagName('h2')[i].innerHTML == 'Feed Auto Hide') {
+                document.getElementsByTagName('h2')[i].parentNode.parentNode.style.display = 'none';
+                break;
+            }
+        }
+      
+        var isFeedShown = document.getElementById('hideFeedLink').style.display == 'none' ? false : true;
+        if (isFeedShown && chatter && location.pathname == "/home/home.jsp") {
+            if (sfdcPage.entityId) {
+                chatter.getFeed().toggle('{"subjectId":"' + sfdcPage.entityId + '","feedType":"ENTITY"}');
+            } else {
+                chatter.getFeed().toggle('{"subjectId":"","feedType":"NEWS"}');
+            }
+        }      
+    }
+    document.onreadystatechange = hideChatterFeed;
+</script>
+<body>
+<apex:form >
+  <div class="container">
+    <p class="main-line">
+      <apex:commandlink action="{!portal_entry}" styleclass="main-line">HopeRx</apex:commandlink>
+    </p>
+    <p class="link-line">
+      <a href="/apex/ccare_clinical_patient" class="link-line" target="__blank">Practice Management System</a>
+    </p>
+  </div>
+</apex:form>
+</body>
+</apex:page>

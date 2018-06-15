@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Account.Consult_Completed_Date__c</field>
+    </columns>
+    <columns>
+        <field>ACCOUNT.NAME</field>
+    </columns>
+    <columns>
+        <field>Account.Consult_Result__c</field>
+    </columns>
+    <columns>
+        <field>Account.Financing_Result__c</field>
+    </columns>
+    <columns>
+        <field>Account.Preliminary_Treatment_Plan__c</field>
+    </columns>
+    <columns>
+        <field>Account.General_Notes__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>USERS.NAME</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Jayne Neeley</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Center__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>kansas city</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Brooke&apos;s callback report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>AccountList</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

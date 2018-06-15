@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <aggregates>
+        <calculatedFormula>Lead.Appointment_Scheduled__c:SUM/RowCount</calculatedFormula>
+        <datatype>percent</datatype>
+        <developerName>FORMULA1</developerName>
+        <isActive>false</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Scheduled</masterLabel>
+        <scale>1</scale>
+    </aggregates>
+    <aggregates>
+        <calculatedFormula>Lead.IsConverted:SUM/RowCount</calculatedFormula>
+        <datatype>percent</datatype>
+        <developerName>FORMULA2</developerName>
+        <isActive>false</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Completed</masterLabel>
+        <scale>1</scale>
+    </aggregates>
+    <aggregates>
+        <acrossGroupingContext>GRAND_SUMMARY</acrossGroupingContext>
+        <calculatedFormula>Lead.IsConverted:SUM/RowCount</calculatedFormula>
+        <datatype>number</datatype>
+        <developerName>FORMULA3</developerName>
+        <downGroupingContext>BucketField_29403773</downGroupingContext>
+        <isActive>false</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>% Converted</masterLabel>
+        <scale>2</scale>
+    </aggregates>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_29403773</developerName>
+        <masterLabel>Call Center</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Call_Center_Agent_Team__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Confirmation</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Imp - Mean Green</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Imp - Tooth Avengers</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Implant Consultant</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Outbound</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Seminar</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Web To Lead</sourceValue>
+            </sourceValues>
+            <value>CC</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Imp - IMC API</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Imp - IMC Mansfield</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Imp - IMC NewCastle</sourceValue>
+            </sourceValues>
+            <value>IMC</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>Lead$Id</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>BucketField_29403773</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>CC</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Pre_Screen__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Green,Yellow</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Consult_Inventory__r$isConsultArrived__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>Lead.Consult_Inventory__r$isConsultArrived__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_29403773</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Lead.Consult_Inventory__r$Scheduled_by__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Completes by Agent</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Lead_w_Consult_Inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead.Consult_Inventory__r$Apt_Date__c</dateColumn>
+        <interval>INTERVAL_LASTMONTH</interval>
+    </timeFrameFilter>
+</Report>

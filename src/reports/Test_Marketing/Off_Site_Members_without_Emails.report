@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <aggregates>
+        <calculatedFormula>IF(Campaign.Total_Scheduled_Consult__c:SUM = 0,0,
+Campaign.Total_Scheduled_Consult__c:SUM/
+RowCount)</calculatedFormula>
+        <datatype>percent</datatype>
+        <description>Consult Scheduled Rate</description>
+        <developerName>FORMULA1</developerName>
+        <downGroupingContext>CAMPAIGN_NAME</downGroupingContext>
+        <isActive>false</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Consult Scheduled Rate</masterLabel>
+        <scale>0</scale>
+    </aggregates>
+    <aggregates>
+        <calculatedFormula>IF(
+AND(
+CampaignMember.Scheduled_Consult__c:SUM
+&lt;&gt;0,
+Campaign.Total_Attended_Consult__c:SUM = 0
+)
+,1,
+IF(
+CampaignMember.Scheduled_Consult__c:SUM=
+0,0,
+Campaign.Total_Attended_Consult__c:SUM/CampaignMember.Scheduled_Consult__c:SUM))</calculatedFormula>
+        <datatype>percent</datatype>
+        <description>Consult Show Rate</description>
+        <developerName>FORMULA2</developerName>
+        <downGroupingContext>CAMPAIGN_NAME</downGroupingContext>
+        <isActive>false</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Consult Show Rate</masterLabel>
+        <scale>0</scale>
+    </aggregates>
+    <aggregates>
+        <calculatedFormula>IF(CampaignMember.Started__c:SUM=0,0,CampaignMember.Started__c:SUM/CampaignMember.Attended_Consult__c:SUM)</calculatedFormula>
+        <datatype>percent</datatype>
+        <description>Close Rate</description>
+        <developerName>FORMULA5</developerName>
+        <downGroupingContext>CAMPAIGN_NAME</downGroupingContext>
+        <isActive>false</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Close Rate</masterLabel>
+        <scale>0</scale>
+    </aggregates>
+    <aggregates>
+        <calculatedFormula>IF(CampaignMember.Started__c:SUM=0,0,
+IF(CampaignMember.Start_Lost__c:SUM=0,1,
+CampaignMember.Start_Lost__c:SUM/
+(CampaignMember.Started__c:SUM+CampaignMember.Start_Lost__c:SUM)))</calculatedFormula>
+        <datatype>percent</datatype>
+        <description>Start Cancellation Rate</description>
+        <developerName>FORMULA6</developerName>
+        <downGroupingContext>CAMPAIGN_NAME</downGroupingContext>
+        <isActive>false</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Start Cancellation Rate</masterLabel>
+        <scale>0</scale>
+    </aggregates>
+    <aggregates>
+        <calculatedFormula>IF(CampaignMember.Revenue_Collected__c:SUM= 0
+ ,0 , CampaignMember.Revenue_Collected__c:SUM/CampaignMember.Revenue_Sold__c:SUM)</calculatedFormula>
+        <datatype>percent</datatype>
+        <description>Revenue Collection Rate</description>
+        <developerName>FORMULA7</developerName>
+        <downGroupingContext>CAMPAIGN_NAME</downGroupingContext>
+        <isActive>false</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Revenue Collection Rate</masterLabel>
+        <scale>0</scale>
+    </aggregates>
+    <chart>
+        <backgroundColor1>#FFFFFF</backgroundColor1>
+        <backgroundColor2>#FFFFFF</backgroundColor2>
+        <backgroundFadeDir>Diagonal</backgroundFadeDir>
+        <chartSummaries>
+            <axisBinding>y</axisBinding>
+            <column>RowCount</column>
+        </chartSummaries>
+        <chartType>HorizontalBar</chartType>
+        <enableHoverLabels>true</enableHoverLabels>
+        <expandOthers>true</expandOthers>
+        <groupingColumn>CAMPAIGN_NAME</groupingColumn>
+        <location>CHART_TOP</location>
+        <showAxisLabels>true</showAxisLabels>
+        <showPercentage>false</showPercentage>
+        <showTotal>false</showTotal>
+        <showValues>false</showValues>
+        <size>Medium</size>
+        <summaryAxisRange>Auto</summaryAxisRange>
+        <textColor>#000000</textColor>
+        <textSize>12</textSize>
+        <titleColor>#000000</titleColor>
+        <titleSize>18</titleSize>
+    </chart>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>CampaignMember.Registered__c</field>
+    </columns>
+    <columns>
+        <field>CampaignMember.Confirmation_Email__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>CampaignMember.Attended__c</field>
+    </columns>
+    <columns>
+        <field>CampaignMember.Attended_Email_Sent__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>CampaignMember.No_Show__c</field>
+    </columns>
+    <columns>
+        <field>CampaignMember.No_Show_Email_Sent__c</field>
+    </columns>
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <description>Shows a list of Off-Site members without email date/time stamps</description>
+    <filter>
+        <booleanFilter>(1 AND ((2 AND 3) OR(4 AND 5) OR (6 AND 7))) AND 8</booleanFilter>
+        <criteriaItems>
+            <column>START_DATE</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>greaterThan</operator>
+            <value>1/1/2011</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CampaignMember.Registered__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CampaignMember.Confirmation_Email__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CampaignMember.Attended__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CampaignMember.Attended_Email_Sent__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CampaignMember.No_Show__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CampaignMember.No_Show_Email_Sent__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CAMPAIGN_TYPE</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Off-Site Seminar</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>CAMPAIGN_NAME</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>MEMBER_STATUS</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Off-Site Seminar Members without Emails</name>
+    <params>
+        <name>scopeid</name>
+        <value></value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CampaignWithCampaignMembers</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+</Report>

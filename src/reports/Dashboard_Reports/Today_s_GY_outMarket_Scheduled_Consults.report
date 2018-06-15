@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>number</bucketType>
+        <developerName>BucketField_4641818</developerName>
+        <masterLabel>In/Out Market (50 miles)</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Lead$Distance_To_Center__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <to>50</to>
+            </sourceValues>
+            <value>In Market</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>50</from>
+            </sourceValues>
+            <value>Out of Market</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_96083454</developerName>
+        <masterLabel>Lead Score</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$LeadScore__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Green</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Yellow</sourceValue>
+            </sourceValues>
+            <value>GY</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Red</sourceValue>
+            </sourceValues>
+            <value>R</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Blue (No Hit)</sourceValue>
+            </sourceValues>
+            <value>B</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_99336774</developerName>
+        <masterLabel>Team</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Call_Center_Agent_Team__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Imp - IMC Mansfield</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Imp - IMC NewCastle</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Imp - IMC API</sourceValue>
+            </sourceValues>
+            <value>IMC</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>number</bucketType>
+        <developerName>BucketField_96778142</developerName>
+        <masterLabel>isScheduled</masterLabel>
+        <nullTreatment>z</nullTreatment>
+        <sourceColumnName>Lead.Consult_Inventory__r$isConsultScheudled__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <to>0</to>
+            </sourceValues>
+            <value>0</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>0</from>
+            </sourceValues>
+            <value>1</value>
+        </values>
+    </buckets>
+    <description>SD IM OM GY Scheduled Consults</description>
+    <filter>
+        <criteriaItems>
+            <column>Lead$Inbound_Call__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Dental Inquiry</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Call_Result__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Consultation Scheduled,Not Scheduled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Sales_Alert__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>CONTACT-CM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>BucketField_99336774</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>IMC</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>BucketField_4641818</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Call_Center_Agent_Owner__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Pat Greenwood</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>BucketField_4641818</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>In Market</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$LeadScore__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Green,Yellow</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>BucketField_96778142</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_96778142</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Lead$Call_Center_Agent_Owner__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Today&apos;s GY outMarket Scheduled Consults</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Prospective_Patients_with_Consult_Inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead$CreatedDate</dateColumn>
+        <interval>INTERVAL_TODAY</interval>
+    </timeFrameFilter>
+</Report>

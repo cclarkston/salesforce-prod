@@ -1,0 +1,39 @@
+<apex:page controller="netpromoter_score" sidebar="false" showHeader="false" action="{!record_net_promoter_score}">
+<head>
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>ClearChoice Dental Implant Centers</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
+	<style media="all" type="text/css">
+		@charset "utf-8";article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,table{display:block}
+		a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:auto;padding:0;border:0;font:inherit;vertical-align:baseline}
+		body{line-height:1;position:relative;font-family:Gotham,Montserrat,sans-serif}
+		ol,ul{list-style:none}
+		blockquote,q{quotes:none}
+		blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}
+		table{border-collapse:collapse;border-spacing:0;width:100%;table-layout:fixed;overflow:visible}
+		.rectangle-box{position:relative;width:50%;overflow:hidden;background:#005cb9}
+		.rectangle-box:before{content:"";display:block;padding-top:50%}
+		.rectangle-content{position:absolute;top:0;left:0;bottom:0;right:0;color:#fff}
+		.rectangle-content div{display:table;width:100%;height:100%}
+		.rectangle-content span{text-align:center;vertical-align:middle;display:inline-block}
+		#blue-rectangle{border-radius:20px;background-color:#005cb9;text-align:center;width:100%;margin-top:20px}
+		#thank-you{color:#f9be00}#we-appreciate-you{color:#fff}
+		@media screen and (min-width:800px){#blue-rectangle{max-width:960px;max-height:250px;letter-spacing:1.5px}#thank-you{width:232px;height:100px;font-size:60px;font-weight:300;line-height:56.15px;margin-top:20px!important}#we-appreciate-you{width:795px;height:22px;font-size:24px;font-weight:300;line-height:26.15px;margin-top:30px}}
+		@media screen and (max-width:799px){#thank-you,.rectangle-content{height:100px}#blue-rectangle{max-width:599px;width:100%}#thank-you{font-size:60px;font-weight:300;line-height:56.15px}}
+		@media screen and (max-width:400px){#we-appreciate-you span{display:none}}
+	</style>
+</head>
+
+<body id="thank-you-wrapper">
+<apex:form >
+  <apex:messages style="color:red;font-style:italics;" /><br /><br />
+  <div id="blue-rectangle" class="rectangle-box">
+	<div class="rectangle-content">
+	  <div id="thank-you"><span>THANK YOU!</span></div>
+	  <div id="we-appreciate-you"><span>We appreciate you taking the time to share your response.</span></div>
+	</div>
+  </div>
+</apex:form>
+</body>
+</apex:page>

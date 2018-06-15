@@ -1,0 +1,716 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Arch_count__c</fullName>
+        <description>This is the number of arches a procedure occupies.</description>
+        <externalId>false</externalId>
+        <label>Arch count</label>
+        <precision>1</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Benefits__c</fullName>
+        <externalId>false</externalId>
+        <label>Benefits</label>
+        <length>2000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>8</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Category__c</fullName>
+        <externalId>false</externalId>
+        <label>Category</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Standard</fullName>
+                    <default>false</default>
+                    <label>Standard</label>
+                </value>
+                <value>
+                    <fullName>Phased</fullName>
+                    <default>false</default>
+                    <label>Phased</label>
+                </value>
+                <value>
+                    <fullName>Arch Upgrade</fullName>
+                    <default>false</default>
+                    <label>Arch Upgrade</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Considerations__c</fullName>
+        <externalId>false</externalId>
+        <label>Considerations</label>
+        <length>1000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Copy__c</fullName>
+        <externalId>false</externalId>
+        <label>Copy</label>
+        <length>2000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>8</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Lower_Tag__c</fullName>
+        <externalId>false</externalId>
+        <label>Lower Tag</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>None</fullName>
+                    <default>false</default>
+                    <label>None</label>
+                </value>
+                <value>
+                    <fullName>Phased</fullName>
+                    <default>false</default>
+                    <label>Phased</label>
+                </value>
+                <value>
+                    <fullName>AO4</fullName>
+                    <default>false</default>
+                    <label>AO4</label>
+                </value>
+                <value>
+                    <fullName>Zirconia</fullName>
+                    <default>false</default>
+                    <label>Zirconia</label>
+                </value>
+                <value>
+                    <fullName>Unitary</fullName>
+                    <default>false</default>
+                    <label>Unitary</label>
+                </value>
+                <value>
+                    <fullName>Multiple</fullName>
+                    <default>false</default>
+                    <label>Multiple</label>
+                </value>
+                <value>
+                    <fullName>Arch Upgrade</fullName>
+                    <default>false</default>
+                    <label>Arch Upgrade</label>
+                </value>
+                <value>
+                    <fullName>Implant Bridge</fullName>
+                    <default>false</default>
+                    <label>Implant Bridge</label>
+                </value>
+                <value>
+                    <fullName>Denture</fullName>
+                    <default>false</default>
+                    <label>Denture</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Old_Treatment_Map__c</fullName>
+        <externalId>false</externalId>
+        <label>Old Treatment Map</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Single Implant</fullName>
+                    <default>false</default>
+                    <label>Single Implant</label>
+                </value>
+                <value>
+                    <fullName>Multiple Implants</fullName>
+                    <default>false</default>
+                    <label>Multiple Implants</label>
+                </value>
+                <value>
+                    <fullName>Multiple Implant Bridge</fullName>
+                    <default>false</default>
+                    <label>Multiple Implant Bridge</label>
+                </value>
+                <value>
+                    <fullName>AO4 Upper</fullName>
+                    <default>false</default>
+                    <label>AO4 Upper</label>
+                </value>
+                <value>
+                    <fullName>AO4 Lower</fullName>
+                    <default>false</default>
+                    <label>AO4 Lower</label>
+                </value>
+                <value>
+                    <fullName>AO4 Edentulous Upper</fullName>
+                    <default>false</default>
+                    <label>AO4 Edentulous Upper</label>
+                </value>
+                <value>
+                    <fullName>AO4 Edentulous Lower</fullName>
+                    <default>false</default>
+                    <label>AO4 Edentulous Lower</label>
+                </value>
+                <value>
+                    <fullName>DBL AO4</fullName>
+                    <default>false</default>
+                    <label>DBL AO4</label>
+                </value>
+                <value>
+                    <fullName>DBL AO4 Edentulous</fullName>
+                    <default>false</default>
+                    <label>DBL AO4 Edentulous</label>
+                </value>
+                <value>
+                    <fullName>Upper Denture</fullName>
+                    <default>false</default>
+                    <label>Upper Denture</label>
+                </value>
+                <value>
+                    <fullName>Lower Denture</fullName>
+                    <default>false</default>
+                    <label>Lower Denture</label>
+                </value>
+                <value>
+                    <fullName>Custom</fullName>
+                    <default>false</default>
+                    <label>Custom</label>
+                </value>
+                <value>
+                    <fullName>Transitional DBL AO4</fullName>
+                    <default>false</default>
+                    <label>Transitional DBL AO4</label>
+                </value>
+                <value>
+                    <fullName>None Given</fullName>
+                    <default>false</default>
+                    <label>None Given</label>
+                </value>
+                <value>
+                    <fullName>Lower Overdenture</fullName>
+                    <default>false</default>
+                    <label>Lower Overdenture</label>
+                </value>
+                <value>
+                    <fullName>Upper Overdenture</fullName>
+                    <default>false</default>
+                    <label>Upper Overdenture</label>
+                </value>
+                <value>
+                    <fullName>Phased Barless Interim Upper AO4</fullName>
+                    <default>false</default>
+                    <label>Phased Barless Interim Upper AO4</label>
+                </value>
+                <value>
+                    <fullName>Phased Barless Interim Lower AO4</fullName>
+                    <default>false</default>
+                    <label>Phased Barless Interim Lower AO4</label>
+                </value>
+                <value>
+                    <fullName>Phased Barless Interim Double AO4</fullName>
+                    <default>false</default>
+                    <label>Phased Barless Interim Double AO4</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Start_Value__c</fullName>
+        <description>Usually zero or one, a factor associated with the &apos;start&apos; which could be between zero and one.</description>
+        <externalId>false</externalId>
+        <label>Start Value</label>
+        <precision>5</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Timeline__c</fullName>
+        <externalId>false</externalId>
+        <label>Timeline</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Treatment_Class__c</fullName>
+        <externalId>false</externalId>
+        <label>Treatment Class</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>AO4 Arch Complex</fullName>
+                    <default>false</default>
+                    <label>AO4 Arch Complex</label>
+                </value>
+                <value>
+                    <fullName>AO4 Arch Simple</fullName>
+                    <default>false</default>
+                    <label>AO4 Arch Simple</label>
+                </value>
+                <value>
+                    <fullName>Double AO4 Arch</fullName>
+                    <default>false</default>
+                    <label>Double AO4 Arch</label>
+                </value>
+                <value>
+                    <fullName>Non-Arch Treatment</fullName>
+                    <default>false</default>
+                    <label>Non-Arch Treatment</label>
+                </value>
+                <value>
+                    <fullName>Arch Upgrade</fullName>
+                    <default>false</default>
+                    <label>Arch Upgrade</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Treatment_Grade__c</fullName>
+        <externalId>false</externalId>
+        <label>Treatment Grade</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Good</fullName>
+                    <default>false</default>
+                    <label>Good</label>
+                </value>
+                <value>
+                    <fullName>Better</fullName>
+                    <default>false</default>
+                    <label>Better</label>
+                </value>
+                <value>
+                    <fullName>Best</fullName>
+                    <default>false</default>
+                    <label>Best</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Treatment_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Treatment Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>AO4 Arch</fullName>
+                    <default>false</default>
+                    <label>AO4 Arch</label>
+                </value>
+                <value>
+                    <fullName>AO4 Arch - Bridge</fullName>
+                    <default>false</default>
+                    <label>AO4 Arch - Bridge</label>
+                </value>
+                <value>
+                    <fullName>AO4 Arch - Denture</fullName>
+                    <default>false</default>
+                    <label>AO4 Arch - Denture</label>
+                </value>
+                <value>
+                    <fullName>AO4 Arch - Multiple</fullName>
+                    <default>false</default>
+                    <label>AO4 Arch - Multiple</label>
+                </value>
+                <value>
+                    <fullName>AO4 Arch - Unitary</fullName>
+                    <default>false</default>
+                    <label>AO4 Arch - Unitary</label>
+                </value>
+                <value>
+                    <fullName>Bridge</fullName>
+                    <default>false</default>
+                    <label>Bridge</label>
+                </value>
+                <value>
+                    <fullName>Bridge - Denture</fullName>
+                    <default>false</default>
+                    <label>Bridge - Denture</label>
+                </value>
+                <value>
+                    <fullName>Bridge - Double</fullName>
+                    <default>false</default>
+                    <label>Bridge - Double</label>
+                </value>
+                <value>
+                    <fullName>Bridge - Unitary</fullName>
+                    <default>false</default>
+                    <label>Bridge - Unitary</label>
+                </value>
+                <value>
+                    <fullName>Crystal Arch</fullName>
+                    <default>false</default>
+                    <label>Crystal Arch</label>
+                </value>
+                <value>
+                    <fullName>Crystal Arch - AO4</fullName>
+                    <default>false</default>
+                    <label>Crystal Arch - AO4</label>
+                </value>
+                <value>
+                    <fullName>Crystal Arch - Bridge</fullName>
+                    <default>false</default>
+                    <label>Crystal Arch - Bridge</label>
+                </value>
+                <value>
+                    <fullName>Crystal Arch - Denture</fullName>
+                    <default>false</default>
+                    <label>Crystal Arch - Denture</label>
+                </value>
+                <value>
+                    <fullName>Crystal Arch - Multiple</fullName>
+                    <default>false</default>
+                    <label>Crystal Arch - Multiple</label>
+                </value>
+                <value>
+                    <fullName>Crystal Arch - Phased Arch</fullName>
+                    <default>false</default>
+                    <label>Crystal Arch - Phased Arch</label>
+                </value>
+                <value>
+                    <fullName>Crystal Arch - Unitary</fullName>
+                    <default>false</default>
+                    <label>Crystal Arch - Unitary</label>
+                </value>
+                <value>
+                    <fullName>Denture</fullName>
+                    <default>false</default>
+                    <label>Denture</label>
+                </value>
+                <value>
+                    <fullName>Denture - Double</fullName>
+                    <default>false</default>
+                    <label>Denture - Double</label>
+                </value>
+                <value>
+                    <fullName>Double AO4</fullName>
+                    <default>false</default>
+                    <label>Double AO4</label>
+                </value>
+                <value>
+                    <fullName>Double Arch - Crystal</fullName>
+                    <default>false</default>
+                    <label>Double Arch - Crystal</label>
+                </value>
+                <value>
+                    <fullName>Double Arch - Crystal/Zirconia</fullName>
+                    <default>false</default>
+                    <label>Double Arch - Crystal/Zirconia</label>
+                </value>
+                <value>
+                    <fullName>Double Arch - Zirconia</fullName>
+                    <default>false</default>
+                    <label>Double Arch - Zirconia</label>
+                </value>
+                <value>
+                    <fullName>Multiple</fullName>
+                    <default>false</default>
+                    <label>Multiple</label>
+                </value>
+                <value>
+                    <fullName>Multiple - Bridge</fullName>
+                    <default>false</default>
+                    <label>Multiple - Bridge</label>
+                </value>
+                <value>
+                    <fullName>Multiple - Denture</fullName>
+                    <default>false</default>
+                    <label>Multiple - Denture</label>
+                </value>
+                <value>
+                    <fullName>Multiple - Double</fullName>
+                    <default>false</default>
+                    <label>Multiple - Double</label>
+                </value>
+                <value>
+                    <fullName>Multiple - Unitary</fullName>
+                    <default>false</default>
+                    <label>Multiple - Unitary</label>
+                </value>
+                <value>
+                    <fullName>Phased Arch</fullName>
+                    <default>false</default>
+                    <label>Phased Arch</label>
+                </value>
+                <value>
+                    <fullName>Phased Arch - AO4</fullName>
+                    <default>false</default>
+                    <label>Phased Arch - AO4</label>
+                </value>
+                <value>
+                    <fullName>Phased Arch - Bridge</fullName>
+                    <default>false</default>
+                    <label>Phased Arch - Bridge</label>
+                </value>
+                <value>
+                    <fullName>Phased Arch - Denture</fullName>
+                    <default>false</default>
+                    <label>Phased Arch - Denture</label>
+                </value>
+                <value>
+                    <fullName>Phased Arch - Double</fullName>
+                    <default>false</default>
+                    <label>Phased Arch - Double</label>
+                </value>
+                <value>
+                    <fullName>Phased Arch - Multiple</fullName>
+                    <default>false</default>
+                    <label>Phased Arch - Multiple</label>
+                </value>
+                <value>
+                    <fullName>Phased Arch - Unitary</fullName>
+                    <default>false</default>
+                    <label>Phased Arch - Unitary</label>
+                </value>
+                <value>
+                    <fullName>Unitary</fullName>
+                    <default>false</default>
+                    <label>Unitary</label>
+                </value>
+                <value>
+                    <fullName>Unitary - Denture</fullName>
+                    <default>false</default>
+                    <label>Unitary - Denture</label>
+                </value>
+                <value>
+                    <fullName>Unitary - Double</fullName>
+                    <default>false</default>
+                    <label>Unitary - Double</label>
+                </value>
+                <value>
+                    <fullName>Zirconia Arch</fullName>
+                    <default>false</default>
+                    <label>Zirconia Arch</label>
+                </value>
+                <value>
+                    <fullName>Zirconia Arch - AO4</fullName>
+                    <default>false</default>
+                    <label>Zirconia Arch - AO4</label>
+                </value>
+                <value>
+                    <fullName>Zirconia Arch - Bridge</fullName>
+                    <default>false</default>
+                    <label>Zirconia Arch - Bridge</label>
+                </value>
+                <value>
+                    <fullName>Zirconia Arch - Denture</fullName>
+                    <default>false</default>
+                    <label>Zirconia Arch - Denture</label>
+                </value>
+                <value>
+                    <fullName>Zirconia Arch - Multiples</fullName>
+                    <default>false</default>
+                    <label>Zirconia Arch - Multiples</label>
+                </value>
+                <value>
+                    <fullName>Zirconia Arch - Phased Arch</fullName>
+                    <default>false</default>
+                    <label>Zirconia Arch - Phased Arch</label>
+                </value>
+                <value>
+                    <fullName>Zirconia Arch - Unitary</fullName>
+                    <default>false</default>
+                    <label>Zirconia Arch - Unitary</label>
+                </value>
+                <value>
+                    <fullName>Arch Upgrade: Zirconia</fullName>
+                    <default>false</default>
+                    <label>Arch Upgrade: Zirconia</label>
+                </value>
+                <value>
+                    <fullName>Arch Upgrade: Acrylic</fullName>
+                    <default>false</default>
+                    <label>Arch Upgrade: Acrylic</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Upper_Tag__c</fullName>
+        <externalId>false</externalId>
+        <label>Upper Tag</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>None</fullName>
+                    <default>false</default>
+                    <label>None</label>
+                </value>
+                <value>
+                    <fullName>Phased</fullName>
+                    <default>false</default>
+                    <label>Phased</label>
+                </value>
+                <value>
+                    <fullName>AO4</fullName>
+                    <default>false</default>
+                    <label>AO4</label>
+                </value>
+                <value>
+                    <fullName>Zirconia</fullName>
+                    <default>false</default>
+                    <label>Zirconia</label>
+                </value>
+                <value>
+                    <fullName>Unitary</fullName>
+                    <default>false</default>
+                    <label>Unitary</label>
+                </value>
+                <value>
+                    <fullName>Multiple</fullName>
+                    <default>false</default>
+                    <label>Multiple</label>
+                </value>
+                <value>
+                    <fullName>Arch Upgrade</fullName>
+                    <default>false</default>
+                    <label>Arch Upgrade</label>
+                </value>
+                <value>
+                    <fullName>Implant Bridge</fullName>
+                    <default>false</default>
+                    <label>Implant Bridge</label>
+                </value>
+                <value>
+                    <fullName>Denture</fullName>
+                    <default>false</default>
+                    <label>Denture</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Treatment Option</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Upper_Tag__c</columns>
+        <columns>Lower_Tag__c</columns>
+        <columns>Benefits__c</columns>
+        <columns>Considerations__c</columns>
+        <columns>Copy__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>Start_Value__c</columns>
+        <columns>Category__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Treatment Option Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Treatment Options</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

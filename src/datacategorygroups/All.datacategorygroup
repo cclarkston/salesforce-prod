@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataCategoryGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <dataCategory>
+        <dataCategory>
+            <label>Policies &amp; Guideline</label>
+            <name>Policies_Guideline</name>
+        </dataCategory>
+        <dataCategory>
+            <dataCategory>
+                <label>Leadership</label>
+                <name>Leadership</name>
+            </dataCategory>
+            <dataCategory>
+                <label>Doctors</label>
+                <name>Doctors</name>
+            </dataCategory>
+            <label>Bios</label>
+            <name>Bios</name>
+        </dataCategory>
+        <dataCategory>
+            <label>Glossary</label>
+            <name>Glossary</name>
+        </dataCategory>
+        <dataCategory>
+            <label>Call Aides</label>
+            <name>Call_Aides</name>
+        </dataCategory>
+        <dataCategory>
+            <label>Helpful Info</label>
+            <name>Helpful_Info</name>
+        </dataCategory>
+        <label>All</label>
+        <name>All</name>
+    </dataCategory>
+    <label>All</label>
+    <objectUsage>
+        <object>KnowledgeArticleVersion</object>
+    </objectUsage>
+</DataCategoryGroup>

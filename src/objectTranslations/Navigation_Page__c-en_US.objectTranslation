@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Navigation Page</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Navigation Pages</value>
+    </caseValues>
+    <fields>
+        <label><!-- Alt Page URL --></label>
+        <name>Alt_Page_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hyperlink Target --></label>
+        <name>Hyperlink_Target__c</name>
+    </fields>
+    <fields>
+        <label><!-- Image Name Hover --></label>
+        <name>Image_Name_Hover__c</name>
+    </fields>
+    <fields>
+        <label><!-- Image Name --></label>
+        <name>Image_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Nav Color --></label>
+        <name>Nav_Color__c</name>
+    </fields>
+    <fields>
+        <label><!-- Navigation Header --></label>
+        <name>Navigation_Header__c</name>
+        <relationshipLabel><!-- Navigation Pages --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Page URL --></label>
+        <name>Page_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sort Order --></label>
+        <name>Sort_Order__c</name>
+    </fields>
+    <fields>
+        <label><!-- css class --></label>
+        <name>css_class__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

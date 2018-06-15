@@ -1,0 +1,364 @@
+<apex:page controller="ctrl_pprivileges_services" sidebar="false">
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!$Resource.QTIP_CSS}" />
+
+<apex:includeScript value="{!$Resource.QTIP_JQUERY}" />
+<apex:includeScript value="{!$Resource.QTIP_JS}" />
+
+
+<style>
+.tooltiptext{
+    display: none;
+}
+
+.tipstyle {
+  color:black;
+  font-weight:bold;
+}
+
+  span.line_holder {
+    display:block;
+    padding-bottom:1em;
+  }
+  span.field_label {
+    font-weight:bold;
+    padding-right:10px;
+  }
+  span.blank {
+    font-style:italic;
+    font-weight:bold;    
+  }  
+  tr.control a {
+    text-decoration:none;
+  }
+  .CSSTableGenerator {
+    margin:0px;padding:0px;
+    width:100%;
+    box-shadow: 10px 10px 5px #888888;
+    border:1px solid #000000;
+    
+    -moz-border-radius-bottomleft:0px;
+    -webkit-border-bottom-left-radius:0px;
+    border-bottom-left-radius:0px;
+    
+    -moz-border-radius-bottomright:0px;
+    -webkit-border-bottom-right-radius:0px;
+    border-bottom-right-radius:0px;
+    
+    -moz-border-radius-topright:0px;
+    -webkit-border-top-right-radius:0px;
+    border-top-right-radius:0px;
+    
+    -moz-border-radius-topleft:0px;
+    -webkit-border-top-left-radius:0px;
+    border-top-left-radius:0px;
+}.CSSTableGenerator table{
+    border-collapse: collapse;
+        border-spacing: 0;
+    width:100%;
+    height:100%;
+    margin:0px;padding:0px;
+}.CSSTableGenerator tr:last-child td:last-child {
+    -moz-border-radius-bottomright:0px;
+    -webkit-border-bottom-right-radius:0px;
+    border-bottom-right-radius:0px;
+}
+.CSSTableGenerator table tr:first-child td:first-child {
+    -moz-border-radius-topleft:0px;
+    -webkit-border-top-left-radius:0px;
+    border-top-left-radius:0px;
+}
+.CSSTableGenerator table tr:first-child td:last-child {
+    -moz-border-radius-topright:0px;
+    -webkit-border-top-right-radius:0px;
+    border-top-right-radius:0px;
+}.CSSTableGenerator tr:last-child td:first-child{
+    -moz-border-radius-bottomleft:0px;
+    -webkit-border-bottom-left-radius:0px;
+    border-bottom-left-radius:0px;
+}.CSSTableGenerator tr:hover td{
+    
+}
+.CSSTableGenerator tr:nth-child(odd){ background-color:#aad4ff; }
+.CSSTableGenerator tr:nth-child(even)    { background-color:#ffffff; }.CSSTableGenerator td{
+    vertical-align:middle;    
+    border:1px solid #000000;
+    border-width:0px 1px 1px 0px;
+    text-align:left;
+    padding:7px;
+    font-size:12px;
+    font-family:Arial;
+    font-weight:normal;
+    color:#000000;
+}.CSSTableGenerator tr:last-child td{
+    border-width:0px 1px 0px 0px;
+}.CSSTableGenerator tr td:last-child{
+    border-width:0px 0px 1px 0px;
+}.CSSTableGenerator tr:last-child td:last-child{
+    border-width:0px 0px 0px 0px;
+}
+.CSSTableGenerator tr:first-child td{
+        background:-o-linear-gradient(bottom, #005fbf 5%, #003f7f 100%);    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #005fbf), color-stop(1, #003f7f) );
+    background:-moz-linear-gradient( center top, #005fbf 5%, #003f7f 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#005fbf", endColorstr="#003f7f");  background: -o-linear-gradient(top,#005fbf,003f7f);
+
+    background-color:#005fbf;
+    border:0px solid #000000;
+    text-align:center;
+    border-width:0px 0px 1px 1px;
+    font-size:14px;
+    font-family:Arial;
+    font-weight:bold;
+    color:#ffffff;
+}
+.CSSTableGenerator tr:first-child:hover td{
+    background:-o-linear-gradient(bottom, #005fbf 5%, #003f7f 100%);    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #005fbf), color-stop(1, #003f7f) );
+    background:-moz-linear-gradient( center top, #005fbf 5%, #003f7f 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#005fbf", endColorstr="#003f7f");  background: -o-linear-gradient(top,#005fbf,003f7f);
+
+    background-color:#005fbf;
+}
+.CSSTableGenerator tr:first-child td:first-child{
+    border-width:0px 0px 1px 0px;
+}
+.CSSTableGenerator tr:first-child td:last-child{
+    border-width:0px 0px 1px 1px;
+}
+  
+</style>
+
+<script type="text/javascript"> 
+  function use_fancy_cursor(t) {
+    document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+    t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  }
+
+  function default_cursor(t) {
+    document.body.style.cursor = 'default';
+    t.style.cursor='default';
+  }  
+  
+  
+  </script>
+
+<apex:form style="padding-top:0;display:inline;margin-top:0;" onsubmit="">
+  <apex:actionstatus id="status_load">
+        <apex:facet name="start">
+            <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;
+                   height: 100%;opacity:0.65;width:100%;"> 
+                <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+                    <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                    <span class="waitingDescription">Loading...</span>
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionstatus>
+<apex:outputpanel id="message_holder" layout="block" style="padding-left:20px;font-weight:bold;color:red;font-size:12pt;">    
+<apex:messages />
+</apex:outputpanel>
+
+  <apex:actionFunction name="refresh_search" reRender="search_holder,message_holder" status="status_load">
+  </apex:actionFunction>
+  <apex:actionFunction oncomplete="default_cursor(this);" name="click_on_practice" action="{!select_practice}" rerender="main_holder,message_holder" status="status_load">
+    <apex:param name="pid" value="" />
+  </apex:actionFunction>  
+  <apex:actionFunction oncomplete="default_cursor(this);" name="remove_practice" action="{!delete_practice}" rerender="main_holder,message_holder" status="status_load">
+    <apex:param name="cid" value="" />
+  </apex:actionFunction>  
+
+<apex:outputPanel id="main_holder" rendered="true" layout="block" style="padding-top:2em;padding-left:50px;">   
+<span style="display:block;border-bottom:2px solid black; color:#5789AE; font-size:14pt; font-weight:bold; padding-left:20px; padding-right:20px; width:600px; padding-top:5px; margin-bottom:1em;">Practice Privileges Update Utility</span> 
+
+  
+  <apex:outputpanel rendered="{!display_search}" layout="block" id="search_holder" >
+     <apex:selectRadio value="{!display_completed}" layout="pageDirection" onchange="refresh_search();">
+     <apex:selectOptions value="{!company_options}"/>
+     </apex:selectRadio>
+    <div class="CSSTableGenerator" style="width:80%">
+      <table >
+        <tr>
+          <td width="17%">Practice</td>
+          <td width="17%">Doctor</td>
+          <td width="17%">Contact</td>
+          <td width="10%">Join Date</td>
+          <td width="10%"># Notes</td>
+          <td width="10%">First Note</td>
+          <td width="10%">Last Note</td>                              
+          <td width="9%">&nbsp;</td>
+        </tr>
+        <apex:repeat var="member" value="{!practice_list}">
+        <tr>
+          <td>{!member.practice.Name}<br />{!member.practice.Street__c}<br />{!member.practice.City__c},{!member.practice.State_Province__c} {!member.practice.Postal_Code__c}<br />{!member.practice.Practice_Website__c}</td>
+          <td>{!member.doctor.first_name__c} {!member.doctor.last_name__c}<br />{!member.doctor.phone__c}<br />{!member.doctor.email__c}</td>
+          <td>{!member.practice.primary_contact_name__c}<br />{!member.practice.phone__c}<br />{!member.practice.primary_contact_email__c}</td>
+          <td>{!member.effective_date}</td>
+          <td>{!member.num_notes}</td>
+          <td><span class="tooling" title="{!member.first_note_text}">{!member.first_note_date}</span></td>
+          <td><span class="tooling"  title="{!member.last_note_text}">{!member.last_note_date}</span></td>
+          <td><apex:commandbutton value="Update" onclick="use_fancy_cursor(this);click_on_practice('{!member.practice.id}');return false;" /></td>
+        </tr>
+        </apex:repeat>
+      </table>
+    </div>
+  </apex:outputpanel>
+
+  <apex:outputpanel rendered="{!display_update_form}" style="padding-left:20px;"> 
+    <table>
+      <tr>
+        <td width="125px;" style="font-weight:bold;vertical-align:top;color:#5789AE;">Practice :</td>
+        <td>{!dp.Name}<br />{!dp.Street__c}<br />{!dp.City__c},{!dp.State_Province__c} {!dp.Postal_Code__c}<br /><b>Website:</b> {!dp.Practice_Website__c}<br /><b>Software :</b> {!dp.Practice_Management_Software__c}<br /><b>Office ID : </b> {!dp.Vantage_OfficeID__c}</td>
+      </tr>
+      <tr><td colspan="2">&nbsp;</td></tr>
+      <tr>
+        <td width="125px;" style="font-weight:bold;vertical-align:top;color:#5789AE;">Doctor :</td>
+        <td>{!dp.practice_doctors__r[0].first_name__c} {!dp.practice_doctors__r[0].last_name__c}<br />{!dp.practice_doctors__r[0].phone__c}<br />{!dp.practice_doctors__r[0].email__c}</td>
+      </tr>
+      <tr><td colspan="2">&nbsp;</td></tr>
+      <tr>
+        <td width="125px;" style="font-weight:bold;vertical-align:top;color:#5789AE;">Primary Contact :</td>
+        <td>{!dp.primary_contact_name__c}<br />{!dp.phone__c}<br />{!dp.primary_contact_email__c}</td>
+      </tr>
+    </table><br /><br />
+
+    <apex:outputpanel rendered="{!display_clearviewtv}">    
+    <apex:actionRegion >
+      <span class="line_holder"><span class="field_label">Does the practice have a TV ?</span> <apex:inputField value="{!dp.Does_the_practice_have_a_TV__c}" /></span>
+      <span class="line_holder"><span class="field_label">Is it HDMI compatible?</span> <apex:inputField value="{!dp.Is_it_HDMI_compatible__c}" /></span>
+      <span class="line_holder"><span class="field_label">Do you have a TV ?</span> <apex:inputField value="{!dp.Do_you_have_a_TV__c}" /></span>
+      <span class="line_holder"><span class="field_label">Is your TV mounted to the ceiling ?</span> <apex:inputField value="{!dp.Is_your_TV_mounted_to_the_ceiling__c}" /></span>
+      <span class="line_holder"><span class="field_label">Is your TV mounted to the wall ?</span> <apex:inputField value="{!dp.Is_your_tv_mounted_to_the_wall__c}" /></span>      
+      <span class="line_holder"><span class="field_label">BestBuy site service date ?</span> <apex:inputField value="{!dp.Best_Buy_site_service_date__c}" /></span>
+      <span class="line_holder"><span class="field_label">BestBuy date of service ?</span> <apex:inputField value="{!dp.Best_Buy_date_of_service__c}" /></span>
+      <span class="line_holder"><span class="field_label">BestBuy completed date ?</span> <apex:inputField value="{!dp.Best_Buy_Completed_Date__c}" /></span>      
+      <span class="line_holder"><span class="field_label">BestBuy rescheduled date ?</span> <apex:inputField value="{!dp.Best_Buy_rescheduled_date__c}" /></span>   
+      <span class="line_holder"><span class="field_label">Why was it rescheduled ?</span> <apex:inputField value="{!dp.Why_was_it_rescheduled__c}" /></span>  
+      <span class="line_holder"><span class="field_label">Date for site Installation ?</span> <apex:inputField value="{!dp.ClearViewTV_site_installation_date__c}" /></span>              
+      <span class="line_holder"><span class="field_label">Order # ?</span> <apex:inputField value="{!dp.ClearViewTV_order__c}" /></span> 
+      <span class="line_holder"><span class="field_label">Serial # of the TV ?</span> <apex:inputField value="{!dp.Serial_of_the_TV__c}" /></span> 
+      <span class="line_holder"><span class="field_label">Serial # of the media player ?</span> <apex:inputField value="{!dp.Serial_of_the_media_player__c}" /></span> 
+      <span class="line_holder"><span class="field_label">Installation Type ?</span> <apex:inputField value="{!dp.ClearViewTV_installation_Type__c}" /></span> 
+      <span class="line_holder"><span class="field_label">ClearViewTV complete ?</span> <apex:inputField value="{!dp.ClearViewTV_complete__c}" /></span>      
+      </apex:actionRegion>
+    </apex:outputpanel>
+    
+    <apex:outputpanel rendered="{!display_cleartrain}">
+      <span class="line_holder"><span class="field_label"># Seats in the Office ?</span> <apex:inputField value="{!dp.Seats_in_the_office__c}" /></span> 
+      <span class="line_holder"><span class="field_label">When did they go live with the training ?</span> <apex:inputField value="{!dp.ClearTrain_live_training_date__c}" /></span>
+      <span class="line_holder"><span class="field_label">Scheduled Ghost Call Date ?</span> <apex:inputField value="{!dp.Scheduled_ghost_call__c}" /></span>
+      <span class="line_holder"><span class="field_label">Completed Ghost Call Date ?</span> <apex:inputField value="{!dp.Completed_Ghost_Call__c}" /></span>
+      <span class="line_holder"><span class="field_label">ClearTrain complete ?</span> <apex:inputField value="{!dp.ClearTrain_Complete__c}" /></span>   
+    </apex:outputpanel>
+    
+    <apex:outputpanel rendered="{!display_clearweb}">
+      <span class="line_holder"><span class="field_label">When did the site go live ?</span> <apex:inputField value="{!dp.When_did_the_site_go_live__c}" /></span> 
+      <span class="line_holder"><span class="field_label">What is the domain name ?</span> <apex:inputField value="{!dp.ClearWeb_Domain_Name__c}" /></span>
+      <span class="line_holder"><span class="field_label">What is the temp URL ?</span> <apex:inputField value="{!dp.ClearWeb_Sample_URL__c}" /></span>
+      <span class="line_holder"><span class="field_label">What is the admin username ?</span> <apex:inputField value="{!dp.ClearWeb_Username__c}" /></span>
+      <span class="line_holder"><span class="field_label">What is the admin password ?</span> <apex:inputField value="{!dp.ClearWeb_Password__c}" /></span>
+      <span class="line_holder"><span class="field_label">Who is your primary contact ?</span> <apex:inputField value="{!dp.ClearWeb_Primary_Contact__c}" /></span>
+      <span class="line_holder"><span class="field_label">Services Offered ?</span> <apex:outputField value="{!dp.Services_Offered__c}" /></span>
+      <span class="line_holder"><span class="field_label">ClearWeb complete ?</span> <apex:inputField value="{!dp.ClearWeb_Complete__c}" /></span>    
+    </apex:outputpanel>
+
+    <apex:outputpanel rendered="{!display_clearvantage}">
+      <span class="line_holder"><span class="field_label">When did the Practice go live ?</span> <apex:inputField value="{!dp.ClearVantage_Live_Date__c}" /></span>
+      <span class="line_holder"><span class="field_label">ClearVantage complete ?</span> <apex:inputField value="{!dp.ClearVantage_Complete__c}" /></span>              
+      <span class="line_holder"><span class="field_label">Windows Server Type : </span> <apex:inputField value="{!dp.Windows_server_type__c}" /></span>           
+    </apex:outputpanel>
+    
+    <apex:outputpanel rendered="{!display_clearconnect}">
+      <span class="line_holder"><span class="field_label">When did the practice go live ?</span> <apex:inputField value="{!dp.ClearConnect_Live_Date__c}" /></span>
+      <span class="line_holder"><span class="field_label">ClearConnect complete ?</span> <apex:inputField value="{!dp.ClearConnect_Complete__c}" /></span>        
+    </apex:outputpanel>
+      
+    <apex:commandbutton value="Update" action="{!update_practice}" rerender="main_holder,message_holder" status="status_load" />
+    <span style="display:inline-block;width:20px;">&nbsp;</span>
+    <apex:commandbutton value="Back to Practice Search" action="{!cancel_update}" rerender="main_holder,message_holder" status="status_load" />
+    <span style="display:inline-block;width:20px;">&nbsp;</span>
+    <apex:commandButton rendered="{!display_clearviewtv}" value="Upload TV Images" action="{!display_image_page}" />
+    
+    <apex:outputpanel rendered="{!display_clearviewtv}">  
+      <br /><span style="display:block;border-bottom:1px dotted blue; color:black; font-size:12pt; font-weight:bold; padding-left:20px; padding-right:20px; width:600px; padding-top:5px; margin-bottom:1em;margin-top:1em;">TV Campaigns</span> 
+      <span class="line_holder"><span class="field_label">Name : </span><apex:inputfield value="{!new_campaign.name}" />
+        <span style="display:inline-block;width:30px;">&nbsp;</span>
+        <span class="field_label">Start Date : </span><apex:inputfield value="{!new_campaign.Start_Date__c}" />
+        <span style="display:inline-block;width:30px;">&nbsp;</span> 
+        <span class="field_label">End Date : </span><apex:inputfield value="{!new_campaign.End_Date__c}" />
+        <span style="display:inline-block;width:30px;">&nbsp;</span>
+        <apex:commandButton value="Add Campaign" action="{!add_campaign}" /></span><br />
+      <div class="CSSTableGenerator" style="width:80%">
+      <table>
+        <tr>
+          <td width="40%">Campaign Name</td>
+          <td width="25%">Started</td>
+          <td width="25%">Ended</td>
+          <td width="10%">&nbsp;</td>
+        </tr>
+        <apex:repeat var="campaign" value="{!current_campaigns}">
+        <tr>
+          <td><apex:outputfield value="{!campaign.Name}" /></td>
+          <td><apex:outputfield value="{!campaign.Start_Date__c}" /></td>
+          <td><apex:outputfield value="{!campaign.End_Date__c}" /></td>
+          <td><apex:commandbutton value="Delete" onclick="use_fancy_cursor(this);remove_practice('{!campaign.id}');return false;" /></td>
+        </tr>
+        </apex:repeat>
+      </table>
+    </div>
+        
+    </apex:outputpanel>  
+    
+    
+    
+    
+   <apex:outputpanel >  
+      <br /><span style="display:block;border-bottom:1px dotted blue; color:black; font-size:12pt; font-weight:bold; padding-left:20px; padding-right:20px; width:600px; padding-top:5px; margin-bottom:1em;margin-top:1em;">Notes</span> 
+      <span class="line_holder"><span class="field_label">Note Text : </span><apex:inputfield value="{!new_note.body}" style="width:200px;" /><span style="display:inline-block;width:40px;">&nbsp;</span>
+        <apex:commandButton value="Add Note" action="{!add_note}" /></span><br />      
+      <div class="CSSTableGenerator" style="width:80%">
+      <table>
+        <tr>
+          <td width="20%">Title</td>
+          <td width="60%">Note</td>
+          <td width="20%">Created Time</td>
+        </tr>
+        <apex:repeat var="note" value="{!all_notes}">
+        <tr>
+          <td><apex:outputtext value="{!note.note_title}" /></td>
+          <td><apex:outputtext value="{!note.note_detail}" /></td>
+          <td><apex:outputtext value="{!note.formated_cdate}" /></td>
+        </tr>
+        </apex:repeat>
+      </table>
+    </div>
+        
+    </apex:outputpanel>  
+      
+  </apex:outputpanel>
+  
+
+</apex:outputpanel>
+</apex:form>
+
+<script>
+j$ = jQuery.noConflict(); 
+j$(document).ready(function() { 
+   // This will automatically grab the 'title' attribute and replace
+    // the regular browser tooltips for all <a> elements with a title attribute!    
+
+   j$('[title]').qtip({
+            style: {
+                classes: 'qtip-blue qtip-shadow qtip-rounded',
+                width:'400px'
+            },
+            position: {
+                my: 'top center',  // Position my top left...
+                at: 'bottom left' // at the bottom right of...            
+            },
+            content: {
+                title: 'Note Text'
+            }
+        });
+});
+</script>
+
+</apex:page>

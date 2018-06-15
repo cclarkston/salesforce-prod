@@ -1,0 +1,203 @@
+<apex:page controller="ctrl_reoccuring_payment" >
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!$Resource.QTIP_CSS}" />
+<apex:includeScript value="{!$Resource.QTIP_JQUERY}" />
+<apex:includeScript value="{!$Resource.QTIP_JS}" />
+
+
+<style>
+.tooltiptext{
+    display: none;
+}
+
+.tipstyle {
+  color:black;
+  font-weight:bold;
+}
+
+  span.line_holder {
+    display:block;
+    padding-bottom:1em;
+  }
+  span.field_label {
+    font-weight:bold;
+    padding-right:10px;
+  }
+  span.blank {
+    font-style:italic;
+    font-weight:bold;    
+  }  
+  tr.control a {
+    text-decoration:none;
+  }
+  .CSSTableGenerator {
+    margin:0px;padding:0px;
+    width:100%;
+    box-shadow: 10px 10px 5px #888888;
+    border:1px solid #000000;
+    
+    -moz-border-radius-bottomleft:0px;
+    -webkit-border-bottom-left-radius:0px;
+    border-bottom-left-radius:0px;
+    
+    -moz-border-radius-bottomright:0px;
+    -webkit-border-bottom-right-radius:0px;
+    border-bottom-right-radius:0px;
+    
+    -moz-border-radius-topright:0px;
+    -webkit-border-top-right-radius:0px;
+    border-top-right-radius:0px;
+    
+    -moz-border-radius-topleft:0px;
+    -webkit-border-top-left-radius:0px;
+    border-top-left-radius:0px;
+}.CSSTableGenerator table{
+    border-collapse: collapse;
+        border-spacing: 0;
+    width:100%;
+    height:100%;
+    margin:0px;padding:0px;
+}.CSSTableGenerator tr:last-child td:last-child {
+    -moz-border-radius-bottomright:0px;
+    -webkit-border-bottom-right-radius:0px;
+    border-bottom-right-radius:0px;
+}
+.CSSTableGenerator table tr:first-child td:first-child {
+    -moz-border-radius-topleft:0px;
+    -webkit-border-top-left-radius:0px;
+    border-top-left-radius:0px;
+}
+.CSSTableGenerator table tr:first-child td:last-child {
+    -moz-border-radius-topright:0px;
+    -webkit-border-top-right-radius:0px;
+    border-top-right-radius:0px;
+}.CSSTableGenerator tr:last-child td:first-child{
+    -moz-border-radius-bottomleft:0px;
+    -webkit-border-bottom-left-radius:0px;
+    border-bottom-left-radius:0px;
+}.CSSTableGenerator tr:hover td{
+    
+}
+.CSSTableGenerator tr:nth-child(odd){ background-color:#aad4ff; }
+.CSSTableGenerator tr:nth-child(even)    { background-color:#ffffff; }.CSSTableGenerator td{
+    vertical-align:middle;    
+    border:1px solid #000000;
+    border-width:0px 1px 1px 0px;
+    text-align:left;
+    padding:7px;
+    font-size:12px;
+    font-family:Arial;
+    font-weight:normal;
+    color:#000000;
+}.CSSTableGenerator tr:last-child td{
+    border-width:0px 1px 0px 0px;
+}.CSSTableGenerator tr td:last-child{
+    border-width:0px 0px 1px 0px;
+}.CSSTableGenerator tr:last-child td:last-child{
+    border-width:0px 0px 0px 0px;
+}
+.CSSTableGenerator tr:first-child td{
+        background:-o-linear-gradient(bottom, #005fbf 5%, #003f7f 100%);    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #005fbf), color-stop(1, #003f7f) );
+    background:-moz-linear-gradient( center top, #005fbf 5%, #003f7f 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#005fbf", endColorstr="#003f7f");  background: -o-linear-gradient(top,#005fbf,003f7f);
+
+    background-color:#005fbf;
+    border:0px solid #000000;
+    text-align:center;
+    border-width:0px 0px 1px 1px;
+    font-size:14px;
+    font-family:Arial;
+    font-weight:bold;
+    color:#ffffff;
+}
+.CSSTableGenerator tr:first-child:hover td{
+    background:-o-linear-gradient(bottom, #005fbf 5%, #003f7f 100%);    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #005fbf), color-stop(1, #003f7f) );
+    background:-moz-linear-gradient( center top, #005fbf 5%, #003f7f 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#005fbf", endColorstr="#003f7f");  background: -o-linear-gradient(top,#005fbf,003f7f);
+
+    background-color:#005fbf;
+}
+.CSSTableGenerator tr:first-child td:first-child{
+    border-width:0px 0px 1px 0px;
+}
+.CSSTableGenerator tr:first-child td:last-child{
+    border-width:0px 0px 1px 1px;
+}
+  
+</style>
+
+<script type="text/javascript"> 
+  function use_fancy_cursor(t) {
+    document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+    t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  }
+  function default_cursor(t) {
+    document.body.style.cursor = 'default';
+    t.style.cursor='default';
+  }  
+</script>
+
+<apex:form style="padding-top:0;display:inline;margin-top:0;" onsubmit="">
+  <apex:actionstatus id="status_load">
+        <apex:facet name="start">
+            <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;
+                   height: 100%;opacity:0.65;width:100%;"> 
+                <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+                    <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                    <span class="waitingDescription">Loading...</span>
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionstatus>
+<apex:outputpanel id="message_holder" layout="block" style="padding-left:20px;font-weight:bold;color:red;font-size:14pt;">    
+<apex:messages />
+</apex:outputpanel>
+
+<apex:outputPanel id="main_holder" rendered="true" layout="block" style="padding-top:2em;padding-left:50px;">   
+<span style="display:block;border-bottom:2px solid black; color:#5789AE; font-size:14pt; font-weight:bold; padding-left:20px; padding-right:20px; width:600px; padding-top:5px; margin-bottom:1em;">Reoccuring Payment Utility</span> 
+
+  <apex:outputpanel id="util_holder">
+    <span class="line_holder"><span class="field_label">Prosth Exam : </span><apex:outputLink value="/{!o.id}"><apex:outputField value="{!o.name}" /></apex:outputLink></span>    
+    <span class="line_holder"><span class="field_label">Start Payment Date : </span><apex:inputfield value="{!rec_payment.Payment_Date__c}" /></span>   
+    <span class="line_holder"><span class="field_label"># Payments : </span><apex:inputText value="{!rec_num_payments}" size="5"/></span>   
+    <span class="line_holder"><span class="field_label">Payments Every : </span><apex:inputText value="{!rec_payment_num_interval}" size="5"/> &nbsp;&nbsp; <apex:selectList value="{!rec_payment_interval_type}" size="1"> 
+      <apex:selectoptions value="{!interval_list}"></apex:selectoptions></apex:selectList></span>     
+    <span class="line_holder"><span class="field_label">Payment Amount : </span><apex:inputfield value="{!rec_payment.Payment_Amount__c}" /></span>         
+    <span class="line_holder"><span class="field_label">Payment Type: </span><apex:inputfield value="{!rec_payment.Payment_Type__c}" /></span>   
+    <apex:inputfield value="{!rec_payment.Payment_Type_Master__c}" style="display:none;"/>   
+    <span class="line_holder"><span class="field_label">Payment Status : </span>
+      <apex:selectList value="{!rec_payment.Payment_Status__c}" size="1"> <apex:selectoptions value="{!payment_status_list}"></apex:selectoptions></apex:selectList></span>     
+   <!-- <span class="line_holder"><span class="field_label">Finance Fee : </span><apex:inputfield value="{!rec_payment.Finance_Fee__c}" /></span>  -->
+    <apex:commandbutton value="Create Payment Records" action="{!create_rec_payments}" rerender="current_payments,message_holder" status="status_load" />    
+  </apex:outputpanel>
+
+  <br /><br />
+  <span style="display:block;border-bottom:2px solid black; color:#5789AE; font-size:14pt; font-weight:bold; padding-left:20px; padding-right:20px; width:600px; padding-top:5px; margin-bottom:1em;">Current Payments</span> 
+  <apex:outputpanel layout="block" id="current_payments" >
+    <div class="CSSTableGenerator" style="width:80%">
+      <table >
+        <tr>
+          <td width="10%">Payment ID</td>
+          <td width="10%">Payment Date</td>
+          <td width="20%">Payment Type</td>
+          <td width="20%">Payment Amount</td>
+          <td width="20%">Finance Fee</td>
+          <td width="20%">Payment Status</td>
+        </tr>
+        <apex:repeat var="payments" value="{!current_payment_list}">
+        <tr>
+          <td>{!payments.Name}</td>
+          <td><apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!payments.Payment_Date__c}" /></apex:outputText></td>
+          <td>{!payments.Payment_Type__c}</td>
+          <td>{!payments.Payment_Amount__c}</td>
+          <td>{!payments.Finance_Fee__c}</td>
+          <td>{!payments.Payment_Status__c}</td>
+        </tr>
+        </apex:repeat>
+      </table>
+    </div>
+  </apex:outputpanel>
+
+</apex:outputPanel>
+</apex:form>
+</apex:page>

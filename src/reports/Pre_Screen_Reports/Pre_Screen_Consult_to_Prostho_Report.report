@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Account$Consult_Completed__c</field>
+    </columns>
+    <columns>
+        <field>Account$Prostho_Exam_Scheduled_del__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Opportunities$Prostho_Exam_Scheduled__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Account$Center_Master_Location__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Atlanta,Dallas,Denver,Chicago,Cleveland,St. Louis,Las Vegas</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account$Pre_Screen__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Green,Yellow,Red,Blue (No Hit)</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account$Pre_Screen__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account$Center_Master_Location__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account$Owner</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Pre Screen Consult to Prostho Report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Consults_with_Prostho_Exam_and_Payments__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Account$CreatedDate</dateColumn>
+        <endDate>2009-09-30</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2009-07-27</startDate>
+    </timeFrameFilter>
+</Report>

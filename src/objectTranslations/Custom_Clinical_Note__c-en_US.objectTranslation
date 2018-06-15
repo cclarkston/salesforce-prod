@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Custom Clinical Note</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Custom Clinical Notes</value>
+    </caseValues>
+    <fields>
+        <label><!-- Center Information --></label>
+        <name>Center_Information__c</name>
+        <relationshipLabel><!-- Custom Clinical Notes --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- IsActive --></label>
+        <name>IsActive__c</name>
+    </fields>
+    <fields>
+        <label><!-- Note Text --></label>
+        <name>Note_Text__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sort Order --></label>
+        <name>Sort_Order__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,1215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Application_Date__c</fullName>
+        <description>Date carecredit payment was applied for by the PEC</description>
+        <externalId>false</externalId>
+        <label>Application Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Backdated_Payment__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates payment date was changed to a point in the past</description>
+        <externalId>false</externalId>
+        <label>Backdated Payment</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Celigo_Update__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Celigo Update</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Collected_Date__c</fullName>
+        <description>Date a payment was last marked in a collected state - this update gets handled by a trigger of field update (trigger at the moment).  Used for a formula field</description>
+        <externalId>false</externalId>
+        <label>Collected Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Confirmation_ID__c</fullName>
+        <description>This field will hold the Check # or Transaction ID/Authorization number for a credit card payment where appropriate.</description>
+        <externalId>false</externalId>
+        <label>Confirmation ID</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Days_between_Create_Date_Orig_Pay_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF((Original_Anticipated_Payment_Date__c - DATEVALUE( CreatedDate)) &lt; 0, 0,
+IF( ISBLANK(Original_Anticipated_Payment_Date__c ),   Days_between_Create_Date_Pay_Date__c  , (Original_Anticipated_Payment_Date__c - DATEVALUE( CreatedDate))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Days between Create Date &amp; Orig Pay Date</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Days_between_Create_Date_Pay_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(Payment_Date__c -DATEVALUE( CreatedDate ) &lt; 0,0, Payment_Date__c -DATEVALUE( CreatedDate )  )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Days between Create Date &amp; Pay Date</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Days_to_Collected__c</fullName>
+        <externalId>false</externalId>
+        <formula>if( ISNULL( Application_Date__c ) || ISNULL( Collected_Date__c ), 999, Collected_Date__c - Application_Date__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Days to Collected</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Difference_Current_Original_Pay_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(Days_between_Create_Date_Orig_Pay_Date__c ), 0, Days_between_Create_Date_Pay_Date__c - Days_between_Create_Date_Orig_Pay_Date__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Difference Current &amp; Original Pay Date</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Finance_Fee__c</fullName>
+        <description>The amount of the collection that covers the finance fee.</description>
+        <externalId>false</externalId>
+        <label>Finance Fee</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Finance_Net_Collections__c</fullName>
+        <externalId>false</externalId>
+        <formula>if( Payment_Status_Formula__c = &apos;Collected&apos;,  Net_Collection_Amount__c * -1,  
+  if(Payment_Status_Formula__c = &apos;Refunded&apos;, Net_Collection_Amount__c, 0)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Finance Net Collections</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Finance_Net_Collections_minus_GP__c</fullName>
+        <externalId>false</externalId>
+        <formula>if( Payment_Status_Formula__c = &apos;Collected&apos;,  Net_Collection_Amount_minus_GP__c  * -1, 
+if(Payment_Status_Formula__c = &apos;Refunded&apos;,  Net_Collection_Amount_minus_GP__c , 0) 
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Finance Net Collections minus GP</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>GP_Fee_Amount__c</fullName>
+        <description>Amount payable to the GP. Should be equivalent to the payment amount minus finance fees * GP Fee Rate (Track based selection)</description>
+        <externalId>false</externalId>
+        <formula>(Payment_Amount__c - Finance_Fee__c) * if(ISNULL( Opportunity__r.GP_Fee_Rate__c ) ,0, Opportunity__r.GP_Fee_Rate__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>GP Fee Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Is_Slipped__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(
+(Original_Anticipated_Payment_Date__c &lt; Payment_Date__c)
+&amp;&amp;  
+(!ispickval(Payment_Status__c, &quot;Collected&quot;) 
+&amp;&amp; !ispickval(Payment_Status__c, &quot;Anticipated Payment Cancelled&quot;) 
+&amp;&amp; !ispickval(Payment_Status__c, &quot;Refund&quot;)
+&amp;&amp; !ispickval(Payment_Status__c, &quot; Anticipated Prom Note Payment Cancelled&quot;)
+)
+,&quot;Yes&quot;, &quot;No&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>If Original Anticipated Payment Date &lt; Payment Date, Not Cancelled, Not Collected and Not Refunded then it has slipped.</inlineHelpText>
+        <label>Is Slipped</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NS_Payment_Method__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE(Payment_Type__c,
+&quot;Visa&quot;, &quot;Credit Card VS, MC, DS&quot;,
+&quot;Springstone&quot;, &quot;STONE&quot;,
+&quot;Cash&quot;, &quot;CASH&quot;,
+&quot;CareCredit&quot;, &quot;CARE&quot;,
+&quot;ACH&quot;, &quot;ACH&quot;,
+&quot;Check&quot;, &quot;CK&quot;,
+&quot;American Express&quot;, &quot;Credit Card VS, MC, DS&quot;,
+&quot;Master Card&quot;, &quot;Credit Card VS, MC, DS&quot;,
+&quot;Credit Card&quot;, &quot;Credit Card VS, MC, DS&quot;,
+&quot;Alphaeon&quot;, &quot;Alphaeon&quot;,
+&quot;Discover&quot;, &quot;Credit Card VS, MC, DS&quot;,
+&quot;Patient Preferred Financing&quot;, &quot;PPF&quot;,
+&quot;Wire&quot;, &quot;WIRE&quot;,
+&quot;Coupon&quot;, &quot;Coupon&quot;,
+&quot;Unrecognized payment type&quot;
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>NS Payment Method</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NS_Sync__c</fullName>
+        <externalId>false</externalId>
+        <label>NetSuite_Sync</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>NetSuite_Warning__c</fullName>
+        <externalId>false</externalId>
+        <label>NetSuite Warning</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Net_Collection_Amount__c</fullName>
+        <externalId>false</externalId>
+        <formula>Payment_Amount__c  -  Finance_Fee__c - Writeoff_Amount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Net Collection Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Net_Collection_Amount_minus_GP__c</fullName>
+        <description>Payment Amount minus the finance fee and GP fee</description>
+        <externalId>false</externalId>
+        <formula>Payment_Amount__c - Finance_Fee__c - ((Payment_Amount__c - Finance_Fee__c) * if(ISNULL( Opportunity__r.GP_Fee_Rate__c ) ,0, Opportunity__r.GP_Fee_Rate__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Net Collection Amount minus GP</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Netsuite_ID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>Netsuite ID</label>
+        <length>25</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <externalId>false</externalId>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipName>Remittances</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Original_Anticipated_Payment_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Original Anticipated Payment Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Origional_Payment_Date__c</fullName>
+        <description>Just adding this formula so I can quickly display the value on the layout without opening it for editing by the team.</description>
+        <externalId>false</externalId>
+        <formula>Original_Anticipated_Payment_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Original Payment Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>PEC__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Stores the id of the PEC who will get credit for this payment transaction</description>
+        <externalId>false</externalId>
+        <label>PEC</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Payments</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Paid_Same_Month_as_Exam__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+AND(
+MONTH( Payment_Date__c) = MONTH( DATEVALUE(Opportunity__r.CreatedDate)),
+YEAR( Payment_Date__c) = YEAR( DATEVALUE(Opportunity__r.CreatedDate))
+      ),
+&quot;Same Month&quot;,
+&quot;Not The Same Month&quot;
+
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Paid Same Month as Exam</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Past_Due__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(Payment_Date__c &lt; today() &amp;&amp;  !(OR(ispickval(Payment_Status__c, &quot;Collected&quot;),ispickval(Payment_Status__c, &quot;Anticipated Payment Cancelled&quot;),ispickval(Payment_Status__c, &quot;Refund&quot;),ispickval(Payment_Status__c, &quot;Anticipated Prom Note Payment Cancelled&quot;))), &quot;Yes&quot;, &quot;No&quot;)</formula>
+        <label>Past Due</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payment_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment Amount</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Before_PE_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>if( Payment_Date__c &lt; Opportunity__r.CloseDate , &apos;Y&apos;, &apos;N&apos;)</formula>
+        <label>Payment Before PE Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payment_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Different_Month_from_PE__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( Paid_Same_Month_as_Exam__c &lt;&gt; &quot;Same Month&quot;, Payment_Amount__c ,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Payment Different Month from PE</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Same_Month_as_PE__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( Paid_Same_Month_as_Exam__c  = &quot;Same Month&quot;,  Payment_Amount__c ,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Payment Same Month as PE</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Status_Formula__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE(Payment_Status__c,
+&quot;Anticipated&quot;,&quot;Anticipated&quot;,
+&quot;Anticipated PPF&quot;,&quot;Anticipated&quot;,
+&quot;Anticipated Promise Note&quot;,&quot;Anticipated&quot;,
+&quot;Collected&quot;,&quot;Collected&quot;,
+&quot;Collected Promise Note&quot;,&quot;Collected&quot;,
+&quot;Collected PPF&quot;,&quot;Collected&quot;,
+&quot;Anticipated Payment Cancelled&quot;,&quot;Cancelled&quot;,
+&quot;Anticipated Payment Cancelled Write Off&quot;,&quot;Cancelled&quot;,
+&quot;Anticipated PPF Cancelled&quot;,&quot;Cancelled&quot;,
+&quot;Refund&quot;,&quot;Refunded&quot;,
+&quot;HCF In Process&quot;,&quot;HCF&quot;,
+&quot;NSF&quot;,&quot;Refunded&quot;,
+&quot;Anticipated Prom Note Payment Cancelled&quot;,&quot;Cancelled&quot;,
+&quot;&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Payment Status (Formula)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payment_Status__c</fullName>
+        <description>Pending</description>
+        <externalId>false</externalId>
+        <label>Payment Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Anticipated</fullName>
+                    <default>false</default>
+                    <label>Anticipated</label>
+                </value>
+                <value>
+                    <fullName>Anticipated Promise Note</fullName>
+                    <default>false</default>
+                    <label>Anticipated Promise Note</label>
+                </value>
+                <value>
+                    <fullName>Collected</fullName>
+                    <default>false</default>
+                    <label>Collected</label>
+                </value>
+                <value>
+                    <fullName>Collected Promise Note</fullName>
+                    <default>false</default>
+                    <label>Collected Promise Note</label>
+                </value>
+                <value>
+                    <fullName>Anticipated Payment Cancelled</fullName>
+                    <default>false</default>
+                    <label>Anticipated Payment Cancelled</label>
+                </value>
+                <value>
+                    <fullName>Refund</fullName>
+                    <default>false</default>
+                    <label>Refund</label>
+                </value>
+                <value>
+                    <fullName>HCF In Process</fullName>
+                    <default>false</default>
+                    <label>HCF In Process</label>
+                </value>
+                <value>
+                    <fullName>Anticipated Prom Note Payment Cancelled</fullName>
+                    <default>false</default>
+                    <label>Anticipated Prom Note Payment Cancelled</label>
+                </value>
+                <value>
+                    <fullName>Anticipated Payment Cancelled Write Off</fullName>
+                    <default>false</default>
+                    <label>Anticipated Payment Cancelled Write Off</label>
+                </value>
+                <value>
+                    <fullName>NSF</fullName>
+                    <default>false</default>
+                    <label>NSF</label>
+                </value>
+                <value>
+                    <fullName>Anticipated PPF</fullName>
+                    <default>false</default>
+                    <label>Anticipated PPF</label>
+                </value>
+                <value>
+                    <fullName>Collected PPF</fullName>
+                    <default>false</default>
+                    <label>Collected PPF</label>
+                </value>
+                <value>
+                    <fullName>Anticipated PPF Cancelled</fullName>
+                    <default>false</default>
+                    <label>Anticipated PPF Cancelled</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Payment_Type_Master__c</fullName>
+        <description>Master picklist to drive visibility of picklist items in Payment Type</description>
+        <externalId>false</externalId>
+        <label>Payment Type Master</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>--  MASTER  --</fullName>
+                    <default>true</default>
+                    <label>--  MASTER  --</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Payment_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment Type</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Payment_Type_Master__c</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Cash</fullName>
+                    <default>false</default>
+                    <label>Cash</label>
+                </value>
+                <value>
+                    <fullName>Check</fullName>
+                    <default>false</default>
+                    <label>Check</label>
+                </value>
+                <value>
+                    <fullName>Credit Card</fullName>
+                    <default>false</default>
+                    <label>Credit Card</label>
+                </value>
+                <value>
+                    <fullName>CareCredit</fullName>
+                    <default>false</default>
+                    <label>CareCredit</label>
+                </value>
+                <value>
+                    <fullName>LendingClub</fullName>
+                    <default>false</default>
+                    <label>LendingClub</label>
+                </value>
+                <value>
+                    <fullName>ClearChoice Base Plan</fullName>
+                    <default>false</default>
+                    <label>ClearChoice Base Plan</label>
+                </value>
+                <value>
+                    <fullName>TBD (Anticipated Payment)</fullName>
+                    <default>false</default>
+                    <label>TBD (Anticipated Payment)</label>
+                </value>
+                <value>
+                    <fullName>ClearChoice Marketing / Dr. Gratus</fullName>
+                    <default>false</default>
+                    <label>ClearChoice Marketing / Dr. Gratus</label>
+                </value>
+                <value>
+                    <fullName>ACH</fullName>
+                    <default>false</default>
+                    <label>ACH</label>
+                </value>
+                <value>
+                    <fullName>Wire</fullName>
+                    <default>false</default>
+                    <label>Wire</label>
+                </value>
+                <value>
+                    <fullName>Patient Preferred Financing</fullName>
+                    <default>false</default>
+                    <label>Patient Preferred Financing</label>
+                </value>
+                <value>
+                    <fullName>American Express</fullName>
+                    <default>false</default>
+                    <label>American Express</label>
+                </value>
+                <value>
+                    <fullName>Discover</fullName>
+                    <default>false</default>
+                    <label>Discover</label>
+                </value>
+                <value>
+                    <fullName>Visa</fullName>
+                    <default>false</default>
+                    <label>Visa</label>
+                </value>
+                <value>
+                    <fullName>Master Card</fullName>
+                    <default>false</default>
+                    <label>Master Card</label>
+                </value>
+                <value>
+                    <fullName>Alphaeon</fullName>
+                    <default>false</default>
+                    <label>Alphaeon</label>
+                </value>
+                <value>
+                    <fullName>Proceed Finance</fullName>
+                    <default>false</default>
+                    <label>Proceed Finance</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>--  MASTER  --</controllingFieldValue>
+                <valueName>Cash</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>--  MASTER  --</controllingFieldValue>
+                <valueName>Check</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>--  MASTER  --</controllingFieldValue>
+                <valueName>Credit Card</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>--  MASTER  --</controllingFieldValue>
+                <valueName>CareCredit</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>--  MASTER  --</controllingFieldValue>
+                <valueName>LendingClub</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>--  MASTER  --</controllingFieldValue>
+                <valueName>ClearChoice Base Plan</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>--  MASTER  --</controllingFieldValue>
+                <valueName>TBD (Anticipated Payment)</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>--  MASTER  --</controllingFieldValue>
+                <valueName>ClearChoice Marketing / Dr. Gratus</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>--  MASTER  --</controllingFieldValue>
+                <valueName>ACH</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>--  MASTER  --</controllingFieldValue>
+                <valueName>Wire</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>--  MASTER  --</controllingFieldValue>
+                <valueName>Patient Preferred Financing</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>--  MASTER  --</controllingFieldValue>
+                <valueName>American Express</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>--  MASTER  --</controllingFieldValue>
+                <valueName>Discover</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>--  MASTER  --</controllingFieldValue>
+                <valueName>Visa</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>--  MASTER  --</controllingFieldValue>
+                <valueName>Master Card</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>--  MASTER  --</controllingFieldValue>
+                <valueName>Alphaeon</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>--  MASTER  --</controllingFieldValue>
+                <valueName>Proceed Finance</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Refund_Amount__c</fullName>
+        <description>If the Payment_Status_Formula__c field is equal to &apos;Refunded,&apos; then this field will populate with the Net_Collection_Amount__c. This field can then be :SUM to total refunds at the &apos;Payment&apos; level.</description>
+        <externalId>false</externalId>
+        <formula>if(Payment_Status_Formula__c = &apos;Refunded&apos;, Net_Collection_Amount__c, 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Refund Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Refund_Reason__c</fullName>
+        <externalId>false</externalId>
+        <label>Refund Reason</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Going with other dental options</fullName>
+                    <default>false</default>
+                    <label>Going with other dental options</label>
+                </value>
+                <value>
+                    <fullName>Changed method of payment</fullName>
+                    <default>false</default>
+                    <label>Changed method of payment</label>
+                </value>
+                <value>
+                    <fullName>Overpaid</fullName>
+                    <default>false</default>
+                    <label>Overpaid</label>
+                </value>
+                <value>
+                    <fullName>Spouse</fullName>
+                    <default>false</default>
+                    <label>Spouse</label>
+                </value>
+                <value>
+                    <fullName>Cannot afford HCF payments</fullName>
+                    <default>false</default>
+                    <label>Cannot afford HCF payments</label>
+                </value>
+                <value>
+                    <fullName>Relocating</fullName>
+                    <default>false</default>
+                    <label>Relocating</label>
+                </value>
+                <value>
+                    <fullName>Medical Issues</fullName>
+                    <default>false</default>
+                    <label>Medical Issues</label>
+                </value>
+                <value>
+                    <fullName>Non Responsive</fullName>
+                    <default>false</default>
+                    <label>Non Responsive</label>
+                </value>
+                <value>
+                    <fullName>Lost job</fullName>
+                    <default>false</default>
+                    <label>Lost job</label>
+                </value>
+                <value>
+                    <fullName>Change in treatment plan</fullName>
+                    <default>false</default>
+                    <label>Change in treatment plan</label>
+                </value>
+                <value>
+                    <fullName>Financial Restraints</fullName>
+                    <default>false</default>
+                    <label>Financial Restraints</label>
+                </value>
+                <value>
+                    <fullName>Courtesy Refund</fullName>
+                    <default>false</default>
+                    <label>Courtesy Refund</label>
+                </value>
+                <value>
+                    <fullName>Dr. Declined Case</fullName>
+                    <default>false</default>
+                    <label>Dr. Declined Case</label>
+                </value>
+                <value>
+                    <fullName>Family Emergency</fullName>
+                    <default>false</default>
+                    <label>Family Emergency</label>
+                </value>
+                <value>
+                    <fullName>Dr. Dismissed Patient From Practice</fullName>
+                    <default>false</default>
+                    <label>Dr. Dismissed Patient From Practice</label>
+                </value>
+                <value>
+                    <fullName>Patient Passed Away</fullName>
+                    <default>false</default>
+                    <label>Patient Passed Away</label>
+                </value>
+                <value>
+                    <fullName>Cold Feet/Changed Mind</fullName>
+                    <default>false</default>
+                    <label>Cold Feet/Changed Mind</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Send_to_NetSuite__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Send to NetSuite</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Service_Date__c</fullName>
+        <description>Date the payment should be applied. Will default to payment date if left blank</description>
+        <externalId>false</externalId>
+        <label>Service Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Slipped_Payment_Other__c</fullName>
+        <description>Detailed description of the issue for a slipped payment record</description>
+        <externalId>false</externalId>
+        <label>Slipped Payment - Other</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Slipped_Payment_Reason__c</fullName>
+        <description>Reason for the payment date being adjusted</description>
+        <externalId>false</externalId>
+        <label>Slipped Payment Reason</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Waiting on 401k</fullName>
+                    <default>false</default>
+                    <label>Waiting on 401k</label>
+                </value>
+                <value>
+                    <fullName>Waiting on investments</fullName>
+                    <default>false</default>
+                    <label>Waiting on investments</label>
+                </value>
+                <value>
+                    <fullName>Loss of income</fullName>
+                    <default>false</default>
+                    <label>Loss of income</label>
+                </value>
+                <value>
+                    <fullName>Family Emergency</fullName>
+                    <default>false</default>
+                    <label>Family Emergency</label>
+                </value>
+                <value>
+                    <fullName>Health Issues</fullName>
+                    <default>false</default>
+                    <label>Health Issues</label>
+                </value>
+                <value>
+                    <fullName>Medical Clearance needed (so couldn&apos;t collect HCF)</fullName>
+                    <default>false</default>
+                    <label>Medical Clearance needed (so couldn&apos;t collect HCF)</label>
+                </value>
+                <value>
+                    <fullName>Medical Clearance needed and patient wouldn&apos;t pay yet</fullName>
+                    <default>false</default>
+                    <label>Medical Clearance needed and patient wouldn&apos;t pay yet</label>
+                </value>
+                <value>
+                    <fullName>Medical Clearance needed and doctor directed to not collect</fullName>
+                    <default>false</default>
+                    <label>Medical Clearance needed and doctor directed to not collect</label>
+                </value>
+                <value>
+                    <fullName>CTX results will not allow surgery for several months</fullName>
+                    <default>false</default>
+                    <label>CTX results will not allow surgery for several months</label>
+                </value>
+                <value>
+                    <fullName>Home Refinancing</fullName>
+                    <default>false</default>
+                    <label>Home Refinancing</label>
+                </value>
+                <value>
+                    <fullName>Vacation</fullName>
+                    <default>false</default>
+                    <label>Vacation</label>
+                </value>
+                <value>
+                    <fullName>Business Trip</fullName>
+                    <default>false</default>
+                    <label>Business Trip</label>
+                </value>
+                <value>
+                    <fullName>HCF In Process</fullName>
+                    <default>false</default>
+                    <label>HCF In Process</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Who_applied_for_CareCredit__c</fullName>
+        <externalId>false</externalId>
+        <label>Who applied for CareCredit?</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>PEC</fullName>
+                    <default>false</default>
+                    <label>PEC</label>
+                </value>
+                <value>
+                    <fullName>Patient</fullName>
+                    <default>false</default>
+                    <label>Patient</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Writeoff_Amount__c</fullName>
+        <defaultValue>0.00</defaultValue>
+        <description>Amount of the payment being written off</description>
+        <externalId>false</externalId>
+        <label>Writeoff Amount</label>
+        <precision>14</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <label>Payment</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>Opportunity__c</columns>
+        <columns>NAME</columns>
+        <columns>Payment_Date__c</columns>
+        <columns>Payment_Type__c</columns>
+        <columns>Payment_Amount__c</columns>
+        <columns>PEC__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>Angela Little</label>
+    </listViews>
+    <listViews>
+        <fullName>Angela_Little</fullName>
+        <columns>Opportunity__c</columns>
+        <columns>NAME</columns>
+        <columns>Payment_Date__c</columns>
+        <columns>Payment_Type__c</columns>
+        <columns>Payment_Amount__c</columns>
+        <columns>PEC__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>Angela Little</label>
+    </listViews>
+    <nameField>
+        <displayFormat>PMT-{000000}</displayFormat>
+        <label>Reference Nbr</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Payments</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Opportunity__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Payment_Amount__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Payment_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Payment_Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Payment_Type__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>UPDATEDBY_USER</customTabListAdditionalFields>
+        <customTabListAdditionalFields>LAST_UPDATE</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Opportunity__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Payment_Amount__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Payment_Date__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Payment_Status__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Payment_Type__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>UPDATEDBY_USER</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>LAST_UPDATE</lookupDialogsAdditionalFields>
+        <searchResultsAdditionalFields>Opportunity__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Payment_Amount__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Payment_Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Payment_Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Payment_Type__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>UPDATEDBY_USER</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>LAST_UPDATE</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Application_Date_3_Day_rule</fullName>
+        <active>false</active>
+        <description>Ensures the application date is 4 days before the collection date</description>
+        <errorConditionFormula>ISPICKVAL(Payment_Type__c,&apos;CareCredit&apos;) &amp;&amp; Payment_Date__c - Application_Date__c &lt; CASE( 
+MOD( Application_Date__c - DATE(1900, 1, 7), 7), 
+0, 4, 
+1, 4, 
+2, 6, 
+3, 5, 
+4, 4, 
+5, 4, 
+6, 4, 4) &amp;&amp; ispickval( Who_applied_for_CareCredit__c , &apos;PEC&apos;) &amp;&amp; ($Profile.Name = &apos;PEC - Application Date&apos; || $Profile.Name = &apos;PEC - PFF - Application Date&apos;) &amp;&amp; CreatedDate &gt;= DATETIMEVALUE(&quot;2014-04-24 00:00:00&quot;)</errorConditionFormula>
+        <errorDisplayField>Application_Date__c</errorDisplayField>
+        <errorMessage>Application Date must be at least 4 days prior to the payment date. If the Payment Date falls on a weekend, then the next Monday should be selected.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Application_Date_Required</fullName>
+        <active>false</active>
+        <description>Rule to require that application date is filled out for any carecredit payments</description>
+        <errorConditionFormula>CreatedDate &gt;= DATETIMEVALUE(&quot;2014-04-24 00:00:00&quot;) &amp;&amp;
+ ISPICKVAL(Payment_Type__c,&apos;CareCredit&apos;) &amp;&amp; (isnull(Application_Date__c) || Application_Date__c &lt;  DATEVALUE(CreatedDate) ) &amp;&amp; ($Profile.Name = &apos;PEC - Application Date&apos; || $Profile.Name = &apos;PEC - PFF - Application Date&apos;)</errorConditionFormula>
+        <errorDisplayField>Application_Date__c</errorDisplayField>
+        <errorMessage>You must enter a value for the application date, and it can not be before the record was created</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Backdated_Check</fullName>
+        <active>true</active>
+        <description>Rule to prevent someone from backdating a payment date. RBD/RSM/and Refund Team should be exempt</description>
+        <errorConditionFormula>PRIORVALUE( Payment_Date__c ) &gt; Payment_Date__c 
+&amp;&amp; (Month(Today()) &gt; Month(Payment_Date__c) || Year(Today()) &gt; Year(Payment_Date__c)) 
+&amp;&amp; $UserRole.Name != &apos;Refund Team&apos; 
+&amp;&amp; $Profile.Name != &apos;RBD&apos; 
+&amp;&amp; $Profile.Name != &apos;System Administrator&apos;</errorConditionFormula>
+        <errorDisplayField>Payment_Date__c</errorDisplayField>
+        <errorMessage>You can not select a payment date from a prior period. Please contact your RSM/RBD/or the refund team for help.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Block_TBD_Collections</fullName>
+        <active>true</active>
+        <description>Rule will not allow the payment type to be TBD when the status is collected/refunded</description>
+        <errorConditionFormula>ISPICKVAL(Payment_Type__c, &apos;TBD&apos;) &amp;&amp; (ISPICKVAL(Payment_Status__c,&apos;Collected&apos;) || ISPICKVAL(Payment_Status__c,&apos;Refunded&apos;))</errorConditionFormula>
+        <errorDisplayField>Payment_Type__c</errorDisplayField>
+        <errorMessage>You must change the payment type to something other than TBD when marking a payment as collected or refunded.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>CareCredit_Who_Applied</fullName>
+        <active>false</active>
+        <description>Rule to require that who applied for CareCredit is filled out when the payment type is carecredit</description>
+        <errorConditionFormula>CreatedDate &gt;= DATETIMEVALUE(&quot;2014-04-24 00:00:00&quot;) &amp;&amp;
+ ISPICKVAL(Payment_Type__c,&apos;CareCredit&apos;) &amp;&amp; ispickval( Who_applied_for_CareCredit__c,&apos;&apos;) &amp;&amp; ($Profile.Name = &apos;PEC - Application Date&apos; || $Profile.Name = &apos;PEC - PFF - Application Date&apos;)</errorConditionFormula>
+        <errorDisplayField>Who_applied_for_CareCredit__c</errorDisplayField>
+        <errorMessage>You must select an option for Who applied for CareCredit</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Collected_Credit_Card</fullName>
+        <active>true</active>
+        <description>This rule is in place to make sure the pec chooses the actual credit card type, when marking any credit card payment as collected</description>
+        <errorConditionFormula>ISPICKVAL(Payment_Type__c, &apos;Credit Card&apos;) &amp;&amp; ISPICKVAL(Payment_Status__c,&apos;Collected&apos;)</errorConditionFormula>
+        <errorDisplayField>Payment_Type__c</errorDisplayField>
+        <errorMessage>You must change the payment type to the actual card type when marking this payment as collected</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Collected_Status_Lock</fullName>
+        <active>true</active>
+        <description>Block changing collected status on a record outside of the day it is selected</description>
+        <errorConditionFormula>PRIORVALUE( Payment_Status_Formula__c ) = &apos;Collected&apos; 
+&amp;&amp; PRIORVALUE( Payment_Status_Formula__c ) != Payment_Status_Formula__c 
+&amp;&amp; Today() &gt; Collected_Date__c</errorConditionFormula>
+        <errorDisplayField>Payment_Status__c</errorDisplayField>
+        <errorMessage>This payment has been locked into a collected state. You can not change it at this point. Please contact your RBD, RSM, or the refund team if you need assistance.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>FFee_Required_Check</fullName>
+        <active>true</active>
+        <description>Checks to see if we need to require the finance fee here</description>
+        <errorConditionFormula>IF( ISPICKVAL(Payment_Status__c,&apos;Collected&apos;) &amp;&amp; ( ISPICKVAL(Payment_Type__c,&apos;Chase Health&apos;) || ISPICKVAL(Payment_Type__c, &apos;CareCredit&apos;) || 
+ISPICKVAL(Payment_Type__c, &apos;Alphaeon&apos;) || 
+ISPICKVAL(Payment_Type__c, &apos;Proceed Finance&apos;) || 
+ISPICKVAL(Payment_Type__c,&apos;Springstone&apos;)) &amp;&amp;  
+(ISNULL(Finance_Fee__c)  || Finance_Fee__c &lt;=0), true, false)</errorConditionFormula>
+        <errorMessage>You must enter a finance fee when collecting money from Chase Health,  CareCredit,  or SpringStone.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Future_Collections_Check</fullName>
+        <active>true</active>
+        <description>Checks for a payment status of collected,  where the payment date is a date &gt; today.</description>
+        <errorConditionFormula>Payment_Status_Formula__c = &apos;Collected&apos; 
+&amp;&amp;  Payment_Date__c &gt; TODAY()</errorConditionFormula>
+        <errorDisplayField>Payment_Date__c</errorDisplayField>
+        <errorMessage>You can not collect money in the future.  Please consider changing your payment date or your payment status.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Payment_Confirmation_ID</fullName>
+        <active>true</active>
+        <description>Rule to require confirmation id is filled out when marking a credit card or check payment as collected</description>
+        <errorConditionFormula>(ISPICKVAL(Payment_Type__c , &apos;Check&apos;) || ISPICKVAL(Payment_Type__c , &apos;American Express&apos;) || 
+ISPICKVAL(Payment_Type__c , &apos;Citi&apos;) || 
+ISPICKVAL(Payment_Type__c , &apos;Discover&apos;) || 
+ISPICKVAL(Payment_Type__c , &apos;Credit Card&apos;) || 
+ISPICKVAL(Payment_Type__c , &apos;Visa&apos;)) &amp;&amp; 
+ISPICKVAL( Payment_Status__c , &apos;Collected&apos;) &amp;&amp; ISBLANK( Confirmation_ID__c)</errorConditionFormula>
+        <errorDisplayField>Confirmation_ID__c</errorDisplayField>
+        <errorMessage>You must enter a value for the Confirmation ID field. If this is a check payment, then please use the check #. For credit cards, please enter the transaction id.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Payment_Slip_Reason</fullName>
+        <active>true</active>
+        <description>Rule to require that payment slip reason is filled out if the payment date doesn&apos;t match the original payment date</description>
+        <errorConditionFormula>ISPICKVAL( Slipped_Payment_Reason__c , &quot;&quot;) &amp;&amp; DATEVALUE(CreatedDate) &lt; today() &amp;&amp; Payment_Date__c &gt; Original_Anticipated_Payment_Date__c &amp;&amp; (ISCHANGED(Payment_Date__c) || ischanged(Slipped_Payment_Reason__c))</errorConditionFormula>
+        <errorDisplayField>Slipped_Payment_Reason__c</errorDisplayField>
+        <errorMessage>You must enter a slipped payment reason when changing the payment date</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Payment_Slipped_Other</fullName>
+        <active>true</active>
+        <description>Ensures a reason is filled out in the other section when someone selects this option from the slipped payment picklist</description>
+        <errorConditionFormula>Ispickval( Slipped_Payment_Reason__c , &quot;Other&quot;) &amp;&amp; LEN( Slipped_Payment_Other__c ) &lt; 4</errorConditionFormula>
+        <errorDisplayField>Slipped_Payment_Other__c</errorDisplayField>
+        <errorMessage>You must enter something valid for the Slipped Payment Other reason</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Refund_Reason_Required</fullName>
+        <active>true</active>
+        <errorConditionFormula>ISPICKVAL( Payment_Status__c, &apos;Refund&apos;) &amp;&amp; isblank(text(Refund_Reason__c) )</errorConditionFormula>
+        <errorDisplayField>Payment_Status__c</errorDisplayField>
+        <errorMessage>You need to select a refund reason when processing a refund payment.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Refund_Status_Check</fullName>
+        <active>true</active>
+        <description>Rule should only allow refund to be set up by a system admin or someone in the Refund Team Role</description>
+        <errorConditionFormula>Payment_Status_Formula__c = &apos;Refunded&apos;
+&amp;&amp; PRIORVALUE( Payment_Status_Formula__c) != &apos;Refunded&apos; 
+&amp;&amp; $Profile.Name != &apos;System Administrator&apos; 
+&amp;&amp; $UserRole.Name != &apos;Refund Team&apos;
+&amp;&amp; Not(ISPICKVAL(Payment_Status__c,&apos;NSF&apos;))</errorConditionFormula>
+        <errorDisplayField>Payment_Status__c</errorDisplayField>
+        <errorMessage>Refunds can only be handled by the refund team.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

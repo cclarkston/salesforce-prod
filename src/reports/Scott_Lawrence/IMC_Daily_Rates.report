@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_73629116</developerName>
+        <masterLabel>IMC</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Call_Center_Agent_Team__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Imp - IMC API</sourceValue>
+            </sourceValues>
+            <value>IMC API</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Imp - IMC Mansfield</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Imp - IMC NewCastle</sourceValue>
+            </sourceValues>
+            <value>IMC</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_97236303</developerName>
+        <masterLabel>Prescreen</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Pre_Screen__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Green</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Yellow</sourceValue>
+            </sourceValues>
+            <value>GY</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Red</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Blue (No Hit)</sourceValue>
+            </sourceValues>
+            <value>RB</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>PO Box</sourceValue>
+            </sourceValues>
+            <value>PO Box</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>number</bucketType>
+        <developerName>BucketField_26430241</developerName>
+        <masterLabel>Range</masterLabel>
+        <nullTreatment>z</nullTreatment>
+        <sourceColumnName>Lead$Distance_To_Center__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <to>30</to>
+            </sourceValues>
+            <value>Under 30</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>30</from>
+                <to>50</to>
+            </sourceValues>
+            <value>30-50</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>50</from>
+            </sourceValues>
+            <value>Over 50</value>
+        </values>
+    </buckets>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Lead.Consult_Inventory__r$isConsultArrived__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Lead.Consult_Inventory__r$isConsultScheudled__c</field>
+    </columns>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_73629116</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_97236303</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Lead$CreatedDate</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_26430241</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>IMC Daily Rates</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Prospective_Patients_with_Consult_Inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead$CreatedDate</dateColumn>
+        <interval>INTERVAL_LASTWEEK</interval>
+    </timeFrameFilter>
+</Report>

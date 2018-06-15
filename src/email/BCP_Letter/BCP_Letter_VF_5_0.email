@@ -1,0 +1,66 @@
+<messaging:emailTemplate subject="Thank you for contacting ClearChoice Dental Implant Centers" recipientType="Lead" relatedToType="Lead">
+<messaging:plainTextEmailBody >
+  {!Recipient.Center__r.Street_1__c}
+  {!Recipient.Center__r.City__c} {!Recipient.Center__r.State__c} {!Recipient.Center__r.Zip_Code__c}
+    
+  Dear {!Recipient.FirstName} {!Recipient.LastName},
+  You've taken an important first step to putting an end to chronic dental health problems  
+  
+  You're invited to schedule a free, no risk consultation
+  Call : {!Recipient.Center_Phone_Number__c}
+  
+  Thank you for contacting ClearChoice Dental Implant Centers. The precise technology used at ClearChoice gives you one permanent solution with implants that look, feel and function like natural teeth. You might soon say goodbye to solutions like bridges, crowns and partials. All in just one day!
+  
+  
+  Understandably, this is an important decision—one that you should make with all of the information you need. ClearChoice is here to make that easy…
+  
+  
+  During your consultation you can:
+  
+    Tour our advanced facility and receive a complimentary panoramic X-Ray and 3D CAT scan (a $700 value).
+    Meet with a doctor to talk about your dental concerns and learn more about your treatment options.
+    Determine the specific investment for your treatment plan and understand financing options as needed.
+    
+  Every life changing event starts with that first step, and you’ve already begun by making the first call. Why not schedule a no-risk consultation today so you can finally be on your way to the smile you deserve?
+    
+  Sincerely,
+  
+  {!Recipient.Call_Center_Agent__r.name}
+  Dental Implant Consultant
+  
+  
+  ClearChoice Dental Implant Centers are locally owned and operated by licensed local dentists, and are part of a professional affiliation of implant
+  practices operated by oral surgeons, prosthodontists and restorative dentists across the United States.
+  
+  Qualified Patients can have their procedure in one day after initial workup without additional bone graft surgery. Results May Vary in Individual Cases.
+  
+  ©2014 ClearChoice Dental Implant Centers
+</messaging:plainTextEmailBody>
+<messaging:htmlEmailBody >
+<div style="width:720px;font-family:Times New Roman;font-size:12pt;">
+  <table style="width:720px;"><tr><td style="text-align:left;vertical-align:top;">
+  <img  src="https://c.na2.content.force.com/servlet/servlet.ImageServer?id=01540000001aO6B&oid=00D400000007ZMu"  /><br /><br />
+  <p style="padding-left:55px;padding-bottom:10px;"><span class="cali_reg" style="font-size:14pt;">
+  {!Recipient.Center__r.Street_1__c}<br />{!Recipient.Center__r.city__c} {!Recipient.Center__r.state__c} {!Recipient.Center__r.zip_code__c}</span></p><br /><span style="display:block;line-height:5px;">&nbsp;</span>
+  </td><td style="text-align:right;vertical-align:top;width:370px;" >
+  <div style="text-align-right;"><p style="width:370px;font-family:georgia, Arial,'Gotham','Gotham',sans-serif; font-size:16pt; color:#196D86;text-align:left;padding:0;margin:0;"><span class="cali_bold" style="font-size:16pt;">You've taken an important first<br />step to putting an end to chronic<br />dental health problems</span></p></div>
+  <div style="align:right;width:250px;margin-left:auto;margin-right:20px;padding-top:0;margin-top:0;position:relative;top:-3px;"><p style="text-align:left;"><span class="cali_reg" style="font-size:14pt;font-weight:bold;">You're invited to schedule a free, no risk consultation<br /><span class="cali_bold" style="font-size:18pt;font-weight:normal;color:#196D86">Call: {!Recipient.Center_Phone_Number__c}</span></span></p></div>
+  </td></tr></table>
+  <div style="padding-left:55px;padding-top:38px;width:690px;"><span class="cali_reg" style="font-size:13pt;line-height.8em;">Dear {!Recipient.FirstName} {!Recipient.LastName},<br /><br />
+  <span style="padding-left:25px;">Thank you for contacting ClearChoice Dental Implant Centers. The precise technology used at ClearChoice gives you one permanent solution with implants that look, feel and function like natural teeth. You might soon say goodbye to solutions like bridges, crowns and partials. All in just one day!</span><br /><span style="display:block;line-height:9px;">&nbsp;</span>
+  <span style="padding-left:25px;">Understandably, this is an important decision—one that you should make with all of the information you need. ClearChoice is here to make that easy…</span><br /><span style="display:block;line-height:9px;">&nbsp;</span>
+  <span style="padding-left:25px;">During your consultation you can:</span>
+  <ul style="padding-left:30px;"><li>Tour our advanced facility and receive a complimentary panoramic X-Ray and 3D CAT scan (a $700 value).</li><span style="display:block;line-height:9px;">&nbsp;</span>
+  <li>Meet with a doctor to talk about your dental concerns and learn more about your treatment options.</li><span style="display:block;line-height:9px;">&nbsp;</span>
+  <li>Determine the specific investment for your treatment plan and understand financing options as needed.</li></ul>
+  <span style="padding-left:25px;">Every life changing event starts with that first step, and you’ve already begun by making the first call. Why not schedule a no-risk consultation today so you can finally be on your way to the smile you deserve?</span><br /><span style="display:block;line-height:9px;">&nbsp;</span>
+  Sincerely,<br /><span style="display:block;line-height:9px;">&nbsp;</span>{!Recipient.Call_Center_Agent__r.name}<br />Dental Implant Consultant<br /><span style="display:block;line-height:15px;">&nbsp;</span></span>
+  <span class="trade_gothic" style="line-height:12px; font-size:9pt; font-weight:normal; font-stretch:condensed; color:#221E1F">
+  ClearChoice Dental Implant Centers are locally owned and operated by licensed local dentists, and are part of a professional affiliation of implant 
+  practices operated by oral surgeons, prosthodontists and restorative dentists across the United States.<br /><br />
+  Qualified Patients can have their procedure in one day after initial workup without additional bone graft surgery. Results May Vary in Individual Cases.<br /><br />
+  ©2014 ClearChoice Dental Implant Centers</span></div><br />
+  </div><img src="https://c.na2.content.force.com/servlet/servlet.ImageServer?id=01540000001aO6G&oid=00D400000007ZMu"  />
+</messaging:htmlEmailBody>
+
+</messaging:emailTemplate>

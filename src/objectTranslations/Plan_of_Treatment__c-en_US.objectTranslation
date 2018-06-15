@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Plan of Treatment</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Plans of Treatment</value>
+    </caseValues>
+    <fields>
+        <label><!-- Center Information --></label>
+        <name>Center_Information__c</name>
+        <relationshipLabel><!-- Plans of Treatment --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Cloned Plan of Treatment --></label>
+        <name>Cloned_Plan_of_Treatment__c</name>
+        <relationshipLabel><!-- Plans of Treatment --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Display Handout Name --></label>
+        <name>Display_Handout_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Doctor --></label>
+        <name>Doctor__c</name>
+        <relationshipLabel><!-- Plans of Treatment --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Lower Arch --></label>
+        <name>Lower_Arch__c</name>
+        <picklistValues>
+            <masterLabel>Arch Replacement</masterLabel>
+            <translation><!-- Arch Replacement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Crystal Ultra</masterLabel>
+            <translation><!-- Crystal Ultra --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denture</masterLabel>
+            <translation><!-- Denture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Implant Bridge</masterLabel>
+            <translation><!-- Implant Bridge --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Multiple</masterLabel>
+            <translation><!-- Multiple --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phased</masterLabel>
+            <translation><!-- Phased --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Single</masterLabel>
+            <translation><!-- Single --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Zirconia</masterLabel>
+            <translation><!-- Zirconia --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Non Doctor Selection --></label>
+        <name>Non_Doctor_Selection__c</name>
+    </fields>
+    <fields>
+        <label><!-- Treatment Description --></label>
+        <name>Treatment_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Upper Arch --></label>
+        <name>Upper_Arch__c</name>
+        <picklistValues>
+            <masterLabel>Arch Replacement</masterLabel>
+            <translation><!-- Arch Replacement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Crystal Ultra</masterLabel>
+            <translation><!-- Crystal Ultra --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denture</masterLabel>
+            <translation><!-- Denture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Implant Bridge</masterLabel>
+            <translation><!-- Implant Bridge --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Multiple</masterLabel>
+            <translation><!-- Multiple --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phased</masterLabel>
+            <translation><!-- Phased --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Single</masterLabel>
+            <translation><!-- Single --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Zirconia</masterLabel>
+            <translation><!-- Zirconia --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- isActive --></label>
+        <name>isActive__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

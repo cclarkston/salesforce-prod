@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Account.Prostho_Exam_Scheduled_del__c</field>
+    </columns>
+    <columns>
+        <field>Opportunity.Preliminary_Treatment_Plan__c</field>
+    </columns>
+    <columns>
+        <field>Opportunity.Treatment_Added_at_Prostho_Exam__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>STAGE_NAME</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Paid In Full</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Opportunity.Preliminary_Treatment_Plan__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Single Implant,Multiple Implants,AO4 Upper,AO4 Lower,DBL AO4,AO4 Edentulous Upper,AO4 Edentulous Lower,DBL AO4 Edentulous,Multiple Implant Bridge</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account.Center_Location__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Treatment for Patients PIF</name>
+    <params>
+        <name>open</name>
+        <value>all</value>
+    </params>
+    <params>
+        <name>probability</name>
+        <value>&gt;0</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Opportunity</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <endDate>2009-02-28</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2008-01-01</startDate>
+    </timeFrameFilter>
+</Report>

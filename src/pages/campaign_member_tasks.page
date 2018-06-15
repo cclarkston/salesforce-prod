@@ -1,0 +1,85 @@
+<apex:page controller="rpt_campaignmember_activity" sidebar="false" readOnly="true">
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<style type="text/css" media="print">
+  div.bPageHeader {
+    display:none;
+  }  
+  
+  p.form_holder {
+    display:none; 
+  }
+  
+  a.dlink {
+    display:none;
+  }  
+</style>
+
+
+<style>
+  tr.control td {
+    color:#5789AE;
+  }  
+  
+  table.accs_details td.indent {
+    padding-left:25px;      
+    font-weight:bold; 
+    font-style:italic;
+    empty-cells:hide;                
+  }
+  
+  table.accs_details td.vaca {
+    font-style:italic;   
+    text-align:center;             
+  }   
+</style>
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+<table class="accs_details" style="width:100%">
+<tr class="control" style="font-size:10pt;vertical-align:bottom;">
+  <td width="15%">Name</td>
+  <td width="10%">Phone</td>  
+  <td width="10%">Mobile</td>    
+  <td width="10%">Status</td>
+  <td width="10%">Last OB Call</td>  
+  <td width="15%">Last OB Call By</td>          
+  <td width="10%">Outcome</td>  
+  <td width="10%">Notes</td>     
+  <td width="10%">Campaign</td>
+  </tr>
+  
+<apex:variable var="rowclassname" value="accs" />
+<apex:repeat value="{!all_member_activity}" var="all_members" >
+  <tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />  
+  <td class="indent"><apex:outputField value="{!all_members.cm.contactid}" rendered="{!if(all_members.cm.contactid==null,false,true)}" /><apex:outputField value="{!all_members.cm.leadid}" rendered="{!if(all_members.cm.leadid==null,false,true)}" />    </td>    
+  <td class="indent"><apex:outputField value="{!all_members.cm.contact.phone}" rendered="{!if(all_members.cm.contactid==null,false,true)}" /><apex:outputField value="{!all_members.cm.lead.phone}" rendered="{!if(all_members.cm.leadid==null,false,true)}" />    </td>    
+  <td class="indent"><apex:outputField value="{!all_members.cm.contact.mobilephone}" rendered="{!if(all_members.cm.contactid==null,false,true)}" /><apex:outputField value="{!all_members.cm.lead.mobilephone}" rendered="{!if(all_members.cm.leadid==null,false,true)}" />    </td>            
+  <td class="indent">{!all_members.cm.status}</td>   
+  <apex:repeat value="{!all_members.last_task}" var="last_activity" >
+    <td class="indent"><apex:outputfield value="{!last_activity.createddate}" />&nbsp;</td>   
+    <td class="indent"><apex:outputfield value="{!last_activity.createdbyid}" />&nbsp;</td>    
+    <td class="indent"><apex:outputfield value="{!last_activity.Outcome__c}" />&nbsp;</td>     
+    <td class="indent"><apex:outputfield value="{!last_activity.subject}" />&nbsp;</td>           
+  </apex:repeat>  
+  <td class="indent"><apex:outputField value="{!all_members.cm.campaign.name}" /></td>
+</tr> 
+</apex:repeat>
+
+
+</table>
+
+
+</apex:page>

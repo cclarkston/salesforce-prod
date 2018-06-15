@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Testing Plan DMA</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Testing Plan DMAs</value>
+    </caseValues>
+    <fields>
+        <label><!-- DMA --></label>
+        <name>DMA__c</name>
+        <relationshipLabel><!-- Testing Plan DMAs --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Testing Plan --></label>
+        <name>Testing_Plan__c</name>
+        <relationshipLabel><!-- Testing Plan DMAs --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Testing Plan DMA Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,5 @@
+<apex:page controller="portal_referral_out" cache="false" contentType="text/csv#{!filename}" language="en-US"  readonly="true">{!file_header}
+<apex:repeat value="{!csv_detail}" var="output_line">
+  <apex:repeat value="{!output_line.output_fields}" var="field">"{!field}",</apex:repeat>{!new_line}
+</apex:repeat>  
+</apex:page>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>new revision 3/21</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>First Response to Online Survey</name>
+    <style>none</style>
+    <subject>Thank you for taking the survey with ClearChoice Dental Implant Center</subject>
+    <textOnly>Hello {!Lead.FirstName},
+
+Thank you for completing the dental health survey sponsored by ClearChoice Dental Implant Centers.
+
+In this era of advanced 21st Century dentistry, no one should suffer from chronic dental problems. There are permanent, convenient and affordable solutions to most issues. Let our doctors show you the possibilities!
+
+To get started, simply reply to this email with your phone contact information or call us today at 1-888-654-4675 to schedule a Free, No-Risk Consultation with a complimentary 3D CAT scan (a $700 value).
+A lifetime of freedom from your dental problems is closer than you think. We look forward to meeting you.
+Sincerely,
+
+{!Lead.Call_Center_Agent__c}
+Dental Implant Consultant
+ClearChoice Dental Center ClearChoice Dental Implant Centers are locally owned and operated by licensed local dentists, and are part of a professional affiliation of implant practices operated by oral surgeons, prosthodontists and restorative dentists across the U.S. *Qualified patients can have their procedure in one day after initial workup without additional bone graft surgery.  Results may vary in individual cases.</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

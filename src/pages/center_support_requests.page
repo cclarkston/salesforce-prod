@@ -1,0 +1,202 @@
+<apex:page controller="ctrl_center_support_requests" showHeader="true" sidebar="true" standardStylesheets="false" docType="html-5.0" title="Center Support Requests">
+    <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/fonts.css')}"/>
+    <link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:300,400,500,700" media="screen" />
+
+    <!-- Standard styling -->
+    <style>
+        body {
+          font-family: Raleway,'Open Sans', sans-serif;
+        }
+        input.btn.command-button {
+          background: #005eb8;
+          color: white;
+          font-size: 1.5em;
+          font-weight: lighter;
+          padding: 15px;
+          margin: 1px 0 0 0;
+        }
+        a, a:hover {
+            text-decoration: none !important;
+        }
+        .right {
+            text-align: right;
+        }
+        .module {
+            background-color: white;
+            border-radius: 3px;
+            padding: 4px 24px;
+            margin: 14px;
+        }
+        .header {
+          border-left: 4px solid;
+          color: #005eb8;
+          font-family: Raleway,'Open Sans', sans-serif;
+          font-size: 2.5em;
+          padding: 16px;
+          margin: 15px;
+        }
+        .footer {
+            width: calc(100% - 240px);
+            position: absolute;
+            bottom: 0;
+            text-align: right;
+        }
+        .select-center {
+          font-size: 2em;
+          color: gray;
+          width: 300px;
+        }
+        .request {
+            border-radius: .5em;
+            background-color: white;
+            padding: .5em;
+            margin-bottom: .5em;
+        }
+        .main a, .main input, .main select {
+            cursor: pointer;
+        }
+        .module {
+            font-family: Raleway,'Open Sans', sans-serif;
+            margin-bottom: 4vw;
+            background-color: #e7e7e6;
+        }
+        .filter-container {
+          max-width: 980px;
+          width: 90vw;
+        }
+        .filters {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .note-header {
+            display: flex;
+        }
+        .request-header {
+            text-align: center;
+            font-size: large;
+        }
+        .note-header *, .request-header * {
+            font-weight: bold;
+        }
+        .title {
+            flex: 1 0;
+        }
+        .name, .date {
+            flex: 0 1 12em;
+        }
+        .name {
+            color: cadetblue;
+        }
+        .note {
+            position: relative;
+            border-left: 3px solid gainsboro;
+            border-radius: .5em;
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+        .note-header, .request-header, .content {
+            padding: .5em 1em;
+        }
+        .note:first-child {
+            margin-top: 1em;
+        }
+        .content {
+            color: gray;
+            padding-top: 0;
+            padding-left: 3em;
+        }
+        i {
+            margin-right: 0.5em;
+            color: gray;
+        }
+        #spinner-container.spinner, #spinner-container.spinner * {
+            cursor: progress;
+        }
+        .days-back {
+          font-size: 1.5em;
+          padding: 20px;
+        }
+        .days {
+          border-radius: 5px;
+          font-size: 1.5rem;
+          padding: 10px;
+        }
+    </style>
+
+    <script>
+        function spinner(status) {
+            var element = document.getElementById('spinner-container');
+            if (status == 'on')       {element.classList.add('spinner');}
+            else if (status == 'off') {element.classList.remove('spinner');}
+        };
+    </script>
+
+
+    <apex:form styleClass="main">
+        <div id="spinner-container">
+            <apex:actionFunction action="{!prepare_notes_and_attachments}" name="get_history" reRender="content, footer" oncomplete="spinner('off')" />
+
+            <div class="header">Center Support Request History</div>
+
+            <div class="module">
+                <!-- <div class="filter-container"> -->
+                  <div class="filters">
+
+                      <apex:selectList value="{!center_ID}" size="1" onchange="get_history(); spinner('on')" styleClass="select-center">
+                          <apex:selectOptions value="{!center_options}" />
+                      </apex:selectList>
+
+                      <div class="days-back"><apex:input value="{!days_back}" size="3" styleClass="days"/> days</div>
+
+                      <apex:commandButton action="{!prepare_notes_and_attachments}" value="Get History" onclick="spinner('on')" reRender="content, footer" styleClass="command-button" oncomplete="spinner('off')"/>
+
+                  <!-- </div> -->
+                </div>
+
+                <apex:outputPanel id="content" styleClass="row" layout="block">
+                    <apex:repeat value="{!note_and_attachment_groups}" var="note_and_attachment_group">
+                        <div class="request">
+                            <div class="request-header">
+                                <apex:outputLink value="{!URLFOR($Action.Center_Support_Request__c.View, note_and_attachment_group.request.ID)}" target="_blank">
+                                    {!note_and_attachment_group.request.Name + ' -- ' + note_and_attachment_group.request.CreatedBy.Name + ' -- ' + note_and_attachment_group.modified}
+                                </apex:outputLink>
+                            </div>
+                            <apex:repeat value="{!note_and_attachment_group.notes_and_attachments}" var="note_or_attachment">
+                                <div class="note">
+                                    <div class="note-header">
+                                        <div class="title">
+                                            <i class="{!IF(note_or_attachment.is_attachment, 'ccf-attach', 'ccf-notes')}"></i>
+                                            <!-- <apex:outputLink value="{!URLFOR($Action.Center_Support_Request__c.View, note_or_attachment.request_ID)}" target="_blank">
+                                            </apex:outputLink> -->
+                                            <apex:outputText rendered="{!note_or_attachment.is_note}"       value="{!note_or_attachment.Name}" />
+                                            <apex:outputLink rendered="{!note_or_attachment.is_attachment}" value="{!URLFOR($Action.Attachment.Download, note_or_attachment.attachment.ID)}" target="_blank">
+                                                {!note_or_attachment.Name}
+                                            </apex:outputLink>
+                                        </div>
+                                        <div class="name">
+                                            {!note_or_attachment.created_by}
+                                        </div>
+                                        <div class="date right">
+                                            {!note_or_attachment.modified}
+                                        </div>
+                                    </div>
+                                    <apex:outputPanel rendered="{!note_or_attachment.is_note}" layout="block" styleClass="content">
+                                        {!note_or_attachment.content}
+                                    </apex:outputPanel>
+                                </div>
+                            </apex:repeat>
+                        </div>
+                    </apex:repeat>
+                    <apex:outputPanel rendered="{!request_count == 0}" layout="block" styleClass="request">
+                        No Center Support Requests modified in the last {!days_back} day{! IF(days_back == 1, '', 's')} were found for this center.
+                    </apex:outputPanel>
+                </apex:outputPanel>
+            </div>
+        </div>
+
+        <!-- <apex:outputPanel id="footer" layout="block" styleClass="footer">
+            DEBUG: {!debug}
+        </apex:outputPanel> -->
+    </apex:form>
+</apex:page>

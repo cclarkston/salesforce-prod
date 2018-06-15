@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReportType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <baseObject>Clinical_Procedure_Form__c</baseObject>
+    <category>other</category>
+    <deployed>true</deployed>
+    <description>Clinical Procedure Forms</description>
+    <label>Procedure Forms by Clinic</label>
+    <sections>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Clinical_Procedure__c</field>
+            <table>Clinical_Procedure_Form__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Id</field>
+            <table>Clinical_Procedure_Form__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Name</field>
+            <table>Clinical_Procedure_Form__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>CreatedBy</field>
+            <table>Clinical_Procedure_Form__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>CreatedDate</field>
+            <table>Clinical_Procedure_Form__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>LastModifiedBy</field>
+            <table>Clinical_Procedure_Form__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>LastModifiedDate</field>
+            <table>Clinical_Procedure_Form__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Office_Form__c</field>
+            <table>Clinical_Procedure_Form__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Owner</field>
+            <table>Clinical_Procedure_Form__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Clinical_Procedure__c.Center_Information__c</field>
+            <table>Clinical_Procedure_Form__c</table>
+        </columns>
+        <masterLabel>Clinical Procedure Forms</masterLabel>
+    </sections>
+</ReportType>

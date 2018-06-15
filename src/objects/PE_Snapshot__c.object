@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Used for the Center Dashboard reporting, stores the details of Prostho Exams and their associated payment details, maintaining the Stage and Payment information at the time that the record is created.  Data is created through the use of Analytic Snapshots.
+
+Created by OpFocus for the Center Reporting project, Summer 2009</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>AO4_Count__c</fullName>
+        <description>Prostho Exam: Preliminary Treatment Plan is used to determine the number of AO4s; because of the relative inflexibility of multi-select picklists, the evaluation is handled via the AO4 Count formula field on Prostho Exams (Opportunities).</description>
+        <externalId>false</externalId>
+        <label>AO4 Count</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Adj_As_Of_Date__c</fullName>
+        <description>PE Snapshots are taken the day after the activity they capture; unless do not override as of date is checked, this field backdates the as of date by 1 day.  Workflow is not allowed on Snapshot targets.  (Snapshots created prior to Aug 17, 2009 do not require adjusting.)</description>
+        <externalId>false</externalId>
+        <formula>IF( AND( Do_not_override_As_Of_Date__c &lt;&gt; True,
+                DATEVALUE( CreatedDate) &gt; DATE(2009, 8, 17)
+               ) , 
+        DATEVALUE( Snapshot_as_of_date__c) -1, 
+        DATEVALUE( Snapshot_as_of_date__c)
+     )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>1 day before Snapshot was created, unless Do not override as of date is checked.</inlineHelpText>
+        <label>Adj As Of Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Center_Location__c</fullName>
+        <description>Center where the consult will take place</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Center Location (when snapshot was taken)</inlineHelpText>
+        <label>Center Location</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Center_Location_sort__c</fullName>
+        <description>Pulls in Center Location sort from the Consult record for use as a sort field in the Center Sales Dashboard application.  Centers are listed in the order they will appear.</description>
+        <externalId>false</externalId>
+        <formula>Consult__r.Center_Location_sort__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Hard-coded sort field for use by Excel, pulled from the Consult record.</inlineHelpText>
+        <label>Center Location sort</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Consult_Center_Location__c</fullName>
+        <description>&apos;Live&apos; look at the Center Location, vs. snapshot view</description>
+        <externalId>false</externalId>
+        <formula>Text(Consult__r.Center_Location__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>This is the current value, vs. Center Location (at the time of the snapshot).</inlineHelpText>
+        <label>Consult: Center Location</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Consult_Name__c</fullName>
+        <description>The name of the patient having the work done</description>
+        <externalId>false</externalId>
+        <label>Consult Name</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Consult__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Consult</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipName>Prostho_Exam_Payment_Snapshots</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Current_Payment_Date__c</fullName>
+        <description>Current Payment Date on the Payment record.</description>
+        <externalId>false</externalId>
+        <formula>Payment__r.Payment_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Lookup to the Payment: Payment Date field.</inlineHelpText>
+        <label>Current Payment Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Current_Payment_Status__c</fullName>
+        <description>Current payment status from the payment record.</description>
+        <externalId>false</externalId>
+        <formula>Case(Payment__r.Payment_Status__c, 
+             &quot;Anticipated&quot;, &quot;Anticipated&quot;,
+             &quot;Collected&quot;, &quot;Collected&quot;,
+             &quot;Anticipated Payment Cancelled&quot;, &quot;Anticipated Payment Cancelled&quot;,
+             &quot;Other&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Current Payment Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Deleted_Payment_record__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Identifies Payment records that no longer exist in SFDC; these cause invalid results in Excel calculations such as Yet to Collect.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicates Payment records deleted from SFDC (before that privilege was removed)</inlineHelpText>
+        <label>Deleted Payment record</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Do_not_override_As_Of_Date__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Unchecked by default, this field can be added to Data Loader imports to prevent Workflow from overwriting the default Snapshot Date with (Snapshot Date - 1)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>When creating records directly (DataLoader or SFDC), set to 1 (True) to prevent workflow from overriding Snapshot As Of Date.</inlineHelpText>
+        <label>Do not override As/Of Date</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Exam_Date__c</fullName>
+        <description>Prostho Exam: Prostho Exam Date (Close Date)</description>
+        <externalId>false</externalId>
+        <formula>Prostho_Exam__r.CloseDate</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Exam Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Exclude_from_Report__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Used for Test data, to allow for data to reside in the system w/o impacting the report (and/or having to delete it between times)</description>
+        <externalId>false</externalId>
+        <label>Exclude from Report</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Group_Location__c</fullName>
+        <description>Parses Center locations to identify Chicago, Denver, Phoenix and Washington satellites, for dashboard reporting.</description>
+        <externalId>false</externalId>
+        <formula>Case ( Center_Location__c,
+        &quot;Chicago Deerfield/Northbrook&quot;, &quot;Chicago&quot;,
+        &quot;Chicago Naperville&quot;, &quot;Chicago&quot;,
+        &quot;Denver Colorado Springs&quot;, &quot;Denver&quot;,
+        &quot;Denver Glenwood Springs&quot;, &quot;Denver&quot;,
+        &quot;Phoenix Mesa&quot;, &quot;Phoenix&quot;,
+        &quot;Washington Tysons Corner&quot;, &quot;Washington DC&quot;,
+        &quot;Washington Chevy Chase&quot;, &quot;Washington DC&quot;,
+        Center_Location__c 
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Formula: Which satellite group (if any) does this Center belong to?</inlineHelpText>
+        <label>Group Location</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Negotiated_Total_Amount__c</fullName>
+        <description>Prostho Exam: Negotiated Total Amount</description>
+        <externalId>false</externalId>
+        <label>Negotiated Total Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>PE_Last_Modified_Date__c</fullName>
+        <description>Last Modified Date on the Prostho Exam</description>
+        <externalId>false</externalId>
+        <label>PE Last Modified Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Date_Snapshot_Date__c</fullName>
+        <description>Returns 1 if Payment Date = Snapshot Date, for calculating Revenue Collections</description>
+        <externalId>false</externalId>
+        <formula>If  ( 
+      AND( Payment_Date__c =  DateValue(CreatedDate),
+                 Revenue_Collected__c &lt;&gt; 0),
+       1, 
+       0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Is Payment Date = Snapshot Date? (1=True)</inlineHelpText>
+        <label>Payment Date = Snapshot Date</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payment_Date__c</fullName>
+        <description>Date that the payment is due / was made</description>
+        <externalId>false</externalId>
+        <label>Payment Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Ref_Number__c</fullName>
+        <description>Payment reference number</description>
+        <externalId>false</externalId>
+        <label>Payment Ref. Number</label>
+        <length>25</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payment_Status__c</fullName>
+        <description>Anticipated, Collected, etc.</description>
+        <externalId>false</externalId>
+        <label>Payment Status</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payment__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Payment</label>
+        <referenceTo>CCPayment__c</referenceTo>
+        <relationshipName>Prostho_Exam_Payment_Snapshots</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Prostho_Exam_Owner_Traveler_Until__c</fullName>
+        <description>Streamlining the process of tracking Travelers; rather than using cross-object formulas and workflow, the Analytic Snapshot source report can access the User: Traveling Until date of the Record Owner.</description>
+        <externalId>false</externalId>
+        <label>Prostho Exam Owner: Traveler Until</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Prostho_Exam__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Prostho Exam</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipName>Prostho_Exam_Payment_Snapshots</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Prostho_Owner_Role__c</fullName>
+        <description>Prostho Owner&apos;s User:Role name, passed in during the snapshot process.  Unable to create a useful lookup to the actual user record.</description>
+        <externalId>false</externalId>
+        <label>Prostho Owner: Role</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Prostho_Owner__c</fullName>
+        <description>Owner of the underlying Prostho Exam record</description>
+        <externalId>false</externalId>
+        <label>Prostho Owner</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Prostho_Owner_lookup__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Links to the User record of the Prostho Exam Owner</description>
+        <externalId>false</externalId>
+        <label>Prostho Owner_lookup</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>P_E_Snapshots</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Revenue_Collected__c</fullName>
+        <description>Payment: Payment Amount when Payment Status = Collected</description>
+        <externalId>false</externalId>
+        <formula>CASE( Payment_Status__c , 
+              &quot;Collected&quot;,  Payment_Amount__c, 
+              0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Payment Amount when Payment Status = Collected</inlineHelpText>
+        <label>Revenue Collected</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Snapshot_as_of_date__c</fullName>
+        <description>The date that the activity pertains to; by default the snapshot created date.  In cases where the snapshot does not run, or data is back-filled, this field can be overridden.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>When did the activity occur?</inlineHelpText>
+        <label>Snapshot as of date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Stage__c</fullName>
+        <description>The Prostho Exam:Stage at the time that the snapshot was created</description>
+        <externalId>false</externalId>
+        <label>Stage</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Start_Date__c</fullName>
+        <description>Date when Prostho Exam: Stage = Scheduled, and the exam should be counted as a Patient Start.</description>
+        <externalId>false</externalId>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Traveler__c</fullName>
+        <description>If the current date is &lt;= Traveler Until Date, &quot;True&quot;; else &quot;False&quot;.  Returns &apos;False&apos; if Prostho Owner: Traveler Until is null.</description>
+        <externalId>false</externalId>
+        <formula>IF( NOT( ISNULL( Prostho_Exam_Owner_Traveler_Until__c)),
+              IF ( TODAY() &lt;=  Prostho_Exam_Owner_Traveler_Until__c, 
+                                     &quot;True&quot;,
+                                     &quot;False&quot;
+                   ),
+     &quot;False&quot;
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Is Today &lt;= Traveler Until Date?</inlineHelpText>
+        <label>Traveler</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>P.E. Snapshot</label>
+    <nameField>
+        <displayFormat>PEPS-{0000}</displayFormat>
+        <label>PEPS #</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>P.E. Snapshots</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Center_Location__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Prostho_Owner__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Consult_Name__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Stage__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Payment_Amount__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Payment_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Payment_Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>AO4_Count__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Center_Location__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Prostho_Owner__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Consult_Name__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Stage__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Payment_Amount__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Payment_Date__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Payment_Status__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>AO4_Count__c</lookupDialogsAdditionalFields>
+        <searchFilterFields>Center_Location__c</searchFilterFields>
+        <searchFilterFields>Payment_Amount__c</searchFilterFields>
+        <searchFilterFields>Payment_Date__c</searchFilterFields>
+        <searchFilterFields>Prostho_Owner__c</searchFilterFields>
+        <searchFilterFields>Stage__c</searchFilterFields>
+        <searchFilterFields>Payment_Status__c</searchFilterFields>
+        <searchResultsAdditionalFields>Center_Location__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Prostho_Owner__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Consult_Name__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Stage__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Payment_Amount__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Payment_Ref_Number__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Payment_Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>AO4_Count__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Adj_As_Of_Date__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

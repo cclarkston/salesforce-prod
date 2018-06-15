@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Base Target</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Base Targets</value>
+    </caseValues>
+    <fields>
+        <help><!-- Which Center does this apply to? --></help>
+        <label><!-- Center Location --></label>
+        <name>Center_Location__c</name>
+        <picklistValues>
+            <masterLabel>Atlanta</masterLabel>
+            <translation><!-- Atlanta --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Austin</masterLabel>
+            <translation><!-- Austin --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Charlotte</masterLabel>
+            <translation><!-- Charlotte --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chicago</masterLabel>
+            <translation><!-- Chicago --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chicago All</masterLabel>
+            <translation><!-- Chicago All --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chicago Deerfield/Northbrook</masterLabel>
+            <translation><!-- Chicago Deerfield/Northbrook --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chicago Naperville</masterLabel>
+            <translation><!-- Chicago Naperville --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cleveland</masterLabel>
+            <translation><!-- Cleveland --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dallas</masterLabel>
+            <translation><!-- Dallas --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dallas All</masterLabel>
+            <translation><!-- Dallas All --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dallas Fort Worth</masterLabel>
+            <translation><!-- Dallas Fort Worth --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denver</masterLabel>
+            <translation><!-- Denver --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denver All</masterLabel>
+            <translation><!-- Denver All --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denver Colorado Springs</masterLabel>
+            <translation><!-- Denver Colorado Springs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denver Glenwood Springs</masterLabel>
+            <translation><!-- Denver Glenwood Springs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Houston</masterLabel>
+            <translation><!-- Houston --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Kansas City</masterLabel>
+            <translation><!-- Kansas City --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Las Vegas</masterLabel>
+            <translation><!-- Las Vegas --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Miami</masterLabel>
+            <translation><!-- Miami --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Miami Fort Lauderdale</masterLabel>
+            <translation><!-- Miami Fort Lauderdale --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Minneapolis</masterLabel>
+            <translation><!-- Minneapolis --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phoenix</masterLabel>
+            <translation><!-- Phoenix --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phoenix All</masterLabel>
+            <translation><!-- Phoenix All --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phoenix Mesa</masterLabel>
+            <translation><!-- Phoenix Mesa --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Portland</masterLabel>
+            <translation><!-- Portland --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sacramento</masterLabel>
+            <translation><!-- Sacramento --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salt Lake City</masterLabel>
+            <translation><!-- Salt Lake City --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>San Antonio</masterLabel>
+            <translation><!-- San Antonio --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>San Jose</masterLabel>
+            <translation><!-- San Jose --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>St. Louis</masterLabel>
+            <translation><!-- St. Louis --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Toronto</masterLabel>
+            <translation><!-- Toronto --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Washington Chevy Chase</masterLabel>
+            <translation><!-- Washington Chevy Chase --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Washington DC All</masterLabel>
+            <translation><!-- Washington DC All --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Washington Tysons Corner</masterLabel>
+            <translation><!-- Washington Tysons Corner --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- When does this target become effective?  (Can be set in advance of becoming effective.) --></help>
+        <label><!-- Effective Date --></label>
+        <name>Effective_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Target Amount --></label>
+        <name>Target_Amount__c</name>
+    </fields>
+    <layouts>
+        <layout>Base Target Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

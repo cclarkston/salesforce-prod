@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_58061172</developerName>
+        <masterLabel>PreScreen</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Pre_Screen__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Green</sourceValue>
+            </sourceValues>
+            <value>Green</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Yellow</sourceValue>
+            </sourceValues>
+            <value>Yellow</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Red</sourceValue>
+            </sourceValues>
+            <value>Red</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Blue (No Hit)</sourceValue>
+            </sourceValues>
+            <value>Blue</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>PO Box</sourceValue>
+            </sourceValues>
+            <value>Black</value>
+        </values>
+    </buckets>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Lead.Consult_Inventory__r$isConsultScheudled__c</field>
+    </columns>
+    <description>This report measures schedule rate within the call center by Prescreen</description>
+    <filter>
+        <criteriaItems>
+            <column>Lead$Center__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>San Francisco Oakland</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_58061172</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Lead$Center__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Executive Report - Schedule Rates</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Prospective_Patients_with_Consult_Inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead$CreatedDate</dateColumn>
+        <interval>INTERVAL_LASTMONTH</interval>
+    </timeFrameFilter>
+</Report>

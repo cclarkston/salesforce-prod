@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>CITY</field>
+    </columns>
+    <columns>
+        <field>Lead.VIP_Event__c</field>
+    </columns>
+    <columns>
+        <field>PHONE</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Lead.VIP_Event__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>4 Points Sheraton Akron</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>ZIP</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Akron offsite by zip code</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadList</reportType>
+    <scope>org</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <endDate>2009-12-31</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2009-05-01</startDate>
+    </timeFrameFilter>
+</Report>

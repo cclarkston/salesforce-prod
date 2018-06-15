@@ -1,0 +1,19 @@
+<!-- is actually rendering the LeadScore__c color  -->
+
+<apex:page standardController="lead" extensions="CtrlPrescreenColor" sidebar="false" showHeader="false" doctype="html-5.0" title="Prescreen" standardStylesheets="true">
+<link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:300,400,500,700" media="screen" />
+<apex:stylesheet value="{!URLFOR($Resource.prescreen_page, 'css/main.css')}" />
+<apex:form >
+    <apex:outputPanel id="main">
+        <apex:outputPanel layout="block" styleClass="content {! color }">
+           <apex:outputText value="{! leadScore }"></apex:outputText>
+        </apex:outputPanel>
+        <apex:outputPanel layout="block" styleClass="custom-button refresh">
+          <apex:commandButton value="Refresh" action="{! updateLeadscore }" reRender="main"/>
+        </apex:outputPanel>
+        <apex:outputPanel layout="block" styleClass="custom-button" rendered="{! prescreenButton }">
+            <apex:commandButton action="{! prescreen }" value="Prescreen" reRender="main"/>
+        </apex:outputPanel>
+    </apex:outputPanel>
+</apex:form>
+</apex:page>

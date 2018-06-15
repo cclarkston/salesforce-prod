@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Surgical Note Implant</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Surgical Note Implants</value>
+    </caseValues>
+    <fields>
+        <label><!-- Abutment Collar Height --></label>
+        <name>Abutment_Collar_Height__c</name>
+        <picklistValues>
+            <masterLabel>0.5</masterLabel>
+            <translation><!-- 0.5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>1.0</masterLabel>
+            <translation><!-- 1.0 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>1.5</masterLabel>
+            <translation><!-- 1.5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2.0</masterLabel>
+            <translation><!-- 2.0 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2.5</masterLabel>
+            <translation><!-- 2.5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3.0</masterLabel>
+            <translation><!-- 3.0 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3.5</masterLabel>
+            <translation><!-- 3.5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4.0</masterLabel>
+            <translation><!-- 4.0 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4.5</masterLabel>
+            <translation><!-- 4.5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5.0</masterLabel>
+            <translation><!-- 5.0 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5.5</masterLabel>
+            <translation><!-- 5.5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6.0</masterLabel>
+            <translation><!-- 6.0 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6.5</masterLabel>
+            <translation><!-- 6.5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7.0</masterLabel>
+            <translation><!-- 7.0 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Abutment Straight --></label>
+        <name>Abutment_Straight__c</name>
+        <picklistValues>
+            <masterLabel>17</masterLabel>
+            <translation><!-- 17 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>30</masterLabel>
+            <translation><!-- 30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Straight</masterLabel>
+            <translation><!-- Straight --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Abutment Width --></label>
+        <name>Abutment_Width__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bone Density --></label>
+        <name>Bone_Density__c</name>
+        <picklistValues>
+            <masterLabel>D1</masterLabel>
+            <translation><!-- D1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D2</masterLabel>
+            <translation><!-- D2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D3</masterLabel>
+            <translation><!-- D3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D4</masterLabel>
+            <translation><!-- D4 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Buried Implant --></label>
+        <name>Buried_Implant__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Closure Screw Placed --></label>
+        <name>Closure_Screw_Placed__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Conversion Notes Form --></label>
+        <name>Conversion_Notes_Form__c</name>
+        <relationshipLabel><!-- Surgical Note Implants --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Conversion Torque Value --></label>
+        <name>Conversion_Torque_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Failure Observed --></label>
+        <name>Date_Failure_Observed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Final Notes Form --></label>
+        <name>Final_Notes_Form__c</name>
+        <relationshipLabel><!-- Surgical Note Implants --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Final Ostell ISQ --></label>
+        <name>Final_Ostell_ISQ__c</name>
+    </fields>
+    <fields>
+        <label><!-- Healing Cap Placed --></label>
+        <name>Healing_Cap_Placed__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Implant Length --></label>
+        <name>Implant_Length__c</name>
+    </fields>
+    <fields>
+        <label><!-- Implant System Other --></label>
+        <name>Implant_System_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Implant System Value --></label>
+        <name>Implant_System_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Implant System --></label>
+        <name>Implant_System__c</name>
+        <picklistValues>
+            <masterLabel>Neodent</masterLabel>
+            <translation><!-- Neodent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nobel Biocare</masterLabel>
+            <translation><!-- Nobel Biocare --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Straumann</masterLabel>
+            <translation><!-- Straumann --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Implant Torque Number --></label>
+        <name>Implant_Torque_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Implant Torque Value --></label>
+        <name>Implant_Torque_Value__c</name>
+        <picklistValues>
+            <masterLabel>15 Ncm</masterLabel>
+            <translation><!-- 15 Ncm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20 Ncm</masterLabel>
+            <translation><!-- 20 Ncm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>30 Ncm</masterLabel>
+            <translation><!-- 30 Ncm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>35 Ncm</masterLabel>
+            <translation><!-- 35 Ncm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Holder Value</masterLabel>
+            <translation><!-- Holder Value --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Implant Type --></label>
+        <name>Implant_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Implant Width --></label>
+        <name>Implant_Width__c</name>
+    </fields>
+    <fields>
+        <label><!-- JIG Notes Form --></label>
+        <name>JIG_Notes_Form__c</name>
+        <relationshipLabel><!-- Surgical Note Implants --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- JIG Ostell ISQ --></label>
+        <name>JIG_Ostell_ISQ__c</name>
+    </fields>
+    <fields>
+        <label><!-- Numerical Name --></label>
+        <name>Numerical_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Conversion Ostell ISQ --></label>
+        <name>Ostel__c</name>
+    </fields>
+    <fields>
+        <label><!-- Redo Surgery Form --></label>
+        <name>Redo_Surgery_Form__c</name>
+        <relationshipLabel><!-- Surgical Note Implants --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Surgical Notes Form --></label>
+        <name>Surgical_Notes_Form__c</name>
+        <relationshipLabel><!-- Surgical Note Implants --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Unique Placement --></label>
+        <name>Unique_Placement__c</name>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pterygoid</masterLabel>
+            <translation><!-- Pterygoid --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Trans-sinus</masterLabel>
+            <translation><!-- Trans-sinus --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Vomer</masterLabel>
+            <translation><!-- Vomer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Zygomaticus</masterLabel>
+            <translation><!-- Zygomaticus --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

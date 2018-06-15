@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>number</bucketType>
+        <developerName>BucketField_42617698</developerName>
+        <masterLabel>Arches</masterLabel>
+        <nullTreatment>z</nullTreatment>
+        <sourceColumnName>Clinical_Apt_Calendar__c$Patient_POT_Apt__c.Clinical_Appointment__c.Arch_Count__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <to>1</to>
+            </sourceValues>
+            <value>Single Arch</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>1</from>
+            </sourceValues>
+            <value>Double Arch</value>
+        </values>
+    </buckets>
+    <filter>
+        <criteriaItems>
+            <column>Clinical_Apt_Calendar__c$Patient_POT_Apt__c.Clinical_Appointment__c.Arch_Count__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Clinical_Apt_Calendar__c$Patient_POT_Apt__c.Clinical_Appointment__c.Appointment_Filter__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Surgical</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Month</dateGranularity>
+        <field>Clinical_Apt_Calendar__c$Apt_Date__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Clinical_Apt_Calendar__c$Account__c.Center__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_42617698</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Arch Count- Year Audit</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Clinical_Apt_Calendar_Only__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Clinical_Apt_Calendar__c$Apt_Date__c</dateColumn>
+        <interval>INTERVAL_CURY</interval>
+    </timeFrameFilter>
+</Report>

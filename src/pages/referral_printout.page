@@ -1,0 +1,117 @@
+<apex:page showHeader="false" controller="ctrl_referral_print" sidebar="false">
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+
+<style>
+  span.section_header {
+    font-weight:bold;
+    font-size:14pt;
+    display:block;
+    padding-bottom:10px;
+  }
+  span.section_detail {
+    display:block;
+    padding-bottom:5px;
+    font-size:12pt;
+  }
+    span.section_detail_pad {
+    display:block;
+    padding-bottom:15px;
+    font-size:16pt;
+  }
+  span.reason {
+    display:inline-block;
+    padding-left:30px;
+  }
+  #container {
+    width:900px;
+    margin:8px auto;
+    padding:10px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:16px;
+}
+
+h1 {
+    text-transform:uppercase;
+    color:#4694D2;
+    font-size:28px;
+    font-weight:normal;
+    margin-top:6px;
+    margin-bottom:35px;
+}
+h2 {
+    color:#4694D2;
+    font-size:22px;
+    font-weight: bold;
+    border-bottom: 1px solid #4694D2;
+    margin-top:3px;
+    margin-bottom:20px;
+}
+
+@media print {
+    textarea {
+        border:0;
+    }
+}
+</style>
+
+<apex:messages />
+<apex:form >
+<div id="container">
+<div style="margin-top:2em;margin-bottom:2em;padding-top:5px;padding-bottom:5px;border-bottom:4px solid #4395cf;padding-left:20px;width:900px; ">
+<apex:image id="CCLogo" value="{!$Resource.CCLogo2}" /> 
+<span style="float:right; font-family:Arial, Helvetica, sans-serif; font-size:14px;color:#666666;width:350px;text-align:left;">
+<span style="font-weight:bold;font-size:16px;">{!dp.center_information__r.name} ClearChoice</span><br />
+<apex:outputtext value="{!center_address}" escape="false"/><br />
+<apex:outputtext value="{!dp.center_information__r.Local_Front_Desk__c}" />
+</span>
+</div>
+
+<div style="width:900px;padding-left:20px;">
+<h1>REFERRAl FORM</h1><br /><br />
+<table style="width:900px;">
+  <tr>
+    <td style="vertical-align:top;width:400px;">
+      <h2 style="display:block;width:400px;">Introducing...</h2>
+      <p style="padding-left:10px;">
+        <span class="section_detail"><apex:outputtext value="{!patient_name}" /></span>
+        <span class="section_detail"><apex:outputtext value="{!patient_phone}" /></span>
+        <span class="section_detail"><apex:outputtext value="{!patient_street}" /><br /><apex:outputtext value="{!patient_city}" />,&nbsp;<apex:outputtext value="{!patient_state}" />&nbsp;<apex:outputtext value="{!patient_postal}" /></span>
+      </p>      
+      <br /><br /><br /><br />
+      <h2 style="display:block;width:400px;">Dentist Information</h2>
+      <p style="padding-left:10px;padding-bottom:2em;">
+        <span class="section_detail"><apex:outputfield value="{!dp.name}" /></span>
+        <span class="section_detail"><apex:outputtext value="{!dentist_name}" /></span>
+        <span class="section_detail"><apex:outputfield value="{!dp.Phone__c}" /></span>
+        <span class="section_detail"><apex:outputfield value="{!dp.Street__c}" /><br />
+          <apex:outputfield value="{!dp.City__c}" />,&nbsp;<apex:outputfield value="{!dp.State_Province__c}" />&nbsp;<apex:outputfield value="{!dp.Postal_Code__c}" /></span>
+        <span class="section_detail"><apex:outputfield value="{!dp.Practice_Website__c}" /></span>
+      </p>
+      <apex:image url="/servlet/servlet.FileDownload?file={!MapId}" style="max-height:367px;max-width:316px;border:2px solid black" /> 
+    </td>
+    <td style="width:50px;">&nbsp;</td>
+    <td style="vertical-align:top;">
+      <h2 style="display:block;width:400px;">Reason for visit</h2>
+      <p style="padding-left:10px;font-size:16pt;">
+        <span class="section_detail_pad"><apex:inputCheckbox value="{!hygiene}" /><span class="reason">Hygiene</span></span>
+        <span class="section_detail_pad"><apex:inputCheckbox value="{!crown_bridge}"/><span class="reason">Crown &amp; Bridge</span></span>
+        <span class="section_detail_pad"><apex:inputCheckbox value="{!teeth_whitening}"/><span class="reason">Teeth Whitening</span></span>
+        <span class="section_detail_pad"><apex:inputCheckbox value="{!dentures}"/><span class="reason">Dentures</span></span>
+        <span class="section_detail_pad"><apex:inputCheckbox value="{!invisalign}"/><span class="reason">Invisalign</span></span>
+        <span class="section_detail_pad"><apex:inputCheckbox value="{!Laser_Dentistry}" /><span class="reason">Laser Dentistry</span></span>
+        <span class="section_detail_pad"><apex:inputCheckbox value="{!veneers}"/><span class="reason">Veneers</span></span>
+        <span class="section_detail_pad"><apex:inputCheckbox value="{!wisdom_teeth}"/><span class="reason">Wisdom Teeth Extractions</span></span>
+      </p><br /><br /><br />
+      <h2 style="display:block;width:400px;">Additional Patient Information</h2>
+      <p style="padding-left:10px;font-size:14pt;">
+        <textarea name="extra notes" cols="45" rows="15" style="font-size:14px;">{!patient_note}</textarea>
+      </p>
+    </td>
+  </tr>
+</table>
+</div>
+</div>
+
+    
+</apex:form>
+</apex:page>

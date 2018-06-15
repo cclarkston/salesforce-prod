@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Lending App Offer</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Lending App Offers</value>
+    </caseValues>
+    <fields>
+        <label><!-- APR --></label>
+        <name>APR__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Lending App Offers --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Lender --></label>
+        <name>Lender__c</name>
+    </fields>
+    <fields>
+        <label><!-- Loan Application Url --></label>
+        <name>Loan_Application_Url__c</name>
+    </fields>
+    <fields>
+        <label><!-- Max Line --></label>
+        <name>Max_Line__c</name>
+    </fields>
+    <fields>
+        <label><!-- Min Line --></label>
+        <name>Min_Line__c</name>
+    </fields>
+    <fields>
+        <label><!-- Monthly Payment --></label>
+        <name>Monthly_Payment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Promotional Period --></label>
+        <name>Promotional_Period__c</name>
+    </fields>
+    <fields>
+        <label><!-- Term --></label>
+        <name>Term__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>ACCOUNT.NAME</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Consult_Completed__c</field>
+    </columns>
+    <columns>
+        <field>Account.Applied_for_Financing__c</field>
+    </columns>
+    <columns>
+        <field>Account.Financing_Result__c</field>
+    </columns>
+    <columns>
+        <field>Account.Consult_Result__c</field>
+    </columns>
+    <columns>
+        <field>Account.Pre_Screen__c</field>
+    </columns>
+    <description>weekly detailed consult results prescreen included</description>
+    <filter>
+        <criteriaItems>
+            <column>Account.Center_Location__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>St. Louis</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>PC_LAST_NAME</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>USERS.NAME</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>STL consult results</name>
+    <params>
+        <name>co</name>
+        <value>0</value>
+    </params>
+    <reportType>AccountList</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <interval>INTERVAL_THISMONTH</interval>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <aggregates>
+        <calculatedFormula>Consult_Inventory__c.isConsultArrived__c:SUM/Consult_Inventory__c.isConsultScheudled__c:SUM</calculatedFormula>
+        <datatype>percent</datatype>
+        <developerName>FORMULA1</developerName>
+        <isActive>true</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Center Show Rate</masterLabel>
+        <scale>1</scale>
+    </aggregates>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_33557202</developerName>
+        <masterLabel>Confirmation Agent</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Center_Name__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Atlanta</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Charlotte</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Columbia</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Tucson</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Walnut Creek</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chicago</sourceValue>
+            </sourceValues>
+            <value>Marcella</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Minneapolis</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Kansas City</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>St. Louis</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Phoenix</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Denver</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Austin</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Portland</sourceValue>
+            </sourceValues>
+            <value>Barb</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Cleveland</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Salt Lake City</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Seattle</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Washington Tysons Corner</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Houston Woodlands</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Washington Rockville</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>San Antonio</sourceValue>
+            </sourceValues>
+            <value>Stacie</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>San Diego</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Las Vegas</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>San Jose</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>San Francisco Daly City</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chicago Naperville</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chicago Schaumburg</sourceValue>
+            </sourceValues>
+            <value>Lisa</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Houston</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Sacramento</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Dallas</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Dallas Fort Worth</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Miami Fort Lauderdale</sourceValue>
+            </sourceValues>
+            <value>Rochelle</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_15551800</developerName>
+        <masterLabel>Non- IMC</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Contact_Agency__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Infocision</sourceValue>
+            </sourceValues>
+            <value>IMC</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_44498439</developerName>
+        <masterLabel>Prescreen</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Pre_Screen__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Green</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Yellow</sourceValue>
+            </sourceValues>
+            <value>Green/Yellow</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_45657988</developerName>
+        <masterLabel>Team</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Call_Center_Agent_Team__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Imp - IMC API</sourceValue>
+            </sourceValues>
+            <value>API</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Imp - IMC Mansfield</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Imp - IMC NewCastle</sourceValue>
+            </sourceValues>
+            <value>IMC SF</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>Lead$Name</field>
+    </columns>
+    <columns>
+        <field>Lead.Consult_Inventory__r$Name</field>
+    </columns>
+    <description>Marcella Velasquez cities only</description>
+    <filter>
+        <booleanFilter>(1 or( 2 AND 3)) AND 4</booleanFilter>
+        <criteriaItems>
+            <column>Lead.Consult_Inventory__r$Consult_Room__c.Room_Type__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Normal,OverFlow,Manual</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Consult_Inventory__r$Consult_Room__c.Room_Type__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Unconfirmed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Consult_Inventory__r$isConsultArrived__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>BucketField_33557202</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Marcella</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>Lead.Consult_Inventory__r$isConsultArrived__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_33557202</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Lead$Center_Name__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Confirmation Team Showed-TODAY (MV)</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Lead_w_Consult_Inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead.Consult_Inventory__r$Apt_Date__c</dateColumn>
+        <interval>INTERVAL_TODAY</interval>
+    </timeFrameFilter>
+</Report>

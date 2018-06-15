@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Campaign$Name</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers$Name</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers$Phone</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers$LastActivityDate</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers.Activities$Subject</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Campaign.LeadCampaignMembers$LastActivityDate</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>lessThan</operator>
+            <value>1/13/2013</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <name>Campaign Attempts by Activity</name>
+    <params>
+        <name>scopeid</name>
+        <value>70140000000jia8</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Activites_w_Patient_and_Campaign__c</reportType>
+    <scope>one</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Campaign$CreatedDate</dateColumn>
+        <endDate>2013-01-18</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2012-10-01</startDate>
+    </timeFrameFilter>
+</Report>

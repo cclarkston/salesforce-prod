@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Extended Finance</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Extended Finances</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Extended Finances --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Alphaeon Financed --></label>
+        <name>Alphaeon_Financed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Amount Financed --></label>
+        <name>Amount_Financed__c</name>
+    </fields>
+    <fields>
+        <label><!-- CareCredit Finance --></label>
+        <name>CareCredit_Finance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cash Down Payment --></label>
+        <name>Cash_Down_Payment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Center Information --></label>
+        <name>Center_Information__c</name>
+        <relationshipLabel><!-- Extended Finances --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Did Patient Accept --></label>
+        <name>Did_Patient_Accept__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Finance Charge --></label>
+        <name>Finance_Charge__c</name>
+    </fields>
+    <fields>
+        <label><!-- First Payment Date --></label>
+        <name>First_Payment_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Interest Rate --></label>
+        <name>Interest_Rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Itemization Requested --></label>
+        <name>Itemization_Requested__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Printed By --></label>
+        <name>Last_Printed_By__c</name>
+        <relationshipLabel><!-- Extended Finances --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Last Printed Time --></label>
+        <name>Last_Printed_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead --></label>
+        <name>Lead__c</name>
+        <relationshipLabel><!-- Extended Finances --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Loan Status --></label>
+        <name>Loan_Status__c</name>
+        <picklistValues>
+            <masterLabel>Accepted</masterLabel>
+            <translation><!-- Accepted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Accepted</masterLabel>
+            <translation><!-- Not Accepted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Received</masterLabel>
+            <translation><!-- Received --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Signed</masterLabel>
+            <translation><!-- Signed --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Number of Payments --></label>
+        <name>Number_of_Payments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Per Payment Amount --></label>
+        <name>Per_Payment_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- SpringStone Financed --></label>
+        <name>SpringStone_Financed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Treatment Value --></label>
+        <name>Treatment_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Was Form Printed --></label>
+        <name>Was_Form_Printed__c</name>
+    </fields>
+    <startsWith>Vowel</startsWith>
+</CustomObjectTranslation>

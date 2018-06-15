@@ -1,0 +1,99 @@
+<apex:page standardController="Lead" extensions="SearchInfoCision">
+<script type="text/javascript">  
+  var key_timeout;
+  var search_in_progress = false;
+   
+  function search_now() {
+    search_in_progress = false;  
+    search_leads(); 
+  } 
+    
+  function search_key() {    
+    if(search_in_progress)
+      clearTimeout(key_timeout);
+    search_in_progress = true;  
+    key_timeout = setTimeout("search_now()",1000);
+  }   
+</script>
+        <apex:define name="body">
+            <apex:form >
+				<apex:actionFunction name="search_leads" action="{!Search}" reRender="results"></apex:actionFunction>
+                <apex:pageBlock mode="edit">
+                    <apex:messages id="error" styleClass="errorMsg" layout="table"
+                        style="margin-top:1em;" />
+                    <apex:pageBlockSection title="Search" collapsible="false"
+                        columns="1">
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="Search" for="Search" />
+                            <input type="text" id="Search" name="Search" value="{!searchString}" onkeyup="search_key();" />
+                        </apex:pageBlockSectionItem>      
+                    </apex:pageBlockSection>
+                    <apex:pageBlockButtons location="bottom">
+                        <apex:commandButton value="Search" action="{!Search}" />
+                    </apex:pageBlockButtons>
+                </apex:pageBlock>
+                <apex:pageBlock mode="edit" id="results">                
+                    <apex:pageBlockTable value="{!returnedLeads }" var="lead">
+                        <apex:column >
+                            <a href="/{!lead.Id}" title="{!lead.Name}" target="_blank">Edit</a>
+                        </apex:column>
+                        
+                        <apex:column >
+                           <apex:facet name="header">
+                                <apex:commandLink value="Name" action="{!toggleSort}" rerender="results,debug">
+                                    <apex:param name="sortField" value="Name" assignTo="{!sortField}"/>
+                                </apex:commandLink>
+                            </apex:facet>
+                            <apex:outputField value="{!lead.Name}"/>
+                        </apex:column>
+                        
+                        <apex:column >
+                           <apex:facet name="header">
+                                <apex:commandLink value="Email" action="{!toggleSort}" rerender="results,debug">
+                                    <apex:param name="sortField" value="Email" assignTo="{!sortField}"/>
+                                </apex:commandLink>
+                            </apex:facet>
+                            <apex:outputField value="{!lead.Email}"/>
+                        </apex:column>
+                        
+                        <apex:column >
+                           <apex:facet name="header">
+                                <apex:commandLink value="Phone" action="{!toggleSort}" rerender="results,debug">
+                                    <apex:param name="sortField" value="Phone" assignTo="{!sortField}"/>
+                                </apex:commandLink>
+                            </apex:facet>
+                            <apex:outputField value="{!lead.Phone}"/>
+                        </apex:column>
+                        
+                        <apex:column >
+                           <apex:facet name="header">
+                                <apex:commandLink value="State" action="{!toggleSort}" rerender="results,debug">
+                                    <apex:param name="sortField" value="State" assignTo="{!sortField}"/>
+                                </apex:commandLink>
+                            </apex:facet>
+                            <apex:outputField value="{!lead.State}"/>
+                        </apex:column>
+                        
+                        <apex:column >
+                           <apex:facet name="header">
+                                <apex:commandLink value="City" action="{!toggleSort}" rerender="results,debug">
+                                    <apex:param name="sortField" value="City" assignTo="{!sortField}"/>
+                                </apex:commandLink>
+                            </apex:facet>
+                            <apex:outputField value="{!lead.City}"/>
+                        </apex:column>
+                        
+                        <apex:column >
+                           <apex:facet name="header">
+                                <apex:commandLink value="Street" action="{!toggleSort}" rerender="results,debug">
+                                    <apex:param name="sortField" value="Street" assignTo="{!sortField}"/>
+                                </apex:commandLink>
+                            </apex:facet>
+                            <apex:outputField value="{!lead.Street}"/>
+                        </apex:column>
+             
+                    </apex:pageBlockTable>
+                </apex:pageBlock>         
+            </apex:form>
+        </apex:define>
+</apex:page>

@@ -1,0 +1,67 @@
+<apex:page controller="ctl_run_log_csv_up">
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}" />          
+<apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+
+<apex:form > 
+<apex:outputPanel id="main_holder" layout="block" style="padding-top:1em;">  
+  <span style="padding-left:20px;color:blue;font-weight:bold;display:inline-block;font-size:12pt;border-bottom:1px solid black;width:400px;">Upload a Run Log File</span><br /><br />
+  <p style="padding-left:20px;">
+  This utility will read a file and upload the costs to the appropriate campaign based on the ISCI value.  The file must be a .csv,  and should follow this format <apex:outputLink style="padding-left:5px;color:blue;" value="{!$Resource.RunLogTemplate}" id="run_link">Run Log Template</apex:outputLink>.<br /><br />
+  <span style="color:red;font-weight:bold;">Required Fields - </span> ISCI, Net Cost, Den_Day,  and Den_Millt<br /><br />
+  
+  <apex:inputFile value="{!contentFile}" filename="{!nameFile}"  style="background-color:white;margin-left:10px;"/> <apex:commandButton action="{!ReadFile}" value="Upload File" style="width:70px;margin-left:20px;" /><br />
+  <apex:inputCheckbox value="{!ignore_warnings}" /> Ignore Warnings  
+  </p>
+
+<apex:outputpanel id="results_holder" layout="block" style="padding-top:1em;" rendered="{!display_run_errors}">     
+  # Errors :  <apex:outputtext value="{!num_errors}" /><br />  
+  # Warnings : <apex:outputtext value="{!num_warnings}" /><br /><br />  
+  
+  <apex:outputtext value="{!upload_results}" escape="false" />  
+  
+</apex:outputpanel>    
+
+
+<!--------- <br /><br /><br /><br />
+  <span style="padding-left:20px;color:blue;font-weight:bold;display:inline-block;font-size:12pt;border-bottom:1px solid black;width:400px;">Upload an ISCI File</span><br /><br />
+  <p style="padding-left:20px;">
+  This utility will read a file and upload the ISCI codes to any matching campaigns in the system.  The file must be a .csv,  and should be in the following format <apex:outputLink style="padding-left:5px;color:blue;" value="{!$Resource.ISCIUpTemplate}" id="isci_link">ISCI Upload Template</apex:outputLink>.<br /><br />
+  <span style="color:red;font-weight:bold;">Required Fields - </span> Market, Station (Media Outlet), Creative,  and ISCI <br /><br />   
+  
+  <apex:inputFile value="{!isci_contentFile}" filename="{!isci_nameFile}"  style="background-color:white;margin-left:10px;"/> <apex:commandButton action="{!Upload_ISCI}" value="Upload File" style="width:70px;margin-left:20px;" /><br />
+  </p>
+
+<apex:outputpanel id="results_holder2" layout="block" style="padding-top:1em;" rendered="{!display_isci_errors}">     
+  # Errors :  <apex:outputtext value="{!isci_num_errors}" /><br />  
+  # Warnings : <apex:outputtext value="{!isci_num_warnings}" /><br /><br />  
+  
+  <apex:outputtext value="{!isci_upload_results}" escape="false" />  
+  
+</apex:outputpanel>    ------>
+
+
+<br /><br /><br /><br />
+  <span style="padding-left:20px;color:blue;font-weight:bold;display:inline-block;font-size:12pt;border-bottom:1px solid black;width:400px;">Upload Web Costs</span><br /><br />
+  <p style="padding-left:20px;">
+  This utility will read a file and upload the web costs to the appropriate SEM campaign in the system.  The file must be a .csv,  and should be in the following format <apex:outputLink style="padding-left:5px;color:blue;" value="{!$Resource.WebCostsTemplate}" id="isci_link">Web Costs Template</apex:outputLink>.<br /><br />
+  <span style="color:red;font-weight:bold;">Required Fields - </span> Date, Engine, Spend, Impressions, and Clicks<br /><br />   
+  
+  <apex:inputFile value="{!wcosts_contentFile}" filename="{!wcosts_nameFile}"  style="background-color:white;margin-left:10px;"/> <apex:commandButton action="{!Upload_web_costs}" value="Upload File" style="width:70px;margin-left:20px;" /><br />
+  </p>
+
+<apex:outputpanel id="results_holder2" layout="block" style="padding-top:1em;" rendered="{!display_wcosts_errors}">     
+  # Errors :  <apex:outputtext value="{!wcosts_num_errors}" /><br />  
+  # Warnings : <apex:outputtext value="{!wcosts_num_warnings}" /><br /><br />  
+  
+  <apex:outputtext value="{!wcosts_upload_results}" escape="false" />  
+  
+</apex:outputpanel>    
+
+
+</apex:outputPanel>
+
+</apex:form>
+</apex:page>

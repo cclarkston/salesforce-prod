@@ -1,0 +1,29 @@
+<messaging:emailTemplate subject="Schedule your FREE consultation!" recipientType="Lead" relatedToType="CampaignMember">
+<messaging:htmlEmailBody >
+
+<img id="theImage" src="http://www.clearchoice.com/files/images/EmailTemplates/ClearChoiceLogo.png" width="387" height="114"/> 
+<br/>
+<hr color="DarkBlue"/>
+
+Hello {!Relatedto.First_Name__c},<br/>
+<br/>
+<br/>
+We were so happy to see you at our seminar on {!Relatedto.Campaign_Date_Time__c}. We hope that you had a great time and received answers to your questions.
+<br/>
+<br/>
+We would like to take this opportunity to schedule your FREE consultation and 3D CAT scan. We will set aside an hour of time for you to speak with our doctors and team. 
+<br/>
+<br/> 
+Please contact our office at {!Relatedto.Campaign_Center_Phone_Number__c} or respond to this email to schedule your free consultation. If you are no longer interested, please contact us so we may update our records. 
+<br/>
+<br/> 
+Looking forward to seeing you again!
+<br/> 
+<br/> 
+Best regards,<br/>
+<br/>
+<br/>
+{!Relatedto.Lead.Owner.Name}<br/>
+Dental Implant Consultant<br/>
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

@@ -1,0 +1,321 @@
+<apex:page controller="ctrl_patientimplants" sidebar="true">
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+
+<!-- <apex:includeScript value="{!URLFOR($Resource.PhoneGap)} "/> -->
+<!--<apex:includeScript value="{!URLFOR($Resource.BarCodeScanner)} "/>-->
+
+
+<!-- <apex:dynamicComponent componentValue="{!PhoneGapJS}"/>  -->
+<!-- <apex:dynamicComponent componentValue="{!BarcodeScannerJS}"/>  -->
+  
+<style>
+  span.blank {
+    font-style:italic;
+    font-weight:bold;    
+  }  
+  tr.control a {
+    text-decoration:none;
+  }
+  
+  span.required {
+    font-weight:bold;
+    color:red;
+  }
+  
+  span.optional {
+    font-weight:bold;
+    color:purple;
+  }
+</style>
+
+
+<!--<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="plugins/com.phonegap.plugins.barcodescanner/www/barcodescanner.js"></script>-->
+
+<script type="text/javascript"> 
+  var key_timeout;
+  var search_in_progress = false;
+   
+  function search_now() {
+    search_in_progress = false;  
+    search_patients(); 
+  } 
+    
+  function search_key() {    
+    if(search_in_progress)
+      clearTimeout(key_timeout);
+    search_in_progress = true;  
+    key_timeout = setTimeout("search_now()",600);
+  }   
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}  
+      
+  function handle_enter(e){         
+    if(window.event){                    
+      key = window.event.keyCode;     //IE               
+    } 
+    else {                    
+      key = e.which;     //firefox               
+    }               
+    if(key == 13) { //return             
+      return false;               
+    } else{                    
+      return true;               
+    }          
+  }     
+  
+function handle_enter1(e){         
+    if(window.event){                    
+      key = window.event.keyCode;     //IE               
+    } 
+    else {                    
+      key = e.which;     //firefox               
+    }               
+    if(key == 13) { //return 
+      var elements = document.getElementsByTagName('input'); 
+      for(var i=0; i<elements.length; i++) { 
+        var input = elements[i];   
+        var input_title = input.id;  
+        if(input_title.indexOf('lot_input') != -1) {  
+          input.focus();          
+        }
+      } 
+      return false;               
+    } else{                    
+      return true;               
+    }          
+  }  
+   
+  function part_focus() {   
+   var elements = document.getElementsByTagName('input'); 
+   for(var i=0; i<elements.length; i++) { 
+        var input = elements[i];   
+        var input_title = input.id;    
+        if(input_title.indexOf('gudid_input') != -1) {  
+          input.focus();          
+        }
+      } 
+  }  
+ 
+  </script>
+<apex:form style="padding-top:0;display:inline;margin-top:0;" onsubmit="" >
+ <apex:actionFunction name="search_patients" action="{!patient_search}" reRender="psearch_holder">
+ </apex:actionFunction>
+  <apex:actionFunction oncomplete="default_cursor(this);part_focus();" name="click_on_patient" action="{!select_patient}" rerender="main_holder">
+    <apex:param name="aid" value="" />
+  </apex:actionFunction> 
+  <apex:actionFunction oncomplete="default_cursor(this);part_focus();" name="click_on_ppatient" action="{!select_patient}" rerender="main_holder">
+    <apex:param name="ppid" value="" />
+  </apex:actionFunction>   
+
+  <apex:actionFunction oncomplete="default_cursor(this);part_focus();" name="remove_implant" action="{!delete_implant}" rerender="main_holder">
+    <apex:param name="dimpid" value="" />
+  </apex:actionFunction> 
+  
+<span style="display:block;border-bottom:2px solid black; color:#5789AE; font-size:14pt; font-weight:bold; padding-left:20px; padding-right:20px; width:600px;">Patient Implant Utility</span> 
+<apex:outputPanel id="main_holder" rendered="true" layout="block" style="padding-top:2em;">   
+<apex:outputpanel id="message_holder" layout="block" style="padding-left:20px;font-weight:bold;color:red;font-size:12pt;font-style:italic;">    
+<apex:messages />
+</apex:outputpanel>
+
+
+  
+  <apex:outputpanel rendered="{!if(display_new_practice_patient,false,true)}" >
+  <span style="display:block;padding-bottom:1.5em;font-size:12pt;">  
+  <span style="font-weight:bold;width:150px;">Patient : </span><apex:outputText escape="false" value="{!patient_display_name}" />
+    <apex:outputpanel rendered="{!if(display_patient_search,false,true)}" layout="inline" style="padding-left:20px;font-size:10pt;"><apex:commandButton style="position:relative;top:-3px;" value="Change Patient" action="{!change_patient}" /></apex:outputpanel></span>
+  </apex:outputpanel>
+    
+  <apex:outputpanel id="newpatient_holder" rendered="{!display_new_practice_patient}" layout="block" style="padding-top:.5em;">
+  <span style="font-weight:bold;color:#5789AE;font-size:12pt;">New Private Practice Patient Form</span><br /><br />
+  <table>
+    <tr style="height:30px;">
+      <td style="width:150px;font-weight:bold;"><span class="required">*</span> First Name :</td>
+      <td><apex:inputfield value="{!new_patient.First_Name__c}" /></td>
+    </tr>
+    <tr style="height:30px;">
+      <td style="width:150px;font-weight:bold;"><span class="required">*</span> Last Name : </td>
+      <td><apex:inputfield value="{!new_patient.Last_Name__c}" /></td>
+    </tr>
+    <tr style="height:30px;">
+      <td style="width:150px;font-weight:bold;"><span class="required">*</span> Windent Patient ID : </td>
+      <td><apex:inputfield value="{!new_patient.Practice_ID__c}" /></td>
+    </tr>
+    <tr style="height:30px;">
+      <td style="width:150px;font-weight:bold;"><span class="optional">#</span> Email : </td>
+      <td><apex:inputfield value="{!new_patient.Patient_Email__c}" /></td>
+    </tr>
+    <tr style="height:30px;">
+      <td style="width:150px;font-weight:bold;"><span class="optional">#</span> Primary Phone : </td>
+      <td><apex:inputfield value="{!new_patient.Main_Phone__c}" /></td>
+    </tr>
+    <tr style="height:30px;">
+      <td style="width:150px;font-weight:bold;">Primary Phone Type : </td>
+      <td><apex:inputfield value="{!new_patient.Main_Phone_Type__c}" /></td>
+    </tr>
+    <tr style="height:30px;">
+      <td style="width:150px;font-weight:bold;"><span class="optional">#</span> Street Address : </td>
+      <td><apex:inputfield value="{!new_patient.Street_Address__c}" /></td>
+    </tr>
+    <tr style="height:30px;">
+      <td style="width:150px;font-weight:bold;">City : </td>
+      <td><apex:inputfield value="{!new_patient.City__c}" /></td>
+    </tr>
+    <tr style="height:30px;">
+      <td style="width:150px;font-weight:bold;">State : </td>
+      <td><apex:inputfield value="{!new_patient.State__c}" /></td>
+    </tr>
+    <tr style="height:30px;">
+      <td style="width:150px;font-weight:bold;">Zip Code : </td>
+      <td><apex:inputfield value="{!new_patient.Postal_Code__c}" /></td>
+    </tr>
+    <tr style="height:30px;">
+      <td style="width:150px;font-weight:bold;">Treatment Plan : </td>
+      <td><apex:inputfield value="{!new_patient.Treatment_Plan__c}" /></td>
+    </tr>   
+    <tr>
+      <td><apex:commandbutton value="Add Patient" action="{!add_practice_patient}" rerender="main_holder"  onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);" /></td>
+      <td><apex:commandbutton value="Back to Search" action="{!change_patient}" rerender="main_holder"  onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);" /></td>
+    </tr>    
+    <tr>
+      <td colspan="2" style="font-style:italic;"><span class="required">*</span> indicates a required field</td>
+    </tr>
+    <tr>
+      <td colspan="2" style="font-style:italic;"><span class="optional">#</span> indicates an optional requirement.  You must fill out one field marked this way.</td>
+    </tr>
+  </table>
+  </apex:outputpanel>  
+
+  <apex:outputpanel id="psearch_holder" rendered="{!display_patient_search}" layout="block" style="padding-top:.5em;">   
+  <span style="display:block;padding-bottom:.5em;">  
+  <span style="font-weight:bold;width:150px;">Patient Search : </span>
+    <apex:inputText value="{!name_filter}" id="search_filter" onkeyup="search_key();"  onkeypress="return handle_enter(event);" /><span style="display:inline-block;width:30px;">&nbsp;</span>    <apex:commandbutton value="Add Private Practice Patient" action="{!new_private_practice_form}" rerender="main_holder" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  /><br />  
+  </span>
+  <span style="display:block;padding-bottom:1em;">    
+  <span style="font-weight:bold;width:150px;">Center : </span> 
+    <apex:outputText value="{!center_filter}" /></span>     
+    
+  <apex:outputpanel id="psearch_results_holder" rendered="{!if(patient_search_error,false,true)}" layout="block" style="padding-left:10px;">    
+    <table class="accs_details" style="width:700px;empty-cells:show;">   
+      <tr class="control">  
+        <td width="30%">Patient Name</td> 
+        <td width="15%">Prosth Date</td>  
+        <td width="15%">Tx Plan</td>
+        <td width="25%">Email</td>
+        <td width="15%">Phone</td>         
+      </tr>
+    </table>  
+    <div style="overflow:auto;width:750px;height:300px;">    
+      <table style="width:700px;" class="accs_details">  
+      <apex:variable var="rowclassname" value="accs" />
+      <apex:repeat value="{!patient_search_results}" var="patient">
+        <tr class="{!rowclassname}">
+        <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />  
+          <td width="30%" class="indent">
+            <apex:outputpanel rendered="{!if(patient.patient_type=='Account',true,false)}">
+              <span style="color:blue;" onclick="click_on_patient('{!patient.a.id}');"><apex:outputfield value="{!patient.a.name}" /></span>
+            </apex:outputpanel>            
+            <apex:outputpanel rendered="{!if(patient.patient_type='Private_Practice',true,false)}">  
+              <span style="color:blue;" onclick="click_on_ppatient('{!patient.pp.id}');"><apex:outputfield value="{!patient.pp.name}" /></span>
+            </apex:outputpanel>          
+          </td> 
+          <td width="15%" style="padding-left:5px;"><apex:outputtext value="{!patient.prosth_date}" />&nbsp;</td>  
+          <td width="15%" style="padding-left:5px;"><apex:outputtext value="{!patient.tx_plan}" />&nbsp;</td>
+          <td width="25%" style="padding-left:5px;"><apex:outputtext value="{!patient.patient_email}" />&nbsp;</td>
+          <td width="15%" style="padding-left:5px;"><apex:outputtext value="{!patient.patient_phone}" />&nbsp;</td>                     
+        </tr>     
+      </apex:repeat>        
+      </table>
+    </div>     
+  </apex:outputpanel>     
+    <apex:outputPanel id="psearch_err_holder" rendered="{!patient_search_error }" layout="block" style="padding-left:10px;">  
+       <apex:outputtext escape="false" value="{!patient_search_message}" />
+    </apex:outputpanel>    
+  </apex:outputpanel>
+  
+  <apex:outputpanel id="current_implant_holder" rendered="{!display_implant_info}" layout="block" style="padding-left:10px;">
+  <span style="display:block;border-bottom:1px solid black; color:#5789AE; font-size:12pt; font-weight:bold; padding-left:20px; padding-right:20px; width:600px; margin-bottom:1em;">Current Implants</span>  
+    <apex:outputpanel rendered="{!if(current_implants_size==0,true,false)}" style="padding-left:30px;"> 
+      <span style="font-style:italics;">There are currently no implants installed for this patient</span>
+    </apex:outputpanel>
+    
+    <apex:outputpanel rendered="{!if(current_implants_size>0,true,false)}" > 
+      <apex:repeat value="{!current_implants}" var="cimplants">    
+        <apex:outputpanel layout="block" style="padding-left:40px;border-top:1px dashed #5789AE;border-bottom:1px dashed silver;width:550px;padding-top:5px;padding-bottom:5px;margin-left:20px;">
+          <span style="display:block;padding-bottom:.5em;">  
+             <apex:outputpanel rendered="{!if(cimplants.pi.Implant_Free__c=='',false,true)}">
+                  <span style="font-weight:bold;width:125px;">Implant PN # : </span><apex:outputfield value="{!cimplants.pi.implant__r.name}" /><apex:outputField value="{!cimplants.pi.Implant_Free__c}"/>
+                  <span style="font-weight:bold;width:50px;">Lot # : </span><apex:outputfield value="{!cimplants.pi.Lot_Number__c}" /></apex:outputpanel>
+             <apex:outputpanel rendered="{!if(cimplants.pi.Implant_Free__c=='',true,false)}">
+                  <span style="font-weight:bold;width:125px;">GUDID : </span><apex:outputfield value="{!cimplants.pi.GUDID__c}" />
+             </apex:outputpanel></span>
+                <span style="display:block;padding-bottom:.5em;">  
+                  <span style="font-weight:bold;width:125px;">Item Type : </span><apex:outputfield value="{!cimplants.pi.Implant_Type__c}" rendered="{!if(cimplants.allow_edit,false,true)}" />
+                    <apex:inputfield value="{!cimplants.pi.Implant_Type__c}" rendered="{!cimplants.allow_edit}" /></span>
+                <span style="display:block;padding-bottom:.5em;">  
+                  <span style="font-weight:bold;width:125px;">Location : </span><apex:outputfield value="{!cimplants.pi.Implant_location__c}" rendered="{!if(cimplants.allow_edit,false,true)}" /><apex:inputfield value="{!cimplants.pi.Implant_location__c}" rendered="{!cimplants.allow_edit}" /></span>                  
+                <span style="display:block;padding-bottom:.5em;">  
+                  <span style="font-weight:bold;width:125px;">Installed By : </span><apex:outputfield value="{!cimplants.pi.createdby.name}" /> (<apex:outputfield value="{!cimplants.pi.createddate}" />)</span>
+                <span style="display:block;padding-bottom:.5em;">  
+                  <span style="font-weight:bold;width:125px;">Last Modified : </span><apex:outputfield value="{!cimplants.pi.lastmodifiedby.name}" /> (<apex:outputfield value="{!cimplants.pi.lastmodifieddate}" />)</span>
+                <span style="display:block;padding-bottom:.5em;">  
+                  <span style="font-weight:bold;width:125px;">Status : </span><apex:inputfield value="{!cimplants.pi.Implant_Status__c}"  />
+                  <span style="display:inline-block;width:20px;">&nbsp;</span>                  
+                  <apex:commandbutton value="Update Status" action="{!update_implant_status}" style="position:relative;top:-3px;" rerender="current_implant_holder,new_implant_holder" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);part_focus();" /> 
+                  <span style="display:inline-block;width:20px;">&nbsp;</span>  
+                  <apex:commandbutton value="Delete Implant"  style="position:relative;top:-3px;" rerender="current_implant_holder" onclick="remove_implant('{!cimplants.pi.id}');use_fancy_cursor(this);" oncomplete="default_cursor(this);part_focus();" rendered="{!if(cimplants.pi.createdby.name==user_name,'true','false')}" />                                     
+                  </span>
+        </apex:outputpanel><br />
+      </apex:repeat>
+    </apex:outputpanel>
+  
+  </apex:outputpanel>  
+  
+  <apex:outputpanel id="new_implant_holder" rendered="{!display_implant_info}" layout="block" style="padding-left:10px;padding-top:2em;">   
+  <apex:actionRegion >
+  <span style="display:block;border-bottom:1px solid black; color:#5789AE; font-size:12pt; font-weight:bold; padding-left:20px; padding-right:20px; width:600px; margin-bottom:1em;">Add New Implant</span>  
+    <apex:outputpanel layout="block" style="padding-left:20px;">
+      <span style="display:block;padding-bottom:.5em;">  
+        <span style="font-weight:bold;width:150px;display:inline-block;">Item Type # : </span><apex:inputfield value="{!implant.Implant_Type__c}" /> </span>  
+
+      <p style="border-top:1px dashed #5789AE;border-bottom:1px dashed silver;width:550px;padding-top:5px;padding-bottom:3px;margin-bottom:5px;margin-left:5px;">    
+      <span style="display:block;padding-bottom:.5em;">  
+        <span style="font-weight:bold;width:150px;display:inline-block;">Implant Part # : </span><apex:inputfield value="{!implant.Implant_Free__c}" style="width:300px;"  onkeypress="return handle_enter1(event);" id="implant_input"/> </span>
+      <span style="display:block;padding-bottom:.5em;">
+        <span style="font-weight:bold;width:150px;display:inline-block;">Lot Number : </span><apex:inputfield value="{!implant.Lot_Number__c}" style="width:300px;"  onkeypress="return handle_enter(event);" id="lot_input" /></span>  
+
+      <span style="display:block;padding-bottom:.5em;">
+        <span style="font-weight:bold;width:150px;display:inline-block;padding-left:20px;color:red;">OR</span></span>  
+      <span style="display:block;padding-bottom:.5em;">
+        <span style="font-weight:bold;width:150px;display:inline-block;">GUDID # : </span><apex:inputfield value="{!implant.GUDID__c}" style="width:375px;" onkeypress="return handle_enter(event);" id="gudid_input" /></span>  
+      </p>
+
+      <span style="display:block;padding-bottom:.5em;">  
+        <span style="font-weight:bold;width:150px;display:inline-block;">Install Location # : </span><apex:inputfield value="{!implant.Implant_location__c}"  /> </span>        
+      <span style="display:block;padding-bottom:.5em;">  
+        <span style="font-weight:bold;width:150px;display:inline-block;">Status : </span><apex:inputfield value="{!implant.Implant_Status__c}" /></span>         
+      <apex:commandbutton value="Add Implant" action="{!add_implant}" rerender="new_implant_holder,current_implant_holder" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);part_focus();"  />
+      
+    </apex:outputpanel>   
+    </apex:actionRegion>  
+        
+    <apex:outputpanel layout="block" style="padding-left:20px;" id="implant_error_holder" rendered="{!implant_error}">
+      <apex:outputtext escape="false" value="{!implant_error_message}" />
+    </apex:outputpanel>
+  
+  </apex:outputpanel> 
+</apex:outputPanel>
+</apex:form>
+</apex:page>

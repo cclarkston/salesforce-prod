@@ -1,0 +1,363 @@
+<apex:page controller="ctrl_weekly_huddle" sidebar="false"  action="{!check_for_scorecard}">
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}"  />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+
+<style type="text/css" media="print">  
+  span.patient_name {
+    display:none;
+  }
+  
+  span.patient_initials {
+    visibility: visible !important;
+  }
+  
+  table.print_break {
+    page-break-after:always;  
+  }
+  
+  td.right_border {
+    border:0px; 
+    right-border:0px;
+  }
+
+  img.skiplink {
+    display:none;
+  }
+
+  div.bodyDiv {
+    border:0px;
+  }
+      
+  div.bPageHeader {
+    display:none;
+  }  
+  
+  div.bPageFooter {
+    display:none;
+  } 
+  
+  div.no_print {
+    display:none; 
+  }    
+</style>
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+<style>  
+  hr.style-fade {
+    border: 0;
+    height: 2px;
+    width:1000px;
+    display:block;  
+    background-image: -webkit-linear-gradient(left, rgba(80,180,230,100), rgba(80,180,230,0.55), rgba(80,180,230,0)); 
+    background-image:    -moz-linear-gradient(left, rgba(80,180,230,100), rgba(80,180,230,0.55), rgba(80,180,230,0)); 
+    background-image:     -ms-linear-gradient(left, rgba(80,180,230,100), rgba(80,180,230,0.55), rgba(80,180,230,0)); 
+    background-image:      -o-linear-gradient(left, rgba(80,180,230,100), rgba(80,180,230,0.55), rgba(80,180,230,0)); 
+  }
+
+  div.bPageHeader {
+    z-index:-1;  
+  }
+  
+  div.searchBoxClearContainer {
+    z-index: 5;   
+  }
+  
+  div#tabContainer {
+    z-index:-1;
+  } 
+ 
+ span.blank {
+    font-style:italic;
+    font-weight:bold;    
+  }    
+     
+  input:focus {
+      background: #EBEBE0;
+  }
+  
+  table.accs_details tr.subhead {
+    font-weight:bold;
+    font-size:12pt;
+  }
+  
+  table.accs_details tr.subhead td {
+    text-align:left;  
+    border-bottom:1px dotted black;
+    padding-top:1em;         
+    color:blue;   
+    padding-left:10px;   
+    empty-cells:hide;  
+  }
+  
+  span.page_header {
+    font-weight:bold;
+    font-size:16pt;
+    display:block;
+    padding-left:20px;
+  }
+    
+  table.accs_details tr.accs {
+ /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: -moz-linear-gradient(top,  rgba(176,212,227,1) 0%, rgba(136,186,207,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(176,212,227,1)), color-stop(100%,rgba(136,186,207,0))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(176,212,227,1) 0%,rgba(136,186,207,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(176,212,227,1) 0%,rgba(136,186,207,0) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(176,212,227,1) 0%,rgba(136,186,207,0) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(176,212,227,1) 0%,rgba(136,186,207,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b0d4e3', endColorstr='#0088bacf',GradientType=0 ); /* IE6-8 */  
+
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2IwZDRlMyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM4OGJhY2YiIHN0b3Atb3BhY2l0eT0iMC4zMyIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  rgba(176,212,227,1) 0%, rgba(136,186,207,0.25) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(176,212,227,1)), color-stop(100%,rgba(136,186,207,0.25))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(176,212,227,1) 0%,rgba(136,186,207,0.25) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(176,212,227,1) 0%,rgba(136,186,207,0.25) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(176,212,227,1) 0%,rgba(136,186,207,0.25) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(176,212,227,1) 0%,rgba(136,186,207,0.25) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b0d4e3', endColorstr='#5488bacf',GradientType=0 ); /* IE6-8 */
+
+
+  }
+   
+  table.accs_details tr.accs td {
+    text-align:left;  
+    line-height:25px;   
+    font-size:10pt;
+    border-bottom:1px dashed #5789AE; 
+    empty-cells:hide;      
+  }
+  
+  table.accs_details tr.accs td.indent {
+    padding-left:25px;      
+    font-weight:bold; 
+    font-style:italic;
+    empty-cells:hide;      
+  }
+
+  table.accs_details tr.accs td.right {
+     text-align:right;
+     padding-right:5px;     
+     empty-cells:hide;    
+  }  
+
+  table.accs_details tr.accs_b {
+ /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: -moz-linear-gradient(top,  rgba(213,206,166,1) 0%, rgba(201,193,144,0.6) 40%, rgba(183,173,112,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(213,206,166,1)), color-stop(40%,rgba(201,193,144,0.6)), color-stop(100%,rgba(183,173,112,0))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(213,206,166,1) 0%,rgba(201,193,144,0.6) 40%,rgba(183,173,112,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(213,206,166,1) 0%,rgba(201,193,144,0.6) 40%,rgba(183,173,112,0) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(213,206,166,1) 0%,rgba(201,193,144,0.6) 40%,rgba(183,173,112,0) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(213,206,166,1) 0%,rgba(201,193,144,0.6) 40%,rgba(183,173,112,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d5cea6', endColorstr='#00b7ad70',GradientType=0 ); /* IE6-8 */
+
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Q1Y2VhNiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNiN2FkNzAiIHN0b3Atb3BhY2l0eT0iMC4zMyIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  rgba(213,206,166,1) 0%, rgba(183,173,112,0.33) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(213,206,166,1)), color-stop(100%,rgba(183,173,112,0.33))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(213,206,166,1) 0%,rgba(183,173,112,0.33) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(213,206,166,1) 0%,rgba(183,173,112,0.33) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(213,206,166,1) 0%,rgba(183,173,112,0.33) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(213,206,166,1) 0%,rgba(183,173,112,0.33) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d5cea6', endColorstr='#54b7ad70',GradientType=0 ); /* IE6-8 */
+
+
+  }
+   
+  table.accs_details tr.accs_b td {
+    text-align:left;  
+    line-height:25px;
+    font-size:10pt;  
+    border-bottom:1px dashed #5789AE; 
+    empty-cells:hide;       
+  }
+  
+  table.accs_details tr.accs_b td.indent {
+    padding-left:25px;
+    font-weight:bold;
+    font-style:italic;      
+    empty-cells:hide;  
+  }
+  
+  table.accs_details tr.accs_b td.right {
+    text-align:right;
+    padding-right:5px;     
+    empty-cells:hide;       
+  }
+  
+  
+  
+</style>
+
+<apex:form >
+
+
+
+
+<span class="page_header">Weekly Huddle Commitment Form</span>
+<hr class="style-fade" /><br />
+
+<apex:outputpanel id="main_holder" layout="block"  style="padding-left:25px;">
+
+<apex:actionfunction oncomplete="default_cursor(this);" name="refresh_other" reRender="other_holder" />
+<apex:actionfunction oncomplete="default_cursor(this);" action="{!quick_save}" name="refresh_rainmaker_score" reRender="main_holder" />
+
+<span style="display:block;padding-bottom:5px;font-size:11pt;">
+  <span style="width:100px;">Scorecard for : <span style="font-style:italic;font-weight:bold;"><apex:outputtext value="{!huddle_name}" /> -&nbsp;<apex:outputfield value="{!current_huddle.Week_Start__c}" /></span></span>
+</span><br />
+
+<apex:messages style="color:red;font-weight:bold;"/>
+
+
+<apex:variable var="rowclassname" value="accs" />
+
+<table class="accs_details" style="width:95%">
+<tr class="control">
+  <td width="20%" style="border:0px;"></td>
+  <td width="20%">Last Week Goal</td>    
+  <td width="20%">Last Week Actual</td>
+  <td width="20%">Current Week Goal</td>
+  <td width="20%">Current Week Actual</td>
+</tr>
+
+  <tr class="subhead">
+    <td colspan="5">Performance Goals</td>
+  </tr>
+  <tr class="{!rowclassname}">
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+    <td width="20%" class="indent">Close Rate</td>
+    <td width="20%" class="right"><apex:outputText value="{0,number,##0.0}"><apex:param value="{!previous_huddle.Close_Rate_Goal__c}" /></apex:outputText>&nbsp;</td>
+    <td width="20%" class="right"><apex:outputtext value="{0,number,##0.0%}"><apex:param value="{!closerate_last_week}" /></apex:outputtext>&nbsp;</td>
+    <td width="20%" class="right"><apex:inputfield value="{!current_huddle.Close_Rate_Goal__c}" rendered="{!if(display_mode=='Edit',true,false)}" />
+      <apex:outputText value="{0,number,##0.0}" rendered="{!if(display_mode=='View',true,false)}"><apex:param value="{!current_huddle.Close_Rate_Goal__c}" /></apex:outputText></td>
+    <td width="20%" class="right"><apex:outputtext value="{0,number,##0.0%}"><apex:param value="{!closerate_current_week}" /></apex:outputtext>&nbsp;</td>
+  </tr>
+  
+  <tr class="subhead">
+    <td colspan="5">Behavioral Objectives</td>
+  </tr>
+  <tr class="{!rowclassname}">
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+    <td width="20%" class="indent"># Call Backs</td>
+    <td width="20%" class="right"><apex:outputText value="{0,number,##0.0}"><apex:param value="{!previous_huddle.Number_of_Callbacks__c}" /></apex:outputText>&nbsp;</td>
+    <td width="20%" class="right"><apex:outputtext value="{0,number,##0.0}"><apex:param value="{!callbacks_last_week}" /></apex:outputtext>&nbsp;</td>
+    <td width="20%" class="right"><apex:inputfield value="{!current_huddle.Number_of_Callbacks__c}" rendered="{!if(display_mode=='Edit',true,false)}" />
+    <apex:outputText value="{0,number,##0.0}" rendered="{!if(display_mode=='View',true,false)}"><apex:param value="{!current_huddle.Number_of_Callbacks__c}" /></apex:outputText>     </td>
+    <td width="20%" class="right"><apex:outputtext value="{0,number,##0.0}"><apex:param value="{!callbacks_current_week}" /></apex:outputtext>&nbsp;</td>
+  </tr>
+  <tr class="{!rowclassname}">
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+    <td width="20%" class="indent">RainMaker Score</td>
+    <td width="20%" class="right"><apex:outputText value="{0,number,##0.0%}"><apex:param value="{!(previous_huddle.Rainmaker_What_Score__c + previous_huddle.Rainmaker_What_Score__c)/10}" /></apex:outputText>&nbsp;</td>
+    <td width="20%" class="right"><apex:outputtext value="{0,number,##0.0%}"><apex:param value="{!rainmaker_overall_avg_last_week}" /></apex:outputtext>&nbsp;</td>
+    <td width="20%" class="right"><apex:outputText value="{0,number,##0.0%}"><apex:param value="{!(current_huddle.Rainmaker_What_Score__c + current_huddle.Rainmaker_How_Score__c)/10}" /></apex:outputText>&nbsp;</td>
+    <td width="20%" class="right"><apex:outputtext value="{0,number,##0.0%}"><apex:param value="{!rainmaker_overall_avg_current_week}" /></apex:outputtext>&nbsp;</td>
+  </tr>
+  <tr class="{!rowclassname}">
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+    <td width="20%" class="indent" style="padding-left:40px;">What</td>
+    <td width="20%" class="right"><apex:outputText value="{0,number,##0.0%}"><apex:param value="{!(previous_huddle.Rainmaker_What_Score__c)/5}" /></apex:outputText>&nbsp;</td>
+    <td width="20%" class="right"><apex:outputtext value="{0,number,##0.0%}"><apex:param value="{!rainmaker_overall_what_avg_last_week}" /></apex:outputtext>&nbsp;</td>
+    <td width="20%" class="right"><apex:inputfield value="{!current_huddle.Rainmaker_What_Score__c}" rendered="{!if(display_mode=='Edit',true,false)}" onchange="use_fancy_cursor(this);refresh_rainmaker_score();" />
+    <apex:outputText value="{0,number,##0.0%}" rendered="{!if(display_mode=='View',true,false)}"><apex:param value="{!(current_huddle.Rainmaker_What_Score__c)/5}" /></apex:outputText> <b>/ 5</b>
+    &nbsp;</td>
+    <td width="20%" class="right"><apex:outputtext value="{0,number,##0.0%}"><apex:param value="{!rainmaker_overall_what_avg_current_week}" /></apex:outputtext>&nbsp;</td>
+  </tr>
+  <tr class="{!rowclassname}">
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+    <td width="20%" class="indent" style="padding-left:40px;">How</td>
+    <td width="20%" class="right"><apex:outputText value="{0,number,##0.0%}"><apex:param value="{!(previous_huddle.Rainmaker_How_Score__c)/5}" /></apex:outputText>&nbsp;</td>
+    <td width="20%" class="right"><apex:outputtext value="{0,number,##0.0%}"><apex:param value="{!rainmaker_overall_how_avg_last_week}" /></apex:outputtext>&nbsp;</td>
+    <td width="20%" class="right"><apex:inputfield value="{!current_huddle.Rainmaker_How_Score__c}" onchange="use_fancy_cursor(this);refresh_rainmaker_score();" rendered="{!if(display_mode=='Edit',true,false)}" />
+    <apex:outputText value="{0,number,##0.0%}" rendered="{!if(display_mode=='View',true,false)}"><apex:param value="{!(current_huddle.Rainmaker_How_Score__c)/5}" /></apex:outputText> <b>/ 5</b>
+    &nbsp;</td>
+    <td width="20%" class="right"><apex:outputtext value="{0,number,##0.0%}"><apex:param value="{!rainmaker_overall_how_avg_current_week}" /></apex:outputtext>&nbsp;</td>
+  </tr>
+  
+  <tr class="subhead">
+    <td colspan="5">Learning Objectives</td>
+  </tr>
+  <tr class="{!rowclassname}">
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+    <td width="20%" class="indent">Category</td>
+    <td width="20%" class="right"><apex:outputField value="{!previous_huddle.Rainmaker_Skill_Category__c}" />&nbsp;</td>
+    <td width="20%" class="right">&nbsp;</td>
+    <td width="20%" class="right"><apex:inputfield value="{!current_huddle.Rainmaker_Skill_Category__c}" rendered="{!if(display_mode=='Edit',true,false)}" /><apex:outputField value="{!current_huddle.Rainmaker_Skill_Category__c}" rendered="{!if(display_mode=='View',true,false)}"  />  &nbsp;</td>
+    <td width="20%" class="right">&nbsp;</td>
+  </tr>
+  <tr class="{!rowclassname}">
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+    <td width="20%" class="indent" >Skill</td>
+    <td width="20%" class="right"><apex:outputField value="{!previous_huddle.Rainmaker_Sub_Skill_Category__c}" />&nbsp;</td>
+    <td width="20%" class="right">&nbsp;</td>
+    <td width="20%" class="right"><apex:inputfield value="{!current_huddle.Rainmaker_Sub_Skill_Category__c}" rendered="{!if(display_mode=='Edit',true,false)}"  /><apex:outputField value="{!current_huddle.Rainmaker_Sub_Skill_Category__c}" rendered="{!if(display_mode=='View',true,false)}" />  &nbsp;</td>
+    <td width="20%" class="right">&nbsp;</td>
+  </tr>
+  
+  <tr class="subhead">
+    <td colspan="5">Learning Action Plan</td>
+  </tr>
+  <tr class="{!rowclassname}">
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+    <td width="20%" class="indent">Add at least one</td>
+    <td width="20%" class="right">
+    <apex:repeat value="{!previous_learning_actions}" var="action_item" >
+      <apex:outputfield value="{!action_item.Action_Plan__c}" /> <apex:outputpanel rendered="{!if(action_item.Action_Plan__c=='Other',true,false)}" > - <apex:outputfield value="{!action_item.Other_Action_Type__c}" /></apex:outputpanel><br />
+    </apex:repeat>
+    &nbsp;</td>
+    <td width="20%" class="right">&nbsp;</td>
+    <td width="20%" class="right"><apex:repeat value="{!current_learning_actions}" var="action_item" >
+      <apex:outputfield value="{!action_item.Action_Plan__c}" /> <apex:outputpanel rendered="{!if(action_item.Action_Plan__c=='Other',true,false)}" > - <apex:outputfield value="{!action_item.Other_Action_Type__c}" /></apex:outputpanel><br />
+    </apex:repeat><br />
+    <apex:outputpanel rendered="{!if(display_mode=='Edit',true,false)}">
+    <span style="font-weight:bold;font-style:italic;">Add new action item :</span><br />
+    <apex:inputfield value="{!new_learning_action.Action_Plan__c}" onchange="use_fancy_cursor(this);refresh_other()" /><br />
+    <apex:outputpanel id="other_holder">      
+      <apex:outputpanel rendered="{!if(new_learning_action.Action_Plan__c=='Other',true,false)}" >
+        <span style="font-weight:bold;font-style:italic;">Other Plan : </span> <apex:inputfield value="{!new_learning_action.Other_Action_Type__c}" />
+      </apex:outputpanel>
+    </apex:outputpanel>
+    <br /><apex:commandButton action="{!add_learning_action}" value="Add Action" rerender="main_holder" /></apex:outputpanel>
+    &nbsp;</td>
+    <td width="20%" class="right">&nbsp;</td>
+  </tr>
+  
+  <tr class="subhead">
+    <td colspan="5">Pulse Check</td>
+  </tr>
+  <tr class="{!rowclassname}">
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+    <td width="20%" class="indent">How am I feeling</td>
+    <td width="20%" class="right"><apex:outputfield value="{!previous_huddle.Pulse_Check__c}" />&nbsp;</td>
+    <td width="20%" class="right">&nbsp;</td>
+    <td width="20%" class="right"><apex:selectList value="{!current_huddle.Pulse_Check__c}" multiselect="false" size="1" rendered="{!if(display_mode=='Edit',true,false)}">
+      <apex:selectOptions value="{!pulse_options}"></apex:selectoptions>
+    </apex:selectList> <apex:outputfield value="{!current_huddle.Pulse_Check__c}" rendered="{!if(display_mode=='View',true,false)}" />
+    &nbsp;</td>
+    <td width="20%" class="right">&nbsp;</td>
+  </tr>
+  
+</table><br />
+
+<apex:commandButton action="{!complete_scorecard}" value="Save Weekly Huddle" rendered="{!if(display_mode=='Edit',true,false)}" rerender="main_holder" />
+<apex:outputpanel rendered="{!if(display_mode=='View',true,false)}" >
+  <span style="font-style:italic;color:blue;">Huddle completed - <apex:outputText value="{!current_huddle.Completed_Time__c}" /></span>
+</apex:outputpanel>
+
+</apex:outputpanel>
+
+</apex:form>
+</apex:page>

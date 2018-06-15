@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Lead$Center_Name__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Consult_Inventory__r$Name</field>
+    </columns>
+    <columns>
+        <field>Lead.Consult_Inventory__r$Patient_Name__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Pre_Screen__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Consult_Inventory__r$Consult_Show_Status__c</field>
+    </columns>
+    <columns>
+        <field>Lead$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Lead$Date_Booked__c</field>
+    </columns>
+    <columns>
+        <field>Lead$DateTime_Consult_Scheduled__c</field>
+    </columns>
+    <columns>
+        <field>Lead$ConvertedDate</field>
+    </columns>
+    <description>How far out do patients have to book?</description>
+    <filter>
+        <criteriaItems>
+            <column>Lead$DateTime_Consult_Scheduled__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>lessThan</operator>
+            <value>9/21/2012 12:00 AM</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Patient Lead Times</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Lead_w_Consult_Inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead$CreatedDate</dateColumn>
+        <interval>INTERVAL_CURRENT</interval>
+    </timeFrameFilter>
+</Report>

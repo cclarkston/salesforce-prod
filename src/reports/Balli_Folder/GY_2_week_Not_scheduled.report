@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>Lead.Pre_Screen__c</field>
+    </columns>
+    <columns>
+        <field>PHONE</field>
+    </columns>
+    <columns>
+        <field>Lead.OBJECTION__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Center_Location__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Distance_To_Center__c</field>
+    </columns>
+    <description>CCMS and API</description>
+    <filter>
+        <booleanFilter>1 AND 2 AND 3 AND (4 or 5)</booleanFilter>
+        <criteriaItems>
+            <column>Lead.Pre_Screen__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Green,Yellow</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Call_Result__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Not Scheduled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.OBJECTION__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Calling for Someone Else,Cost Prohibitive,Location/Distance</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Distance_To_Center__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>lessOrEqual</operator>
+            <value>100</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Distance_To_Center__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value></value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>GY 2 week Not scheduled</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadList</reportType>
+    <scope>org</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <endDate>2013-02-06</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2013-02-01</startDate>
+    </timeFrameFilter>
+</Report>

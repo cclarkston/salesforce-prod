@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Legal approval of Creative (Parent Asset) approval request</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Creative (Parent Asset) Approved</name>
+    <style>none</style>
+    <subject>Approved: {!Creative__c.Name__c}</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

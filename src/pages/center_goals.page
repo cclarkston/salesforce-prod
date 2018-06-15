@@ -1,0 +1,114 @@
+<apex:page controller="ctrl_centerbudget_attributes" sidebar="false" action="{!check_for_null_budgets}">
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+
+<style>
+  td.right input {
+    text-align:right;
+  }  
+  tr.control a {
+    text-decoration:none;
+  }  
+</style>
+
+<apex:form >
+ <apex:actionFunction name="center_search" action="{!center_search}" reRender="main_holder">
+ </apex:actionFunction>
+ 
+ <apex:actionFunction name="next_year" action="{!next_year}" reRender="main_holder">
+ </apex:actionFunction>
+ 
+ <apex:actionFunction name="prev_year" action="{!prev_year}" reRender="main_holder">
+ </apex:actionFunction>
+  
+<div id="header" style="border-bottom:3px solid black;">
+<table style="width:100%">
+<tr>
+  <td width="600px;" style="border-right:2px solid black;">
+  <span style="font-weight:bold;width:80px;display:inline-block;">Center :</span>    
+  <apex:selectList value="{!center_filter}" size="1" onchange="center_search();">
+    <apex:selectoptions value="{!center_list}"></apex:selectoptions>  
+  </apex:selectList><br />
+  <span style="font-weight:bold;width:75px;display:inline-block;">Attribute :</span>  
+  <apex:selectRadio value="{!attribute_filter}" style="display:inline-block;position:relative;top:5px;" onclick="center_search();">
+    <apex:selectOptions value="{!attribute_options}" />  
+  </apex:selectRadio>
+  </td>
+  <td><h1 class="report_header">Center Budget Metrics</h1></td>  
+</tr>
+</table>
+</div>
+
+<apex:outputPanel id="main_holder" rendered="true" layout="block" style="padding-top:1em;">
+
+<span style="font-weight:bold;font-size:12pt;"><span style="width:75px;display:inline-block;">Year :</span>
+  <span style="color:#5789AE;padding-right:10px;">{!view_year}</span>   
+  <span style="font-weight:normal"><apex:commandLink value="Prev" action="{!prev_year}" reRender="main_holder" style="padding-left:10px;padding-right:10px;" /> 
+  <apex:commandLink value="Next" action="{!next_year}" rerender="main_holder" /></span>
+  <span style="padding-left:40px;font-style:italic;">{!attrib_name}</span>
+</span><br /><br />
+
+<apex:outputPanel id="center_holder">
+<script>
+  function display_load_msg() {
+    document.getElementById('{!$Component.center_holder}').innerHTML = '<span style="color:#5789AE;font-weight:bold;font-size:12pt;font-style:italic;">Loading...Please Wait</span>';  
+    next_year();    
+  }
+</script>
+<table class="accs_details" width="100%">
+<tr class="control">
+  <td width="16%">Center</td>
+  <td width="5%"><span onmouseover="tooltip.show('<p style=\'font-family:georgia;color:yellow;text-align:center;font-size:10pt;\'>Click to download January comission report</p>');" onmouseout="tooltip.hide();"><a href="{!hyper_prefix}/apex/opsDashcsv?format=19&rmonth=1&ryear={!view_year}" target="_blank">Jan</a></span></td>
+  <td width="5%"><span onmouseover="tooltip.show('<p style=\'font-family:georgia;color:yellow;text-align:center;font-size:10pt;\'>Click to download February comission report</p>');" onmouseout="tooltip.hide();"><a href="{!hyper_prefix}/apex/opsDashcsv?format=19&rmonth=2&ryear={!view_year}" target="_blank">Feb</a></span></td>
+  <td width="5%"><span onmouseover="tooltip.show('<p style=\'font-family:georgia;color:yellow;text-align:center;font-size:10pt;\'>Click to download March comission report</p>');" onmouseout="tooltip.hide();"><a href="{!hyper_prefix}/apex/opsDashcsv?format=19&rmonth=3&ryear={!view_year}" target="_blank">Mar</a></span></td>
+  <td width="5%"><span onmouseover="tooltip.show('<p style=\'font-family:georgia;color:yellow;text-align:center;font-size:10pt;\'>Click to download April comission report</p>');" onmouseout="tooltip.hide();"><a href="{!hyper_prefix}/apex/opsDashcsv?format=19&rmonth=4&ryear={!view_year}" target="_blank">Apr</a></span></td>
+  <td width="5%"><span onmouseover="tooltip.show('<p style=\'font-family:georgia;color:yellow;text-align:center;font-size:10pt;\'>Click to download May comission report</p>');" onmouseout="tooltip.hide();"><a href="{!hyper_prefix}/apex/opsDashcsv?format=19&rmonth=5&ryear={!view_year}" target="_blank">May</a></span></td>
+  <td width="5%"><span onmouseover="tooltip.show('<p style=\'font-family:georgia;color:yellow;text-align:center;font-size:10pt;\'>Click to download June comission report</p>');" onmouseout="tooltip.hide();"><a href="{!hyper_prefix}/apex/opsDashcsv?format=19&rmonth=6&ryear={!view_year}" target="_blank">Jun</a></span></td>
+  <td width="5%"><span onmouseover="tooltip.show('<p style=\'font-family:georgia;color:yellow;text-align:center;font-size:10pt;\'>Click to download July comission report</p>');" onmouseout="tooltip.hide();"><a href="{!hyper_prefix}/apex/opsDashcsv?format=19&rmonth=7&ryear={!view_year}" target="_blank">Jul</a></span></td>
+  <td width="5%"><span onmouseover="tooltip.show('<p style=\'font-family:georgia;color:yellow;text-align:center;font-size:10pt;\'>Click to download August comission report</p>');" onmouseout="tooltip.hide();"><a href="{!hyper_prefix}/apex/opsDashcsv?format=19&rmonth=8&ryear={!view_year}" target="_blank">Aug</a></span></td>
+  <td width="5%"><span onmouseover="tooltip.show('<p style=\'font-family:georgia;color:yellow;text-align:center;font-size:10pt;\'>Click to download September comission report</p>');" onmouseout="tooltip.hide();"><a href="{!hyper_prefix}/apex/opsDashcsv?format=19&rmonth=9&ryear={!view_year}" target="_blank">Sep</a></span></td>
+  <td width="5%"><span onmouseover="tooltip.show('<p style=\'font-family:georgia;color:yellow;text-align:center;font-size:10pt;\'>Click to download October comission report</p>');" onmouseout="tooltip.hide();"><a href="{!hyper_prefix}/apex/opsDashcsv?format=19&rmonth=10&ryear={!view_year}" target="_blank">Oct</a></span></td>
+  <td width="5%"><span onmouseover="tooltip.show('<p style=\'font-family:georgia;color:yellow;text-align:center;font-size:10pt;\'>Click to download November comission report</p>');" onmouseout="tooltip.hide();"><a href="{!hyper_prefix}/apex/opsDashcsv?format=19&rmonth=11&ryear={!view_year}" target="_blank">Nov</a></span></td>
+  <td width="5%"><span onmouseover="tooltip.show('<p style=\'font-family:georgia;color:yellow;text-align:center;font-size:10pt;\'>Click to download December comission report</p>');" onmouseout="tooltip.hide();"><a href="{!hyper_prefix}/apex/opsDashcsv?format=19&rmonth=12&ryear={!view_year}" target="_blank">Dec</a></span></td></tr>
+
+  <apex:variable var="rowclassname" value="accs" />
+
+  <apex:repeat value="{!all_centers}" var="center">
+  <tr class="{!rowclassname}">
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />  
+    <td class="indent">{!center.centerinfo.name}</td>
+    <apex:repeat value="{!center.budget_months}" var="bm">    
+      <td class="right">
+        <apex:inputText value="{!bm.Sales_Goal__c}" rendered="{!if(attribute_filter=='1','true','false')}" size="6" />
+        <apex:inputText value="{!bm.Budgeted_Close_Rate__c}" rendered="{!if(attribute_filter=='2','true','false')}" size="3" />
+        <apex:inputText value="{!bm.Budgeted_Consults__c}" rendered="{!if(attribute_filter=='3','true','false')}" size="3" />
+      </td>
+    </apex:repeat>
+  </tr>  
+  </apex:repeat>
+</table>  
+</apex:outputPanel>
+<apex:outputPanel id="msg" layout="block" style="padding-top:1em;" >
+  <apex:commandButton action="{!save}" value="Save" reRender="msg" onclick="slow_fade(100);"/><apex:outputtext id="msgholder" value="{!result_msg}" style="padding-left:10px;font-size:12pt;" escape="false" />
+<script>
+  var target = '{!$Component.msgHolder}';
+  function slow_fade(value) {
+    document.getElementById(target).style.opacity = value/100;
+    document.getElementById(target).style.filter = 'alpha(opacity=' + value + ')';  
+    if(value<=0)
+      document.getElementById(target).innerHTML = '';
+    else {    
+      var time_function = "slow_fade(" + (value-10) + ")";  
+      setTimeout(time_function,1000);
+    }     
+  }  
+</script>  
+</apex:outputPanel>
+<span class="page_span">Page {!page} of {!num_pages} 
+    <apex:commandButton value="Prev" action="{!prev}" rendered="{!if(display_prev==true,true,false)}" style="margin-left:20px;" reRender="main_holder" />
+    <apex:commandButton value="Next" action="{!next}" rendered="{!if(display_next==true,true,false)}" style="margin-left:20px;" reRender="main_holder" />
+</span>  
+</apex:outputPanel>
+</apex:form>
+</apex:page>

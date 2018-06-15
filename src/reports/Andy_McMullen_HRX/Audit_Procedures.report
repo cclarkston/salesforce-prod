@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Patient_POT_Apt_Procedure__c$Patient_POT_Apt__c.Clinical_Appointment__c.Center_Information__c</field>
+    </columns>
+    <columns>
+        <field>Patient_POT_Apt_Procedure__c$Cost__c</field>
+    </columns>
+    <columns>
+        <field>Patient_POT_Apt_Procedure__c$Name</field>
+    </columns>
+    <columns>
+        <field>Patient_POT_Apt_Procedure__c$Id</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Patient_POT_Apt_Procedure__c$Clinical_Procedure__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Prefabricated Abutment-Lower Arch Replacement,Prefabricated Abutment-Upper Arch Replacement,Surg Place Implant Endosteal-Lower Arch Replacement,Surg Place Implant Endosteal-Upper Arch Replacement</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Audit- Procedures</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Patient_POT_Apt_Procedures__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Patient_POT_Apt_Procedure__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

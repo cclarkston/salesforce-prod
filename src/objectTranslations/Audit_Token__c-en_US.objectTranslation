@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Audit Token</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Audit Tokens</value>
+    </caseValues>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Extend Pending Cancel --></label>
+        <name>Extend_Pending_Cancel__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Active --></label>
+        <name>Is_Active__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notes --></label>
+        <name>Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prostho Exam --></label>
+        <name>Prostho_Exam__c</name>
+        <relationshipLabel><!-- Audit Tokens --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Sales Region --></label>
+        <name>Sales_Region__c</name>
+        <relationshipLabel><!-- Audit Tokens --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Audit Notes Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Vowel</startsWith>
+    <webLinks>
+        <label><!-- Reset_Token --></label>
+        <name>Reset_Token</name>
+    </webLinks>
+</CustomObjectTranslation>

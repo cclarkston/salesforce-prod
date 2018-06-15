@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Consult_Inventory__c$Apt_Date__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Consult_Show_Status__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Scheduled_by__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Scheduled_Lead__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Scheduled_Account__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Consult_Room__c.Room_Type__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Consult_PEC__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Consult_Room__c.Center_Information__c.Name</field>
+    </columns>
+    <description>Report that shows the consults completed over a defined range,  where a gift certificate was offered to the canidate.</description>
+    <filter>
+        <criteriaItems>
+            <column>Consult_Inventory__c$GC_Offered__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Consult_Inventory__c$Consult_Show_Status__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Consult Completed</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Consults Completed - GC Offered</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Consult_Inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Consult_Inventory__c$Consult_Completed__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2012-12-09</startDate>
+    </timeFrameFilter>
+</Report>

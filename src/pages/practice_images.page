@@ -1,0 +1,69 @@
+<apex:page controller="ctrl_pprivileges_images" sidebar="false">
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+
+<apex:form style="padding-top:0;display:inline;margin-top:0;" onsubmit="">
+  <apex:actionstatus id="status_load">
+        <apex:facet name="start">
+            <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;
+                   height: 100%;opacity:0.65;width:100%;"> 
+                <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+                    <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                    <span class="waitingDescription">Loading...</span>
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionstatus>
+<apex:outputpanel id="message_holder" layout="block" style="padding-left:20px;font-weight:bold;color:red;font-size:12pt;">    
+<apex:messages />
+</apex:outputpanel>
+
+<apex:outputPanel id="main_holder"  layout="block" style="padding-top:2em;padding-left:50px;">   
+<span style="display:block;border-bottom:2px solid black; color:#5789AE; font-size:14pt; font-weight:bold; padding-left:20px; padding-right:20px; width:600px; padding-top:5px; margin-bottom:1em;">TV Images for - {!dp.name}</span> 
+
+<apex:outputpanel layout="block" style="width:600px;padding-bottom:1em;" >
+<apex:pageBlock title="Upload Attachments">                                               
+<apex:PageBlockSection >
+<apex:pageBlockSectionItem >                        
+<apex:outputLabel value="File"/>
+<apex:inputFile value="{!new_attachment.body}" filename="{!new_attachment.name}"/>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel value="Description"/>
+<apex:inputText value="{!new_attachment.Description}"/>    
+</apex:pageBlockSectionItem>            
+</apex:PageBlockSection>     
+            
+<apex:commandButton value="Save" action="{!upload_file}"/><span style="display:inline-block;width:40px;">&nbsp;</span><apex:commandButton value="Done Uploading" action="{!open_update_form}"/>
+</apex:pageBlock>
+</apex:outputpanel>
+
+
+<apex:outputpanel layout="block" style="width:600px;" id="attachment_holder">
+
+<apex:outputpanel rendered="{!if(current_size>0,true,false)}">
+<apex:pageBlock title="Existing Attachments">
+        
+  <apex:pageBlockTable value="{!current_attachments}" var="attachment" >
+  <apex:column headerValue="Action">              
+   <apex:outputLink value="{!URLFOR($Action.Attachment.Download, attachment.Id)}" target="_blank">View</apex:outputLink>            
+  </apex:column>            
+  <apex:column value="{!attachment.Name}"/>            
+  <apex:column value="{!attachment.Description}"/>        
+  </apex:pageBlockTable>
+</apex:pageBlock>
+</apex:outputpanel>
+
+<apex:outputpanel rendered="{!if(current_size>0,false,true)}">
+  <span style="font-style:italic;color:red;">There are currently no images uploaded for this practice</span>
+</apex:outputpanel>
+
+</apex:outputpanel>
+
+</apex:outputpanel>
+
+</apex:form>
+</apex:page>

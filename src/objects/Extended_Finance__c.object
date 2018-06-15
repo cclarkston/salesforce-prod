@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>A table that tracks patients/consults who looked in to our extended financing option</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The Consult record that applied for the loan</description>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Extended Finances</relationshipLabel>
+        <relationshipName>Extended_Finances</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Alphaeon_Financed__c</fullName>
+        <externalId>false</externalId>
+        <label>Alphaeon Financed</label>
+        <precision>9</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Amount_Financed__c</fullName>
+        <externalId>false</externalId>
+        <formula>Treatment_Value__c - CareCredit_Finance__c - Cash_Down_Payment__c - SpringStone_Financed__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Amount Financed</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CareCredit_Finance__c</fullName>
+        <defaultValue>0.00</defaultValue>
+        <description>Amount financed via Care Credit</description>
+        <externalId>false</externalId>
+        <label>CareCredit Finance</label>
+        <precision>9</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Cash_Down_Payment__c</fullName>
+        <defaultValue>0.00</defaultValue>
+        <description>Amount of cash put down on the treatment</description>
+        <externalId>false</externalId>
+        <label>Cash Down Payment</label>
+        <precision>9</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Center_Information__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The center the patient was associated with when the extended finance option was accepted. Locking this is so we know which form to display in the future if we have more than one.</description>
+        <externalId>false</externalId>
+        <label>Center Information</label>
+        <referenceTo>Center_Information__c</referenceTo>
+        <relationshipLabel>Extended Finances</relationshipLabel>
+        <relationshipName>Extended_Finances</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Did_Patient_Accept__c</fullName>
+        <description>Did the Patient accep the financing offer</description>
+        <externalId>false</externalId>
+        <label>Did Patient Accept</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Finance_Charge__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(( Number_of_Payments__c * Per_Payment_Amount__c ) - Amount_Financed__c &lt; 0, 0, ( Number_of_Payments__c * Per_Payment_Amount__c ) - Amount_Financed__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Finance Charge</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>First_Payment_Date__c</fullName>
+        <description>Date the first payment will be made</description>
+        <externalId>false</externalId>
+        <label>First Payment Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Interest_Rate__c</fullName>
+        <defaultValue>4.9</defaultValue>
+        <description>Interest Rate for the loan</description>
+        <externalId>false</externalId>
+        <label>Interest Rate</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Itemization_Requested__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates if the patient requested an itemization form.</description>
+        <externalId>false</externalId>
+        <label>Itemization Requested</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Last_Printed_By__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Last Printed By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Extended_Finances</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Last_Printed_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>Last Printed Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Lead__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The prospective patient who applied for this loan</description>
+        <externalId>false</externalId>
+        <label>Lead</label>
+        <referenceTo>Lead</referenceTo>
+        <relationshipLabel>Extended Finances</relationshipLabel>
+        <relationshipName>Extended_Finances</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Loan_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Loan Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Not Accepted</fullName>
+                    <default>false</default>
+                    <label>Not Accepted</label>
+                </value>
+                <value>
+                    <fullName>Accepted</fullName>
+                    <default>false</default>
+                    <label>Accepted</label>
+                </value>
+                <value>
+                    <fullName>Received</fullName>
+                    <default>false</default>
+                    <label>Received</label>
+                </value>
+                <value>
+                    <fullName>Signed</fullName>
+                    <default>false</default>
+                    <label>Signed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Number_of_Payments__c</fullName>
+        <defaultValue>24</defaultValue>
+        <description>Number of Payments to be made</description>
+        <externalId>false</externalId>
+        <label>Number of Payments</label>
+        <precision>3</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Per_Payment_Amount__c</fullName>
+        <defaultValue>0.00</defaultValue>
+        <description>Amount of each individual payment</description>
+        <externalId>false</externalId>
+        <label>Per Payment Amount</label>
+        <precision>9</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SpringStone_Financed__c</fullName>
+        <defaultValue>0.00</defaultValue>
+        <description>Amount of the treatment being covered by SpringStone FInancial</description>
+        <externalId>false</externalId>
+        <label>SpringStone Financed</label>
+        <precision>9</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Treatment_Value__c</fullName>
+        <defaultValue>0.00</defaultValue>
+        <description>The total value for treating this patient</description>
+        <externalId>false</externalId>
+        <label>Treatment Value</label>
+        <precision>9</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Was_Form_Printed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Was the Loan Form Printed out</description>
+        <externalId>false</externalId>
+        <label>Was Form Printed</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Extended Finance</label>
+    <nameField>
+        <displayFormat>EFL-{0000}</displayFormat>
+        <label>Loan Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Extended Finances</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <startsWith>Vowel</startsWith>
+    <visibility>Public</visibility>
+</CustomObject>

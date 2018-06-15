@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <aggregates>
+        <calculatedFormula>Account.American_Applied_Amount__c:SUM + Account.CareCredit_Applied_Amount__c:SUM + Account.Chase_Applied_Amount2__c:SUM + Account.Citi_Applied_Amount__c:SUM + Account.MedChoice_Applied_Amount__c:SUM + Account.SpringStone_Applied_Amount__c:SUM</calculatedFormula>
+        <datatype>number</datatype>
+        <description>This formula adds all the applied amount fields</description>
+        <developerName>FORMULA1</developerName>
+        <isActive>false</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Sum of Applied Amount</masterLabel>
+        <scale>0</scale>
+    </aggregates>
+    <aggregates>
+        <calculatedFormula>Account.American_Approved_Amount__c:SUM + Account.CareCredit_Approved_Amount__c:SUM + Account.Chase_Approved_Amount2__c:SUM + Account.Citi_Approved_Amount__c:SUM +   Account.SpringStone_Approved_Amount__c:SUM</calculatedFormula>
+        <datatype>number</datatype>
+        <description>This adds all the approved amount fields</description>
+        <developerName>FORMULA2</developerName>
+        <isActive>false</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Sum of Approved Amount</masterLabel>
+    </aggregates>
+    <aggregates>
+        <calculatedFormula>Account.Amount_Charged_to_CareCredit_Account__c:SUM + Account.Amount_Charged_to_Chase_Account__c:SUM + Account.Amount_Charged_to_Citi_Account__c:SUM + Account.Amount_Charged_to_MedChoice_Account__c:SUM + Account.Amount_Charged_to_SpringStone_Account__c:SUM</calculatedFormula>
+        <datatype>number</datatype>
+        <description>This adds up all the Charged amount fields</description>
+        <developerName>FORMULA3</developerName>
+        <isActive>false</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Charged Amount</masterLabel>
+    </aggregates>
+    <columns>
+        <field>ACCOUNT.NAME</field>
+    </columns>
+    <columns>
+        <field>Account.Consult_Result__c</field>
+    </columns>
+    <columns>
+        <field>Account.Preliminary_Treatment_Fee_Quoted__c</field>
+    </columns>
+    <columns>
+        <field>Account.Pre_Screen__c</field>
+    </columns>
+    <columns>
+        <field>Account.Preliminary_Treatment_Plan__c</field>
+    </columns>
+    <columns>
+        <field>Account.Financing_Result__c</field>
+    </columns>
+    <columns>
+        <field>Account.Finance_Notes__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Sum__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Sum_of_Amount_Approved__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Sum_of_Amount_Charged__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Account.Center_Location__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>contains</operator>
+            <value>Atlanta,Charlotte,Miami Fort Lauderdale</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Sum_of_Amount_Approved__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>greaterThan</operator>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Sum_of_Amount_Charged__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account.Center_Location__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>USERS.NAME</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>CB HCF Approvals SouthEast</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>AccountList</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <endDate>2011-11-02</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2011-07-01</startDate>
+    </timeFrameFilter>
+</Report>

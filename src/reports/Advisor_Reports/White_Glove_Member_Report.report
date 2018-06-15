@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>PHONE</field>
+    </columns>
+    <columns>
+        <field>Lead.LeadScore__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Center_Location__c</field>
+    </columns>
+    <columns>
+        <field>CampaignMember.DateTime_Consult_Scheduled__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Date_Booked__c</field>
+    </columns>
+    <columns>
+        <field>MEMBER_CREATED_DATE</field>
+    </columns>
+    <format>Tabular</format>
+    <name>White Glove Member Report</name>
+    <params>
+        <name>scopeid</name>
+        <value>70140000001KLwO</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CampaignLead</reportType>
+    <scope>one</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>CampaignMember.DateTime_Consult_Scheduled__c</sortColumn>
+    <sortOrder>Desc</sortOrder>
+</Report>

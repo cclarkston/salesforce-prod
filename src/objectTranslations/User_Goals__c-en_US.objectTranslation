@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>User Goal</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>User Goals</value>
+    </caseValues>
+    <fields>
+        <label><!-- Baseline Target --></label>
+        <name>Baseline_Target__c</name>
+    </fields>
+    <fields>
+        <help><!-- Amount of treatment dollars cancelled in interval --></help>
+        <label><!-- Cancelled Dollars In --></label>
+        <name>Cancelled_Dollars_In__c</name>
+    </fields>
+    <fields>
+        <help><!-- Amount of treatment dollars cancelled out of interval --></help>
+        <label><!-- Cancelled Dollars Out --></label>
+        <name>Cancelled_Dollars_Out__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cancelled Starts In --></label>
+        <name>Cancelled_Starts_In__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of starts cancelled out of interval --></help>
+        <label><!-- Cancelled Starts Out --></label>
+        <name>Cancelled_Starts_Out__c</name>
+    </fields>
+    <fields>
+        <label><!-- Collected Dollars --></label>
+        <name>Collected_Dollars__c</name>
+    </fields>
+    <fields>
+        <label><!-- Consults --></label>
+        <name>Consults__c</name>
+    </fields>
+    <fields>
+        <label><!-- Financed Consults --></label>
+        <name>Financed_Consults__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fiscal Month --></label>
+        <name>Fiscal_Month__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fiscal Year --></label>
+        <name>Fiscal_Year__c</name>
+    </fields>
+    <fields>
+        <label><!-- GP Collected Fees --></label>
+        <name>GP_Collected_Fees__c</name>
+    </fields>
+    <fields>
+        <label><!-- GP Refunded Fees --></label>
+        <name>GP_Refunded_Fees__c</name>
+    </fields>
+    <fields>
+        <label><!-- Goal Type --></label>
+        <name>Goal_Type__c</name>
+        <picklistValues>
+            <masterLabel>Center</masterLabel>
+            <translation><!-- Center --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>User</masterLabel>
+            <translation><!-- User --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Refunded Dollars --></label>
+        <name>Refunded_Dollars__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Goal --></label>
+        <name>Sales_Goal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sold --></label>
+        <name>Sold__c</name>
+    </fields>
+    <fields>
+        <label><!-- Starts --></label>
+        <name>Starts__c</name>
+    </fields>
+    <fields>
+        <label><!-- Target Dollars --></label>
+        <name>Target_Dollars__c</name>
+    </fields>
+    <fields>
+        <label><!-- Target Rate --></label>
+        <name>Target_Rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier 1 Floor --></label>
+        <name>Tier_1_Floor__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier 2 Floor --></label>
+        <name>Tier_2_Floor__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier 3 Floor --></label>
+        <name>Tier_3_Floor__c</name>
+    </fields>
+    <fields>
+        <label><!-- User --></label>
+        <name>User__c</name>
+        <relationshipLabel><!-- User Goals --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>User Goal Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

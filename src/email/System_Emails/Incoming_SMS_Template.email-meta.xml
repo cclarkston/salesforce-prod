@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Incoming SMS Template</name>
+    <style>none</style>
+    <subject>SMS Message Received</subject>
+    <textOnly>Sender Id : {!smagicinteract__Incoming_SMS__c.LeadId__c}
+
+Message Date/Time : {!smagicinteract__Incoming_SMS__c.CreatedDate}
+
+Sent from Mobile # : {!smagicinteract__Incoming_SMS__c.smagicinteract__Mobile_Number__c}
+
+Text Message : {!smagicinteract__Incoming_SMS__c.smagicinteract__SMS_Text__c}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

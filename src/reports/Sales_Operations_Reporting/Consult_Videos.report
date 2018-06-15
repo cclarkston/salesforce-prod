@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CUST_CREATED_DATE</field>
+    </columns>
+    <columns>
+        <field>Consult_Camera_Video__c.PEC_Access_URL__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Camera_Video__c.Part_Number__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Camera_Video__c.Account__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Camera_Video__c.Lead__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Camera_Video__c.Consult_URL_Link__c</field>
+    </columns>
+    <format>Tabular</format>
+    <name>Consult Videos</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Consult_Camera_Video__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Consult_Camera_Video__c.Lead__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

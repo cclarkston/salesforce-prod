@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Patient_POT__c$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Patient_POT__c$Account__c</field>
+    </columns>
+    <columns>
+        <field>Patient_POT__c$Account__c.Phone</field>
+    </columns>
+    <columns>
+        <field>Patient_POT__c$Opportunity__c.StageName</field>
+    </columns>
+    <columns>
+        <field>Patient_POT__c$Opportunity__c.Outstanding_Balance_incl_anticipated__c</field>
+    </columns>
+    <columns>
+        <field>Patient_POT__c$Name</field>
+    </columns>
+    <filter>
+        <booleanFilter>((((((1 AND 2 AND 3) or (1 and 3) or (2 and 3))))) AND 4) AND 5</booleanFilter>
+        <criteriaItems>
+            <column>Patient_POT__c$Plan_of_Treatment__c.Upper_Arch__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Phased</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Patient_POT__c$Plan_of_Treatment__c.Lower_Arch__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Phased</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Patient_POT__c$Account__c.Center_Location__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>New Jersey Roseland</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Patient_POT__c$Opportunity__c.Completed_Stage__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Patient Non Responsive,Not Moving Forward,Non Candidate,Doctor Declined Case</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Patient_POT__c$Opportunity__c.StageName</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Cancelled Not Rescheduled</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>New Jersey Phased Cases</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Patient_POT__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Patient_POT__c$Account__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Patient_POT__c$CreatedDate</dateColumn>
+        <endDate>2019-01-01</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2016-01-01</startDate>
+    </timeFrameFilter>
+</Report>

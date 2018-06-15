@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Achievement</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Achievements</value>
+    </caseValues>
+    <fields>
+        <label><!-- Approved? --></label>
+        <name>Approved__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Approved --></label>
+        <name>Date_Approved__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Qualified --></label>
+        <name>Date_Qualified__c</name>
+    </fields>
+    <fields>
+        <label><!-- Level --></label>
+        <name>Level__c</name>
+        <picklistValues>
+            <masterLabel>First</masterLabel>
+            <translation><!-- First --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Second</masterLabel>
+            <translation><!-- Second --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Notes --></label>
+        <name>Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Old_Id --></label>
+        <name>Old_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Participant Name --></label>
+        <name>Participant_Name__c</name>
+        <relationshipLabel><!-- Achievements --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Points Awarded --></label>
+        <name>Points_Awarded__c</name>
+    </fields>
+    <fields>
+        <label><!-- Record --></label>
+        <name>Record__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier --></label>
+        <name>Tier__c</name>
+        <picklistValues>
+            <masterLabel>30%</masterLabel>
+            <translation><!-- 30% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>35%</masterLabel>
+            <translation><!-- 35% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>40%</masterLabel>
+            <translation><!-- 40% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fifth</masterLabel>
+            <translation><!-- Fifth --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>First</masterLabel>
+            <translation><!-- First --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fourth</masterLabel>
+            <translation><!-- Fourth --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Second</masterLabel>
+            <translation><!-- Second --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sixth</masterLabel>
+            <translation><!-- Sixth --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Third</masterLabel>
+            <translation><!-- Third --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>&quot;Start&quot; Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>40% Challenge</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>CPC Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Events</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Goal based Achievements</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Participation Based Achievements</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- CPC --></label>
+        <name>CPC</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Events --></label>
+        <name>Events</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Goal Based Achievements --></label>
+        <name>Goal_Based_Achievements</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Participation Based Achievements --></label>
+        <name>Participation_Based_Achievements</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Starts --></label>
+        <name>Starts</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- 40% Challenge --></label>
+        <name>X40_Challenge</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

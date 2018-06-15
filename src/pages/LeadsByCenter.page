@@ -1,0 +1,53 @@
+<apex:page controller="LeadsByCenter1" showheader="false" >
+<head>
+<meta http-equiv="refresh" content="30" />
+</head>
+
+<apex:stylesheet value="{!$Resource.TableAlternateRowShading}"/>
+
+<br/>
+<table >
+    <tr>
+        <td/>
+        <td><b>Dental Inquiries by Center</b>
+        </td>
+        <td/>
+        <td>
+            <b><font color="darkblue"><apex:outputText value="Total Dental Inquiries = {!TotalLeads}"/></font></b>
+        </td>
+    </tr>
+    <tr>
+        <td width = "2%"/>
+        <td>
+            <apex:dataTable value="{!myCollection1}" border="1" var="wrapper" columns="6" rowClasses="even, odd" cellpadding="5">
+              <apex:column headerValue="Center Location">
+                <apex:outputText value="{!wrapper.item}"/>
+              </apex:column>
+              <apex:column dir="RTL" headerValue="Count" >
+                <apex:outputText value="{!wrapper.counter}"/>
+              </apex:column>
+            </apex:dataTable>
+         </td>
+        <td>
+            <apex:dataTable value="{!myCollection2}" border="1" var="wrapper" columns="6" rowClasses="even, odd" cellpadding="5">
+              <apex:column headerValue="Center Location">
+                <apex:outputText value="{!wrapper.item}"/>
+              </apex:column>
+              <apex:column dir="RTL" headerValue="Count" >
+                <apex:outputText value="{!wrapper.counter}"/>
+              </apex:column>
+            </apex:dataTable> 
+         </td>
+        <td>
+            <apex:dataTable value="{!myCollection3}" border="1" var="wrapper" columns="6" rowClasses="even, odd" cellpadding="5">
+              <apex:column headerValue="Center Location">
+                <apex:outputText value="{!wrapper.item}"/>
+              </apex:column>
+              <apex:column dir="RTL" headerValue="Count" >
+                <apex:outputText value="{!wrapper.counter}"/>
+              </apex:column>
+            </apex:dataTable>
+         </td>         
+    </tr>
+</table>
+</apex:page>

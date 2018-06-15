@@ -1,0 +1,10 @@
+<apex:page standardController="Center_Information__c" extensions="CenterInfoExtension" action="{!autoRun}">  
+<apex:sectionHeader title="Auto-Running Apex Code"/>  
+<apex:outputPanel >
+  <span style="font-weight:bold;font-style:italics;color:red;">     
+  You tried calling Apex Code from a button.<br /> 
+  If you see this page, something went wrong.<br />  
+  You should have been redirected back to the record you clicked the button from. <br />
+  Contact The IT department for help</span>
+</apex:outputPanel>
+</apex:page>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Redo Surgery Form</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Redo Surgery Forms</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Redo Surgery Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Biological Complication Other --></label>
+        <name>Biological_Complication_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Biological Complication --></label>
+        <name>Biological_Complication__c</name>
+        <picklistValues>
+            <masterLabel>Osseointegration failure</masterLabel>
+            <translation><!-- Osseointegration failure --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Peri-implant mucositis</masterLabel>
+            <translation><!-- Peri-implant mucositis --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Bone Graft Material Other --></label>
+        <name>Bone_Graft_Material_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bone Graft Material --></label>
+        <name>Bone_Graft_Material__c</name>
+        <picklistValues>
+            <masterLabel>Allograft</masterLabel>
+            <translation><!-- Allograft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Autograft</masterLabel>
+            <translation><!-- Autograft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Collagen Plug</masterLabel>
+            <translation><!-- Collagen Plug --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Gelfoam</masterLabel>
+            <translation><!-- Gelfoam --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Xenograft</masterLabel>
+            <translation><!-- Xenograft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>rhBMP</masterLabel>
+            <translation><!-- rhBMP --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Clinical Apt Calendar --></label>
+        <name>Clinical_Apt_Calendar__c</name>
+        <relationshipLabel><!-- Redo Surgery Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Clinical Note Instance --></label>
+        <name>Clinical_Note_Instance__c</name>
+        <relationshipLabel><!-- Redo Surgery Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Graft Failure Reason Other --></label>
+        <name>Graft_Failure_Reason_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Graft Failure Reason --></label>
+        <name>Graft_Failure_Reason__c</name>
+        <picklistValues>
+            <masterLabel>Graft Mobility</masterLabel>
+            <translation><!-- Graft Mobility --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Infection</masterLabel>
+            <translation><!-- Infection --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lesions</masterLabel>
+            <translation><!-- Lesions --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Loss of Material</masterLabel>
+            <translation><!-- Loss of Material --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Graft Failure Site --></label>
+        <name>Graft_Failure_Site__c</name>
+    </fields>
+    <fields>
+        <label><!-- Graft Failure --></label>
+        <name>Graft_Failure__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Implant Failure --></label>
+        <name>Implant_Failure__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Implant Tooth Position --></label>
+        <name>Implant_Tooth_Position__c</name>
+    </fields>
+    <fields>
+        <label><!-- IsActive --></label>
+        <name>IsActive__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mechanical Complication Other --></label>
+        <name>Mechanical_Complication_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mechanical Complication --></label>
+        <name>Mechanical_Complication__c</name>
+        <picklistValues>
+            <masterLabel>Implant Fracture</masterLabel>
+            <translation><!-- Implant Fracture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Redo Type Other --></label>
+        <name>Redo_Type_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Redo Type --></label>
+        <name>Redo_Type__c</name>
+        <picklistValues>
+            <masterLabel>Mandibular Arch</masterLabel>
+            <translation><!-- Mandibular Arch --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Maxillary Arch</masterLabel>
+            <translation><!-- Maxillary Arch --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>S/M</masterLabel>
+            <translation><!-- S/M --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Rerelate --></label>
+        <name>Rerelate__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

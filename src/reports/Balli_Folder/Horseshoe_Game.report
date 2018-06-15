@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Consult_Inventory__c$Consult_Room__c.Center_Information__c.Name</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Patient_Name__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Scheduled_Time__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Scheduled_by__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Scheduled_Lead__c.Pre_Screen__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c.Apt_Histories__r$Action__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c.Apt_Histories__r$Notes__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Consult_Inventory__c$Scheduled_by__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notContain</operator>
+            <value>pat greenwood,ccapi,kelley village</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Consult_Inventory__c.Apt_Histories__r$Notes__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>consultation has been scheduled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Consult_Inventory__c.Apt_Histories__r$Action__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>scheduled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Consult_Inventory__c$Patient_Name__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Horseshoe Game!</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Consult_Inventory_w_History__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Consult_Inventory__c$Scheduled_Time__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Consult_Inventory__c$Scheduled_Time__c</dateColumn>
+        <interval>INTERVAL_TODAY</interval>
+    </timeFrameFilter>
+</Report>

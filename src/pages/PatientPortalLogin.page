@@ -1,0 +1,28 @@
+<apex:page id="loginPage" showHeader="false" action="{!forwardToAuthPage}" title="{!$Label.site.site_login}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
+    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900" />
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+    
+    <apex:define name="body">
+        <apex:stylesheet value="{!URLFOR($Resource.PatientPortalAssets, 'css/login-style.css')}"/>
+        <div class="login-page">
+        <div id="header-text"><h1>Patient Portal</h1></div>
+        <div id="cc-logo"><apex:image id="theImage" value="{!$Resource.ClearChoiceLogo}" width="280" height="89"/></div>
+        <div class="form blue-form">
+            <apex:outputPanel layout="block" styleClass="topPanel">
+              <apex:panelGrid width="360" cellpadding="0" cellspacing="0" columns="2"> 
+                <apex:panelGroup >
+                  <br/>
+                  <apex:outputText styleClass="title" value="{!$Label.site.login}" />
+                  <br/>
+                  <c:SiteLogin id="siteLogin"/>
+                  <br/>
+                </apex:panelGroup>
+              </apex:panelGrid> 
+             </apex:outputPanel>
+        </div>
+    </div>
+    </apex:define>
+    
+</apex:page>

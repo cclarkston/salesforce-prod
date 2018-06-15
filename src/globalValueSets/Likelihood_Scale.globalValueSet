@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Very likely</fullName>
+        <default>false</default>
+        <label>Very likely</label>
+    </customValue>
+    <customValue>
+        <fullName>Likely</fullName>
+        <default>false</default>
+        <label>Likely</label>
+    </customValue>
+    <customValue>
+        <fullName>Somewhat likely</fullName>
+        <default>false</default>
+        <label>Somewhat likely</label>
+    </customValue>
+    <customValue>
+        <fullName>Somewhat unlikely</fullName>
+        <default>false</default>
+        <label>Somewhat unlikely</label>
+    </customValue>
+    <customValue>
+        <fullName>Unlikely</fullName>
+        <default>false</default>
+        <label>Unlikely</label>
+    </customValue>
+    <customValue>
+        <fullName>Very unlikely</fullName>
+        <default>false</default>
+        <label>Very unlikely</label>
+    </customValue>
+    <customValue>
+        <fullName>Soloist</fullName>
+        <default>false</default>
+        <label>Soloist</label>
+    </customValue>
+    <customValue>
+        <fullName>Validator</fullName>
+        <default>false</default>
+        <label>Validator</label>
+    </customValue>
+    <customValue>
+        <fullName>Delegator</fullName>
+        <default>false</default>
+        <label>Delegator</label>
+    </customValue>
+    <description>Intended for use with the Acxiom Data table</description>
+    <masterLabel>Likelihood Scale</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

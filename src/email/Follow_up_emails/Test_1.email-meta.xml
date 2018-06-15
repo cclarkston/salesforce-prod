@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Follow up email with video link</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Information Video</name>
+    <style>none</style>
+    <subject>Learn more about Dental Implants</subject>
+    <textOnly>Dear {!Lead.FirstName},
+
+I’d like to thank you for calling ClearChoice to inquire about dental implants and beautiful new teeth ... in just one day.* 
+
+You may be skeptical that dental implants and functional new teeth can be done in one day. As a leader in implant dentistry we have successfully completed over 10,000 cases and we urge you to watch our informative video (http://www.ClearChoice.com/movie) which answers many questions you may have.
+
+We hope that, like many others, you choose to:
+
+Schedule a free consultation. In a friendly environment, you’ll be able to:
+
+Tour our state-of-the-art facility and receive a FREE panoramic X-ray 
+
+Meet with the doctor to discuss your dental concerns
+
+See for yourself how dental implants and beautiful new teeth can be done conveniently in a day
+
+Determine the fee for your specific treatment plan
+
+Understand your financing options
+
+
+Our mission statement is to give our patients a high standard of care and a high quality experience. ClearChoice brings together state of the art technology, surgical procedures and restorative techniques that can enhance your appearance and lifestyle.
+
+Dental implants are a superior solution for your dental problems! We are available Monday through Friday at 1-888-654-4675 between the hours of 8:00am-5:00pm to answer your questions. 
+
+Sincerely,
+
+{!Lead.OwnerFullName}
+Dental Implant Consultant
+P.S. Remember to check out our website at clearchoice.com</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

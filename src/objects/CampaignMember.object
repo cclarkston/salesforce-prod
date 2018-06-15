@@ -1,0 +1,814 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>AddCampaign</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ConvertLead</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CreateOpportunity</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Address__c</fullName>
+        <externalId>false</externalId>
+        <formula>Street &amp; BR() &amp;
+City &amp; &quot;, &quot; &amp; State &amp; &quot; &quot; &amp;  PostalCode</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Address</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Anticipated_Payments__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact.Account.Total_Anticipated_Payments__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Anticipated Payments</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Attended_Consult__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+OR(
+ISPICKVAL(Status,&quot;Attended Consult&quot;),
+ISPICKVAL(Status,&quot;Started&quot;),
+ISPICKVAL(Status,&quot;Start Lost&quot;)
+
+),1 ,0 
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Attended Consult</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Attended_Email_Sent__c</fullName>
+        <externalId>false</externalId>
+        <label>Attended Email Sent</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Attended__c</fullName>
+        <externalId>false</externalId>
+        <label>Attended</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Booked_at_Seminar__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates if a patient was booked at the Seminar</description>
+        <externalId>false</externalId>
+        <label>Booked at Seminar</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Call_Center_Agent_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead.Call_Center_Agent__r.FirstName &amp; &quot; &quot; &amp;  Lead.Call_Center_Agent__r.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Call Center Agent Name</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CampaignId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Campaign_Center_Address__c</fullName>
+        <externalId>false</externalId>
+        <formula>Campaign.Center__r.Street_1__c &amp; &quot; &quot; &amp; Campaign.Center__r.Street_2__c  &amp; br() &amp; 
+Campaign.Center__r.City__c &amp; &quot;, &quot; &amp; TEXT(Campaign.Center__r.State__c) &amp; &quot; &quot; &amp; Campaign.Center__r.Zip_Code__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Campaign Center Address</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Campaign_Center_Phone_Number__c</fullName>
+        <externalId>false</externalId>
+        <formula>Campaign.Center__r.Call_Center_Marketing__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Campaign Center Phone Number</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Campaign_Date_Time__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE(Month(Campaign.StartDate),
+1,&quot;January&quot;,
+2,&quot;February&quot;,
+3,&quot;March&quot;,
+4,&quot;April&quot;,
+5,&quot;May&quot;,
+6,&quot;June&quot;,
+7,&quot;July&quot;,
+8,&quot;August&quot;,
+9,&quot;September&quot;,
+10,&quot;October&quot;,
+11,&quot;November&quot;,
+12,&quot;December&quot;,&quot;&quot;)
+&amp; &quot; &quot; &amp;
+TEXT(Day( Campaign.StartDate))
+&amp; &quot;, &quot; &amp;
+TEXT(Year(Campaign.StartDate))
+&amp; &quot; at &quot; &amp;  TEXT(Campaign.Time__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Campaign Date / Time</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Campaign_Location_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Campaign.Location_Name__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Campaign Location Name</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Campaign_Type_del__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text(Campaign.Type)</formula>
+        <label>Campaign Type</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Center_City_State_Zip__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead.Center__r.City__c &amp; &quot; ,&quot; &amp; TEXT(Lead.Center__r.State__c) &amp; &quot; &quot; &amp; Lead.Center__r.Zip_Code__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Center City State Zip</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Center_Map_URL__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead.Center__r.Map_Directions_URL__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Center Map URL</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Center_Marketing_Number__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead.Center__r.Call_Center_Marketing__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Center Marketing Number</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Center_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead.Center__r.Name &amp;  &quot; ClearChoice Dental Center&quot;</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Center Name</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Center_Street__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead.Center__r.Street_1__c &amp; &quot; &quot; &amp; Lead.Center__r.Street_2__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Center Street</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>City</fullName>
+    </fields>
+    <fields>
+        <fullName>Collected__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+OR(
+Revenue_Collected__c = 0,
+Revenue_Sold__c = 0,
+ISBLANK(Revenue_Collected__c),
+ISBLANK(Revenue_Sold__c)
+),
+Revenue_Collected__c /  Revenue_Sold__c,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>% Collected</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>CompanyOrAccount</fullName>
+    </fields>
+    <fields>
+        <fullName>Confirmation_Email__c</fullName>
+        <description>Confirmation Email Sent Date/Time</description>
+        <externalId>false</externalId>
+        <label>Welcome Packet Email</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Confirmation_Time__c</fullName>
+        <description>Timestamp from when the campaign member status was switched to confirmed</description>
+        <externalId>false</externalId>
+        <label>Confirmation Time</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Confirmed__c</fullName>
+        <externalId>false</externalId>
+        <label>Confirmed</label>
+        <precision>1</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Consult_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>DATEVALUE( Contact.Account.CreatedDate )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Consult Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Consult_Scheduled_Date_Past__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(Scheduled_Consult__c =1 &amp;&amp; Date_Consult_Scheduled_For__c &lt; NOW(),1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Consult Scheduled - Date Past</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Consult_Scheduled_Email_Sent__c</fullName>
+        <description>Consult Scheduled Email Sent</description>
+        <externalId>false</externalId>
+        <label>Consult Scheduled Email Sent</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Consult_Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Contact.Account.Consult_Result__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Consult Status</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ContactId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Country</fullName>
+    </fields>
+    <fields>
+        <fullName>Created_Clone__c</fullName>
+        <externalId>false</externalId>
+        <formula>CreatedDate</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Created_Clone</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DNC_Phone_Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead.StrikeForce4__DNC_Phone_Status_Display__c</formula>
+        <label>DNC Phone Status</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DateTime_Consult_Scheduled__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead.DateTime_Consult_Scheduled__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>DateTime Consult Scheduled</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Date_Consult_Scheduled_For__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead.DateTime_Consult_Scheduled__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Date Consult Scheduled For</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Description</fullName>
+    </fields>
+    <fields>
+        <fullName>DevNotes__c</fullName>
+        <description>A field to hold Development Notes that can be used later</description>
+        <externalId>false</externalId>
+        <label>Dev Notes</label>
+        <length>50</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DoNotCall</fullName>
+    </fields>
+    <fields>
+        <fullName>Email</fullName>
+    </fields>
+    <fields>
+        <fullName>Email_Address__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( NOT(ISBLANK(Lead.Email)), Lead.Email,
+IF(NOT(ISBLANK(Contact.Email)),Contact.Email,&quot;&quot;))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Email Address</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Email_Sent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Email Sent</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Email_address_when_status_consult_schd__c</fullName>
+        <externalId>false</externalId>
+        <label>Email address when status = consult schd</label>
+        <required>false</required>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fax</fullName>
+    </fields>
+    <fields>
+        <fullName>FirstName</fullName>
+    </fields>
+    <fields>
+        <fullName>FirstRespondedDate</fullName>
+    </fields>
+    <fields>
+        <fullName>First_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>FirstName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>First Name</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Guest_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK( ContactId), Lead.Guest_Name__c  ,  Contact.Account.Guest_Name__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Guest Name</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Guest_Names__c</fullName>
+        <description>Field to hold the names of guests attending seminar events</description>
+        <externalId>false</externalId>
+        <label>Guest Names</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>HasOptedOutOfEmail</fullName>
+    </fields>
+    <fields>
+        <fullName>HasOptedOutOfFax</fullName>
+    </fields>
+    <fields>
+        <fullName>HasResponded</fullName>
+    </fields>
+    <fields>
+        <fullName>Language_Spoken__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT( Lead.Language_Spoken__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Language Spoken</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LastName</fullName>
+    </fields>
+    <fields>
+        <fullName>LeadId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>LeadSource</fullName>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Lead_Call_Status__c</fullName>
+        <description>Holds the lead status for report purposes.</description>
+        <externalId>false</externalId>
+        <formula>Text(Lead.Status)</formula>
+        <label>Lead Call Status</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lead_Created_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(isnull(Lead.CreatedDate),Contact.CreatedDate,Lead.CreatedDate)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Lead/Contact Created Date</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Lead_Marketing_Source__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead.Marketing_Source_Formula__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Lead Marketing Source</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lead_Prospective_Patient_Status__c</fullName>
+        <description>Hold the lead prospective patient status for internal salesforce reports.</description>
+        <externalId>false</externalId>
+        <formula>Text(Lead.Call_Result__c)</formula>
+        <label>Lead Prospective Patient Status</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MobilePhone</fullName>
+    </fields>
+    <fields>
+        <fullName>Net_Revenue__c</fullName>
+        <externalId>false</externalId>
+        <formula>Revenue_Sold__c - Revenue_Cancelled__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Net Revenue</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>No_Show_Consult__c</fullName>
+        <externalId>false</externalId>
+        <label>No Show Consult</label>
+        <precision>1</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>No_Show_Email_Sent__c</fullName>
+        <externalId>false</externalId>
+        <label>No Show Email Sent</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>No_Show__c</fullName>
+        <externalId>false</externalId>
+        <label>No Show</label>
+        <precision>1</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Num_Guests__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Number of guests that will be attending the seminar with this lead</description>
+        <externalId>false</externalId>
+        <label>Num Guests</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Outstanding_Balance_Projected_Pipeline__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact.Account.Outstanding_Balance__c +  Projected_Pipeline__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Outstanding Balance + Projected Pipeline</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Outstanding_Balance__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact.Account.Outstanding_Balance__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Outstanding Balance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Phone</fullName>
+    </fields>
+    <fields>
+        <fullName>PostalCode</fullName>
+    </fields>
+    <fields>
+        <fullName>Projected_Pipeline__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( Contact.Account.Prosth_Exam_Count__c &gt; 0,0,Contact.Account.Preliminary_Treatment_Fee_Quoted__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Projected Pipeline</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Prospective_Patient_Consult_Owner__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Prospective Patient / Consult Owner</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Campaign_Members</relationshipName>
+        <required>false</required>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Registered__c</fullName>
+        <externalId>false</externalId>
+        <formula>1</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Registered</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Revenue_Cancelled__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( Contact.Account.Cancelled_Prosth_Exam_Revenue__c &lt;&gt; 0,
+Contact.Account.Negotiated_Fee_Amount__c,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Revenue Cancelled</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Revenue_Collected__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact.Account.Revenue_Collected__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Revenue Collected</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Revenue_Sold__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact.Account.Negotiated_Fee_Amount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Revenue Sold</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Salutation</fullName>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Scheduled_Consult__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(OR(
+CONTAINS(TEXT(Status),&quot;Scheduled Consult&quot;),
+CONTAINS(TEXT(Status),&quot;Attended Consult&quot;),
+CONTAINS(TEXT(Status),&quot;No Show Consult&quot;),
+CONTAINS(TEXT(Status),&quot;Start&quot;),
+CONTAINS(TEXT(Status),&quot;Start Lost&quot;)
+)
+,1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Scheduled Consult</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Start_Lost__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(ISPICKVAL( Status ,&quot;Start Lost&quot;),1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Start Lost</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Started__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(ISPICKVAL( Status ,&quot;Started&quot;),1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Started</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>State</fullName>
+    </fields>
+    <fields>
+        <fullName>Status</fullName>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Street</fullName>
+    </fields>
+    <fields>
+        <fullName>Title</fullName>
+    </fields>
+    <fields>
+        <fullName>Walk_In__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates if the campaign member was ever a walk-in</description>
+        <externalId>false</externalId>
+        <label>Walk In</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Well_Formatted_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead.Well_Formatted_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Well-Formatted Date</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Well_Formatted_Time__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead.Well_Formatted_Time__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Well-Formatted Time</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>actual_first_date__c</fullName>
+        <description>Actual date of when the Campaign Member was stored</description>
+        <externalId>false</externalId>
+        <label>Actual First Date</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>et4ae5__Activity__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Activity</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Sent</fullName>
+                    <default>false</default>
+                    <label>Sent</label>
+                </value>
+                <value>
+                    <fullName>Unsubscribed</fullName>
+                    <default>false</default>
+                    <label>Unsubscribed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>isLeadValid__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( ISBLANK( ContactId ) , if(ISPICKVAL(Lead.Inbound_Call__c, &apos;Dental Inquiry&apos;) || ISPICKVAL( Lead.Inbound_Call__c, &apos;Referral&apos;),1,0), 1)</formula>
+        <label>isLeadValid</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>testtest__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>test</label>
+        <type>Checkbox</type>
+    </fields>
+    <sharingModel>ControlledByCampaign</sharingModel>
+    <validationRules>
+        <fullName>Attended_Less_than_2</fullName>
+        <active>true</active>
+        <description>Check to verify that the value in attended is less than 2 (or null)</description>
+        <errorConditionFormula>AND(!ISNULL(Attended__c), Attended__c &gt;200)</errorConditionFormula>
+        <errorMessage>Attended must be set to a value of 1 or 0.  Please correct it and save the record again.</errorMessage>
+    </validationRules>
+</CustomObject>

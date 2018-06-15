@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Awaiting Bulk Print</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Awaiting Bulk Prints</value>
+    </caseValues>
+    <fields>
+        <label><!-- Batch Form --></label>
+        <name>Batch_Form__c</name>
+        <picklistValues>
+            <masterLabel>BCP Letter</masterLabel>
+            <translation><!-- BCP Letter --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Seminar Letter</masterLabel>
+            <translation><!-- Seminar Letter --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Welcome Letter</masterLabel>
+            <translation><!-- Welcome Letter --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Lead Id --></label>
+        <name>Lead_Id__c</name>
+        <relationshipLabel><!-- Awaiting Bulk Prints --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Complete</masterLabel>
+            <translation><!-- Complete --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending</masterLabel>
+            <translation><!-- Pending --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Printed</masterLabel>
+            <translation><!-- Printed --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Submitted By --></label>
+        <name>Submitted_By__c</name>
+        <relationshipLabel><!-- Awaiting Bulk Prints --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Submitted Time --></label>
+        <name>Submitted_Time__c</name>
+    </fields>
+    <startsWith>Vowel</startsWith>
+</CustomObjectTranslation>

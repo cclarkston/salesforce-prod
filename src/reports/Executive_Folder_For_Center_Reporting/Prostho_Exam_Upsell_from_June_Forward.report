@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>OPPORTUNITY_NAME</field>
+    </columns>
+    <columns>
+        <field>CLOSE_DATE</field>
+    </columns>
+    <columns>
+        <field>Opportunity.Treatment_Added_at_Prostho_Exam__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Opportunity.Additional_Treatment_Amount__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Opportunity.Treatment_Added_at_Prostho_Exam__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>includes</operator>
+            <value>Single Implant,Multiple Implants,Multiple Implant Bridge,AO4 Upper,AO4 Lower,AO4 Edentulous Upper,AO4 Edentulous Lower,DBL AO4,DBL AO4 Edentulous,Upper Denture,Lower Denture,Custom</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account.Center_Location__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Prostho Exam Upsell from June Forward</name>
+    <params>
+        <name>open</name>
+        <value>all</value>
+    </params>
+    <params>
+        <name>probability</name>
+        <value>&gt;0</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Opportunity</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CLOSE_DATE</dateColumn>
+        <endDate>2009-03-31</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2008-06-02</startDate>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Perio Chart Tooth</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Perio Chart Teeth</value>
+    </caseValues>
+    <fields>
+        <label><!-- Decay --></label>
+        <name>Decay__c</name>
+    </fields>
+    <fields>
+        <label><!-- Endo --></label>
+        <name>Endo__c</name>
+    </fields>
+    <fields>
+        <label><!-- Measurement --></label>
+        <name>Measurement__c</name>
+    </fields>
+    <fields>
+        <label><!-- Perio Chart --></label>
+        <name>Perio_Chart__c</name>
+        <relationshipLabel><!-- Perio Chart Teeth --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Tooth Integer --></label>
+        <name>Tooth_Integer__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tooth Type --></label>
+        <name>Tooth_Type__c</name>
+        <picklistValues>
+            <masterLabel>Crown</masterLabel>
+            <translation><!-- Crown --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Implant</masterLabel>
+            <translation><!-- Implant --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Missing</masterLabel>
+            <translation><!-- Missing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Natural</masterLabel>
+            <translation><!-- Natural --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pontic</masterLabel>
+            <translation><!-- Pontic --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

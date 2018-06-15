@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <comment>Redirects the user from the default Recent Items view to the most recently visited view instead.</comment>
+        <content>Creative_Tab_Default</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Creative material produced by Marketing. There are two types - Parent Assets and Public Ads. A Parent Asset needs Legal&apos;s approval but may need additional work (like the overlay of an end tag) before publishing. A Public Ad is the final creative piece with a defined DMA and an end tag, if applicable. Public Ads with end tags (local ads) need the approval of the relevant doctors.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Approval_Reminder_flag__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Not intended for the user - used to control the sending of reminder emails to Legal.</description>
+        <externalId>false</externalId>
+        <label>Approval Reminder flag</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Approved_By_Legal__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Denotes the asset has been approved by Legal (applies to Parent Assets)</description>
+        <externalId>false</externalId>
+        <label>Approved By Legal</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Approved__c</fullName>
+        <description>True is either a (Parent Asset is approved by Legal) OR a (Public Ad has a DoctorApprovalStatus of Approved or a checked ForceApproval checkbox)</description>
+        <externalId>false</externalId>
+        <formula>OR(
+
+    AND(
+        RecordType.Name = &quot;Parent Asset&quot;,
+        Approved_By_Legal__c = true
+        ),
+
+    AND(
+        RecordType.Name = &quot;Public Ad&quot;,
+        OR(
+           TEXT(Doctor_Approval_Status__c) = &quot;Approved&quot;,
+           Force_Approval__c
+           )
+        )
+   )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Approved?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DMA__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>DMA</label>
+        <referenceTo>DMA__c</referenceTo>
+        <relationshipLabel>Creative</relationshipLabel>
+        <relationshipName>Creative</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Doctor_Approval_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Doctor Approval Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Never Submitted</fullName>
+                    <default>true</default>
+                    <label>Never Submitted</label>
+                </value>
+                <value>
+                    <fullName>Pending</fullName>
+                    <default>false</default>
+                    <label>Pending</label>
+                </value>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+                <value>
+                    <fullName>Rejected</fullName>
+                    <default>false</default>
+                    <label>Rejected</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Duration__c</fullName>
+        <externalId>false</externalId>
+        <label>Duration</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>60s</fullName>
+                    <default>false</default>
+                    <label>60s</label>
+                </value>
+                <value>
+                    <fullName>30s</fullName>
+                    <default>false</default>
+                    <label>30s</label>
+                </value>
+                <value>
+                    <fullName>15s</fullName>
+                    <default>false</default>
+                    <label>15s</label>
+                </value>
+                <value>
+                    <fullName>2m</fullName>
+                    <default>false</default>
+                    <label>2m</label>
+                </value>
+                <value>
+                    <fullName>Longform</fullName>
+                    <default>false</default>
+                    <label>Longform</label>
+                </value>
+                <value>
+                    <fullName>NA</fullName>
+                    <default>false</default>
+                    <label>NA</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Force_Approval__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>An option for Marketing to force approval of a Public Ad without submitting to doctors for approval</description>
+        <externalId>false</externalId>
+        <label>Force Approval</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Legal_Approval_Due_Date__c</fullName>
+        <description>Should be set to one week after the initiation of the Legal Approval Process - controlled by a Workflow rule</description>
+        <externalId>false</externalId>
+        <label>Legal Approval Due Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Link_to_media__c</fullName>
+        <externalId>false</externalId>
+        <label>Link to media</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Media_type__c</fullName>
+        <externalId>false</externalId>
+        <label>Media type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>TV</fullName>
+                    <default>false</default>
+                    <label>TV</label>
+                </value>
+                <value>
+                    <fullName>Long-form TV</fullName>
+                    <default>false</default>
+                    <label>Long-form TV</label>
+                </value>
+                <value>
+                    <fullName>TV Doc Spot</fullName>
+                    <default>false</default>
+                    <label>TV Doc Spot</label>
+                </value>
+                <value>
+                    <fullName>Radio</fullName>
+                    <default>false</default>
+                    <label>Radio</label>
+                </value>
+                <value>
+                    <fullName>Print Newspaper</fullName>
+                    <default>false</default>
+                    <label>Print Newspaper</label>
+                </value>
+                <value>
+                    <fullName>Print Magazine</fullName>
+                    <default>false</default>
+                    <label>Print Magazine</label>
+                </value>
+                <value>
+                    <fullName>Web Display</fullName>
+                    <default>false</default>
+                    <label>Web Display</label>
+                </value>
+                <value>
+                    <fullName>Web Content</fullName>
+                    <default>false</default>
+                    <label>Web Content</label>
+                </value>
+                <value>
+                    <fullName>Web Video</fullName>
+                    <default>false</default>
+                    <label>Web Video</label>
+                </value>
+                <value>
+                    <fullName>Web SEM</fullName>
+                    <default>false</default>
+                    <label>Web SEM</label>
+                </value>
+                <value>
+                    <fullName>Direct Mail</fullName>
+                    <default>false</default>
+                    <label>Direct Mail</label>
+                </value>
+                <value>
+                    <fullName>Direct Mail CCMS</fullName>
+                    <default>false</default>
+                    <label>Direct Mail CCMS</label>
+                </value>
+                <value>
+                    <fullName>Direct Mail S4</fullName>
+                    <default>false</default>
+                    <label>Direct Mail S4</label>
+                </value>
+                <value>
+                    <fullName>Center Marketing S4</fullName>
+                    <default>false</default>
+                    <label>Center Marketing S4</label>
+                </value>
+                <value>
+                    <fullName>Email</fullName>
+                    <default>false</default>
+                    <label>Email</label>
+                </value>
+                <value>
+                    <fullName>GLO</fullName>
+                    <default>false</default>
+                    <label>GLO</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Name__c</fullName>
+        <description>The calculated name of the Creative object - it&apos;s a concatenation of other fields on the object - controlled by a Workflow rule</description>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Note__c</fullName>
+        <externalId>false</externalId>
+        <label>Note (optional)</label>
+        <length>63</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Parent_Asset__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Parent Asset</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Creative__c.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Parent Asset</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Creative__c</referenceTo>
+        <relationshipLabel>Creative</relationshipLabel>
+        <relationshipName>Public_Ad</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Project__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Project</label>
+        <referenceTo>Creative_Project__c</referenceTo>
+        <relationshipLabel>Creative</relationshipLabel>
+        <relationshipName>Creative</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Ready_for_use__c</fullName>
+        <description>True if the the Creative is both Approved AND not Retired</description>
+        <externalId>false</externalId>
+        <formula>AND(Approved__c = true, Retired__c = false)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Ready for use?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Retire_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Retire Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Retired__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Retired?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Retirement_Reason__c</fullName>
+        <externalId>false</externalId>
+        <label>Retirement Reason</label>
+        <length>1023</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <label>Creative</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Name__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Project__c</columns>
+        <columns>Parent_Asset__c</columns>
+        <columns>DMA__c</columns>
+        <columns>Media_type__c</columns>
+        <columns>Duration__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>Ready_for_use__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Legal_Compliance_Creative</fullName>
+        <filterScope>Queue</filterScope>
+        <label>Legal and Compliance</label>
+        <queue>Legal_Compliance</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Parent_Assets</fullName>
+        <columns>NAME</columns>
+        <columns>Name__c</columns>
+        <columns>Project__c</columns>
+        <columns>Media_type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>Approved_By_Legal__c</columns>
+        <columns>Retired__c</columns>
+        <columns>Ready_for_use__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Creative__c.Parent_Asset</value>
+        </filters>
+        <label>Parent Assets</label>
+    </listViews>
+    <listViews>
+        <fullName>Public_Ads</fullName>
+        <columns>NAME</columns>
+        <columns>Name__c</columns>
+        <columns>Project__c</columns>
+        <columns>Media_type__c</columns>
+        <columns>Duration__c</columns>
+        <columns>DMA__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>Doctor_Approval_Status__c</columns>
+        <columns>Retired__c</columns>
+        <columns>Ready_for_use__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Creative__c.Public_Ad</value>
+        </filters>
+        <label>Public Ads</label>
+    </listViews>
+    <nameField>
+        <displayFormat>CA-{0}</displayFormat>
+        <label>Identifier</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Creative</pluralLabel>
+    <recordTypes>
+        <fullName>Parent_Asset</fullName>
+        <active>true</active>
+        <description>An asset requiring Legal&apos;s approval, prior to producing the final, Public Ad</description>
+        <label>Parent Asset</label>
+        <picklistValues>
+            <picklist>Doctor_Approval_Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Never Submitted</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Pending</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Duration__c</picklist>
+            <values>
+                <fullName>15s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2m</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>30s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>60s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Longform</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Media_type__c</picklist>
+            <values>
+                <fullName>Center Marketing S4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Direct Mail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Direct Mail CCMS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Direct Mail S4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GLO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Long-form TV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Print Magazine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Print Newspaper</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radio</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TV Doc Spot</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web Content</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web Display</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web SEM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web Video</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Public_Ad</fullName>
+        <active>true</active>
+        <description>A final creative piece intended for public consumption. Requires approval of doctors if end tags are present.</description>
+        <label>Public Ad</label>
+        <picklistValues>
+            <picklist>Doctor_Approval_Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Never Submitted</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Pending</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Duration__c</picklist>
+            <values>
+                <fullName>15s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2m</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>30s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>60s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Longform</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Media_type__c</picklist>
+            <values>
+                <fullName>Center Marketing S4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Direct Mail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Direct Mail CCMS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Direct Mail S4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GLO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Long-form TV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Print Magazine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Print Newspaper</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radio</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TV Doc Spot</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web Content</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web Display</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web SEM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web Video</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>DMA__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CREATED_DATE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Approved__c</customTabListAdditionalFields>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <listViewButtons>New_Project</listViewButtons>
+        <listViewButtons>All_Projects</listViewButtons>
+        <listViewButtons>New_Creative_Shoot</listViewButtons>
+        <listViewButtons>All_Creative_Shoots</listViewButtons>
+        <lookupDialogsAdditionalFields>Name__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>DMA__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Media_type__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Note__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CREATED_DATE</lookupDialogsAdditionalFields>
+        <lookupFilterFields>Media_type__c</lookupFilterFields>
+        <lookupFilterFields>Duration__c</lookupFilterFields>
+        <lookupFilterFields>DMA__c</lookupFilterFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+    <webLinks>
+        <fullName>All_Creative_Shoots</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>All Creative Shoots</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <requireRowSelection>false</requireRowSelection>
+        <url>{!$Site.BaseUrl}/a26/l</url>
+    </webLinks>
+    <webLinks>
+        <fullName>All_Projects</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>All Projects</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <requireRowSelection>false</requireRowSelection>
+        <url>{!$Site.BaseUrl}/a25/l</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Create_National_Public_Ad</fullName>
+        <availability>online</availability>
+        <description>Makes a Public Ad version of the Parent Asset</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Create National Public Ad</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/15.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/15.0/apex.js&quot;)} 
+
+var response = sforce.apex.execute(&quot;Creative_Btn_Make_Public_Ad_From_Parent&quot;,&quot;make_copy&quot;,{recordID:&quot;{!Creative__c.Id}&quot;}); 
+
+alert(response); 
+
+location.reload(true);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>New_Creative_Shoot</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>New Creative Shoot</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>{!URLFOR($Action.Creative_Shoot__c.New, null)}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>New_Project</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>New Project</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>{!URLFOR($Action.Creative_Project__c.New, null)}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Retire_this_related_ads</fullName>
+        <availability>online</availability>
+        <description>Retires the Parent Asset and all its related Public Ads</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Retire this &amp; related ads</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/15.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/15.0/apex.js&quot;)} 
+
+var reason = prompt(&quot;Continuing will affect this Parent Asset and ALL the related Public Ads.\n\nEach item will be retired and have both its Retire Date and Retirement Response reset.\n\nIf you&apos;d like to proceed, provide a reason for the retirement and press OK.&quot;); 
+
+if (reason) { 
+sforce.apex.execute(&quot;Creative_Button_Parent_Retirement&quot;,&quot;retire&quot;,{recordID:&quot;{!Creative__c.Id}&quot;, userID: &quot;{!$User.Id}&quot;, retirement_status: true, retirement_reason: reason}); 
+location.reload(true); 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Submit_for_Doctor_Approval</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Submit for Doctor Approval</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/15.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/15.0/apex.js&quot;)} 
+
+var response = sforce.apex.execute(&quot;Creative_Button_Doctor_Approval&quot;,&quot;submit_for_doctor_approval&quot;,{recordID:&quot;{!Creative__c.Id}&quot;}); 
+
+alert(response); 
+
+location.reload(true);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>UnRetire_this_and_related_ads</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>UnRetire this &amp; related ads</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/15.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/15.0/apex.js&quot;)} 
+
+var confirmed = confirm(&quot;Continuing will affect this Parent Asset and ALL the related Public Ads.\n\nAny item that has retirement details will be unretired and have both its Retire Date and Retirement Response reset.&quot;); 
+
+if (confirmed) { 
+sforce.apex.execute(&quot;Creative_Button_Parent_Retirement&quot;,&quot;retire&quot;,{recordID:&quot;{!Creative__c.Id}&quot;, userID: &quot;{!$User.Id}&quot;, retirement_status: false}); 
+location.reload(true); 
+}</url>
+    </webLinks>
+</CustomObject>

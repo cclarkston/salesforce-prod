@@ -1,0 +1,260 @@
+<apex:page controller="ctrl_video_review" showHeader="true" sidebar="true" standardStylesheets="false" docType="html-5.0" title="Video Review">
+    <!-- <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/fonts.css')}"/> -->
+
+    <!-- Standard styling -->
+    <style>
+        .main * {
+            font-family: sans-serif;
+            font-size: medium;
+            box-sizing: border-box;
+        }
+        a, a:hover {
+            /*text-decoration: none !important;*/
+        }
+        .main .header {
+            font-size: 4vw;
+        }
+        .row {
+            display: block;
+        }
+        .right {
+            text-align: right;
+        }
+        .module {
+            background-color: white;
+            border-radius: .3vw;
+            padding: 1vw;
+            margin: 1vw;
+        }
+        .header, .footer {
+            -webkit-margin-before: 0;
+            -webkit-margin-after: 0;
+            background-color: cadetblue;
+            color: white;
+            padding: 1vw;
+        }
+        .header {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 2vw;
+        }
+        .module, .header {
+            box-shadow: 0 .3vw 1vw 0 black;
+        }
+        .footer {
+            width: calc(100% - 280px);
+            position: absolute;
+            bottom: 0;
+            text-align: right;
+        }
+    </style>
+
+    <!-- Custom styling for this page -->
+    <style>
+        .request {
+            border-radius: .5em;
+            background-color: white;
+            padding: .5em;
+            margin-bottom: .5em;
+        }
+        .main a, .main input, .main select {
+            cursor: pointer;
+        }
+        .module {
+            margin-bottom: 4vw;
+            background-color: lightgray;
+        }
+
+        .row.dates {
+            text-align: center;
+        }
+        .row.dates div {
+            display: inline-block;
+            margin: 0 1em;
+        }
+        .row.dates input {
+            padding-left: 1em;
+        }
+        .row.dates *:not(input) {
+            font-weight: bold;
+        }
+
+
+
+
+        .filters {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin: .5em 0;
+        }
+        .filters + * {
+            flex: 0;
+        }
+        .filters * {
+            border: none;
+            font-size: large !important;
+        }
+        .filters input {
+            text-align: center;
+        }
+        table {
+        width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+        }
+        #video-table th {
+            font-size: x-large;
+            border-bottom: 3px solid gray;
+            padding: 25px 25px 10px 25px;
+        }
+        #video-table td:first-child {
+            font-weight: bold;
+        }
+        .main tr {
+            border-bottom: 3px solid #eee;
+        }
+        .main tr:last-child {
+            border-bottom: none;
+        }
+        td {
+            padding: 25px;
+        }
+        .request-header {
+            text-align: center;
+            font-size: large;
+        }
+        .title {
+            flex: 1 0;
+        }
+        .name, .date {
+            flex: 0 1 12em;
+        }
+        .name {
+            color: cadetblue;
+        }
+        .command-button {
+            background: none !important;
+            background-color: steelblue !important;
+            border: none !important;
+            color: white !important;
+            font-size: medium !important;
+            font-weight: normal !important;
+            padding: 0.1em 0.8em !important;
+            margin: 1px 0 0 0 !important;
+        }
+        .body {
+            color: gray;
+            padding-top: 0;
+            padding-left: 3em;
+        }
+        i {
+            margin-right: 0.5em;
+            color: gray;
+        }
+        #spinner-container.spinner, #spinner-container.spinner * {
+            cursor: progress;
+        }
+    </style>
+
+    <script>
+        function spinner(status) {
+            var element = document.getElementById('spinner-container');
+            if (status == 'on')       {element.classList.add('spinner');}
+            else if (status == 'off') {element.classList.remove('spinner');}
+        };
+    </script>
+
+    <apex:form styleClass="main">
+    <div id="spinner-container">
+
+        <apex:pageMessages />
+        <div class="header">Video Review</div>
+
+        <div class="module">
+            <div class="row dates">
+                <div>
+                    <div>
+                        <div>
+                            Start date
+                        </div>
+                        <apex:input value="{!start_date}" type="date" />
+                    </div>
+                    <div>
+                        <div>
+                            End date
+                        </div>
+                        <apex:input value="{!end_date}" type="date" />
+                    </div>
+                </div>
+            </div>
+            <div class="row filters">
+                <apex:selectList value="{!region_ID}" size="1">
+                    <apex:selectOptions value="{!region_options}" />
+                </apex:selectList>
+                <apex:selectList value="{!center_ID}" size="1">
+                    <apex:selectOptions value="{!center_options}" />
+                </apex:selectList>
+                <apex:selectList value="{!PEC}" size="1">
+                    <apex:selectOptions value="{!PEC_options}" />
+                </apex:selectList>
+                <apex:selectList value="{!type}" size="1">
+                    <apex:selectOptions value="{!type_options}" />
+                </apex:selectList>
+
+                <apex:commandButton action="{!prepare_videos}" value="Search" onclick="spinner('on')" reRender="content, footer" styleClass="absolute-right command-button" oncomplete="spinner('off')" />
+            </div>
+
+            <apex:outputPanel id="content" styleClass="row" layout="block">
+                <apex:outputPanel rendered="{! video_count != 0 && video_count != null}">
+                    <table id="video-table">
+                        <thead>
+                            <th>Patient</th>
+                            <th>Region</th>
+                            <th>Center</th>
+                            <th>PEC</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                        </thead>
+                        <apex:repeat value="{!videos}" var="video">
+                            <!-- <div class="request">
+                                <div class="request-header"> -->
+                                <tr>
+                                    <td>
+                                        <apex:outputLink value="{!video.Link__c}">{!video.Account__r.Name}</apex:outputLink>
+                                    </td>
+                                    <td>
+                                        {!video.Account__r.Center__r.Region__r.Name}
+                                    </td>
+                                    <td>
+                                        {!video.Account__r.Center__r.Name}
+                                    </td>
+                                    <td>
+                                        {!video.CreatedBy.Name}
+                                    </td>
+                                    <td>
+                                        {!video.Type__c}
+                                    </td>
+                                    <td>
+                                        <apex:outputText value="{0, date, MM/dd/yy}">
+                                            <apex:param value="{!video.CreatedDate}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                                <!-- </div>
+                            </div> -->
+                        </apex:repeat>
+                    </table>
+                </apex:outputPanel>
+                    <apex:outputPanel rendered="{!video_count == 0}" layout="block" styleClass="request">
+                        No videos found with these selections.
+                    </apex:outputPanel>
+            </apex:outputPanel>
+        </div>
+
+        <apex:outputPanel rendered="{! $CurrentPage.parameters.debug == 'true'}" id="footer" layout="block" styleClass="footer">
+            DEBUG: {!debug}
+        </apex:outputPanel>
+    </div>
+    </apex:form>
+</apex:page>

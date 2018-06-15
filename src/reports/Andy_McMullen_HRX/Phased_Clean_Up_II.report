@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Patient_POT_Apt__c$Patient_POT__c</field>
+    </columns>
+    <columns>
+        <field>Patient_POT_Apt__c$Name</field>
+    </columns>
+    <columns>
+        <field>Patient_POT_Apt__c$Id</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Patient_POT_Apt__c$Patient_POT__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>1st</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Patient_POT_Apt__c$Name</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>arch</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Patient_POT_Apt__c$Name</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>surgery</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Phased Clean-Up II</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Patient_POT_Apts__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Patient_POT_Apt__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,1092 @@
+<apex:page controller="dp_admin_rooms" sidebar="false" showHeader="false" docType="html-5.0">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!--  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css' />
+  <apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+  <apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/mmenu_nav.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/dp_css_main.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.TippedLibrary, 'css/tipped/tipped.css')}"/>
+  <script type="text/javascript" src="{!URLFOR($Resource.TippedLibrary, 'js/tipped/tipped.js')}"></script>
+  <script> 
+  jQuery.noConflict();
+  jQuery(document).ready(function(){});
+  </script>  
+  <!-- Library for drag and drop sortable list functionality -->
+  <script type="text/javascript" src="{!URLFOR($Resource.Scriptaculous, 'lib/prototype.js')}"></script>
+  <script type="text/javascript" src="{!URLFOR($Resource.Scriptaculous, 'src/scriptaculous.js')}"></script>   
+
+  <style>
+  p.tool_head {
+    width:100%;
+    color:black;
+    font-weight:bold;
+    border-bottom:1px solid black;
+    text-align:center;
+  }
+  
+  .tpd-skin .tpd-content,
+.tpd-skin .tpd-title,
+.tpd-skin .tpd-close { color: #bfbfbf; }
+.tpd-skin .tpd-background-content { background-color: #f5f5f5; }
+.tpd-skin .tpd-background {
+  border-width: 1px;
+  border-color: #bfbfbf;
+}
+.tpd-skin .tpd-background-title { background-color: #bfbfbf; }
+/* line below the title */
+.tpd-skin .tpd-title-wrapper { border-bottom: 1px solid #bfbfbf; }
+/* shadow */
+.tpd-skin .tpd-background-shadow { box-shadow: 0 0 8px rgba(0,0,0,.15); }
+/* spinner */
+.tpd-skin .tpd-spinner-spin {
+  border-color: rgba(255,255,255,.2);
+}
+.tpd-skin li {color:#189BEB;}
+/* links */
+.tpd-skin a { color: #ddd; }
+.tpd-skin a:hover { color: #c6c6c6; }
+  
+  
+    input.input_hour {
+      text-align:right;
+      padding-right:2px;
+      width:30px;
+    }
+    
+    input.input_minute {
+      text-align:right;
+      padding-right:2px;
+      width:30px;
+    }
+  
+    .cell_image {
+      vertical-align:middle;  
+    }
+  
+    .form-label {
+      font-weight:bold;
+      width:75px;
+    }
+  
+    table.bend_table {
+      width:100%;      
+    }
+    
+    tr.bend_header {
+
+    }
+    
+    .gray_under {
+       display:inline-block;
+       border-bottom:1px solid #bfbfbf;
+       padding-left:5px;
+       padding-right:5px;
+     <!--text-decoration: underline;
+      -moz-text-decoration-color: #bfbfbf; /* Code for Firefox */
+      text-decoration-color: #bfbfbf;-->
+    }
+    
+    tr.bend_header td {
+
+    }
+    
+    tr.odd {
+    
+    }
+    
+    tr.odd td {
+      padding-left:5px;
+      border-bottom:1px dotted #bfbfbf;
+    }
+    
+    tr.even {
+        
+    }
+    
+    tr.even td {
+      padding-left:5px;
+      background:#f5f5f5;
+      border-bottom:1px dotted #bfbfbf;
+    }
+    
+    div.column_holder {
+      float:left;
+      padding-right:20px;   
+    }
+    
+    table.hours_column {
+      border-collapse: separate;
+      border-spacing: .1px;
+    }
+    
+    table.hours_column td {
+      border-bottom:1px dashed #bfbfbf;
+      border-left:1px dashed #bfbfbf;
+      border-right:1px dashed #bfbfbf;
+      padding-left:2px;
+      padding-right:2px;
+      min-width:200px;
+      height:20px;
+      line-height:20px;
+    }
+    
+    table.hours_column td.time_label {
+      text-align:right;
+      padding-right:5px;
+      background:#f5f5f5;
+    }
+    
+    table.hours_column td.col_header {
+      border:0;
+      background-color: #58595b;  
+      height:35px;  
+      line-height: 35px;
+      color:white;
+      font-weight:300;
+      font-size:14pt;
+      text-align:center;
+    }
+    
+    table.hours_column td.working_slot {
+       background:#fffef2;
+       padding-left:10px;
+       border-right:1px solid #e6d400;
+       border-left:1px solid #e6d400;
+       border-bottom:1px solid #fffef2;
+    }
+    
+    table.hours_column td.working_head {
+       background:#fffef2;
+       padding-left:10px;
+       border-top:1px solid #e6d400;
+       border-right:1px solid #e6d400;
+       border-left:1px solid #e6d400;
+       border-bottom:0px;
+    }
+    
+    table.hours_column td.working_close {
+       background:#fffef2;
+       padding-left:10px;
+       border:0;
+       border-right:1px solid #e6d400;
+       border-left:1px solid #e6d400;
+       border-bottom:1px solid #e6d400;
+    }
+    
+    table.hours_column td.inactive_slot {
+       background:#fbf0ff;
+       padding-left:10px;
+       border-right:1px solid #ebb3ff;
+       border-left:1px solid #ebb3ff;
+       border-bottom:0;
+    }
+    
+    table.hours_column td.inactive_head {
+       background:#fbf0ff;
+       padding-left:10px;
+       border-top:1px solid #ebb3ff;
+       border-right:1px solid #ebb3ff;
+       border-left:1px solid #ebb3ff;
+       border-bottom:0px;
+    }
+    
+    table.hours_column td.inactive_close {
+       background:#fbf0ff;
+       padding-left:10px;
+       border:0;
+       border-right:1px solid #ebb3ff;
+       border-left:1px solid #ebb3ff;
+       border-bottom:1px solid #ebb3ff;
+    }
+    
+    table.hours_column td.lunch_slot {
+       background:#F6E5F9;
+       padding-left:10px;
+       border:0;
+       border-right:1px solid #be45d4;
+       border-left:1px solid #be45d4;
+       border-bottom:1px solid #F6E5F9;
+    }
+    
+    table.hours_column td.lunch_head {
+       background:#F6E5F9;
+       padding-left:10px;
+       border:0;
+       border-top:1px solid #be45d4;
+       border-right:1px solid #be45d4;
+       border-left:1px solid #be45d4;
+       border-bottom:1px solid #F6E5F9;
+    }
+    
+    table.hours_column td.lunch_close {
+      background:#F6E5F9;
+      padding-left:10px;
+      border:0;
+      border-bottom:1px solid #be45d4;
+      border-right:1px solid #be45d4;
+      border-left:1px solid #be45d4;
+    }
+    
+    table.hours_column td.no_bottom {
+      border-bottom:0px;
+    }
+    
+    table.hours_column td.open_slot:hover {
+      background:#FFF3FF;
+    }
+    
+    span.li_room_name {
+      display:inline-block;
+      width:100%;
+    }
+    
+    <!--span.li_room_name:hover {
+      background:#f5f5f5;
+    }-->
+    
+    span.li_room_actions {
+      display:inline-block;
+      text-align:right;
+      width:90%;
+      padding-right:20px;
+    }
+    
+    span.sortable {
+      width:100%;
+    }
+  </style>
+  
+  <script type="text/javascript">    
+    var key_timeout;
+    var search_in_progress = false;
+   
+   function search_now() {
+      search_in_progress = false;  
+      search_users(); 
+   }
+    
+    function qsearch_key() {    
+      if(search_in_progress)
+        clearTimeout(key_timeout);
+      search_in_progress = true;  
+      key_timeout = setTimeout("body_refresh()",600);
+    }   
+    
+    function apt_qsearch_key() {    
+      if(search_in_progress)
+        clearTimeout(key_timeout);
+      search_in_progress = true;  
+      key_timeout = setTimeout("apt_refresh()",600);
+    }
+    
+    function init_sort() {
+       Sortable.create('prosth_room',{tag:'span',onUpdate: function(item) {
+         var list = Sortable.options(item).element; 
+         var pass_string = Sortable.serialize(list,{'list':'list'});
+         room_sort_handler(pass_string);          
+       }});
+       Sortable.create('surgery_room',{tag:'span',onUpdate: function(item) {
+         var list = Sortable.options(item).element; 
+         var pass_string = Sortable.serialize(list,{'list':'list'});
+         room_sort_handler(pass_string);          
+       }});
+       Sortable.create('recovery_room',{tag:'span',onUpdate: function(item) {
+         var list = Sortable.options(item).element; 
+         var pass_string = Sortable.serialize(list,{'list':'list'});
+         room_sort_handler(pass_string);          
+       }});
+       Sortable.create('hygiene_room',{tag:'span',onUpdate: function(item) {
+         var list = Sortable.options(item).element; 
+         var pass_string = Sortable.serialize(list,{'list':'list'});
+         room_sort_handler(pass_string);          
+       }});
+     }
+     
+     window.onload = init_sort;     
+  </script>
+  
+  
+</head>
+<body>
+<apex:form >
+<apex:messages />
+<apex:actionFunction name="body_refresh" rerender="main_holder" />
+
+<div id="nav-fixed">
+<div id="nav-header" style="border:0px;">
+<apex:actionRegion >
+<apex:actionFunction name="nav_to" action="{!navigate_to}" rerender="none" status="ajaxstatus">
+  <apex:param name="navid" value=""  />
+</apex:actionFunction>
+<apex:actionFunction name="center_switch" action="{!change_center}" rerender="nav_content,main_holder" oncomplete="init_sort();" status="ajaxstatus">
+  <apex:param name="cid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="active_switch" action="{!change_active_view}" rerender="main_holder" oncomplete="init_pops();init_sort();" status="ajaxstatus">
+  <apex:param name="afilter" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="new_prosth_room_form" action="{!new_room_form}" rerender="main_holder" oncomplete="init_sort();" status="ajaxstatus">
+   <apex:param name="new_room_type" value="Prosth" assignTo="{!new_room_type}"  />
+</apex:actionFunction>
+<apex:actionFunction name="room_sort_handler" action="{!modify_sort_order}" rerender="main_holder" oncomplete="init_sort();" status="ajaxstatus" >
+  <apex:param name="pthru" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="appointment_info" action="{!display_appointment_info}" rerender="nav_content,main_holder" status="ajaxstatus" >
+  <apex:param name="rid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="schedule_info" action="{!display_schedule_info}" rerender="nav_content,main_holder" oncomplete="init_pops();" status="ajaxstatus" >
+  <apex:param name="rid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="new_block" action="{!display_new_block_form}" rerender="nav_content,main_holder" status="ajaxstatus" >
+  <apex:param name="dow" value="" />
+  <apex:param name="shour" value="" />
+  <apex:param name="sminute" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="modify_block" action="{!display_existing_block_form}" rerender="nav_content,main_holder" status="ajaxstatus"  >
+  <apex:param name="bid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="add_all_form_type" action="{!add_all_form_appointments}" rerender="main_holder" status="ajaxstatus" >
+  <apex:param name="ftype" value="" />
+</apex:actionFunction>
+
+<apex:actionFunction name="edit_block_detail" action="{!show_block_form}" rerender="nav_content,main_holder" status="ajaxstatus" />
+
+<apex:actionStatus id="ajaxstatus">
+    <apex:facet name="start">
+      <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1110; background-color: #f2f2f2;">
+        &nbsp;
+      </div>
+      <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1111; margin: 20% 50%">
+        <!--<apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,'Images/5Wits.gif')}"/>-->
+        <!--<img src="http://upload.wikimedia.org/wikipedia/commons/e/ed/Cursor_Windows_Vista.gif" />-->
+        <img src="{!URLFOR($Resource.Dental_Practice_Resources,'Images/Circle-out.gif')}" />
+        <!--<img src="{!URLFOR($Resource.Dental_Practice_Resources,'Images/5Wits.gif')}" />-->
+      </div>
+    </apex:facet>
+  </apex:actionStatus>
+
+<apex:outputpanel id="nav_content" style="width:100%;">
+<!--<table style="width:100%">
+<tr style="height:35px;">
+  <td class="back_cell">
+    <apex:outputpanel id="back_holder">
+      <apex:outputpanel rendered="{!if(selected_view=='all_room_display',true,false)}"><a href="javascript:window.history.go(-1);" class="nav_color">&lt; Back</a></apex:outputpanel>
+<!--      <apex:outputpanel rendered="{!if(selected_view=='staff_display',false,true)}"><apex:commandLink styleClass="nav_color" action="{!display_staff_info}" reRender="nav_content,main_holder">&lt; Back</apex:commandLink></apex:outputpanel>-->
+<!--    </apex:outputpanel>
+  </td>
+  <td class="center_cell">  
+    <span class="dropdown   drop-hover">
+      <a class="dropdown-toggle nav_color" data-toggle="dropdown"><apex:outputtext value="{!current_center.name}" styleClass="c-pointer" style="padding-right:5px;"/><span class="caret"></span></a>
+        <ul class="dropdown-menu overflow-menu" >
+          <apex:repeat var="center" value="{!center_list}">
+            <li class="dropdown-lineitem">
+              <a href="javascript:center_switch('{!center.id}');" style="color:#189BEB"><apex:outputtext value="{!center.name}" /></a>
+            </li>
+          </apex:repeat>
+        </ul>
+    </span>        
+  </td>
+    <td class="gear_cell"><span class="dropdown  drop-hover">
+      <a class="dropdown-toggle nav_color" data-toggle="dropdown"><apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}" width="25" height="25" styleClass="c-pointer"
+        onmouseover="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_black.png')}';"
+        onmouseout="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}';" /></a>
+      <ul class="dropdown-menu gear-menu dropdown-menu-right">
+<!--        <li class="dropdown-lineitem"><a href="/apex/ccare_bend_mmenu" style="color:#189BEB;">Admin Menu</a></li>
+        <li class="dropdown-lineitem"><a href="/secur/logout.jsp" style="color:#189BEB;">Logout</a></li>-->
+<!--        <apex:repeat var="gitem" value="{!gear_menu}" >
+            <li class="dropdown-lineitem" style="display:inline-block;">
+              <a href="{!gitem.Page_URL__c}" style="color:#189BEB;"  
+                  onmouseover="this.firstChild.src='{!URLFOR($Resource.Dental_Practice_Resources,gitem.Image_Name_Hover__c)}';this.style.color='black';" 
+                  onmouseout="this.firstChild.src='{!URLFOR($Resource.Dental_Practice_Resources,gitem.Image_Name__c)}';this.style.color='#189BEB';">
+                <apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,gitem.Image_Name__c)}" width="{!if(gitem.name=='Salesforce','30','20')}" height="20" style="display:inline;{!if(gitem.name=='Salesforce','position:relative;left:-7px;margin-right:-6px;','margin-right:5px;')}" />&nbsp;&nbsp;{!gitem.name}
+              </a>
+            </li>
+        </apex:repeat>
+      </ul>        
+    </span></td>
+</tr>
+<tr>
+  <td>
+  <!--Quick Page Navigation-->
+ <!-- <div class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:black;">
+      <span class="color-box" style="background:{!current_page.nav_color__c};">&nbsp;</span>
+      <apex:outputtext value="{!current_page.name}" />
+    </a>    
+    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">    
+      <apex:repeat var="menu_line" value="{!navigation_menu}" >
+        <!--is menu line a header?-->
+    <!--    <apex:outputpanel rendered="{!if(menu_line.menu_type=='Header',true,false)}"> 
+          <li role="presentation" class="dropdown-header"><apex:outputtext value="{!menu_line.menu_name}" /></li>
+        </apex:outputpanel>
+        <!--is menu line a page?-->
+     <!--   <apex:outputpanel rendered="{!if(menu_line.menu_type=='Page',true,false)}">
+          <li role="presentation" class="dropdown-lineitem">
+            <a role="menuitem" tabindex="-1" href="javascript:nav_to('{!menu_line.menu_id}');" style="color:#189BEB">
+              <span class="color-box" style="background:{!menu_line.menu_nav_color};">&nbsp;</span><apex:outputtext value="{!menu_line.menu_name}" />
+            </a>
+          </li>
+        </apex:outputpanel>
+        <!--is it a call for a spacer-->
+      <!--  <apex:outputpanel rendered="{!if(menu_line.menu_type=='Spacer',true,false)}"><br /></apex:outputpanel>
+      </apex:repeat>      
+    </ul>
+  </div>
+  </td>
+  <td align="center">
+  <!--Quick Search Bar-->
+<!--  <apex:outputpanel rendered="{!display_qsearch}"><apex:inputText value="{!quick_search_field}" styleClass="qsearch" onkeyup="qsearch_key();"  /><a class="qsearch-btn" >Search</a></apex:outputpanel>
+    <apex:outputpanel rendered="{!display_add_button}">
+      <!--<apex:outputpanel rendered="{!if(selected_view=='license_display',true,false)}"><span class="add-box" onclick="new_license();">+</span></apex:outputpanel>-->
+<!--    </apex:outputpanel>
+  </td>
+  <td>
+  <!--nothing-->
+<!--  </td>
+</tr>
+</table>  -->
+<div class="nav-col-quarter">
+    <apex:outputpanel id="back_holder">
+      <apex:outputpanel rendered="{!if(selected_view=='all_room_display',true,false)}"><a href="javascript:window.history.go(-1);" class="nav_color">&lt; Back</a></apex:outputpanel>
+      <apex:outputpanel rendered="{!if(selected_view=='all_room_display',false,true)}"><apex:commandLink styleClass="nav_color" status="ajaxstatus" action="{!display_all_rooms}" reRender="nav_content,main_holder" oncomplete="init_sort();">&lt; Back</apex:commandLink></apex:outputpanel>
+    </apex:outputpanel>
+  <div class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:black;">
+      <span class="color-box" style="background:{!current_page.nav_color__c};">&nbsp;</span>
+      <apex:outputtext value="{!current_page.name}" />
+    </a>    
+    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">    
+      <apex:repeat var="menu_line" value="{!navigation_menu}" >
+        <!--is menu line a header?-->
+        <apex:outputpanel rendered="{!if(menu_line.menu_type=='Header',true,false)}"> 
+          <li role="presentation" class="dropdown-header"><apex:outputtext value="{!menu_line.menu_name}" /></li>
+        </apex:outputpanel>
+        <!--is menu line a page?-->
+        <apex:outputpanel rendered="{!if(menu_line.menu_type=='Page',true,false)}">
+          <li role="presentation" class="dropdown-lineitem">
+            <a role="menuitem" tabindex="-1" href="javascript:nav_to('{!menu_line.menu_id}');" style="color:#189BEB">
+              <span class="color-box" style="background:{!menu_line.menu_nav_color};">&nbsp;</span><apex:outputtext value="{!menu_line.menu_name}" />
+            </a>
+          </li>
+        </apex:outputpanel>
+        <!--is it a call for a spacer-->
+        <apex:outputpanel rendered="{!if(menu_line.menu_type=='Spacer',true,false)}"><br /></apex:outputpanel>
+      </apex:repeat>      
+    </ul>
+  </div>
+</div>
+
+<div class="nav-col-half">
+  <span class="dropdown drop-hover">
+      <a class="dropdown-toggle nav_color " data-toggle="dropdown"><apex:outputtext value="{!current_center.name}"  style="padding-right:5px;" styleClass="c-pointer"  /><span class="caret"></span></a>
+        <ul class="dropdown-menu overflow-menu" >
+          <apex:repeat var="center" value="{!center_list}">
+            <li class="dropdown-lineitem">
+              <a href="javascript:center_switch('{!center.id}');" style="color:#189BEB"><apex:outputtext value="{!center.name}" /></a>
+            </li>
+          </apex:repeat>
+        </ul>
+    </span>
+  <!--Quick Search Bar-->
+   <apex:outputpanel rendered="{!display_qsearch}"><apex:inputText value="{!quick_search_field}" styleClass="qsearch" onkeyup="qsearch_key();"  /><a class="qsearch-btn" >Search</a></apex:outputpanel>
+    <apex:outputpanel rendered="{!display_add_button}">
+      <!--<apex:outputpanel rendered="{!if(selected_view=='license_display',true,false)}"><span class="add-box" onclick="new_license();">+</span></apex:outputpanel>-->
+    </apex:outputpanel>
+</div>
+
+<div class="nav-col-quarter ag-left">
+  <span class="dropdown drop-hover">
+      <a class="dropdown-toggle nav_color" data-toggle="dropdown"><apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}" width="25" height="25" styleClass="c-pointer"
+        onmouseover="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_black.png')}';"
+        onmouseout="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}';"
+        onclick="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}';"
+         /></a>
+      <ul class="dropdown-menu gear-menu dropdown-menu-right">
+        <apex:repeat var="gitem" value="{!gear_menu}" >
+            <li class="dropdown-lineitem" style="display:inline-block;">
+              <a href="{!gitem.Page_URL__c}" style="color:#189BEB;" target="{!gitem.hyperlink_target__c}"
+                  onmouseover="this.firstChild.src='{!URLFOR($Resource.Dental_Practice_Resources,gitem.Image_Name_Hover__c)}';this.style.color='black';" 
+                  onmouseout="this.firstChild.src='{!URLFOR($Resource.Dental_Practice_Resources,gitem.Image_Name__c)}';this.style.color='#189BEB';">
+                <apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,gitem.Image_Name__c)}" width="{!if(gitem.name=='Salesforce','30','20')}" height="20" style="display:inline;{!if(gitem.name=='Salesforce','position:relative;left:-7px;margin-right:-6px;','margin-right:5px;')}" />&nbsp;&nbsp;{!gitem.name}
+              </a>
+            </li>
+        </apex:repeat>
+      </ul>        
+    </span>
+</div>
+</apex:outputPanel>
+</apex:actionRegion>  
+</div>
+</div>
+
+<apex:outputPanel id="main_holder" styleClass="mm_container" layout="block" >
+  <apex:outputpanel styleClass="ptop_header" layout="block" >
+  <!--display active/inactive bar here-->
+  <table style="width:100%">
+  <tr>
+    <td class="back_cell">
+      <apex:outputpanel rendered="{!if(Selected_view=='block_display',true,false)}">  
+        <apex:commandLink styleclass="lblue" action="{!display_schedule_info}" rerender="main_holder" status="ajaxstatus" oncomplete="init_pops();">
+          <apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,'Images/calendar-blue.png')}" height="20" width="20" />
+          <apex:param name="rid" value="{!new_room.id}" /> Calendar View
+        </apex:commandLink>
+      </apex:outputpanel>
+    </td>
+    <td class="center_cell"><apex:outputtext value="{!body_header}" /></td>
+    <td class="active_cell">
+      <apex:outputpanel rendered="{!display_active_nav}">
+          <span class="{!if(active_filter=='All','selected_active','unselected_active')}" onclick="active_switch('All');">All({!all_count})</span>
+          <span class="{!if(active_filter=='Active','selected_active','unselected_active')}" onclick="active_switch('Active');">Active({!active_count})</span>
+          <span class="{!if(active_filter=='Inactive','selected_active','unselected_active')}" onclick="active_switch('Inactive');" >Inactive({!inactive_count})</span>
+      </apex:outputpanel>
+    </td>
+  </tr>
+  </table>
+  </apex:outputpanel>
+  <apex:messages style="color:red;font-style:italics;" />
+  <br />
+  
+<!--  <ul id="namelist">
+         <li id="list1_1">Physics</li>
+         <li id="list1_2">Chemistry</li>
+         <li id="list1_3">Maths</li>
+         <li id="list1_4">Botany</li>
+         <li id="list1_5">Sociology</li>
+         <li id="list1_6">English</li>
+      </ul>-->
+
+<!--------- Start Display All Rooms  ----------------------------------->
+  <apex:outputpanel rendered="{!if(selected_view=='all_room_display',true,false)}" styleClass="content_holder" >           
+  <!--display prosth rooms-->
+  <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+      <apex:outputPanel layout="block" styleClass="mm_header-label">Prosth</apex:outputPanel>
+    </apex:outputPanel>  
+<!--  <apex:outputPanel layout="block" styleClass="mm_header">Prosth</apex:outputPanel>  -->
+  <!--form for a new Prosth room here or display the add room button-->
+  <apex:outputpanel rendered="{!display_prosth_room_form}" style="padding-left:40px;">
+      <apex:inputfield value="{!new_room.name}" styleclass="input_standard" onfocus="if(this.value=='Enter room label') {this.value='';}" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!save_new_room}" status="ajaxstatus" reRender="main_holder" value="Save" styleclass="lblue" oncomplete="window.location = '#lastinsert';document.getElementById('lastinsert').focus();init_sort();return false" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!hide_room_form}" status="ajaxstatus" reRender="main_holder" value="Cancel" styleclass="lblue" oncomplete="init_sort();" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!reset_room_form}" status="ajaxstatus" reRender="main_holder" value="Reset" styleclass="lblue" oncomplete="init_sort();" />
+  </apex:outputpanel>
+  
+  <apex:outputpanel rendered="{!if(display_prosth_room_form==true,false,true)}" style="padding-left:40px;">  
+    <apex:commandlink action="{!new_room_form}" status="ajaxstatus" rerender="main_holder" styleclass="lblue" value="+ Add Room" oncomplete="init_sort();">
+      <apex:param name="new_room_type" value="Prosth" assignTo="{!new_room_type}" />
+      <!--<span class="light-add-box">&#43;</span>&nbsp; Add Room -->
+    </apex:commandlink>  
+  </apex:outputpanel>
+  
+  <div class="section_details" style="padding-top:5px;" id="prosth_room">  
+  <!--display all of the prosth rooms--->
+    <apex:repeat var="room" value="{!prosth_rooms}">
+    
+    <!--<apex:outputpanel rendered="{!if(room.Room_Type__c=='Prosth',true,false)}">-->
+      <span id="list_{!room.id}" class="sortable">
+      <!--not editing this record-->
+      <apex:outputpanel rendered="{!if(current_edit==room.id,false,true)}" >  
+        <span class="li_room_name">      
+        <apex:commandlink value="{!room.name}" status="ajaxstatus" rerender="main_holder" action="{!edit_room}" style="color:black;" oncomplete="init_sort();">
+          <apex:param name="current_edit" value="{!room.id}" assignTo="{!current_edit}" />
+        </apex:commandlink><span class="spacer">&nbsp;</span>
+        <span class="li_room_actions">
+          <span class="detail_nav_link" onclick="appointment_info('{!room.id}');">Appointments</span>    
+          <span class="detail_nav_link" onclick="schedule_info('{!room.id}');">Schedule</span>        
+        </span></span>
+      </apex:outputpanel>
+      
+      <!--editing this record-->
+      <apex:outputpanel rendered="{!if(current_edit==room.id,true,false)}" >
+        <apex:inputfield value="{!new_room.name}" /> <span class="spacer">&nbsp;</span>   
+        <apex:commandLink action="{!save_new_room}" status="ajaxstatus" reRender="main_holder" value="Save" styleclass="lblue" oncomplete="init_sort();" /><span class="spacer">&nbsp;</span>
+        <apex:commandLink action="{!hide_room_form}" status="ajaxstatus" reRender="main_holder" value="Cancel" styleclass="lblue" oncomplete="init_sort();"/><span class="spacer">&nbsp;</span>
+        <apex:commandLink action="{!edit_room}" status="ajaxstatus" reRender="main_holder" value="Reset" styleclass="lblue" oncomplete="init_sort();"/>       
+      </apex:outputpanel> 
+    <br />
+    </span>
+    <!--</apex:outputpanel> -->
+    </apex:repeat>
+  </div>
+  <br />  
+  
+  <!--display surgery rooms-->
+    <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+      <apex:outputPanel layout="block" styleClass="mm_header-label">Surgery</apex:outputPanel>
+    </apex:outputPanel>  
+<!--  <apex:outputPanel layout="block" styleClass="section-box">Surgery</apex:outputPanel>  -->
+  <!--form for a new Surgery room here or display the add room button-->
+  <apex:outputpanel rendered="{!display_surgery_room_form}" style="padding-left:40px;">
+      <apex:inputfield value="{!new_room.name}" styleclass="input_standard" onfocus="if(this.value=='Enter room label') {this.value='';}" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink status="ajaxstatus" action="{!save_new_room}" reRender="main_holder" value="Save" styleclass="lblue" oncomplete="window.location = '#lastinsert';document.getElementById('lastinsert').focus();init_sort();return false" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink status="ajaxstatus" action="{!hide_room_form}" reRender="main_holder" value="Cancel" styleclass="lblue" oncomplete="init_sort();" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink status="ajaxstatus" action="{!reset_room_form}" reRender="main_holder" value="Reset" styleclass="lblue" oncomplete="init_sort();" />
+  </apex:outputpanel>
+  
+  <apex:outputpanel rendered="{!if(display_surgery_room_form==true,false,true)}" style="padding-left:40px;">  
+    <apex:commandlink action="{!new_room_form}" status="ajaxstatus" rerender="main_holder" styleclass="lblue" value="+ Add Room" oncomplete="init_sort();">
+      <apex:param name="new_room_type" value="Surgery" assignTo="{!new_room_type}" />
+<!--      <span class="light-add-box">&#43;</span>&nbsp; Add Room -->
+    </apex:commandlink>  
+  </apex:outputpanel> 
+  
+  <div class="section_details" style="padding-top:5px;" id="surgery_room">  
+  <!--display all of the surgery rooms--->
+    <apex:repeat var="room" value="{!surgery_rooms}">
+<!--    <apex:outputpanel rendered="{!if(room.Room_Type__c=='Surgery',true,false)}">-->
+      <span id="list_{!room.id}" class="sortable">
+      <!--not editing this record-->
+      <apex:outputpanel rendered="{!if(current_edit==room.id,false,true)}" >  
+        <span class="li_room_name">      
+        <apex:commandlink value="{!room.name}" status="ajaxstatus" rerender="main_holder" action="{!edit_room}" style="color:black;" oncomplete="init_sort();">
+          <apex:param name="current_edit" value="{!room.id}" assignTo="{!current_edit}" />
+        </apex:commandlink><span class="spacer">&nbsp;</span>
+        <span class="li_room_actions">
+          <span class="detail_nav_link" onclick="appointment_info('{!room.id}');">Appointments</span>    
+          <span class="detail_nav_link" onclick="schedule_info('{!room.id}');">Schedule</span>        
+        </span></span>
+      </apex:outputpanel>
+      
+      <!--editing this record-->
+      <apex:outputpanel rendered="{!if(current_edit==room.id,true,false)}" >
+        <apex:inputfield value="{!new_room.name}" /> <span class="spacer">&nbsp;</span>   
+        <apex:commandLink action="{!save_new_room}" status="ajaxstatus" reRender="main_holder" value="Save" styleclass="lblue" oncomplete="init_sort();" /><span class="spacer">&nbsp;</span>
+        <apex:commandLink action="{!hide_room_form}" status="ajaxstatus" reRender="main_holder" value="Cancel" styleclass="lblue" oncomplete="init_sort();"/><span class="spacer">&nbsp;</span>
+        <apex:commandLink action="{!edit_room}" status="ajaxstatus" reRender="main_holder" value="Reset" styleclass="lblue" oncomplete="init_sort();"/>       
+      </apex:outputpanel>
+    <br />
+    </span>
+    <!--</apex:outputpanel>-->
+    </apex:repeat>
+  </div> 
+  
+  <br />
+  
+  <!--display recovery rooms-->
+  <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+      <apex:outputPanel layout="block" styleClass="mm_header-label">Recovery</apex:outputPanel>
+    </apex:outputPanel>  
+<!--  <apex:outputPanel layout="block" styleClass="section-box">Recovery</apex:outputPanel> -->
+  <!--form for a new Recovery room here or display the add room button-->
+  <apex:outputpanel rendered="{!display_recovery_room_form}" style="padding-left:40px;">
+      <apex:inputfield value="{!new_room.name}" styleclass="input_standard" onfocus="if(this.value=='Enter room label') {this.value='';}" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!save_new_room}" status="ajaxstatus" reRender="main_holder" value="Save" styleclass="lblue" oncomplete="window.location = '#lastinsert';document.getElementById('lastinsert').focus();init_sort();return false" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!hide_room_form}" status="ajaxstatus" reRender="main_holder" value="Cancel" styleclass="lblue" oncomplete="init_sort();"/><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!reset_room_form}" status="ajaxstatus" reRender="main_holder" value="Reset" styleclass="lblue" oncomplete="init_sort();"/>
+  </apex:outputpanel>
+  
+  <apex:outputpanel rendered="{!if(display_recovery_room_form==true,false,true)}" style="padding-left:40px;">  
+    <apex:commandlink action="{!new_room_form}" status="ajaxstatus" rerender="main_holder" styleclass="lblue" value="+ Add Room" oncomplete="init_sort();">
+      <apex:param name="new_room_type" value="Recovery" assignTo="{!new_room_type}" />
+<!--      <span class="light-add-box">&#43;</span>&nbsp; Add Room -->
+    </apex:commandlink>  
+  </apex:outputpanel>  
+  
+  <div class="section_details" style="padding-top:5px;" id="recovery_room">  
+  <!--display all of the surgery rooms--->
+    <apex:repeat var="room" value="{!recovery_rooms}">
+<!--    <apex:outputpanel rendered="{!if(room.Room_Type__c=='Recovery',true,false)}">-->
+      <span id="list_{!room.id}" class="sortable">
+      <!--not editing this record-->
+      <apex:outputpanel rendered="{!if(current_edit==room.id,false,true)}" >  
+        <span class="li_room_name">      
+        <apex:commandlink value="{!room.name}" status="ajaxstatus" rerender="main_holder" action="{!edit_room}" style="color:black;" oncomplete="init_sort();">
+          <apex:param name="current_edit" value="{!room.id}" assignTo="{!current_edit}" />
+        </apex:commandlink><span class="spacer">&nbsp;</span>
+        <span class="li_room_actions">
+          <span class="detail_nav_link" onclick="appointment_info('{!room.id}');">Appointments</span>    
+          <span class="detail_nav_link" onclick="schedule_info('{!room.id}');">Schedule</span>        
+        </span></span>
+      </apex:outputpanel>
+      
+      <!--editing this record-->
+      <apex:outputpanel rendered="{!if(current_edit==room.id,true,false)}" >
+        <apex:inputfield value="{!new_room.name}" /> <span class="spacer">&nbsp;</span>   
+        <apex:commandLink action="{!save_new_room}" status="ajaxstatus" reRender="main_holder" value="Save" styleclass="lblue" oncomplete="init_sort();"/><span class="spacer">&nbsp;</span>
+        <apex:commandLink action="{!hide_room_form}" status="ajaxstatus" reRender="main_holder" value="Cancel" styleclass="lblue" oncomplete="init_sort();"/><span class="spacer">&nbsp;</span>
+        <apex:commandLink action="{!edit_room}" status="ajaxstatus" reRender="main_holder" value="Reset" styleclass="lblue" oncomplete="init_sort();"/>       
+      </apex:outputpanel>
+    <br />
+    </span>
+    <!--</apex:outputpanel>-->
+    </apex:repeat>
+  </div>  
+  
+  <br />  
+  
+  <!--display hygiene rooms-->
+  <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+      <apex:outputPanel layout="block" styleClass="mm_header-label">Hygiene</apex:outputPanel>
+    </apex:outputPanel>  
+  <!--<apex:outputPanel layout="block" styleClass="section-box">Hygiene</apex:outputPanel>  -->
+  <!--form for a new Hygiene room here or display the add room button-->
+  <apex:outputpanel rendered="{!display_hygiene_room_form}" style="padding-left:40px;">
+      <apex:inputfield value="{!new_room.name}" styleclass="input_standard" onfocus="if(this.value=='Enter room label') {this.value='';}" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!save_new_room}" status="ajaxstatus" reRender="main_holder" value="Save" styleclass="lblue" oncomplete="window.location = '#lastinsert';document.getElementById('lastinsert').focus();init_sort();return false" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!hide_room_form}" status="ajaxstatus" reRender="main_holder" value="Cancel" styleclass="lblue" oncomplete="init_sort();"/><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!reset_room_form}" status="ajaxstatus" reRender="main_holder" value="Reset" styleclass="lblue" oncomplete="init_sort();"/>
+  </apex:outputpanel>
+  
+  <apex:outputpanel rendered="{!if(display_hygiene_room_form==true,false,true)}" style="padding-left:40px;">  
+    <apex:commandlink action="{!new_room_form}" status="ajaxstatus" rerender="main_holder" styleclass="lblue" value="Add Room" oncomplete="init_sort();" >
+      <apex:param name="new_room_type" value="Hygiene" assignTo="{!new_room_type}" />
+<!--      <span class="light-add-box">&#43;</span>&nbsp; Add Room -->
+    </apex:commandlink>  
+  </apex:outputpanel>  
+  
+  <div class="section_details" style="padding-top:5px;" id="hygiene_room">  
+  <!--display all of the hygiene rooms--->
+    <apex:repeat var="room" value="{!hygiene_rooms}">
+<!--    <apex:outputpanel rendered="{!if(room.Room_Type__c=='Hygiene',true,false)}">-->
+      <span id="list_{!room.id}" class="sortable">
+      <!--not editing this record-->
+      <apex:outputpanel rendered="{!if(current_edit==room.id,false,true)}" >  
+        <span class="li_room_name">      
+        <apex:commandlink value="{!room.name}" status="ajaxstatus" rerender="main_holder" action="{!edit_room}" style="color:black;" oncomplete="init_sort();">
+          <apex:param name="current_edit" value="{!room.id}" assignTo="{!current_edit}" />
+        </apex:commandlink><span class="spacer">&nbsp;</span>
+        <span class="li_room_actions">
+          <span class="detail_nav_link" onclick="appointment_info('{!room.id}');">Appointments</span>    
+          <span class="detail_nav_link" onclick="schedule_info('{!room.id}');">Schedule</span>        
+        </span></span>
+      </apex:outputpanel>
+      
+      <!--editing this record-->
+      <apex:outputpanel rendered="{!if(current_edit==room.id,true,false)}" >
+        <apex:inputfield value="{!new_room.name}" /> <span class="spacer">&nbsp;</span>   
+        <apex:commandLink action="{!save_new_room}" status="ajaxstatus" reRender="main_holder" value="Save" styleclass="lblue" oncomplete="init_sort();" /><span class="spacer">&nbsp;</span>
+        <apex:commandLink action="{!hide_room_form}" status="ajaxstatus" reRender="main_holder" value="Cancel" styleclass="lblue" oncomplete="init_sort();" /><span class="spacer">&nbsp;</span>
+        <apex:commandLink action="{!edit_room}" status="ajaxstatus" reRender="main_holder" value="Reset" styleclass="lblue" oncomplete="init_sort();" />       
+      </apex:outputpanel>
+    <br />
+    </span>
+<!--    </apex:outputpanel>-->
+    </apex:repeat>
+  </div> 
+    
+  <br />
+    
+   <!--display hybrid rooms-->
+  <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+      <apex:outputPanel layout="block" styleClass="mm_header-label">Prosth/Surgery Hybrid</apex:outputPanel>
+    </apex:outputPanel>  
+
+  <apex:outputpanel rendered="{!display_hybrid_room_form}" style="padding-left:40px;">
+      <apex:inputfield value="{!new_room.name}" styleclass="input_standard" onfocus="if(this.value=='Enter room label') {this.value='';}" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!save_new_room}" status="ajaxstatus" reRender="main_holder" value="Save" styleclass="lblue" oncomplete="window.location = '#lastinsert';document.getElementById('lastinsert').focus();init_sort();return false" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!hide_room_form}" status="ajaxstatus" reRender="main_holder" value="Cancel" styleclass="lblue" oncomplete="init_sort();" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!reset_room_form}" status="ajaxstatus" reRender="main_holder" value="Reset" styleclass="lblue" oncomplete="init_sort();" />
+  </apex:outputpanel>
+  
+  <apex:outputpanel rendered="{!if(display_hybrid_room_form==true,false,true)}" style="padding-left:40px;">  
+    <apex:commandlink action="{!new_room_form}" status="ajaxstatus" rerender="main_holder" styleclass="lblue" value="+ Add Room" oncomplete="init_sort();">
+      <apex:param name="new_room_type" value="Hybrid" assignTo="{!new_room_type}" />
+      <!--<span class="light-add-box">&#43;</span>&nbsp; Add Room -->
+    </apex:commandlink>  
+  </apex:outputpanel>
+  
+  <div class="section_details" style="padding-top:5px;" id="hybrid_room">  
+  <!--display all of the hybrid rooms--->
+    <apex:repeat var="room" value="{!hybrid_rooms}">
+      <span id="list_{!room.id}" class="sortable">
+      <!--not editing this record-->
+      <apex:outputpanel rendered="{!if(current_edit==room.id,false,true)}" >  
+        <span class="li_room_name">      
+        <apex:commandlink value="{!room.name}" status="ajaxstatus" rerender="main_holder" action="{!edit_room}" style="color:black;" oncomplete="init_sort();">
+          <apex:param name="current_edit" value="{!room.id}" assignTo="{!current_edit}" />
+        </apex:commandlink><span class="spacer">&nbsp;</span>
+        <span class="li_room_actions">
+          <span class="detail_nav_link" onclick="appointment_info('{!room.id}');">Appointments</span>    
+          <span class="detail_nav_link" onclick="schedule_info('{!room.id}');">Schedule</span>        
+        </span></span>
+      </apex:outputpanel>
+      
+      <!--editing this record-->
+      <apex:outputpanel rendered="{!if(current_edit==room.id,true,false)}" >
+        <apex:inputfield value="{!new_room.name}" /> <span class="spacer">&nbsp;</span>   
+        <apex:commandLink action="{!save_new_room}" status="ajaxstatus" reRender="main_holder" value="Save" styleclass="lblue" oncomplete="init_sort();" /><span class="spacer">&nbsp;</span>
+        <apex:commandLink action="{!hide_room_form}" status="ajaxstatus" reRender="main_holder" value="Cancel" styleclass="lblue" oncomplete="init_sort();"/><span class="spacer">&nbsp;</span>
+        <apex:commandLink action="{!edit_room}" status="ajaxstatus" reRender="main_holder" value="Reset" styleclass="lblue" oncomplete="init_sort();"/>       
+      </apex:outputpanel> 
+    <br />
+    </span>
+    <!--</apex:outputpanel> -->
+    </apex:repeat>
+  </div>
+  <br />  
+
+  </apex:outputpanel>
+<!---------------END  Display Alll Rooms-------------------------------------------------->
+
+<!----------START Display Appointment Auth Info ------------------------------------------>
+  <apex:outputpanel rendered="{!if(selected_view=='appointment_display',true,false)}" styleClass="content_holder" >           
+    <!--category filter bar--------->
+    <apex:commandLink action="{!change_category_filter}" status="ajaxstatus" reRender="main_holder" value="All ({!all_apt_count})" styleclass="{!if(appointment_filter=='All','selected_category','unselected_category')}" >
+      <apex:param name="cfilter" value="All" />
+    </apex:commandlink><span class="spacer">&nbsp;</span>
+    <apex:commandLink action="{!change_category_filter}" status="ajaxstatus" reRender="main_holder" value="Prosth ({!prosth_count})" styleclass="{!if(appointment_filter=='Prosth','selected_category','unselected_category')}" >
+      <apex:param name="cfilter" value="Prosth" />
+    </apex:commandlink><span class="spacer">&nbsp;</span>
+    <apex:commandLink action="{!change_category_filter}" status="ajaxstatus" reRender="main_holder" value="Surgical ({!surgical_count})" styleclass="{!if(appointment_filter=='Surgical','selected_category','unselected_category')}" >
+      <apex:param name="cfilter" value="Surgical" />
+    </apex:commandlink><span class="spacer">&nbsp;</span>
+    <apex:commandLink action="{!change_category_filter}" status="ajaxstatus" reRender="main_holder" value="Misc ({!misc_count})" styleclass="{!if(appointment_filter=='Misc','selected_category','unselected_category')}" >
+      <apex:param name="cfilter" value="Misc" />
+    </apex:commandlink><span class="spacer">&nbsp;</span>
+    
+    <!--displays list of apts that can be performed in this room-->
+    <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+      <apex:outputPanel layout="block" styleClass="mm_header-label">Authorized Appointments</apex:outputPanel>
+    </apex:outputPanel> 
+    <apex:outputpanel style="padding-left:15px;" layout="block">
+      <apex:commandlink value="Remove All" status="ajaxstatus" rerender="main_holder" action="{!block_all_appointments}" styleclass="lblue" /><br />
+      <apex:repeat var="apt" value="{!authorized_apts}">        
+        <span class="hidden_parent">{!apt.clinical_appointment__r.name}<span class="spacer">&nbsp;</span><span class="spacer">&nbsp;</span>
+          <span class="hidden_hover"><apex:commandlink value="Remove" status="ajaxstatus" rerender="main_holder" action="{!block_appointment}" styleclass="lblue">
+             <apex:param name="activation_id" value="{!apt.id}" assignTo="{!activation_id}" />
+           </apex:commandlink></span>
+        </span><br />
+      </apex:repeat>
+    <br /><br />      
+    </apex:outputpanel>
+
+    <!--displays list of apts that can not be performed in this room------------>
+    <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+      <apex:outputPanel layout="block" styleClass="mm_header-label">Non-Authorized Appointments</apex:outputPanel>
+    </apex:outputPanel>
+    <apex:outputpanel style="padding-left:15px;" layout="block">             
+      <apex:commandlink value="Authorize All" status="ajaxstatus" rerender="main_holder" action="{!authorize_all_appointments}" styleclass="lblue" /><br />
+      <apex:repeat var="apt" value="{!blocked_appointments}">
+        <span class="hidden_parent">{!apt.name}<span class="spacer">&nbsp;</span><span class="spacer">&nbsp;</span>
+          <span class="hidden_hover"><apex:commandlink value="Authorize" status="ajaxstatus" rerender="main_holder" action="{!authorize_appointment}" styleclass="lblue">
+             <apex:param name="activation_id" value="{!apt.id}" assignTo="{!activation_id}" />
+           </apex:commandlink></span>
+        </span><br />
+      </apex:repeat>         
+    </apex:outputpanel>
+
+  </apex:outputpanel>
+<!----------END  Display Appointment Auth Info ------------------------------------------->
+
+<!-------------------------- Start Calendar Display -------------------------------------------------------------------->  
+  <apex:outputPanel rendered="{!if(selected_view=='calendar_display',true,false)}" id="calendar_holder" styleClass="mm_group" layout="block">           
+  <!--display the calendar--->
+  <!--work through our calendar columns-->
+  <apex:repeat var="col" value="{!calendar_info}">
+    <apex:outputPanel styleClass="column_holder" layout="block">
+    <table class="hours_column">    
+    <!--work through the cells in the column--->
+    <apex:repeat var="cell" value="{!col.all_cells}">
+      <tr>
+        <td class="{!cell.cell_css}" onclick="{!cell.onclick_event}"  data-toggle="{!cell.tool_type}" title="{!cell.tool_title}" data-trigger="hover" data-content="{!cell.tool_content}"  >
+          <apex:image rendered="{!cell.image_display}" url="{!URLFOR($Resource.Dental_Practice_Resources,cell.image_name)}" width="15" height="15" styleClass="cell_image" />
+          {!cell.cell_text}&nbsp;
+        </td>
+      </tr>
+    </apex:repeat>
+    </table>
+    </apex:outputPanel>
+  </apex:repeat>
+  </apex:outputPanel>
+<!-------------------------- End Calendar Display -------------------------------------------------------------------->  
+
+
+<!-------------------------- Start Calendar Block Display -------------------------------------------------------------------->  
+  <apex:outputpanel rendered="{!if(selected_view=='block_display',true,false)}" styleClass="content_holder" >           
+    <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+      <apex:outputPanel layout="block" styleClass="mm_header-label">Block Detail</apex:outputPanel>
+    </apex:outputPanel> 
+    <apex:outputpanel style="padding-left:15px;" layout="block">             
+      <span class="form-line" >
+        <span class="form-label" style="width:125px;">Starting Time :</span>
+        <!--<apex:inputfield value="{!new_block.Start_Hour__c}" styleclass="input_standard input_hour" rendered="{!display_block_form}" />
+        <apex:outputfield value="{!new_block.Start_Hour__c}" styleclass="input_standard input_hour" rendered="{!if(display_block_form,false,true)}" /> : 
+        <apex:inputfield value="{!new_block.Start_Minute__c}" styleclass="input_standard input_minute" rendered="{!display_block_form}" />        
+        <apex:outputfield value="{!new_block.Start_Minute__c}" styleclass="input_standard input_minute" rendered="{!if(display_block_form,false,true)}" />-->
+        <apex:inputfield value="{!new_block.Start_Time__c}" styleclass="input_standard" rendered="{!display_block_form}" />
+        <span onclick="edit_block_detail();" ><apex:outputField value="{!new_block.Start_Time__c}"  rendered="{!if(display_block_form,false,true)}"  /></span>
+      </span>
+      <span class="form-line" >
+        <span class="form-label" style="width:125px;">Ending Time :</span>
+        <!--<apex:inputfield value="{!new_block.End_Hour__c}" styleclass="input_standard input_hour" rendered="{!display_block_form}"/> 
+        <apex:outputfield value="{!new_block.End_Hour__c}" styleclass="input_standard input_hour" rendered="{!if(display_block_form,false,true)}" /> : 
+        <apex:inputfield value="{!new_block.End_Minute__c}" styleclass="input_standard input_minute" rendered="{!display_block_form}" />
+        <apex:outputfield value="{!new_block.End_Minute__c}" styleclass="input_standard input_minute" rendered="{!if(display_block_form,false,true)}" />-->
+        <apex:inputfield value="{!new_block.End_Time__c}" styleclass="input_standard" rendered="{!display_block_form}" />
+        <span onclick="edit_block_detail();" ><apex:outputfield value="{!new_block.End_Time__c}"  rendered="{!if(display_block_form,false,true)}" /></span>
+      </span>
+      <span class="form-line" >
+        <span class="form-label" style="width:125px;">Calendar Label :</span>
+        <apex:inputfield value="{!new_block.Calendar_Label__c}" styleclass="input_standard" rendered="{!display_block_form}"  />
+        <span onclick="edit_block_detail();" ><apex:outputfield value="{!new_block.Calendar_Label__c}"  rendered="{!if(display_block_form,false,true)}" /></span>
+      </span>
+      <span class="form-line">
+        <span class="form-label" style="width:125px;">Allow Any Apt :</span>
+        <apex:outputField value="{!new_block.Allow_All__c}" />
+      </span>
+      <apex:outputpanel rendered="{!display_block_form}">
+        <apex:commandLink action="{!save_block_form}" status="ajaxstatus" reRender="main_holder" value="Save" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+        <apex:commandLink action="{!hide_block_form}" status="ajaxstatus" reRender="main_holder" value="Cancel" styleclass="lblue" oncomplete="init_pops();" /><span class="spacer">&nbsp;</span>
+        <apex:commandLink action="{!reset_block_form}" status="ajaxstatus" reRender="main_holder" value="Reset" styleclass="lblue" />
+      </apex:outputpanel>
+      <apex:outputpanel rendered="{!if(display_block_form,false,true)}">
+        <apex:outputpanel rendered="{!if(working_on_new_block,false,true)}">
+        <apex:commandlink value="{!if(new_block.isActive__c,'Active','Inactive')}" status="ajaxstatus" rerender="main_holder" action="{!confim_activation_block}" styleclass="lblue">
+          <apex:param name="activation_id" value="{!new_block.id}" assignTo="{!activation_id}" />
+        </apex:commandlink>
+        </apex:outputpanel>
+      </apex:outputpanel>
+    </apex:outputpanel>
+    <br />
+    <br />
+    
+    <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+      <apex:outputPanel layout="block" styleClass="mm_header-label">Allowed Appointments</apex:outputPanel>
+    </apex:outputPanel> 
+    <apex:outputpanel style="padding-left:15px;" layout="block"> 
+      <apex:actionFunction name="apt_select" status="ajaxstatus" action="{!select_appointment}" rerender="main_holder" oncomplete="init_sort();return false;">
+        <apex:param name="aptid" value="" />
+      </apex:actionFunction> 
+      <apex:actionFunction name="apt_refresh" status="ajaxstatus" rerender="apt_match_holder" />
+      <apex:outputpanel rendered="{!working_on_new_block}">
+        Appointments can not be added to a new scheduling block,  until after you save it
+      </apex:outputpanel>
+      
+      <apex:outputpanel rendered="{!if(working_on_new_block,false,true)}">
+        <!--display new apt form--->
+        <apex:outputpanel rendered="{!display_apt_form}" style="padding-left:40px;">
+          <apex:inputText id="pname_holder" value="{!new_apt_name}" styleclass="input_standard" onfocus="if(this.value=='Enter Appointment') {this.value='';}" onkeyup="apt_qsearch_key();" /><span class="spacer">&nbsp;</span>
+          <apex:selectList value="{!appointment_filter}" onchange="apt_refresh();" size="1">
+            <apex:selectOptions value="{!apt_category_list}" />
+          </apex:selectList><span class="spacer">&nbsp;</span>
+          <apex:commandLink action="{!add_block_apt_authorization}" status="ajaxstatus" reRender="main_holder" value="Save" styleclass="lblue" oncomplete="init_sort();return false;" /><span class="spacer">&nbsp;</span>
+          <apex:commandLink action="{!hide_apt_form}" status="ajaxstatus" reRender="main_holder" value="Cancel" styleclass="lblue" oncomplete="init_sort();return false;" /><span class="spacer">&nbsp;</span>
+          <apex:commandLink action="{!reset_apt_form}" status="ajaxstatus" reRender="main_holder" value="Reset" styleclass="lblue" oncomplete="init_sort();" /><br /><br />
+          <apex:outputpanel id="apt_match_holder" styleclass="procedure_matches">
+            <apex:repeat var="sresult" value="{!search_appointments}" >
+              <span onclick="apt_select('{!sresult.id}');" class="overflow_option"><apex:outputText value="{!sresult.name}" /></span>
+            </apex:repeat>
+          </apex:outputpanel>
+        </apex:outputpanel>    
+        
+        <!--display add new apt link---->
+        <!--add appointment button-->
+       
+        
+        <apex:outputpanel layout="block" rendered="{!if(display_apt_form==true,false,true)}" style="padding-left:40px;display:flex;">
+          <div style="display:flex;flex-direction:column;min-width:50%;">  
+            <apex:commandlink action="{!new_apt_form}" status="ajaxstatus" rerender="main_holder" styleclass="lblue" value="+ Add Appointment" />
+            <apex:commandlink action="{!add_all_prosth_appointments}" status="ajaxstatus" rerender="main_holder" styleclass="lblue" value="+ Add All Prosth Appointments" />
+            <apex:commandlink action="{!add_all_surgical_appointments}" status="ajaxstatus" rerender="main_holder" styleclass="lblue" value="+ Add All Surgical Appointments" />
+            <apex:commandlink action="{!add_all_misc_appointments}" status="ajaxstatus" rerender="main_holder" styleclass="lblue" value="+ Add All Misc Appointments" />
+          </div>
+          <div>
+            All apts for form :&nbsp;&nbsp;
+            <apex:selectList value="{!selected_form_type}" size="1" onchange="add_all_form_type(this.value);">
+              <apex:selectOptions value="{!form_type_list}"  />
+            </apex:selectList>
+            <!-- <span style="background-color: #337ab7;padding: 5px;border-radius:5px;padding-left:10px;padding-right:10px;margin-left:10px;color:white;" onclick="add_all_form_type();">Add</span> --> 
+          </div>            
+        </apex:outputpanel>
+        
+        <br /><br />
+        
+        <!---display authorized apts----->
+        <apex:outputpanel style="padding-left:40px;" layout="block" id="auth_apt_holder">
+          <apex:repeat var="apt" value="{!block_apts}">
+            <span class="hidden_parent">
+              <span class="hidden_hover">
+                <apex:commandlink value="Remove" status="ajaxstatus" rerender="main_holder" action="{!remove_apt_authorization}" styleclass="lblue" >
+                  <apex:param name="activation_id" value="{!apt.id}" assignTo="{!activation_id}" />
+                </apex:commandlink>
+              </span><span class="spacer">&nbsp;</span>
+              {!apt.clinical_appointment__r.name}              
+            </span><br />
+          </apex:repeat>
+        </apex:outputpanel>
+      </apex:outputpanel>
+    </apex:outputpanel>    
+  </apex:outputPanel>
+<!-------------------------- End Calendar Block Display -------------------------------------------------------------------->  
+
+  
+<!-------------------------- Start Modal Holder -------------------------------------------------------------------->  
+  <apex:outputPanel id="modal_holder" style="z-index:3000;" >
+  <apex:actionRegion >
+  <apex:actionFunction oncomplete="default_cursor(this);" action="{!close_modal}" name="close_pop" rerender="modal_holder" />  
+  <apex:actionFunction oncomplete="default_cursor(this);" action="{!update_activation_block}" name="update_block" rerender="modal_holder,main_holder" />    
+
+   <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!modal_display}"/>
+    <apex:outputPanel styleClass="modalPopup_outer" layout="block" rendered="{!modal_display}" id="outerpop">
+    <span class="modalPopup_outerheader" onclick="close_pop();">Close X</span> 
+    
+    <!-- rendered="{!if(modal_display && modal_type=='new_payment',true,false)}"  -->
+    <apex:outputPanel styleClass="modal_normal"  id="new_payment_form" style="border:0px;"> 
+    <apex:outputpanel rendered="{!if(selected_view=='block_display',true,false)}">
+      <apex:outputtext value="{!modal_out}" escape="false" /><br /><br /><br />
+      <span class="confirm-btn" onclick="update_block();">Confirm</span><span class="spacer">&nbsp;</span>
+      <span class="cancel-btn" onclick="close_pop();">Cancel</span>
+    </apex:outputpanel>
+      
+    </apex:outputPanel>
+        
+ </apex:outputpanel>
+ </apex:actionRegion>    
+</apex:outputPanel> 
+<!----end modal holder----->
+
+</apex:outputPanel>
+
+<script>
+/*function init_pops() {
+   alert("function is ready to use now");
+   try {
+    $('[data-toggle="popover"]').popover();
+    $('.working_head').tooltip();
+   } catch (err) {
+     alert(err.message);
+   }
+    alert("pop done");
+}*/
+
+function close_pops() {
+  try {
+    Tipped.remove('.working_head');
+    Tipped.remove('.working_slot');
+    Tipped.remove('.working_close');
+    Tipped.remove('.inactive_head');
+    Tipped.remove('.inactive_slot');
+    Tipped.remove('.inactive_close');
+  } catch (err) {
+    alert(err.message);
+  }
+}  
+  
+function init_pops() {
+ try {
+    //alert('start');
+/*    Tipped.create('.boxes .box', {skin: 'purple'});*/
+    Tipped.create('.working_head');
+    Tipped.create('.working_slot');
+    Tipped.create('.working_close');
+    Tipped.create('.inactive_head');
+    Tipped.create('.inactive_slot');
+    Tipped.create('.inactive_close');
+    //alert('end');
+  } catch (err) {
+    //alert(err.message);
+  }
+}
+
+/*function init_pops() {
+    $('[data-toggle="popover"]').popover();   
+});*/
+</script>
+
+</apex:form>
+</body>
+</apex:page>

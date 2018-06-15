@@ -1,0 +1,113 @@
+<apex:page standardController="Opportunity" extensions="opp_treatmentplan" sidebar="false" showHeader="false">
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+<style>
+  span.section_line {
+    display:block;
+    padding-bottom:8px;
+  }
+  
+  hr.style-fade {
+    border: 0;
+    height: 3px;
+    width:900px;
+    display:block;  
+    background-image: -webkit-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.95), rgba(80,180,230,0)); 
+    background-image:    -moz-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.95), rgba(80,180,230,0)); 
+    background-image:     -ms-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.95), rgba(80,180,230,0)); 
+    background-image:      -o-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.95), rgba(80,180,230,0)); 
+  }
+  
+  span.section_header {
+    padding-left:20px;
+    display:inline-block;
+    width:150px;
+    font-weight:bold;
+  }
+  
+  span.blank {
+    font-style:italic;
+  }
+</style>
+
+<apex:form >
+<apex:actionFunction name="select_plan" action="{!select_consult_plan}" reRender="main_holder">   
+  <apex:param name="cpid" value="" />
+</apex:actionFunction>
+
+<apex:outputpanel id="main_holder" style="padding-top:5px;">
+<apex:messages style="color:red;"/>
+<apex:outputfield rendered="false" value="{!Opportunity.accountid}" />
+
+
+  <apex:outputpanel rendered="{!has_treatment}" >
+  <table>
+    <tr><td>
+    <span class="section_line">
+      <span class="section_header">Treatment Option : </span><apex:outputfield value="{!tp.treatment_option__r.name}" />
+    </span>
+    <span class="section_line">
+      <span class="section_header">Initial Amount : </span><apex:outputfield value="{!tp.Initial_Cost__c}" />
+    </span>
+    <span class="section_line">
+      <span class="section_header">Future Amount : </span><apex:outputfield value="{!tp.Final_Cost__c}" />
+    </span>
+    <span class="section_line">
+      <span class="section_header">Doctor : </span><apex:outputfield value="{!tp.clearchoice_doctor__r.name}" />
+    </span>
+    <span class="section_line">
+      <span class="section_header">Options : </span>
+        <apex:outputtext value="{!if(tp.Bleaching_Tray__c,'Bleaching Tray ','')}" />
+        <apex:outputtext value="{!if(tp.Nightguard__c,'NightGuard ','')}" />
+        <apex:outputtext value="{!if(tp.Bone_Grafting__c,'Bone Grafting ','')}" />
+        <apex:outputtext value="{!if(tp.Immediate_Load__c,'Immediate Load ','')}" />
+        <apex:outputPanel styleClass="treatment_options" rendered="{!if(tp.Nightguard__c || tp.Bleaching_Tray__c || tp.Bone_Grafting__c || tp.Immediate_Load__c,false,true)}" >No Options</apex:outputpanel>
+    </span>    
+    <span class="section_line">
+      <span class="section_header">Timeline : </span><apex:outputfield value="{!tp.Timeline__c}" /><apex:outputpanel rendered="{!if(tp.Timeline__c==null,true,false)}">N/A</apex:outputpanel>
+    </span></td>
+    <td style="padding-left:50px;"><br />
+    <span class="section_line"><a href="{!change_treatment_plan_url}" target="__blank" ><button type="button">Change Treatment Plan</button></a></span>
+<!--      <apex:commandButton value="Modify Treatment Plan" action="{!open_change_plan_page}"  />-->     
+    </td></tr></table>
+  </apex:outputpanel>
+
+  <apex:outputpanel rendered="{!if(has_treatment,false,true)}">
+    <span class="blank" style="font-size:11pt;font-weight:bold;"><span style="color:red;">No treatment plan has been selected yet.</span>  Please choose a treatment plan from the options offered at the consultation</span><br /><br /><br />
+    
+    <span style="font-size:10pt;font-weight:bold;padding-left:60px;">Treatment Plans offered at Consult</span><br />
+    <hr class="style-fade" />
+    <div style="padding-left:50px;">
+    <table class="accs_details" style="width:800px;">
+      <apex:variable var="rowclassname" value="accs" />
+      <apex:repeat value="{!consult_plans}" var="tplan" >
+        <tr class="{!rowclassname}">
+        <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+          <td width="25%"><apex:outputfield value="{!tplan.treatment_option__r.name}" /></td>
+          <td width="15%"><apex:outputfield value="{!tplan.Total_Cost__c}" /></td>
+          <td width="20%"><apex:outputpanel rendered="{!tplan.Recommended__c}" style="color:blue;">Recommended</apex:outputpanel><apex:outputpanel rendered="{!if(tplan.Recommended__c,false,true)}">Alternative</apex:outputpanel></td>
+          <td width="25%"><apex:outputfield value="{!tplan.clearchoice_doctor__r.name}" /></td>
+          <td width="15%"><apex:commandLink styleclass="btn" style="text-decoration:none;" value="Select Plan"  onclick="select_plan('{!tplan.id}');return false;" /></td>
+        </tr>
+      </apex:repeat>
+    </table></div>
+    
+  </apex:outputpanel>
+
+</apex:outputpanel>
+</apex:form>
+</apex:page>

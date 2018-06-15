@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Uncomitted Form Change</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Uncomitted Form Changes</value>
+    </caseValues>
+    <fields>
+        <label><!-- Field Name --></label>
+        <name>Field_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Field Type --></label>
+        <name>Field_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Field Value --></label>
+        <name>Field_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form ID --></label>
+        <name>Form_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Request Time --></label>
+        <name>Request_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- VF Page --></label>
+        <name>VF_Page__c</name>
+        <picklistValues>
+            <masterLabel>Notes</masterLabel>
+            <translation><!-- Notes --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>POT</masterLabel>
+            <translation><!-- POT --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

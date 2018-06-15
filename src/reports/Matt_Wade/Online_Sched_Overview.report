@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_24847440</developerName>
+        <masterLabel>CC Team</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead.Call_Center_Agent_Team__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Confirmation</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>IMP - LA</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>IMP - MP</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>IMP - MV</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>IMP - SG</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>IMP - SV</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Outbound</sourceValue>
+            </sourceValues>
+            <value>ClearChoice</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Imp - IMC API</sourceValue>
+            </sourceValues>
+            <value>IMC</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Online Sched</sourceValue>
+            </sourceValues>
+            <value>Online Schedule</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_32862809</developerName>
+        <masterLabel>Leadscore</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead.LeadScore__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Green</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Yellow</sourceValue>
+            </sourceValues>
+            <value>GY</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Blue (no hit)</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Red</sourceValue>
+            </sourceValues>
+            <value>RB</value>
+        </values>
+    </buckets>
+    <filter>
+        <criteriaItems>
+            <column>BucketField_24847440</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Online Schedule</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Month</dateGranularity>
+        <field>Lead.DateTime_Consult_Scheduled__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_32862809</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Lead.Center_Location__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Online Sched Overview</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadList</reportType>
+    <scope>org</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead.DateTime_Consult_Scheduled__c</dateColumn>
+        <interval>INTERVAL_THISNEXTMONTH</interval>
+    </timeFrameFilter>
+</Report>

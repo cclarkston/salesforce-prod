@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_35079212</developerName>
+        <masterLabel>Regional Business Director</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Consult_Inventory__c$Consult_Room__c.Center_Information__c.Name</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Cleveland</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Washington Tysons Corner</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Washington Rockville</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Columbia</sourceValue>
+            </sourceValues>
+            <value>Houmam (East)</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Chicago Evanston</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chicago Naperville</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chicago Schaumburg</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Minneapolis</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>St. Louis</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Kansas City</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chicago</sourceValue>
+            </sourceValues>
+            <value>Bryce (Midwest)</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Austin</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Dallas</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Dallas  Arlington</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Dallas Fort Worth</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Houston</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Houston Woodlands</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>San Antonio</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Dallas Arlington</sourceValue>
+            </sourceValues>
+            <value>John (Texas)</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Portland</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Sacramento</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>San Francisco Daly City</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>San Jose</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Seattle</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Walnut Creek</sourceValue>
+            </sourceValues>
+            <value>Shane (Northwest)</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Denver</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Las Vegas</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Phoenix</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>San Diego</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Salt Lake City</sourceValue>
+            </sourceValues>
+            <value>Kym (Southwest)</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Atlanta</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Charlotte</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Miami Fort Lauderdale</sourceValue>
+            </sourceValues>
+            <value>Erica (Southeast)</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Metro Detroit</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>New Jersey - Dental Arts of South Jersey</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Philadelphia - By Design Dental Implant Center</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Tucson</sourceValue>
+            </sourceValues>
+            <value>Closed Centers</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>BucketField_35079212</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Consult_Room__c.Center_Information__c.Name</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Consult_Room__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Apt_Datetime__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Patient_Name__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Consult_Show_Status__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Ready_Time__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Consult_PEC__c.Name</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Scheduled_Lead__c.Id</field>
+    </columns>
+    <description>This report shows all Consults on the Clinic Calendar that are still &quot;Awaiting Arrival&quot;, &quot;Arrived&quot;, &quot;Ready for Consult&quot;, &quot;Consult Started&quot; that have not moved past those states to indicate that the Consult was Completed or the Patient  Left</description>
+    <filter>
+        <criteriaItems>
+            <column>Consult_Inventory__c$Apt_Date__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>lessThan</operator>
+            <value>TODAY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Consult_Inventory__c$Scheduled_Lead__c.Id</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Consult_Inventory__c$Consult_Show_Status__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>,Arrived,Ready for Consult</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Consult_Inventory__c$Consult_Room__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notContain</operator>
+            <value>unconfirmed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>BucketField_35079212</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Closed Centers</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Clinic Calendar - Audit</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Consult_Inventory_w_History__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>BucketField_35079212</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Consult_Inventory__c$Apt_Date__c</dateColumn>
+        <interval>INTERVAL_CURFY</interval>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Google AdWord</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Google AdWords</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Google AdWords --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Ad Content --></label>
+        <name>Ad_Content__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ad Group --></label>
+        <name>Ad_Group__c</name>
+    </fields>
+    <fields>
+        <label><!-- Keyword --></label>
+        <name>Keyword__c</name>
+    </fields>
+    <fields>
+        <label><!-- Landing Page --></label>
+        <name>Landing_Page__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead --></label>
+        <name>Lead__c</name>
+        <relationshipLabel><!-- Google AdWords --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Search Time --></label>
+        <name>Search_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Source --></label>
+        <name>Source__c</name>
+    </fields>
+    <layouts>
+        <layout>Google AdWord Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

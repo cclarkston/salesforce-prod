@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Close Request</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Close Requests</value>
+    </caseValues>
+    <fields>
+        <label><!-- Center Open Day --></label>
+        <name>Center_Open_Day__c</name>
+        <relationshipLabel><!-- Close Requests --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Close Notes --></label>
+        <name>Close_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Close Reason --></label>
+        <name>Close_Reason__c</name>
+    </fields>
+    <fields>
+        <label><!-- Denied Reason --></label>
+        <name>Denied_Reason__c</name>
+    </fields>
+    <fields>
+        <label><!-- Handled By --></label>
+        <name>Handled_By__c</name>
+        <relationshipLabel><!-- Close Requests --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Handled Status --></label>
+        <name>Handled_Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denied</masterLabel>
+            <translation><!-- Denied --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending</masterLabel>
+            <translation><!-- Pending --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Handled Time --></label>
+        <name>Handled_Time__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

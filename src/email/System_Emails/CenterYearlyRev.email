@@ -1,0 +1,8 @@
+<messaging:emailTemplate subject="Center Yearly Revenue" recipientType="User" >
+<messaging:plainTextEmailBody >
+The Center Year Over Year Revenue report has been generated and attached to this email. Please Download the attachment if you would like to view the numbers.
+</messaging:plainTextEmailBody>
+  <messaging:attachment filename="CenterYearlyRev.csv">        
+    <c:CenterYearlyRev />
+  </messaging:attachment>
+</messaging:emailTemplate>

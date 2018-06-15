@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Clinical Apt Procedure</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Clinical Apt Procedures</value>
+    </caseValues>
+    <fields>
+        <label><!-- Clinical Appointment --></label>
+        <name>Clinical_Appointment__c</name>
+        <relationshipLabel><!-- Clinical Apt Procedures --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Clinical Procedure --></label>
+        <name>Clinical_Procedure__c</name>
+        <relationshipLabel><!-- Clinical Apt Procedures --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Sort Order --></label>
+        <name>Sort_Order__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

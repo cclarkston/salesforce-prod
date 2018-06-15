@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_21390106</developerName>
+        <masterLabel>Agency</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Call_Center_Agent_Team__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Imp - IMC Mansfield</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Imp - IMC API</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Imp - IMC NewCastle</sourceValue>
+            </sourceValues>
+            <value>IMC</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Imp - Mean Green</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Imp - Tooth Avengers</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Confirmation</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Implant Consultant</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Seminar</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Web To Lead</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Outbound</sourceValue>
+            </sourceValues>
+            <value>CC</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_26559004</developerName>
+        <masterLabel>Call Center</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Call_Center_Agent_Team__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Imp - IMC Mansfield</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Imp - IMC NewCastle</sourceValue>
+            </sourceValues>
+            <value>IMC</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Imp - IMC API</sourceValue>
+            </sourceValues>
+            <value>IMC API</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_44498439</developerName>
+        <masterLabel>Prescreen</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Pre_Screen__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Green</sourceValue>
+            </sourceValues>
+            <value>Green</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Yellow</sourceValue>
+            </sourceValues>
+            <value>Yellow</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Red</sourceValue>
+            </sourceValues>
+            <value>Red</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Blue (No Hit)</sourceValue>
+            </sourceValues>
+            <value>Blue</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>PO Box</sourceValue>
+            </sourceValues>
+            <value>PO Box</value>
+        </values>
+    </buckets>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Lead.Consult_Inventory__r$isConsultArrived__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Lead.Consult_Inventory__r$isConsultScheudled__c</field>
+    </columns>
+    <filter>
+        <booleanFilter>1 OR (2 AND 3)</booleanFilter>
+        <criteriaItems>
+            <column>Lead.Consult_Inventory__r$Consult_Room__c.Room_Type__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Normal,OverFlow,Manual</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Consult_Inventory__r$Consult_Room__c.Room_Type__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Unconfirmed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Consult_Inventory__r$isConsultArrived__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_44498439</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Month</dateGranularity>
+        <field>Lead.Consult_Inventory__r$Apt_Date__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_26559004</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>CCMS Completed Consults</name>
+    <params>
+        <name>co</name>
+        <value>0</value>
+    </params>
+    <reportType>Lead_w_Consult_Inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead.Consult_Inventory__r$Apt_Date__c</dateColumn>
+        <interval>INTERVAL_LAST90</interval>
+    </timeFrameFilter>
+</Report>

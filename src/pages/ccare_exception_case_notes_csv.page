@@ -1,0 +1,7 @@
+<apex:page controller="dp_exception_case_notes" cache="false" contentType="text/csv#{!filename}" language="en-US"  readonly="true">{!file_header}
+<apex:repeat value="{!apts_with_no_notes_csv}" var="output_list">
+  <apex:repeat value="{!output_list.csvfiles}" var="output">
+    {!output.output_line}
+  </apex:repeat>
+</apex:repeat>  
+</apex:page>

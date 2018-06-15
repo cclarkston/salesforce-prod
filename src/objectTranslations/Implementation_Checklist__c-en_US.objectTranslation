@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Implementation Checklist</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Implementation Checklists</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account created for Admin user (s) --></label>
+        <name>Account_created_for_Admin_user_s__c</name>
+    </fields>
+    <fields>
+        <label><!-- Admin (1) email address --></label>
+        <name>Admin_1_email_address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Admin (1) name (first &amp; last) --></label>
+        <name>Admin_1_name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Admin (1) role/title --></label>
+        <name>Admin_1_role_title__c</name>
+    </fields>
+    <fields>
+        <label><!-- Admin (2) email address --></label>
+        <name>Admin_2_email_address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Admin (2) name (first &amp; last) --></label>
+        <name>Admin_2_name_first_last__c</name>
+    </fields>
+    <fields>
+        <label><!-- Admin (2) role/title --></label>
+        <name>Admin_2_role_title__c</name>
+    </fields>
+    <fields>
+        <label><!-- Admin trained to enroll new users --></label>
+        <name>Admin_trained_to_enroll_new_users__c</name>
+    </fields>
+    <fields>
+        <label><!-- Asked Kip to contact GP re: website --></label>
+        <name>Asked_Kip_to_contact_GP_re_website__c</name>
+    </fields>
+    <fields>
+        <label><!-- CCMS contacts GP re: PSA --></label>
+        <name>CCMS_contacts_GP_re_PSA__c</name>
+    </fields>
+    <fields>
+        <label><!-- CV Notes (1) --></label>
+        <name>CV_Notes_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- CV Notes (2) --></label>
+        <name>CV_Notes_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- CV Notes (3) --></label>
+        <name>CV_Notes_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Call notes --></label>
+        <name>Call_notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearTrainU notes (1) --></label>
+        <name>ClearTrainU_notes_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearTrainU notes (2) --></label>
+        <name>ClearTrainU_notes_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearTrainU notes (3) --></label>
+        <name>ClearTrainU_notes_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearViewTV Notes --></label>
+        <name>ClearViewTV_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearWeb notes --></label>
+        <name>ClearWeb_notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Confirm GP knows how to get leads --></label>
+        <name>Confirm_GP_knows_how_to_get_leads__c</name>
+    </fields>
+    <fields>
+        <label><!-- Confirm GP knows how to send leads --></label>
+        <name>Confirm_GP_knows_how_to_send_leads__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date PSA request sent to CCMS Legal --></label>
+        <name>Date_PSA_request_sent_to_CCMS_Legal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date PSA request was sent to CCMS Legal --></label>
+        <name>Date_PSA_request_was_sent_to_CCMS_Legal__c</name>
+    </fields>
+    <fields>
+        <label><!-- PSA Sent --></label>
+        <name>Date_PSA_sent_to_GP__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Signed by Practice --></label>
+        <name>Date_Signed_by_CC__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Signed by GP --></label>
+        <name>Date_Signed_by_GP__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date enrollment email sent --></label>
+        <name>Date_enrollment_email_sent__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date request send to Kip --></label>
+        <name>Date_request_send_to_Kip__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dental Practice --></label>
+        <name>Dental_Practice__c</name>
+        <relationshipLabel><!-- Implementation Checklists --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Does the practice use appt reminder sw? --></label>
+        <name>Does_the_practice_use_appt_reminder_sw__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Enrollment Link (Admin) --></label>
+        <name>Enrollment_Link_Admin__c</name>
+    </fields>
+    <fields>
+        <label><!-- Enrollment Link (Team Member) --></label>
+        <name>Enrollment_Link_Team_Member__c</name>
+    </fields>
+    <fields>
+        <label><!-- CTU Enrollment email sent to Admin (s) --></label>
+        <name>Enrollment_email_sent_to_Admin_s__c</name>
+    </fields>
+    <fields>
+        <label><!-- Explain why CV is required --></label>
+        <name>Explain_why_CV_is_required__c</name>
+    </fields>
+    <fields>
+        <label><!-- Facilitate w/ Ger &amp; GP staff --></label>
+        <name>Facilitate_install_w_Ger_GP_staff__c</name>
+    </fields>
+    <fields>
+        <label><!-- Identify Admin User (s) --></label>
+        <name>Identify_Admin_User__c</name>
+    </fields>
+    <fields>
+        <label><!-- If yes, which system is used? --></label>
+        <name>If_yes_which_system_does_GP_use__c</name>
+    </fields>
+    <fields>
+        <label><!-- Office location established --></label>
+        <name>Office_location_established__c</name>
+    </fields>
+    <fields>
+        <label><!-- PSA Notes --></label>
+        <name>PSA_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- PSA URL --></label>
+        <name>PSA_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- PSA request sent to CCMS Legal --></label>
+        <name>PSA_request_sent_to_CCMS_Legal__c</name>
+    </fields>
+    <fields>
+        <label><!-- PSA sent to GP --></label>
+        <name>PSA_sent_to_GP__c</name>
+    </fields>
+    <fields>
+        <label><!-- PSA signed by Practice --></label>
+        <name>PSA_signed_by_CC_Doctor__c</name>
+    </fields>
+    <fields>
+        <label><!-- PSA signed by GP --></label>
+        <name>PSA_signed_by_GP__c</name>
+    </fields>
+    <fields>
+        <label><!-- Secondary Contact Role --></label>
+        <name>Secondary_Contact_Role__c</name>
+    </fields>
+    <fields>
+        <label><!-- Signed by CC --></label>
+        <name>Signed_by_Practice__c</name>
+    </fields>
+    <fields>
+        <label><!-- Spoken w/ CC doctor --></label>
+        <name>Spoken_w_CC_doctor__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Spoken w/ CC doctor (notes) --></label>
+        <name>Spoken_w_CC_doctor_notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Admin trained to login &amp; begin modules --></label>
+        <name>Train_Admin_user_to_login_begin_module__c</name>
+    </fields>
+    <fields>
+        <label><!-- Visited CC Center --></label>
+        <name>Visited_CC_Center__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Visited CC Center (notes) --></label>
+        <name>Visited_CC_Center_notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Was PSA request sent to CCMS Legal --></label>
+        <name>Was_PSA_request_sent_to_CCMS_Legal__c</name>
+    </fields>
+    <layouts>
+        <layout>Implementation Checklist Layout</layout>
+        <sections>
+            <label><!-- ClearTrainU --></label>
+            <section>ClearTrainU</section>
+        </sections>
+        <sections>
+            <label><!-- ClearVantage --></label>
+            <section>ClearVantage</section>
+        </sections>
+        <sections>
+            <label><!-- ClearViewTV --></label>
+            <section>ClearViewTV</section>
+        </sections>
+        <sections>
+            <label><!-- ClearWeb --></label>
+            <section>ClearWeb</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- General --></label>
+            <section>General</section>
+        </sections>
+        <sections>
+            <label><!-- PSA --></label>
+            <section>PSA</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Legal PSA View</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- PSA --></label>
+            <section>PSA</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

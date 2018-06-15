@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Payment</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Payments</value>
+    </caseValues>
+    <fields>
+        <label><!-- Application Date --></label>
+        <name>Application_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Backdated Payment --></label>
+        <name>Backdated_Payment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Celigo Update --></label>
+        <name>Celigo_Update__c</name>
+    </fields>
+    <fields>
+        <label><!-- Collected Date --></label>
+        <name>Collected_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Confirmation ID --></label>
+        <name>Confirmation_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Days between Create Date &amp; Orig Pay Date --></label>
+        <name>Days_between_Create_Date_Orig_Pay_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Days between Create Date &amp; Pay Date --></label>
+        <name>Days_between_Create_Date_Pay_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Days to Collected --></label>
+        <name>Days_to_Collected__c</name>
+    </fields>
+    <fields>
+        <label><!-- Difference Current &amp; Original Pay Date --></label>
+        <name>Difference_Current_Original_Pay_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Finance Fee --></label>
+        <name>Finance_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Finance Net Collections --></label>
+        <name>Finance_Net_Collections__c</name>
+    </fields>
+    <fields>
+        <label><!-- Finance Net Collections minus GP --></label>
+        <name>Finance_Net_Collections_minus_GP__c</name>
+    </fields>
+    <fields>
+        <label><!-- GP Fee Amount --></label>
+        <name>GP_Fee_Amount__c</name>
+    </fields>
+    <fields>
+        <help><!-- If Original Anticipated Payment Date &lt; Payment Date, Not Cancelled, Not Collected and Not Refunded then it has slipped. --></help>
+        <label><!-- Is Slipped --></label>
+        <name>Is_Slipped__c</name>
+    </fields>
+    <fields>
+        <label><!-- NS Payment Method --></label>
+        <name>NS_Payment_Method__c</name>
+    </fields>
+    <fields>
+        <label><!-- NetSuite_Sync --></label>
+        <name>NS_Sync__c</name>
+    </fields>
+    <fields>
+        <label><!-- NetSuite Warning --></label>
+        <name>NetSuite_Warning__c</name>
+    </fields>
+    <fields>
+        <label><!-- Net Collection Amount --></label>
+        <name>Net_Collection_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Net Collection Amount minus GP --></label>
+        <name>Net_Collection_Amount_minus_GP__c</name>
+    </fields>
+    <fields>
+        <label><!-- Netsuite ID --></label>
+        <name>Netsuite_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+        <relationshipLabel><!-- Payments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Original Anticipated Payment Date --></label>
+        <name>Original_Anticipated_Payment_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Original Payment Date --></label>
+        <name>Origional_Payment_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- PEC --></label>
+        <name>PEC__c</name>
+        <relationshipLabel><!-- Payments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Paid Same Month as Exam --></label>
+        <name>Paid_Same_Month_as_Exam__c</name>
+    </fields>
+    <fields>
+        <label><!-- Past Due --></label>
+        <name>Past_Due__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Amount --></label>
+        <name>Payment_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Before PE Date --></label>
+        <name>Payment_Before_PE_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Date --></label>
+        <name>Payment_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Different Month from PE --></label>
+        <name>Payment_Different_Month_from_PE__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Same Month as PE --></label>
+        <name>Payment_Same_Month_as_PE__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Status (Formula) --></label>
+        <name>Payment_Status_Formula__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Status --></label>
+        <name>Payment_Status__c</name>
+        <picklistValues>
+            <masterLabel>Anticipated</masterLabel>
+            <translation><!-- Anticipated --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Anticipated PPF</masterLabel>
+            <translation><!-- Anticipated PPF --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Anticipated PPF Cancelled</masterLabel>
+            <translation><!-- Anticipated PPF Cancelled --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Anticipated Payment Cancelled</masterLabel>
+            <translation><!-- Anticipated Payment Cancelled --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Anticipated Payment Cancelled Write Off</masterLabel>
+            <translation><!-- Anticipated Payment Cancelled Write Off --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Anticipated Prom Note Payment Cancelled</masterLabel>
+            <translation><!-- Anticipated Prom Note Payment Cancelled --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Anticipated Promise Note</masterLabel>
+            <translation><!-- Anticipated Promise Note --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Collected</masterLabel>
+            <translation><!-- Collected --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Collected PPF</masterLabel>
+            <translation><!-- Collected PPF --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Collected Promise Note</masterLabel>
+            <translation><!-- Collected Promise Note --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>HCF In Process</masterLabel>
+            <translation><!-- HCF In Process --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NSF</masterLabel>
+            <translation><!-- NSF --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Refund</masterLabel>
+            <translation><!-- Refund --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Payment Type Master --></label>
+        <name>Payment_Type_Master__c</name>
+        <picklistValues>
+            <masterLabel>--  MASTER  --</masterLabel>
+            <translation><!-- - -   MASTER  - -  --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Payment Type --></label>
+        <name>Payment_Type__c</name>
+        <picklistValues>
+            <masterLabel>ACH</masterLabel>
+            <translation><!-- ACH --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Alphaeon</masterLabel>
+            <translation><!-- Alphaeon --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>American Express</masterLabel>
+            <translation><!-- American Express --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CareCredit</masterLabel>
+            <translation><!-- CareCredit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cash</masterLabel>
+            <translation><!-- Cash --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Check</masterLabel>
+            <translation><!-- Check --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ClearChoice Base Plan</masterLabel>
+            <translation><!-- ClearChoice Base Plan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ClearChoice Marketing / Dr. Gratus</masterLabel>
+            <translation><!-- ClearChoice Marketing / Dr. Gratus --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Credit Card</masterLabel>
+            <translation><!-- Credit Card --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Discover</masterLabel>
+            <translation><!-- Discover --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LendingClub</masterLabel>
+            <translation><!-- LendingClub --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Master Card</masterLabel>
+            <translation><!-- Master Card --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Patient Preferred Financing</masterLabel>
+            <translation><!-- Patient Preferred Financing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Proceed Finance</masterLabel>
+            <translation><!-- Proceed Finance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TBD (Anticipated Payment)</masterLabel>
+            <translation><!-- TBD (Anticipated Payment) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Visa</masterLabel>
+            <translation><!-- Visa --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wire</masterLabel>
+            <translation><!-- Wire --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Refund Amount --></label>
+        <name>Refund_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Refund Reason --></label>
+        <name>Refund_Reason__c</name>
+        <picklistValues>
+            <masterLabel>Cannot afford HCF payments</masterLabel>
+            <translation><!-- Cannot afford HCF payments --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Change in treatment plan</masterLabel>
+            <translation><!-- Change in treatment plan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Changed method of payment</masterLabel>
+            <translation><!-- Changed method of payment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cold Feet/Changed Mind</masterLabel>
+            <translation><!-- Cold Feet/Changed Mind --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Courtesy Refund</masterLabel>
+            <translation><!-- Courtesy Refund --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dr. Declined Case</masterLabel>
+            <translation><!-- Dr. Declined Case --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dr. Dismissed Patient From Practice</masterLabel>
+            <translation><!-- Dr. Dismissed Patient From Practice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Family Emergency</masterLabel>
+            <translation><!-- Family Emergency --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Financial Restraints</masterLabel>
+            <translation><!-- Financial Restraints --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Going with other dental options</masterLabel>
+            <translation><!-- Going with other dental options --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lost job</masterLabel>
+            <translation><!-- Lost job --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medical Issues</masterLabel>
+            <translation><!-- Medical Issues --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Non Responsive</masterLabel>
+            <translation><!-- Non Responsive --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Overpaid</masterLabel>
+            <translation><!-- Overpaid --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Patient Passed Away</masterLabel>
+            <translation><!-- Patient Passed Away --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Relocating</masterLabel>
+            <translation><!-- Relocating --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spouse</masterLabel>
+            <translation><!-- Spouse --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Send to NetSuite --></label>
+        <name>Send_to_NetSuite__c</name>
+    </fields>
+    <fields>
+        <label><!-- Service Date --></label>
+        <name>Service_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Slipped Payment - Other --></label>
+        <name>Slipped_Payment_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Slipped Payment Reason --></label>
+        <name>Slipped_Payment_Reason__c</name>
+        <picklistValues>
+            <masterLabel>Business Trip</masterLabel>
+            <translation><!-- Business Trip --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CTX results will not allow surgery for several months</masterLabel>
+            <translation><!-- CTX results will not allow surgery for several months --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Family Emergency</masterLabel>
+            <translation><!-- Family Emergency --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>HCF In Process</masterLabel>
+            <translation><!-- HCF In Process --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Health Issues</masterLabel>
+            <translation><!-- Health Issues --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Home Refinancing</masterLabel>
+            <translation><!-- Home Refinancing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Loss of income</masterLabel>
+            <translation><!-- Loss of income --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medical Clearance needed (so couldn&apos;t collect HCF)</masterLabel>
+            <translation><!-- Medical Clearance needed (so couldn&apos;t collect HCF) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medical Clearance needed and doctor directed to not collect</masterLabel>
+            <translation><!-- Medical Clearance needed and doctor directed to not collect --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medical Clearance needed and patient wouldn&apos;t pay yet</masterLabel>
+            <translation><!-- Medical Clearance needed and patient wouldn&apos;t pay yet --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Vacation</masterLabel>
+            <translation><!-- Vacation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Waiting on 401k</masterLabel>
+            <translation><!-- Waiting on 401k --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Waiting on investments</masterLabel>
+            <translation><!-- Waiting on investments --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Who applied for CareCredit? --></label>
+        <name>Who_applied_for_CareCredit__c</name>
+        <picklistValues>
+            <masterLabel>PEC</masterLabel>
+            <translation><!-- PEC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Patient</masterLabel>
+            <translation><!-- Patient --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Writeoff Amount --></label>
+        <name>Writeoff_Amount__c</name>
+    </fields>
+    <layouts>
+        <layout>GP Partner - Payment Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Payment - Application Date</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Payment Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Payment w/PEC</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Application Date must be at least 4 days prior to the payment date. If the Payment Date falls on a weekend, then the next Monday should be selected. --></errorMessage>
+        <name>Application_Date_3_Day_rule</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You must enter a value for the application date, and it can not be before the record was created --></errorMessage>
+        <name>Application_Date_Required</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can not select a payment date from a prior period. Please contact your RSM/RBD/or the refund team for help. --></errorMessage>
+        <name>Backdated_Check</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You must change the payment type to something other than TBD when marking a payment as collected or refunded. --></errorMessage>
+        <name>Block_TBD_Collections</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You must select an option for Who applied for CareCredit --></errorMessage>
+        <name>CareCredit_Who_Applied</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You must change the payment type to the actual card type when marking this payment as collected --></errorMessage>
+        <name>Collected_Credit_Card</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- This payment has been locked into a collected state. You can not change it at this point. Please contact your RBD, RSM, or the refund team if you need assistance. --></errorMessage>
+        <name>Collected_Status_Lock</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You must enter a finance fee when collecting money from Chase Health,  CareCredit,  or SpringStone. --></errorMessage>
+        <name>FFee_Required_Check</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can not collect money in the future.  Please consider changing your payment date or your payment status. --></errorMessage>
+        <name>Future_Collections_Check</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You must enter a value for the Confirmation ID field. If this is a check payment, then please use the check #. For credit cards, please enter the transaction id. --></errorMessage>
+        <name>Payment_Confirmation_ID</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You must enter a slipped payment reason when changing the payment date --></errorMessage>
+        <name>Payment_Slip_Reason</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You must enter something valid for the Slipped Payment Other reason --></errorMessage>
+        <name>Payment_Slipped_Other</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You need to select a refund reason when processing a refund payment. --></errorMessage>
+        <name>Refund_Reason_Required</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Refunds can only be handled by the refund team. --></errorMessage>
+        <name>Refund_Status_Check</name>
+    </validationRules>
+</CustomObjectTranslation>

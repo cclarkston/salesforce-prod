@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Note History</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Notes History</value>
+    </caseValues>
+    <fields>
+        <label><!-- Notes ID --></label>
+        <name>Notes_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Old Body --></label>
+        <name>Old_Body__c</name>
+    </fields>
+    <fields>
+        <label><!-- Old Note By --></label>
+        <name>Old_Note_By__c</name>
+        <relationshipLabel><!-- Notes History --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

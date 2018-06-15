@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Patient_POT__c$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Patient_POT__c$Owner</field>
+    </columns>
+    <columns>
+        <field>Patient_POT__c$Opportunity__c</field>
+    </columns>
+    <columns>
+        <field>Patient_POT__c$Name</field>
+    </columns>
+    <columns>
+        <field>Patient_POT__c$Opportunity__c.Cancel_Date__c</field>
+    </columns>
+    <columns>
+        <field>Patient_POT__c$Opportunity__c.Outstanding_Balance_incl_anticipated__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Patient_POT__c$Account__c.Center__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Boston Woburn</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Patient_POT__c$Name</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>phased</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Patient_POT__c$Opportunity__c.Cancel_Date__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Patient_POT__c$Owner</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Charles Doxsee</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Phased POT-Charles Doxsee</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Patient_POT__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Patient_POT__c$CreatedDate</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Patient_POT__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

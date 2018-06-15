@@ -1,0 +1,238 @@
+<apex:page standardController="Account" sidebar="false" showHeader="false" standardStylesheets="false" docType="html-5.0" applyHTMLTag="false">
+    <script type="text/javascript">__sfdcSessionId = '{!$Api.Session_Id}';</script>
+    <script src="/soap/ajax/29.0/connection.js" type="text/javascript"></script>
+
+    <apex:messages />
+    <apex:includeScript value="/soap/ajax/37.0/connection.js"/>
+    <apex:includeScript value="/soap/ajax/37.0/apex.js"/>
+    <style type="text/css">
+        /*.container {
+            margin-left: 156px;
+        }*/
+        button {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        button.btn-link {
+            display: block;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+    </style>
+
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <!-- Bootstrap core CSS -->
+        <apex:stylesheet value="{!URLFOR($Resource.Bootstrap, '/css/bootstrap.min.css')}" />
+      </head>
+
+      <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2" style="display:none">
+                    <div id="submit-patient-button"></div>
+                    <div id="submit-error"></div>
+                </div>
+                <!-- <div class="col-md-2">
+                        <div id="refills-and-errors-status"></div>
+                </div> -->
+                <div class="col-md-2">
+                        <div id="refills-and-errors-button"></div>
+                </div>
+                <!-- <div class="col-md-2">
+                    <h4>Medication Search</h4>
+                    <div id="medication-search-area">
+                        <input type="text" id="medication-searchbox" />
+                    </div>
+                    <div id="medication-search-results"></div>
+                </div>
+                <div class="col-md-2">
+                    <div id="get-medication-history">
+                        <button class="btn btn-success btn-lg" onclick="upsertMedicationHistory()">Import/Update<br/>Medication History</button>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h4>Allergy Search</h4>
+                    <div id="allergy-search-area">
+                        <input type="text" id="allergy-searchbox" />
+                    </div>
+                    <div id="allergy-search-results"></div>
+                </div>
+                <div class="col-md-2">
+                    <div id="get-allergies">
+                        <button class="btn btn-success btn-lg" onclick="upsertAllergies()">Import/Update<br/>Allergies</button>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+        <!-- Bootstrap core JavaScript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+        <script src="{!URLFOR($Resource.Bootstrap, '/js/bootstrap.min.js')}"></script>
+
+        <script type="text/javascript">
+            // $(document).ready(function(){
+            //     var medicationQuery;
+            //     $('#medication-searchbox').keyup(function(){
+            //         medicationQuery = $('#medication-searchbox').val();
+            //         if (medicationQuery && medicationQuery.length >= 3) {displayMedicationNames(medicationQuery);}
+            //     });
+            //     var allergyQuery;
+            //     $('#allergy-searchbox').keyup(function(){
+            //         allergyQuery = $('#allergy-searchbox').val();
+            //         if (allergyQuery && allergyQuery.length >= 3) {displayAllergyNames(allergyQuery);}
+            //     });
+            // })
+            displayDoseSpotButton();
+            // displayRefillRequestsAndTransmissionErrors();
+            displayRefillRequestsAndTransmissionErrorsButton();
+
+            function displayDoseSpotButton() {
+                var buttonLabel = ("{!Account.DoseSpot_Patient_ID__c}") ? "Visit Patient's<br\>DoseSpot Page" : "Add Patient<br\>to DoseSpot";
+                var buttonHTML = "<button class='btn btn-info btn-lg' onclick='addPatient()'>" + buttonLabel + "</button>";
+                $('#submit-patient-button').html(buttonHTML);
+            }
+
+            function addPatient() {
+                // var real_patient_id = '0014000000WVjQz';
+                // var patient_detail_URL = sforce.apex.execute("DoseSpotServices","DoseSpot_patient_URL",{patient_ID:real_patient_id})[0];
+                var patient_detail_URL = sforce.apex.execute("DoseSpotServices","DoseSpot_patient_URL",{patient_ID:"{!Account.ID}"})[0];
+                if (patient_detail_URL.startsWith('http')) {window.open(patient_detail_URL, '_blank');}
+                else {$('#submit-error').html("<h4>" + patient_detail_URL + "</h4>");}
+            }
+
+            // function displayRefillRequestsAndTransmissionErrors() {
+            //     var response = JSON.parse( sforce.apex.execute("DoseSpotServices","refill_requests_and_transmission_errors_json",{})[0] );
+            //     if (response.is_ok) {
+            //         $('#refills-and-errors-status').append("<h4><a class='btn btn-danger' href='" + response.data.URL + "' target='_blank'>Refill Requests &<br\>Transmission Errors Page</a></h4>");
+            //         $('#refills-and-errors-status').append("<h4>Refill Requests: " + response.data.refillRequestCount + "</h4>");
+            //         $('#refills-and-errors-status').append("<h4>Transmission Errors: " + response.data.transmissionErrorCount + "</h4>");
+            //     } else {$('#refills-and-errors-status').append("<h4>" + response.message + "</h4>");}
+            // }
+
+            function displayRefillRequestsAndTransmissionErrorsButton() {
+                var buttonLabel = "Visit DoseSpot";
+                var buttonHTML = "<button class='btn btn-info btn-lg' onclick='visit_DoseSpot_refills_page()'>" + buttonLabel + "</button>";
+                $('#refills-and-errors-button').html(buttonHTML);
+            }
+
+            function visit_DoseSpot_refills_page() {
+                // var url = sforce.apex.execute("DoseSpotServices","refill_requests_and_transmission_errors_URL",{center_ID:"{!Account.Center__c}"})[0];
+                var philadelphia_ID = "a0S4000000ALk3EEAT";
+                var alpharetta_ID   = "a0S4000000AfZkBEAV";
+                var url = sforce.apex.execute("DoseSpotServices","refill_requests_and_transmission_errors_URL",{center_ID:alpharetta_ID})[0];
+                if (url.startsWith('http')) {window.open(url, '_blank');}
+                else {$('#submit-error').html("<h4>" + url + "</h4>");}
+            }
+
+            function displayMedicationNames(query) {
+                $('#medication-search-results').html("searching...");
+                var response = medicationNameSearchResults(query);
+                if (response.is_ok) {
+                    var medications = response.data;
+                    $('#medication-search-results').html("");
+                    if (medications) {medications.forEach(function(medication){
+                        $("#medication-search-results").append('<button name="' + medication.name + '" lexicompdrugid="' + medication.lexicompdrugid + '" lexicompsynonymid="' + medication.lexicompsynonymid + '" class="btn btn-link" onclick="addMedication(this.getAttribute(\'name\'), this.getAttribute(\'lexicompdrugid\'), this.getAttribute(\'lexicompsynonymid\'))">' + medication.name + '</button>');
+                    })}
+                }
+                else {alert(response.message);}
+            }
+
+            function medicationNameSearchResults(search) {
+                return JSON.parse( sforce.apex.execute("DoseSpotServices","medication_search_results",{search: search, patient_ID:"{!Account.ID}"}) );
+            }
+
+            function addMedication(name, lexicompdrugid, lexicompsynonymid) {
+                var response = JSON.parse( sforce.apex.execute("DoseSpotServices","add_medication",{name: name, LexiCompDrugId: lexicompdrugid, LexiCompSynonymId: Number(lexicompsynonymid), patient_ID:"{!Account.ID}"}) );
+                alert(response.message);
+            }
+
+            function upsertMedicationHistory() {
+                var response = JSON.parse(sforce.apex.execute("DoseSpotServices","upsert_medication_history",{patient_ID:"{!Account.ID}"}));
+                alert(response.message);
+            }
+
+            function displayAllergyNames(query) {
+                $('#allergy-search-results').html("searching...");
+                var response = allergyNameSearchResults(query);
+                if (response.is_ok) {
+                    var allergies = response.data;
+                    $('#allergy-search-results').html("");
+                    if (allergies) {allergies.forEach(function(allergy){
+                        // $("#allergy-search-results").append('<button name="' + allergy.name + '" code="' + allergy.code + '" code_type="' + allergy.code_type + '" class="btn btn-link" onclick="addAllergy(this.getAttribute(\'name\'), this.getAttribute(\'code\'), this.getAttribute(\'code_type\'))">' + allergy.name + '</button>');
+                        $("#allergy-search-results").append('<button name="' + allergy.name + '" code="' + allergy.code + '" code_type="' + allergy.code_type + '" class="btn btn-link" onclick="displayAllergyForm(this.getAttribute(\'name\'), this.getAttribute(\'code\'), this.getAttribute(\'code_type\'))">' + allergy.name + '</button>');
+                    })}
+                }
+                else {alert(response.message);}
+            }
+
+            function allergyNameSearchResults(search) {
+                return JSON.parse( sforce.apex.execute("DoseSpotServices","allergy_search_results",{search: search}) );
+            }
+
+            function displayAllergyForm(name, code, codeType) {
+                $('#allergy-search-area').attr('code', code);
+                $('#allergy-search-area').attr('code-type', codeType);
+                $('#allergy-search-area').attr('name', name);
+                $('#allergy-search-area').html("<h4>" + name + "</h4>");
+                $('#allergy-search-results').html(
+                    '<form onSubmit="return addAllergy()">' +
+                        "<div><select id='reaction-type'><option value='Allergy'>Allergy</option><option value='AdverseReaction'>Adverse Reaction</option></select></div>" +
+                        "<div><textarea id='reaction' placeholder='Description of reaction' rows='2' cols='30' /><div>" +
+                        '<p>Onset Date: <input type="text" id="datepicker" required></p>' +
+                        '<input type="submit" class="btn btn-primary" value="Add Allergy">' +
+                    '</form>'
+                );
+                $(function() {
+                  $( "#datepicker" ).datepicker();
+                });
+            }
+
+            function addAllergy(name, code, codeType) {
+                var name         = $('#allergy-search-area').attr('name');
+                var code         = $('#allergy-search-area').attr('code');
+                var codeType     = $('#allergy-search-area').attr('code-type');
+                var reactionType = $('#reaction-type').val();
+                var reaction     = $('#reaction').val();
+                var onsetDate    = $('#datepicker').val();
+                try {
+                    var response = JSON.parse( sforce.apex.execute("DoseSpotServices","add_allergy",{name: name, code: code, code_type: codeType, reaction: reaction, reaction_type: reactionType, onset_date: onsetDate, patient_ID:"{!Account.ID}"}) );
+                    alert(response.message);
+                }
+                catch(error) {alert('Something went wrong. Communication with DoseSpot failed.');}
+                return false; // Returning false prevents normal submission process from taking place
+            }
+
+            function upsertAllergies() {
+                var response = JSON.parse(sforce.apex.execute("DoseSpotServices","upsert_allergies",{patient_ID:"{!Account.ID}"}));
+                alert(response.message);
+            }
+
+            // function displayMedicationStrengths(medication) {
+            //     $('#medication-search-results').html("searching...");
+            //     var strengths = medicationStrengthSearchResults(medication);
+            //     $('#medication-search-results').html("<button id='unknown' class='btn btn-link' onclick=test(this.id)>Unknown</button>");
+            //     if (strengths) {strengths.forEach(function(strength){
+            //         $('#medication-search-results').append("<button id='" + strength + "' class='btn btn-link' onclick=test(this.id)>" + strength + "</button>");
+            //     })}
+            // }
+
+            // function medicationStrengthSearchResults(search) {
+            //     return JSON.parse( sforce.apex.execute("DoseSpotServices","medication_search_results",{search_type: "strength", search: search, patient_id: null}) );
+            // }
+
+            // function selectMedication(medication) {
+            //     $('#medication-search-area').html("<h5>" + medication + "</h5><p>Select Dosage</p>");
+            //     displayMedicationStrengths(medication);
+            // }
+        </script>
+      </body>
+    </html>
+</apex:page>

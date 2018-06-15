@@ -1,0 +1,6 @@
+<apex:page controller="rpt_call_center_dash" cache="false" contentType="text/csv#{!file_name}" language="en-US"  readonly="true">{!csv_daterange}
+{!file_header}
+<apex:repeat value="{!csv_output}" var="output">
+    {!output.output_line}
+</apex:repeat>  
+</apex:page>

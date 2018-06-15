@@ -1,0 +1,1131 @@
+<apex:page showheader="false" sidebar="false" Controller="dp_clinical_srx" docType="html-5.0">
+<head>
+  <meta charset="UTF-8" />
+  <title>HopeRx</title>
+    <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/dp_css_main.css')}"/>  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  
+<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css' />
+  
+  <link rel="icon" type="image/png" href="{!$Resource.CCFavIcon}" />
+  <link rel="icon shortcut"  href="{!$Resource.CCFavIcon}" />
+  
+<!--  <apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />-->
+<!--  <apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>-->
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/mmenu_nav.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc.css')}"/>   
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/dp_css_main.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/fonts.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-buttons.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-patient.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-clinical-calendar.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-clinical.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-pot.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/style.css')}"/>     
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-perio.css')}"/>     
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/forms.css')}"/>     
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-printClinical.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/generic-print.css')}" html-media="print"/>          
+
+  <apex:includeScript value="{!URLFOR($Resource.Dental_Practice_Resources,'js/cc-clinical-calendar.js')}"/>
+  <apex:includeScript value="{!URLFOR($Resource.Dental_Practice_Resources,'js/cc-patient.js')}"/>
+  
+  <script type="text/javascript" src="{!URLFOR($Resource.Scriptaculous, 'lib/prototype.js')}"></script>
+  <script type="text/javascript" src="{!URLFOR($Resource.Scriptaculous, 'src/scriptaculous.js')}"></script>
+<script>
+var $j = jQuery.noConflict();
+// $j is now an alias to the jQuery function; creating the new alias is optional.  
+</script>    
+       
+</head>
+
+<style type="text/css" media="print">
+  .no-print {
+    display:none !important;
+  }
+  
+  .print-only {
+    display:visible !important;
+  }
+    
+</style>
+
+<style>
+.cc-sub-nav-cell [class^="ccf-"], [class*=" ccf-"] {
+  line-height:1.2;
+}
+
+.icon_tooltip {
+  position: relative;
+}
+
+.icon_tooltip .icon_tiptext {
+  visibility: hidden;
+  width: 150px;
+  background-color: white;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  border:1px solid black;
+  color: black;
+  box-shadow: -1px 9px 31px -4px rgba(0,0,0,0.75);
+  position: absolute;
+  z-index: 1;  
+  top: 100%;
+  left: 50%; 
+  margin-left: -75px;
+  font-size:12pt;
+}
+
+.icon_tooltip:hover .icon_tiptext {
+  visibility: visible;
+}
+
+.cc-back-container {
+  display: flex;
+  flex-direction: row;
+}
+
+  .no-print {
+    display:visible;
+  }
+
+  .center_header {
+    display: flex;
+    align-items: flex-end;
+    width: 50%;
+    min-width:500px;
+    justify-content: flex-end;  
+    flex-grow: 2;
+    text-align: right;  
+  }
+
+  .print-only {
+    display:none;
+  }
+
+  .patient_label {
+color:#0000FF;
+font-weight:bold;
+}
+
+.vertical-text {
+	transform: rotate(270deg);
+	transform-origin: center;
+	font-weight:400;
+	min-width: 60px;
+}
+
+.hover_add {
+  color:black;
+  text-decoration:none;
+}
+
+.hover_add:hover {
+  color:white;
+  text-decoration:none;
+}
+
+.hover_add:visited {
+  text-decoration:none;
+}
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0 auto;
+    padding: 0;
+  }  
+  
+  .pad-main-wrapper {
+    margin-top:145px;
+  }
+  
+  a.nav_anchor {
+    color:black;
+    font-weight:300;
+    font-size: 12pt;
+    letter-spacing: 1px;
+  }
+  
+  a.nav_anchor:hover {
+    color:white;
+    text-decoration:none;
+  }
+  
+  span.dateFormat {
+    display:none;
+  }
+  
+  .cc-field-label {
+    display:inline-block;
+    padding-right:5px;
+    font-weight:bold;
+  }
+  
+  .cc-field-input {
+    border:none;
+    outline:0;
+    font-szie:12pt;    
+  }
+  
+  .cc-email-attachment-item {
+    display:inline-block;
+    padding-right:20px;    
+  }
+  
+  .cc-email-attachment-remove {
+    padding-left:10px;
+    display:inline-block;
+  }
+  
+  .cc-section-header-right-button-container a:hover {
+    color:white;
+    text-decoration:none;
+  }
+  
+  table.bend_table {
+      width:100%;      
+    }
+    
+    tr.bend_header {
+
+    }
+    
+    .cc-bgColor-blue {
+      background-color:rgb(10,102,224);
+    }
+    
+    .gray_under {
+       display:inline-block;
+       border-bottom:1px solid #bfbfbf;
+       padding-left:5px;
+       padding-right:5px;
+     <!--text-decoration: underline;
+      -moz-text-decoration-color: #bfbfbf; /* Code for Firefox */
+      text-decoration-color: #bfbfbf;-->
+    }
+    
+    .hover-blue:hover {
+      color:#189BEB;
+    }
+    
+    .hover-over-red:hover {
+      background-color: rgb(227,20,20);
+    }
+    
+    .no-uline:hover {
+      text-decoration:none;
+    }
+    
+    tr.bend_header td {
+
+    }
+    
+    tr.odd {
+    
+    }
+    
+    tr.odd td {
+      padding-left:5px;
+      border-bottom:1px dotted #bfbfbf;
+    }
+    
+    tr.even {
+        
+    }
+    
+    tr.even td {
+      padding-left:5px;
+      background:#f5f5f5;
+      border-bottom:1px dotted #bfbfbf;
+    }
+    
+    .review_selection {
+    background-color: rgba(25, 117, 210, 0.55);
+    border: 4px solid rgba(25, 117, 210, 0.55);
+}
+
+.cc-perio-form-row-template {
+    width: 100%;
+}
+
+.cc-form-container {
+    position: relative;
+    transition: .25s;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 2px solid #999999;
+    background-color: #fafafa;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.cc-form-header-container {
+    width: 100%;
+    /* padding: 10px; */
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.cc-form-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 16pt;
+    font-weight: 400;
+    height: 45px;
+}
+
+.center_header {
+    display: flex;
+    align-items: flex-end;
+    width: 50%;
+    min-width: 500px;
+    justify-content: flex-end;
+    flex-grow: 2;
+    text-align: right;
+}
+
+.cc-form-content-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+    margin-top: 25px;
+}
+
+.cc-form-row-header {
+    font-weight: 300;
+    font-size: 14pt;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #888888;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.cc-perio-prosth-row {
+    display: flex;
+    flex-direction: row;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.cc-form-content-columnContainer {
+    width: 100%;
+    display: flex;
+}
+
+.cc-form-content-container-left {
+    width: 45%;
+}
+
+.cc-form-content-container-center {
+    width: 65px;
+}
+
+.cc-form-content-container-right {
+    width: 45%;
+}
+
+.cc-perio-prosth-label {
+    word-wrap: none;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+.cc-patientProfile-input-container {
+    position: relative;
+    margin-left: 10px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+    height: 100%;
+}
+
+.cc-patientProfile-input {
+    border: none;
+    outline: 0;
+    font-size: 12pt;
+    width: 200px;
+    background-color: transparent;
+}
+
+.cc-inputBottomBorder {
+    width: 0px;
+    visibility: hidden;
+    border: 1px solid #0a66e0;
+    transition: .75s;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    z-index: 1;
+}
+
+.cc-inputBottomBorder-off {
+    width: 100%;
+    border-bottom: 1px solid #a1a1a1;
+    transition: .25s;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    z-index: 0;
+}
+
+.cc-form-notation-button {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 4px;
+    border: 2px solid rgb(227, 227, 227);
+    background-color: rgb(242, 242, 242);
+    font-weight: 400;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+.cc-form-notation-button-selected, .cc-form-notation-button-locked {
+    background-color: #0a66e0;
+    border: 2px solid transparent;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 4px;
+    font-weight: 400;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+    
+</style>
+
+
+
+<body>
+<apex:form onsubmit="return true;">
+<apex:outputpanel styleclass="cc-wrapper" layout="block">
+
+  <apex:outputpanel layout="block" styleclass="cc-content-wrapper" id="main_holder">
+    <apex:outputpanel layout="block" styleclass="cc-content-container">    
+      <apex:outputpanel layout="block" styleclass="cc-clinical-content-container" style="padding-top:1em;">
+    
+      <!--start new lab rx form/edit existing lab rx form--->
+      <apex:outputpanel layout="block" styleclass="cc-perio-form-row-template">   
+        <div class="cc-form-container" style="border: 2px solid rgb(153, 153, 153); display: flex;" id="surgical_rx_holder">
+          <!-- start header and form buttons -->
+          <apex:outputpanel layout="block" styleclass="cc-form-header-container">
+            <apex:outputpanel layout="block" styleclass="cc-form-header" style="width:50%;">Surgical Rx </apex:outputpanel>
+              <div class="center_header" style="flex-grow: 2;text-align: right;  ">
+                {!srx.center_information__r.legal_name__c}<br /> 
+                <apex:outputtext value="{!center_address_line}" escape="false" />                             
+              </div>              
+            </apex:outputpanel> 
+            <!-- end header and form buttons -->
+            <!-- start form section container -->
+            <apex:outputpanel layout="block" styleclass="cc-form-content-container">
+              <!-- start columnContainer -->
+              <apex:outputpanel layout="block" styleclass="cc-form-content-columnContainer">
+                <!-- start left column --> 
+                <apex:outputpanel layout="block" styleclass="cc-form-content-container-left">
+                  <!-- start input row -->
+                  <apex:outputpanel layout="block" styleclass="cc-perio-row">
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label">Patient Name:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputtext value="{!patient.name}" styleclass="cc-patientProfile-input" />
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder">    </apex:outputpanel>
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off">  </apex:outputpanel>
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                  </apex:outputpanel>
+                  <!-- end input row -->
+                  <!-- start input row -->
+                  <apex:outputpanel layout="block" styleclass="cc-perio-row">
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label">DOB:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                          <apex:param value="{!patient.Date_of_Birth__c}" /> 
+                        </apex:outputText> 
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder">  </apex:outputpanel>
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off">  </apex:outputpanel>
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                  </apex:outputpanel>
+                  <!-- end input row -->
+                  <!-- start input row -->
+                  <apex:outputpanel layout="block" styleclass="cc-perio-row">
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label">Age:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputfield value="{!patient.Age__c}" styleclass="cc-patientProfile-input" />
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder"> </apex:outputpanel>
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off"> </apex:outputpanel>
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                  </apex:outputpanel>
+                  <!-- end input row -->
+                </apex:outputpanel>
+                <!-- end left column -->
+                <!-- start spacer center column -->
+                <apex:outputpanel layout="block" styleclass="cc-form-content-container-center">
+                </apex:outputpanel>
+                <!-- end spacer center column -->
+                <!-- start right column -->
+                <apex:outputpanel layout="block" styleclass="cc-form-content-container-right">
+                  <!-- start input row -->
+                  <apex:outputpanel layout="block" styleclass="cc-perio-row">
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label">Date:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                          <apex:param value="{!srx.createddate}" /> 
+                        </apex:outputText> 
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder"> </apex:outputpanel>
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off"> </apex:outputpanel>
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                  </apex:outputpanel>
+                  <!-- end input row -->
+                  <!-- start input row -->
+                  <apex:outputpanel layout="block" styleclass="cc-perio-row">
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label">To:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputfield value="{!srx.Dr_to__c}" />                              
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder"> </apex:outputpanel>
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off">  </apex:outputpanel>
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                  </apex:outputpanel>
+                  <!-- end input row -->
+                  <!-- start input row -->
+                  <apex:outputpanel layout="block" styleclass="cc-perio-row">
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label">From:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputfield value="{!srx.DR_for__c}" />
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder"> </apex:outputpanel>
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off"> </apex:outputpanel>
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                  </apex:outputpanel>
+                  <!-- end input row -->
+                  <!-- start input row -->
+                  <apex:outputpanel layout="block" styleclass="cc-perio-row">
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label">Re:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputfield value="{!srx.Reason__c}" styleclass="cc-patientProfile-input" />
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder">         </apex:outputpanel>
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off">      </apex:outputpanel>
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                  </apex:outputpanel>
+                  <!-- end input row -->
+                </apex:outputpanel>
+                <!-- end right column -->
+              </apex:outputpanel>
+              <!-- end columnContainer -->
+            </apex:outputpanel>
+            <!-- end form section container -->
+                        
+  
+              <!-- start form section container -->
+              <apex:outputpanel layout="block" styleclass="cc-form-content-container">
+                <!-- start header-->
+                <apex:outputpanel layout="block" styleclass="cc-form-row-header ">Caution</apex:outputpanel>
+                <!-- end header -->
+                <!-- start columnContainer -->
+                <apex:outputpanel layout="block" styleclass="cc-form-content-columnContainer">
+                  <!-- start left container -->
+                  <apex:outputpanel layout="block" styleclass="cc-form-content-container">
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row" style="width:100%;">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-font-bold cc-form-input-label-markSelected" >Drug allergies:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container" style="width:100%;">
+                        {!patient_allergy_info}
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder">  </apex:outputpanel>
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off">      </apex:outputpanel>
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                  </apex:outputpanel>
+                  <!-- end left container -->
+                  <!-- start center container -->
+                  <apex:outputpanel layout="block" styleclass="cc-form-content-container-center">
+  
+                  </apex:outputpanel>
+                  <!-- end left container -->
+                  
+                </apex:outputpanel>
+                <!-- end columnContainer -->
+              </apex:outputpanel>
+              <!-- end form section container -->
+  
+              <!-- start form section container -->
+              <apex:outputpanel layout="block" styleclass="cc-form-content-container">
+                <!-- start header-->
+                <apex:outputpanel layout="block" styleclass="cc-form-row-header {!if(srx.Include_Upper_Arch__c,'','no-print')}">
+                  <apex:outputtext value="{!srx.Include_Upper_Arch__c}" /> &nbsp;Upper Arch Replacement
+                </apex:outputpanel>
+                <!-- end header -->
+                <!-- start columnContainer -->
+                <apex:outputpanel layout="block" styleclass="cc-form-content-columnContainer" rendered="{!srx.Include_Upper_Arch__c}">
+                  <!-- start left container -->
+                  <apex:outputpanel layout="block" styleclass="cc-form-content-container-left">
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Max Ant. Bone Reduction:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputfield value="{!srx.Max_max_ant_bone_reduction__c}" styleclass="cc-patientProfile-input-mm cc-form-input-markSelected" />mm
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder"> </apex:outputpanel>
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off"> </apex:outputpanel>
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Max L Post Bone Reduction:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputfield value="{!srx.Max_max_left_post_bone_reduction__c}" styleclass="cc-patientProfile-input-mm cc-form-input-markSelected" />mm
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder">  </apex:outputpanel>
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off"> </apex:outputpanel>
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Max R Post Bone Reduction:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputfield value="{!srx.MAX_max_right_post_bone_reduction__c}" styleclass="cc-patientProfile-input-mm cc-form-input-markSelected" />mm
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder"> </apex:outputpanel>
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off"> </apex:outputpanel>
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row cc-form-oneButtonOnly cc-flexWrap">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label">System:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <div id="max_system_1" class="cc-form-notation-button{!if(srx.max_implant_system__c=='Straumann','-selected','')}" onclick="toggle_surgical_rx_text('max_implant_system__c','{!if(srx.max_implant_system__c=='Straumann','','Straumann')}');reset_form_buttons(['max_system_2','max_system_3','max_system_4']);toggle_form_button(this);">Straumann</div>
+                        <div id="max_system_2" class="cc-form-notation-button{!if(srx.max_implant_system__c=='Neodent','-selected','')}" onclick="toggle_surgical_rx_text('max_implant_system__c','{!if(srx.max_implant_system__c=='Neodent','','Neodent')}');reset_form_buttons(['max_system_1','max_system_3','max_system_4']);toggle_form_button(this);">Neodent</div>
+                        <div id="max_system_3" class="cc-form-notation-button{!if(srx.max_implant_system__c=='Nobel Biocare','-selected','')}" onclick="toggle_surgical_rx_text('max_implant_system__c','{!if(srx.max_implant_system__c=='Nobel Biocare','','Nobel Biocare')}');reset_form_buttons(['max_system_1','max_system_2','max_system_4']);toggle_form_button(this);">Nobel Biocare</div>
+                        <div id="max_system_4" class="cc-form-notation-button{!if(srx.max_implant_system__c=='Other','-selected','')}" onclick="toggle_surgical_rx_text('max_implant_system__c','{!if(srx.max_implant_system__c=='Other','','Other')}');reset_form_buttons(['max_system_1','max_system_2','max_system_3']);toggle_form_button(this);">Other</div>                        
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row" rendered="{!if(srx.Max_Implant_System__c=='Other',true,false)}">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">System Other:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputfield value="{!srx.Max_Implant_System_Other__c}" styleclass="cc-patientProfile-input" />
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder"> </apex:outputpanel>
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off"> </apex:outputpanel>
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row" rendered="{!if(srx.Max_Implant_System__c=='',false,true)}">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Implant Type:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputfield value="{!srx.Max_Implant_teeth__c}" rendered="{!if(srx.Max_Implant_System__c=='Other',false,true)}" />
+			            <apex:outputfield value="{!srx.Max_Implant_teeth__c}" styleclass="cc-patientProfile-input cc-form-input-markSelected" rendered="{!if(srx.Max_Implant_System__c=='Other',true,false)}"/>
+			              <div class="cc-inputBottomBorder">  </div>
+			              <div class="cc-inputBottomBorder-off">  </div>  
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <!-- <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Implants:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputfield value="{!srx.Max_Implant_teeth__c}" styleclass="cc-patientProfile-input cc-form-input-markSelected" />
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder">  </apex:outputpanel>
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off">  </apex:outputpanel>
+                      </apex:outputpanel>
+                    </apex:outputpanel>-->
+                    <!-- end row -->
+                  </apex:outputpanel>
+                  <!-- end left container -->
+                  <!-- start center container -->
+                  <apex:outputpanel layout="block" styleclass="cc-form-content-container-center">
+  
+                  </apex:outputpanel>
+                  <!-- end left container -->
+                  <!-- start right container -->
+                  <apex:outputpanel layout="block" styleclass="cc-form-content-container-right">
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Grafting:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <div id="max_graft_1" class="cc-form-notation-button{!if(srx.max_grafting__c=='Yes','-selected','')}" onclick="toggle_surgical_rx_text('max_grafting__c','{!if(srx.max_grafting__c=='Yes','','Yes')}');reset_form_buttons(['max_graft_2']);toggle_form_button(this);">Yes</div>    
+                        <div id="max_graft_2" class="cc-form-notation-button{!if(srx.max_grafting__c=='No','-selected','')}" onclick="toggle_surgical_rx_text('max_grafting__c','{!if(srx.max_grafting__c=='No','','No')}');reset_form_buttons(['max_graft_1']);toggle_form_button(this);">No</div>                      
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row no-print" rendered="{!if(srx.Max_Grafting__c=='Yes',true,false)}">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Grafting Notes:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container" style="width:100%;">
+                        <apex:outputfield value="{!srx.Max_Grafting_Note__c}"  style="width:100%;"/>                                          
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->     
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row print-only" rendered="{!if(srx.Max_Grafting__c=='Yes',true,false)}">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Grafting Notes:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container" style="width:100%;">
+                        <apex:outputfield value="{!srx.Max_Grafting_Note__c}"  style="width:100%;"/>                                          
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->      
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Sinus Grafting:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <div id="ua_sgraft_1" class="cc-form-notation-button{!if(srx.upper_arch_sinus_grafting__c=='Yes','-selected','')}" onclick="toggle_surgical_rx_text('upper_arch_sinus_grafting__c','{!if(srx.upper_arch_sinus_grafting__c=='Yes','','Yes')}');reset_form_buttons(['ua_sgraft_2']);toggle_form_button(this);">Yes</div>    
+                        <div id="ua_sgraft_2" class="cc-form-notation-button{!if(srx.upper_arch_sinus_grafting__c=='No','-selected','')}" onclick="toggle_surgical_rx_text('upper_arch_sinus_grafting__c','{!if(srx.upper_arch_sinus_grafting__c=='No','','No')}');reset_form_buttons(['ua_sgraft_1']);toggle_form_button(this);">No</div>                      
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Sinus Grafting Location:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputpanel layout="block" styleclass="cc-form-notation-button{!if(srx.Upper_Arch_Sinus_Grafting_Left__c,'-selected','')}" onclick="toggle_surgical_rx_boolean('upper_arch_sinus_grafting_left__c');toggle_form_button(this);">Left</apex:outputpanel>
+                        <apex:outputpanel layout="block" styleclass="cc-form-notation-button{!if(srx.Upper_Arch_Sinus_Grafting_Right__c,'-selected','')}" onclick="toggle_surgical_rx_boolean('upper_arch_sinus_grafting_right__c');toggle_form_button(this);">Right</apex:outputpanel>                                            
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Immediate Load:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <div id="uiload_1" class="cc-form-notation-button{!if(srx.upper_immediate_load__c=='Yes','-selected','')}" onclick="toggle_surgical_rx_text('upper_immediate_load__c','{!if(srx.upper_immediate_load__c=='Yes','','Yes')}');reset_form_buttons(['uiload_2']);toggle_form_button(this);">Yes</div>    
+                        <div id="uiload_2" class="cc-form-notation-button{!if(srx.upper_immediate_load__c=='No','-selected','')}" onclick="toggle_surgical_rx_text('upper_immediate_load__c','{!if(srx.upper_immediate_load__c=='No','','No')}');reset_form_buttons(['uiload_1']);toggle_form_button(this);">No</div>                      
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Immediate Placement:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <div id="uiplace_1" class="cc-form-notation-button{!if(srx.upper_immediate_placement__c=='Yes','-selected','')}" onclick="toggle_surgical_rx_text('upper_immediate_placement__c','{!if(srx.upper_immediate_placement__c=='Yes','','Yes')}');reset_form_buttons(['uiplace_2']);toggle_form_button(this);">Yes</div>    
+                        <div id="uiplace_2" class="cc-form-notation-button{!if(srx.upper_immediate_placement__c=='No','-selected','')}" onclick="toggle_surgical_rx_text('upper_immediate_placement__c','{!if(srx.upper_immediate_placement__c=='No','','No')}');reset_form_buttons(['uiplace_1']);toggle_form_button(this);">No</div>                      
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->  
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row no-print" rendered="{!if(srx.Upper_Immediate_Placement__c=='Yes' || srx.Upper_Immediate_Load__c=='Yes',true,false)}">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Immediate Notes:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container" style="width:100%;">
+                        <apex:outputfield value="{!srx.Upper_Immediate_Notes__c}"  style="width:100%;"/>                                          
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->   
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row print-only" rendered="{!if(srx.Upper_Immediate_Placement__c=='Yes' || srx.Upper_Immediate_Load__c=='Yes',true,false)}">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Immediate Notes:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container" style="width:100%;">
+                        <apex:outputfield value="{!srx.Upper_Immediate_Notes__c}"  style="width:100%;"/>                                          
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->                     
+                                                            
+                  </apex:outputpanel>
+                  <!-- end right container -->
+                </apex:outputpanel>
+                <!-- end columnContainer -->
+              </apex:outputpanel>
+              <!-- end form section container -->
+              <apex:outputpanel layout="block" styleclass="cc-pageBreak">&nbsp;</apex:outputpanel>
+
+              <!-- start form section container -->
+              <apex:outputpanel layout="block" styleclass="cc-form-content-container">
+                <!-- start header-->
+                <apex:outputpanel layout="block" styleclass="cc-form-row-header {!if(srx.Include_Lower_Arch__c,'','no-print')}">
+                  <apex:outputtext value="{!srx.Include_Lower_Arch__c}" /> &nbsp;Lower Arch Replacement
+                </apex:outputpanel>
+                <!-- end header -->
+                <!-- start columnContainer -->
+                <apex:outputpanel layout="block" styleclass="cc-form-content-columnContainer" rendered="{!srx.Include_Lower_Arch__c}">
+                  <!-- start left container -->
+                  <apex:outputpanel layout="block" styleclass="cc-form-content-container-left">
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Mand Ant. Bone Reduction:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputfield value="{!srx.Man_max_ant_bone_reduction__c}" styleclass="cc-patientProfile-input-mm cc-form-input-markSelected" />mm
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder">  </apex:outputpanel>
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off">  </apex:outputpanel>
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Mand L Post Bone Reduction:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputfield value="{!srx.Man_max_left_post_bone_reduction__c}" styleclass="cc-patientProfile-input-mm cc-form-input-markSelected" />mm
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder"> </apex:outputpanel>
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off">      </apex:outputpanel>
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Mand R Post Bone Reduction:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputfield value="{!srx.Man_max_right_post_bone_reduction__c}" styleclass="cc-patientProfile-input-mm cc-form-input-markSelected" />mm
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder">      </apex:outputpanel>
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off">      </apex:outputpanel>
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <!-- <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-form-input-label-markSelected cc-perio-prosth-label">Implants:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputfield value="{!srx.Man_implant_teeth__c}" styleclass="cc-patientProfile-input cc-form-input-markSelected"  />
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder"> </apex:outputpanel>
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off"> </apex:outputpanel>
+                      </apex:outputpanel>
+                    </apex:outputpanel>-->
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row cc-form-oneButtonOnly cc-flexWrap">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label">System:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <div id="man_system_1" class="cc-form-notation-button{!if(srx.man_implant_system__c=='Straumann','-selected','')}" onclick="toggle_surgical_rx_text('man_implant_system__c','{!if(srx.man_implant_system__c=='Straumann','','Straumann')}');reset_form_buttons(['man_system_2','man_system_3','man_system_4']);toggle_form_button(this);">Straumann</div>
+                        <div id="man_system_2" class="cc-form-notation-button{!if(srx.man_implant_system__c=='Neodent','-selected','')}" onclick="toggle_surgical_rx_text('man_implant_system__c','{!if(srx.man_implant_system__c=='Neodent','','Neodent')}');reset_form_buttons(['man_system_1','man_system_3','man_system_4']);toggle_form_button(this);">Neodent</div>
+                        <div id="man_system_3" class="cc-form-notation-button{!if(srx.man_implant_system__c=='Nobel Biocare','-selected','')}" onclick="toggle_surgical_rx_text('man_implant_system__c','{!if(srx.man_implant_system__c=='Nobel Biocare','','Nobel Biocare')}');reset_form_buttons(['man_system_1','man_system_2','man_system_4']);toggle_form_button(this);">Nobel Biocare</div>
+                        <div id="man_system_4" class="cc-form-notation-button{!if(srx.man_implant_system__c=='Other','-selected','')}" onclick="toggle_surgical_rx_text('man_implant_system__c','{!if(srx.man_implant_system__c=='Other','','Other')}');reset_form_buttons(['man_system_1','man_system_2','man_system_3']);toggle_form_button(this);">Other</div>                        
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row" rendered="{!if(srx.Man_implant_system__c=='Other',true,false)}">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">System Other:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputfield value="{!srx.Man_Implant_System_Other__c}" styleclass="cc-patientProfile-input" />
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder"> </apex:outputpanel>
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off"> </apex:outputpanel>
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row" rendered="{!if(srx.Man_implant_system__c=='',false,true)}">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Implant Type:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputfield value="{!srx.Man_implant_teeth__c}" rendered="{!if(srx.Man_implant_system__c=='Other',false,true)}" />
+			            <apex:outputfield value="{!srx.Man_implant_teeth__c}" styleclass="cc-patientProfile-input cc-form-input-markSelected" rendered="{!if(srx.Man_implant_system__c=='Other',true,false)}"/>
+			              <div class="cc-inputBottomBorder">  </div>
+			              <div class="cc-inputBottomBorder-off">  </div>  
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                  </apex:outputpanel>
+                  <!-- end left container -->
+                  <!-- start center container -->
+                  <apex:outputpanel layout="block" styleclass="cc-form-content-container-center">
+  
+                  </apex:outputpanel>
+                  <!-- end left container -->
+                  <!-- start right container -->
+                  <apex:outputpanel layout="block" styleclass="cc-form-content-container-right">
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Grafting:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <div id="mand_graft_1" class="cc-form-notation-button{!if(srx.mand_grafting__c=='Yes','-selected','')}" onclick="toggle_surgical_rx_text('mand_grafting__c','{!if(srx.mand_grafting__c=='Yes','','Yes')}');reset_form_buttons(['mand_graft_2']);toggle_form_button(this);">Yes</div>    
+                        <div id="mand_graft_2" class="cc-form-notation-button{!if(srx.mand_grafting__c=='No','-selected','')}" onclick="toggle_surgical_rx_text('mand_grafting__c','{!if(srx.mand_grafting__c=='No','','No')}');reset_form_buttons(['mand_graft_1']);toggle_form_button(this);">No</div>                      
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row" rendered="{!if(srx.Mand_grafting__c=='Yes',true,false)}">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Grafting Notes:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container" style="width:100%;">
+                        <apex:outputfield value="{!srx.Mand_Grafting_note__c}"  style="width:100%;"/>                                          
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Immediate Load:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <div id="liload_1" class="cc-form-notation-button{!if(srx.lower_immediate_load__c=='Yes','-selected','')}" onclick="toggle_surgical_rx_text('lower_immediate_load__c','{!if(srx.lower_immediate_load__c=='Yes','','Yes')}');reset_form_buttons(['liload_2']);toggle_form_button(this);">Yes</div>    
+                        <div id="liload_2" class="cc-form-notation-button{!if(srx.lower_immediate_load__c=='No','-selected','')}" onclick="toggle_surgical_rx_text('lower_immediate_load__c','{!if(srx.lower_immediate_load__c=='No','','No')}');reset_form_buttons(['liload_1']);toggle_form_button(this);">No</div>                      
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Immediate Placement:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <div id="liplace_1" class="cc-form-notation-button{!if(srx.lower_immediate_placement__c=='Yes','-selected','')}" onclick="toggle_surgical_rx_text('lower_immediate_placement__c','{!if(srx.lower_immediate_placement__c=='Yes','','Yes')}');reset_form_buttons(['liplace_2']);toggle_form_button(this);">Yes</div>    
+                        <div id="liplace_2" class="cc-form-notation-button{!if(srx.lower_immediate_placement__c=='No','-selected','')}" onclick="toggle_surgical_rx_text('lower_immediate_placement__c','{!if(srx.lower_immediate_placement__c=='No','','No')}');reset_form_buttons(['liplace_1']);toggle_form_button(this);">No</div>                      
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->  
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row" rendered="{!if(srx.Lower_Immediate_Placement__c=='Yes' || srx.Lower_Immediate_Load__c=='Yes',true,false)}">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Immediate Notes:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container" style="width:100%;">
+                        <apex:outputfield value="{!srx.Lower_Immediate_Load_Notes__c}"  style="width:100%;"/>                                          
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->    
+                  </apex:outputpanel>
+                  <!-- end right container -->
+                </apex:outputpanel>
+                <!-- end columnContainer -->
+              </apex:outputpanel>
+              <!-- end form section container -->
+  
+              <!-- start form section container -->
+              <apex:outputpanel layout="block" styleclass="cc-form-content-container">
+                <!-- start header-->
+                <apex:outputpanel layout="block" styleclass="cc-form-row-header ">Extractions</apex:outputpanel>
+                <!-- end header -->
+                <!-- start columnContainer -->
+                <apex:outputpanel layout="block" styleclass="cc-form-content-columnContainer">
+                  <!-- start left container -->
+                  <apex:outputpanel layout="block" styleclass="cc-form-content-container-left" style="width:80%;">                                   
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-form-input-label-markSelected cc-perio-prosth-label">Extract :</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">                       
+                        <i class="ccf-tooth cc-cursor-hover cc-color-font-hover-blue " onclick="ovar_tooth_modal('surgical','Extraction_teeth__c','Extraction Teeth');"></i>
+                        <apex:outputpanel layout="block" styleclass="cc-patient-schedule-row-toothSelected-numbers">
+                          {!srx.Extraction_teeth__c}
+                        </apex:outputpanel>
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row ">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Extraction Notes:</apex:outputpanel>
+                      <apex:outputfield value="{!srx.Extraction_Notes__c}" style="width:100%;"/>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                  </apex:outputpanel>
+                  <!-- end left container -->
+                  
+                </apex:outputpanel>
+                <!-- end columnContainer -->
+              </apex:outputpanel>
+              <!-- end form section container -->
+              <!-- start form section container -->
+              <apex:outputpanel layout="block" styleclass="cc-form-content-container">
+                <!-- start header-->
+                <apex:outputpanel layout="block" styleclass="cc-form-row-header {!if(srx.Include_SM__c,'','no-print')}">
+                  <apex:outputtext value="{!srx.Include_SM__c}"  /> &nbsp;Single/Multiple Implants
+                </apex:outputpanel>
+                <!-- end header -->
+                <!-- start columnContainer -->
+                <apex:outputpanel layout="block" styleclass="cc-form-content-columnContainer" rendered="{!srx.Include_SM__c}">
+                  <!-- start left container -->
+                  <apex:outputpanel layout="block" styleclass="cc-form-content-container-left">                                   
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-form-input-label-markSelected cc-perio-prosth-label">Implant Placement:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">                       
+                        <i class="ccf-tooth cc-cursor-hover cc-color-font-hover-blue " onclick="ovar_tooth_modal('surgical','Implant_Placement__c','Implant Placement');"></i>
+                        <apex:outputpanel layout="block" styleclass="cc-patient-schedule-row-toothSelected-numbers">
+                          {!srx.Implant_Placement__c}
+                        </apex:outputpanel>
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row cc-form-oneButtonOnly cc-flexWrap">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label">System:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <div id="sm_system_1" class="cc-form-notation-button{!if(srx.sm_implant_system__c=='Straumann','-selected','')}" onclick="toggle_surgical_rx_text('sm_implant_system__c','{!if(srx.sm_implant_system__c=='Straumann','','Straumann')}');reset_form_buttons(['sm_system_2','sm_system_3','sm_system_4']);toggle_form_button(this);">Straumann</div>
+                        <div id="sm_system_2" class="cc-form-notation-button{!if(srx.sm_implant_system__c=='Neodent','-selected','')}" onclick="toggle_surgical_rx_text('sm_implant_system__c','{!if(srx.sm_implant_system__c=='Neodent','','Neodent')}');reset_form_buttons(['sm_system_1','sm_system_3','sm_system_4']);toggle_form_button(this);">Neodent</div>
+                        <div id="sm_system_3" class="cc-form-notation-button{!if(srx.sm_implant_system__c=='Nobel Biocare','-selected','')}" onclick="toggle_surgical_rx_text('sm_implant_system__c','{!if(srx.sm_implant_system__c=='Nobel Biocare','','Nobel Biocare')}');reset_form_buttons(['sm_system_1','sm_system_2','sm_system_4']);toggle_form_button(this);">Nobel Biocare</div>
+                        <div id="sm_system_4" class="cc-form-notation-button{!if(srx.sm_implant_system__c=='Other','-selected','')}" onclick="toggle_surgical_rx_text('sm_implant_system__c','{!if(srx.sm_implant_system__c=='Other','','Other')}');reset_form_buttons(['sm_system_1','sm_system_2','sm_system_3']);toggle_form_button(this);">Other</div>                        
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row" rendered="{!if(srx.SM_Implant_System__c=='Other',true,false)}">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">System Other:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputfield value="{!srx.SM_Implant_System_Other__c}" styleclass="cc-patientProfile-input" />
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder"> </apex:outputpanel>
+                        <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off"> </apex:outputpanel>
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row" rendered="{!if(srx.SM_Implant_System__c=='',false,true)}">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Implant Type:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputfield value="{!srx.SM_Implant_System_Type__c}" rendered="{!if(srx.SM_Implant_System__c=='Other',false,true)}" />
+			            <apex:outputfield value="{!srx.SM_Implant_System_Type__c}" styleclass="cc-patientProfile-input cc-form-input-markSelected" rendered="{!if(srx.SM_Implant_System__c=='Other',true,false)}"/>
+			              <div class="cc-inputBottomBorder">  </div>
+			              <div class="cc-inputBottomBorder-off">  </div>  
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->                                       
+                  </apex:outputpanel>
+                  <!-- end left container -->
+                  <!-- start center container -->
+                  <apex:outputpanel layout="block" styleclass="cc-form-content-container-center">
+  
+                  </apex:outputpanel>
+                  <!-- end left container -->
+                  <!-- start right container -->
+                  <apex:outputpanel layout="block" styleclass="cc-form-content-container-right">
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Grafting:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <div id="sm_graft_1" class="cc-form-notation-button{!if(srx.single_multi_grafting__c=='Yes','-selected','')}" onclick="toggle_surgical_rx_text('single_multi_grafting__c','{!if(srx.single_multi_grafting__c=='Yes','','Yes')}');reset_form_buttons(['sm_graft_2']);toggle_form_button(this);">Yes</div>    
+                        <div id="sm_graft_2" class="cc-form-notation-button{!if(srx.single_multi_grafting__c=='No','-selected','')}" onclick="toggle_surgical_rx_text('single_multi_grafting__c','{!if(srx.single_multi_grafting__c=='No','','No')}');reset_form_buttons(['sm_graft_1']);toggle_form_button(this);">No</div>                      
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row" rendered="{!if(srx.Single_Multi_Grafting__c=='Yes',true,false)}">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected" style="min-width:150px;">Grafting Notes:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container" style="width:100%;">
+                        <apex:outputfield value="{!srx.Single_Multi_Grafting_Note__c}"  style="width:100%;"/>                                          
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Sinus Grafting:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <div id="sm_sgraft_1" class="cc-form-notation-button{!if(srx.sm_sinus_grafting__c=='Yes','-selected','')}" onclick="toggle_surgical_rx_text('sm_sinus_grafting__c','{!if(srx.sm_sinus_grafting__c=='Yes','','Yes')}');reset_form_buttons(['sm_sgraft_2']);toggle_form_button(this);">Yes</div>    
+                        <div id="sm_sgraft_2" class="cc-form-notation-button{!if(srx.sm_sinus_grafting__c=='No','-selected','')}" onclick="toggle_surgical_rx_text('sm_sinus_grafting__c','{!if(srx.sm_sinus_grafting__c=='No','','No')}');reset_form_buttons(['sm_sgraft_1']);toggle_form_button(this);">No</div>                      
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Sinus Grafting Location:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputpanel layout="block" styleclass="cc-form-notation-button{!if(srx.SM_Sinus_Grafting_Left__c,'-selected','')}" onclick="toggle_surgical_rx_boolean('sm_sinus_grafting_left__c');toggle_form_button(this);">Left</apex:outputpanel>
+                        <apex:outputpanel layout="block" styleclass="cc-form-notation-button{!if(srx.SM_Sinus_Grafting_Right__c,'-selected','')}" onclick="toggle_surgical_rx_boolean('sm_sinus_grafting_right__c');toggle_form_button(this);">Right</apex:outputpanel>                                            
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row --> 
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Immediate Load:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <div id="smload_1" class="cc-form-notation-button{!if(srx.sm_immediate_load__c=='Yes','-selected','')}" onclick="toggle_surgical_rx_text('sm_immediate_load__c','{!if(srx.sm_immediate_load__c=='Yes','','Yes')}');reset_form_buttons(['smload_2']);toggle_form_button(this);">Yes</div>    
+                        <div id="smload_2" class="cc-form-notation-button{!if(srx.sm_immediate_load__c=='No','-selected','')}" onclick="toggle_surgical_rx_text('sm_immediate_load__c','{!if(srx.sm_immediate_load__c=='No','','No')}');reset_form_buttons(['smload_1']);toggle_form_button(this);">No</div>                      
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Immediate Placement:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <div id="smplace_1" class="cc-form-notation-button{!if(srx.sm_immediate_placement__c=='Yes','-selected','')}" onclick="toggle_surgical_rx_text('sm_immediate_placement__c','{!if(srx.sm_immediate_placement__c=='Yes','','Yes')}');reset_form_buttons(['smplace_2']);toggle_form_button(this);">Yes</div>    
+                        <div id="smplace_2" class="cc-form-notation-button{!if(srx.sm_immediate_placement__c=='No','-selected','')}" onclick="toggle_surgical_rx_text('sm_immediate_placement__c','{!if(srx.sm_immediate_placement__c=='No','','No')}');reset_form_buttons(['smplace_1']);toggle_form_button(this);">No</div>                      
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->  
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row" rendered="{!if(srx.SM_Immediate_Placement__c=='Yes' || srx.SM_Immediate_Load__c=='Yes',true,false)}">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Immediate Notes:</apex:outputpanel>
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container" style="width:100%;">
+                        <apex:outputfield value="{!srx.SM_Immediate_Load_Notes__c}"  style="width:100%;"/>                                          
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                    <!-- end row -->    
+                  </apex:outputpanel>
+                  <!-- end right container -->             
+
+                </apex:outputpanel>
+                <!-- end columnContainer -->
+              </apex:outputpanel>
+              <!-- end form section container -->
+              <!-- start form section container -->
+              <apex:outputpanel layout="block" styleclass="cc-form-content-container">
+                <!-- start header-->
+                <apex:outputpanel layout="block" styleclass="cc-form-row-header ">Misc</apex:outputpanel>
+                <!-- end header -->
+                <!-- start columnContainer -->
+                <apex:outputpanel layout="block" styleclass="cc-form-content-columnContainer">
+                  <!-- start left container -->
+                  <apex:outputpanel layout="block" styleclass="cc-form-content-container-left" style="width:95%;">
+                    <!-- start row -->
+                    <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row">
+                      <apex:outputpanel layout="block" styleclass="cc-perio-prosth-label cc-form-input-label-markSelected">Notes:</apex:outputpanel>
+                      <apex:outputfield value="{!srx.Comments__c}" style="width:100%;" />
+                    </apex:outputpanel>
+                    <!-- end row -->
+                    
+                    <!-- start row -->
+			        <div class="cc-perio-prosth-row">
+			          <div class="cc-perio-prosth-label cc-form-input-label">&nbsp;</div>
+			          <div class="cc-patientProfile-input-container">	
+  			            <apex:outputpanel layout="block" rendered="{!if(srx.Reviewed_By__c=='',false,true)}" style="font-style:italic;">
+  			              Reviewed By - {!srx.reviewed_by__r.name} &nbsp;(<apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                            <apex:param value="{!srx.Review_Time__c}" /> 
+                          </apex:outputText>)
+  			            </apex:outputpanel>
+			          </div>
+			        </div>
+			        <!-- end row -->			        
+                    <!-- start row -->
+                    <!-- pulling per Andy 5/20/2016
+                     <apex:outputpanel layout="block" styleclass="cc-perio-prosth-row ">
+                      <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+                        <apex:outputpanel layout="block" styleclass="cc-form-notation-button{!if(srx.grafting_as_needed__c,'-selected','')}" onclick="toggle_surgical_rx_boolean('Grafting_as_needed__c');toggle_form_button(this);">Grafting as needed</apex:outputpanel>                      
+                    </apex:outputpanel> -->
+                    <!-- end row 
+                  </apex:outputpanel>-->
+                  <!-- end left container -->
+                  
+                  
+                </apex:outputpanel>
+                <!-- end columnContainer -->
+              </apex:outputpanel>
+              <!-- end form section container -->
+            </apex:outputpanel>
+          </div>
+        </apex:outputpanel>
+        <!-- end new surgical rx form/edit existing surgical rx form -->
+      </apex:outputpanel>  
+  </apex:outputpanel> <!--end cc-content-container-->
+</apex:outputpanel> <!--end cc-content-wrapper-->
+</apex:outputpanel> <!--end cc-wrapper-->
+
+
+</apex:form>
+</body>
+</apex:page>

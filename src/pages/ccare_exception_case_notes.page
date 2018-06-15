@@ -1,0 +1,399 @@
+<apex:page showheader="false" sidebar="false" standardStylesheets="false" controller="dp_exception_case_notes" docType="html-5.0">
+<head>
+  <meta charset="UTF-8" />
+  <title>HopeRx</title>
+    <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/dp_css_main.css')}"/>  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  
+<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css' />
+  
+<!--  <apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />-->
+<!--  <apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>-->
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/mmenu_nav.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc.css')}"/>   
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/dp_css_main.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/fonts.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-buttons.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-patient.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-clinical-calendar.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/style.css')}"/>   
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-clinical.css')}"/>   
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-pot.css')}"/>     
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-modal.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/forms.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-hrxfont.css')}"/>
+
+  <apex:includeScript value="{!URLFOR($Resource.Dental_Practice_Resources,'js/cc-clinical-calendar.js')}"/>
+  <apex:includeScript value="{!URLFOR($Resource.Dental_Practice_Resources,'js/cc-patient.js')}"/>
+       
+</head>
+<style type="text/css" media="print">
+  * {transition: none !important;}
+
+  .no-print {
+    display:none !important;
+  }
+  
+  .print-only {
+    display:flex !important;
+  }
+</style>
+
+<style>
+  .print-only {
+    display:none;
+  }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0 auto;
+    padding: 0;
+  }  
+  
+  .pad-main-wrapper {
+    margin-top:145px;
+  }
+  
+  a.nav_anchor {
+    color:black;
+    font-weight:300;
+    font-size: 12pt;
+    letter-spacing: 1px;
+  }
+  
+  a.nav_anchor:hover {
+    color:white;
+    text-decoration:none;
+  }
+  
+  span.dateFormat {
+    display:none;
+  }
+  
+  .cc-field-label {
+    display:inline-block;
+    padding-right:5px;
+    font-weight:bold;
+  }
+  
+  .cc-field-input {
+    border:none;
+    outline:0;
+    font-szie:12pt;    
+  }
+  
+  .cc-email-attachment-item {
+    display:inline-block;
+    padding-right:20px;    
+  }
+  
+  .cc-email-attachment-remove {
+    padding-left:10px;
+    display:inline-block;
+  }
+  
+  .cc-section-header-right-button-container a:hover {
+    color:white;
+    text-decoration:none;
+  }
+  
+  .filter_header {
+    font-weight: bold;
+    width: 100px;
+    display: inline-flex;
+  }
+  
+  table.bend_table {
+      width:100%;      
+    }
+    
+    tr.bend_header {
+
+    }
+    
+    .gray_under {
+       display:inline-block;
+       border-bottom:1px solid #bfbfbf;
+       padding-left:5px;
+       padding-right:5px;
+     <!--text-decoration: underline;
+      -moz-text-decoration-color: #bfbfbf; /* Code for Firefox */
+      text-decoration-color: #bfbfbf;-->
+    }
+    
+    tr.bend_header td {
+
+    }
+    
+    tr.odd {
+    
+    }
+    
+    tr.odd td {
+      padding-left:5px;
+      border-bottom:1px dotted #bfbfbf;
+    }
+    
+    tr.even {
+        
+    }
+    
+    tr.even td {
+      padding-left:5px;
+      background:#f5f5f5;
+      border-bottom:1px dotted #bfbfbf;
+    }
+
+.patient_label {
+color:#0000FF;
+font-weight:bold;
+}
+</style>
+
+<script type="text/javascript">    
+  var key_timeout;
+  var search_in_progress = false;
+  var apt_search_timeout;
+  var apt_search_in_progress = false;
+  
+  function apt_search_delay() {    
+    if(apt_search_in_progress)
+      clearTimeout(apt_search_timeout);
+    apt_search_in_progress = true;  
+    apt_search_timeout = setTimeout("search_apts()",1200);
+  }   
+      
+  function qsearch_key(e) {    
+    if(search_in_progress)
+      clearTimeout(key_timeout);
+    search_in_progress = true;  
+    key_timeout = setTimeout("search_patients()",600);
+  }   
+  
+  function show_update_text(x) {
+    x.innerHTML = 'Update';
+  }
+  
+  $(function(){
+    /*
+     * this swallows backspace keys on any non-input element.
+     * stops backspace -> back
+     */
+    var rx = /INPUT|SELECT|TEXTAREA/i;
+
+    $(document).bind("keydown", function(e){
+        //alert('Alert Pressed : ' + e.which);
+        if( e.which == 8 ){ // 8 == backspace
+            if(!rx.test(e.target.tagName) || e.target.disabled || e.target.readOnly ){
+                e.preventDefault();
+            }
+        }
+        if(e.which== 116) {
+          e.preventDefault();
+        }
+    });
+});
+</script>    
+
+<body>
+<apex:form onsubmit="return true;">
+<apex:outputpanel styleclass="cc-wrapper" layout="block">
+<apex:actionFunction name="body_refresh" rerender="calendar_nav,main_holder" status="ajaxstatus" />
+<apex:actionFunction name="nav_bar_refresh" rerender="nav_content" />
+
+<apex:actionFunction name="nav_to" action="{!navigate_to}" rerender="none" status="ajaxstatus">
+  <apex:param name="navid" value=""  />
+</apex:actionFunction>
+<apex:actionFunction name="center_switch" action="{!change_center}" rerender="nav_content,calendar_nav,main_holder" status="ajaxstatus" >
+  <apex:param name="cid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="cdate_change"  rerender="main_holder" status="ajaxstatus" />
+
+<c:HopeRx_print_header CenterRecord="{!current_center}"  />
+
+<apex:outputpanel layout="block" styleclass="cc-nav-wrapper no-print">
+  <apex:outputpanel styleclass="cc-nav-container">
+    <apex:outputpanel styleclass="cc-top-nav-container" id="nav_content" layout="block">
+      <div class="cc-top-nav-left">
+        <apex:outputpanel id="back_holder" styleclass="cc-back-container" layout="block" >
+          <apex:outputpanel ><a href="javascript:window.history.go(-1);" class="nav_color">&lt; Back</a></apex:outputpanel>
+        </apex:outputpanel>  
+      </div>
+      <div class="cc-top-nav-center">
+        <div class="cc-link-dropdown-container">
+          <span class="dropdown drop-hover">
+          <a class="dropdown-toggle nav_color " data-toggle="dropdown"><apex:outputtext value="{!current_center.name}"  style="padding-right:5px;" styleClass="c-pointer"  /><span class="caret"></span></a>
+            <ul class="dropdown-menu overflow-menu" >
+              <apex:repeat var="center" value="{!center_list}">
+                <li class="dropdown-lineitem">
+                  <a href="javascript:center_switch('{!center.id}');" style="color:#189BEB"><apex:outputtext value="{!center.name}" /></a>
+                </li>
+              </apex:repeat>
+            </ul>
+          </span>
+        </div>
+      </div>
+      <div class="cc-top-nav-right">
+        <span class="dropdown drop-hover">
+          <a class="dropdown-toggle nav_color" data-toggle="dropdown"><apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}" width="25" height="25" styleClass="c-pointer"
+            onmouseover="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_black.png')}';"
+            onmouseout="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}';"
+            onclick="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}';"
+             /></a>
+          <ul class="dropdown-menu gear-menu dropdown-menu-right">
+            <apex:repeat var="gitem" value="{!gear_menu}" >
+                <li class="dropdown-lineitem" style="display:inline-block;">
+                  <a href="{!gitem.page_url}" style="color:#189BEB;" target="{!gitem.nav_page.hyperlink_target__c}"  
+                      onmouseover="this.firstChild.src='{!URLFOR($Resource.Dental_Practice_Resources,gitem.nav_page.Image_Name_Hover__c)}';this.style.color='black';" 
+                      onmouseout="this.firstChild.src='{!URLFOR($Resource.Dental_Practice_Resources,gitem.nav_page.Image_Name__c)}';this.style.color='#189BEB';">
+                    <apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,gitem.nav_page.Image_Name__c)}" width="{!if(gitem.nav_page.name=='Salesforce','30','20')}" height="20" style="display:inline;{!if(gitem.nav_page.name=='Salesforce','position:relative;left:-7px;margin-right:-6px;','margin-right:5px;')}" />&nbsp;&nbsp;{!gitem.nav_page.name}
+                  </a>
+                </li>
+            </apex:repeat>
+          </ul>        
+          </span>
+      </div>
+    </apex:outputpanel>
+    <div class="cc-sub-nav-container" >
+      <apex:repeat var="mitem" value="{!common_header.clinical_header_items}">
+        <apex:outputpanel layout="block" styleclass="cc-sub-nav-cell" onclick="nav_to('{!mitem.id}')">
+          <button class="cc-sub-nav-top-button cc-color-{!mitem.css_class__c} cc-hover-tooltips-dark-anchor-nav">
+            <i class="{!if(mitem.image_name__c=='home','hrxicon','ccf')}-{!mitem.image_name__c} cc-color-font-white"></i>
+            <div>{!mitem.name}</div>                      
+          </button>
+          <div class="cc-button-text">          
+            {!mitem.name}
+          </div>
+          <div class="cc-button_bg cc-color-{!mitem.css_class__c}">
+            <apex:outputpanel rendered="{!if(mitem.name=='Notifications',true,false)}" layout="block"  styleclass="cc-calBadge-badge">{!dosespot_notification_count}</apex:outputpanel>
+          </div>          
+        </apex:outputpanel>
+      </apex:repeat>
+    </div> 
+
+   
+  </apex:outputpanel>
+</apex:outputpanel>
+
+<apex:outputpanel layout="block" styleclass="cc-content-wrapper" id="main_holder">
+  <apex:outputpanel layout="block" styleclass="cc-content-container">
+  <apex:outputpanel id="error_holder" ><apex:messages style="color:red;font-style:italics;padding-top:3px;" /></apex:outputpanel>
+  <apex:actionStatus id="ajaxstatus">
+    <apex:facet name="start">
+      <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1110; background-color: #f2f2f2;">
+        &nbsp;
+      </div>
+      <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1111; margin: 20% 50%">
+        <!--<apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,'Images/5Wits.gif')}"/>-->
+        <!--<img src="http://upload.wikimedia.org/wikipedia/commons/e/ed/Cursor_Windows_Vista.gif" />-->
+        <img src="{!URLFOR($Resource.Dental_Practice_Resources,'Images/Circle-out.gif')}" />
+        <!--<img src="{!URLFOR($Resource.Dental_Practice_Resources,'Images/5Wits.gif')}" />-->
+      </div>
+    </apex:facet>
+  </apex:actionStatus>  
+    
+  
+  <apex:outputpanel layout="block" styleclass="cc-clinical-content-container" style="padding-top:1em;">
+   <div>
+     <span class="filter_header">Start Date : </span>
+     <apex:input style="width:300px;" type="date" value="{!sdate}" styleClass="cc-cc-datepicker" onchange="cdate_change();"/>
+   </div>
+   <div style="padding-top:10px;">
+     <span class="filter_header">End Date : </span>
+     <apex:input style="width:300px;" type="date" value="{!edate}" styleClass="cc-cc-datepicker" onchange="cdate_change();"/>
+   </div>
+   <div style="padding-top:10px;">
+     <span class="filter_header">Report Type : </span>
+     <apex:selectList value="{!report_type}" size="1" onchange="body_refresh();">
+       <apex:selectOptions value="{!rtype_options}" />
+	 </apex:selectList>  
+   </div>   
+   
+   <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;margin-top:10px;width:100%;">
+     <apex:outputPanel layout="block" styleClass="mm_header-label">
+       <apex:outputtext value="Apts with no notes" rendered="{!if(report_type=='No Notes',true,false)}" />
+       <apex:outputtext value="Awaiting doctor review" rendered="{!if(report_type=='No Doctor',true,false)}" />
+     </apex:outputPanel>
+   </apex:outputPanel>  
+   
+   <apex:outputpanel layout="block" rendered="{!if(report_type=='No Notes',true,false)}">
+   <table class="bend_table"> 
+      <tr class="bend_header">
+        <th><span class="gray_under">Apt Date</span></th>
+        <th><span class="gray_under">Patient</span></th>
+        <th><span class="gray_under">Appointment</span></th>
+        <th><span class="gray_under">Status</span></th>
+        <th><span class="gray_under">Doctor</span></th>        
+      </tr>      
+    <apex:variable var="rowclassname" value="odd" />    
+    <apex:repeat var="apt" value="{!apts_with_no_notes_class}">
+     <tr class="{!rowclassname}">
+     <apex:variable var="rowclassname" value="{!if(rowclassname=='odd','even','odd')}" />
+       <td>
+         <apex:outputText value="{0, date, MM'/'dd'/'yyyy}">
+           <apex:param value="{!apt.ca.Apt_Date__c}" /> 
+         </apex:outputText>
+       </td>         
+       <td><a href="{!apt.notes_href}" target="__blank"><apex:outputtext value="{!apt.ca.account__r.name}" /></a></td>
+       <td><apex:outputtext value="{!apt.ca.patient_pot_apt__r.name}" /></td>
+       <td><apex:outputtext value="{!apt.ca.Apt_Status__c}" /></td>
+       <td><apex:outputtext value="{!apt.ca.doctor__r.name}" /></td>      
+      </tr>    
+    </apex:repeat>
+    </table><br /><br />      
+  </apex:outputpanel>
+  
+  <apex:outputpanel layout="block" rendered="{!if(report_type=='No Doctor',true,false)}">
+    <table class="bend_table"> 
+      <tr class="bend_header">
+        <th><span class="gray_under">Apt Date</span></th>
+        <th><span class="gray_under">Patient</span></th>
+        <th><span class="gray_under">Appointment</span></th>
+        <th><span class="gray_under">Status</span></th>
+        <th><span class="gray_under">Doctor</span></th>        
+      </tr>      
+    <apex:variable var="rowclassname" value="odd" />    
+    <apex:repeat var="apt" value="{!apts_with_no_review_class}">
+     <tr class="{!rowclassname}">
+     <apex:variable var="rowclassname" value="{!if(rowclassname=='odd','even','odd')}" />
+       <td>
+         <apex:outputText value="{0, date, MM'/'dd'/'yyyy}">
+           <apex:param value="{!apt.ca.Apt_Date__c}" /> 
+         </apex:outputText>
+       </td>         
+       <td><a href="{!apt.notes_href}" target="__blank"><apex:outputtext value="{!apt.ca.account__r.name}" /></a></td>
+       <td><apex:outputtext value="{!apt.ca.patient_pot_apt__r.name}" /></td>
+       <td><apex:outputtext value="{!apt.ca.Apt_Status__c}" /></td>
+       <td><apex:outputtext value="{!apt.ca.doctor__r.name}" /></td>      
+      </tr>    
+    </apex:repeat>
+    </table><br /><br />       
+  </apex:outputpanel>
+  
+  <a href="{!csv_download_link}">Download Details</a>
+  
+  </apex:outputpanel>
+  
+  
+  
+  </apex:outputpanel> <!--end cc-content-container-->
+</apex:outputpanel> <!--end cc-content-wrapper-->
+</apex:outputpanel>
+
+<script>  
+  function refresh_top_nav() { 
+    nav_bar_refresh();  
+    setTimeout("refresh_top_nav()",600000); 
+  }  
+
+  window.onload = function() { 
+    setTimeout("refresh_top_nav();",600000);  
+  }
+</script>
+
+</apex:form>
+</body>
+</apex:page>

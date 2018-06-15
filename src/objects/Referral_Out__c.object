@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>A table that tracks the referrals out of our system on patients.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>Link to an account that was referred out.</description>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Referrals Out</relationshipLabel>
+        <relationshipName>Referrals_Out</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Callback_Scheduled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates if a callback should be scheduled for this patient</description>
+        <externalId>false</externalId>
+        <label>Callback Scheduled</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ClearConnect_Referral_ID__c</fullName>
+        <externalId>true</externalId>
+        <label>ClearConnect Referral ID</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Dental_Practice__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>The practice the patient was referred to.</description>
+        <externalId>false</externalId>
+        <label>Dental Practice</label>
+        <referenceTo>Dental_Practice__c</referenceTo>
+        <relationshipLabel>Referrals Out</relationshipLabel>
+        <relationshipName>Referrals_Out</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Insurance_Plan__c</fullName>
+        <description>Insurance Plan the patient was on at the time of the referral request</description>
+        <externalId>false</externalId>
+        <label>Insurance Plan</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Lead__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Link to a lead that was referred out</description>
+        <externalId>false</externalId>
+        <label>Lead</label>
+        <referenceTo>Lead</referenceTo>
+        <relationshipLabel>Referrals Out</relationshipLabel>
+        <relationshipName>Referrals_Out</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Preferred_Callback_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>Preferred Callback Time</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Procedure_Interested_In__c</fullName>
+        <description>List of the procedure(s) the patient was interested in at the time of the referral.</description>
+        <externalId>false</externalId>
+        <label>Procedure(s) Interested In</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Hygiene</fullName>
+                    <default>false</default>
+                    <label>Hygiene</label>
+                </value>
+                <value>
+                    <fullName>Crown &amp; Bridge</fullName>
+                    <default>false</default>
+                    <label>Crown &amp; Bridge</label>
+                </value>
+                <value>
+                    <fullName>Teeth Whitening</fullName>
+                    <default>false</default>
+                    <label>Teeth Whitening</label>
+                </value>
+                <value>
+                    <fullName>Dentures</fullName>
+                    <default>false</default>
+                    <label>Dentures</label>
+                </value>
+                <value>
+                    <fullName>Invisalign</fullName>
+                    <default>false</default>
+                    <label>Invisalign</label>
+                </value>
+                <value>
+                    <fullName>Botox</fullName>
+                    <default>false</default>
+                    <label>Botox</label>
+                </value>
+                <value>
+                    <fullName>Traditional Orthodontics</fullName>
+                    <default>false</default>
+                    <label>Traditional Orthodontics</label>
+                </value>
+                <value>
+                    <fullName>Endontics</fullName>
+                    <default>false</default>
+                    <label>Endontics</label>
+                </value>
+                <value>
+                    <fullName>Dental Implants</fullName>
+                    <default>false</default>
+                    <label>Dental Implants</label>
+                </value>
+                <value>
+                    <fullName>Laser Dentistry</fullName>
+                    <default>false</default>
+                    <label>Laser Dentistry</label>
+                </value>
+                <value>
+                    <fullName>Veneers</fullName>
+                    <default>false</default>
+                    <label>Veneers</label>
+                </value>
+                <value>
+                    <fullName>Wisdom Teeth Extractions</fullName>
+                    <default>false</default>
+                    <label>Wisdom Teeth Extractions</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Referral_Error__c</fullName>
+        <description>Stores any error messages for a failed referral request.</description>
+        <externalId>false</externalId>
+        <label>Referral Error</label>
+        <length>250</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Referral_Notes__c</fullName>
+        <externalId>false</externalId>
+        <label>Referral Notes</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Referral_Outcome__c</fullName>
+        <externalId>false</externalId>
+        <label>Referral Outcome</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Dead Air</fullName>
+                    <default>false</default>
+                    <label>Dead Air</label>
+                </value>
+                <value>
+                    <fullName>Refused Transfer</fullName>
+                    <default>false</default>
+                    <label>Refused Transfer</label>
+                </value>
+                <value>
+                    <fullName>Test Call</fullName>
+                    <default>false</default>
+                    <label>Test Call</label>
+                </value>
+                <value>
+                    <fullName>Transfer Failed - Caller Disconnect</fullName>
+                    <default>false</default>
+                    <label>Transfer Failed - Caller Disconnect</label>
+                </value>
+                <value>
+                    <fullName>Transfer Failed - No Answer</fullName>
+                    <default>false</default>
+                    <label>Transfer Failed - No Answer</label>
+                </value>
+                <value>
+                    <fullName>Transfer Successful</fullName>
+                    <default>false</default>
+                    <label>Transfer Successful</label>
+                </value>
+                <value>
+                    <fullName>Wrong Number</fullName>
+                    <default>false</default>
+                    <label>Wrong Number</label>
+                </value>
+                <value>
+                    <fullName>PEC Referral Success</fullName>
+                    <default>false</default>
+                    <label>PEC Referral Success</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Vantage_Response__c</fullName>
+        <externalId>false</externalId>
+        <label>Vantage Response</label>
+        <length>250</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Referral Out</label>
+    <nameField>
+        <displayFormat>REF-{00000}</displayFormat>
+        <label>Referral Out Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Referrals Out</pluralLabel>
+    <searchLayouts>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>New</excludedStandardButtons>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

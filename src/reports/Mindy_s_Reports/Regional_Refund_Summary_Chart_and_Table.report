@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_2577305</developerName>
+        <masterLabel>Region</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>FK_$Opportunity.Exam_Center_formula__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Walnut Creek</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>San Jose</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>San Francisco Daly City</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Sacramento</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Portland</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Seattle</sourceValue>
+            </sourceValues>
+            <value>Northwest</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Denver</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Las Vegas</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Phoenix</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Salt Lake City</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>San Diego</sourceValue>
+            </sourceValues>
+            <value>Southwest</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Austin</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Dallas</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Dallas Arlington</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Houston</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Houston Woodlands</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>San Antonio</sourceValue>
+            </sourceValues>
+            <value>Texas</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Chicago</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chicago Evanston</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chicago Naperville</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chicago Schaumburg</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Kansas City</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Minneapolis</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>St. Louis</sourceValue>
+            </sourceValues>
+            <value>Midwest</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Atlanta</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Charlotte</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Miami Fort Lauderdale</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Tampa</sourceValue>
+            </sourceValues>
+            <value>Southeast</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Cleveland</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Columbia</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Washington Rockville</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Washington Tysons Corner</sourceValue>
+            </sourceValues>
+            <value>Northeast</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>New Jersey Roseland</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Philadelphia Fort Washington</sourceValue>
+            </sourceValues>
+            <value>New Centers</value>
+        </values>
+    </buckets>
+    <chart>
+        <backgroundColor1>#FFFFFF</backgroundColor1>
+        <backgroundColor2>#FFFFFF</backgroundColor2>
+        <backgroundFadeDir>Diagonal</backgroundFadeDir>
+        <chartSummaries>
+            <aggregate>Sum</aggregate>
+            <axisBinding>y</axisBinding>
+            <column>Refund_Request__c.Amount_of_Refund__c</column>
+        </chartSummaries>
+        <chartType>Pie</chartType>
+        <enableHoverLabels>true</enableHoverLabels>
+        <expandOthers>true</expandOthers>
+        <groupingColumn>BucketField_2577305</groupingColumn>
+        <legendPosition>Right</legendPosition>
+        <location>CHART_TOP</location>
+        <showAxisLabels>true</showAxisLabels>
+        <showPercentage>false</showPercentage>
+        <showTotal>false</showTotal>
+        <showValues>true</showValues>
+        <size>Large</size>
+        <summaryAxisRange>Auto</summaryAxisRange>
+        <textColor>#000000</textColor>
+        <textSize>12</textSize>
+        <title>Count of Completed Refunds by Region</title>
+        <titleColor>#000099</titleColor>
+        <titleSize>18</titleSize>
+    </chart>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Refund_Request__c.Amount_of_Refund__c</field>
+    </columns>
+    <description>Chart and Table that summarize count and sum of refunds THIS MONTH by center and region</description>
+    <filter>
+        <criteriaItems>
+            <column>Refund_Request__c.Refund_Status__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Closed</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_2577305</field>
+        <sortOrder>Desc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>FK_$Opportunity.Exam_Center_formula__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>CUST_OWNER_NAME</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Regional Refund Summary Chart and Table</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Refund_Request__c@Refund_Request__c.Opportunity__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Refund_Request__c.Refund_Completed_Date__c</dateColumn>
+        <interval>INTERVAL_THISMONTH</interval>
+    </timeFrameFilter>
+</Report>

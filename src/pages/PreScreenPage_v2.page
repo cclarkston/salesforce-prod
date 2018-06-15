@@ -1,0 +1,140 @@
+<apex:page standardController="Lead" >
+<script src="../../soap/ajax/23.0/connection.js" type="text/javascript"></script>
+
+  <apex:pageBlock title="Data Copy Page for Pre Screen"> 
+                <apex:messages style="color:red;" />   
+    <style>
+    h2.mainTitle  {
+      width:400px;
+      font-size:12pt;
+       font-family:georgia;   
+    }     
+    
+    span.section_header {
+      display:inline-block; 
+      font-size:10pt;
+      width:150px;
+      padding-left:20px;
+      padding-right:10px;    
+      font-weight:bold;  
+    }    
+
+    span.display_value {
+      font-size:10pt; 
+    }   
+     
+    span.section_line {
+      display:block;
+      padding-bottom:10px; 
+    }   
+    
+    span.sp_italics {
+      font-style:italic;
+      font-weight:bold;
+    }  
+    
+    a.form_link {
+      font-weight:bold;
+      color:blue; 
+    }  
+    </style>        
+     <span>Center Location is </span><span id="Center" class="sp_italics">{!lead.Center_Master_Location__c}</span><br /> 
+     <p>Pre Screen website: Click 
+     <a href="http://sfcstu.com/" target="_blank" class="form_link">here</a>
+     </p>
+    <br />
+  
+    <span class="section_line">  
+      <span class="section_header">SalesForce ID :</span>
+        <span id="copyID" onclick="ClipBoard2('copyID');" title="Click to copy SalesForce ID" class="display_value">{!lead.ID}</span></span>
+    <span class="section_line">  
+      <span class="section_header">First Name :</span>
+        <span id="copyFName" onclick="ClipBoard2('copyFName');"  title="Click to copy First Name" class="display_value">{!lead.firstname}</span></span>        
+    <span class="section_line">  
+      <span class="section_header">Last Name :</span>
+        <span id="copySName" onclick="ClipBoard2('copySName');"  title="Click to copy Last Name" class="display_value">{!lead.lastname}</span></span>        
+   <span class="section_line">  
+      <span class="section_header">Street :</span>
+        <span id="copyStreet" onclick="ClipBoard2('copyStreet');"  title="Click to copy Street" class="display_value">{!lead.street}</span></span>
+   <span class="section_line">  
+      <span class="section_header">City :</span>
+        <span id="copyCity" onclick="ClipBoard2('copyCity');"  title="Click to copy City" class="display_value">{!UPPER(lead.city,"EN")}</span></span>
+   <span class="section_line">  
+      <span class="section_header">State :</span>
+        <span id="copyState" onclick="ClipBoard2('copyState');"  title="Click to copy State" class="display_value">{!lead.state}</span></span>        
+   <span class="section_line">  
+      <span class="section_header">Zip Code :</span>
+        <span id="copyZIP" onclick="ClipBoard2('copyZIP');"  title="Click to copy Zip Code" class="display_value">{!lead.postalcode}</span></span>
+
+    <textarea id="holdtext" style="display:none;"></textarea> 
+    
+   <apex:form > 
+    <span class="section_line">
+      <span class="section_header">Pre Screen Result :</span>
+    <apex:inputField value="{!lead.Pre_Screen__c}"/> </span>    
+    <span class="section_line">
+      <span class="section_header">Fees Quoted :</span> 
+      <apex:inputField value="{!lead.Fees_Quoted__c}"/> </span>     
+    <p/>
+    <apex:commandButton action="{!save}" value="Save Pre Screen Result"/>
+    <span style="width:20px;">&nbsp;</span>  
+    <apex:outputPanel rendered="{!if(lead.Prescreen_Street_Name__c==null||lead.Prescreen_Street_Name__c=='',false,true)}">      
+      <input type="button" name="credit_submit" id="credit_submit" value="Credit Check" class="btn" onclick="check_user_id();" />             
+    </apex:outputpanel>  
+    <apex:outputtext rendered="{!if(lead.Prescreen_Street_Name__c==null||lead.Prescreen_Street_Name__c=='',true,false)}" style="color:red;font-weight:bold;" value="Error - Address info is not available.  Please rerun verification or notify your supervisor."/>    
+    </apex:form> 
+    <span id="main_holder"></span>
+    
+</apex:pageBlock>    
+
+<form name="form1" action="http://sfcstu.com/creditresult.asp" target="credit_results" method="POST" style="display:inline-block;">
+  <input type="hidden" name="salesforceid" id="salesforceid" value="{!lead.ID}" />
+  <input type="hidden" name="firstname" id="firstname" value="{!lead.firstname}" />
+  <input type="hidden" name="middlename" id="middlename" value="" />
+  <input type="hidden" name="lastname" id="lastname" value="{!lead.lastname}" />
+  <input type="hidden" name="streetnum" id="streetnum" value="{!lead.Prescreen_Street_Number__c}" />
+  <input type="hidden" name="predirection" id="predirection" value="{!lead.Prescreen_Pre_Directional__c}" />
+  <input type="hidden" name="address" id="address" value="{!lead.Prescreen_Street_Name__c}" />
+  <input type="hidden" name="streettype" id="streettype" value="{!UPPER(lead.Prescreen_Type__c)}" />
+  <input type="hidden" name="unitnum" id="unitnum" value="{!lead.Prescreen_ExtensionNumber__c}" />
+  <input type="hidden" name="city" id="city" value="{!lead.city}" />
+  <input type="hidden" name="state" id="state" value="{!lead.state}" />
+  <input type="hidden" name="zip" id="zip" value="{!lead.PostalCode}" />  
+  <input type="hidden" name="MM_insert" value="form1" />
+</form> 
+    
+<script>
+var xmlHttp;
+var changeid;
+var mywindowhandler;
+
+  function ClipBoard(theSel) {
+    holdtext.innerText = theSel.innerText;
+    Copied = holdtext.createTextRange();
+    Copied.execCommand("Copy");
+  }
+    
+  function ClipBoard2(my_target) {
+    var my_text = document.getElementById(my_target).innerHTML;
+    window.clipboardData.setData("Text",my_text); 
+  }
+  
+  //commented out code allows you to restrict which users can submit the credit check - for testing purposes  
+  function check_user_id() {
+    if(mywindowhandler==null) {
+      mywindowhandler = window.open('about:blank','credit_results');     
+      document.form1.submit();  
+      mywindowhandler.focus();           
+    }
+    else {
+      if(!mywindowhandler.closed) {  
+        mywindowhandler.close();
+      }
+      mywindowhandler = window.open('about:blank','credit_results');     
+      document.form1.submit();  
+      mywindowhandler.focus();            
+    }    
+  }
+</script>    
+
+</apex:page>

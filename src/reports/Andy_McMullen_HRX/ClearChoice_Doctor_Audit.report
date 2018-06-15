@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>ClearChoice_Doctor__c$Center_Information__c</field>
+    </columns>
+    <columns>
+        <field>ClearChoice_Doctor__c$Name</field>
+    </columns>
+    <columns>
+        <field>ClearChoice_Doctor__c$First_Name__c</field>
+    </columns>
+    <columns>
+        <field>ClearChoice_Doctor__c$Last_Name__c</field>
+    </columns>
+    <columns>
+        <field>ClearChoice_Doctor__c$Email_Address__c</field>
+    </columns>
+    <columns>
+        <field>ClearChoice_Doctor__c$Active__c</field>
+    </columns>
+    <format>Tabular</format>
+    <name>ClearChoice Doctor Audit-TCS</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>ClearChoice_Doctors__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>ClearChoice_Doctor__c$Center_Information__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>ClearChoice_Doctor__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

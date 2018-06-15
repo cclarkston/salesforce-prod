@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Dental_Practice__c$Name</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Dental_Practice__c$PSA_Contract_Completed__c</field>
+    </columns>
+    <columns>
+        <field>Dental_Practice__c$PSA_Effective_Date__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Dental_Practice__c$ClearVantage_Complete__c</field>
+    </columns>
+    <columns>
+        <field>Dental_Practice__c$ClearVantage_Live_Date__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Dental_Practice__c$ClearWeb_Complete__c</field>
+    </columns>
+    <columns>
+        <field>Dental_Practice__c$ClearWeb_Domain_Name__c</field>
+    </columns>
+    <description>A list of GP offices that have been sent the PSA contract.  Broken out by center with sign up status fields</description>
+    <filter>
+        <criteriaItems>
+            <column>Dental_Practice__c$Refer_to_this_practice__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Dental_Practice__c$Center_Information__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>PP Members by Center</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Dental_Practice__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Dental_Practice__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

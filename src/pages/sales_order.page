@@ -1,0 +1,883 @@
+<apex:page controller="ctrl_sales_order" sidebar="false" showHeader="false"  action="{!check_for_actions}">
+    <apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}"  />
+    <apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+    <apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+
+    <apex:includeScript value="{!URLFOR($Resource.JQuery)}"  />
+
+    <style type="text/css" media="print">
+        input.btn {
+            display:none;
+        }
+
+        input#edit_btn {
+            display:none;
+        }
+
+        td.right_border {
+        border:0px;
+            right-border:0px;
+        }
+
+        img.skiplink {
+            display:none;
+        }
+
+        div.bodyDiv {
+            border:0px;
+        }
+
+        div.bPageHeader {
+            display:none;
+        }
+
+        div.bPageFooter {
+            display:none;
+        }
+
+        div.no_print {
+            display:none;
+        }
+∏    </style>
+
+    <script>
+        function use_fancy_cursor(t) {
+          document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+          t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+        }
+
+        function default_cursor(t) {
+          document.body.style.cursor = 'default';
+          t.style.cursor='default';
+        }
+
+        function confirm_invoice() {
+          var invoice_confirmed=confirm('Are you sure you want to invoice this order?');
+          if(invoice_confirmed) {
+            document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+            invoice_order();
+          }
+        }
+    </script>
+
+    <script>
+        var ie_check = false;
+        var ie_ver;
+
+        function getInternetExplorerVersion()
+        // Returns the version of Internet Explorer or a -1
+        // (indicating the use of another browser).
+        {
+          var rv = -1; // Return value assumes failure.
+          if (navigator.appName == 'Microsoft Internet Explorer') {
+            var ua = navigator.userAgent;
+            var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+            if (re.exec(ua) != null)
+              rv = parseFloat( RegExp.$1 );
+          }
+          return rv;
+        }
+
+        function ietruebody(){
+        return (document.compatMode && document.compatMode!="BackCompat")? document.documentElement : document.body
+        }
+
+        var ie=document.all;
+        var ns6=document.getElementById && !document.all
+        var offsetxpoint=-250;
+        var offsetypoint=20;
+
+        function part_modal(e) {
+        getScrollXY() ;
+          alertSize();
+          if(!ie_check)
+            ie_ver = getInternetExplorerVersion();
+        //  alert('Height : ' + scrH + ' Width : ' + scrW + ' X Pos : ' + scrX + ' Y Pos : ' + scrY + ' PageY : ' + e.pageY + ' PageX : ' + e.pageX);
+          if (! document.styleSheets) return
+            var CSSRules;  // IE uses rules...
+            for (var i = 0; i < (document.styleSheets.length -1); i++) {
+                (document.styleSheets[0].cssRules) ? CSSRules = 'cssRules' : CSSRules = 'rules';
+                var my_ref = document.styleSheets[i].href || 'Unknown';
+                //alert(my_ref);
+                if(my_ref.indexOf("modal") != -1) {
+                for (var j = 0; j < document.styleSheets[i][CSSRules].length; j++) {
+                    if (document.styleSheets[i][CSSRules][j].selectorText == '.modalPopup_outer') {
+                     // alert(my_ref);
+                     // alert('Test');
+                      var curX=(ns6)?e.pageX : e.clientX+ietruebody().scrollLeft;
+                      var curY=(ns6)?e.pageY : e.clientY+ietruebody().scrollTop;
+            //          alert('Cur X: ' + curX + ' Cur Y : ' + curY);
+              //        alert('ietruebody.clientwidth : ' + ietruebody().clientWidth + ' Client X : ' + e.clientX + ' Offset : ' + offsetxpoint );
+                      var rightedge=ie&&!window.opera? e.clientX+offsetxpoint + 500 : e.clientX+offsetxpoint-20 + 500;
+                      var bottomedge=ie&&!window.opera? ietruebody().clientHeight-e.clientY-offsetypoint : window.innerHeight-e.clientY-offsetypoint-20
+                //      alert('Right Edge : ' + rightedge + ' bottom edge : ' + bottomedge);
+                  //    alert('Width : ' + document.styleSheets[i][CSSRules][j].style.width );
+                      var leftedge=(offsetxpoint<0)? offsetxpoint*(-1) : -1000
+                    //  alert('Left Edge : ' + leftedge);
+                      var newleft;
+                      var newtop;
+
+                      if (rightedge>scrW)
+                        newleft = curX-500+"px";
+                      else if (curX<leftedge)
+                        newleft = curX;
+                      else
+                        newleft = curX+offsetxpoint+"px";
+               //       alert(newleft);
+                      document.styleSheets[i][CSSRules][j].style.left = newleft;
+                      if(curY-scrY<300)
+                        newtop = scrY-75;
+                      else
+                        newtop = curY-300;
+                      document.styleSheets[i][CSSRules][j].style.top = newtop+"px";
+              }
+            }
+            }
+          }
+          display_parts_list();
+        }
+
+        function note_modal(e) {
+            getScrollXY() ;
+          alertSize();
+          if(!ie_check)
+            ie_ver = getInternetExplorerVersion();
+        //  alert('Height : ' + scrH + ' Width : ' + scrW + ' X Pos : ' + scrX + ' Y Pos : ' + scrY + ' PageY : ' + e.pageY + ' PageX : ' + e.pageX);
+          if (! document.styleSheets) return
+            var CSSRules;  // IE uses rules...
+            for (var i = 0; i < (document.styleSheets.length -1); i++) {
+                (document.styleSheets[0].cssRules) ? CSSRules = 'cssRules' : CSSRules = 'rules';
+                var my_ref = document.styleSheets[i].href || 'Unknown';
+                //alert(my_ref);
+                if(my_ref.indexOf("modal") != -1) {
+                for (var j = 0; j < document.styleSheets[i][CSSRules].length; j++) {
+                    if (document.styleSheets[i][CSSRules][j].selectorText == '.modalPopup_outer') {
+                     // alert(my_ref);
+                     // alert('Test');
+                      var curX=(ns6)?e.pageX : e.clientX+ietruebody().scrollLeft;
+                      var curY=(ns6)?e.pageY : e.clientY+ietruebody().scrollTop;
+            //          alert('Cur X: ' + curX + ' Cur Y : ' + curY);
+              //        alert('ietruebody.clientwidth : ' + ietruebody().clientWidth + ' Client X : ' + e.clientX + ' Offset : ' + offsetxpoint );
+                      var rightedge=ie&&!window.opera? e.clientX+offsetxpoint + 500 : e.clientX+offsetxpoint-20 + 500;
+                      var bottomedge=ie&&!window.opera? ietruebody().clientHeight-e.clientY-offsetypoint : window.innerHeight-e.clientY-offsetypoint-20
+                //      alert('Right Edge : ' + rightedge + ' bottom edge : ' + bottomedge);
+                  //    alert('Width : ' + document.styleSheets[i][CSSRules][j].style.width );
+                      var leftedge=(offsetxpoint<0)? offsetxpoint*(-1) : -1000
+                    //  alert('Left Edge : ' + leftedge);
+                      var newleft;
+                      var newtop;
+
+                      if (rightedge>scrW)
+                        newleft = curX-500+"px";
+                      else if (curX<leftedge)
+                        newleft = curX;
+                      else
+                        newleft = curX+offsetxpoint+"px";
+               //       alert(newleft);
+                      document.styleSheets[i][CSSRules][j].style.left = newleft;
+                      if(curY-scrY<300)
+                        newtop = scrY-75;
+                      else
+                        newtop = curY-300;
+                      document.styleSheets[i][CSSRules][j].style.top = newtop+"px";
+              }
+            }
+            }
+          }
+          display_note_modal();
+        }
+
+        function payment_modal(e) {
+            getScrollXY() ;
+          alertSize();
+          if(!ie_check)
+            ie_ver = getInternetExplorerVersion();
+        //  alert('Height : ' + scrH + ' Width : ' + scrW + ' X Pos : ' + scrX + ' Y Pos : ' + scrY + ' PageY : ' + e.pageY + ' PageX : ' + e.pageX);
+          if (! document.styleSheets) return
+            var CSSRules;  // IE uses rules...
+            for (var i = 0; i < (document.styleSheets.length -1); i++) {
+                (document.styleSheets[0].cssRules) ? CSSRules = 'cssRules' : CSSRules = 'rules';
+                var my_ref = document.styleSheets[i].href || 'Unknown';
+                //alert(my_ref);
+                if(my_ref.indexOf("modal") != -1) {
+                for (var j = 0; j < document.styleSheets[i][CSSRules].length; j++) {
+                    if (document.styleSheets[i][CSSRules][j].selectorText == '.modalPopup_outer') {
+                     // alert(my_ref);
+                     // alert('Test');
+                      var curX=(ns6)?e.pageX : e.clientX+ietruebody().scrollLeft;
+                      var curY=(ns6)?e.pageY : e.clientY+ietruebody().scrollTop;
+            //          alert('Cur X: ' + curX + ' Cur Y : ' + curY);
+              //        alert('ietruebody.clientwidth : ' + ietruebody().clientWidth + ' Client X : ' + e.clientX + ' Offset : ' + offsetxpoint );
+                      var rightedge=ie&&!window.opera? e.clientX+offsetxpoint + 500 : e.clientX+offsetxpoint-20 + 500;
+                      var bottomedge=ie&&!window.opera? ietruebody().clientHeight-e.clientY-offsetypoint : window.innerHeight-e.clientY-offsetypoint-20
+                //      alert('Right Edge : ' + rightedge + ' bottom edge : ' + bottomedge);
+                  //    alert('Width : ' + document.styleSheets[i][CSSRules][j].style.width );
+                      var leftedge=(offsetxpoint<0)? offsetxpoint*(-1) : -1000
+                    //  alert('Left Edge : ' + leftedge);
+                      var newleft;
+                      var newtop;
+
+                      if (rightedge>scrW)
+                        newleft = curX-500+"px";
+                      else if (curX<leftedge)
+                        newleft = curX;
+                      else
+                        newleft = curX+offsetxpoint+"px";
+               //       alert(newleft);
+                      document.styleSheets[i][CSSRules][j].style.left = newleft;
+                      if(curY-scrY<300)
+                        newtop = scrY-75;
+                      else
+                        newtop = curY-300;
+                      document.styleSheets[i][CSSRules][j].style.top = newtop+"px";
+              }
+            }
+            }
+          }
+          display_payment_modal();
+        }
+
+        $(function(){
+            /*
+             * this swallows backspace keys on any non-input element.
+             * stops backspace -> back
+             */
+            var rx = /INPUT|SELECT|TEXTAREA/i;
+
+            $(document).bind("keydown", function(e){
+                //alert('Alert Pressed : ' + e.which);
+                if( e.which == 8 ){ // 8 == backspace
+                    if(!rx.test(e.target.tagName) || e.target.disabled || e.target.readOnly ){
+                        e.preventDefault();
+                    }
+                }
+                if(e.which== 116) {
+                  e.preventDefault();
+                }
+            });
+        });
+    </script>
+
+    <style>
+        html, body {
+            margin:0;
+            padding:0;
+            height:100%;
+        }
+
+        .logo {
+            height: 90px;
+            margin-left: -30px;
+        }
+        div.so_background {
+          /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d5cea6', endColorstr='#00b7ad70',GradientType=0 ); /* IE6-8 */
+        width:80%;
+        margin-left:auto;
+        margin-right:auto;
+        padding-left:20px;
+        padding-right:20px;
+        margin-top:1em;
+        background: none;
+        padding: 50px;
+        }
+
+        div.so_background_print {
+        width:96%;
+        margin-left:auto;
+        margin-right:auto;
+        padding-left:20px;
+        padding-right:20px;
+        margin-top:1em;
+        min-height:100%;
+        position:relative;
+        }
+
+        div.content {
+         padding-bottom:50px;
+        }
+
+        div.footer {
+          padding-top:50px;
+            width:100%;
+        <!--    height:50px;
+            position:absolute;
+            bottom:0;
+            left:0;-->
+            text-align:center;
+        }
+
+        span.so_header {
+          font-size: 1.5em;
+          display: inline-block;
+        }
+
+        span.so_status_header {
+          font-size:12pt;
+          display:inline-block;
+          padding-bottom:1em;
+        }
+
+        span.date_header {
+          font-size:12pt;
+        }
+
+        span.center_header {
+          font-size:12pt;
+        }
+
+        span.patient_info {
+          font-style:italic;
+          line-height:17px;
+        }
+
+        table.part_detail {
+
+        }
+
+        table.part_detail tr.header_row {
+          background : #5789AE;
+          background : #A3E0FF;
+          background : #D1F0FF;
+        }
+
+        table.part_detail tr.header_row td {
+          color:white;
+          color:black;
+          font-weight:bold;
+          line-height:30px;
+          text-align:center;
+          border:1px solid black;
+          border-top:2px solid black;
+          font-size: 11pt;
+          background: lightgray;
+        }
+
+        table.part_detail tr.detail_line {
+
+        }
+
+        table.part_detail tr.detail_line td {
+          border:1px solid black;
+          font-size:10pt;
+          padding-top:5px;
+          line-height:25px;
+          text-align:center;
+          border-top:0;
+        }
+
+        table.part_detail tr.detail_line td.button_holder {
+          border:0;
+          font-size:10pt;
+          font-weight:bold;
+          padding-top:5px;
+          line-height:25px;
+          text-align:left;
+          padding-left:20px;
+        }
+
+        table.part_detail tr.detail_line td.footer {
+          border:0;
+          border-right:1px solid black;
+          font-size:10pt;
+          font-weight:bold;
+          padding-top:5px;
+          line-height:25px;
+          text-align:right;
+          padding-right:5px;
+        }
+
+      .modal_normal {
+         display:inline-block;
+         background-color: white;
+         border-width: 1px;
+         border-style: solid;
+         padding:0px;
+         width:100%;
+         position:relative;
+         left:-1px;
+      }
+
+      .modal_overflow {
+         display:inline-block;
+         background-color: white;
+         border-width: 1px;
+         border-style: solid;
+         padding:0px;
+         width:100%;
+         position:relative;
+         left:-1px;
+         height:200px;
+         overflow:auto;
+      }
+
+      span.blank {
+        font-style:italic;
+        font-weight:bold;
+      }
+
+      table.history {
+        font-family:verdana,arial;
+      }
+
+      table.history tr.control {
+        font-weight:bold;
+        font-size:10pt;
+      }
+
+      table.history tr.control td {
+        padding-bottom:3px;
+        empty-cells:hide;
+      }
+
+      table.history tr.hodd td {
+        text-align:left;
+        padding-top:2px; padding-bottom:3px;
+        font-size:10pt;
+        border-bottom:1px dashed #5789AE;
+        empty-cells:hide;
+      }
+
+      table.history tr.heven {
+        background-color:#C9E4E4;
+      }
+
+      table.history tr.heven td {
+        text-align:left;
+        padding-top:2px; padding-bottom:3px;
+        font-size:10pt;
+        border-bottom:1px dashed #5789AE;
+        empty-cells:hide;
+      }
+
+      #coupon-type .requiredInput {
+          display: inline-block;
+      }
+    </style>
+
+    <script>
+
+      var key_timeout;
+      var search_in_progress = false;
+      var price_change_in_progress = false;
+
+      function shipping_key() {
+        if(price_change_in_progress)
+          clearTimeout(key_timeout);
+        price_change_in_progress = true;
+        key_timeout = setTimeout("update_shipping()",1200);
+      }
+
+      function search_now() {
+        search_in_progress = false;
+        search_users();
+      }
+
+      function search_key() {
+        if(search_in_progress)
+          clearTimeout(key_timeout);
+        search_in_progress = true;
+        key_timeout = setTimeout("search_refresh()",1200);
+      }
+    </script>
+
+    <apex:form >
+        <apex:actionFunction oncomplete="default_cursor(this);"  action="{!display_part_search}" name="display_parts_list" reRender="modal_holder" />
+        <apex:actionFunction oncomplete="default_cursor(this);"  action="{!display_note_form}" name="display_note_modal" reRender="modal_holder" />
+        <apex:actionFunction oncomplete="default_cursor(this);"  action="{!display_payment_form}" name="display_payment_modal" reRender="modal_holder" />
+
+        <apex:outputpanel id="main_holder">
+
+        <!-- Print View Start   -->
+        <apex:outputpanel layout="block" styleclass="so_background_print" rendered="{!if(display_mode=='View',true,false)}">
+
+        <apex:outputpanel styleclass="content">
+        <br />
+        <table width="100%">
+        <tr>
+          <td ><apex:image styleClass="logo" value="{!$Resource.ClearChoiceLogo2018White}" /><br /><br /></td>
+          <td style="text-align:right;"><span class="so_header" style="padding-bottom:5px;"><apex:outputtext value="{!if(sales_order.Order_Status__c=='Invoiced',"Sales Invoice","Sales Order")}" />&nbsp;#&nbsp;<apex:outputfield value="{!sales_order.name}" /></span><br />
+            <span class="date_header">Order Date : <apex:outputfield value="{!sales_order.Order_Date__c}" /></span></td>
+        </tr>
+        <tr>
+          <td><span class="center_header">ClearChoice Dental Implant Center<br /><apex:outputtext value="{!center_name}" /><br /><apex:outputtext value="{!center_address}" escape="false" /></span></td>
+          <td></td>
+        </tr>
+        </table><br /><br />
+        <table>
+          <tr>
+            <td width="100px;vertical-align:top;">SOLD<br />TO</td>
+            <td><span class="patient_info"><apex:outputtext escape="false" value="{!patient_address}" /></span></td>
+          </tr>
+        </table>
+        <apex:outputfield value="{!sales_order.Shipping_Out_Of_State__c}" /><span style="padding-left:10px;font-weight:bold;">Shipping Out of State</span>
+
+        <apex:messages style="color:red;font-weight:bold;margin-left:5em;margin-top:1em;font-size:large;" /><br />
+
+        <apex:outputpanel layout="block" style="padding-top:1em;">
+
+        <table class="part_detail" width="100%" cellspacing="0">
+          <tr class="header_row">
+            <td width="20%">Part/Service #</td>
+            <td width="40%">Description</td>
+            <td width="10%">QTY</td>
+            <td width="15%">Unit Price</td>
+            <td width="15%">Line Total</td>
+          </tr>
+          <apex:repeat value="{!item_list}" var="so_line">
+          <tr class="detail_line">
+            <td><apex:outputfield value="{!so_line.ClearChoice_Center_Part__r.Part__r.Name}" rendered="{!if(so_line.ClearChoice_Center_Part__c == null, false, true)}" />&nbsp;</td>
+            <td><apex:outputfield value="{!so_line.ClearChoice_Center_Part__r.Part__r.Part_Description__c}" rendered="{!if(so_line.ClearChoice_Center_Part__c == null, false, true)}" />
+              <apex:outputfield value="{!so_line.Line_Note__c}" rendered="{!if(so_line.ClearChoice_Center_Part__c == null, true, false)}" />&nbsp;
+            </td>
+            <td><apex:outputfield value="{!so_line.Quantity__c}" style="width:50px;text-align:right;" rendered="{!if(so_line.ClearChoice_Center_Part__c == null, false, true)}" />&nbsp;</td>
+            <td><apex:outputfield value="{!so_line.Unit_Price__c}" style="text-align:right;" rendered="{!if(so_line.ClearChoice_Center_Part__c == null, false, true)}" />&nbsp;</td>
+            <td style="padding-right:20px;text-align:right"><apex:outputfield value="{!so_line.Line_Total__c}" rendered="{!if(so_line.ClearChoice_Center_Part__c == null, false, true)}" /></td>
+          </tr>
+          </apex:repeat>
+          <tr class="detail_line">
+            <td colspan="3" class="button_holder">
+              <apex:commandbutton value="Edit Order" action="{!edit_mode}" id="edit_btn" rendered="{!if(sales_order.Order_Status__c=='Invoiced',false,true)}" />
+            </td>
+            <td class="footer">SUBTOTAL</td>
+            <td style="padding-right:20px;text-align:right"><apex:outputfield value="{!sales_order.Subtotal__c}" /></td>
+          </tr>
+          <tr class="detail_line">
+            <td colspan="4" class="footer">SALES TAX</td>
+            <td style="padding-right:20px;text-align:right"><apex:outputfield value="{!sales_order.Tax_Total__c}" /></td>
+          </tr>
+          <tr class="detail_line">
+            <td colspan="4" class="footer">SHIPPING</td>
+            <td style="padding-right:20px;text-align:right"><apex:outputfield value="{!sales_order.Shipping__c}" /></td>
+          </tr>
+          <tr class="detail_line">
+            <td colspan="4" class="footer">TOTAL</td>
+            <td style="padding-right:20px;text-align:right">$<apex:outputtext value="{!order_total}" /></td>
+          </tr>
+        </table>
+        </apex:outputpanel>
+
+
+        <span style="font-size:11pt;color:#4295d2;font-weight:bold;display:block;padding-left:20px;padding-bottom:5px;padding-top:2em;">Payments</span>
+        <table class="part_detail" width="100%" cellspacing="0">
+          <tr class="header_row">
+            <td width="20%">Date</td>
+            <td width="25%">Type</td>
+            <td width="25%">Status</td>
+            <td width="15%">Amount</td>
+            <td width="15%">Check/Trans#</td>
+          </tr>
+          <apex:repeat value="{!payment_details}" var="payment_line">
+          <tr class="detail_line">
+            <td><apex:outputfield value="{!payment_line.Payment_Date__c}" />&nbsp;</td>
+            <td><apex:outputfield value="{!payment_line.Payment_Type__c}" />&nbsp;</td>
+            <td><apex:outputfield value="{!payment_line.Payment_Status__c}" />&nbsp;</td>
+            <td><apex:outputfield value="{!payment_line.Payment_Amount__c}" style="text-align:right;"  />&nbsp;</td>
+            <td><apex:outputfield value="{!payment_line.Confirmation_ID__c}" style="text-align:right;"  /></td>
+          </tr>
+          </apex:repeat>
+          <tr class="detail_line">
+            <td colspan="3" class="button_holder">
+            </td>
+            <td class="footer">TOTAL PAID</td>
+            <td><apex:outputtext value="{!amount_paid}" /></td>
+          </tr>
+          <tr class="detail_line">
+            <td colspan="4" class="footer">AMOUNT DUE</td>
+            <td><apex:outputtext value="{!(order_total - amount_paid)}" style="{!if((order_total - amount_paid)>0,'font-weight:bold;color:red;','font-weight:bold;')}" /></td>
+          </tr>
+        </table>
+
+        </apex:outputpanel>
+
+
+
+        <apex:outputpanel styleclass="footer" layout="block">
+        <span style="font-weight:bold;font-szie:12pt;">Thank you for your business!!</span><br /><br />
+        <span style="font-style:italic;">All sales are final unless the customer experiences an adverse reaction.</span>
+        </apex:outputpanel>
+        </apex:outputpanel>
+        <!-- Print View End   -->
+
+
+        <!-- Edit View Start -->
+        <apex:outputpanel layout="block" styleclass="so_background" rendered="{!if(display_mode=='Edit',true,false)}">
+        <br />
+        <table width="100%">
+        <tr>
+          <td ><apex:image id="CCLogo" styleClass="logo" value="{!$Resource.ClearChoiceLogo2018White}" /><br /><br /></td>
+          <td style="text-align:right;"><span class="so_header">Sales Order #&nbsp;<apex:outputfield value="{!sales_order.name}" /></span><br />
+            <span class="so_status_header">Status : <apex:outputfield value="{!sales_order.Order_Status__c}" /></span><br />
+            <span class="date_header">Order Date : <apex:inputfield value="{!sales_order.Order_Date__c}" /></span></td>
+        </tr>
+        <tr>
+          <td><span class="center_header">ClearChoice Dental Implant Center<br /><apex:outputtext value="{!center_name}" /><br /><apex:outputtext value="{!center_address}" escape="false" /></span></td>
+          <td></td>
+        </tr>
+        </table><br /><br />
+        <table>
+          <tr>
+            <td width="100px;vertical-align:top;">SOLD<br />TO</td>
+            <td><span class="patient_info"><apex:outputtext escape="false" value="{!patient_address}" /></span></td>
+          </tr>
+        </table>
+        <apex:inputfield value="{!sales_order.Shipping_Out_Of_State__c}"  onchange="update_out_of_state();"/><span style="padding-left:10px;font-weight:bold;">Shipping Out of State</span>
+
+        <apex:messages style="color:red;font-weight:bold;margin-left:5em;margin-top:1em;font-size:large;" /><br />
+
+        <apex:outputpanel layout="block" id="detail_holder" style="padding-top:1em;">
+          <apex:actionFunction oncomplete="default_cursor(this);" name="change_qty" action="{!qty_change}" reRender="main_holder">
+            <apex:param name="slid" value="" />
+            <apex:param name="qty" value="" />
+          </apex:actionFunction>
+          <apex:actionFunction oncomplete="default_cursor(this);" name="change_price" action="{!price_change}" reRender="main_holder">
+            <apex:param name="slid" value="" />
+            <apex:param name="price" value="" />
+          </apex:actionFunction>
+          <apex:actionFunction oncomplete="default_cursor(this);" name="remove_line" action="{!delete_note}" reRender="main_holder">
+            <apex:param name="slid" value="" />
+          </apex:actionFunction>
+          <apex:actionFunction oncomplete="default_cursor(this);" name="add_upc" action="{!upc_scan}" reRender="main_holder">
+            <apex:param name="upc" value="" />
+          </apex:actionFunction>
+          <apex:actionfunction oncomplete="default_cursor(this);" name="update_shipping" rerender="main_holder" />
+            <apex:actionfunction oncomplete="default_cursor(this);" name="update_out_of_state" action="{!oos_save}" rerender="main_holder" />
+
+        <table class="part_detail" width="100%" cellspacing="0">
+          <tr class="header_row">
+            <td width="20%">Part/Service #</td>
+            <td width="40%">Description</td>
+            <td width="10%">QTY</td>
+            <td width="15%">Unit Price</td>
+            <td width="15%">Line Total</td>
+          </tr>
+          <apex:repeat value="{!item_list}" var="so_line">
+          <tr class="detail_line">
+            <td><apex:outputfield value="{!so_line.ClearChoice_Center_Part__r.Part__r.Name}" rendered="{!if(so_line.ClearChoice_Center_Part__c == null, false, true)}" />&nbsp;</td>
+            <td><apex:outputfield value="{!so_line.ClearChoice_Center_Part__r.Part__r.Part_Description__c}" rendered="{!if(so_line.ClearChoice_Center_Part__c == null, false, true)}" />
+              <apex:outputfield value="{!so_line.Line_Note__c}" rendered="{!if(so_line.ClearChoice_Center_Part__c == null, true, false)}" />&nbsp;
+            </td>
+            <td><apex:inputfield value="{!so_line.Quantity__c}" style="width:50px;text-align:right;" rendered="{!if(so_line.ClearChoice_Center_Part__c == null, false, true)}" onchange="use_fancy_cursor(this);change_qty('{!so_line.id}',this.value);" />&nbsp;
+             <!-- <apex:commandLink styleclass="btn" style="text-decoration:none;" value="Remove Line" onclick="remove_line('{!so_line.id}');" rendered="{!if(so_line.ClearChoice_Center_Part__c == null, true, false)}" />-->
+             <apex:outputpanel rendered="{!if(so_line.ClearChoice_Center_Part__c == null, true, false)}" onclick="use_fancy_cursor(this);remove_line('{!so_line.id}');" style="color:red;font-weight:bold;">Remove Line</apex:outputpanel>
+            </td>
+            <td><apex:inputfield value="{!so_line.Unit_Price__c}" style="text-align:right;" rendered="{!if(so_line.ClearChoice_Center_Part__c == null, false, true)}" onchange="use_fancy_cursor(this);change_price('{!so_line.id}',this.value);" />&nbsp;</td>
+            <td><apex:outputfield value="{!so_line.Line_Total__c}" rendered="{!if(so_line.ClearChoice_Center_Part__c == null, false, true)}" /></td>
+          </tr>
+          </apex:repeat>
+          <tr class="detail_line">
+            <td colspan="3" class="button_holder">
+              <apex:commandLink styleclass="btn" style="text-decoration:none;" value="Add Product or Service"  onclick="part_modal(event);return false;"/><span style="display:inline-block;width:50px;">&nbsp;</span>
+              <apex:commandLink styleclass="btn" style="text-decoration:none;" value="Add Note" onclick="note_modal(event);return false;" />      <span style="display:inline-block;width:50px;">&nbsp;</span>
+              <apex:commandbutton value="Print View" action="{!print_mode}" rerender="main_holder" /> <span style="display:inline-block;width:50px;">&nbsp;</span>
+              <b>Scan UPC : </b><input value="" size="12" onchange="use_fancy_cursor(this);add_upc(this.value);return false;" />
+            </td>
+            <td class="footer">SUBTOTAL</td>
+            <td><apex:outputfield value="{!sales_order.Subtotal__c}" /></td>
+          </tr>
+          <tr class="detail_line">
+            <td colspan="4" class="footer">SALES TAX</td>
+            <td><apex:outputfield value="{!sales_order.Tax_Total__c}" /></td>
+          </tr>
+            <tr class="detail_line">
+            <td colspan="4" class="footer">SHIPPING</td>
+            <td>$<apex:inputfield value="{!sales_order.Shipping__c}" onkeyup="shipping_key();" style="width:50px;text-align:right;" /></td>
+          </tr>
+          <tr class="detail_line">
+            <td colspan="4" class="footer">TOTAL</td>
+            <td>$<apex:outputtext value="{!order_total}" /></td>
+          </tr>
+        </table>
+        </apex:outputpanel><br />
+
+        <apex:outputpanel layout="block" id="payment_holder" style="padding-top:2em;">
+        <span style="font-size:11pt;color:#4295d2;font-weight:bold;display:block;padding-left:20px;padding-bottom:5px;">Payments</span>
+          <apex:actionFunction oncomplete="default_cursor(this);" name="update_payment" action="{!update_payment_list}" reRender="main_holder" />
+          <apex:actionFunction oncomplete="default_cursor(this);" name="invoice_order" action="{!invoice_sales_order}" reRender="main_holder" />
+        <table class="part_detail" width="100%" cellspacing="0">
+          <tr class="header_row">
+            <td width="20%">Date</td>
+            <td width="20%">Type</td>
+            <td width="15%">Status</td>
+            <td width="15%">Amount</td>
+        	<td width="15%">Finance Fee</td>
+            <td width="15%">Check/Trans#</td>
+          </tr>
+          <apex:repeat value="{!payment_details}" var="payment_line">
+          <tr class="detail_line">
+            <td><apex:inputfield value="{!payment_line.Payment_Date__c}"  onchange="use_fancy_cursor(this);update_payment();"/>&nbsp;</td>
+            <td>
+                <apex:selectList value="{!payment_line.Payment_Type__c}" multiselect="false" size="1" onchange="use_fancy_cursor(this);update_payment();" >
+                    <apex:selectOptions value="{!valid_payments}"></apex:selectoptions>
+                </apex:selectList>&nbsp;
+                <apex:outputPanel rendered="{!payment_line.Payment_Type__c == 'Coupon'}">
+                    <apex:inputField value="{!payment_line.Coupon_Type__c}" onchange="use_fancy_cursor(this);update_payment();"/>
+                </apex:outputPanel>
+            </td>
+            <td><apex:selectList value="{!payment_line.Payment_Status__c}" multiselect="false" size="1" onchange="use_fancy_cursor(this);update_payment();">
+                    <apex:selectOptions value="{!valid_payment_status}"></apex:selectoptions>
+                  </apex:selectList>&nbsp;</td>
+            <td>
+        		<apex:inputfield value="{!payment_line.Payment_Amount__c}" style="text-align:right;" onchange="use_fancy_cursor(this);update_payment();" />
+        	</td>
+        	<td>
+        		<apex:inputField value="{!payment_line.Finance_Fee__c}" rendered="{!payment_line.Payment_Type__c == 'CareCredit' || payment_line.Payment_Type__c == 'Lending Club'}" style="text-align:right;" onchange="use_fancy_cursor(this);update_payment();"/>
+        	</td>
+            <td><apex:inputfield value="{!payment_line.Confirmation_ID__c}" style="text-align:right;" onchange="use_fancy_cursor(this);update_payment();" /></td>
+          </tr>
+          </apex:repeat>
+          <tr class="detail_line">
+            <td colspan="4" class="button_holder">
+              <apex:commandLink styleclass="btn" style="text-decoration:none;" value="Add Payment" onclick="payment_modal(event);return false;" /> <span style="display:inline-block;width:50px;">&nbsp;</span>
+              <apex:commandLink styleclass="btn" style="text-decoration:none;" rendered="{!(order_total - amount_paid) == 0 && has_errors == false}" value="Invoice Order" onclick="confirm_invoice();return false;" />
+            </td>
+            <td class="footer">TOTAL PAID</td>
+            <td><apex:outputtext value="{!amount_paid}" /></td>
+          </tr>
+          <tr class="detail_line">
+            <td colspan="5" class="footer">AMOUNT DUE</td>
+            <td><apex:outputtext value="{!(order_total - amount_paid)}" style="{!if((order_total - amount_paid)>0,'font-weight:bold;color:red;','font-weight:bold;')}" /></td>
+          </tr>
+        </table>
+        </apex:outputpanel>
+
+        </apex:outputpanel>
+        <!-- Edit View End  -->
+
+
+        <apex:outputPanel id="modal_holder" style="z-index:3000;" >
+        <apex:actionRegion >
+          <apex:actionFunction name="close_pop"                oncomplete="default_cursor(this);" reRender="modal_holder"     action="{!close_modal}" />
+          <apex:actionFunction name="search_refresh"           oncomplete="default_cursor(this);" reRender="part_results" />
+          <apex:actionFunction name="add_part"                 oncomplete="default_cursor(this);" reRender="main_holder"      action="{!add_so_part}" >
+            <apex:param name="pid" value="" />
+          </apex:actionFunction>
+          <apex:actionFunction name="update_modal"             oncomplete="default_cursor(this);" reRender="new_payment_form" />
+          <apex:actionFunction name="set_modal_coupon_payment" oncomplete="default_cursor(this);" reRender="new_payment_form" action="{!set_new_payment_coupon_payment_amount}" />
+
+
+            <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!modal_display}"/>
+            <apex:outputPanel styleClass="modalPopup_outer" layout="block" rendered="{!modal_display}" id="outerpop" style="margin-left: 100px;">
+            <span class="modalPopup_outerheader" onclick="use_fancy_cursor(this);close_pop();">Close X</span>
+
+            <apex:outputPanel styleClass="modal_normal" rendered="{!if(modal_display && modal_type=='new_payment',true,false)}" id="new_payment_form">
+        		<apex:pageMessages />
+                <table width="100%">
+                    <tr>
+                        <td style="padding-top:5px;">
+                            <span style="font-weight:bold;font-size:10pt;width:100px;display:inline-block;">Date : </span>
+                            <apex:inputfield value="{!new_payment.Payment_Date__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-top:5px;">
+                            <span style="font-weight:bold;font-size:10pt;width:100px;display:inline-block;">Type : </span>
+                            <apex:selectList value="{!new_payment.Payment_Type__c}" onchange="update_modal()" multiselect="false" size="1">
+                                <apex:selectOptions value="{!valid_payments}"></apex:selectoptions>
+                            </apex:selectList>
+                            <apex:outputPanel rendered="{!new_payment.Payment_Type__c == 'CareCredit' || new_payment.Payment_Type__c == 'Lending Club'}">
+                                <div style="padding-top:5px; margin-bottom: 1em;">
+                                    <span style="font-weight:bold;font-size:10pt;width:100px;display:inline-block;margin-left:30px;">Finance Fee : </span>
+                                    <apex:inputText value="{!new_payment.Finance_Fee__c}" required="true"/>
+                                </div>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!new_payment.Payment_Type__c == 'Coupon'}">
+                                <div id="coupon-type" style="padding-top:5px; margin-bottom: 1em;">
+                                    <span style="font-weight:bold;font-size:10pt;width:100px;display:inline-block;margin-left:30px;">Coupon Type : </span>
+                                    <apex:inputField value="{!new_payment.Coupon_Type__c}" onchange="set_modal_coupon_payment()" required="true"/>
+                                </div>
+                            </apex:outputPanel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-top:5px;">
+                            <span style="font-weight:bold;font-size:10pt;width:100px;display:inline-block;">Amount : </span>
+                            <apex:inputfield value="{!new_payment.Payment_Amount__c}" style="width:100px;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-top:5px;">
+                            <span style="font-weight:bold;font-size:10pt;width:100px;display:inline-block;">Status : </span>
+                            <apex:selectList value="{!new_payment.Payment_Status__c}" multiselect="false" size="1">
+                                <apex:selectOptions value="{!valid_payment_status}"></apex:selectoptions>
+                            </apex:selectList>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-top:5px;">
+                            <span style="font-weight:bold;font-size:10pt;width:100px;display:inline-block;">Check/Trans # : </span>
+                            <apex:inputfield value="{!new_payment.Confirmation_ID__c}" />
+                        </td>
+                    </tr>
+                </table>
+                <apex:commandbutton value="Add New Payment" action="{!add_payment}" rerender="main_holder" />
+            </apex:outputPanel>
+
+            <apex:outputPanel styleClass="modal_normal" rendered="{!if(modal_display && modal_type=='new_note',true,false)}" id="new_note_form">
+              <br /><span style="display:block;padding-left:10px;">
+                <span style="vertical-align:top;font-weight:bold;font-size:10pt;width:50px;display:inline-block;">Note : </span>
+              <apex:inputfield value="{!sol.Line_Note__c}" /></span><br />
+              <span style="display:block;padding-left:10px;">      <apex:commandbutton value="Add Note to Order" action="{!add_new_note}"  rerender="main_holder"  /></span><br />
+              <apex:outputtext escape="false" value="{!modal_out}"/>
+            </apex:outputPanel>
+
+            <apex:outputPanel styleClass="modal_normal" rendered="{!if(modal_display && modal_type=='part_search',true,false)}" id="part_search">
+              <apex:pageMessages />
+              <table width="100%">
+                <tr style="">
+                  <td style="padding-top:5px;"><span style="font-weight:bold;font-size:10pt;width:100px;display:inline-block;">Part # : </span><apex:inputfield value="{!searched_part.Name}" style="width:100px;" onchange="search_refresh();" /></td>
+                  <td style="padding-top:5px;"><span style="font-weight:bold;font-size:10pt;width:100px;display:inline-block;">Brand : </span><apex:selectList value="{!searched_part.Brand__c}" multiselect="false" size="1" onchange="search_refresh();" >
+                    <apex:selectOptions value="{!BrandList}"></apex:selectoptions>
+                  </apex:selectList></td>
+                </tr>
+                <tr>
+                  <td style="padding-top:5px;"><span style="font-weight:bold;font-size:10pt;width:100px;display:inline-block;">UPC : </span><apex:inputfield value="{!searched_part.UPC__c}" style="width:100px;" onchange="search_refresh();" /></td>
+                  <td style="padding-top:5px;"><span style="font-weight:bold;font-size:10pt;width:100px;display:inline-block;">Type : </span><apex:selectList value="{!searched_part.Type__c}" multiselect="false" size="1" onchange="search_refresh();" >
+                    <apex:selectOptions value="{!PTypeList}"></apex:selectoptions>
+                  </apex:selectList></td>
+                </tr>
+                <tr>
+                  <td style="padding-top:5px;padding-bottom:5px;" colspan="2"><span style="font-weight:bold;font-size:10pt;width:100px;display:inline-block;">Description : </span><apex:inputfield value="{!searched_part.Part_Description__c}" style="width:320px;" onkeyup="search_key();"  /></td>
+                </tr>
+              </table><br />
+
+              <table class="history" width="100%">
+                <tr class="control">
+                  <td width="28%">Part #</td>
+                  <td width="48%">Description</td>
+                  <td width="10%">Avail</td>
+                  <td width="14%">Price</td>
+                </tr>
+              </table>
+            </apex:outputPanel>
+
+            <apex:outputPanel styleClass="modal_overflow" rendered="{!if(modal_display && modal_type=='part_search',true,false)}" id="part_results">
+
+              <apex:variable var="rowclassname" value="hodd" />
+              <table class="history" width="100%">
+              <apex:repeat value="{!part_search_matches}" var="center_part">
+                <tr class="{!rowclassname}" style="line-height:30px;">
+                <apex:variable var="rowclassname" value="{!if(rowclassname == 'hodd','heven','hodd')}" />
+                  <td width="28%"><span style="color:#4295d2;font-weight:bold;" onclick="use_fancy_cursor(this);add_part('{!center_part.id}')" ><apex:outputfield value="{!center_part.Part__r.Name}" /></span></td>
+                  <td width="48%"><apex:outputtext value="{!center_part.Part__r.Part_Description__c}" /></td>
+                  <td width="10%"><apex:outputfield value="{!center_part.Quantity__c}" rendered="{!if(center_part.Part__r.RecordType.Name == 'Product',true,false)}" />
+                    <apex:outputpanel rendered="{!if(center_part.Part__r.RecordType.Name == 'Service',true,false)}" ><span class="blank">N/A</span></apex:outputpanel></td>
+                  <td width="14%"><apex:outputfield value="{!center_part.Price__c}" /></td>
+                </tr>
+              </apex:repeat>
+              </table>
+            </apex:outputPanel>
+
+
+
+         </apex:outputpanel>
+         </apex:actionRegion>
+        </apex:outputPanel>
+        <!-- --end modal holder--- -->
+
+        </apex:outputpanel>
+        <!-- --end main holder----- -->
+    </apex:form>
+</apex:page>

@@ -1,0 +1,327 @@
+<!-- 
+Modified by cm on 2012-2-13
+I've switched the page to use a custom CSS and removed all the extraneous html tags that were everywhere.  I also pulled out a bunch of redundant apex tags that weren't
+ serving much purpose.  The second table has now been encapsulated in an apex tag that will render only if the center has been selected.  This prevents some section
+headers from displaying without info tied to them when we have an older record with no center assigned to it. It also allowed me to remove a lot of the rendered attributes
+on the lines that were all running this same check.  DR/PEC section has combined three apex tags into a single one.  The Old Phone # section now displays under the Name and
+address column.  That freed it up for use as the new Performs column which lists the operations being done at the center.  Pulled the label for address and combined name and type to
+use up less space.
+-->
+<!----
+Modified by cm on 2012-5-18
+There's a new section at the bottom which should display any upcoming seminars for the center the lead record has been set to.  There is a registration button and some quick
+links in this area that should improve the efficency of the call center
+-->
+<apex:page showHeader="FALSE" standardController="Lead" extensions="lead_upcomingseminars" >
+<apex:stylesheet value="{!$Resource.CenterInfoCSS}"/>    
+<style>
+  span.ltest {
+    font-weight:bold; 
+    color:red;
+    background-color:yellow;
+  }  
+  
+  span.performs_no_alt {
+    color:#20f9f2;
+    font-weight:bold;
+  }
+</style>    
+<apex:outputpanel layout="block" style="padding-top:5px;font-weight:bold;font-size:14pt;text-align:center;width:500px;min-height:30px;background:#FFD700" rendered="{!display_gold}">GOLD Lead</apex:outputpanel>
+<div style="background:{!if(lead.center__r.Type__c=='Network Center','#bc5def','white')};min-height:230px;">
+<table width="100%">
+  <tr> 
+   <td align="center" width="100%">   
+
+<!--     <apex:OutputText styleClass="header_warning" rendered="{!IF(Lead.Number_of_Times_Schedule__c=="3rd Scheduled Consultation",'true','false')}" value="ALERT: 3+ appointments have been scheduled!"/>-->
+     <apex:OutputText styleClass="header_warning" style="color:purple" rendered="{!IF(lead.email==null && lead.Refused_to_give_email__c==false,'true','false')}" value="Warning:  Email Info needs to be updated"/>   
+     <apex:OutputText styleClass="header_warning" style="color:purple" rendered="{!IF(lead.Hot_List__c==true && LEN(lead.Cancellation_List_Notes__c) < 2,'true','false')}" value="Warning:  Cancellation List Notes need to be entered"/>         
+     <apex:OutputText styleClass="header_warning" rendered="{!IF(schedule_num>=3,'true','false')}" value="ALERT: 3+ appointments have been scheduled!"/>
+     <apex:OutputText styleClass="header_warning" rendered="{!IF(ISBLANK(Lead.Center__c),'true','false')}" value="Please Select a Center!"/>     
+     <apex:OutputText styleClass="header_warning" rendered="{!IF(ISBLANK(Lead.center__r.Center_Alerts__c),'false','true')}" value="{!Lead.center__r.Center_Alerts__c}"/>
+   </td>
+  </tr>
+</table>
+<apex:outputPanel rendered="{!IF(ISBLANK(Lead.Center__c),'false','true')}" layout="block">
+<table width="100%">
+  <tr>  
+    <td valign="top" width="{!if(lead.center__r.Type__c=='Network Center',34,34)}%">
+      <apex:outputPanel styleClass="section_line">
+<!--        <apex:OutputText styleClass="section_header" value="Name: "/> -->
+        <apex:OutputText style="font-size:12pt;padding-right:5px;{!if(lead.center__r.Type__c=='Network Center','color:White','')}" styleClass="center_name" value="{!Lead.center__r.Name} "/><br />                
+        <apex:OutputText styleClass="section_header" value="(Type - {!Lead.center__r.Type__c})"/>        
+      </apex:outputPanel>
+<!--      <apex:outputPanel styleClass="section_line">
+        <apex:OutputText styleClass="section_header" value="Address:"/>
+      </apex:outputPanel> 
+-->
+      <apex:outputPanel styleClass="section_line">
+        <apex:OutputField value="{!Lead.center__r.Street_1__c}"/>
+      </apex:outputPanel>
+      <apex:outputPanel styleClass="section_line" rendered="{!IF(ISBLANK(Lead.center__r.Street_2__c),'false','true')}">
+        <apex:OutputField rendered="{!IF(ISBLANK(Lead.center__r.Street_2__c),'false','true')}" value="{!Lead.center__r.Street_2__c}"/>
+      </apex:outputPanel>
+      <apex:outputPanel styleClass="section_line">
+        <apex:OutputText value="{!Lead.center__r.City__c},"/>&nbsp;
+        <apex:OutputField value="{!Lead.center__r.State__c}"/>&nbsp;    
+        <apex:OutputField value="{!Lead.center__r.Zip_Code__c}"/>
+      </apex:outputPanel>
+      
+      <apex:outputpanel rendered="{!if(lead.center__r.Type__c=='Network Center','false','true')}">
+      <apex:outputPanel styleClass="section_line" rendered="{!IF(ISBLANK(Lead.center__r.MapGoogle__c),'false','true')}">
+        <apex:OutputField rendered="{!IF(ISBLANK(Lead.center__r.MapGoogle__c),'false','true')}" value="{!Lead.center__r.MapGoogle__c}"/>
+      </apex:outputPanel>
+<!--      
+      <apex:outputPanel styleClass="section_line">
+        <apex:OutputText styleClass="section_header" value="Type:"/>&nbsp;
+        <apex:OutputField value="{!Lead.center__r.Type__c}"/>                           
+      </apex:outputPanel>
+-->      
+      <apex:outputPanel styleClass="section_line" style="color:red;">
+        <apex:OutputText styleClass="section_header" value="Call Center/Marketing:"/>&nbsp;
+        <apex:OutputField value="{!Lead.center__r.Call_Center_Marketing__c}"/>
+      </apex:outputPanel>
+      <apex:outputPanel styleClass="section_line" style="color:blue;">
+        <apex:OutputText styleClass="section_header" value="Local Front Desk:"/>&nbsp;
+        <apex:OutputField value="{!Lead.center__r.Local_Front_Desk__c}"/>
+      </apex:outputPanel>           
+      <apex:outputPanel styleClass="section_line">
+        <apex:OutputText styleClass="section_header" rendered="{!IF(ISBLANK(Lead.Center__c),'false','true')}" value="Location:"/>&nbsp;
+        <apex:OutputField value="{!Lead.center__r.Location__c}"/>&nbsp;&nbsp;
+        <apex:OutputText styleClass="section_header" rendered="{!IF(ISBLANK(Lead.Center__c),'false','true')}" value="CID:"/>&nbsp;
+        <apex:OutputField value="{!Lead.center__r.CID__c}"/>                                                                                                                                                                                          
+      </apex:outputPanel> 
+      </apex:outputPanel>      
+      
+      <br /><span style="font-weight:bold;font-size:14pt;">Patient is&nbsp; <apex:outputtext escape="false" value="{!patient_sched_status}" /></span><br /><br />    
+      <apex:outputpanel rendered="{!if(lead.center__r.Type__c=='Network Center','true','false')}">
+      <apex:OutputText styleClass="doctor_name" style="font-weight:bold;font-size:12pt;{!if(lead.center__r.Type__c=='Network Center','color:white;','')} " value="Please transfer to :" /><br />
+      <apex:OutputText styleClass="doctor_name" style="font-weight:bold;font-size:12pt;{!if(lead.center__r.Type__c=='Network Center','color:white;','')} " value="{!if(patient_sched_bool,lead.center__r.Scheduled_Transfer_Note__c,lead.center__r.Not_Scheduled_Transfer_Note__c)}" />      
+      </apex:outputpanel>
+             
+    </td>    
+    <td valign="top" width="{!if(lead.center__r.Type__c=='Network Center',33,33)}%"> 
+      <apex:outputpanel rendered="{!if(lead.center__r.Type__c=='Network Center','false','true')}">
+      <apex:repeat value="{!doctor_list}" var="doctor" >
+        <apex:outputPanel styleClass="section_line">
+          <apex:Outputtext styleClass="doctor_name" value="{!doctor.First_Name__c}"  />&nbsp;<apex:outputtext styleClass="doctor_name" value="{!doctor.Last_Name__c}" />&nbsp;-&nbsp;<apex:outputtext styleClass="doctor_name" value="{!doctor.Doctor_Type__c}" />      
+        </apex:outputPanel>        
+      </apex:repeat>
+      <!--<apex:outputPanel rendered="{!IF(ISBLANK(Lead.center__r.Doctor_1__c),'false','true')}" styleClass="section_line">
+        <apex:OutputText styleClass="doctor_name" value="{!Lead.center__r.Doctor_1__c} - {!Lead.center__r.Doctor_1_Type__c}"/>      
+      </apex:outputPanel>        
+      <apex:outputPanel rendered="{!IF(ISBLANK(Lead.center__r.Doctor_2__c),'false','true')}" styleClass="section_line">
+        <apex:OutputText styleClass="doctor_name" value="{!Lead.center__r.Doctor_2__c} - {!Lead.center__r.Doctor_2_Type__c}"/>      
+      </apex:outputPanel>   
+      <apex:outputPanel rendered="{!IF(ISBLANK(Lead.center__r.Doctor_3__c),'false','true')}" styleClass="section_line">
+        <apex:OutputText styleClass="doctor_name" value="{!Lead.center__r.Doctor_3__c} - {!Lead.center__r.Doctor_3_Type__c}"/>      
+      </apex:outputPanel>           
+      <apex:outputPanel rendered="{!IF(ISBLANK(Lead.center__r.Doctor_4__c),'false','true')}" styleClass="section_line">
+        <apex:OutputText styleClass="doctor_name" value="{!Lead.center__r.Doctor_4__c} - {!Lead.center__r.Doctor_4_Type__c}"/>
+      </apex:outputPanel>   
+      <apex:outputPanel rendered="{!IF(ISBLANK(Lead.center__r.Doctor_5__c),'false','true')}" styleClass="section_line">
+        <apex:OutputText styleClass="doctor_name" value="{!Lead.center__r.Doctor_5__c} - {!Lead.center__r.Doctor_5_Type__c}"/>
+      </apex:outputPanel>           -->
+      <apex:repeat value="{!pec_list}" var="pec">
+        <apex:outputPanel styleClass="section_line">
+          <apex:OutputText styleClass="section_header" value="PEC:"/>&nbsp;
+        <apex:OutputText value="{!pec.Name}"/>
+      </apex:outputPanel>           
+      </apex:repeat>
+      <!--<apex:outputPanel rendered="{!IF(ISBLANK(Lead.center__r.PEC_1__c),'false','true')}" styleClass="section_line">
+        <apex:OutputText styleClass="section_header" value="PEC:"/>&nbsp;
+        <apex:OutputText value="{!Lead.center__r.PEC_1__r.Name}"/>
+      </apex:outputPanel>           
+      <apex:outputPanel rendered="{!IF(ISBLANK(Lead.center__r.PEC_2__c),'false','true')}" styleClass="section_line">
+        <apex:OutputText styleClass="section_header" value="PEC:"/>&nbsp;
+        <apex:OutputText value="{!Lead.center__r.PEC_2__r.Name}"/>      
+      </apex:outputPanel>           -->
+      <apex:outputPanel rendered="{!IF(ISBLANK(Lead.center__r.DEC__c),'false','true')}" styleClass="section_line">
+        <apex:OutputText styleClass="section_header" value="DEC:"/>&nbsp;
+        <apex:OutputField value="{!Lead.center__r.DEC__c}"/>
+      </apex:outputPanel>           
+      <apex:repeat value="{!ca_list}" var="ca" >
+        <apex:outputPanel styleClass="section_line">
+          <apex:OutputText styleClass="section_header" value="CA:"/>&nbsp;
+          <apex:OutputField value="{!ca.name}"/>
+        </apex:outputPanel>
+      </apex:repeat>
+<!--      <apex:outputPanel rendered="{!IF(ISBLANK(Lead.center__r.CAdmin__c),'false','true')}" styleClass="section_line">
+        <apex:OutputText styleClass="section_header" value="CA:"/>&nbsp;
+        <apex:OutputField value="{!Lead.center__r.CAdmin__c}"/>
+      </apex:outputPanel>           -->
+      </apex:outputPanel>
+      
+      <apex:outputpanel rendered="{!if(lead.center__r.Type__c=='Network Center','true','false')}">
+      <apex:outputPanel styleClass="section_line"><apex:OutputText styleClass="section_header" style="color:yellow;" value="Network Practice :"/><br />
+        <apex:OutputField value="{!Lead.center__r.Legal_Name__c}" />
+      </apex:outputPanel>
+      <apex:outputPanel styleClass="section_line"><apex:OutputText styleClass="section_header" style="color:yellow;" value="Network Doctors :"/><br />
+        <apex:OutputField value="{!Lead.center__r.Doctor_1__c}" /><br /><apex:OutputField value="{!Lead.center__r.Doctor_2__c}" /><br /><br />
+      </apex:outputPanel>
+      <apex:outputPanel styleClass="section_line"><apex:OutputText styleClass="section_header" style="color:yellow;" value="Front Desk Number :"/><br />
+        <apex:OutputField value="{!Lead.center__r.Local_Front_Desk__c}" />
+      </apex:outputPanel>
+      <apex:outputPanel styleClass="section_line"><apex:OutputText styleClass="section_header" style="color:yellow;" value="Call Center - Marketing :"/><br />
+        <apex:OutputField value="{!Lead.center__r.Call_Center_Marketing__c}" />
+      </apex:outputPanel>
+      </apex:outputpanel>    
+      
+      <apex:outputPanel styleClass="section_line">    
+        <apex:OutputText styleClass="section_header" style="{!if(lead.center__r.Type__c=='Network Center','color:yellow','')}"  value="Directions:"/>
+      </apex:outputPanel>      
+      <apex:outputPanel styleClass="section_line">         
+           <apex:OutputField value="{!Lead.center__r.Directions__c}"/>           
+      </apex:outputPanel>
+      <apex:outputPanel styleClass="section_line" rendered="{!IF(ISBLANK(Lead.center__r.Map_Directions_URL__c),'false','true')}" >             
+        <apex:OutputText value="Click to view Map:"/>&nbsp;
+        <apex:OutputField value="{!Lead.center__r.Map_Directions_URL__c}"/>                          
+     </apex:outputPanel>        
+    </td>            
+    <td valign="top" width="{!if(lead.center__r.Type__c=='Network Center',33,33)}%">
+      <apex:outputpanel rendered="{!if(lead.center__r.Type__c=='Network Center','false','true')}">
+      <apex:OutputText styleClass="performs_header" value="Performs" />
+      <apex:outputPanel styleClass="section_line"> 
+        <apex:OutputText styleClass="performs_detail" value="Pros Exams" />
+        <apex:OutputText styleClass="{!IF(Lead.center__r.Performs_Pros_Exams__c==true,'performs_yes','performs_no')}"  value="{!IF(Lead.center__r.Performs_Pros_Exams__c==true,'Yes','No')}"/>
+      </apex:outputPanel>        
+      <apex:outputPanel styleClass="section_line">         
+        <apex:OutputText styleClass="performs_detail" value="Post Op Checks" />
+        <apex:OutputText styleClass="{!IF(Lead.center__r.Performs_Post_Op_Checks__c==true,'performs_yes','performs_no')}"  value="{!IF(Lead.center__r.Performs_Post_Op_Checks__c==true,'Yes','No')}"/>
+      </apex:outputPanel>        
+      <apex:outputPanel styleClass="section_line">         
+        <apex:OutputText styleClass="performs_detail" value="Single Implant" />
+        <apex:OutputText styleClass="{!IF(Lead.center__r.Performs_Single_Implants__c==true,'performs_yes','performs_no')}"  value="{!IF(Lead.center__r.Performs_Single_Implants__c==true,'Yes','No')}"/>      
+      </apex:outputPanel>        
+      <apex:outputPanel styleClass="section_line">         
+        <apex:OutputText styleClass="performs_detail" value="Multi Implant" />
+        <apex:OutputText styleClass="{!IF(Lead.center__r.Performs_Multiple_Implants__c==true,'performs_yes','performs_no')}"  value="{!IF(Lead.center__r.Performs_Multiple_Implants__c==true,'Yes','No')}"/>      
+      </apex:outputPanel>        
+      <apex:outputPanel styleClass="section_line">         
+        <apex:OutputText styleClass="performs_detail" value="AO4" />
+        <apex:OutputText styleClass="{!IF(Lead.center__r.Performs_AO4__c==true,'performs_yes','performs_no')}"  value="{!IF(Lead.center__r.Performs_AO4__c==true,'Yes','No')}"/>      
+      </apex:outputPanel>        
+      </apex:outputPanel>   
+      
+      <apex:outputpanel rendered="{!if(lead.center__r.Type__c=='Network Center','true','false')}">                  
+      <apex:OutputText styleClass="performs_header" style="color:White"  value="Performs" />
+      <apex:outputPanel styleClass="section_line"> 
+        <apex:OutputText styleClass="performs_detail" style="width:160px;" value="General Dentistry" />
+        <apex:OutputText styleClass="{!IF(Lead.center__r.General_Dentistry__c==true,'performs_yes','performs_no_alt')}"  value="{!IF(Lead.center__r.General_Dentistry__c==true,'Yes','No')}"/>
+      </apex:outputPanel>   
+      
+      <apex:outputPanel styleClass="section_line"> 
+        <apex:OutputText styleClass="performs_detail" style="width:160px;" value="Dental Implants" />
+        <apex:OutputText styleClass="{!IF(Lead.center__r.Dental_Implants__c==true,'performs_yes','performs_no_alt')}"  value="{!IF(Lead.center__r.Dental_Implants__c==true,'Yes','No')}"/>
+      </apex:outputPanel>   
+      
+      <apex:outputPanel styleClass="section_line"> 
+        <apex:OutputText styleClass="performs_detail" style="width:160px;" value="Whitening" />
+        <apex:OutputText styleClass="{!IF(Lead.center__r.Whitening__c==true,'performs_yes','performs_no_alt')}"  value="{!IF(Lead.center__r.Whitening__c==true,'Yes','No')}"/>
+      </apex:outputPanel>   
+      
+      <apex:outputPanel styleClass="section_line"> 
+        <apex:OutputText styleClass="performs_detail" style="width:160px;" value="Dentures" />
+        <apex:OutputText styleClass="{!IF(Lead.center__r.Dentures__c==true,'performs_yes','performs_no_alt')}"  value="{!IF(Lead.center__r.Dentures__c==true,'Yes','No')}"/>
+      </apex:outputPanel>   
+      
+      <apex:outputPanel styleClass="section_line"> 
+        <apex:OutputText styleClass="performs_detail" style="width:160px;" value="Veneers" />
+        <apex:OutputText styleClass="{!IF(Lead.center__r.Veneers__c==true,'performs_yes','performs_no_alt')}"  value="{!IF(Lead.center__r.Veneers__c==true,'Yes','No')}"/>
+      </apex:outputPanel>   
+      
+      <apex:outputPanel styleClass="section_line"> 
+        <apex:OutputText styleClass="performs_detail" style="width:160px;" value="Orthodontics" />
+        <apex:OutputText styleClass="{!IF(Lead.center__r.Orthodontics__c==true,'performs_yes','performs_no_alt')}"  value="{!IF(Lead.center__r.Orthodontics__c==true,'Yes','No')}"/>
+      </apex:outputPanel>   
+      
+      <apex:outputPanel styleClass="section_line"> 
+        <apex:OutputText styleClass="performs_detail" style="width:160px;" value="Periodontics" />
+        <apex:OutputText styleClass="{!IF(Lead.center__r.Periodontics__c==true,'performs_yes','performs_no_alt')}"  value="{!IF(Lead.center__r.Periodontics__c==true,'Yes','No')}"/>
+      </apex:outputPanel>   
+      
+      <br /><apex:OutputText styleClass="performs_header" style="color:white;"  value="Financial" />
+      <apex:outputPanel styleClass="section_line"> 
+        <apex:OutputText styleClass="performs_detail" style="width:160px;" value="Financing Options" />
+        <apex:OutputText styleClass="{!IF(Lead.center__r.Financing_Options__c==true,'performs_yes','performs_no_alt')}"  value="{!IF(Lead.center__r.Financing_Options__c==true,'Yes','No')}"/>
+      </apex:outputPanel>  
+      
+      <apex:outputPanel styleClass="section_line"> 
+        <apex:OutputText styleClass="performs_detail" style="width:160px;" value="Medicare/Medicaid" />
+        <apex:OutputText styleClass="{!IF(Lead.center__r.Medicaid_Medicare__c==true,'performs_yes','performs_no_alt')}"  value="{!IF(Lead.center__r.Medicaid_Medicare__c==true,'Yes','No')}"/>
+      </apex:outputPanel>  
+      
+      <apex:outputPanel styleClass="section_line"> 
+        <apex:OutputText styleClass="performs_detail" style="width:160px;" value="Insurance" />
+        <apex:OutputText styleClass="{!IF(Lead.center__r.Insurance__c==true,'performs_yes','performs_no_alt')}"  value="{!IF(Lead.center__r.Insurance__c==true,'Yes','No')}"/>
+      </apex:outputPanel>  
+      </apex:outputPanel>
+    </td>        
+  </tr>
+</table><br />
+  <apex:outputPanel id="upcoming_holder" rendered="{!if(seminar_num>0 && isleadvalid,'true','false')}">
+    <apex:form >  
+      <apex:actionFunction action="{!register_seminar}" name="register" reRender="upcoming_holder" >
+      <apex:param name="cid" value="" />   
+      <apex:param name="nguests" value="" />         
+  <!--    <apex:param name="gname" value="" />    -->
+    </apex:actionFunction>    
+  <apex:actionFunction action="{!cancel_seminar}" name="cancel" reRender="upcoming_holder" >
+      <apex:param name="cid" value="" />   
+    </apex:actionFunction>        
+<script>
+  function register_feed(cid,selObj) {
+    var selIndex = selObj.selectedIndex;
+    var num_guests = selObj.options[selIndex].value;
+    //alert(gnames);
+    //alert(num_guests);    
+    //return false;    
+    register(cid,num_guests);    
+    return true;    
+  }  
+
+  function cancel_feed(cid) {
+    cancel(cid);
+    return true;    
+  }
+</script>    
+   <!--Modified by cm on 2013-12-12 - pulled Seminar section per Andy -->
+    <span style="display:block;width:600px;border-bottom:1px dotted black;color:#5789AE;font-size:10pt;padding-left:10px;margin-left:10px;">Upcoming Seminars for {!lead.Center__r.Market__r.Name}</span>
+    <div style="padding-left:20px;">  
+    <table><tr >
+    <apex:repeat value="{!center_upcoming_seminars}" var="seminar">
+      <td style="width:200px;padding-right:10px;">{!seminar.seminar_campaign.center__r.name}&nbsp;<apex:outputLink value="/{!seminar.seminar_campaign.id}" target="_blank"><apex:outputField value="{!seminar.seminar_campaign.Location_Name__c}" /></apex:outputLink><br />
+      <apex:outputField value="{!seminar.seminar_campaign.startdate}"/>&nbsp;<apex:outputField value="{!seminar.seminar_campaign.Time__c}" /><br />
+      <apex:outputText escape="false" rendered="{!seminar.currently_registered}" value="{!seminar.cm_status}" />
+      <apex:outputPanel rendered="{!if(seminar.seminar_campaign.Google_Doc_URL__c<>'','true','false')}"><a href="{!seminar.seminar_campaign.Google_Doc_URL__c}" target="_blank">Registration Form</a><br /></apex:outputPanel>       
+      <apex:repeat value="{!seminar.sem_doc}" var="sem_attachments">
+        <apex:outputLink value="/servlet/servlet.FileDownload?file={!sem_attachments.id}" target="_blank"><apex:outputField value="{!sem_attachments.name}"/></apex:outputLink><br />      
+      </apex:repeat> 
+      <apex:outputPanel rendered="{!if(seminar.currently_registered,'false','true')}" >
+        # Guests : <select id="guest_{!seminar.seminar_campaign.id}" size="1">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9+</option>
+      </select><br />
+      Guest Names : <apex:inputtextarea value="{!seminar.guest_names}" cols="30" rows="1" />      
+      <apex:commandLink value="Register" onclick="register_feed('{!seminar.seminar_campaign.id}',document.getElementById('guest_{!seminar.seminar_campaign.id}'));" styleclass="btn" style="position:relative;top:5px;text-decoration:none;" oncomplete="return false;"/><br /></apex:outputPanel>              
+      <apex:outputpanel rendered="{!seminar.currently_registered}" >
+      <apex:commandLink rendered="{!if(lead.Call_Result__c=='Cancelled Appointment',false,true)}" value="Cancel" onclick="cancel_feed('{!seminar.seminar_campaign.id}');" styleclass="btn" style="position:relative;top:5px;text-decoration:none;" oncomplete="return false;"/>
+      <apex:outputPanel rendered="{!if(lead.Call_Result__c=='Cancelled Appointment',true,false)}"><span style="font-weight:bold;color:red;">Cancelled Seminar</span></apex:outputpanel>
+      </apex:outputpanel>
+      </td>
+    </apex:repeat>
+    </tr></table><br />{!register_issues}</div> 
+  </apex:form>      
+  </apex:outputPanel>
+<!--  <apex:outputPanel rendered="{!if(seminar_num==0 && isleadvalid,'true','false')}"><span style="font-weight:bold;color:red;">There are currently no upcoming seminars for this center</span></apex:outputPanel>     -->
+  <apex:outputPanel rendered="{!if(isleadvalid,false,true)}"><apex:outputtext escape="false" value="{!lead_valid_errors}" /></apex:outputPanel>    
+</apex:outputPanel>
+</div>
+</apex:page>

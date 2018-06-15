@@ -1,0 +1,740 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Tracks the implants tied to a patient (Prostho Exam)</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Patient Implants</relationshipLabel>
+        <relationshipName>Patient_Implants</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>GUDID__c</fullName>
+        <description>Global Unique Device Identification</description>
+        <externalId>false</externalId>
+        <label>GUDID</label>
+        <length>200</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Implant_Free__c</fullName>
+        <description>Stores the part number in a text field rather than a lookup field.  This prevents us from needing a db of the parts already upload and built,  as the team has yet to provide anything to us.</description>
+        <externalId>false</externalId>
+        <label>Implant Free</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Implant_Status__c</fullName>
+        <description>A status of a particular implant in a patient.</description>
+        <externalId>false</externalId>
+        <label>Implant Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Installed</fullName>
+                    <default>false</default>
+                    <label>Installed</label>
+                </value>
+                <value>
+                    <fullName>Recalled</fullName>
+                    <default>false</default>
+                    <label>Recalled</label>
+                </value>
+                <value>
+                    <fullName>Failed</fullName>
+                    <default>false</default>
+                    <label>Failed</label>
+                </value>
+                <value>
+                    <fullName>Broken</fullName>
+                    <default>false</default>
+                    <label>Broken</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Implant_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Implant Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Implant</fullName>
+                    <default>true</default>
+                    <label>Implant</label>
+                </value>
+                <value>
+                    <fullName>Bone Grafting</fullName>
+                    <default>false</default>
+                    <label>Bone Grafting</label>
+                </value>
+                <value>
+                    <fullName>BMP</fullName>
+                    <default>false</default>
+                    <label>BMP</label>
+                </value>
+                <value>
+                    <fullName>Abutments</fullName>
+                    <default>false</default>
+                    <label>Abutments</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Implant__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Part Number for the Implant installed</description>
+        <externalId>false</externalId>
+        <label>Implant</label>
+        <referenceTo>Implant_Parts__c</referenceTo>
+        <relationshipLabel>Patient Implants</relationshipLabel>
+        <relationshipName>Patient_Implants</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Implant_location__c</fullName>
+        <externalId>false</externalId>
+        <label>Implant Location</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Implant_Type__c</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Upper Left</fullName>
+                    <default>false</default>
+                    <label>Upper Left</label>
+                </value>
+                <value>
+                    <fullName>Upper Right</fullName>
+                    <default>false</default>
+                    <label>Upper Right</label>
+                </value>
+                <value>
+                    <fullName>Lower Left</fullName>
+                    <default>false</default>
+                    <label>Lower Left</label>
+                </value>
+                <value>
+                    <fullName>Lower Right</fullName>
+                    <default>false</default>
+                    <label>Lower Right</label>
+                </value>
+                <value>
+                    <fullName>1</fullName>
+                    <default>false</default>
+                    <label>1</label>
+                </value>
+                <value>
+                    <fullName>2</fullName>
+                    <default>false</default>
+                    <label>2</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+                <value>
+                    <fullName>4</fullName>
+                    <default>false</default>
+                    <label>4</label>
+                </value>
+                <value>
+                    <fullName>5</fullName>
+                    <default>false</default>
+                    <label>5</label>
+                </value>
+                <value>
+                    <fullName>6</fullName>
+                    <default>false</default>
+                    <label>6</label>
+                </value>
+                <value>
+                    <fullName>7</fullName>
+                    <default>false</default>
+                    <label>7</label>
+                </value>
+                <value>
+                    <fullName>8</fullName>
+                    <default>false</default>
+                    <label>8</label>
+                </value>
+                <value>
+                    <fullName>9</fullName>
+                    <default>false</default>
+                    <label>9</label>
+                </value>
+                <value>
+                    <fullName>10</fullName>
+                    <default>false</default>
+                    <label>10</label>
+                </value>
+                <value>
+                    <fullName>11</fullName>
+                    <default>false</default>
+                    <label>11</label>
+                </value>
+                <value>
+                    <fullName>12</fullName>
+                    <default>false</default>
+                    <label>12</label>
+                </value>
+                <value>
+                    <fullName>13</fullName>
+                    <default>false</default>
+                    <label>13</label>
+                </value>
+                <value>
+                    <fullName>14</fullName>
+                    <default>false</default>
+                    <label>14</label>
+                </value>
+                <value>
+                    <fullName>15</fullName>
+                    <default>false</default>
+                    <label>15</label>
+                </value>
+                <value>
+                    <fullName>16</fullName>
+                    <default>false</default>
+                    <label>16</label>
+                </value>
+                <value>
+                    <fullName>17</fullName>
+                    <default>false</default>
+                    <label>17</label>
+                </value>
+                <value>
+                    <fullName>18</fullName>
+                    <default>false</default>
+                    <label>18</label>
+                </value>
+                <value>
+                    <fullName>19</fullName>
+                    <default>false</default>
+                    <label>19</label>
+                </value>
+                <value>
+                    <fullName>20</fullName>
+                    <default>false</default>
+                    <label>20</label>
+                </value>
+                <value>
+                    <fullName>21</fullName>
+                    <default>false</default>
+                    <label>21</label>
+                </value>
+                <value>
+                    <fullName>22</fullName>
+                    <default>false</default>
+                    <label>22</label>
+                </value>
+                <value>
+                    <fullName>23</fullName>
+                    <default>false</default>
+                    <label>23</label>
+                </value>
+                <value>
+                    <fullName>24</fullName>
+                    <default>false</default>
+                    <label>24</label>
+                </value>
+                <value>
+                    <fullName>25</fullName>
+                    <default>false</default>
+                    <label>25</label>
+                </value>
+                <value>
+                    <fullName>26</fullName>
+                    <default>false</default>
+                    <label>26</label>
+                </value>
+                <value>
+                    <fullName>27</fullName>
+                    <default>false</default>
+                    <label>27</label>
+                </value>
+                <value>
+                    <fullName>28</fullName>
+                    <default>false</default>
+                    <label>28</label>
+                </value>
+                <value>
+                    <fullName>29</fullName>
+                    <default>false</default>
+                    <label>29</label>
+                </value>
+                <value>
+                    <fullName>30</fullName>
+                    <default>false</default>
+                    <label>30</label>
+                </value>
+                <value>
+                    <fullName>31</fullName>
+                    <default>false</default>
+                    <label>31</label>
+                </value>
+                <value>
+                    <fullName>32</fullName>
+                    <default>false</default>
+                    <label>32</label>
+                </value>
+                <value>
+                    <fullName>Max right</fullName>
+                    <default>false</default>
+                    <label>Max right</label>
+                </value>
+                <value>
+                    <fullName>Max ant</fullName>
+                    <default>false</default>
+                    <label>Max ant</label>
+                </value>
+                <value>
+                    <fullName>Max left</fullName>
+                    <default>false</default>
+                    <label>Max left</label>
+                </value>
+                <value>
+                    <fullName>Mand right</fullName>
+                    <default>false</default>
+                    <label>Mand right</label>
+                </value>
+                <value>
+                    <fullName>Mand ant</fullName>
+                    <default>false</default>
+                    <label>Mand ant</label>
+                </value>
+                <value>
+                    <fullName>Mand left</fullName>
+                    <default>false</default>
+                    <label>Mand left</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>Upper Left</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>Upper Right</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>Lower Left</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>Lower Right</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>1</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>2</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>3</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>4</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>5</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>6</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>7</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>8</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>9</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>10</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>11</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>12</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>13</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>14</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>15</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>16</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>17</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>18</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>19</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>20</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>21</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>22</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>23</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>24</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>25</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>26</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>27</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>28</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>29</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>30</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>31</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>32</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>Max right</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>Max ant</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>Max left</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>Mand right</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>Mand ant</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Implant</controllingFieldValue>
+                <controllingFieldValue>Bone Grafting</controllingFieldValue>
+                <controllingFieldValue>BMP</controllingFieldValue>
+                <controllingFieldValue>Abutments</controllingFieldValue>
+                <valueName>Mand left</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Lot_Number__c</fullName>
+        <description>The lot this implant was tied to.</description>
+        <externalId>false</externalId>
+        <label>Lot Number</label>
+        <length>40</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Private_Practice_Patient__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Private Practice Patient</label>
+        <referenceTo>Private_Practice_Patient__c</referenceTo>
+        <relationshipLabel>Patient Implants</relationshipLabel>
+        <relationshipName>Patient_Implants</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Prosth_Patient__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The Prosth Exam this implant was used in</description>
+        <externalId>false</externalId>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Patient Implants</relationshipLabel>
+        <relationshipName>Patient_Implants</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Patient Implant</label>
+    <nameField>
+        <displayFormat>Imp-{0000}</displayFormat>
+        <label>Patient Implant Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Patient Implants</pluralLabel>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>Lot_Number__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Implant__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Implant_Status__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CREATEDBY_USER</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CREATED_DATE</lookupDialogsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

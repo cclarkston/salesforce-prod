@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>ACCOUNT.NAME</field>
+    </columns>
+    <columns>
+        <field>Account.Consult_Result__c</field>
+    </columns>
+    <columns>
+        <field>PHONE1</field>
+    </columns>
+    <columns>
+        <field>Account.General_Notes__c</field>
+    </columns>
+    <columns>
+        <field>Account.Preliminary_Treatment_Plan__c</field>
+    </columns>
+    <columns>
+        <field>Account.Preliminary_Treatment_Fee_Quoted__c</field>
+    </columns>
+    <columns>
+        <field>Account.Off_Site_Event__c</field>
+    </columns>
+    <columns>
+        <field>Account.Pre_Screen__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Account.Consult_Result__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Prostho Exam Scheduled,Prostho Exam Scheduled Call Back,2nd Consult,30 Day Pipeline,60 Day Pipeline</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Pipeline Management</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>AccountList</reportType>
+    <scope>user</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Account.Consult_Result__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <endDate>2010-11-10</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2010-09-01</startDate>
+    </timeFrameFilter>
+</Report>

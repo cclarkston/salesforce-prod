@@ -1,0 +1,401 @@
+<apex:page standardController="lead" extensions="lead_consultschedule" sidebar="false" showHeader="false" docType="html-5.0">
+    <apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+    <apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+    <apex:stylesheet value="https://fonts.googleapis.com/css?family=Open+Sans:300,600" />
+
+	<apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/fonts.css')}"/>
+
+    <style>
+        * {
+            font-family: 'Open Sans' !important;
+        }
+		body a:hover {
+			text-decoration: none;
+		}
+        .row {
+            margin-bottom: 5px;
+        }
+        .row:not(.flex-container) {
+            display: block !important;
+        }
+        .flex-container {
+            display: flex;
+        }
+        .flex-container .left-column {
+            margin-right: 5px;
+        }
+        .column {
+            display: inline-block;
+            vertical-align: top;
+        }
+        .left-column {
+            flex: 0 0 400px;
+        }
+        .right-column {
+            flex: 1 1 670px;
+        }
+        .header {
+            display: block;
+            background-color: gray;
+            color: white;
+            text-transform: uppercase;
+            text-align: center;
+            font-size: large;
+            padding: .25em 0;
+            margin-bottom: 5px;
+            font-weight: bold;
+            letter-spacing: .5px;
+        }
+        .label {
+            display: inline-block;
+            width: 6em;
+            font-size: medium !important;
+            font-weight: bold;
+            font-size: small;
+        }
+        .label.long {
+            width: 11em;
+        }
+        .btn {
+            background: cadetblue !important;
+            color: white !important;
+            font-size: small !important;
+            padding: .1em .5em !important;
+            border: 1px solid gray !important;
+            font-weight: normal !important;
+			text-decoration: none;
+        }
+        .btn.overflow {
+            background: indianred !important;
+        }
+
+        .top-row {
+            font-size: medium;
+        }
+        .top-row .right-column .label {
+            text-indent: 1em;
+        }
+		.top-row .left-column {
+			text-align: center;
+		}
+		.top-row .left-column .label.long {
+			display: block;
+		}
+		.top-row .radio-buttons {
+			display: inline-block;
+		}
+		#consult-scheduled .highlight {
+            display: inline-block;
+            background-color: pink;
+            padding: 2px 2em 0;
+        }
+
+		#days {
+            width: 110px;
+			margin-right: 10px;
+        }
+        /*********** CHECKBOX BUTTONS ***********/
+			.day {
+				margin-bottom: 1px;
+			}
+			.day label {
+				display: block;
+				/*width: 8em;*/
+				text-indent: 1.5em;
+				font-size: small;
+				font-weight: bold;
+			}
+			input[type="checkbox"] {
+				display: none;
+			}
+			input[type="checkbox"] + label {
+				color: gray;
+				background-color: lightgray;
+				border: 1px solid gray;
+				border-radius: 3px;
+				cursor: pointer !important;
+			}
+			input:checked + label {
+				background-color: steelblue;
+				color: white;
+			}
+        /*********** CHECKBOX BUTTONS ***********/
+
+        #date-and-time {
+            width: 270px;
+            vertical-align: top;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+        #any label {
+            width: 15em;
+        }
+        .radio-buttons table, .filter-row div {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .filter-row:not(.radio-buttons) {
+            margin-top: 1em;
+        }
+		#action-buttons {
+            padding-right: 15px;
+			margin-top: 50px;
+        }
+        input.big {
+            /*position: absolute;*/
+            font-size: large !important;
+            /*right: 0;*/
+            margin: 0;
+        }
+		input[value="Consult Calendar"] {
+            background-color: indianred !important;
+        }
+        input[value="Search"] {
+            /*right: 20px;*/
+			float: right;
+        }
+        .dateInput * {
+            font-size: inherit;
+            text-align: center;
+        }
+
+        /*********** PICKLIST SWITCHES ***********/
+            input[type=radio] {
+                display: none !important;
+            }
+
+            input[type=radio] + label {
+                display: inline-block;
+                background-color: white;
+                color: gray;
+                font-size: small;
+                font-weight: normal;
+                text-align: center;
+                text-shadow: none;
+                padding: .25em .5em;
+                margin: -1px -1px 0 -2px;
+                border: 1px solid rgba(0, 0, 0, 0.2);
+                -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+                box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+                -webkit-transition: all 0.1s ease-in-out;
+                -moz-transition:    all 0.1s ease-in-out;
+                -ms-transition:     all 0.1s ease-in-out;
+                -o-transition:      all 0.1s ease-in-out;
+                transition:         all 0.1s ease-in-out;
+            }
+
+            input[type=radio] + label:hover {
+                cursor: pointer;
+                background-color: lightgray;
+            }
+
+            input:checked + label, input:checked + label:hover {
+              background-color: steelblue;
+              color: white;
+              -webkit-box-shadow: none;
+              box-shadow: none;
+              cursor: default;
+            }
+        /*********** PICKLIST SWITCHES ***********/
+        .yes-no input[type=radio] + label {
+            width: 5em;
+        }
+
+        .appointment {
+            display: inline-block;
+            font-size: small;
+            text-align: center;
+            min-width: 6.7em;
+            background-color: #bbb;
+            padding: .5em;
+            box-sizing: border-box;
+            margin: .25em;
+            border: 2px solid gray;
+            border-radius: .5em;
+        }
+        .appointment.light-background {
+            background-color: #eee;
+        }
+        .appointment .row {
+            margin-bottom: .25em;
+        }
+        .appointment .row:last-child {
+            margin-top: .5em;
+        }
+        .appointment .date a {
+            text-decoration: none;
+            font-size: medium;
+            font-weight: bold;
+        }
+
+        .issues {
+            padding: .5em;
+            font-weight: bold;
+        }
+
+		.btn.on-hold {
+			background-color: gray !important;
+			cursor: not-allowed;
+		}
+		.ccf-clock {
+			padding-right: 1em
+		}
+	</style>
+
+    <apex:form >
+        <apex:actionFunction action="{!set_reminder_checkboxes_when_reminder_radios_change}" name="set_reminder_checkboxes_when_reminder_radios_change" reRender="debug"/>
+		<!-- DIFFERENCE BETWEEN SCHEDULERS start-->
+        <apex:outputPanel id="invisibles_called_to_ensure_theyre_available_in_controller" rendered="false">
+            <apex:outputText value="{!lead.Receive_Auto_Reminder__c}"/>
+            <apex:outputText value="{!lead.Receive_Text_Reminder__c}"/>
+        </apex:outputPanel>
+        <apex:outputPanel layout="block"  rendered="{!isLeadValid}" >
+		<!-- DIFFERENCE BETWEEN SCHEDULERS end-->
+            <apex:outputpanel id="ctime_holder" layout="block">
+                <div class="row top-row flex-container">
+                    <div class="column left-column">
+                        <div class="radio-buttons yes-no">
+                            <div class="label long">Automated Call?</div>
+							<!-- DIFFERENCE BETWEEN SCHEDULERS -->
+                            <apex:selectRadio value="{!lead.Reminder_Call__c}" onchange="set_reminder_checkboxes_when_reminder_radios_change()">
+                                <apex:selectOptions value="{!yes_no_options}"/>
+                            </apex:selectRadio>
+                        </div>
+                        <div class="radio-buttons yes-no">
+                            <div class="label long">Text Reminder?</div>
+							<!-- DIFFERENCE BETWEEN SCHEDULERS -->
+                            <apex:selectRadio value="{!lead.Reminder_Text__c}" onchange="set_reminder_checkboxes_when_reminder_radios_change()">
+                                <apex:selectOptions value="{!yes_no_options}"/>
+                            </apex:selectRadio>
+                        </div>
+                    </div>
+                    <div class="column right-column">
+                        <div id="consult-scheduled" class="row">
+                            <div class="label long">Current Consult(s)</div>
+							<apex:variable value="{!scheduled_consults_string}" var="scheduled_consults_output" />
+							<apex:outputText value="{!scheduled_consults_output}" styleClass="{!IF(scheduled_consults_output = 'None', '', 'highlight')}" />
+                        </div>
+						<div id="previous_consult" class="row">
+							<div class="label long">Previous Consult</div>
+							<apex:outputText value="{!previous_consult_string}" />
+						</div>
+						<!-- DIFFERENCE BETWEEN SCHEDULERS start-->
+                        <div class="row">
+                            <div class="row">
+                                <div class="label long"># Times Scheduled</div>{!schedule_num}
+                            </div>
+                            <!-- <div class="row">
+                                <div class="label long"># Times Called</div>{!contact_num}
+                            </div> -->
+                        </div>
+						<!-- DIFFERENCE BETWEEN SCHEDULERS end-->
+                    </div>
+                </div>
+            </apex:outputPanel>
+            <div class="row flex-container">
+                <div class="column left-column">
+                    <div class="header">Search Options</div>
+                    <div class="row">
+						<div id="days" class="column">
+                            <div class="day">
+                                <apex:inputCheckbox id="sunday" value="{!sSunday}" />
+                                <label for="{!$Component.sunday}">Sunday</label>
+                            </div>
+                            <div class="day">
+                                <apex:inputCheckbox id="monday" value="{!sMonday}" />
+                                <label for="{!$Component.monday}">Monday</label>
+                            </div>
+                            <div class="day">
+                                <apex:inputCheckbox id="tuesday" value="{!sTuesday}" />
+                                <label for="{!$Component.tuesday}">Tuesday</label>
+                            </div>
+                            <div class="day">
+                                <apex:inputCheckbox id="wednesday" value="{!sWednesday}" />
+                                <label for="{!$Component.wednesday}">Wednesday</label>
+                            </div>
+                            <div class="day">
+                                <apex:inputCheckbox id="thursday" value="{!sThursday}" />
+                                <label for="{!$Component.thursday}">Thursday</label>
+                            </div>
+                            <div class="day">
+                                <apex:inputCheckbox id="friday" value="{!sFriday}" />
+                                <label for="{!$Component.friday}">Friday</label>
+                            </div>
+                            <div class="day">
+                                <apex:inputCheckbox id="saturday" value="{!sSaturday}" />
+                                <label for="{!$Component.saturday}">Saturday</label>
+                            </div>
+                        </div>
+                        <div id="date-and-time" class="column">
+                            <div class="row filter-row radio-buttons">
+                                <apex:selectRadio value="{!time_group}">
+                                    <apex:selectOptions value="{!time_group_options}"/>
+                                </apex:selectRadio>
+                            </div>
+                            <div class="row filter-row">
+                                <div class="label">Start Date</div>
+                                <apex:inputField value="{!block_form.Apt_Date__c}" style="display:inline;"/>
+                            </div>
+							<div id="action-buttons" class="row filter-row">
+								<apex:commandButton action="{!find_next_available}" value="Search" reRender="search_holder" styleClass="big"/>
+								<apex:commandButton onclick="window.open('{!open_schedule_test}','ccalendar');" value="Consult Calendar" styleClass="big" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column right-column">
+                    <apex:actionRegion >
+                        <div class="header">Available Consults</div>
+                        <apex:actionFunction action="{!schedule_consult}" name="schedule" reRender="ctime_holder,search_holder">
+                            <apex:param value="" name="aid" />
+                        </apex:actionFunction>
+
+                        <apex:outputPanel layout="block" id="search_holder">
+                            <apex:outputPanel layout="block" rendered="{!(schedule_issues != null && schedule_issues != '') || (search_issues != null && search_issues != '')}" styleClass="issues">
+                                <apex:outputText value="{!schedule_issues}" escape="false" />
+                                <apex:outputText value="{!search_issues}"   escape="false" />
+                            </apex:outputPanel>
+
+                            <apex:variable var="background_incrementor" value="{!0}"/>
+                            <apex:variable var="previous_date" value="{!TODAY() - 1}"/>
+                            <apex:repeat value="{!search_consult_results}" var="next_appt">
+                                <apex:variable var="background_incrementor" value="{!IF(next_appt.apt_block.Apt_Date__c != previous_date, MOD(background_incrementor + 1, 2), background_incrementor)}"/>
+                                <apex:variable var="previous_date" value="{!next_appt.apt_block.Apt_Date__c}"/>
+                                <div class="appointment {!IF(background_incrementor == 0, 'light-background', '')}">
+                                    <div class="row date">
+										<!-- DIFFERENCE BETWEEN SCHEDULERS -->
+                                        <a href="/apex/sandbox_calendar?aid={!next_appt.apt_block.id}&lid={!lead.id}" target="ccalendar">
+                                            <apex:outputText value="{0, date, MMM d}">
+                                                <apex:param value="{!next_appt.apt_block.Apt_Date__c}"/>
+                                            </apex:outputText>
+                                        </a>
+                                    </div>
+                                    <div class="row">
+                                        {!next_appt.day_of_week}
+                                    </div>
+                                    <div class="row">
+                                        {!next_appt.start_time}
+                                    </div>
+                                    <div class="row">
+										<apex:variable value="{!next_appt.hold_minutes}" var="hold_minutes" />
+                                        <apex:commandLink rendered="{!hold_minutes = 0}" styleClass="btn {!next_appt.room_type}" value="{!IF(next_appt.room_type != 'overflow', 'Schedule', 'Overflow')}" onclick="schedule('{!next_appt.apt_block.id}');return false;" />
+										<apex:outputPanel rendered="{!hold_minutes > 0}" styleClass="btn on-hold icon-clock" layout="block">
+											<i class="ccf-clock"></i>{!next_appt.hold_minutes}
+										</apex:outputPanel>
+                                    </div>
+                                </div>
+                            </apex:repeat>
+							<apex:outputPanel rendered="{!has_searched && search_consult_results.size == 0}">
+								Search completed, but there are no appointments available using these criteria.
+							</apex:outputPanel>
+                        </apex:outputPanel>
+                    </apex:actionRegion>
+                </div>
+            </div>
+        </apex:outputPanel>
+		<!-- DIFFERENCE BETWEEN SCHEDULERS -->
+        <apex:outputPanel rendered="{!if(isLeadValid==true,false,true)}"><apex:outputtext escape="false" value="{!lead_valid_errors}" /></apex:outputPanel>
+    </apex:form>
+</apex:page>

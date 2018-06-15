@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Media Vendor</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Media Vendors</value>
+    </caseValues>
+    <fields>
+        <label><!-- Agency Naming Convention --></label>
+        <name>Agency_Naming_Convention__c</name>
+    </fields>
+    <fields>
+        <label><!-- DMA --></label>
+        <name>DMA__c</name>
+        <relationshipLabel><!-- Media Vendors --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Station Affliliate --></label>
+        <name>Station_Affliliate__c</name>
+        <picklistValues>
+            <masterLabel>ABC</masterLabel>
+            <translation><!-- ABC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CBS</masterLabel>
+            <translation><!-- CBS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CW</masterLabel>
+            <translation><!-- CW --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FOX</masterLabel>
+            <translation><!-- FOX --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Independent</masterLabel>
+            <translation><!-- Independent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MyTV</masterLabel>
+            <translation><!-- MyTV --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NBC</masterLabel>
+            <translation><!-- NBC --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

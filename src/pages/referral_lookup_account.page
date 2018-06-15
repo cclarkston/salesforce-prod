@@ -1,0 +1,270 @@
+<apex:page showHeader="false" standardController="Account" extensions="account_referral" >
+<style>
+div.left_block; {
+  float:left;
+}
+
+.CSSTableGenerator {
+    margin:0px;padding:0px;
+    margin-top:10px;
+    width:500px;
+    margin-left:20px;
+    box-shadow: 10px 10px 5px #888888;
+    border:1px solid #3f7f00;
+    
+    -moz-border-radius-bottomleft:5px;
+    -webkit-border-bottom-left-radius:5px;
+    border-bottom-left-radius:5px;
+    
+    -moz-border-radius-bottomright:5px;
+    -webkit-border-bottom-right-radius:5px;
+    border-bottom-right-radius:5px;
+    
+    -moz-border-radius-topright:5px;
+    -webkit-border-top-right-radius:5px;
+    border-top-right-radius:5px;
+    
+    -moz-border-radius-topleft:5px;
+    -webkit-border-top-left-radius:5px;
+    border-top-left-radius:5px;
+    margin-right:50px;
+}.CSSTableGenerator table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    width:100%;
+    height:100%;
+    margin:0px;padding:0px;
+}.CSSTableGenerator tr:last-child td:last-child {
+    -moz-border-radius-bottomright:5px;
+    -webkit-border-bottom-right-radius:5px;
+    border-bottom-right-radius:5px;
+}
+.CSSTableGenerator table tr:first-child td:first-child {
+    -moz-border-radius-topleft:5px;
+    -webkit-border-top-left-radius:5px;
+    border-top-left-radius:5px;
+}
+.CSSTableGenerator table tr:first-child td:last-child {
+    -moz-border-radius-topright:5px;
+    -webkit-border-top-right-radius:5px;
+    border-top-right-radius:5px;
+}.CSSTableGenerator tr:last-child td:first-child{
+    -moz-border-radius-bottomleft:5px;
+    -webkit-border-bottom-left-radius:5px;
+    border-bottom-left-radius:5px;
+}.CSSTableGenerator tr:hover td{
+    
+}
+.CSSTableGenerator tr:nth-child(odd){ background-color:#d4ffaa; }
+.CSSTableGenerator tr:nth-child(even)    { background-color:#ffffff; }.CSSTableGenerator td{
+    vertical-align:middle;
+    
+    
+    border:1px solid #3f7f00;
+    border-width:0px 1px 1px 0px;
+    text-align:left;
+    padding:7px;
+    font-size:12px;
+    font-family:Arial;
+    font-weight:bold;
+    color:#000000;
+}.CSSTableGenerator tr:last-child td{
+    border-width:0px 1px 0px 0px;
+}.CSSTableGenerator tr td:last-child{
+    border-width:0px 0px 1px 0px;
+}.CSSTableGenerator tr:last-child td:last-child{
+    border-width:0px 0px 0px 0px;
+}
+.CSSTableGenerator tr:first-child td{
+        background:-o-linear-gradient(bottom, #5fbf00 5%, #3f7f00 100%);    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #5fbf00), color-stop(1, #3f7f00) );
+    background:-moz-linear-gradient( center top, #5fbf00 5%, #3f7f00 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#5fbf00", endColorstr="#3f7f00");  background: -o-linear-gradient(top,#5fbf00,3f7f00);
+
+    background-color:#5fbf00;
+    border:0px solid #3f7f00;
+    text-align:center;
+    border-width:0px 0px 1px 1px;
+    font-size:14px;
+    font-family:Arial;
+    font-weight:bold;
+    color:#ffffff;
+}
+.CSSTableGenerator tr:first-child:hover td{
+    background:-o-linear-gradient(bottom, #5fbf00 5%, #3f7f00 100%);    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #5fbf00), color-stop(1, #3f7f00) );
+    background:-moz-linear-gradient( center top, #5fbf00 5%, #3f7f00 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#5fbf00", endColorstr="#3f7f00");  background: -o-linear-gradient(top,#5fbf00,3f7f00);
+
+    background-color:#5fbf00;
+}
+.CSSTableGenerator tr:first-child td:first-child{
+    border-width:0px 0px 1px 0px;
+}
+.CSSTableGenerator tr:first-child td:last-child{
+    border-width:0px 0px 1px 1px;
+}
+</style>
+
+<script>
+function confirm_refuse(t) {
+  var refuse_confirmed=confirm('Continuing will permanently block this Doctor from future results,  are you sure you want to continue?');
+  if(refuse_confirmed) {   
+    block_doctor();
+  }  
+  else 
+    default_cursor(t);
+}       
+
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+<apex:form onsubmit="">
+   <apex:actionstatus id="status_load">
+        <apex:facet name="start">
+            <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;
+                   height: 100%;opacity:0.65;width:100%;"> 
+                <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+                    <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                    <span class="waitingDescription">Loading...</span>
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionstatus>
+  <apex:actionFunction status="status_load" name="block_doctor" action="{!refuse_out}" rerender="ref_out_holder,rlist_holder,ref_out_detail,pnav_holder" oncomplete="default_cursor(this);" />    
+  <apex:actionFunction status="status_load" name="cback_change" action="{!callback_change}" rerender="callback_holder" oncomplete="default_cursor(this);" />    
+    
+<apex:outputText value="{!Account.Center__c} {!Account.BillingStreet} {!Account.BillingCity} {!Account.BillingPostalCode} {!Account.Refused_Referrals__c} {!Account.Work_Street__c} {!Account.Work_State__c} {!Account.Work_City__c} {!Account.Work_Postal_Code__c}" rendered="false"/>
+
+<apex:outputPanel rendered="{!if(practice_count==0,true,false)}">
+  <span class="blank">There are currently no practices in this area that have signed up for the referral program</span>
+</apex:outputPanel>
+
+<apex:outputpanel id="ref_main_holder" rendered="{!if(practice_count==0,false,true)}" layout="block" style="width:100%">
+<table><tr><td>
+<div class="CSSTableGenerator">
+<table>
+  <tr>
+    <td colspan="3"><b>Patient is interested in :</b></td>
+  </tr>
+  <tr>
+    <td><apex:inputCheckbox value="{!hygiene}" style="padding-right:5px;"/> Hygiene</td>
+    <td><apex:inputCheckbox value="{!Crown_Bridge}" style="padding-right:5px;" /> Crown / Bridge</td>
+    <td><apex:inputCheckbox value="{!Teeth_Whitening}" style="padding-right:5px;" /> Teeth Whitening</td>
+  </tr>
+  <tr>
+    <td><apex:inputCheckbox value="{!dentures}" style="padding-right:5px;"/> Dentures</td>
+    <td><apex:inputCheckbox value="{!Invisalign}" style="padding-right:5px;" /> Invisalign</td>
+    <td><apex:inputCheckbox value="{!Botox}" style="padding-right:5px;" /> Botox</td>
+  </tr>
+  <tr>
+    <td><apex:inputCheckbox value="{!Traditional_Ortho}" style="padding-right:5px;"/> Traditional Orthodontics</td>
+    <td><apex:inputCheckbox value="{!Endontics}" style="padding-right:5px;" /> Endontics</td>
+    <td><apex:inputCheckbox value="{!Laser_Dentistry}" style="padding-right:5px;" /> Laser Dentistry</td>
+  </tr>
+  <tr>
+    <td><apex:inputCheckbox value="{!Wisdom_Teeth}" style="padding-right:5px;" /> Wisdom Teeth Extractions</td>
+    <td><apex:inputCheckbox value="{!Veneers}" style="padding-right:5px;"/> Veneers</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+</div>
+<div style="margin-left:20px;padding-top:15px;">
+  <span style="display:inline-block;font-weight:bold;font-size:12pt;width:125px;color:#3f7f00">Insurance :</span> <apex:selectList value="{!Insurance_Plan}" multiselect="false" size="1">
+    <apex:selectOptions value="{!insurance_options_list}"></apex:selectoptions>
+  </apex:selectList><br />
+  <table><tr><td><span style="font-weight:bold;">Find Practice Near :</span></td><td><apex:selectRadio value="{!address_near}" style="display:inline;" id="address_near"><apex:selectOptions value="{!near_options}"/></apex:selectRadio></td><td>  <apex:commandButton value="Search Practices" action="{!search_referral}"  status="status_load" reRender="ref_out_holder,ref_out_detail,pnav_holder" rendered="{!if(account.billingstreet<>'',true,false)}"/></td></tr></table>
+  <apex:outputtext rendered="{!if(account.billingstreet<>'',false,true)}" value="You must enter an address before referring out" escape="false" style="font-weight:bold;color:red;" />
+</div></td>
+<td style="vertical-align:top;">
+  <apex:outputPanel id="ref_out_holder">
+    <apex:messages />
+    <apex:outputPanel rendered="{!display_referral}" ><br />
+      <span style="font-weight:bold;font-size:12pt;color:#5789AE;"><apex:outputField value="{!referral_practice[referral_option].name}" /></span><br /> 
+      <apex:repeat var="doctor" value="{!referral_practice[referral_option].practice_doctors__r}">
+      <apex:outputtext value="<b>Doctor : </b>" rendered="{!if(doctor.Title__c=='',true,false)}" escape="false" />   <apex:outputfield value="{!doctor.Title__c}" rendered="{!if(doctor.Title__c=='',false,true)}" /> &nbsp; <apex:outputField value="{!doctor.First_Last__c}" /><br />
+      </apex:repeat>
+      <apex:outputfield value="{!referral_practice[referral_option].Street__c}" /><br />
+      <apex:outputfield value="{!referral_practice[referral_option].City__c}" />,&nbsp;<apex:outputfield value="{!referral_practice[referral_option].State_Province__c}" />&nbsp;<apex:outputfield value="{!referral_practice[referral_option].Postal_Code__c}" /><br />
+      <b>Primary Contact :</b><apex:outputfield value="{!referral_practice[referral_option].Primary_Contact_Name__c}" /><br />
+      <b>Phone : </b><apex:outputfield value="{!referral_practice[referral_option].Phone__c}" /><br />
+      <b>Alt Phone: </b><apex:outputfield value="{!referral_practice[referral_option].Alt_Phone__c}" /><br />
+      <b>Website : </b><apex:outputfield value="{!referral_practice[referral_option].Practice_Website__c}" /><br />
+      <b>Distance : </b><apex:outputtext value="{!distance_to_referral[referral_option]}" /> mile(s)<br /><br />
+      <apex:commandButton value="Block Dr" onclick="use_fancy_cursor(this);confirm_refuse(this);return false;" style="color:red;font-weight:bold;font-size:10pt;" /><br /><br />
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!display_referral_error}" layout="block" style="padding-top:1em;">
+      <apex:outputText value="{!referral_error}" escape="false" />
+    </apex:outputPanel>
+  </apex:outputPanel>
+  <apex:outputpanel id="rlist_holder"><apex:outputtext escape="false" value="{!refused_list}" /></apex:outputpanel>
+  </td>  
+  <td style="padding-left:50px;vertical-align:top;">
+  
+  <apex:outputpanel id="pnav_holder">
+    <apex:outputPanel rendered="{!display_referral}" >    
+    <apex:outputpanel rendered="{!if(referral_option>0,true,false)}"><apex:commandButton value="Prev Practice" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  action="{!previous_practice_option}" status="status_load" reRender="ref_out_holder,ref_out_detail,pnav_holder" style="background:#5789AE;font-weight:bold;font-size:10pt;color:white;" /><span style="display:inline-block;width:15px;">&nbsp;</span></apex:outputpanel>
+    <apex:commandButton rendered="{!if(referral_option<max_referral_option,true,false)}" value="Next Practice" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  action="{!next_practice_option}" status="status_load" reRender="ref_out_holder,ref_out_detail,pnav_holder" style="background:#5789AE;font-weight:bold;font-size:10pt;color:white;" /><br />
+    </apex:outputPanel>
+  <apex:outputPanel rendered="{!display_referral}" >    
+    <span style="display:block;margin-top:10px;padding-left:5px;font-weight:bold;font-size:10pt;width:225px;border-bottom:1px solid black;color:#3f7f00;">Hours of Operation</span>
+    <span style="display:block;padding-bottom:5px;">
+    <span style="font-weight:bold;display:inline-block;width:100px;padding-left:5px;">Monday</span> 
+    <apex:outputpanel rendered="{!referral_practice[referral_option].Monday_Open__c}">{!monday_hours}</apex:outputpanel>
+    <apex:outputpanel rendered="{!if(referral_practice[referral_option].Monday_Open__c,false,true)}"><span style="color:red;font-weight:bold;">Closed</span></apex:outputpanel>    
+    </span>
+        <span style="display:block;padding-bottom:5px;">
+    <span style="font-weight:bold;display:inline-block;width:100px;padding-left:5px;">Tuesday</span> 
+    <apex:outputpanel rendered="{!referral_practice[referral_option].Tuesday_Open__c}">{!tuesday_hours}</apex:outputpanel>
+    <apex:outputpanel rendered="{!if(referral_practice[referral_option].Tuesday_Open__c,false,true)}"><span style="color:red;font-weight:bold;">Closed</span></apex:outputpanel>    
+</span>
+    <span style="display:block;padding-bottom:5px;">
+    <span style="font-weight:bold;display:inline-block;width:100px;padding-left:5px;">Wednesday</span> 
+    <apex:outputpanel rendered="{!referral_practice[referral_option].Wednesday_Open__c}">{!wednesday_hours}</apex:outputpanel>
+    <apex:outputpanel rendered="{!if(referral_practice[referral_option].Wednesday_Open__c,false,true)}"><span style="color:red;font-weight:bold;">Closed</span></apex:outputpanel>    
+</span>
+    <span style="display:block;padding-bottom:5px;">
+    <span style="font-weight:bold;display:inline-block;width:100px;padding-left:5px;">Thursday</span> 
+    <apex:outputpanel rendered="{!referral_practice[referral_option].Thursday_Open__c}">{!thursday_hours}</apex:outputpanel>
+    <apex:outputpanel rendered="{!if(referral_practice[referral_option].Thursday_Open__c,false,true)}"><span style="color:red;font-weight:bold;">Closed</span></apex:outputpanel>    
+</span>
+    <span style="display:block;padding-bottom:5px;">
+    <span style="font-weight:bold;display:inline-block;width:100px;padding-left:5px;">Friday</span> 
+    <apex:outputpanel rendered="{!referral_practice[referral_option].Friday_Open__c}">{!friday_hours}</apex:outputpanel>
+    <apex:outputpanel rendered="{!if(referral_practice[referral_option].Friday_Open__c,false,true)}"><span style="color:red;font-weight:bold;">Closed</span></apex:outputpanel>    
+</span>
+    <span style="display:block;padding-bottom:5px;">
+    <span style="font-weight:bold;display:inline-block;width:100px;padding-left:5px;">Saturday</span> 
+    <apex:outputpanel rendered="{!referral_practice[referral_option].Saturday_Open__c}">{!saturday_hours}</apex:outputpanel>
+    <apex:outputpanel rendered="{!if(referral_practice[referral_option].Saturday_Open__c,false,true)}"><span style="color:red;font-weight:bold;">Closed</span></apex:outputpanel>    
+</span>
+    <span style="display:block;padding-bottom:5px;">
+    <span style="font-weight:bold;display:inline-block;width:100px;padding-left:5px;">Sunday</span> 
+    <apex:outputpanel rendered="{!referral_practice[referral_option].Sunday_Open__c}">{!sunday_hours}</apex:outputpanel>
+    <apex:outputpanel rendered="{!if(referral_practice[referral_option].Sunday_Open__c,false,true)}"><span style="color:red;font-weight:bold;">Closed</span></apex:outputpanel>    
+</span>
+<apex:commandLink value="Print Referral Handout" action="{!ReferralPrint_link}" target="_blank" />
+  </apex:outputPanel>
+  </apex:outputPanel>
+  </td>
+  <td style="padding-left:20px;vertical-align:top;padding-top:5px;">
+  <apex:outputpanel id="ref_out_detail">
+  <apex:outputPanel rendered="{!display_referral}" >
+    <span style="font-weight:bold;color:red;">Referral Outcome :</span><br /><apex:inputfield value="{!rout.Referral_Outcome__c}" /><br /><br />
+    <b>Scheduled Callback ? </b><apex:inputfield value="{!rout.Callback_Scheduled__c}" onchange="cback_change();" /><br /><br />
+    <apex:outputpanel id="callback_holder"><apex:outputpanel rendered="{!display_callback_time}"><b>Callback Time : </b><apex:inputfield value="{!rout.Preferred_Callback_Time__c}" /><br /><br /></apex:outputpanel></apex:outputpanel>
+    <b>Referral Notes / Preferred Appt:</b><br /><apex:inputtextarea value="{!rout.Referral_Notes__c}"  rows="3" cols="40"/><br /><br />
+          <apex:commandButton value="Referred Out" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  action="{!ref_out}" status="status_load" reRender="ref_out_holder,ref_out_detail,pnav_holder" style="background:#d4ffaa;font-weight:bold;font-size:12pt;" /><span style="display:inline-block;width:50px;">&nbsp;</span>
+      <apex:commandButton value="Decline Referral" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"  style="background:#3d3d3d;color:white;font-weight:bold;font-size:12pt;" action="{!ref_declined}" status="status_load" rerender="ref_out_holder,rlist_holder,ref_out_detail,pnav_holder" />
+  </apex:outputPanel></apex:outputpanel>
+  </td>
+</tr></table>
+</apex:outputpanel>
+</apex:form>
+</apex:page>

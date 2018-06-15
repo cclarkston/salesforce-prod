@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>InContact Contact</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>InContact Contacts</value>
+    </caseValues>
+    <fields>
+        <label><!-- ACW Seconds --></label>
+        <name>ACWSeconds__c</name>
+    </fields>
+    <fields>
+        <label><!-- Abandon Seconds --></label>
+        <name>AbandonSeconds__c</name>
+    </fields>
+    <fields>
+        <label><!-- Abandoned --></label>
+        <name>Abandoned__c</name>
+    </fields>
+    <fields>
+        <label><!-- Agent Name InfoCision --></label>
+        <name>AgentName_InfoCision__c</name>
+    </fields>
+    <fields>
+        <label><!-- Agent Number --></label>
+        <name>AgentNo__c</name>
+    </fields>
+    <fields>
+        <label><!-- Agent Seconds --></label>
+        <name>AgentSeconds__c</name>
+    </fields>
+    <fields>
+        <help><!-- Right Click and Copy Link Address, paste link inside Windows Explorer or Audio Program
+Please Note that the file may not exist on server. --></help>
+        <label><!-- Audio File Path --></label>
+        <name>Audio_File_Path__c</name>
+    </fields>
+    <fields>
+        <label><!-- Call System --></label>
+        <name>Call_System__c</name>
+        <picklistValues>
+            <masterLabel>InContact</masterLabel>
+            <translation><!-- InContact --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>InfoCision</masterLabel>
+            <translation><!-- InfoCision --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Campaign Number --></label>
+        <name>CampaignNo__c</name>
+    </fields>
+    <fields>
+        <label><!-- Conference Seconds --></label>
+        <name>ConfSeconds__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contact Code --></label>
+        <name>ContactCode__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contact --></label>
+        <name>Contact__c</name>
+        <relationshipLabel><!-- InContact Contacts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Date ACW Warehoused --></label>
+        <name>DateACWWarehoused__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Contact Warehoused --></label>
+        <name>DateContactWarehoused__c</name>
+    </fields>
+    <fields>
+        <label><!-- Disposition Code --></label>
+        <name>Disposition_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Disposition Comments --></label>
+        <name>Disposition_Comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Date --></label>
+        <name>EndDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- ANI Number --></label>
+        <name>From__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hold Seconds --></label>
+        <name>HoldSeconds__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hold Count --></label>
+        <name>Hold_cnt__c</name>
+    </fields>
+    <fields>
+        <label><!-- InQueue Seconds --></label>
+        <name>InQueueSeconds__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Short Abandon --></label>
+        <name>IsShortAbandon__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Warehoused --></label>
+        <name>IsWarehoused__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Checked --></label>
+        <name>LastChecked__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead --></label>
+        <name>Lead__c</name>
+        <relationshipLabel><!-- InContact Contacts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Master Contact ID --></label>
+        <name>MasterContactID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Media Type --></label>
+        <name>MediaType__c</name>
+        <picklistValues>
+            <masterLabel>Chat</masterLabel>
+            <translation><!-- Chat --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EMail</masterLabel>
+            <translation><!-- EMail --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FAX</masterLabel>
+            <translation><!-- FAX --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PhoneCall</masterLabel>
+            <translation><!-- PhoneCall --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Undefined</masterLabel>
+            <translation><!-- Undefined --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>VoiceMail</masterLabel>
+            <translation><!-- VoiceMail --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>WorkItem</masterLabel>
+            <translation><!-- WorkItem --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Outbound Skill --></label>
+        <name>OutboundSkill__c</name>
+    </fields>
+    <fields>
+        <label><!-- PostQueue Seconds --></label>
+        <name>PostQueueSeconds__c</name>
+    </fields>
+    <fields>
+        <label><!-- PreQueue Seconds --></label>
+        <name>PreQueueSeconds__c</name>
+    </fields>
+    <fields>
+        <label><!-- Release Seconds --></label>
+        <name>ReleaseSeconds__c</name>
+    </fields>
+    <fields>
+        <label><!-- Report Grouping --></label>
+        <name>ReportGrouping__c</name>
+    </fields>
+    <fields>
+        <label><!-- Service Level --></label>
+        <name>ServiceLevel__c</name>
+        <picklistValues>
+            <masterLabel>Ignored</masterLabel>
+            <translation><!-- Ignored --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>InServiceLevel</masterLabel>
+            <translation><!-- InServiceLevel --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>OutServiceLevel</masterLabel>
+            <translation><!-- OutServiceLevel --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Skill Name --></label>
+        <name>SkillName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Skill Number --></label>
+        <name>SkillNo__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Date --></label>
+        <name>StartDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- State --></label>
+        <name>State__c</name>
+        <picklistValues>
+            <masterLabel>Abandoned</masterLabel>
+            <translation><!-- Abandoned --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Busy</masterLabel>
+            <translation><!-- Busy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CallBack</masterLabel>
+            <translation><!-- CallBack --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CallbackPending</masterLabel>
+            <translation><!-- CallbackPending --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Conference</masterLabel>
+            <translation><!-- Conference --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EmailDiscard</masterLabel>
+            <translation><!-- EmailDiscard --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EmailForward</masterLabel>
+            <translation><!-- EmailForward --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EmailReply</masterLabel>
+            <translation><!-- EmailReply --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EmailTransfer</masterLabel>
+            <translation><!-- EmailTransfer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EndContact</masterLabel>
+            <translation><!-- EndContact --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hold</masterLabel>
+            <translation><!-- Hold --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inbound</masterLabel>
+            <translation><!-- Inbound --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inqueue</masterLabel>
+            <translation><!-- Inqueue --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Interrupted</masterLabel>
+            <translation><!-- Interrupted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Outbound</masterLabel>
+            <translation><!-- Outbound --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PlaceCall</masterLabel>
+            <translation><!-- PlaceCall --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PostQueue</masterLabel>
+            <translation><!-- PostQueue --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prequeue</masterLabel>
+            <translation><!-- Prequeue --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Refused</masterLabel>
+            <translation><!-- Refused --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Released</masterLabel>
+            <translation><!-- Released --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Routing</masterLabel>
+            <translation><!-- Routing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spawned</masterLabel>
+            <translation><!-- Spawned --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transfer</masterLabel>
+            <translation><!-- Transfer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Undefined</masterLabel>
+            <translation><!-- Undefined --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Team Name --></label>
+        <name>TeamName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Team Number --></label>
+        <name>TeamNo__c</name>
+    </fields>
+    <fields>
+        <label><!-- DNIS Number --></label>
+        <name>To__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Duration Seconds --></label>
+        <name>TotalDurationSeconds__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transfer External --></label>
+        <name>Transfer_EXT__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transfer Internal --></label>
+        <name>Transfer_INT__c</name>
+    </fields>
+    <layouts>
+        <layout>InContact Contact Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Vowel</startsWith>
+</CustomObjectTranslation>

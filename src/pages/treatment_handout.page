@@ -1,0 +1,170 @@
+<apex:page controller="account_treatment_plans" sidebar="false" showheader="false" standardStylesheets="false" >
+<head>
+  <title>Treatment Comparison</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" />
+  <apex:stylesheet value="https://{!server_name}/{!URLFOR($Resource.THandout_Resources_Rev4, 'dist/style/style.css?v=10')}"/>
+</head>
+<body class="{!template_name}">
+
+<div class="wrapper">
+  <div class="hf-wrapper header-wrapper hf-wrapper-1"><header class="cf">
+  <apex:image url="https://{!server_name}/{!URLFOR($Resource.THandout_Resources_Rev4,'images/clearchoice.png')}" styleClass="logo" alt="Clear Choice"/>
+  <div class="page-title">Preliminary Consult</div>
+  <table class="date-patient-wrap">
+    <tr class="date-patient-item-wrap doctor-name">
+      <td class="label">Doctor Name:</td>
+      <td class="value"><apex:outputtext value="{!current_doctor}" /></td>
+    </tr>
+    <tr class="date-patient-item-wrap patient-name">
+      <td class="label">PEC Name:</td>
+      <td class="value"><apex:outputtext value="{!a.owner.name}" /></td>
+    </tr>
+    <tr class="date-patient-item-wrap date">
+      <td class="label">PEC Phone:</td>
+      <td class="value"><apex:outputtext value="{!a.owner.phone}" rendered="{!if(a.owner.phone=='',false,true)}" /><apex:outputfield value="{!center.Local_Front_Desk__c}" rendered="{!if(a.owner.phone=='',true,false)}" /></td>
+    </tr>
+  </table>
+</header>
+</div>
+<apex:variable var="plan_count" value="1" />
+
+  <section class="modules-list" >
+<apex:repeat var="tplan" value="{!current_treatments}"  >
+    <div class="{!if(tplan.tp.Recommended__c,'module recommended','module')}">
+      <div class="title-wrap">
+        <div class="sub-title">{!if (template_name != 'template-single', 'Pathway' + plan_count, '')}</div>
+        <apex:variable var="plan_count" value="{!if(plan_count=='1','2','3')}" />
+        <div class="main-title"><apex:outputfield value="{!tplan.tp.treatment_option__r.name}" /></div>
+      </div>
+      <div class="content">
+        <div class="col display">
+          <div class="image-wrap">
+            <apex:repeat value="{!tplan.file_list}" var="timage" >
+              <apex:image url="https://{!server_name}/servlet/servlet.FileDownload?file={!timage.id}"/>
+            </apex:repeat>
+          </div>
+          <p class="display-explanation"><apex:outputtext value="{!tplan.tp.treatment_option__r.Copy__c}" escape="false" /></p>
+        </div>
+        <div class="col description">
+          <div class="benefits">
+            <h3 class="highlight">Benefits</h3><ul>
+            <apex:outputtext value="{!tplan.tp.treatment_option__r.Benefits__c}" escape="false" />
+            <!--display checkbox options-->
+            <apex:outputpanel id="btray_holder" rendered="{!tplan.tp.Bleaching_Tray__c}" ><li>Bleaching tray provided to ensure that remaining teeth match the shade of your new teeth</li></apex:outputpanel>
+            <apex:outputpanel id="nguard_holder" rendered="{!tplan.tp.Nightguard__c}"><li>Night Guard</li></apex:outputpanel>
+            <apex:outputpanel id="bgraft_holder" rendered="{!tplan.tp.Bone_Grafting__c}"><li>Bone grafting required to anchor implant</li></apex:outputpanel>
+            <apex:outputpanel id="iload_holder" rendered="{!tplan.tp.Immediate_Load__c}"><li>Custom temporization of missing tooth</li></apex:outputpanel>
+            </ul>
+          </div>
+          <apex:outputpanel id="consider_holder" rendered="{!if(tplan.tp.treatment_option__r.Considerations__c=='',false,true)}" styleclass="things-to-consider" layout="block">
+            <h3 class="highlight">Things to Consider</h3>
+            <ul>
+              <apex:outputtext value="{!tplan.tp.treatment_option__r.Considerations__c}" escape="false" />
+            </ul>
+          </apex:outputpanel>
+          <apex:outputpanel rendered="{!if(tplan.tp.treatment_option__r.Considerations__c=='' && template_name!='template-single',true,false)}" styleclass="things-to-consider" layout="block">
+            <br />
+          </apex:outputpanel>
+          <apex:outputpanel styleclass="notes" rendered="{!if(template_name=='template-single',false,true)}" layout="block">
+            <apex:outputpanel rendered="{!if(tplan.tp.Handout_Notes__c=='',false,true)}" >
+              <h3 class="highlight">Notes:</h3>
+              <span style="display:inline-block;padding-left:3px;"><apex:outputfield value="{!tplan.tp.Handout_Notes__c}" /></span>
+            </apex:outputpanel>
+          </apex:outputpanel>
+        </div>
+
+
+        <div class="col">
+          <apex:outputpanel styleclass="notes" rendered="{!if(template_name=='template-single',true,false)}" layout="block">
+            <apex:outputpanel rendered="{!if(tplan.tp.Handout_Notes__c=='',false,true)}" >
+              <h3 class="highlight">Notes:</h3><br />
+              <span style="display:inline-block;padding-left:3px;"><apex:outputfield value="{!tplan.tp.Handout_Notes__c}" /></span>
+            </apex:outputpanel>
+          </apex:outputpanel>
+          <div class="time-cost-wrap">
+          <div class="time-cost-item timeline-wrap">
+            <div class="label">Timeline</div>
+            <div class="value"><apex:outputtext value="{!if(tplan.tp.Timeline__c=='','N/A',tplan.tp.Timeline__c)}" /></div>
+          </div>
+          <div class="time-cost-item initial-cost-wrap">
+            <div class="label">Initial Cost</div>
+            <div class="value"><apex:outputText value="{0,number,$#,##0}" >
+                <apex:param value="{!tplan.tp.Initial_Cost__c}" />
+              </apex:outputtext>
+            </div>
+          </div>
+          <div class="time-cost-item future-cost-wrap">
+            <div class="label">Future Cost</div>
+            <div class="value"><apex:outputText value="{0,number,$#,##0}" >
+                <apex:param value="{!tplan.tp.Final_Cost__c}" />
+              </apex:outputtext></div>
+          </div>
+          <div class="time-cost-item final-cost-wrap">
+            <div class="label">Final Cost</div>
+            <div class="value"><apex:outputText value="{0,number,$#,##0}" >
+                <apex:param value="{!tplan.tp.Total_Cost__c}" />
+              </apex:outputtext></div>
+          </div>
+          </div>
+        </div>
+        <div class="cf"></div>
+      </div>
+    </div>
+</apex:repeat>
+   </section>
+
+  <div class="cf"></div>
+  <div class="hf-wrapper footer-wrapper hf-wrapper-1"><footer class="cf">
+  <div class="fine-print">* Quotes are valid for 90 days</div>
+  <div class="practice-info">
+    <span class="practice-name"><apex:outputfield value="{!center.Legal_Name__c}" /></span>
+    <span class="address-1">&bull;&nbsp; <apex:outputfield value="{!center.Street_1__c}" /></span>
+    <span class="address-2">&bull;&nbsp; <apex:outputfield value="{!center.Street_2__c}" /></span>
+    <span class="city-state-zip">&bull;&nbsp; <apex:outputfield value="{!center.City__c}" />, &nbsp;<apex:outputfield value="{!center.State__c}" /> &nbsp; <apex:outputfield value="{!center.Zip_Code__c}" /></span>
+    <span class="phone">&bull;&nbsp; <apex:outputfield value="{!center.Local_Front_Desk__c}" /></span>
+  </div>
+</footer>
+</div>
+  <div class="hf-wrapper header-wrapper hf-wrapper-2"><header class="cf">
+  <apex:image url="https://{!server_name}/{!URLFOR($Resource.THandout_Resources_Rev4,'images/clearchoice.png')}" styleClass="logo" alt="Clear Choice"/>
+  <div class="page-title">Preliminary Consult</div>
+  <table class="date-patient-wrap">
+    <tr class="date-patient-item-wrap doctor-name">
+      <td class="label">Doctor Name:</td>
+      <td class="value"><apex:outputtext value="{!current_doctor}" /></td>
+    </tr>
+    <tr class="date-patient-item-wrap patient-name">
+      <td class="label">Patient Name:</td>
+      <td class="value"><apex:outputtext value="{!account_name}" /></td>
+    </tr>
+    <tr class="date-patient-item-wrap date">
+      <td class="label">Date:</td>
+      <td class="value"><apex:outputtext value="{!current_date}" /></td>
+    </tr>
+  </table>
+</header>
+</div>
+  <section class="legal">
+    <p>For financing and other questions, please contact&nbsp;<apex:outputfield value="{!a.owner.name}" />&nbsp;who can connect you with the doctor for any clinical questions. This is a preliminary consultation with estimated fees. No party has committed to any of the listed treatment options.</p>
+    <p>These treatment options do not represent a definitive diagnosis or treatment plan. They are based on a preliminary review of radiographic images only to identify missing teeth and discuss tooth replacement options. A comprehensive prosthetic evaluation must be completed before a definitive diagnosis and customized treatment plan can be formulated for any individual. The Doctor has discussed other treatment options including: no treatment, as well as possible endodontic, periodontal, orthodontic and conventional prosthetics.</p>
+    <p>Your next step is to become a patient of record by booking a comprehensive prosthodontic evaluation. The fee for the evaluation is $1,000.00. This fee will be applied towards the total cost of your treatment. The fee for the comprehensive prosthodontic evaluation is non-refundable once the evaluation has started, unless the Doctor agrees, in writing, to refund all, or a portion, of the fee. The evaluation will take between 2 and 3 hours. Please plan accordingly.</p>
+    <p>The prosthodontic evaluation is integral to developing a diagnostic review and to understand the Patient's general health. The prosthodontic evaluation includes a detailed oral evaluation, detailed whole mouth series of x-rays, an analysis of the Patient's bite registration and intra-oral facial photographs to customize implants for functional and aesthetic purposes. This will enable the Doctor to develop a customized treatment plan, including the Patient's customized smile.</p>
+    <p>After the Patient's definitive diagnosis and treatment plan has been formulated based on our evaluation, the Patient's fee will not exceed the fee estimated unless (1) the definitive treatment is different from what is listed or (2) the Patient's surgery has to be done in a hospital or surgery center. Payment of the Patient's treatment plan is due in full, or executed financing documents must be in place, at the completion of the comprehensive prosthodontic evaluation.</p>
+  </section>
+  <div class="hf-wrapper footer-wrapper hf-wrapper-2"><footer class="cf">
+  <div class="fine-print">* Quotes are valid for 90 days</div>
+  <div class="practice-info">
+    <span class="practice-name"><apex:outputfield value="{!center.Legal_Name__c}" /></span>
+    <span class="address-1">&bull;&nbsp; <apex:outputfield value="{!center.Street_1__c}" /></span>
+    <span class="address-2">&bull;&nbsp; <apex:outputfield value="{!center.Street_2__c}" /></span>
+    <span class="city-state-zip">&bull;&nbsp; <apex:outputfield value="{!center.City__c}" />, &nbsp;<apex:outputfield value="{!center.State__c}" /> &nbsp; <apex:outputfield value="{!center.Zip_Code__c}" /></span>
+    <span class="phone">&bull;&nbsp; <apex:outputfield value="{!center.Local_Front_Desk__c}" /></span>
+  </div>
+</footer>
+</div>
+</div>
+
+</body>
+</apex:page>

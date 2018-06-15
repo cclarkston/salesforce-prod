@@ -1,0 +1,475 @@
+<apex:page controller="ctrl_salesranking" readonly="true" sidebar="false" >
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<style type="text/css" media="print">
+  div.bPageHeader {
+    display:none;
+  }  
+  
+  p.form_holder {
+    display:none; 
+  }  
+</style>
+
+<style>
+div.left_block; {
+  float:left;
+}
+
+.CSSTableGenerator {
+    margin:0px;padding:0px;
+    margin-top:10px;
+    width:450px;
+    margin-left:20px;
+    box-shadow: 10px 10px 5px #888888;
+    border:1px solid #3f7f00;
+    
+    -moz-border-radius-bottomleft:5px;
+    -webkit-border-bottom-left-radius:5px;
+    border-bottom-left-radius:5px;
+    
+    -moz-border-radius-bottomright:5px;
+    -webkit-border-bottom-right-radius:5px;
+    border-bottom-right-radius:5px;
+    
+    -moz-border-radius-topright:5px;
+    -webkit-border-top-right-radius:5px;
+    border-top-right-radius:5px;
+    
+    -moz-border-radius-topleft:5px;
+    -webkit-border-top-left-radius:5px;
+    border-top-left-radius:5px;
+    margin-right:50px;
+}.CSSTableGenerator table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    width:100%;
+    height:100%;
+    margin:0px;padding:0px;
+}.CSSTableGenerator tr:last-child td:last-child {
+    -moz-border-radius-bottomright:5px;
+    -webkit-border-bottom-right-radius:5px;
+    border-bottom-right-radius:5px;
+}
+.CSSTableGenerator table tr:first-child td:first-child {
+    -moz-border-radius-topleft:5px;
+    -webkit-border-top-left-radius:5px;
+    border-top-left-radius:5px;
+}
+.CSSTableGenerator table tr:first-child td:last-child {
+    -moz-border-radius-topright:5px;
+    -webkit-border-top-right-radius:5px;
+    border-top-right-radius:5px;
+}.CSSTableGenerator tr:last-child td:first-child{
+    -moz-border-radius-bottomleft:5px;
+    -webkit-border-bottom-left-radius:5px;
+    border-bottom-left-radius:5px;
+}.CSSTableGenerator tr:hover td{
+    
+}
+.CSSTableGenerator tr:nth-child(odd){ background-color:#d4ffaa; }
+.CSSTableGenerator tr:nth-child(even)    { background-color:#ffffff; }.CSSTableGenerator td{
+    vertical-align:middle;
+    
+    
+    border:1px solid #3f7f00;
+    border-width:0px 1px 1px 0px;
+    text-align:left;
+    padding:7px;
+    font-size:12px;
+    font-family:Arial;
+    font-weight:bold;
+    color:#000000;
+}.CSSTableGenerator tr:last-child td{
+    border-width:0px 1px 0px 0px;
+}.CSSTableGenerator tr td:last-child{
+    border-width:0px 0px 1px 0px;
+}.CSSTableGenerator tr:last-child td:last-child{
+    border-width:0px 0px 0px 0px;
+}
+.CSSTableGenerator tr:first-child td{
+        background:-o-linear-gradient(bottom, #5fbf00 5%, #3f7f00 100%);    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #5fbf00), color-stop(1, #3f7f00) );
+    background:-moz-linear-gradient( center top, #5fbf00 5%, #3f7f00 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#5fbf00", endColorstr="#3f7f00");  background: -o-linear-gradient(top,#5fbf00,3f7f00);
+
+    background-color:#5fbf00;
+    border:0px solid #3f7f00;
+    text-align:center;
+    border-width:0px 0px 1px 1px;
+    font-size:14px;
+    font-family:Arial;
+    font-weight:bold;
+    color:#ffffff;
+}
+.CSSTableGenerator tr:first-child:hover td{
+    background:-o-linear-gradient(bottom, #5fbf00 5%, #3f7f00 100%);    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #5fbf00), color-stop(1, #3f7f00) );
+    background:-moz-linear-gradient( center top, #5fbf00 5%, #3f7f00 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#5fbf00", endColorstr="#3f7f00");  background: -o-linear-gradient(top,#5fbf00,3f7f00);
+
+    background-color:#5fbf00;
+}
+.CSSTableGenerator tr:first-child td:first-child{
+    border-width:0px 0px 1px 0px;
+}
+.CSSTableGenerator tr:first-child td:last-child{
+    border-width:0px 0px 1px 1px;
+}
+
+table.accs_details tr.lgreen {
+    background-color:#C9E4E4;  
+    font-size:10pt; 
+  }
+
+  table.accs_details tr.lgreen td {
+      line-height:20px;
+    color:black;
+    border-top:1px solid #008080;
+    border-bottom:1px solid #008080; 
+    empty-cells:hide;       
+        text-align:left;    
+  } 
+
+  table.accs_details tr.lgreen td.right {
+    text-align:right;
+    padding-right:5px;    
+    empty-cells:hide;      
+  }  
+
+  table.accs_details tr.lgreen td.indent {
+    padding-left:25px;
+    empty-cells:hide; 
+         font-style:italic;    
+    font-weight:bold;         
+  }  
+  
+  table.accs_details tr.dgreen {
+    background-color:#147585;  
+    font-weight:bold;
+    font-size:12pt; 
+  }
+
+  table.accs_details tr.dgreen td {
+      line-height:20px;
+    color:white;
+    border-top:1px solid #008080;
+    border-bottom:1px solid #008080; 
+    empty-cells:hide;   
+    text-align:left;     
+  } 
+
+  table.accs_details tr.dgreen td.right {
+    text-align:right;
+    padding-right:5px;    
+    empty-cells:hide;      
+  }  
+
+  table.accs_details tr.dgreen td.indent {
+    padding-left:25px;
+    empty-cells:hide;      
+  } 
+</style>
+
+<script type="text/javascript"> 
+  function use_fancy_cursor(t) {
+    document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+    t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  }
+
+  function default_cursor(t) {
+    document.body.style.cursor = 'default';
+    t.style.cursor='default';
+  }  
+</script>
+
+<apex:form style="padding-top:0;display:inline;margin-top:0;" onsubmit="">
+  <apex:actionstatus id="status_load">
+    <apex:facet name="start">
+      <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;height: 100%;opacity:0.65;width:100%;"> 
+        <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+          <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+          <span class="waitingDescription">Loading...</span>
+        </div>
+      </div>
+    </apex:facet>
+  </apex:actionstatus>
+  
+  <apex:outputpanel id="message_holder" layout="block" style="padding-left:20px;font-weight:bold;color:red;font-size:12pt;">    
+  <apex:messages />
+  </apex:outputpanel>
+    
+  <apex:actionFunction oncomplete="default_cursor(this);" name="interval_change" action="{!change_report_interval}" rerender="main_holder,message_holder" status="status_load"></apex:actionFunction>  
+
+  <span style="display:block;padding-bottom:2em;"><span style="display:inline-block;padding-left:30px;margin-left:20px;border-bottom:1px solid #bcb371;color:#5789AE;font-size:20pt;font-family:arial;width:500px;font-weight:bold;">ClearChoice Sales Rankings</span>   
+    <span style="font-size:12pt;font-weight:bold;padding-left:30px;padding-right:20px;">Report Interval : </span>
+    <apex:selectList value="{!report_interval}" multiselect="false" size="1" onchange="interval_change();">
+      <apex:selectOptions value="{!IntervalOptions}"></apex:selectoptions>
+    </apex:selectList>
+  </span>    
+
+  <apex:outputpanel id="main_holder" layout="block" style="padding-left:45px;">
+  <table style="width:1000px;"><tr style="vertical-align:top;"><td style="width:500px;">
+    <table class="accs_details" width="400px;">
+      <tr class="subhead">
+        <td colspan="2">Revenue</td>
+      </tr>
+      <tr class="accs">
+       <td class="indent" style="width:250px;">Sold $</td>
+       <td class="right"><apex:outputText value="{0,number,##,##,##0.00}" >
+         <apex:param value="{!sold_dollars}" />   
+       </apex:outputtext></td>  
+      </tr> 
+      <tr class="accs_b">
+       <td class="indent" style="width:250px;">Cancelled $</td>
+       <td class="right"><apex:outputText value="{0,number,##,##,##0.00}" >
+         <apex:param value="{!cancelled_dollars}" />   
+       </apex:outputtext></td>  
+      </tr> 
+      <tr class="footer">
+       <td class="indent" style="width:250px;">Net Sold $</td>
+       <td class="right"><apex:outputText value="{0,number,##,##,##0.00}" >
+         <apex:param value="{!sold_dollars - cancelled_dollars}" />   
+       </apex:outputtext></td>  
+      </tr> 
+      <tr class="subhead">
+        <td colspan="2">Collections</td>
+      </tr>
+      <tr class="accs">
+       <td class="indent" style="width:250px;">Collected $</td>
+       <td class="right"><apex:outputText value="{0,number,##,##,##0.00}" >
+         <apex:param value="{!collected_dollars}" />   
+       </apex:outputtext></td>  
+      </tr> 
+      <tr class="accs_b">
+       <td class="indent" style="width:250px;">Refunded $</td>
+       <td class="right"><apex:outputText value="{0,number,##,##,##0.00}" >
+         <apex:param value="{!refunded_dollars}" />   
+       </apex:outputtext></td>  
+      </tr> 
+      <tr class="lgreen">
+       <td class="indent" style="width:250px;">GP Fees</td>
+       <td class="right"><apex:outputText value="{0,number,##,##,##0.00}" >
+         <apex:param value="{!gp_collected_fees + gp_refunded_fees}" />   
+       </apex:outputtext></td>  
+      </tr> 
+      <tr class="footer">
+       <td class="indent" style="width:250px;">Net Collected $</td>
+       <td class="right"><apex:outputText value="{0,number,##,##,##0.00}" >
+         <apex:param value="{!collected_dollars + refunded_dollars}" />   
+       </apex:outputtext></td>  
+      </tr> 
+      <tr class="dgreen">
+       <td class="indent" style="width:250px;">Net Collected $ (after GP fees)</td>
+       <td class="right"><apex:outputText value="{0,number,##,##,##0.00}" >
+         <apex:param value="{!collected_dollars + refunded_dollars + gp_collected_fees + gp_refunded_fees}" />   
+       </apex:outputtext></td>  
+      </tr>       
+    </table><br /><br />
+    
+    <apex:outputpanel id="pec_finance_holder">
+          <div class="CSSTableGenerator">
+      <table >
+        <tr>
+          <td colspan="2">% Applying For Financing (PEC)</td>
+        </tr>
+        <apex:repeat value="{!finance_list}" var="pec_finance" > 
+          <tr>
+            <td style="width:250px;">{!pec_finance.pec_name}</td>
+            <td style="text-align:right;padding-right:2px;"><apex:outputText value="{0,number,##,##,##0.0}" >
+              <apex:param value="{!if(pec_finance.num_consults==0,0, pec_finance.finance_consults/pec_finance.num_consults * 100)}" />   
+              </apex:outputtext>            
+            </td>
+          </tr>
+        </apex:repeat>   
+      </table>
+      </div><br /><br />
+      <apex:commandlink rendered="{!finance_pec_limit}" value="Click here to view all pecs" action="{!display_all_finance_pec}" rerender="pec_finance_holder" status="status_load" />
+      </apex:outputpanel><br /><br />
+    
+     <apex:outputpanel id="center_finance_holder" >
+     <div class="CSSTableGenerator">
+      <table >
+        <tr>
+          <td colspan="2">% Applying For Financing (Center)</td>
+        </tr>
+        <apex:repeat value="{!center_finance_list}" var="pec_finance" > 
+          <tr>
+            <td style="width:250px;">{!pec_finance.pec_name}</td>
+            <td style="text-align:right;padding-right:2px;"><apex:outputText value="{0,number,##,##,##0.0}" >
+              <apex:param value="{!if(pec_finance.num_consults==0,0, pec_finance.finance_consults/pec_finance.num_consults * 100)}" />   
+              </apex:outputtext>            
+            </td>
+          </tr>
+        </apex:repeat>   
+      </table>
+      </div><br /><br />
+      <apex:commandlink rendered="{!finance_center_limit}" value="Click here to view all centers" action="{!display_all_finance_center}" rerender="center_finance_holder" status="status_load" />
+    </apex:outputpanel>
+    
+    </td>
+    <td width="500px;">
+<apex:outputpanel id="center_start_holder">
+    <div class="CSSTableGenerator">
+      <table >
+        <tr>
+          <td colspan="5">Net Sold $ by Center</td>
+        </tr>
+        <apex:outputPanel rendered="{!$CurrentPage.parameters.Detailed == 'true'}">
+                <tr style="background-color:gray;">
+                    <td>Center</td>
+                    <td>Starts Value</td>
+                    <td>Consults Count</td>
+                    <td>Collections</td>
+                    <td>Close Rate</td>
+                </tr>
+        </apex:outputPanel>
+         <apex:repeat value="{!center_start_dollars}" var="center_starts" >
+          <tr>
+            <td style="width:250px;">{!center_starts.display_name}</td>
+            <apex:outputPanel rendered="{!$CurrentPage.parameters.Detailed == 'true'}">
+                <td>{!center_starts.starts}</td>
+                <td>{!center_starts.consults}</td>
+            </apex:outputPanel>
+            <td style="text-align:right;padding-right:2px;"><apex:outputText value="{0,number,##,##,##0.00}" >
+              <apex:param value="{!center_starts.display_value}" />
+              </apex:outputtext>
+            </td>
+            <td style="text-align:right;padding-right:2px;"><apex:outputText value="{0,number,##,##,##0.00%}" >
+              <apex:param value="{!center_starts.close_rate}" />
+              </apex:outputtext>
+            </td>
+          </tr>
+        </apex:repeat>
+      </table>
+
+      </div><br /><br />
+      <apex:commandlink rendered="{!center_limit}" value="Click here to view all centers" action="{!display_all_center}" rerender="center_start_holder" status="status_load" />
+            </apex:outputpanel><br /><br />
+
+          <apex:outputpanel id="pec_start_holder">
+    <div class="CSSTableGenerator">
+
+      <table >
+        <tr>
+          <td colspan="5">Net Sold $ by PEC</td>
+        </tr>
+        <apex:outputPanel rendered="{!$CurrentPage.parameters.Detailed == 'true'}">
+                <tr style="background-color:gray;">
+                    <td>PEC</td>
+                    <td>Starts Value</td>
+                    <td>Consults Count</td>
+                    <td>Sold</td>
+                    <td>Close Rate</td>
+                </tr>
+        </apex:outputPanel>
+         <apex:repeat value="{!pec_start_dollars}" var="pec_starts" >
+          <tr>
+            <td style="width:250px;">{!pec_starts.display_name}</td>
+            <apex:outputPanel rendered="{!$CurrentPage.parameters.Detailed == 'true'}">
+                <td>{!pec_starts.starts}</td>
+                <td>{!pec_starts.consults}</td>
+            </apex:outputPanel>
+            <td style="text-align:right;padding-right:2px;"><apex:outputText value="{0,number,##,##,##0.00}" >
+              <apex:param value="{!pec_starts.display_value}" />
+              </apex:outputtext>
+            </td>
+            <td style="text-align:right;padding-right:2px;"><apex:outputText value="{0,number,##,##,##0.00%}" >
+              <apex:param value="{!pec_starts.close_rate}" />
+              </apex:outputtext>
+            </td>
+          </tr>
+        </apex:repeat>
+      </table>
+
+      </div><br /><br />
+      <apex:commandlink rendered="{!pec_limit}" value="Click here to view all pecs" action="{!display_all_pec}" rerender="pec_start_holder" status="status_load" />
+      </apex:outputpanel><br /><br />
+      
+      <apex:outputpanel id="center_collected_holder">
+    <div class="CSSTableGenerator">
+      <table>
+        <tr>
+          <td colspan="5">Net Collected $ by Center</td>
+        </tr>
+        <apex:outputPanel rendered="{!$CurrentPage.parameters.Detailed == 'true'}">
+                <tr style="background-color:gray;">
+                    <td>Center</td>
+                    <td>Starts Value</td>
+                    <td>Consults Count</td>
+                    <td>Collections</td>
+                    <td>Close Rate</td>
+                </tr>
+        </apex:outputPanel>
+         <apex:repeat value="{!center_collected_dollars}" var="center_starts" >
+          <tr>
+            <td style="width:250px;">{!center_starts.display_name}</td>
+            <apex:outputPanel rendered="{!$CurrentPage.parameters.Detailed == 'true'}">
+                <td>{!center_starts.starts}</td>
+                <td>{!center_starts.consults}</td>
+            </apex:outputPanel>
+            <td style="text-align:right;padding-right:2px;"><apex:outputText value="{0,number,##,##,##0.00}" >
+              <apex:param value="{!center_starts.display_value}" />
+              </apex:outputtext>
+            </td>
+            <td style="text-align:right;padding-right:2px;"><apex:outputText value="{0,number,##,##,##0.00%}" >
+              <apex:param value="{!center_starts.close_rate}" />
+              </apex:outputtext>
+            </td>
+          </tr>
+        </apex:repeat>
+      </table>
+
+      </div><br /><br />
+      <apex:commandlink rendered="{!collected_center_limit}" value="Click here to view all centers" action="{!display_all_collected_center}" rerender="center_collected_holder" status="status_load" />
+            </apex:outputpanel><br /><br />
+      
+               <apex:outputpanel id="pec_collected_holder">
+    <div class="CSSTableGenerator">
+
+      <table>
+        <tr>
+          <td colspan="5">Net Collected $ by PEC</td>
+        </tr>
+        <apex:outputPanel rendered="{!$CurrentPage.parameters.Detailed == 'true'}">
+                <tr style="background-color:gray;">
+                    <td>PEC</td>
+                    <td>Starts Value</td>
+                    <td>Consults Count</td>
+                    <td>Collections</td>
+                    <td>Close Rate</td>
+                </tr>
+        </apex:outputPanel>
+         <apex:repeat value="{!pec_collected_dollars}" var="pec_starts" >
+          <tr>
+            <td style="width:250px;">{!pec_starts.display_name}</td>
+            <apex:outputPanel rendered="{!$CurrentPage.parameters.Detailed == 'true'}">
+                <td>{!pec_starts.starts}</td>
+                <td>{!pec_starts.consults}</td>
+            </apex:outputPanel>
+            <td style="text-align:right;padding-right:2px;"><apex:outputText value="{0,number,##,##,##0.00}" >
+              <apex:param value="{!pec_starts.display_value}" />
+              </apex:outputtext>
+            </td>
+            <td style="text-align:right;padding-right:2px;"><apex:outputText value="{0,number,##,##,##0.00%}" >
+              <apex:param value="{!pec_starts.close_rate}" />
+              </apex:outputtext>
+            </td>
+          </tr>
+        </apex:repeat>
+      </table>
+
+      </div><br /><br />
+      <apex:commandlink rendered="{!collected_pec_limit}" value="Click here to view all pecs" action="{!display_all_collected_pec}" rerender="pec_collected_holder" status="status_load" />
+      </apex:outputpanel>  
+       
+       
+       
+    </td>
+    </tr>
+  </table>    
+
+  </apex:outputpanel>
+    
+    
+</apex:form>
+</apex:page>

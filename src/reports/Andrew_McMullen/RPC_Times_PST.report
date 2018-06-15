@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_4070670</developerName>
+        <masterLabel>Contact</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Activity.Outcome__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Refused Reschedule</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Consult Rescheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Consult Cancelled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Consult Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Not Scheduled</sourceValue>
+            </sourceValues>
+            <value>RPC</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>LM - 3rd Party</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>VM - full</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>VM - no message</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>VM - LM</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Busy/No Answer</sourceValue>
+            </sourceValues>
+            <value>Non-RPC</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Supervisor</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Non-Sales Call</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Other</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Sent</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>No Call Elected</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>PPT will call back</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Wrong Number</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Disconnect/Not in Service</sourceValue>
+            </sourceValues>
+            <value>DISCO/ No Call</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_29537149</developerName>
+        <masterLabel>RPC</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Activity.Outcome__c</sourceColumnName>
+        <useOther>false</useOther>
+    </buckets>
+    <columns>
+        <field>BucketField_29537149</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Activity.Activity_Type__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Outbound Call</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Center_Location__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Las Vegas,Phoenix,Phoenix Mesa,Portland,Sacramento,San Diego,San Francisco Daly City,San Francisco Oakland,San Jose,Seattle,Tampa,Tucson</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_4070670</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Activity.Activity_Hour__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>RPC Times- PST</name>
+    <params>
+        <name>closed</name>
+        <value>all</value>
+    </params>
+    <params>
+        <name>type</name>
+        <value>te</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadActivity</reportType>
+    <roleHierarchyFilter>DentalImplantConsultant</roleHierarchyFilter>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <endDate>2013-07-15</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2013-06-15</startDate>
+    </timeFrameFilter>
+</Report>

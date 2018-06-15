@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Activity.Activity_Type__c</field>
+    </columns>
+    <columns>
+        <field>Activity.Outcome__c</field>
+    </columns>
+    <columns>
+        <field>ACCOUNT.NAME</field>
+    </columns>
+    <columns>
+        <field>ASSIGNED</field>
+    </columns>
+    <columns>
+        <field>Account.Center_Location__c</field>
+    </columns>
+    <filter>
+        <booleanFilter>1 AND (2 or 3 or 4 or 5) And 6 AND 7</booleanFilter>
+        <criteriaItems>
+            <column>Activity.Activity_Type__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Inbound Email,Outbound Call,Outbound Email</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>ASSIGNED</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Barb Emerick</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>ASSIGNED</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Kelly Sequera</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>ASSIGNED</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Stephanie Palombi</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>ASSIGNED</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Tanya Szalwinski</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Activity.Outcome__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Consult Confirmed - No Reminder</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Center_Location__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Atlanta,Austin,Charlotte,Chicago,Chicago Deerfield/Northbrook,Chicago Naperville,Chicago Schaumburg,Cleveland,Cleveland Akron,Dallas,Dallas Fort Worth,Denver,Denver Colorado Springs,Denver Glenwood Springs,Denver Implant Denistry,Houston,Houston Woodlands,Kansas City,Las Vegas,Miami,Miami Fort Lauderdale,Minneapolis,Phoenix,Phoenix Mesa,Portland,Sacramento,Salt Lake City,San Antonio,San Diego,San Francisco Daly City,San Francisco Oakland,San Jose,Seattle,St. Louis,Tucson,Washington Chevy Chase,Washington Tysons Corner,Washington Rockville</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Confirmation Show Rate*</name>
+    <params>
+        <name>closed</name>
+        <value>all</value>
+    </params>
+    <params>
+        <name>type</name>
+        <value>te</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>0</value>
+    </params>
+    <reportType>AccountActivity</reportType>
+    <roleHierarchyFilter>DentalImplantConsultant</roleHierarchyFilter>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Account.Center_Location__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>ACCT_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_THISWEEK</interval>
+    </timeFrameFilter>
+</Report>

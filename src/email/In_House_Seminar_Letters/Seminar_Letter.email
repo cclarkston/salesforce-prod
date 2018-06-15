@@ -1,0 +1,49 @@
+<messaging:emailTemplate subject="test" recipientType="Lead" relatedToType="Lead"
+Subject="We are excited to see you at the seminar!">
+<messaging:htmlEmailBody >
+
+<img id="theImage" src="http://www.clearchoice.com/files/images/EmailTemplates/ClearChoiceLogo.png" width="387" height="114"/> 
+<br/>
+<hr color="DarkBlue"/>
+
+<font size="5">We are excited to see you at the seminar!</font>
+<br/>
+<br/>
+Hello {!recipient.FirstName},<br/>
+<br/>
+
+We have reserved a seat for you at the ClearChoice patient seminar on {!recipient.Well_Formatted_Date__c} at {!recipient.Well_Formatted_Time__c}.
+<br/>
+<br/> 
+If you would like a complimentary 3D CAT scan, please plan on arriving at 5:30 pm. We will do our best to have your scan taken before the seminar begins.<br/>
+<br/>
+You can look forward to:<br/>
+<ul> 
+<li>Learning how implants can provide a clear solution for your dental needs</li>
+<li>Obtaining answers for your specific dental questions</li>
+<li>Meeting the doctors</li>
+<li>Touring our clinic</li>
+</ul>
+
+We provide a clear advantage through our unique All in One Center. Please feel free to call {!recipient.Center_Phone_Number__c} if you need further directions.<br/>
+<br/>
+Sincerely,<br/>
+<br/>
+
+{!recipient.Call_Center_Agent__r.Name}<br/>
+Dental Implant Consultant<br/>
+<br/>
+
+{!recipient.Center__r.Name} ClearChoice Dental Center<br/>
+{!recipient.Center__r.Street_1__c}&nbsp;
+{!recipient.Center__r.Street_2__c}<br/>
+{!recipient.Center__r.City__c}, {!recipient.Center__r.State__c} {!recipient.Center__r.Zip_Code__c}<br/>
+{!recipient.Center__r.Call_Center_Marketing__c}
+<br/>
+<br/>
+
+<a href="{!recipient.Center__r.Map_Directions_URL__c}">Click Here</a> to view map and directions for the center.<br/>
+<br/>
+
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

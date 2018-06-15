@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>POT_Appointment__c$Plan_of_Treatment__c.Center_Information__c</field>
+    </columns>
+    <columns>
+        <field>POT_Appointment__c$Plan_of_Treatment__c</field>
+    </columns>
+    <columns>
+        <field>POT_Appointment__c$Clinical_Appointment__c</field>
+    </columns>
+    <columns>
+        <field>POT_Appointment__c$Days_Out__c</field>
+    </columns>
+    <columns>
+        <field>POT_Appointment__c$Sort_Order__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>POT_Appointment__c$Plan_of_Treatment__c.Center_Information__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Cleveland</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>POT Appointment Detail-Go Live</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>POT_Appointments_new__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>POT_Appointment__c$CreatedDate</dateColumn>
+        <endDate>2018-03-31</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2017-01-01</startDate>
+    </timeFrameFilter>
+</Report>

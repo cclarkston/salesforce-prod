@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Center_Information__c.Leads__r$FirstName</field>
+    </columns>
+    <columns>
+        <field>Center_Information__c.Leads__r$LastName</field>
+    </columns>
+    <columns>
+        <field>Center_Information__c.Leads__r$Phone</field>
+    </columns>
+    <columns>
+        <field>Center_Information__c.Leads__r$MobilePhone</field>
+    </columns>
+    <columns>
+        <field>Center_Information__c.Leads__r$ALERT__c</field>
+    </columns>
+    <columns>
+        <field>Center_Information__c.Leads__r$Center_Location__c</field>
+    </columns>
+    <columns>
+        <field>Center_Information__c$Call_Center_Marketing__c</field>
+    </columns>
+    <columns>
+        <field>Center_Information__c.Leads__r$DateTime_Consult_Scheduled__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Center_Information__c.Leads__r$Status</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Consult Scheduled,Rescheduled Consult,Consultation Scheduled</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Confirmation Reminders W/ CID</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Center_Information_w_Prospective__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Center_Information__c.Leads__r$Center_Location__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Center_Information__c.Leads__r$DateTime_Consult_Scheduled__c</dateColumn>
+        <interval>INTERVAL_TOMORROW</interval>
+    </timeFrameFilter>
+</Report>

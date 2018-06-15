@@ -1,0 +1,151 @@
+<apex:page controller="ctrl_drmastery_center_admin" docType="html-5.0">
+<head>
+  <meta charset="UTF-8" />
+  <title>Doctor Mastery Admin</title> 
+</head>
+
+<style>
+  .metrics_holder {
+    display: flex;
+    flex-direction: column;
+    padding-left:10px;
+    max-width:800px;
+  }
+  
+  .metrics_line {
+    display:flex;
+    flex-direction:row;
+    width:100%;
+    line-height:30px;
+  }
+  
+  .metrics_header {
+    font-weight:bold;
+    background: #292dd8;
+    color:white;
+    border-radius:5px 5px 0px 0px;
+  }
+  
+  .metrics_odd {
+    background: #f3f3f3;
+    border-bottom: 1px dashed #c3c3c3;
+  }
+  
+  .metrics_even {
+  
+  }
+  
+  .filter_header {
+    margin-bottom: 2em;
+    font-weight: bold;
+    font-size: 14pt;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .metrics_center_name {
+    width:40%;
+    padding-left:5px;
+  }
+  
+  .metrics_gm {
+    width:20%;
+    padding-left:5px;
+  }
+  
+  .metrics_arches {
+    width:20%;
+    padding-left:5px;
+  }
+  
+  .metrics_backlog {
+    width:20%;
+    padding-left:5px;
+  }
+  
+  input {
+    border:0;
+  }
+  
+  input:focus {
+    outline:0;
+  }
+  
+  .metrics_odd input {
+    background: #f3f3f3;
+  }
+  
+  .metrics_input {
+    border-bottom: 1px solid black;
+    transition: border-width .5s linear; 
+    text-align:right; 
+    max-width:100px;
+  }
+  
+  .metrics_input:focus {
+    border-bottom:1px solid #048ec6;
+    transition : all .5s ease    
+  }
+  
+</style>
+
+<body>
+<apex:form >
+
+<apex:actionFunction name="snap_date_change" action="{!refresh_snap_list}" status="ajaxstatus" rerender="mholder" />
+
+
+<apex:actionStatus id="ajaxstatus">
+  <apex:facet name="start">
+    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 10110; background-color: #f2f2f2;">
+      &nbsp;
+    </div>
+    <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 10111; margin: 20% 50%">
+      <img src="{!URLFOR($Resource.Dental_Practice_Resources,'Images/Circle-out.gif')}" />
+    </div>
+  </apex:facet>
+</apex:actionStatus> 
+
+<apex:outputpanel layout="block" styleclass="metrics_holder" id="mholder">
+<p class="filter_header">Snapshot for &nbsp;&nbsp;
+  <apex:selectList value="{!current_month}" onchange="snap_date_change();" size="1" >
+    <apex:selectOptions value="{!month_option_list}" />
+  </apex:selectList>&nbsp;&nbsp;
+  <apex:selectList value="{!current_year}" onchange="snap_date_change();" size="1" >
+    <apex:selectOptions value="{!year_option_list}" />
+  </apex:selectList>
+</p>  
+  
+<apex:outputpanel id="error_holder" ><apex:messages style="color:red;font-style:italics;padding-top:3px;" /></apex:outputpanel>  
+
+  <span class="metrics_line metrics_header">
+     <span class="metrics_col metrics_center_name">Center</span>
+     <span class="metrics_col metrics_gm">Gross Margin</span>
+     <span class="metrics_col metrics_arches">Arches Delivered</span>
+     <span class="metrics_col metrics_backlog">Surgical Backlog (Weeks)</span>
+  </span>
+  <apex:variable var="rowclassname" value="metrics_odd" />
+  <apex:repeat var="snapshot" value="{!snap_list}">
+    <span class="metrics_line {!rowclassname}">
+      <span class="metrics_col metrics_center_name">{!snapshot.center_information__r.name}</span>
+      <span class="metrics_col metrics_gm"><apex:inputfield value="{!snapshot.Gross_Margin__c}"  styleclass="metrics_input" /></span>
+      <span class="metrics_col metrics_arches"><apex:inputfield value="{!snapshot.Arches_Delivered__c}" styleclass="metrics_input" type="number"/></span>
+      <span class="metrics_col metrics_backlog"><apex:inputfield value="{!snapshot.Surgical_Backlog_Days__c}" styleclass="metrics_input" /></span>
+    </span>
+    <apex:variable var="rowclassname" value="{!if(rowclassname=='metrics_odd','metrics_even','metrics_odd')}" />    
+  </apex:repeat>
+  <br /><br />
+  <span class="metrics_line">
+    <apex:commandbutton action="{!save_snap_list}" value="Save" rerender="mholder" status="ajaxstatus" style="min-width:75px;"/>
+    <span style="display:inline-block;width:40px;">&nbsp;</span>
+    <apex:commandbutton action="{!refresh_snap_list}" value="Reset" rerender="mholder" status="ajaxstatus" style="min-width:75px;"/>
+  </span>
+</apex:outputpanel>
+
+
+
+
+
+</apex:form>
+</body>
+</apex:page>

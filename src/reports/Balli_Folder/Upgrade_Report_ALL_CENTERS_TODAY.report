@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>FK_OPP_OWNER_NAME</field>
+    </columns>
+    <columns>
+        <field>FK_$Account.Center_Location__c</field>
+    </columns>
+    <columns>
+        <field>FK_NAME</field>
+    </columns>
+    <columns>
+        <field>Treatment_Plan__c.Treatment_Option__c</field>
+    </columns>
+    <columns>
+        <field>FK_$Opportunity.Total_Net_Payments_minus_gp__c</field>
+    </columns>
+    <columns>
+        <field>FK_$Opportunity.Latest_Payment_Date__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Treatment_Plan__c.Treatment_Option__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>arch,rejuvenation</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Upgrade Report ALL CENTERS TODAY</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Treatment_Plan__c@Treatment_Plan__c.Opportunity__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_TODAY</interval>
+    </timeFrameFilter>
+</Report>

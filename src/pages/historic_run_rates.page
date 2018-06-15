@@ -1,0 +1,264 @@
+<apex:page controller="rpt_historic_close_rates" sidebar="false" readOnly="true">
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>          
+<apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+<style type="text/css" media="print">
+  div.bPageHeader {
+    display:none;
+  }  
+  
+  p.form_holder {
+    display:none; 
+  }
+  
+  a.dlink {
+    display:none;
+  }  
+</style>
+
+
+<style>
+  tr.control td {
+    color:#5789AE;
+  }  
+  
+  table.accs_details td.indent {
+    padding-left:25px;      
+    font-weight:bold; 
+    font-style:italic;
+    empty-cells:hide;                
+  }
+  
+  table.accs_details td.vaca {
+    font-style:italic;   
+    text-align:center;             
+  }      
+
+  table.accs_details tr.center {
+    background-color:#C9E4E4;  
+    font-weight:bold;
+    font-size:12pt; 
+  }
+
+  table.accs_details tr.center td {
+    color:black;
+    border-top:1px solid #008080;
+    border-bottom:1px solid #008080; 
+    empty-cells:hide;         
+  } 
+
+  table.accs_details tr.center td.right {
+    text-align:right;
+    padding-right:5px;    
+    empty-cells:hide;      
+  }  
+
+  table.accs_details tr.center td.indent {
+    padding-left:25px;
+    empty-cells:hide;      
+  }  
+
+  table.accs_details tr.region {
+    background-color:#147585;  
+    font-weight:bold;
+    font-size:12pt; 
+  }
+
+  table.accs_details tr.region td {
+    color:white;
+    border-top:1px solid #008080;
+    border-bottom:1px solid #008080; 
+    empty-cells:hide;         
+  } 
+
+  table.accs_details tr.region td.right {
+    text-align:right;
+    padding-right:5px;    
+    empty-cells:hide;      
+  }  
+
+  table.accs_details tr.region td.indent {
+    padding-left:25px;
+    empty-cells:hide;      
+  }  
+</style>
+
+<script>
+function use_fancy_cursor() {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+
+}
+
+function default_cursor() {
+  document.body.style.cursor = 'default';
+}   
+
+  var key_timeout;
+  var search_in_progress = false;
+   
+  function report_update() {
+    search_in_progress = false;  
+    use_fancy_cursor();
+    days_updated();   
+  }
+    
+  function days_key() {    
+    if(search_in_progress)
+      clearTimeout(key_timeout);
+    search_in_progress = true;  
+    key_timeout = setTimeout("report_update()",600);
+  }   
+</script>
+
+<apex:form >     
+ <apex:actionFunction name="days_updated" reRender="main_holder" status="update_status"  oncomplete="default_cursor();" >
+ </apex:actionFunction>    
+
+
+<span style="font-weight:bold;padding-left:20px;display:block;padding-bottom:1em;">Display Data for last &nbsp; <apex:inputtext value="{!run_days}" onkeyup="days_key();" style="text-align:right;" size="2" />  days  </span>         
+<span style="font-weight:bold;padding-left:20px;display:block;padding-bottom:1em;">Display Region : &nbsp;
+  <apex:selectList value="{!show_region}" onchange="days_updated();"  size="1" >
+    <apex:selectOptions value="{!region_list}"></apex:selectOptions>
+  </apex:selectList></span>
+ <apex:actionStatus startstyle="font-weight:bold;color:red;padding-left:20px;" startText="Refreshing Report.....Please Wait" stopText="" id="update_status"/>       
+
+<apex:outputpanel id="main_holder">
+<table class="accs_details" style="width:1900px;">
+<tr>
+  <td colspan="2"></td>
+  <td colspan="8" style="font-weight:bold;text-align:center;color:red;padding-bottom:2px;font-size:10pt;">Last {!run_days} Days</td>
+  <td></td>
+  <td colspan="8" style="font-weight:bold;text-align:center;color:red;padding-bottom:2px;font-size:10pt;">Prior Year Last {!run_days} Days</td>
+</tr>
+  
+<tr class="control" style="font-size:10pt;vertical-align:bottom;">
+  <td style="width:150px;">Center/PEC</td>
+  <td style="width:10px;"></td>
+  <td style="width:100px;">Close Rate</td>   
+  <td style="width:75px;">Consults</td>     
+  <td style="width:75px;">Finance %</td>     
+  <td style="width:75px;">Starts</td>
+  <td style="width:80px;">Cancels</td>   
+  <td style="width:100px;">Net Sold</td>    
+  <td style="width:100px;">Net Collected</td>    
+  <td style="width:100px;">Collection %</td>    
+  <td style="width:100px;">Refund %</td>    
+  <td style="width:30px;"></td>      
+  <td style="width:100px;">Close Rate</td>                           
+  <td style="width:75px;">Consults</td>    
+  <td style="width:75px;">Finance %</td>         
+  <td style="width:75px;">Starts</td>
+  <td style="width:80px;">Cancels</td>  
+  <td style="width:100px;">Net Sold</td>    
+  <td style="width:100px;">Net Collected</td>        
+  <td style="width:100px;">Collection %</td>  
+  <td style="width:100px;">Refund %</td>              
+  </tr>    
+</table>  
+  
+  
+<apex:outputpanel layout="block" style="overflow:auto;height:500px;overflow-x:hidden;" >    
+<table class="accs_details" style="width:1915px;">
+<apex:repeat value="{!region_trends}" var="all_regions">
+<tr class="region">  
+    <td class="indent" style="width:150px;padding-left:5px;">{!all_regions.region} Region</td>     
+    <td style="background:white;width:10px;"></td>
+    <td class="right" style="width:100px;"><apex:outputText rendered="{!if(all_regions.consults_90<>0,true,false)}" value="{0,number,##0.0 %}"><apex:param value="{!all_regions.true_close_rate_90}" /></apex:outputtext><apex:outputtext rendered="{!if(all_regions.consults_90==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>          
+    <td class="right" style="width:75px;">{!all_regions.consults_90}</td>
+    <td class="right" style="width:75px;"><apex:outputText rendered="{!if(all_regions.consults_90<>0,true,false)}" value="{0,number,##0.0 %}"><apex:param value="{!all_regions.finance_percent_90}" /></apex:outputtext><apex:outputtext rendered="{!if(all_regions.consults_90==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>        
+    <td class="right" style="width:75px;">{!all_regions.starts_90}</td>
+    <td class="right" style="width:80px;">{!all_regions.total_cancels_90}</td>    
+    <td class="right" style="width:100px;"><apex:outputText value="{0,number,##,##,##0}" ><apex:param value="{!all_regions.net_sold_90}" /></apex:outputtext></td>    
+    <td class="right" style="width:100px;"><apex:outputText value="{0,number,##,##,##0}" ><apex:param value="{!all_regions.net_collected_90}" /></apex:outputtext></td>  
+    <td class="right" style="width:100px;"><apex:outputText rendered="{!if(all_regions.net_sold_90<>0,true,false)}"  value="{0,number,##0.0 %}" ><apex:param value="{!all_regions.collection_percent_90}" /></apex:outputtext><apex:outputtext rendered="{!if(all_regions.net_sold_90==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>            
+    <td class="right" style="width:100px;"><apex:outputText rendered="{!if(all_regions.net_collected_90<>0,true,false)}"  value="{0,number,##0.0 %}" ><apex:param value="{!all_regions.refund_percent_90}" /></apex:outputtext><apex:outputtext rendered="{!if(all_regions.net_collected_90==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>                
+    <td style="background:white;width:30px;"></td>    
+    <td class="right" style="width:100px;"><apex:outputText rendered="{!if(all_regions.consults_ly<>0,true,false)}" value="{0,number,##0.0 %}"><apex:param value="{!all_regions.true_close_rate_ly}" /></apex:outputtext><apex:outputtext rendered="{!if(all_regions.consults_ly==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>             
+    <td class="right" style="width:75px;">{!all_regions.consults_ly}</td>      
+    <td class="right" style="width:75px;"><apex:outputText rendered="{!if(all_regions.consults_ly<>0,true,false)}" value="{0,number,##0.0 %}"><apex:param value="{!all_regions.finance_percent_ly}" /></apex:outputtext><apex:outputtext rendered="{!if(all_regions.consults_ly==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>   
+    <td class="right" style="width:75px;">{!all_regions.starts_ly}</td>
+    <td class="right" style="width:80px;">{!all_regions.total_cancels_ly}</td>    
+    <td class="right" style="width:100px;"><apex:outputText value="{0,number,##,##,##0}" ><apex:param value="{!all_regions.net_sold_ly}" /></apex:outputtext></td>    
+    <td class="right" style="width:100px;"><apex:outputText value="{0,number,##,##,##0}" ><apex:param value="{!all_regions.net_collected_ly}" /></apex:outputtext></td>  
+    <td class="right" style="width:100px;"><apex:outputText rendered="{!if(all_regions.net_sold_ly<>0,true,false)}"  value="{0,number,##0.0 %}" ><apex:param value="{!all_regions.collection_percent_ly}" /></apex:outputtext><apex:outputtext rendered="{!if(all_regions.net_sold_ly==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>                  
+    <td class="right" style="padding-right:20px;width:100px;"><apex:outputText rendered="{!if(all_regions.net_collected_ly<>0,true,false)}"  value="{0,number,##0.0 %}" ><apex:param value="{!all_regions.refund_percent_ly}" /></apex:outputtext><apex:outputtext rendered="{!if(all_regions.net_collected_ly==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>                        
+  </tr>
+  <tr><td colspan="21">&nbsp;</td></tr>  
+
+<apex:repeat value="{!all_regions.center_list}" var="all_centers" >
+  <tr class="{!if(all_centers.ci.name=='All Centers','footer','center')}">  
+
+    <td class="indent" style="padding-left:5px;width:150px;">{!all_centers.ci.name}</td>     
+    <td style="background:white;width:10px;"></td>
+    <td class="right" style="width:100px;"><apex:outputText rendered="{!if(all_centers.consults_90<>0,true,false)}" value="{0,number,##0.0 %}"><apex:param value="{!all_centers.true_close_rate_90}" /></apex:outputtext><apex:outputtext rendered="{!if(all_centers.consults_90==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>          
+    <td class="right" style="width:75px;">{!all_centers.consults_90}</td>
+    <td class="right" style="width:75px;"><apex:outputText rendered="{!if(all_centers.consults_90<>0,true,false)}" value="{0,number,##0.0 %}"><apex:param value="{!all_centers.finance_percent_90}" /></apex:outputtext><apex:outputtext rendered="{!if(all_centers.consults_90==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>        
+    <td class="right" style="width:75px;">{!all_centers.starts_90}</td>
+    <td class="right" style="width:80px;">{!all_centers.total_cancels_90}</td>    
+    <td class="right" style="width:100px;"><apex:outputText value="{0,number,##,##,##0}" ><apex:param value="{!all_centers.net_sold_90}" /></apex:outputtext></td>    
+    <td class="right" style="width:100px;"><apex:outputText value="{0,number,##,##,##0}" ><apex:param value="{!all_centers.net_collected_90}" /></apex:outputtext></td>  
+    <td class="right" style="width:100px;"><apex:outputText rendered="{!if(all_centers.net_sold_90<>0,true,false)}"  value="{0,number,##0.0 %}" ><apex:param value="{!all_centers.collection_percent_90}" /></apex:outputtext><apex:outputtext rendered="{!if(all_centers.net_sold_90==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>            
+    <td class="right" style="width:100px;"><apex:outputText rendered="{!if(all_centers.net_collected_90<>0,true,false)}"  value="{0,number,##0.0 %}" ><apex:param value="{!all_centers.refund_percent_90}" /></apex:outputtext><apex:outputtext rendered="{!if(all_centers.net_collected_90==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>                
+    <td style="background:white;width:30px"></td>    
+    <td class="right" style="width:100px;"><apex:outputText rendered="{!if(all_centers.consults_ly<>0,true,false)}" value="{0,number,##0.0 %}"><apex:param value="{!all_centers.true_close_rate_ly}" /></apex:outputtext><apex:outputtext rendered="{!if(all_centers.consults_ly==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>             
+    <td class="right" style="width:75px;">{!all_centers.consults_ly}</td>      
+    <td class="right" style="width:75px;"><apex:outputText rendered="{!if(all_centers.consults_ly<>0,true,false)}" value="{0,number,##0.0 %}"><apex:param value="{!all_centers.finance_percent_ly}" /></apex:outputtext><apex:outputtext rendered="{!if(all_centers.consults_ly==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>   
+    <td class="right" style="width:75px;">{!all_centers.starts_ly}</td>
+    <td class="right" style="width:80px;">{!all_centers.total_cancels_ly}</td>    
+    <td class="right" style="width:100px;"><apex:outputText value="{0,number,##,##,##0}" ><apex:param value="{!all_centers.net_sold_ly}" /></apex:outputtext></td>    
+    <td class="right" style="width:100px;"><apex:outputText value="{0,number,##,##,##0}" ><apex:param value="{!all_centers.net_collected_ly}" /></apex:outputtext></td>  
+    <td class="right" style="width:100px;"><apex:outputText rendered="{!if(all_centers.net_sold_ly<>0,true,false)}"  value="{0,number,##0.0 %}" ><apex:param value="{!all_centers.collection_percent_ly}" /></apex:outputtext><apex:outputtext rendered="{!if(all_centers.net_sold_ly==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>                  
+    <td class="right" style="padding-right:20px;width:100px;"><apex:outputText rendered="{!if(all_centers.net_collected_ly<>0,true,false)}"  value="{0,number,##0.0 %}" ><apex:param value="{!all_centers.refund_percent_ly}" /></apex:outputtext><apex:outputtext rendered="{!if(all_centers.net_collected_ly==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>                        
+  </tr>
+
+  <apex:variable var="rowclassname" value="accs" />
+  <apex:repeat value="{!all_centers.pec_list}" var="all_pecs">                        
+    <tr class="{!rowclassname}">  
+    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />  
+    <td class="indent" style="padding-left:15px;">{!all_pecs.pec.firstname}&nbsp;{!all_pecs.pec.lastname}</td>     
+    <td style="background:white;"></td>
+    <td class="right"><apex:outputText rendered="{!if(all_pecs.consults_90<>0,true,false)}" value="{0,number,##0.0 %}"><apex:param value="{!all_pecs.true_close_rate_90}" /></apex:outputtext><apex:outputtext rendered="{!if(all_pecs.consults_90==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>          
+    <td class="right">{!all_pecs.consults_90}</td>
+    <td class="right"><apex:outputText rendered="{!if(all_pecs.consults_90<>0,true,false)}" value="{0,number,##0.0 %}"><apex:param value="{!all_pecs.finance_percent_90}" /></apex:outputtext><apex:outputtext rendered="{!if(all_pecs.consults_90==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>        
+    <td class="right">{!all_pecs.starts_90}</td>
+    <td class="right">{!all_pecs.total_cancels_90}</td>    
+    <td class="right"><apex:outputText value="{0,number,##,##,##0}" ><apex:param value="{!all_pecs.net_sold_90}" /></apex:outputtext></td>    
+    <td class="right"><apex:outputText value="{0,number,##,##,##0}" ><apex:param value="{!all_pecs.net_collected_90}" /></apex:outputtext></td>  
+    <td class="right"><apex:outputText rendered="{!if(all_pecs.net_sold_90<>0,true,false)}"  value="{0,number,##0.0 %}" ><apex:param value="{!all_pecs.collection_percent_90}" /></apex:outputtext><apex:outputtext rendered="{!if(all_pecs.net_sold_90==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>            
+    <td class="right"><apex:outputText rendered="{!if(all_pecs.net_collected_90<>0,true,false)}"  value="{0,number,##0.0 %}" ><apex:param value="{!all_pecs.refund_percent_90}" /></apex:outputtext><apex:outputtext rendered="{!if(all_pecs.net_collected_90==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>                
+    <td style="background:white;"></td>    
+    <td class="right"><apex:outputText rendered="{!if(all_pecs.consults_ly<>0,true,false)}" value="{0,number,##0.0 %}"><apex:param value="{!all_pecs.true_close_rate_ly}" /></apex:outputtext><apex:outputtext rendered="{!if(all_pecs.consults_ly==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>             
+    <td class="right">{!all_pecs.consults_ly}</td>      
+    <td class="right"><apex:outputText rendered="{!if(all_pecs.consults_ly<>0,true,false)}" value="{0,number,##0.0 %}"><apex:param value="{!all_pecs.finance_percent_ly}" /></apex:outputtext><apex:outputtext rendered="{!if(all_pecs.consults_ly==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>   
+    <td class="right">{!all_pecs.starts_ly}</td>
+    <td class="right">{!all_pecs.total_cancels_ly}</td>    
+    <td class="right"><apex:outputText value="{0,number,##,##,##0}" ><apex:param value="{!all_pecs.net_sold_ly}" /></apex:outputtext></td>    
+    <td class="right"><apex:outputText value="{0,number,##,##,##0}" ><apex:param value="{!all_pecs.net_collected_ly}" /></apex:outputtext></td>  
+    <td class="right"><apex:outputText rendered="{!if(all_pecs.net_sold_ly<>0,true,false)}"  value="{0,number,##0.0 %}" ><apex:param value="{!all_pecs.collection_percent_ly}" /></apex:outputtext><apex:outputtext rendered="{!if(all_pecs.net_sold_ly==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>                  
+    <td class="right" style="padding-right:20px;"><apex:outputText rendered="{!if(all_pecs.net_collected_ly<>0,true,false)}"  value="{0,number,##0.0 %}" ><apex:param value="{!all_pecs.refund_percent_ly}" /></apex:outputtext><apex:outputtext rendered="{!if(all_pecs.net_collected_ly==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>                        
+  </tr>
+
+  </apex:repeat>
+  <tr><td colspan="21">&nbsp;</td></tr>  
+  
+  </apex:repeat>    
+  <tr><td colspan="21">&nbsp;</td></tr>  
+</apex:repeat>      
+  </table></apex:outputpanel>                           
+  <apex:commandlink action="{!download_details}" value="Download CSV File - Region - Center - PEC" target="__blank" style="display:block;padding-top:1em;color:blue;font-weight:bold;" >  
+    <apex:param name="csv_type" value="1" assignTo="{!csv_type}"/>
+  </apex:commandlink>    
+
+  <apex:commandlink action="{!download_details}" value="Download CSV File - PEC Only" target="__blank" style="display:block;padding-top:1em;color:blue;font-weight:bold;" >  
+    <apex:param name="csv_type" value="2" assignTo="{!csv_type}"/>
+  </apex:commandlink>        
+
+  <apex:commandlink action="{!download_details}" value="Download CSV File - Center Only" target="__blank" style="display:block;padding-top:1em;color:blue;font-weight:bold;" >  
+    <apex:param name="csv_type" value="3" assignTo="{!csv_type}"/>
+  </apex:commandlink>        
+
+</apex:outputpanel>   
+</apex:form>
+</apex:page>

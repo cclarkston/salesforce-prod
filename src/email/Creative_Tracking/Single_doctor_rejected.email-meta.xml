@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>A single Doctor&apos;s Approval Request is rejected</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Single doctor rejected</name>
+    <style>none</style>
+    <subject>Rejected: {!Doctors_Approval_Request__c.Public_Ad_Name__c}</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

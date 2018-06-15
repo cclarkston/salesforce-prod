@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>false</available>
+    <description>Next steps for Practice Privileges</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Next Steps</name>
+    <style>none</style>
+    <subject>Thank you for completing the Practice Privileges application</subject>
+    <textOnly>Thank you for completing the Practice Privileges application
+
+Having trouble viewing this email? Click here
+
+Congratulations! You’re on your way to practice growth
+
+Dear {!PP_Workshop_Member__c.Doctors_Name__c}
+
+We&apos;re excited that you see value in the program and we look forward to serving you. Our mission is designed to help grow the dental practices of the PracticePrivileges members and we&apos;re ready to get the ball rolling on your behalf.
+
+In the next 7-10 days, our partners will be reaching out to you for:
+
+ClearVantage set-up and training
+ClearConnect installation
+ClearTrain overview and instructions
+
+Our team is available to you to answer any questions you may have so please feel free to reach out to us.
+
+Nathaly Ambos
+Manager - Practice Development
+303-729-5054
+
+Jordan Schaffel
+Director - Practice Development
+512-743-4400
+
+Dan Hinkle
+VP - Practice Development
+714-319-0364
+
+Thanks again and welcome!
+The PracticePrivileges Team
+
+ClearChoice Holdings, LLC
+8350 E. Crescent Parkway, Suite 100
+Greenwood Village, CO 80111
+800-617-0705
+
+
+© 2014 Copyright PracticePrivileges. All rights reserved.</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,300 @@
+<apex:page controller="Ctrl_BulkPrintLetters" sidebar="false" showHeader="false" >
+<style type="text/css" media="print">
+a img {
+  display:none;
+}
+
+  div.bPageHeader {
+    display:none;
+  }  
+<!--- -->
+  div.bPageFooter {
+    display:none;
+  }
+    
+  p.form_holder {
+    display:none; 
+  }
+  
+  div.print_off {
+    display:none; 
+  }
+
+  p.break {
+    page-break-after:always;
+  }
+</style>
+
+<style>
+
+
+  p.break {
+    page-break-after:always;
+  }
+
+  div.bcp_letter {
+    font-family:calibri;
+    font-size:11pt;
+    width:400px;    
+  }  
+  
+table.accs_details {
+    font-family:georgia,arial;
+  }
+  
+  table.accs_details th {
+    font-weight:bold;
+    font-size:12pt;
+ 
+    border-bottom:1px solid black; 
+  }
+     
+  table.accs_details tr.control {
+    font-weight:bold;
+    font-size:12pt;
+    text-align:center;    
+  }
+   
+  table.accs_details tr.control td {
+    border-bottom:1px solid black;
+    empty-cells:hide;  
+  }
+  
+  table.accs_details tr.subhead {
+    font-weight:bold;
+    font-size:12pt;
+  }
+  
+  table.accs_details tr.subhead td {
+    border-bottom:1px dotted black;
+    padding-top:1em;         
+    color:blue;   
+    padding-left:10px;   
+    empty-cells:hide;  
+  }
+
+  table.accs_details tr.accs {
+
+  }
+   
+  table.accs_details tr.accs td {
+    line-height:25px;   
+    font-size:10pt;
+    border-bottom:1px dashed #5789AE; 
+    empty-cells:hide;   
+  }
+  
+  table.accs_details tr.accs td.indent {
+    padding-left:25px;      
+    font-weight:bold; 
+    font-style:italic;
+    empty-cells:hide;      
+  }
+
+  table.accs_details tr.accs td.right {
+     text-align:right;
+     padding-right:5px;     
+     empty-cells:hide;    
+  }  
+
+  table.accs_details tr.accs_b {
+    background-color:#CECE9D;
+  }
+   
+  table.accs_details tr.accs_b td {
+    line-height:25px;
+    font-size:10pt;  
+    border-bottom:1px dashed #5789AE; 
+    empty-cells:hide;       
+  }
+  
+  table.accs_details tr.accs_b td.indent {
+    padding-left:25px;
+    font-weight:bold;
+    font-style:italic;      
+    empty-cells:hide;  
+  }
+  
+  table.accs_details tr.accs_b td.right {
+    text-align:right;
+    padding-right:5px;     
+    empty-cells:hide;       
+  }  
+  
+  table.accs_details tr.footer {
+    background-color:#A8A8A8;  
+    font-weight:bold;
+    font-size:12pt; 
+  }
+   
+  table.accs_details tr.footer td {
+    color:white;
+    border-top:2px solid black;
+    border-bottom:2px solid black; 
+    empty-cells:hide;         
+  }    
+
+  table.accs_details tr.footer td.right {
+    text-align:right;
+    padding-right:5px    
+    empty-cells:hide;      
+  }  
+
+  table.accs_details tr.footer td.indent {
+    padding-left:25px;
+    empty-cells:hide;      
+  }  
+
+  form.inline_form {
+    display:inline-block;
+    padding:0;
+    margins:0;    
+  }
+
+  span.page_span {
+    display:block;
+    text-align:right;
+    padding-right:20px; 
+    color:#5789AE;
+    font-size:10pt;     
+  }
+  
+</style>
+<apex:outputPanel rendered="{!display_queue}" style="padding-top:1em;padding-left:50px;" layout="block">
+<script>
+  function refresh_window() { 
+    window.location.href=window.location.href;
+  }  
+
+  var previousOnload = window.onload;        
+  window.onload = function() { 
+    if (previousOnload) { 
+      previousOnload();
+    }  
+    setTimeout("refresh_window()",60000);    
+  }
+</script>
+<apex:form id="print_queue">
+<span style="font-weight:bold;font-size:14pt;color:blue;display:block;padding-bottom:1em;">Call Center Bulk Print Queue</span>
+<apex:outputpanel id="error_holder" ><apex:messages style="color:red;font-style:italics;padding-top:3px;padding-bottom:3px;" /></apex:outputpanel>
+<table class="accs_details" style="width:600px;">
+  <tr class="control">
+    <td width="50%">Form</td>
+    <td width="20%"># Leads</td>
+    <td width="30%">&nbsp;</td></tr>
+  <tr class="accs">
+    <td class="indent">BCP Letter</td>
+    <td align="center">{!num_bcp}</td>
+    <td><apex:commandButton rendered="{!if(num_bcp>0,'true','false')}" value="Generate BCP File" action="{!download_bcp_letters}"/>
+      <apex:outputText rendered="{!if(num_bcp>0,'false','true')}">&nbsp;</apex:outputText></td></tr>            
+  <tr class="accs">
+    <td class="indent">Welcome Letter</td>
+    <td align="center">{!num_welcome}</td>
+    <td><apex:commandButton rendered="{!if(num_welcome>0,'true','false')}" value="Generate Welcome File" action="{!download_welcome_letters}"/>
+      <apex:outputText rendered="{!if(num_welcome>0,'false','true')}">&nbsp;</apex:outputText></td></tr>           
+<!--    <td><apex:commandButton rendered="{!if(num_welcome>0,'true','false')}" value="Print Welcome Letters" action="{!print_welcome_letters}"/>
+      <apex:outputText rendered="{!if(num_welcome>0,'false','true')}">&nbsp;</apex:outputText></td></tr>          -->
+  <!--<tr class="accs_b">
+    <td class="indent">Welcome Letter - Infocision</td>
+    <td align="center">{!num_welcome_info}</td>
+    <td><apex:commandButton rendered="{!if(num_welcome_info>0,'true','false')}" value="Print Welcome Letters" action="{!print_welcome_info_letters}"/>
+      <apex:outputText rendered="{!if(num_welcome_info>0,'false','true')}">&nbsp;</apex:outputText></td></tr>             -->
+<!--  <tr class="accs_b">
+    <td class="indent">Welcome Letter - No Prescreen</td>
+    <td align="center">{!num_welcome_no_prescreen}</td>
+    <td><apex:commandButton rendered="{!if(num_welcome_no_prescreen>0,'true','false')}" value="Print Welcome Letters" action="{!print_welcome_letters_no_prescreen}"/>
+      <apex:outputText rendered="{!if(num_welcome_no_prescreen>0,'false','true')}">&nbsp;</apex:outputText></td></tr>-->
+  <tr class="accs">
+    <td class="indent">Seminar Letter</td>
+    <td align="center">{!num_seminar}</td>
+    <td><apex:commandButton rendered="{!if(num_seminar>0,'true','false')}" value="Print Seminar Letters" action="{!print_seminar_letters}"/>
+      <apex:outputText rendered="{!if(num_seminar>0,'false','true')}">&nbsp;</apex:outputText></td></tr>    
+  <tr class="accs_b">
+    <td class="indent">Seminar Letter - Infocision</td>
+    <td align="center">{!num_seminar_info}</td>
+    <td><apex:commandButton rendered="{!if(num_seminar_info>0,'true','false')}" value="Print Seminar Letters" action="{!print_seminar_info_letters}"/>
+      <apex:outputText rendered="{!if(num_seminar_info>0,'false','true')}">&nbsp;</apex:outputText></td></tr>                
+  </table><br /><br /><br />
+  <span style="font-weight:bold;font-size:12pt;">Bulk Print History (<i>displaying the last&nbsp;
+    <apex:inputText value="{!num_history}" id="history_num" size="3"> 
+      <apex:actionSupport event="onkeyup" reRender="history_holder" status="UpdateMsg"/>     
+    </apex:inputText>    
+    jobs</i>)</span><hr />
+  <apex:outputPanel id="history_holder">
+  <table class="accs_details" width="800px;">
+    <tr class="control">
+      <td width="10%">Batch #</td>
+      <td width="15%">Form</td>
+      <td width="10%"># Printed</td>
+      <td width="20%">Printed By</td>
+      <td width="20%">Printed Time</td>
+      <td width="15%">Status</td>
+      <td width="15%">&nbsp;</td></tr>
+  <apex:variable var="rowclassname" value="accs" />       
+  <apex:repeat value="{!print_history}" var="history"> 
+    <tr class="{!rowclassname}">
+    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+    <td class="indent">{!history.name}</td>
+    <td>{!history.Bulk_Form__c}</td>
+    <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+    <apex:param value="{!history.Num_Printed__c}" />   
+    </apex:outputtext></td>
+    <td>{!history.printed_by__r.name}</td>
+    <td><apex:outputField value="{!history.Printed_Time__c}" /></td>
+    <td><span style="font-weight:bold;color:{!if(history.Print_Successful__c,'blue','red')}">{!if(history.Print_Successful__c,'Success','Failed')}</span></td>
+    <td>
+    <apex:outputpanel rendered="{!if(history.Bulk_Form__c=='BCP Letter' || history.Bulk_Form__c=='BCP Letter - Infocision',true,false)}" ><a href="{!hyper_prefix}/apex/bulkprint_download?bsum={!history.Id}&action=download_bcp" target="_blank" style="color:blue;">Download</a></apex:outputpanel>
+    <apex:outputpanel rendered="{!if(history.Bulk_Form__c=='Welcome Letter' || history.Bulk_Form__c=='Welcome Letter - Infocision',true,false)}" ><a href="{!hyper_prefix}/apex/bulkprint_download?bsum={!history.Id}&action=download_welcome" target="_blank" style="color:blue;">Download</a></apex:outputpanel>
+    <apex:commandLink style="text-decoration:none;" action="{!reprint}" value="Reprint" styleClass="btn" rendered="{!if(history.Print_Successful__c && history.Bulk_Form__c!='BCP Letter' && history.Bulk_Form__c!='Welcome Letter' && history.Bulk_Form__c!='BCP Letter - Infocision' && history.Bulk_Form__c!='Welcome Letter - Infocision' ,true,false)}" target="_blank">
+      <apex:param name="reprint_id" value="{!history.Id}" assignTo="{!reprint_id}"/>
+    </apex:commandLink>
+<!--    <apex:outputpanel rendered="{!if(history.Bulk_Form__c=='BCP Letter' || history.Bulk_Form__c=='BCP Letter - Infocision',true,false)}" ><a href="{!hyper_prefix}/apex/bulkprint_download?bsum={!history.Id}&action=download_bcp" target="_blank" style="color:blue;">Download</a></apex:outputpanel>
+    <apex:commandLink style="text-decoration:none;" action="{!reprint}" value="Reprint" styleClass="btn" rendered="{!if(history.Print_Successful__c && history.Bulk_Form__c!='BCP Letter',true,false)}" target="_blank">
+      <apex:param name="reprint_id" value="{!history.Id}" assignTo="{!reprint_id}"/>
+    </apex:commandLink>-->
+    
+    <apex:outputtext rendered="{!if(history.Print_Successful__c,'false','true')}">&nbsp;</apex:outputtext></td></tr>        
+  </apex:repeat>           
+  </table> 
+  </apex:outputPanel>  
+</apex:form>
+</apex:outputPanel>
+
+<apex:actionStatus startText="Please Wait....Updating" startstyle="color:blue;font-weight:bold;font-size:12pt;font-style:italic;" id="UpdateMsg"/>
+
+
+<apex:outputPanel rendered="{!display_confirmation}">
+<apex:form id="print_display">
+<div class="print_off" style="padding-top:1em;" align="center">
+<span style="color:red;font-weight:bold;font-size:12pt;display:block;padding-bottom:.5em;">Batch Print Job : {!batch_name} - Was the print job successful?</span>
+<apex:commandButton value="Yes" action="{!confirm_print}" style="color:blue;width:40px;" /><span style="width:40px;display:inline-block;">&nbsp;</span>
+<apex:commandButton value="No" action="{!cancel_print}" style="color:red;width:40px;" />
+<hr />
+</div>
+</apex:form>
+</apex:outputPanel>
+
+<apex:outputPanel rendered="{!display_letter}">
+<script type="text/javascript" src="https://fast.fonts.net/jsapi/f0aca6be-70c2-40cc-90cc-3bb90eddd93f.js"></script>
+<script>
+  var previousOnload = window.onload;        
+  window.onload = function() { 
+    if (previousOnload) { 
+      previousOnload();
+    }  
+    window.print(); 
+  }
+</script>
+<apex:outputText value="{!letter_output}" escape="false"/>
+</apex:outputPanel>
+
+<apex:outputpanel rendered="{!display_file}">
+<apex:form id="download_display">
+<h1>File has been generated</h1>
+
+<a href="{!hyper_prefix}/apex/bulkprint_download?bsum={!summary_id}&action={!action}" target="_blank" style="color:blue;">Download File</a><br />
+
+<apex:commandButton value="Return to Queue" action="{!cancel_print}" style="color:red;width:40px;" />
+</apex:form>
+</apex:outputpanel>
+</apex:page>

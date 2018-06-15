@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_91128276</developerName>
+        <masterLabel>Activities</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Activity.Activity_Type__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Other</sourceValue>
+            </sourceValues>
+            <value>Consultations</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Chat</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Inbound Call</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Inbound Email</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Mail</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Outbound Call</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Outbound Email</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Sales Call</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Incoming Text</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Outgoing Text</sourceValue>
+            </sourceValues>
+            <value>Follow-Ups</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_90599257</developerName>
+        <masterLabel>Center</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Account.Center_Location__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Chicago</sourceValue>
+            </sourceValues>
+            <value>Chicago</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>SUBJECT</field>
+    </columns>
+    <columns>
+        <field>ACCOUNT.NAME</field>
+    </columns>
+    <columns>
+        <field>Account.Preliminary_Treatment_Plan__c</field>
+    </columns>
+    <columns>
+        <field>DESCRIPTION</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>CREATED_BY</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>aggie alers</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_91128276</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Daily Activity Log - Aggie</name>
+    <params>
+        <name>closed</name>
+        <value>closed</value>
+    </params>
+    <params>
+        <name>type</name>
+        <value>te</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>AccountActivity</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>DUE_DATE</dateColumn>
+        <interval>INTERVAL_TODAY</interval>
+    </timeFrameFilter>
+</Report>

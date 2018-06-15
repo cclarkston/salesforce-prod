@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Campaign$Name</field>
+    </columns>
+    <columns>
+        <field>Campaign.ContactCampaignMembers$Name</field>
+    </columns>
+    <columns>
+        <field>Campaign.ContactCampaignMembers$Phone</field>
+    </columns>
+    <columns>
+        <field>Campaign.ContactCampaignMembers$HomePhone</field>
+    </columns>
+    <columns>
+        <field>Campaign.ContactCampaignMembers.Activities$Subject</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Campaign.ContactCampaignMembers.Activities$Owner</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Kris Karge</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Converted Campaign Activity</name>
+    <params>
+        <name>scopeid</name>
+        <value>70140000000u0rJ</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Campaign_Test_1__c</reportType>
+    <scope>one</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Campaign.ContactCampaignMembers.Activities$CreatedDate</dateColumn>
+        <endDate>2014-05-22</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2014-05-10</startDate>
+    </timeFrameFilter>
+</Report>

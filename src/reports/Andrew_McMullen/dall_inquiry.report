@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_2577305</developerName>
+        <masterLabel>Region</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>FK_$Opportunity.Exam_Center_formula__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Walnut Creek</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>San Jose</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>San Francisco Daly City</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Sacramento</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Portland</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Seattle</sourceValue>
+            </sourceValues>
+            <value>Northwest</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Denver</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Las Vegas</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Phoenix</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Salt Lake City</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>San Diego</sourceValue>
+            </sourceValues>
+            <value>Southwest</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Austin</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Dallas</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Dallas Arlington</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Houston</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Houston Woodlands</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>San Antonio</sourceValue>
+            </sourceValues>
+            <value>Texas</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Chicago</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chicago Evanston</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chicago Naperville</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chicago Schaumburg</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Kansas City</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Minneapolis</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>St. Louis</sourceValue>
+            </sourceValues>
+            <value>Midwest</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Atlanta</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Charlotte</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Miami Fort Lauderdale</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Tampa</sourceValue>
+            </sourceValues>
+            <value>Southeast</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Cleveland</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Columbia</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Washington Rockville</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Washington Tysons Corner</sourceValue>
+            </sourceValues>
+            <value>Northeast</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>FK_ACC_NAME</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Refund_Request__c.Amount_of_Refund__c</field>
+    </columns>
+    <columns>
+        <field>Refund_Request__c.Reason_for_request__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Refund_Request__c.Refund_Status__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Closed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CUST_OWNER_NAME</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Rodney Cook</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>dall inquiry</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Refund_Request__c@Refund_Request__c.Opportunity__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <endDate>2016-07-31</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2016-05-01</startDate>
+    </timeFrameFilter>
+</Report>

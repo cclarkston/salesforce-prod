@@ -1,0 +1,231 @@
+<apex:page >
+ <!-- Main Header-->
+    <header class="main-header">
+        <!-- Header Top -->
+        <div class="header-top">
+            <div class="auto-container clearfix">
+                <!-- Top Left -->
+                <div class="top-left">
+                    <ul class="clearfix">
+                        <li><strong>Opening Hours </strong>: Monday to Saturday - 8am to 9pm</li>
+                    </ul>
+                    
+                </div>
+                
+                <!-- Top Right -->
+                <div class="top-right">
+                    <ul class="clearfix">
+                        <!--<li><a href="#">Support</a></li>-->
+                        <li><a href="/secur/logout.jsp" class="logout">Logout</a></li>
+                        <!--<li><a href="contact.html">Contact us</a></li>-->
+                    </ul>
+                </div>
+                
+            </div>
+        </div><!-- Header Top End -->
+        
+        <!--Header-Upper-->
+        <div class="header-upper">
+            <div class="auto-container">
+                <div class="clearfix">
+                    
+                    <div class="pull-left logo-outer">
+                        <div class="logo"><a href="index.html">
+                            <apex:image url="{!URLFOR($Resource.PatientPortalAssets,'/images/logo.jpg')}" />
+                        </a></div>
+                    </div>
+                    
+                    <div class="pull-right upper-right clearfix">
+                        
+                        <!--Info Box-->
+                        <div class="upper-column info-box">
+                            <div class="icon-box"><span class="flaticon-phone-call"></span></div>
+                            <ul>
+                                <li><strong>Main: 720-459-6146</strong></li>
+                                <li><a href="#">denverinfo@clearchoice.com</a></li>
+                            </ul>
+                        </div>
+                        
+                        <!--Info Box-->
+                        <div class="upper-column info-box">
+                            <div class="icon-box"><span class="flaticon-placeholder"></span></div>
+                            <ul>
+                                <li><strong>8200 E. Belleview</strong></li>
+                                <li>Denver, CO 80111</li>
+                            </ul>
+                        </div>
+                        
+                        <!--Info Box-->
+                        <div class="upper-column info-box">
+                            <div class="social-links-one">
+                                <a href="#"><span class="fa fa-facebook-f"></span></a>
+                                <a href="#"><span class="fa fa-twitter"></span></a>
+                                <a href="#"><span class="fa fa-google-plus"></span></a>
+                                <a href="#"><span class="fa fa-linkedin"></span></a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <!--Header-Lower-->
+        <div class="header-lower">
+            <div class="auto-container">
+                <div class="nav-outer clearfix">
+                    <!-- Main Menu -->
+                    <nav class="main-menu">
+                        <div class="navbar-header">
+                            <!-- Toggle Button -->      
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        
+                        <div class="navbar-collapse collapse clearfix">
+                            <ul class="navigation clearfix">
+                                <li class="dropdown"><a href="#">Home</a>
+                                    <ul>
+                                        <li><a href="index.html">Homepage One</a></li>
+                                        <li><a href="index-2.html">Homepage Two</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown"><a href="#">About Us</a>
+                                    <ul>
+                                        <li><a href="about-us.html">About Us</a></li>
+                                        <li><a href="department.html">department</a></li>
+                                        <li class="dropdown"><a href="#">Our Team</a>
+                                            <ul>
+                                                <li><a href="team-grid.html">Team Grid View</a></li>
+                                                <li><a href="team-list.html">Team List View</a></li>
+                                                <li><a href="team-single.html">Single Member</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="current dropdown"><a href="#">Services</a>
+                                    <ul>
+                                        <li><a href="services.html">Services Style One</a></li>
+                                        <li><a href="services-2.html">Services Style Two</a></li>
+                                        <li><a href="single-service.html">Single Service</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown"><a href="#">Pages</a>
+                                    <ul>
+                                        <li><a href="faq.html">Faqs</a></li>
+                                        <li><a href="error-page.html">404 Page</a></li>
+                                        <li><a href="gallery.html">gallery</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown"><a href="#">gallery</a>
+                                    <ul>
+                                        <li><a href="gallery.html">gallery</a></li>
+                                        <li><a href="our-work-in-process.html">tretment process</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown"><a href="#">Blog</a>
+                                    <ul>
+                                        <li><a href="blog.html">Blog Classic</a></li>
+                                        <li><a href="blog-three-column.html">Blog Three Column</a></li>
+                                        <li><a href="blog-single.html">Blog Single</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="contact.html">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </nav><!-- Main Menu End-->
+                
+                    <div class="get-btn"><a href="#" class="theme-btn appt-btn">GET FREE CONSULTATION</a></div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        
+        <!--Bounce In Header-->
+        <div class="bounce-in-header">
+            <div class="auto-container clearfix">
+                <!--Logo-->
+                <div class="logo pull-left">
+                    <a href="index.html" class="img-responsive">
+                        <apex:image url="{!URLFOR($Resource.PatientPortalAssets,'/images/logo-small.png')}" />
+                    </a>
+                </div>
+                
+                <!--Right Col-->
+                <div class="right-col pull-right">
+                    <!-- Main Menu -->
+                    <nav class="main-menu">
+                        <div class="navbar-header">
+                            <!-- Toggle Button -->      
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        
+                        <div class="navbar-collapse collapse clearfix">
+                            <ul class="navigation clearfix">
+                                <li class="dropdown"><a href="#">Home</a>
+                                    <ul>
+                                        <li><a href="index.html">Homepage One</a></li>
+                                        <li><a href="index-2.html">Homepage Two</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown"><a href="#">About Us</a>
+                                    <ul>
+                                        <li><a href="about-us.html">About Us</a></li>
+                                        <li><a href="department.html">department</a></li>
+                                        <li class="dropdown"><a href="#">Our Team</a>
+                                            <ul>
+                                                <li><a href="team-grid.html">Team Grid View</a></li>
+                                                <li><a href="team-list.html">Team List View</a></li>
+                                                <li><a href="team-single.html">Single Member</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="current dropdown"><a href="#">Services</a>
+                                    <ul>
+                                        <li><a href="services.html">Services Style One</a></li>
+                                        <li><a href="services-2.html">Services Style Two</a></li>
+                                        <li><a href="single-service.html">Single Service</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown"><a href="#">Pages</a>
+                                    <ul>
+                                        <li><a href="faq.html">Faqs</a></li>
+                                        <li><a href="error-page.html">404 Page</a></li>
+                                        <li><a href="gallery.html">gallery</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown"><a href="#">gallery</a>
+                                    <ul>
+                                        <li><a href="gallery.html">gallery</a></li>
+                                        <li><a href="our-work-in-process.html">tretment process</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown"><a href="#">Blog</a>
+                                    <ul>
+                                        <li><a href="blog.html">Blog Classic</a></li>
+                                        <li><a href="blog-three-column.html">Blog Three Column</a></li>
+                                        <li><a href="blog-single.html">Blog Single</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="contact.html">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </nav><!-- Main Menu End-->
+                </div>
+                
+            </div>
+        </div>
+    
+    </header>
+    <!--End Main Header -->
+</apex:page>

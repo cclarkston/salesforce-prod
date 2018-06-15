@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>OWNER</field>
+    </columns>
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>Lead.Center_Name__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Contact_Agency_Agent__c</field>
+    </columns>
+    <columns>
+        <field>Lead.DateTime_Consult_Scheduled__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>STATUS</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>No Show</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.OBJECTION__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Not Confirmed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Call_Center_Agent__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Kelley Village</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.LeadScore__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Red,Blue (No Hit),Green,Yellow,Insufficient Information,Website Down-No Prescreen,PO Box,Not Checked</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>IMC No Shows</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadList@Lead.Center__c</reportType>
+    <scope>org</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead.DateTime_Consult_Scheduled__c</dateColumn>
+        <interval>INTERVAL_YESTERDAY</interval>
+    </timeFrameFilter>
+</Report>

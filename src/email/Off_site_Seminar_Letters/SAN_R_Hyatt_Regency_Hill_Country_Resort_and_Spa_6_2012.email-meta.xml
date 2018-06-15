@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Thu, June 21, 10am</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>ClearChoice_Letterhead</letterhead>
+    <name>SAN-R-Hyatt Regency Hill Country Resort and Spa-6-2012</name>
+    <style>formalLetter</style>
+    <subject>We are excited to see you at our seminar!</subject>
+    <textOnly>Hello {!Lead.FirstName},&lt;?xml:namespace prefix = o ns = &quot;urn:schemas-microsoft-com:office:office&quot; /&gt;
+
+We have reserved a seat for you at the ClearChoice patient seminar on
+
+{!Lead.DateTime_Consult_Scheduled__c} at the Hyatt Regency Hill Country Resort and Spa.
+
+
+We have tried contacting you to confirm your attendance, but have not been able to reach you. We would appreciate your confirmation so that we can inform our caterer of your reservation. To confirm, please either respond to this email or call us at 210.403.2556.
+
+
+You can look forward to:
+
+
+Learning how implants can provide a clear solution for your dental needs
+Receiving answers to questions pertaining to your dental condition
+Hearing about past patients’ experiences with ClearChoice
+Meeting our doctors and patients
+Enjoying refreshments
+
+We provide a clear advantage through our unique all-in-one Center. We have enclosed a map to the Hyatt Regency Hill Country . Please feel free to call 210.403.2556 if you need further directions.
+
+
+
+Sincerely,
+{!Lead.Call_Center_Agent__c}
+Dental Implant Consultant&lt;?xml:namespace prefix = o ns = &quot;urn:schemas-microsoft-com:office:office&quot; /&gt;</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

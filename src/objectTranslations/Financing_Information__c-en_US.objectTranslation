@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Financing Information</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Financing Information</value>
+    </caseValues>
+    <fields>
+        <label><!-- Amount Charged --></label>
+        <name>Amount_Charged__c</name>
+    </fields>
+    <fields>
+        <label><!-- Application Amount --></label>
+        <name>Application_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approval Amount --></label>
+        <name>Approval_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Consult --></label>
+        <name>Consult__c</name>
+        <relationshipLabel><!-- Financing Information --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Interest Rate --></label>
+        <name>Interest_Rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pending Amount --></label>
+        <name>Pending_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Approval Pending</masterLabel>
+            <translation><!-- Approval Pending --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Declined</masterLabel>
+            <translation><!-- Declined --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Documents Faxed</masterLabel>
+            <translation><!-- Documents Faxed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Waiting on Docs</masterLabel>
+            <translation><!-- Waiting on Docs --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>MedChoice</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Standard Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <description><!-- Care Credit --></description>
+        <label><!-- Care Credit --></label>
+        <name>Care_Credit</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Chase --></description>
+        <label><!-- Chase --></label>
+        <name>Chase</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- MedChoice --></description>
+        <label><!-- MedChoice --></label>
+        <name>MedChoice</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Spring Stone --></description>
+        <label><!-- Spring Stone --></label>
+        <name>Spring_Stone</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

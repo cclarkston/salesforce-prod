@@ -1,0 +1,6 @@
+<apex:component controller="rpt_call_center_dash" access="global" >
+{!file_header}
+<apex:repeat value="{!csv_output}" var="output">
+    {!output.output_line}
+</apex:repeat>  
+</apex:component>

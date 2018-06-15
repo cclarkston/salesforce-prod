@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Post OP Notes Form</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Post OP Notes Forms</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Post OP Notes Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Clinical Apt Calendar --></label>
+        <name>Clinical_Apt_Calendar__c</name>
+        <relationshipLabel><!-- Post OP Notes Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Clinical Note Instance --></label>
+        <name>Clinical_Note_Instance__c</name>
+        <relationshipLabel><!-- Post OP Notes Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Healing in normal limits --></label>
+        <name>Healing_in_normal_limits__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- IsActive --></label>
+        <name>IsActive__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

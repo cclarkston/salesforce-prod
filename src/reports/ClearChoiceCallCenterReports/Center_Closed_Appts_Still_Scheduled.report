@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Lead.Center_Location__c</field>
+    </columns>
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>PHONE</field>
+    </columns>
+    <columns>
+        <field>EMAIL</field>
+    </columns>
+    <columns>
+        <field>Lead.Consult_Cancelled__c</field>
+    </columns>
+    <columns>
+        <field>Lead.DateTime_Consult_Scheduled__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Date_Booked__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Pre_Screen__c</field>
+    </columns>
+    <filter>
+        <booleanFilter>1 AND 2 AND 3</booleanFilter>
+        <criteriaItems>
+            <column>Lead.Call_Result__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Cancelled Appointment</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Reason_For_Cancelling_Appointment_list__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Center Closed Day of Consult</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Center_Location__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Atlanta,Austin,Charlotte,Chicago,Chicago Deerfield/Northbrook,Chicago Naperville,Chicago Schaumburg,Cleveland,Dallas,Dallas Fort Worth,Denver,Denver Colorado Springs,Houston,Houston Woodlands,Kansas City,Las Vegas,Miami,Miami Fort Lauderdale,Minneapolis,Phoenix,Phoenix Mesa,Portland,Sacramento,Salt Lake City,San Antonio,San Diego,San Francisco Daly City,San Francisco Oakland,San Jose,St. Louis,Tucson,Washington Rockville,Washington Tysons Corner,New Market Not Yet Open,Unknown</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Center Closed/Appts Still Scheduled</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadList</reportType>
+    <scope>org</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CURNEXTY</interval>
+    </timeFrameFilter>
+</Report>

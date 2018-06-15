@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Clinical Search Inventory</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Clinical Search Inventory</value>
+    </caseValues>
+    <fields>
+        <label><!-- Clinical Apt Calendar --></label>
+        <name>Clinical_Apt_Calendar__c</name>
+        <relationshipLabel><!-- Clinical Search Inventory --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Clinical Doctor Inventory --></label>
+        <name>Clinical_Doctor_Inventory__c</name>
+        <relationshipLabel><!-- Clinical Search Inventory --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Minutes DR Avail --></label>
+        <name>Minutes_DR_Avail__c</name>
+    </fields>
+    <fields>
+        <label><!-- Minutes after DR --></label>
+        <name>Minutes_after_DR__c</name>
+    </fields>
+    <fields>
+        <label><!-- Minutes before DR --></label>
+        <name>Minutes_before_DR__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Minutes --></label>
+        <name>Total_Minutes__c</name>
+    </fields>
+    <fields>
+        <label><!-- minutes after and dr --></label>
+        <name>minutes_after_and_dr__c</name>
+    </fields>
+    <fields>
+        <label><!-- minutes before and dr --></label>
+        <name>minutes_before_and_dr__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

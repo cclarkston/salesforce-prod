@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>true</doesSendEmailToMembers>
+    <name>Fielded Leads Queue</name>
+    <queueMembers>
+        <users>
+            <user>adinges@clearchoice.com</user>
+            <user>cameron.fisher@clearchoice.com</user>
+            <user>dcardenas@clearchoice.com</user>
+            <user>jmantilla@clearchoice.com</user>
+            <user>jleal@clearchoice.com</user>
+            <user>jtolmich@clearchoice.com</user>
+            <user>kkarge@clearchoice.com</user>
+            <user>kyoelin@clearchoice.com</user>
+            <user>lavrett@clearchoice.com</user>
+            <user>mariann.maestas@clearchoice.com</user>
+            <user>michelle.hernandez@clearchoice.com</user>
+            <user>thomas.probst@clearchoice.com</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Lead</sobjectType>
+    </queueSobject>
+</Queue>

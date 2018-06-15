@@ -1,0 +1,1030 @@
+<apex:page controller="ctrl_centerdays" sidebar="false" showHeader="true" action="{!create_new_center_days}">
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}"  />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+
+<style type="text/css" media="print">  
+  div.calendar_holder {
+    display:none; 
+  }  
+  
+  table.print_break {
+    page-break-after:always;  
+  }
+  
+  hr.style-fade {
+    border: 0;
+    height: 2px;
+    width:500px;
+    display:block;
+    background-image: -webkit-linear-gradient(left, rgba(63,127,0,0), rgba(63,127,0,0.75), rgba(63,127,0,0)); 
+    background-image:    -moz-linear-gradient(left, rgba(63,127,0,0), rgba(63,127,0,0.75), rgba(63,127,0,0)); 
+    background-image:     -ms-linear-gradient(left, rgba(63,127,0,0), rgba(63,127,0,0.75), rgba(63,127,0,0)); 
+    background-image:      -o-linear-gradient(left, rgba(63,127,0,0), rgba(63,127,0,0.75), rgba(63,127,0,0)); 
+  }
+  
+  td.right_border {
+    border:0px; 
+    right-border:0px;
+  }
+
+  img.skiplink {
+    display:none;
+  }
+
+  div.bodyDiv {
+    border:0px;
+  }
+      
+  div.bPageHeader {
+    display:none;
+  }  
+  
+  div.bPageFooter {
+    display:none;
+  } 
+  
+  div.no_print {
+    display:none; 
+  }    
+  
+</style>
+
+<script>
+var ie_check = false;
+var ie_ver; 
+
+function getInternetExplorerVersion()
+// Returns the version of Internet Explorer or a -1
+// (indicating the use of another browser).
+{
+  var rv = -1; // Return value assumes failure.
+  if (navigator.appName == 'Microsoft Internet Explorer') {
+    var ua = navigator.userAgent;
+    var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+    if (re.exec(ua) != null)
+      rv = parseFloat( RegExp.$1 );
+  }
+  return rv;
+}
+
+function ietruebody(){
+return (document.compatMode && document.compatMode!="BackCompat")? document.documentElement : document.body
+}
+
+var ie=document.all;
+var ns6=document.getElementById && !document.all
+var offsetxpoint=-250;
+var offsetypoint=20;
+
+function apt_modal(e) {
+  getScrollXY() ;
+  alertSize();
+  if(!ie_check)
+    ie_ver = getInternetExplorerVersion();    
+//  alert('Height : ' + scrH + ' Width : ' + scrW + ' X Pos : ' + scrX + ' Y Pos : ' + scrY + ' PageY : ' + e.pageY + ' PageX : ' + e.pageX);  
+  if (! document.styleSheets) return
+    var CSSRules;  // IE uses rules...
+    for (var i = 0; i < (document.styleSheets.length -1); i++) {
+        (document.styleSheets[0].cssRules) ? CSSRules = 'cssRules' : CSSRules = 'rules';
+        var my_ref = document.styleSheets[i].href || 'Unknown';
+        //alert(my_ref);
+        if(my_ref.indexOf("modal") != -1) {     
+        for (var j = 0; j < document.styleSheets[i][CSSRules].length; j++) {                             
+            if (document.styleSheets[i][CSSRules][j].selectorText == '.modalPopup_outer') {  
+             // alert(my_ref);
+             // alert('Test');                        
+              var curX=(ns6)?e.pageX : e.clientX+ietruebody().scrollLeft;
+              var curY=(ns6)?e.pageY : e.clientY+ietruebody().scrollTop;
+    //          alert('Cur X: ' + curX + ' Cur Y : ' + curY);
+      //        alert('ietruebody.clientwidth : ' + ietruebody().clientWidth + ' Client X : ' + e.clientX + ' Offset : ' + offsetxpoint );
+              var rightedge=ie&&!window.opera? e.clientX+offsetxpoint + 500 : e.clientX+offsetxpoint-20 + 500;
+              var bottomedge=ie&&!window.opera? ietruebody().clientHeight-e.clientY-offsetypoint : window.innerHeight-e.clientY-offsetypoint-20
+        //      alert('Right Edge : ' + rightedge + ' bottom edge : ' + bottomedge);
+          //    alert('Width : ' + document.styleSheets[i][CSSRules][j].style.width );              
+              var leftedge=(offsetxpoint<0)? offsetxpoint*(-1) : -1000
+            //  alert('Left Edge : ' + leftedge);
+              var newleft;
+              var newtop;             
+               
+              if (rightedge>scrW)
+                newleft = curX-500+"px";   
+              else if (curX<leftedge)
+                newleft = curX;
+              else
+                newleft = curX+offsetxpoint+"px"; 
+       //       alert(newleft);
+              document.styleSheets[i][CSSRules][j].style.left = newleft; 
+              if(curY-scrY<300) 
+                newtop = scrY-75;
+              else
+                newtop = curY-300;
+              document.styleSheets[i][CSSRules][j].style.top = newtop+"px";                                          
+      }
+    } 
+    }  
+  }
+  display_cform();       
+}
+</script>
+
+<style>
+  hr.style-fade {
+    border: 0;
+    height: 2px;
+    width:500px;
+    display:block;
+    background-image: -webkit-linear-gradient(left, rgba(63,127,0,0), rgba(63,127,0,0.75), rgba(63,127,0,0)); 
+    background-image:    -moz-linear-gradient(left, rgba(63,127,0,0), rgba(63,127,0,0.75), rgba(63,127,0,0)); 
+    background-image:     -ms-linear-gradient(left, rgba(63,127,0,0), rgba(63,127,0,0.75), rgba(63,127,0,0)); 
+    background-image:      -o-linear-gradient(left, rgba(63,127,0,0), rgba(63,127,0,0.75), rgba(63,127,0,0)); 
+  }
+
+  p.print_apt {
+    display:block;
+    border:1px solid black;
+    padding-top:5px;
+    padding-bottom:10px;
+    margin-bottom:10px;    
+    padding-right:7px;
+    padding-left:7px;
+    
+  }
+
+  div.bPageHeader {
+    z-index:-1;  
+  }
+  
+  div.searchBoxClearContainer {
+    z-index: 5;   
+  }
+  
+  div#tabContainer {
+    z-index:-1;
+  } 
+
+  table.history {
+    font-family:verdana,arial;
+  }
+   
+  table.history tr.control {
+    font-weight:bold;
+    font-size:10pt;
+  }
+   
+  table.history tr.control td {
+    border-bottom:1px solid black;
+    padding-bottom:3px;    
+    empty-cells:hide;  
+  }
+     
+  table.history tr.hodd td {
+    text-align:left;  
+    padding-top:2px; padding-bottom:3px;
+    font-size:10pt;
+    border-bottom:1px dashed #5789AE; 
+    empty-cells:hide;      
+  }
+  
+  table.history tr.heven {
+    background-color:#C9E4E4;
+  }
+   
+  table.history tr.heven td {
+    text-align:left;  
+    padding-top:2px; padding-bottom:3px;
+    font-size:10pt;
+    border-bottom:1px dashed #5789AE; 
+    empty-cells:hide;       
+  }
+ 
+span.button_spacer {
+  display:inline-block;
+  width:20px;  
+}
+
+span.blank {
+    font-style:italic;
+    font-weight:bold;    
+  }    
+  
+span.scheduling_header {
+  display:block;
+  color:black;
+  font-weight:bold;
+  padding-left:10px; 
+}
+
+ 
+  .room_note_header {
+     display:none;
+     font-weight:normal; 
+                
+  }
+
+  .modalPopup_history{
+     display:inline-block;    
+     background-color: white;
+     border-width: 1px;
+     border-style: solid;
+     padding:0px;     
+     width:100%;
+     position:relative;
+     left:-1px;
+     height:200px;
+     overflow:auto;  
+  }    
+  
+.modalPopup_action{
+        display:inline-block;    
+        background-color: white;
+        border-width: 1px;
+        border-style: solid;
+        padding:0px;     
+        margin-top:5px;        
+        width:100%;
+        position:relative;
+        left:-1px;
+    }  
+   
+  .room_note {
+    display:block;  
+    font-style:italic;    
+     width:210px;
+  }
+
+  .room_holder {
+    display:inline;
+    padding-right:75px;
+    float:left;   
+  }      
+  
+  span.room_manual {      
+    font-weight:bold;
+    font-size:12pt;
+    color:red;
+    display:block;
+    padding-bottom:.5em;  
+    text-align:center;    
+  }    
+  
+  span.room_header {
+    font-weight:bold;
+    font-size:12pt;
+    color:#5789AE;
+    display:block;
+    padding-bottom:.5em;  
+    text-align:center;  
+  }
+  
+  table.calendar_view {
+<!--    background-image:url('https://cs12.salesforce.com/resource/1336491391000/LinesBackground'); -->
+    empty-cells: show;    
+    border-collapse: collapse;
+    border-spacing: 0;  
+  }
+
+  table.calendar_view td {    
+    height:15px; 
+    border-collapse: collapse;
+    border-spacing: 0;      
+  }
+  
+  table.calendar_view tr.maintick {
+    
+  }
+
+  table.calendar_view tr.maintick td {
+    vertical-align:top;   
+    padding:0;
+    margin:0;     
+    padding-left:2px;
+    padding-right:2px;    
+    border-collapse: collapse;
+    border-spacing: 0;      
+  }  
+
+  table.calendar_view tr.maintick td.hour {
+    border-top:1px solid black; 
+    font-weight:bold;
+    height:15px;    
+    width:75px;    
+    border-collapse: collapse;
+    border-spacing: 0; 
+    padding:0;
+    margin:0;      
+  }    
+
+  table.calendar_view tr.subtick {
+
+  }
+
+  table.calendar_view tr.subtick td {    
+    vertical-align:top;  
+    padding:0;
+    margin:0;     
+    padding-left:2px;
+    padding-right:2px;    
+    border-collapse: collapse;
+    border-spacing: 0;              
+  }
+   
+  table.calendar_view tr.subtick td.hour {  
+    border-top:1px dashed #cccccc;
+    font-weight:bold;
+    height:15px;
+    color:white;    
+    width:75px;    
+    border-collapse: collapse;
+    border-spacing: 0; 
+        padding:0;
+    margin:0;  
+  }  
+  
+  span.apt_blue {
+    min-width:65px;    
+    background:#9BDEFF;
+    border-collapse: collapse;
+    border-spacing: 0;      
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;  
+    text-align:center;    
+  }
+
+  span.apt_blue:hover {
+    box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black; 
+    border-collapse: separate;  
+  }   
+ 
+  span.apt_purple {
+    min-width:65px;  
+    border-collapse: collapse;
+    border-spacing: 0;      
+    background:#C9CEE4;    
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;  
+    text-align:center;    
+  } 
+
+  span.apt_purple:hover {
+    box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black; 
+    border-collapse: separate;  
+  }
+    
+  span.apt_brown {
+    min-width:65px;  
+    border-collapse: collapse;
+    border-spacing: 0;      
+    background:#CECE9D;    
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;  
+    text-align:center;    
+  }   
+  
+  span.apt_brown:hover {
+    box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black; 
+    border-collapse: separate;  
+  }
+
+  span.apt_red {
+    min-width:65px;  
+    border-collapse: collapse;
+    border-spacing: 0;      
+    background:#FFA4A4;    
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;  
+    text-align:center;    
+  }     
+  
+  span.apt_red:hover {
+    box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black; 
+    border-collapse: separate;  
+  }
+
+  span.apt_green {
+    min-width:65px;  
+    border-collapse: collapse;
+    border-spacing: 0;      
+    background:#C7E1C4;    
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;  
+    text-align:center;    
+  }     
+  
+  span.apt_green:hover {
+    box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black; 
+    border-collapse: separate;  
+  }
+
+  span.apt_grey {
+    min-width:65px;  
+    border-collapse: collapse;
+    border-spacing: 0;      
+    background:#D2D2D2;    
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;  
+    text-align:center;    
+  }     
+
+  span.apt_grey:hover {
+    box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black; 
+    border-collapse: separate;  
+  }  
+
+  span.apt_yellow {
+    min-width:65px;  
+    border-collapse: collapse;
+    border-spacing: 0;      
+    background:#FFFFAA;    
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;  
+    text-align:center;    
+  }     
+  
+  span.apt_yellow:hover {
+    box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black; 
+    border-collapse: separate;  
+  }
+  
+  span.apt_white {
+    min-width:65px;  
+    border-collapse: collapse;
+    border-spacing: 0;      
+    background:white;    
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;  
+    text-align:center; 
+    border:3px dashed #5789AE;
+  }
+  
+  span.apt_white:hover {
+    box-shadow: 5px 5px 5px #5789AE, inset 0px 0px 3px #5789AE; 
+    border-collapse: separate;    
+    border: 3px solid #5789AE;   
+  }
+    
+  span.apt_orange {
+    min-width:65px;  
+    border-collapse: collapse;
+    border-spacing: 0;      
+    background:#FED681;    
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;  
+    text-align:center;    
+  }     
+
+  span.apt_orange:hover {
+    box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black; 
+    border-collapse: separate;  
+  }
+  
+  span.apt_barney {
+    min-width:65px;  
+    border-collapse: collapse;
+    border-spacing: 0;      
+    background:#9d04ef;    
+    color:white;
+    font-weight:normal;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;  
+    text-align:center;    
+  } 
+  
+  span.apt_barney:hover {
+    box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black; 
+    border-collapse: separate;  
+  }
+
+  span.calendar_name {
+    width:200px;    
+    font-size:12pt;
+    font-weight:normal; 
+    font-family:verdana;   
+    display:block;
+    padding-bottom:10px;   
+  }
+  
+  .cal_commands {
+    font-size:10pt;
+    font-weight:bold;
+    color:blue;
+    display:block;
+    padding-left:10px;
+    text-decoration:none;
+    padding-bottom:1em;    
+  }  
+  
+  .cal_commands:hover {
+    color:red;
+    text-decoration:none;
+    border:0;    
+  }
+ 
+  span.center_line {
+    display:block;
+    padding-bottom:5px;    
+    text-align:center;  
+    width:200px; 
+  }
+  
+  span.center_tag {
+    font-weight:bold;
+    width:75px;    
+  }
+      
+  span.month_name {
+    text-align:left;
+    width:145px;  
+    display:inline-block;    
+  }
+
+  span.year_name {
+    text-align:right;   
+    width:40px;    
+    display:inline-block;    
+  }
+
+  table.calendar {
+    width:200px;
+  }
+  
+  table.calendar tr.cheader {
+    font-weight:bold;    
+  }
+  
+  table.calendar tr.cheader td {
+    border-bottom:1px solid black;    
+  }
+   
+  table.calendar td {
+    text-align:right;
+    margin-left:1px;
+    padding-right:5px;
+  }  
+  
+  table.calendar td.selected {
+    border:1px dotted black;
+    background : #ECF9FF; 
+    font-weight:bold;
+  }  
+  
+  table.calendar td.no_apt {
+    color:gray;        
+  }
+  
+  table.calendar td.empty {
+    color:green;        
+    font-weight:bold;
+  }  
+
+  table.calendar td.near_full {
+    color:blue; 
+    font-weight:bold;
+  }
+  
+  table.calendar td.full {
+    color:red;
+    font-weight:bold;
+  }
+  
+  table.calendar td.pending {
+    color:#147585;
+    font-weight:bold;
+  }
+      
+  table.calendar tr.mname td {
+    font-size:10pt;
+    text-align:center;
+    height:20px;    
+  } 
+  
+  table.calendar tr.year td {
+    font-size:10pt;
+    text-align:center;
+    height:20px;    
+  }
+   
+  span.form_header {
+    display:block;
+    margin-bottom:1em;
+    color:#5789AE;
+    font-size:12pt;
+    font-weight:bold;
+    padding-left:20px;
+    margin-left:20px;   
+    border-bottom:1px solid black;
+    width:400px;    
+  }  
+  span.form_line {
+    display:block;
+    padding-bottom:1em;    
+  }
+  span.apt_line {
+    display:block;
+    padding-bottom:5px;
+  }  
+  span.form_tag {
+    font-weight:bold;
+    width:125px;
+    display:inline-block; 
+  }
+  span.apt_tag {
+    font-weight:bold;
+    width:100px;
+    display:inline-block; 
+  }  
+  input:focus {
+        background:#E8E8D0;  
+  }
+  
+  .CSSTableGenerator {
+    margin:0px;padding:0px;
+    margin-top:10px;
+    width:450px;
+    margin-left:20px;
+    box-shadow: 10px 10px 5px #888888;
+    border:1px solid #3f7f00;
+    
+    -moz-border-radius-bottomleft:5px;
+    -webkit-border-bottom-left-radius:5px;
+    border-bottom-left-radius:5px;
+    
+    -moz-border-radius-bottomright:5px;
+    -webkit-border-bottom-right-radius:5px;
+    border-bottom-right-radius:5px;
+    
+    -moz-border-radius-topright:5px;
+    -webkit-border-top-right-radius:5px;
+    border-top-right-radius:5px;
+    
+    -moz-border-radius-topleft:5px;
+    -webkit-border-top-left-radius:5px;
+    border-top-left-radius:5px;
+    margin-right:50px;
+}.CSSTableGenerator table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    width:100%;
+    height:100%;
+    margin:0px;padding:0px;
+}.CSSTableGenerator tr:last-child td:last-child {
+    -moz-border-radius-bottomright:5px;
+    -webkit-border-bottom-right-radius:5px;
+    border-bottom-right-radius:5px;
+}
+.CSSTableGenerator table tr:first-child td:first-child {
+    -moz-border-radius-topleft:5px;
+    -webkit-border-top-left-radius:5px;
+    border-top-left-radius:5px;
+}
+.CSSTableGenerator table tr:first-child td:last-child {
+    -moz-border-radius-topright:5px;
+    -webkit-border-top-right-radius:5px;
+    border-top-right-radius:5px;
+}.CSSTableGenerator tr:last-child td:first-child{
+    -moz-border-radius-bottomleft:5px;
+    -webkit-border-bottom-left-radius:5px;
+    border-bottom-left-radius:5px;
+}.CSSTableGenerator tr:hover td{
+    
+}
+.CSSTableGenerator tr:nth-child(odd){ background-color:#d4ffaa; }
+.CSSTableGenerator tr:nth-child(even)    { background-color:#ffffff; }.CSSTableGenerator td{
+    vertical-align:middle;
+    
+    
+    border:1px solid #3f7f00;
+    border-width:0px 1px 1px 0px;
+    text-align:left;
+    padding:7px;
+    font-size:12px;
+    font-family:Arial;
+    font-weight:bold;
+    color:#000000;
+}.CSSTableGenerator tr:last-child td{
+    border-width:0px 1px 0px 0px;
+}.CSSTableGenerator tr td:last-child{
+    border-width:0px 0px 1px 0px;
+}.CSSTableGenerator tr:last-child td:last-child{
+    border-width:0px 0px 0px 0px;
+}
+.CSSTableGenerator tr:first-child td{
+        background:-o-linear-gradient(bottom, #5fbf00 5%, #3f7f00 100%);    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #5fbf00), color-stop(1, #3f7f00) );
+    background:-moz-linear-gradient( center top, #5fbf00 5%, #3f7f00 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#5fbf00", endColorstr="#3f7f00");  background: -o-linear-gradient(top,#5fbf00,3f7f00);
+
+    background-color:#5fbf00;
+    border:0px solid #3f7f00;
+    text-align:center;
+    border-width:0px 0px 1px 1px;
+    font-size:14px;
+    font-family:Arial;
+    font-weight:bold;
+    color:#ffffff;
+}
+.CSSTableGenerator tr:first-child:hover td{
+    background:-o-linear-gradient(bottom, #5fbf00 5%, #3f7f00 100%);    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #5fbf00), color-stop(1, #3f7f00) );
+    background:-moz-linear-gradient( center top, #5fbf00 5%, #3f7f00 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#5fbf00", endColorstr="#3f7f00");  background: -o-linear-gradient(top,#5fbf00,3f7f00);
+
+    background-color:#5fbf00;
+}
+.CSSTableGenerator tr:first-child td:first-child{
+    border-width:0px 0px 1px 0px;
+}
+.CSSTableGenerator tr:first-child td:last-child{
+    border-width:0px 0px 1px 1px;
+}
+</style>
+
+<script>
+function confirm_reset() {
+  var rconfirm=confirm('Are you sure you want to reset this quarter?');
+  if(rconfirm) {   
+    reset_current_qtr();
+  }  
+}   
+</script>
+
+<apex:form id="calendar_form">
+
+<table><tr><td style="width:210px;border-right:1px solid black;vertical-align:top;">
+
+<!---Calendar Navigation Functions - Start------>
+<apex:actionFunction name="view_months" oncomplete="default_cursor(this);" action="{!display_months}" rerender="calendar_holder" />
+<apex:actionFunction name="view_years" oncomplete="default_cursor(this);" action="{!display_years}" rerender="calendar_holder" />
+<apex:actionFunction name="next_month" oncomplete="default_cursor(this);" action="{!add_month}" rerender="calendar_holder,main_holder" />
+<apex:actionFunction name="prev_month" oncomplete="default_cursor(this);" action="{!subtract_month}" rerender="calendar_holder,main_holder" />
+<apex:actionFunction oncomplete="default_cursor(this);" name="change_calendar_month" action="{!change_month}" rerender="calendar_holder,main_holder">
+  <apex:param name="mnum" value="" />
+</apex:actionFunction>
+<apex:actionFunction oncomplete="default_cursor(this);" name="change_calendar_day" action="{!change_calendar_day}" rerender="calendar_holder,main_holder">
+  <apex:param name="mday" value="" />
+</apex:actionFunction>
+<apex:actionFunction oncomplete="default_cursor(this);" name="change_calendar_year" action="{!change_calendar_year}" rerender="calendar_holder,main_holder">
+  <apex:param name="cyear" value="" />
+</apex:actionFunction>
+<apex:actionFunction oncomplete="default_cursor(this);" name="change_the_center" action="{!change_center}" rerender="calendar_holder,main_holder" />
+<apex:actionFunction oncomplete="default_cursor(this);" name="reset_current_qtr" action="{!reset_build_out}" rerender="calendar_holder,main_holder" />
+<!---Calendar Navigation Functions - End------>
+
+<apex:actionFunction name="approve_close" action="{!approve_close_request}" rerender="calendar_holder,main_holder" >
+  <apex:param name="crid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="deny_close" action="{!deny_close_request}" rerender="main_holder" >
+  <apex:param name="crid" value="" />
+</apex:actionFunction>
+
+
+<apex:outputPanel layout="block" id="calendar_holder" style="padding-bottom:1em;" styleClass="no_print">
+<!--Confirmation : {!display_confirmation}<br />-->
+  <apex:outputPanel rendered="{!if(display_admin,true,false)}">
+  <span class="center_line"><apex:selectList value="{!selected_center}" onchange="use_fancy_cursor(this);change_the_center();" size="1" >
+      <apex:selectOptions value="{!center_list}"></apex:selectOptions>
+    </apex:selectList></span>
+  </apex:outputPanel> 
+  <apex:outputPanel rendered="{!if(display_admin,false,true)}">
+     <span class="center_line"><apex:selectList value="{!selected_center}" onchange="use_fancy_cursor(this);change_the_center();" size="1" >
+      <apex:selectOptions value="{!foa_center_list}"></apex:selectOptions>
+    </apex:selectList></span>
+  </apex:outputPanel> 
+
+  <span class="calendar_name"><span class="month_name" >
+  <apex:image url="{!$Resource.LArrow}" style="position:relative;top:2px;" onclick="use_fancy_cursor(this);prev_month();"/>
+    <span onclick="use_fancy_cursor(this);view_months();" >{!cmonth.monthname}</span>
+  <apex:image url="{!$Resource.RArrow}" style="position:relative;top:3px;" onclick="use_fancy_cursor(this);next_month();"/></span> 
+  <span class="year_name" onclick="use_fancy_cursor(this);view_years();">{!cmonth.yearnum}</span></span>
+  <apex:outputPanel id="calendar_view" rendered="{!if(calendar_view=='calendar','true','false')}">
+  <table class="calendar">
+  <tr class="cheader">
+    <td>Su</td>
+    <td>M</td>
+    <td>Tu</td>
+    <td>W</td>
+    <td>Th</td>
+    <td>F</td>
+    <td>Sa</td></tr> 
+  <apex:repeat value="{!cmonth.weeks}" var="week">
+    <tr>
+    <apex:repeat value="{!week.days}" var="day">
+      <td class="{!day.css_open_style}" onclick="{!if(day.display_date,'use_fancy_cursor(this);change_calendar_day(' + text(day.date_num) + ');','return false;')}"><apex:outputText rendered="{!day.display_date}" escape="false;" value="{!day.date_num}" /></td>
+    </apex:repeat>
+    </tr>
+  </apex:repeat>
+  </table>
+  <br /><br />
+  <p style="text-align:center;">
+  <span style="font-weight:bold;font-style:italic;">Total Open Days for Month : {!center_total_open_days}</span><br /><br /><br />
+  <span style="font-size:12pt;display:block;padding-bottom:10px;">QTR {!current_qtr.calendar_quarter__c}, {!current_qtr.center_year__c}</span>
+    Status : <span style="color:{!status_color};font-weight:bold;">{!current_qtr.open_status__c}</span><br /><br />
+    <apex:outputpanel rendered="{!if(current_qtr.Open_Status__c=='Build Out',true,false)}">
+      <apex:commandbutton value="Submit for Approval" rendered="true" action="{!submit_build_out}" reRender="calendar_holder,main_holder" /><br /><br />
+      <apex:outputpanel rendered="{!if(current_qtr.Denied_Reason__c<>'',true,false)}">
+        Denied By : {!current_qtr.handled_by__r.name}<br />
+        When : {!formatted_qtr_date}<br /><br />
+        Reason <br /><br /><hr class="style-fade" style="width:200px;" /><span style="font-style:italic;color:red;display:block;padding-top:5px;padding-bottom:5px;">{!current_qtr.Denied_Reason__c}</span><hr class="style-fade" style="width:200px;" /><br /> 
+      </apex:outputpanel>
+    </apex:outputpanel>
+    <apex:outputpanel rendered="{!if(current_qtr.Open_Status__c=='Pending Approval' && display_admin,true,false)}">
+      <apex:commandbutton value="Approve Build Out" action="{!approve_build_out}" reRender="calendar_holder,main_holder" /><br /><br />
+      <apex:commandbutton value="Deny Build Out" action="{!deny_build_out}" reRender="calendar_holder,main_holder" /><br /><br />
+      Reason : <apex:inputfield value="{!deny_holder.Denied_Reason__c}" />
+    </apex:outputpanel>
+    <apex:outputpanel rendered="{!if(current_qtr.Open_Status__c=='Completed',true,false)}">
+      Approved By : {!current_qtr.handled_by__r.name}<br />
+      When : {!formatted_qtr_date}<br />
+      <apex:outputpanel rendered="{!display_admin}">
+      <br /><br /><apex:commandButton value="Reset QTR" onclick="confirm_reset();return false;" />
+      </apex:outputpanel>
+    </apex:outputpanel>
+  </p>
+    </apex:outputPanel>
+
+<apex:outputPanel id="month_view" rendered="{!if(calendar_view=='months','true','false')}">
+    <table class="calendar" >
+    <apex:variable var="mnum" value="1" />          
+    <apex:repeat value="{!month_list}" var="mrow">
+      <tr class="mname">
+        <apex:repeat value="{!mrow}" var="mname">
+          <td class="{!if(mname==selected_monthname,'selected','none')}"><span onclick="use_fancy_cursor(this);change_calendar_month({!mnum});">{!mname}</span></td>
+          <apex:variable var="mnum" value="{!(value(mnum)+1)}" />             
+        </apex:repeat>      
+      </tr>      
+    </apex:repeat>  
+    </table>    
+  </apex:outputPanel>  
+  <apex:outputPanel id="year_view" rendered="{!if(calendar_view=='years','true','false')}">
+    <table class="calendar">
+    <apex:repeat value="{!year_list}" var="yrow">
+      <tr class="year">
+        <apex:repeat value="{!yrow}" var="yvalue">
+          <td class="{!if(yvalue==selected_year,'selected','none')}"><span onclick="use_fancy_cursor(this);change_calendar_year({!yvalue})">{!yvalue}</span></td>        
+        </apex:repeat>      
+      </tr>   
+    </apex:repeat>    
+    </table>
+  </apex:outputPanel>     
+</apex:outputPanel>
+
+</td>
+<td style="vertical-align:top;padding-left:20px;">
+<apex:outputPanel id="main_holder" layout="block" style="width:3800px;overflow:auto;">
+
+
+<span style="font-weight:bold;font-size:18pt;font-family:georgia;">Center is currently - &nbsp;<apex:outputText escape="false" value="{!current_date.formatted_status_text}" /></span><br /><br />
+<apex:outputpanel rendered="{!if(current_date.cd.Open_Status__c=='Closed',true,false)}" layout="block" style="paddin-left:20px;">
+  <span class="apt_line"><span class="apt_tag">Closed Reason :</span><apex:outputField value="{!current_date.cd.Closed_Reason__c}" /></span>
+  <span class="apt_line"><span class="apt_tag">Closed Note :</span><apex:outputField value="{!current_date.cd.Closed_Note__c}" /> </span>
+</apex:outputpanel>
+<br /><br />
+
+  <div class="CSSTableGenerator">
+      <table>
+        <tr>
+          <td>Consult Room</td><td># Blocks</td><td># Scheduled</td>
+        </tr>
+  <apex:outputText escape="false" value="{!current_date.room_breakout}" />
+      </table>
+      </div><br /><br />
+
+<p style="padding-left:20px;">
+  <apex:outputpanel rendered="{!if((display_admin || display_foa) && current_date.cd.Pending_Close_Requests__c==0,true,false)}">
+    <apex:commandbutton value="Open Center" rendered="{!if(current_date.cd.Open_Status__c=='Closed' || current_date.cd.Open_Status__c=='Holiday',true,false)}" action="{!open_center}" reRender="main_holder" />
+    <apex:commandbutton value="Close Center" rendered="{!if(current_date.cd.Open_Status__c=='Open',true,false)}" action="{!display_close_form}" reRender="main_holder,modal_holder" />
+  </apex:outputpanel>
+</p>
+
+<br /><apex:messages style="color:red;font-weight:bold;" /><br />
+  <apex:repeat value="{!close_requests}" var="cr">
+    <hr class="style-fade" />
+    <p style="padding-top:1em;padding-left:50px;">
+    <span style="display:block;padding-bottom:5px;">
+      <span style="font-weight:bold;display:inline-block;width:200px;">Close Requested By : </span><apex:outputfield value="{!cr.createdby.name}" />
+    </span> 
+    <span style="display:block;padding-bottom:5px;">
+      <span style="font-weight:bold;display:inline-block;width:200px;">Requested Time : </span><apex:outputfield value="{!cr.createddate}" />
+    </span> 
+    <span style="display:block;padding-bottom:5px;">
+      <span style="font-weight:bold;display:inline-block;width:200px;">Close Reason : </span><apex:outputfield value="{!cr.Close_Reason__c}" />
+    </span> 
+        <span style="display:block;padding-bottom:1.5em;">
+      <span style="font-weight:bold;display:inline-block;width:200px;">Close Notes : </span><apex:outputfield value="{!cr.Close_Notes__c}" />
+    </span> 
+    <span style="display:block;padding-bottom:5px;">
+      <span style="font-weight:bold;display:inline-block;width:200px;">Request Status : </span><apex:outputfield value="{!cr.Handled_Status__c}" />
+    </span> 
+    <apex:outputpanel rendered="{!if(cr.Handled_Status__c=='Pending',false,true)}">
+    <span style="display:block;padding-bottom:5px;">
+      <span style="font-weight:bold;display:inline-block;width:200px;">Processed By : </span><apex:outputfield value="{!cr.Handled_by__r.name}" />
+    </span> 
+    <span style="display:block;padding-bottom:5px;">
+      <span style="font-weight:bold;display:inline-block;width:200px;">Processed Time : </span><apex:outputfield value="{!cr.Handled_Time__c}" />
+    </span> 
+    </apex:outputpanel>
+    <apex:outputpanel rendered="{!if(cr.Handled_Status__c=='Denied',true,false)}" >
+    <span style="display:block;padding-bottom:5px;">
+      <span style="font-weight:bold;display:inline-block;width:200px;">Denied Notes : </span><apex:outputfield value="{!cr.Denied_Reason__c}" />
+    </span> 
+    </apex:outputpanel>
+    <apex:outputpanel rendered="{!if(cr.Handled_Status__c=='Pending' && display_admin,true,false)}"><br />
+      <apex:commandButton value="Approve" onclick="approve_close('{!cr.id}');return false;" /> 
+      <span style="display:inline-block;width:70px;">&nbsp;</span>
+      <apex:commandButton value="Denied" onclick="deny_close('{!cr.id}');return false;" /> 
+      <span style="display:inline-block;width:30px;">&nbsp;</span><span style="font-weight:bold;">Reason : </span><apex:inputfield value="{!cr.Denied_Reason__c}" /><br />
+    </apex:outputpanel>
+    </p><br />
+    <hr class="style-fade" /><br /><br />
+
+  </apex:repeat>
+
+
+<apex:outputPanel id="modal_holder" style="z-index:3000;" >
+<apex:actionRegion >
+  <apex:actionFunction oncomplete="default_cursor(this);" action="{!close_modal}" name="close_pop" rerender="modal_holder" />  
+
+   <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!modal_display}"/>
+    <apex:outputPanel styleClass="modalPopup_outer" layout="block" rendered="{!modal_display}" id="outerpop" style="left:200px;top:115px;">
+    <span class="modalPopup_outerheader" onclick="use_fancy_cursor(this);close_pop();">Close X</span>
+
+<apex:outputPanel styleClass="modalPopup_inner" rendered="{!if(modal_display && modal_type=='close_form',true,false)}" id="innerpop"> 
+<p style="padding-top:7px;padding-left:20px;">
+  <span class="apt_line">
+    <span class="apt_tag">Close Reason : </span><apex:inputField value="{!current_date.cd.Closed_Reason__c}" />
+  </span>
+  <span class="apt_line">
+    <span class="apt_tag">Close Notes : </span><apex:inputField value="{!current_date.cd.Closed_Note__c}" />
+  </span>
+  <span class="apt_line">
+    <apex:outputtext escape="false" value="{!modal_out}" />     
+  </span>
+</p>
+</apex:outputPanel>    
+
+<apex:outputPanel styleClass="modalPopup_action" rendered="{!modal_display}" id="modaction">
+  <p style="padding:2px;">  
+    <apex:commandbutton rendered="{!if(display_admin || display_foa,true,false)}" value="Save Changes" action="{!update_center_day}" rerender="main_holder,modal_holder" />
+  </p>
+</apex:outputPanel>
+</apex:outputPanel>
+</apex:actionRegion>
+</apex:outputPanel>
+
+</apex:outputPanel>
+
+</td></tr></table>
+</apex:form>
+
+</apex:page>

@@ -1,0 +1,95 @@
+<messaging:emailTemplate subject="Thank you for contacting ClearChoice Dental Implant Centers" recipientType="Lead" 
+replyto="reply-to@clearchoice.com">
+<messaging:plainTextEmailBody >
+Dear {!Recipient.FirstName}, 
+
+I’d like to thank you for contacting ClearChoice Dental Implant Centers – America’s #1 Choice for dental implants.
+ClearChoice is America’s #1 Choice for dental implants because it’s all we do.  Our revolutionary one-day procedure allows you to enjoy the life you’ve earned. We are not just restoring your teeth, but giving you back a full, active lifestyle!  
+
+At ClearChoice, we believe knowledge is power, and by obtaining accurate information you can make an informed decision as to whether our dental implant solution is right for you. We hope that, like many others, you’ll choose to schedule a free, no risk consultation with our doctors.
+
+You will have the opportunity to:
+
+
+•   Tour our advanced facility and receive a complimentary panoramic X-Ray and 3D CAT scan (a $700 value).
+•   Meet with a doctor to discuss your dental concerns and learn your treatment options.
+•   Determine the specific investment for your treatment plan and understand financing options as needed.
+
+
+Imagine, in just one day, getting the healthy permanent smile that allows you to live the life you’ve earned! 
+
+This letter confirms that you have been pre-selected to be offered the ClearChoice Basic Credit Program. 
+
+
+We hope to have the opportunity to meet you. Please call us anytime Monday through Friday at {!Recipient.Center_Phone_Number__c} between the hours of 8:00am-5:00pm to schedule your free consultation with our doctors. You may also visit our website at www.clearchoice.com
+
+
+Sincerely,
+
+<c:WL_agent_name LeadId="{!Recipient.Id}" />
+Dental Implant Consultant
+
+<c:WL_center_name LeadId="{!Recipient.Id}" /> ClearChoice Dental Center
+<c:WL_center_address_1 LeadId="{!Recipient.Id}" />
+<c:WL_center_address_2 LeadId="{!Recipient.Id}" />
+<c:WL_center_phone LeadId="{!Recipient.Id}" /> 
+
+
+ClearChoice Dental Implant Centers are locally owned and operated by licensed local dentists, and are part of a professional affiliation of implant practices operated by oral surgeons, prosthodontists and restorative dentists across the United States.
+† America's #1 Choice determined by an Independent Patient Survey 2011. *Qualified patients can have their procedure in one day after initial workup without additional bone graft surgery.  Results may vary in individual cases. +Limited services available at satellite offices.
+
+</messaging:plainTextEmailBody>
+<messaging:htmlEmailBody >
+<img id="theImage" src="http://www.clearchoice.com/files/images/EmailTemplates/ClearChoiceLogo.png" width="387" height="114"/> 
+<br/>
+<hr color="DarkBlue"/>
+<div style="text-align:justify;">
+<p style="line-height:1.4;">
+Dear {!Recipient.FirstName},
+
+<br/><br/>
+
+I’d like to thank you for contacting ClearChoice Dental Implant Centers – America’s #1 Choice for dental implants.
+<br/><br/>
+
+At ClearChoice, we believe knowledge is power, and by obtaining accurate information you can make an informed decision as to whether our dental implant solution is right for you. We hope that, like many others, you’ll choose to schedule a free, no risk consultation with our doctors.
+<br/><br/>
+
+You will have the opportunity to:
+<br/><br/>
+
+•   Tour our advanced facility and receive a complimentary panoramic X-Ray and 3D CAT scan (a $700 value).
+<br/><br/>
+•   Meet with a doctor to discuss your dental concerns and learn your treatment options.
+<br/><br/>
+•   Determine the specific investment for your treatment plan and understand financing options as needed.
+
+<br/><br/>
+
+Imagine, in just one day, getting the healthy permanent smile that allows you to live the life you’ve earned! 
+
+<br/><br/>
+
+This letter confirms that you have been pre-selected to be offered the ClearChoice Basic Credit Program. 
+
+<br/><br/>
+
+
+
+We hope to have the opportunity to meet you. Please call us anytime Monday through Friday at {!Recipient.Center_Phone_Number__c} between the hours of 8:00am-5:00pm to schedule your free consultation with our doctors. You may also visit our website at www.clearchoice.com
+
+
+</p><br /><br />
+
+Sincerely,<br /><br />
+<c:WL_agent_name LeadId="{!Recipient.Id}" /><br />
+Dental Implant Consultant<br /><br />
+<c:WL_center_name LeadId="{!Recipient.Id}" /> ClearChoice Dental Center<br />
+<c:WL_center_address_1 LeadId="{!Recipient.Id}" /><br />
+<c:WL_center_address_2 LeadId="{!Recipient.Id}" /><br /> 
+<c:WL_center_phone LeadId="{!Recipient.Id}" /> <br /><br />
+<p style="text-align:center;font-size:6pt;font-family:Arial;font-weight:bold;font-style:italic">ClearChoice Dental Implant Centers are locally owned and operated by licensed local dentists, and are part of a professional affiliation of implant practices operated by oral surgeons, prosthodontists and restorative dentists across the United States.</p>
+<span style="font-family:arial;font-size:6pt;">&#8224; America's #1 Choice determined by an Independent Patient Survey 2011. *Qualified patients can have their procedure in one day after initial workup without additional bone graft surgery.  Results may vary in individual cases. +Limited services available at satellite offices. </span>
+</div>
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

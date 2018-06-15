@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Center Open Quarter</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Center Open Quarters</value>
+    </caseValues>
+    <fields>
+        <label><!-- Calendar Quarter --></label>
+        <name>Calendar_Quarter__c</name>
+    </fields>
+    <fields>
+        <label><!-- Center Information --></label>
+        <name>Center_Information__c</name>
+        <relationshipLabel><!-- Center Open Quarters --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Center Year --></label>
+        <name>Center_Year__c</name>
+    </fields>
+    <fields>
+        <label><!-- Closed By --></label>
+        <name>Closed_By__c</name>
+        <relationshipLabel><!-- Center Open Quarters (Closed By) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Closed Time --></label>
+        <name>Closed_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Denied Reason --></label>
+        <name>Denied_Reason__c</name>
+    </fields>
+    <fields>
+        <label><!-- Handled By --></label>
+        <name>Handled_By__c</name>
+        <relationshipLabel><!-- Center Open Quarters (Handled By) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Handled Time --></label>
+        <name>Handled_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Open Status --></label>
+        <name>Open_Status__c</name>
+        <picklistValues>
+            <masterLabel>Build Out</masterLabel>
+            <translation><!-- Build Out --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending Approval</masterLabel>
+            <translation><!-- Pending Approval --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Start_Hour__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Start_Minute__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Account__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Patient_POT_Apt__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Patient_POT_Apt__c.Doctor_Notes__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Patient_POT_Apt__c.Clinical_Appointment__c.Lab_Time__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Account__c.Distance_To_Center__c</field>
+    </columns>
+    <description>Next day appointments for LV Lab</description>
+    <filter>
+        <criteriaItems>
+            <column>Clinical_Apt_Calendar__c$Account__c.Center_Location__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Los Angeles West Covina</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Clinical_Apt_Calendar__c$Apt_Date__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>greaterThan</operator>
+            <value>YESTERDAY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Clinical_Apt_Calendar__c$Apt_Date__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>TOMORROW</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <name>Las Vegas next day appts</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Clinical_Apt_Calendar_Only__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Clinical_Apt_Calendar__c$Apt_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

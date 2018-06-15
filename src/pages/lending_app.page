@@ -1,0 +1,564 @@
+<apex:page controller="CtrlLendingApp" sidebar="false" showHeader="false" doctype="html-5.0" title="PreQ" standardStylesheets="true">
+<link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:300,400,500,700" media="screen" />
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+<apex:stylesheet value="{!URLFOR($Resource.lending_app, 'css/main.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.JQuery)}" />
+<apex:includeScript value="{!URLFOR($Resource.lending_app, 'javascript/main.js')}" />
+
+<apex:form >
+<apex:outputPanel id="main">
+
+    <!-- header & content header -->
+
+    <apex:outputPanel layout="block" styleClass="main-page">
+        <apex:outputPanel styleClass="main-page">
+        </apex:outputPanel>
+        <apex:outputPanel layout="block" styleClass="content-header">
+            <apex:outputText styleClass="text" value="{!header}"></apex:outputText>
+        </apex:outputPanel>
+
+        <!-- login  -->
+
+        <apex:outputPanel layout="block" rendered="{! page = 'login'}" styleClass="login-container">
+        <apex:pageMessages id="login-messages"></apex:pageMessages>
+
+        <apex:outputPanel layout="block" styleClass="label add-space">Enter Last Name</apex:outputPanel>
+          <apex:inputText value="{!loginLastName}" html-placeholder="Enter Last Name" styleClass="patient-info" />
+        <apex:outputPanel layout="block" styleClass="label">Enter Password</apex:outputPanel>
+          <apex:inputSecret value="{!loginPassword}" html-placeholder="Enter Password" styleClass="patient-info" />
+
+        <apex:outputPanel layout="block" styleClass="custom-button">
+            <apex:commandButton value="LOG IN" action="{!validateLogin}" reRender="main" />
+        </apex:outputPanel>
+
+        </apex:outputPanel>
+
+        <!-- main  -->
+
+        <apex:outputPanel layout="block" rendered="{! page == 'main'}">
+          <apex:outputPanel layout="block" styleClass="info">
+              <apex:outputText >
+                  Enter or verify the information below to begin the pre-qualification
+                  inquiry to be submitted to participating Finance Companies*. Please
+                  note that your verified contact information here will be reflected
+                  as corrections to previously entered information on file.
+                </apex:outputText>
+          </apex:outputPanel>
+
+          <apex:outputPanel rendered="{! renderErrors == true}" styleClass="errors">
+              <apex:repeat value="{!errorMessages}" var="messages">
+                  <apex:outputText value="{!messages}"></apex:outputText><br />
+              </apex:repeat>
+          </apex:outputPanel>
+
+          <apex:pageMessages id="messages"></apex:pageMessages>
+
+          <apex:outputPanel >
+              <apex:outputPanel layout="block" styleClass="label">First Name</apex:outputPanel>
+                <apex:inputText value="{!virtualPatient.FirstName}" html-placeholder="First name" styleClass="patient-info" />
+              <apex:outputPanel layout="block" styleClass="label">Last Name</apex:outputPanel>
+                <apex:inputText value="{!virtualPatient.LastName}" html-placeholder="Last name" styleClass="patient-info" />
+              <apex:outputPanel layout="block" styleClass="label">Date of Birth</apex:outputPanel>
+                <apex:input value="{!virtualPatient.Date_of_Birth}" html-placeholder="Date of Birth" type="date" styleClass="patient-info" />
+              <apex:outputPanel layout="block" styleClass="label">Street Address (No Po Boxes)</apex:outputPanel>
+                <apex:inputText value="{!virtualPatient.BillingStreet}" html-placeholder="Street Address" styleClass="patient-info" />
+              <apex:outputPanel layout="block" styleClass="label">City</apex:outputPanel>
+                <apex:inputText value="{!virtualPatient.BillingCity}" html-placeholder="City" styleClass="patient-info" />
+              <apex:outputPanel layout="block" styleClass="label">State</apex:outputPanel>
+                <apex:inputField value="{!application.Home_State__c}" html-placeholder="Valid ID State" styleClass="patient-info options" />
+              <apex:outputPanel layout="block" styleClass="label">Zipcode</apex:outputPanel>
+                <apex:inputText value="{!virtualPatient.BillingPostalCode}" html-placeholder="Zipcode" styleClass="patient-info" />
+              <apex:outputPanel layout="block" styleClass="label">Primary Phone Number</apex:outputPanel>
+                <apex:inputText value="{!virtualPatient.Phone}" html-placeholder="Primary Phone Number" styleClass="patient-info" />
+              <apex:outputPanel layout="block" styleClass="label">Mobile/Alternate Phone Number (optional)</apex:outputPanel>
+                <apex:inputText value="{!virtualPatient.PersonMobilePhone}" html-placeholder="Mobile Phone Number" styleClass="patient-info" />
+              <apex:outputPanel layout="block" styleClass="label">Email
+              </apex:outputPanel>
+                <apex:inputText value="{!virtualPatient.PersonEmail}" html-placeholder="Email" styleClass="patient-info" />
+              <apex:outputPanel layout="block" styleClass="label">Valid Id Type</apex:outputPanel>
+                <apex:inputField value="{!application.Id_Type__c}" html-placeholder="Valid ID State" styleClass="patient-info options" />
+              <apex:outputPanel layout="block" styleClass="label">Valid Id Number</apex:outputPanel>
+                <apex:inputField value="{!application.Id_Number__c}" html-placeholder="Valid ID Number" styleClass="patient-info" />
+              <apex:outputPanel layout="block" styleClass="label">Valid Id State</apex:outputPanel>
+                <apex:inputField value="{!application.Id_State__c}" html-placeholder="Valid ID State" styleClass="patient-info options" />
+              <apex:outputPanel layout="block" styleClass="label">Valid Id Issuance Date</apex:outputPanel>
+                <apex:inputField value="{!application.Id_Issuance_Date__c}" html-placeholder="ID Issuance Date" type="date" styleClass="patient-info" showDatePicker="false" />
+              <apex:outputPanel layout="block" styleClass="label">Valid Id Expiration Date</apex:outputPanel>
+                <apex:inputField value="{!application.Id_Expiration_Date__c}" html-placeholder="ID Expiration Date" type="date" styleClass="patient-info"  showDatePicker="false" />
+              <apex:outputPanel layout="block" styleClass="label">Employment Status</apex:outputPanel>
+                <apex:inputField value="{!application.Employment_Status__c}" html-placeholder="Valid ID State" styleClass="patient-info options" />
+              <apex:outputPanel layout="block" styleClass="label">
+                Gross Yearly Individual Income:
+                Your total personal income (for the applicant only) from salaries, investments, rental property proceeds, Social Security benefits, and other sources. You do not need to include alimony, child support, or separate maintenance income if you will not rely on those funds to repay your credit plan.
+              </apex:outputPanel>
+                <apex:inputField value="{!application.Gross_Yearly_Individual_Income__c}" html-placeholder="Gross Yearly Individual Income" styleClass="patient-info" />
+              <apex:outputPanel layout="block" styleClass="label">
+                Gross Yearly Additional Income:
+                Any supplemental sources of income which you have not included in the Gross yearly individual income field above. Enter $0 if you do not have any additional income.
+              </apex:outputPanel>
+                <apex:inputField value="{!application.Gross_Yearly_Household_Income__c}" html-placeholder="Gross Yearly Household Income" styleClass="patient-info" />
+              <apex:outputPanel layout="block" styleClass="label">Residence Type - Rent/Own </apex:outputPanel>
+                <apex:inputField value="{!application.Residence_Type__c}" html-placeholder="Monthly Rent/Mortgage Payment" styleClass="patient-info options" />
+              <apex:outputPanel layout="block" styleClass="label">Monthly Rent/Mortgage Payment</apex:outputPanel>
+                <apex:inputField value="{!application.Monthly_Residence_Payment__c}" html-placeholder="Monthly Rent/Mortgage Payment" styleClass="patient-info" />
+              <apex:outputPanel layout="block" styleClass="label">Pre-qualification Amount (between $499 and $99,999)</apex:outputPanel>
+                <apex:inputField value="{!application.Loan_Amount__c}" html-placeholder="Loan Amount" styleClass="patient-info" />
+              <apex:outputPanel layout="block" styleClass="label">Social Security Number</apex:outputPanel>
+                <apex:inputSecret value="{!ssn}" html-placeholder="Social Security Number" styleClass="patient-info" />
+              <apex:outputPanel layout="block" styleClass="label">Re-enter Social Security Number</apex:outputPanel>
+                <apex:inputSecret value="{!ssnReentry}" html-placeholder="Re-enter Social Security Number" styleClass="patient-info" />
+
+              <apex:outputPanel layout="block" styleClass="custom-button">
+              <apex:commandButton action="{!saveApplicationInfo}" value="NEXT" reRender="main" oncomplete="window.scrollTo(0,0); if('{! !signed }' == 'true') { renderSignatureForm(); } " />
+              <apex:outputPanel layout="block" styleClass="custom-button label confirm-text">
+              You will be asked to confirm before inquiry is sumbitted.
+              </apex:outputPanel>
+              <apex:outputPanel layout="block" styleClass="custom-button label confirm-text">
+                Using this System is completely voluntary.  You are under no obligation to use any of the participating
+                Finance Companies and are free to explore other financing options outside of the PreQ system.
+              </apex:outputPanel>
+              <apex:outputPanel layout="block" styleClass="custom-button label confirm-text">
+                ClearChoice makes no recommendations to the participating Finance Companies available through the System.
+                ClearChoice makes no representations or assurances as to the quality or accuracy of any of the participating
+                Finance Companies’ services, pre-qualifications, or offers.
+              </apex:outputPanel>
+              </apex:outputPanel>
+              <apex:outputPanel layout="block" styleClass="info">
+                <apex:commandLink action="{!ccPrivacyPolicy}" value="PreQ Privacy Policy" styleClass="custom-link" rerender="main"/>
+              </apex:outputPanel>
+              <apex:outputPanel layout="block" styleClass="custom-button label confirm-text">
+              * <em>Finance Companies</em> shall mean Springstone Financial, LLC, LendingClub Corporation, and LendingClub Patient Solutions.
+            </apex:outputPanel>
+          </apex:outputPanel>
+        </apex:outputPanel>
+
+        <!-- confirmation page -->
+
+        <apex:actionFunction name="saveSignature"
+                             action="{!saveSignature}"
+                             reRender="signature-form">
+           <apex:param id="strDataURITR" name="strDataURI" value="" />
+           <apex:param id="id" name="id" value="" />
+           <apex:param id="signatureValid" name="signatureValid" value="" />
+        </apex:actionFunction>
+
+
+        <apex:outputPanel layout="block" rendered="{! page == 'confirmation'}">
+          <apex:outputPanel rendered="{! renderErrors == true}" styleClass="errors">
+              <apex:repeat value="{!errorMessages}" var="messages">
+                  <apex:outputText value="{!messages}"></apex:outputText><br />
+              </apex:repeat>
+          </apex:outputPanel>
+          <apex:pageMessages id="confirmation-messages"></apex:pageMessages>
+
+          <apex:outputPanel layout="block" styleClass="confirmation-terms-container">
+              <apex:outputPanel styleClass="confirmation-terms">
+                  <apex:inputCheckbox value="{!acceptTerms1}" styleClass="checkbox" />
+                  <apex:outputText >
+                      I have reviewed and I agree to the
+                  </apex:outputText>&nbsp;
+                  <apex:commandLink action="{!ccPrivacyPolicy}" value="PreQ Privacy Policy." styleClass="custom-link" rerender="main"/>
+              </apex:outputPanel>
+          </apex:outputPanel>
+
+          <apex:outputPanel layout="block" styleClass="confirmation-terms-container">
+              <apex:outputPanel styleClass="confirmation-terms">
+                  <apex:inputCheckbox value="{!acceptTerms2}" styleClass="checkbox" />
+                  <apex:outputText >
+                    I agree that I will receive notices and a copy of the PreQ Privacy Policy by email.
+                  </apex:outputText>&nbsp;
+              </apex:outputPanel>
+          </apex:outputPanel>
+
+          <apex:outputPanel layout="block" styleClass="confirmation-terms-container">
+              <apex:outputPanel styleClass="confirmation-terms">
+                  <apex:inputCheckbox value="{!acceptTerms3}" styleClass="checkbox" />
+                  <apex:outputText >
+                    I affirm that I am at least 18 years of age or the age of legal majority in my jurisdiction (if different than 18); and that the information I entered is true and correct. I authorize the participating Finance Companies to verify the information I entered. I authorize the participating Finance Companies to share information concerning the status of the Pre-Qualification Inquiry with this ClearChoice Dental Implant Center that I designate.
+                  </apex:outputText>&nbsp;
+              </apex:outputPanel>
+          </apex:outputPanel>
+
+          <apex:outputPanel layout="block" styleClass="confirmation-terms-container">
+              <apex:outputPanel styleClass="confirmation-terms">
+                  <apex:inputCheckbox value="{!acceptTerms4}" styleClass="checkbox" />
+                  <apex:outputText >
+                      I agree that the information entered into the PreQ system:
+                    <div class="list">
+                        - Is my own;
+                    </div>
+                    <div class="list">
+                        - Does not contain any false or misleading information;
+                    </div>
+                    <div class="list">
+                        - Has been reviewed and authorized by me.
+                    </div>
+                    <div class="list">
+                        - If another person has assisted me in entering my information,
+                        I have authorized that person to enter the information and
+                        have verified all information entered.
+                    </div>
+                  </apex:outputText>
+              </apex:outputPanel>
+          </apex:outputPanel>
+
+          <apex:outputPanel layout="block" styleClass="confirmation-terms-container">
+              <apex:outputPanel styleClass="confirmation-terms">
+                  <apex:inputCheckbox value="{!acceptTerms5}" styleClass="checkbox" />
+                  <apex:outputText >
+                    I understand that by clicking on the I AGREE button immediately following this notice that I am providing ‘written instructions’ to each participating Finance Company under the Fair Credit Reporting Act authorizing each participating Finance Company to obtain information from my personal credit profile or other information from one or more credit reporting agencies.  I authorize each participating Finance Company to obtain such information for the purpose of pre-qualifying me for credit options and to verify my identity and the information provided in connection with my pre-qualification inquiry.
+                  </apex:outputText>
+              </apex:outputPanel>
+          </apex:outputPanel>
+
+          <apex:outputPanel layout="block" id="signature-form" styleClass="signature-form">
+              <!-- signature form -->
+              <apex:outputPanel rendered="{! !signed}">
+                <div class="please-sign">
+                  Please sign here
+                </div>
+                <canvas class="canvas" id="signatureCanvas" width="500" height="200" />
+                <div class="signature-container">
+                  <apex:outputPanel layout="block" styleClass="custom-button signature clear">
+                    <apex:commandButton value="Clear Signature" onclick="resetSignature(); return false;" />
+                  </apex:outputPanel>
+                  <apex:outputPanel layout="block" styleClass="custom-button signature save">
+                  <apex:commandButton onclick="parseSignature('{!application.Id}'); return false;" value="Save Signature"/ >
+                  </apex:outputPanel>
+                </div>
+              </apex:outputPanel>
+
+              <!-- renders image of signature if signature -->
+              <apex:outputpanel rendered="{! signed}">
+                  <table>
+                      <tr>
+                          <td><apex:image value="data:image;base64,{!signatureImage}" /></td>
+                          <!-- <td>{!signature_image_talent_release_date}</td> -->
+                      </tr>
+                  </table>
+                  <br/>
+                  <apex:outputPanel layout="block" styleClass="custom-button signature">
+                    <apex:commandButton action="{!resetSignature}" value="Sign Form Again" reRender="signature-form"  oncomplete="renderSignatureForm()"/>
+                  </apex:outputPanel>
+              </apex:outputpanel>
+          </apex:outputPanel>
+
+            <!-- FIXME: removed script -->
+
+          <apex:outputPanel layout="block" styleClass="confirmation-terms-container">
+              <apex:outputPanel styleClass="confirmation-terms agree">
+                  <apex:outputText >
+                    By clicking I AGREE the pre-qualification inquiry will be submitted.
+                  </apex:outputText>
+              </apex:outputPanel>
+          </apex:outputPanel>
+
+          <div class="submission">
+            <apex:outputPanel layout="block" styleClass="custom-button submit-inquiry">
+                <apex:commandButton value="I UNDERSTAND AND AGREE" onclick="acceptTermsAndSetState( '{! signed }' ); return false;" reRender="main" oncomplete="window.scrollTo(0,0);" />
+                </apex:outputPanel>
+
+                <apex:actionFunction name="acceptTermsAndConditions" action="{!acceptTermsAndConditions}"
+                                                                     reRender="main"
+                                                                     onComplete="window.scrollTo(0,0)"
+                                                                     status="loading" />
+                <apex:actionStatus id="loading">
+                <apex:facet name="start">
+                <apex:image url="{!URLFOR($Resource.lending_app, 'img/loader.gif')}" width="75"
+                                                                                height="75"
+                                                                                alt="Processing inquiry..." />
+              </apex:facet>
+            </apex:actionStatus>
+          </div>
+
+        </apex:outputPanel>
+
+        <!-- offers  -->
+
+        <apex:outputPanel rendered="{! page == 'offers'}" styleClass="offers-page">
+            <apex:outputPanel id="offers" styleClass="offers">
+
+            <apex:outputPanel rendered="{! hasStandardOffers }">
+              <apex:outputPanel layout="block" styleClass="info offers-header">
+                <apex:outputText >Installment Loans
+                </apex:outputText>
+              </apex:outputPanel>
+
+              <table class="offers">
+                 <thead>
+                     <th>
+                       <apex:commandLink value="Financing" styleClass="{! if(sortOffersBy = 'Lender__c', 'custom-link current', 'custom-link')}" rerender="main">
+                       <apex:param name="sortOffersBy"
+                                   value="Lender__c"
+                                   assignTo="{!sortOffersBy}"/>
+                       </apex:commandLink>
+                     </th>
+                     <th>
+                       <apex:commandLink value="Monthly Payment" styleClass="{! if(sortOffersBy = 'Monthly_Payment__c', 'custom-link current', 'custom-link')}" rerender="main">
+                       <apex:param name="sortOffersBy"
+                                   value="Monthly_Payment__c"
+                                   assignTo="{!sortOffersBy}"/>
+                       </apex:commandLink>
+                     </th>
+                     <th>
+                       <apex:commandLink value="APR" styleClass="{! if(sortOffersBy = 'APR__c', 'custom-link current', 'custom-link')}" rerender="main">
+                       <apex:param name="sortOffersBy"
+                                   value="APR__c"
+                                   assignTo="{!sortOffersBy}"/>
+                       </apex:commandLink>
+                     </th>
+                     <th>
+                       <apex:commandLink value="Max Amount" styleClass="{! if(sortOffersBy = 'Max_Line__c DESC', 'custom-link current', 'custom-link')}" rerender="main">
+                       <apex:param name="sortOffersBy"
+                                   value="Max_Line__c DESC"
+                                   assignTo="{!sortOffersBy}"/>
+                       </apex:commandLink>
+                     </th>
+                     <th>
+                       <apex:commandLink value="Term" styleClass="{! if(sortOffersBy = 'Term__c DESC', 'custom-link current', 'custom-link')}" rerender="main">
+                       <apex:param name="sortOffersBy"
+                                   value="Term__c DESC"
+                                   assignTo="{!sortOffersBy}"/>
+                       </apex:commandLink>
+                     </th>
+                     <th class="{! if(!publicUser,  'hide-buttons', '')}"></th>
+                 </thead>
+                 <apex:repeat value="{!standardOffers}" var="offer">
+                     <tr>
+                         <td>{! offer.Lender__c}&sup1;</td>
+                         <td>${! offer.Monthly_Payment__c}</td>
+                         <td>{! if(offer.APR__c == 0.00, "*", offer.APR__c) }%</td>
+                         <td>${! offer.Max_Line__c}</td>
+                         <td>{! if(offer.Term__c == null, "*", offer.Term__c) } months</td>
+                         <td class="{! if(!publicUser,  'hide-buttons', '')}">
+                             <apex:outputPanel layout="block" rendered="{! publicUser }">
+                                 <apex:commandLink value="Select" styleClass="btn custom-button" action="{!selectOffer}" rerender="main" oncomplete="window.scrollTo(0,0);">
+                                   <apex:param value="{!offer.Loan_Application_Url__c}"
+                                               name="loanApplicationUrl"
+                                               assignTo="{!loanApplicationUrl}" />
+                                 </apex:commandLink>
+                             </apex:outputPanel>
+                         </td>
+                     </tr>
+                 </apex:repeat>
+             </table>
+            </apex:outputPanel>
+
+            <apex:outputPanel rendered="{! hasPromotionalOffers }">
+              <apex:outputPanel layout="block" styleClass="info offers-header promotional">
+                  <apex:outputText >True No-Interest Plans for 6, 12, 18 or 24 months -
+                  </apex:outputText>
+                    <br></br>
+                  <apex:outputText >After that, 26.99% standard APR
+                  </apex:outputText>
+                  <sup>&dagger;</sup>
+              </apex:outputPanel>
+
+              <table class="offers">
+                  <thead>
+                      <th>
+                        <apex:commandLink value="Financing" styleClass="{! if(sortOffersBy = 'Lender__c', 'custom-link current', 'custom-link')}" rerender="main">
+                        <apex:param name="sortOffersBy"
+                                    value="Lender__c"
+                                    assignTo="{!sortOffersBy}"/>
+                        </apex:commandLink>
+                      </th>
+                      <th>
+                        <apex:commandLink value="Sugg Monthly Payment" styleClass="{! if(sortOffersBy = 'Monthly_Payment__c', 'custom-link current', 'custom-link')}" rerender="main">
+                        <apex:param name="sortOffersBy"
+                                    value="Monthly_Payment__c"
+                                    assignTo="{!sortOffersBy}"/>
+                        </apex:commandLink>
+                        <sup>&Dagger;</sup>
+                      </th>
+                      <th>
+                        <apex:commandLink value="Promotional Period APR" styleClass="{! if(sortOffersBy = 'APR__c', 'custom-link current', 'custom-link')}" rerender="main">
+                        <apex:param name="sortOffersBy"
+                                    value="APR__c"
+                                    assignTo="{!sortOffersBy}"/>
+                        </apex:commandLink>
+                      </th>
+                      <th>
+                        <apex:commandLink value="Max Amount/Total Cost" styleClass="{! if(sortOffersBy = 'Max_Line__c DESC', 'custom-link current', 'custom-link')}" rerender="main">
+                        <apex:param name="sortOffersBy"
+                                    value="Max_Line__c DESC"
+                                    assignTo="{!sortOffersBy}"/>
+                        </apex:commandLink>
+                      </th>
+                      <th>
+                        <apex:commandLink value="Promotional Period" styleClass="{! if(sortOffersBy = 'Promotional_Period__c DESC', 'custom-link current', 'custom-link')}" rerender="main">
+                        <apex:param name="sortOffersBy"
+                                    value="Promotional_Period__c DESC"
+                                    assignTo="{!sortOffersBy}"/>
+                        </apex:commandLink>
+                      </th>
+                      <th class="{! if(!publicUser,  'hide-buttons', '')}"></th>
+                  </thead>
+                  <apex:repeat value="{!promotionalOffers}" var="offer">
+                      <tr>
+                          <td>{! offer.Lender__c}</td>
+                          <td>${! offer.Monthly_Payment__c}</td>
+                          <td>0%</td>
+                          <td>${! offer.Max_Line__c}</td>
+                          <td>{! offer.Promotional_Period__c} months</td>
+                          <td class="{! if(!publicUser,  'hide-buttons', '')}">
+                              <apex:outputPanel layout="block" rendered="{! publicUser }">
+                                  <apex:commandLink value="Select" styleClass="btn custom-button" action="{!selectOffer}" rerender="main" oncomplete="window.scrollTo(0,0);">
+                                    <apex:param value="{!offer.Loan_Application_Url__c}"
+                                                name="loanApplicationUrl"
+                                                assignTo="{!loanApplicationUrl}" />
+                                  </apex:commandLink>
+                              </apex:outputPanel>
+                          </td>
+                      </tr>
+                  </apex:repeat>
+              </table>
+            </apex:outputPanel>
+
+            <apex:outputPanel layout="block" rendered="{! proceedFinanceDeclined}" styleClass="info offers-disclosure fully-declined">
+                <apex:outputText styleClass="declined-text">
+                    Your pre-application did not result in any offers to apply for a loan from the participating Finance Companies at this time. You should receive further information from the participating Finance Companies regarding the reasons for their decisions.
+                </apex:outputText>
+            </apex:outputPanel>
+            <apex:outputPanel layout="block" rendered="{! lendingClubDeclined }" styleClass="info offers-disclosure declined">
+              <apex:outputText styleClass="declined-text">
+                  Your pre-application did not result in any offers to apply for a loan from the participating Finance Companies at this time. You should receive further information from the participating Finance Companies regarding the reasons for their decisions.
+              </apex:outputText>
+            </apex:outputPanel>
+            <apex:outputPanel layout="block" rendered="{! proceedFinanceDeclined }" styleClass="info offers-disclosure declined">
+                <apex:outputText styleClass="declined-text">
+                    Your pre-application did not result in any offers to apply for a loan from the participating Finance Companies at this time. You should receive further information from the participating Finance Companies regarding the reasons for their decisions.
+                </apex:outputText>
+            </apex:outputPanel>
+            <apex:outputPanel layout="block" styleClass="info offers-disclosure" rendered="{! hasStandardOffers || hasPromotionalOffers }">
+                <apex:outputText >
+                    * Pre-qualification offers are based on a preliminary review by participating Finance Companies of credit information and are not a commitment to lend.  Pre-qualification offers are estimates and are subject to change or cancellation if the information used to make the estimate is inaccurate or unable to be verified, or if the requested financing option no longer meets applicable requirements.
+                  </apex:outputText>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{! hasPromotionalOffers }">
+              <apex:outputPanel layout="block" styleClass="info offers-disclosure">
+                  <sup>&dagger;</sup> No interest for 6, 12, 18, or 24 months, after that 26.99% standard APR.  Interest will be charged to your account at the standard APR of 26.99% from the end of the promotional period on the remaining balance if the purchase balance is not paid in full within the promotional period.  Minimum monthly payments are required for this plan during the promotional period.  Required minimum purchase of $499 for the 6-month plan; $999 for the 12-month plan; $1,499 for the 18-month plan; $2,499 for the 24-month plan.  LendingClub Patient Solutions credit accounts are offered by Comenity Capital Bank which determines qualifications for credit and promotion eligibility.  Minimum interest charge is $1.00 per credit plan.  Standard APR of 26.99%.
+              </apex:outputPanel>
+              <apex:outputPanel layout="block" styleClass="info offers-disclosure">
+                    <sup>&Dagger;</sup>The True No-Interest Plan Equal Monthly Payments shown are representative examples that reflect the monthly payment required to pay off the balance within the promotional period, and will not be equal to your minimum payment.  If you pay the representative equal payment you should pay off the plan within the promotional period.  The minimum payment due assumes there are no other balances on your account.  Purchase must be made using your LendingClub Patient Solutions credit account and is subject to credit approval.  The actual minimum payment due will be calculated as the greater of (a) $5, or (b) 4% of the New Balance shown on your statement (rounded to the nearest $1).  At no time will your minimum payment due be less than $27.  The estimated monthly payment was calculated using the following assumptions: payments are made each period; no debt cancellation or suspension agreement applies to the Account; no taxes or ancillary charges are or will be added to the Account; goods and/or services are purchased on a single date; and you are not currently and will not become delinquent on the Account.  Equal Monthly Payments are not required, but are recommended to lead to full payoff during the promotional period.
+                </apex:outputPanel>
+                <apex:outputPanel layout="block" styleClass="info offers-disclosure">
+                  &sup1; LendingClub Patient Solutions pre-qualification offers for all Extended Plan loans made by NBT
+                  Bank, N.A., member FDIC. Terms available based on amount financed and credit history.
+                </apex:outputPanel>
+                <apex:outputPanel layout="block" styleClass="info offers-disclosure">
+                  Pre-qualification offers are based on a preliminary review by participating Finance Companies of
+                  credit information and are not a commitment to lend. Pre-qualification offers are estimates and
+                  are subject to change or cancellation if the information used to make the estimate is inaccurate or
+                  unable to be verified, or if the requested financing option no longer meets applicable
+                  requirements.
+                </apex:outputPanel>
+            </apex:outputPanel>
+
+            <apex:outputPanel layout="block" styleClass="info">
+              <apex:commandLink action="{!ccPrivacyPolicy}"  value="PreQ Privacy Policy" styleClass="custom-link" rerender="main" />
+            </apex:outputPanel>
+
+            </apex:outputPanel>
+        </apex:outputPanel>
+
+        <!-- privacy-policy -->
+
+        <apex:outputPanel layout="block" rendered="{! page == 'privacy-policy'}" styleClass="info disclaimers">
+            <div class="text">
+              ClearChoice PreQ&#8482; Pre-Qualification Inquiry System Privacy Policy
+            </div>
+            <div class="text">
+              ClearChoice Management Services, LLC, and its network of affiliated dental practices (“<strong>ClearChoice</strong>”) developed a proprietary electronic pre-qualification submittal system interface (the “<strong>PreQ System</strong>”) for the benefit of prospective patients (as a “<strong>Pre-applicant</strong>”).  The PreQ system is a voluntary system, and, accordingly, you may “opt-out” of sharing your personal information by deciding that you will not participate. If you decide to participate as a Pre-applicant you will submit to participating financing companies your non-public personally identifiable information entered into the PreQ System including, without limitation, the following categories: name, address, phone numbers, email addresses, birthdate, and income information. ClearChoice may also receive information from the participating finance companies regarding any pre-qualification offers that may be extended to you. This information, together with information you will submit through the PreQ System, is known as <strong>“Personal Information”. ClearChoice is authorized to, and may, collect that Personal Information to contact you for informational and marketing purposes; to facilitate operation, development and improvement of the PreQ System; to enhance customer service; and for any other lawful purpose.</strong> Personal Information may be retained by ClearChoice to the extent permitted under the law.
+            </div>
+            <div class="text">
+              <strong>By using the PreQ System, you acknowledge that you are transmitting, and have authorized the transmittal of, all Personal Information entered into the PreQ System to participating financing companies and their use of all such Personal Information.</strong> The PreQ System may contain links to the websites of the participating financing companies. You are encouraged review the privacy policies for each of the participating financing companies. ClearChoice is not responsible for the privacy practices of any other person or entity.
+            </div>
+            <div class="text">
+              ClearChoice does not disseminate to, or share Personal Information with, other third parties for direct marketing activities. Statistical or general outcomes analysis may be shared with trusted third parties who assist ClearChoice in operating the PreQ System and in conducting its business. ClearChoice shares Personal Information in such a way that it is not unnecessarily disclosed.  ClearChoice may also disclose Personal Information as required by law, such as to comply with a subpoena or similar legal process. All of the foregoing statements apply equally to current customers and former customers.
+            </div>
+            <div class="text">
+              To protect Personal Information from unauthorized access and use, ClearChoice uses commercially reasonable security measures including computer safeguards and secured files and buildings. However, because information in electronic communications can sometimes be intercepted by a third party, ClearChoice does not provide any assurance that the information entered into the PreQ System will not become known or accessible to unintended third parties.
+            </div>
+            <div class="text">
+              By using the PreQ System, you acknowledge ClearChoice’s policy regarding, and authorize ClearChoice’s, collection, transfer, handling and processing of your Personal Information.
+             </div>
+            <div class="text">
+              The dental practice also has a Notice of Privacy Practices governing use and disclosure of your health information. By sharing your personal information and deciding to participate in the voluntary PreQ System, you are also acknowledging prior receipt and acceptance of the Notice of Privacy Practices provided to you by the dental practice.
+           </div>
+            <div class="text">
+              This Privacy Policy is the most recent version, last updated on March 15, 2018.  ClearChoice may update, revise, or amend this Privacy Policy at any time. If this Privacy Policy is updated, you will receive a copy of the newest version within thirty (30) days of the enactment of the revised policy.
+              <apex:outputPanel layout="block">
+                  <apex:outputPanel >
+                      <apex:inputCheckbox value="{!acceptTerms2}" styleClass="checkbox" />
+                      <apex:outputText >
+                          I choose to opt in to receive notices and a copy of this Privacy Policy by email.
+                      </apex:outputText>&nbsp;
+                  </apex:outputPanel>
+              </apex:outputPanel>
+           </div>
+           <div class="text">
+              If at any time you decide you would like to receive delivery of all notices, including, without limitation, all annual privacy policy statements by standard U.S. Mail, you may do so <a class="opt-out" href="https://clearchoicecallcenter.secure.force.com/preq" target="_blank">here</a>.
+           </div>
+            <div class="text">
+              © ClearChoice Management Services, LLC. 2018. All rights reserved.
+            </div>
+            <apex:outputPanel layout="block" styleClass="custom-button">
+              <apex:commandButton action="{!ccPrivacyPolicy}" value="I UNDERSTAND AND AGREE" rerender="main" oncomplete="renderSignatureForm(); window.scrollTo(0, document.body.scrollHeight);" />
+            </apex:outputPanel>
+        </apex:outputPanel>
+
+        <!-- leaving-clearchoice -->
+
+        <apex:outputPanel id="leaving-clearchoice" layout="block" rendered="{! page == 'leaving-clearchoice'}" styleClass="info disclaimers">
+            <div class="text">
+              By clicking I UNDERSTAND, you understand you are leaving the
+              PreQ system and will be redirected to a third party website not affiliated
+              with the PreQ system.
+            </div>
+            <apex:outputPanel rendered="{!if(CONTAINS(loanApplicationUrl, 'hcsloans'), true, false)}">
+              <div class="text">
+                <a href="https://portal.hcsloans.com/res/assets/pdfs/ESignDisclosuresAndSignaturesConsent.pdf" target="_blank">HCS eDisclosure</a>
+              </div>
+              <div class="text">
+                <a href="http://www.hcsloans.com/privacy/" target="_blank">HCS Privacy</a>
+              </div>
+            </apex:outputPanel>
+            <apex:outputPanel styleClass="custom-button">
+              <apex:commandButton action="{!goToOffersPage}" value="I UNDERSTAND" onclick="openOffer('{!loanApplicationUrl}');" rerender="main" />
+            </apex:outputPanel>
+            <apex:outputPanel styleClass="custom-button go-back">
+              <apex:commandButton action="{!goToOffersPage}" value="GO BACK" reRender="main" />
+            </apex:outputPanel>
+        </apex:outputPanel>
+
+    <!-- declined  -->
+
+    <!-- <apex:outputPanel rendered="{! page == 'declined'}" styleClass="offers-page">
+    <apex:outputPanel layout="block" styleClass="info">
+      <apex:outputText >
+        We were unable to match you with a pre-qualified offer. Explanation will be mailed to the
+        applicant’s provided mailing address within 30 days.
+      </apex:outputText>
+    </apex:outputPanel>
+    <apex:outputPanel layout="block" styleClass="info warning">
+      <apex:outputText >
+        NOTE: You may have recieved this notice if you entered an incorrect or invalid Social Security Number.
+      </apex:outputText>
+    </apex:outputPanel>
+    </apex:outputPanel> -->
+
+    <!-- unavailable  -->
+
+    <apex:outputPanel rendered="{! page == 'unavailable'}" styleClass="offers-page">
+    <apex:outputPanel layout="block" styleClass="info">
+      <apex:outputText >
+        Lending inquiry service is currently unavailable. Please try again in 30 minutes.
+      </apex:outputText>
+    </apex:outputPanel>
+    </apex:outputPanel>
+
+  </apex:outputPanel>
+</apex:outputPanel>
+</apex:form>
+</apex:page>

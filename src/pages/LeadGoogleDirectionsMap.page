@@ -1,0 +1,271 @@
+<apex:page standardController="Lead" cache="false" standardStylesheets="true" showHeader="false" sidebar="false" 
+    extensions="LeadGoogleDirectionsMap">
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?client=gme-clearchoicemanagement&sensor=false"></script>
+<style type="text/css">
+.context_menu{
+    background-color:white;
+    border:1px solid gray;
+}
+.context_menu_item{
+    padding:3px 6px;
+}
+.context_menu_item:hover{
+    background-color:#CCCCCC;
+}
+.context_menu_separator{
+    background-color:gray;
+    height:1px;
+    margin:0;
+    padding:0;
+}
+</style>
+<script>
+//client=gme-clearchoicemanagement&
+var directionsDisplay, map, contextMenu, selLocId;
+function initialize() {
+    directionsDisplay = new google.maps.DirectionsRenderer();
+    var myLatLng = new google.maps.LatLng(39.5, -98.35);
+    var mapOptions = {
+        zoom: 4,
+        center: myLatLng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+    
+    var contextMenuOptions = {};
+    contextMenuOptions.classNames = {menu:'context_menu', menuSeparator:'context_menu_separator'};
+    
+    var menuItems = [];
+    menuItems.push({className:'context_menu_item', eventName:'set_default_center', id:'setDefaultCenter', label:'Set Default Center'});
+    contextMenuOptions.menuItems = menuItems;
+    
+    contextMenu=new ContextMenu(map, contextMenuOptions);
+    
+    google.maps.event.addListener(contextMenu, 'menu_item_selected', function(latLng, eventName){
+        switch(eventName){
+            case 'set_default_center':
+                methodSetCenter(selLocId);
+                setTimeout(function(){$('a[id$="btnRefresh"]').get(0).click();},3000);
+                break;
+        }
+    });
+    
+    directionsDisplay.setMap(map);
+    getDirections();    
+    
+    if('{!LeadMapLink}' == '')
+    {
+    	document.getElementById('GoogleMapLink').style.display = 'none';
+    }
+}
+function getDirections(){
+    if('{!Lead.Id}' != '' && '{!Lead.Street}' != '' && '{!Lead.City}' != '' && '{!Lead.State}' != ''
+            && '{!Lead.Center__r.Street_1__c}' != '' && '{!Lead.Center__r.City__c}' != '' && '{!Lead.Center__r.State__c}' != ''){
+        
+        var request = {
+            origin: '{!Lead.Street},{!Lead.City},{!Lead.State}',
+            destination: '{!Lead.Center__r.Street_1__c},{!Lead.Center__r.City__c},{!Lead.Center__r.State__c}',
+            travelMode: google.maps.TravelMode.DRIVING
+        };
+        
+        var directionsService = new google.maps.DirectionsService();
+        directionsService.route(request, function(result, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(result);
+                
+                {!CenterMarkers}
+                                
+                var route = result.routes[0];
+                
+                var myDistance = route.legs[0].distance.text.replace(/[^0-9\.]/g, '');
+                document.getElementById('distance_to_center').innerHTML = "<strong>Driving Distance: "+myDistance+" miles</strong>";
+                    
+                if('{!Lead.Distance_To_Center__c}' == '' 
+                		|| Math.round(parseFloat('{!Lead.Distance_To_Center__c}')) != Math.round(parseFloat(myDistance))
+                        || '{!Lead.latlong__Longitude__s}' == '' 
+                        || '{!Lead.latlong__Latitude__s}' == ''){
+                    
+                    var myLat = route.legs[0].start_location.lat();
+                    var myLong = route.legs[0].start_location.lng();
+                    methodSetDistance( myDistance, myLat, myLong);
+                }
+            } else {
+                getPatientLocation();
+            }
+        });
+    } else if('{!Lead.Street}' != '' && '{!Lead.City}' != '' && '{!Lead.State}' != ''){
+        getPatientLocation();
+    } 
+}
+function getPatientLocation(){
+    var myAddressQuery = '{!Lead.Street},{!Lead.City},{!Lead.State}';
+    var geocoder = new google.maps.Geocoder(); 
+    geocoder.geocode(
+    { address : myAddressQuery, 
+        region: 'no' 
+    }, function(results, status){
+        if(status == google.maps.GeocoderStatus.OK){
+            var myLatLng = new google.maps.LatLng(results[0]['geometry']['location']['Xa'], results[0]['geometry']['location']['Ya']);
+            var patMarker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: '{!Lead.Street},{!Lead.City},{!Lead.State}'
+            });                    
+            map.setZoom(13);
+            map.setCenter(myLatLng);
+        }
+    }
+    );
+}
+window.onload = function(){
+    initialize();
+};
+
+
+
+function ContextMenu(map, options){
+    options=options || {};
+    
+    this.setMap(map);
+    
+    this.classNames_=options.classNames || {};
+    this.map_ = map;
+    this.mapDiv_ = map.getDiv();
+    this.menuItems_ = options.menuItems || [];
+    this.pixelOffset = options.pixelOffset || new google.maps.Point(10, -5);
+}
+
+ContextMenu.prototype=new google.maps.OverlayView();
+
+ContextMenu.prototype.draw=function(){
+    if(this.isVisible_){
+        var mapSize = new google.maps.Size(this.mapDiv_.offsetWidth, this.mapDiv_.offsetHeight);
+        var menuSize = new google.maps.Size(this.menu_.offsetWidth, this.menu_.offsetHeight);
+        var mousePosition = this.getProjection().fromLatLngToDivPixel(this.position_);
+        
+        var left = mousePosition.x;
+        var top = mousePosition.y;
+        
+        if(mousePosition.x > mapSize.width-menuSize.width - this.pixelOffset.x){
+            left = left - menuSize.width - this.pixelOffset.x;
+        } else {
+            left += this.pixelOffset.x;
+        }
+        
+        if(mousePosition.y>mapSize.height-menuSize.height-this.pixelOffset.y){
+            top = top - menuSize.height - this.pixelOffset.y;
+        } else {
+            top += this.pixelOffset.y;
+        }
+        
+        this.menu_.style.left = left+'px';
+        this.menu_.style.top = top+'px';
+    }
+};
+
+ContextMenu.prototype.getVisible = function(){
+    return this.isVisible_;
+};
+
+ContextMenu.prototype.hide = function(){
+    if(this.isVisible_){
+        this.menu_.style.display = 'none';
+        this.isVisible_ = false;
+    }
+};
+
+ContextMenu.prototype.onAdd = function(){
+    function createMenuItem(values){
+        var menuItem = document.createElement('div');
+        menuItem.innerHTML = values.label;
+        if(values.className){
+            menuItem.className = values.className;
+        }
+        if(values.id){
+            menuItem.id = values.id;
+        }
+        menuItem.style.cssText = 'cursor:pointer; white-space:nowrap';
+        menuItem.onclick = function(){
+            google.maps.event.trigger($this, 'menu_item_selected', $this.position_, values.eventName);
+        };
+        return menuItem;
+    }
+    function createMenuSeparator(){
+        var menuSeparator = document.createElement('div');
+        if($this.classNames_.menuSeparator){
+            menuSeparator.className = $this.classNames_.menuSeparator;
+        }
+        return menuSeparator;
+    }
+    var $this=this; //  used for closures
+    
+    var menu=document.createElement('div');
+    if(this.classNames_.menu){
+        menu.className = this.classNames_.menu;
+    }
+    menu.style.cssText = 'display:none; position:absolute';
+    
+    for(var i=0, j = this.menuItems_.length; i<j; i++){
+        if(this.menuItems_[i].label && this.menuItems_[i].eventName){
+            menu.appendChild(createMenuItem(this.menuItems_[i]));
+        } else {
+            menu.appendChild(createMenuSeparator());
+        }
+    }
+    
+    delete this.classNames_;
+    delete this.menuItems_;
+    
+    this.isVisible_ = false;
+    this.menu_ = menu;
+    this.position_ = new google.maps.LatLng(0, 0);
+    
+    google.maps.event.addListener(this.map_, 'click', function(mouseEvent){
+        $this.hide();
+    });
+    
+    this.getPanes().floatPane.appendChild(menu);
+};
+
+ContextMenu.prototype.onRemove = function(){
+    this.menu_.parentNode.removeChild(this.menu_);
+    delete this.mapDiv_;
+    delete this.menu_;
+    delete this.position_;
+};
+
+ContextMenu.prototype.show = function(latLng){
+    if(!this.isVisible_){
+        this.menu_.style.display = 'block';
+        this.isVisible_ = true;
+    }
+    this.position_ = latLng;
+    this.draw();
+};
+</script>
+    <apex:define name="body">
+    	<div id="distance_to_center"></div>
+        <div id="map_canvas" style="width:100%; height:300px;"></div>
+    </apex:define>
+    <apex:form >
+        <apex:actionFunction action="{!methodUpdateLead}" name="methodSetDistance" rerender="showstate">
+            <apex:param name="LeadDistance" assignTo="{!LeadDistance}" value="" />
+            <apex:param name="LeadLatitude" assignTo="{!LeadLatitude}" value="" />
+            <apex:param name="LeadLongitude" assignTo="{!LeadLongitude}" value="" />
+        </apex:actionFunction>
+        <apex:actionFunction action="{!methodUpdateCenter}" name="methodSetCenter" rerender="showstate">
+            <apex:param name="CenterId" assignTo="{!CenterId}" value="" />
+        </apex:actionFunction>   
+        <apex:outputLink id="btnRefresh" value="{!methodRefreshLead}" target="_top" style="display:none" >
+            <apex:actionSupport event="onClick" action="{!getmethodRefreshLead}" status="Refresh" />
+            Refresh
+        </apex:outputLink>
+    </apex:form>
+    <p id="GoogleMapLink" style="text-align:right;">
+        <apex:outputLink value="{!LeadMapLink}" id="theLink" title="Get Google Directions" target="_blank">Get Google Directions &gt;&gt;</apex:outputLink>
+    </p>
+    <apex:outputText value="{!LeadDistance}" id="showstate" style="display:none" />
+</body>
+</apex:page>

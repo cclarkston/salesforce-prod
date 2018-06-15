@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Table that holds a list of print jobs waiting to be printed from the bulk queue.  These records get deleted once a bulk print job is marked as successful.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Batch_Form__c</fullName>
+        <description>The type of form waiting to be bulk printed. test</description>
+        <externalId>false</externalId>
+        <label>Batch Form</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>BCP Letter</fullName>
+                    <default>false</default>
+                    <label>BCP Letter</label>
+                </value>
+                <value>
+                    <fullName>Welcome Letter</fullName>
+                    <default>false</default>
+                    <label>Welcome Letter</label>
+                </value>
+                <value>
+                    <fullName>Seminar Letter</fullName>
+                    <default>false</default>
+                    <label>Seminar Letter</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Lead_Id__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The lead record the print jobs is related to</description>
+        <externalId>false</externalId>
+        <label>Lead Id</label>
+        <referenceTo>Lead</referenceTo>
+        <relationshipLabel>Awaiting Bulk Prints</relationshipLabel>
+        <relationshipName>Awaiting_Bulk_Print_Lead</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Pending</fullName>
+                    <default>false</default>
+                    <label>Pending</label>
+                </value>
+                <value>
+                    <fullName>Printed</fullName>
+                    <default>false</default>
+                    <label>Printed</label>
+                </value>
+                <value>
+                    <fullName>Complete</fullName>
+                    <default>false</default>
+                    <label>Complete</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Submitted_By__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>User who submitted the bulk print request</description>
+        <externalId>false</externalId>
+        <label>Submitted By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Awaiting_Bulk_Subu</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Submitted_Time__c</fullName>
+        <defaultValue>NOW()</defaultValue>
+        <description>Time the print job was submitted</description>
+        <externalId>false</externalId>
+        <label>Submitted Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <label>Awaiting Bulk Print</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Lead_Id__c</columns>
+        <columns>Submitted_By__c</columns>
+        <columns>Submitted_Time__c</columns>
+        <columns>Status__c</columns>
+        <columns>Batch_Form__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Automated_BCP_Job</fullName>
+        <columns>NAME</columns>
+        <columns>Batch_Form__c</columns>
+        <columns>Lead_Id__c</columns>
+        <columns>Status__c</columns>
+        <columns>Submitted_By__c</columns>
+        <columns>Submitted_Time__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Submitted_By__c</field>
+            <operation>equals</operation>
+            <value>Chanida Clarkston</value>
+        </filters>
+        <label>Automated BCP Job</label>
+    </listViews>
+    <nameField>
+        <displayFormat>{0}</displayFormat>
+        <label>Awaiting Bulk Print Num</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Awaiting Bulk Prints</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <startsWith>Vowel</startsWith>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Lead.Call_Center_Agent_Team__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Call_Center_Agent__c</field>
+    </columns>
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>Lead.Date_Booked__c</field>
+    </columns>
+    <columns>
+        <field>Lead.DateTime_Consult_Scheduled__c</field>
+    </columns>
+    <columns>
+        <field>CREATED_DATE</field>
+    </columns>
+    <columns>
+        <field>STATUS</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Lead.Call_Result__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Consultation Scheduled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.DateTime_Consult_Scheduled__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>greaterThan</operator>
+            <value>7/30/2017 12:00 AM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.DateTime_Consult_Scheduled__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>lessThan</operator>
+            <value>8/5/2017 12:00 AM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Call_Center_Agent_Team__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Online Sched,Imp - IMC API</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>IB 24 Hour Fill Rate Challenge</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadList</reportType>
+    <scope>org</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>CREATED_DATE</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Lead.Date_Booked__c</dateColumn>
+        <endDate>2017-08-04</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2017-07-31</startDate>
+    </timeFrameFilter>
+</Report>

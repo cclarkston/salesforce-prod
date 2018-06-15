@@ -1,0 +1,305 @@
+<apex:page standardController="account" extensions="account_treatment_display_development" sidebar="false" showHeader="false" docType="html-5.0">
+    <apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/fonts.css')}"/>
+    <!-- <apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}"/> -->
+
+    <style>
+        body {
+            margin: 1em;
+        }
+        span.treatment_plan_box {
+            display: inline-table;
+            font-family: calibri, arial;
+            font-size: small;
+            width: 20em;
+            height: 16em;
+            margin: .5em;
+            padding: .5em;
+            text-align: center;
+            position: relative;
+            cursor: default;
+            box-sizing: border-box;
+            border-radius: .75em;
+            border: 2px solid #d9d9d7;
+        }
+        .treatment_plan_box.recommended {
+            background-color: #fdd29a; /* orange */
+        }
+        .treatment_plan_box.alternate {
+            background-color: #fef4e6; /* beige */
+        }
+        .treatment_plan_box.include-on-handout {
+            border-color: steelblue;
+        }
+        .treatment_plan_details > span {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .treatment_plan_details .treatment_header {
+            color: black;
+            font-size: large;
+            font-weight: bold;
+            height: 2.5em;
+        }
+        .treatment_plan_details .treatment_cost {
+            font-size: large;
+            font-weight: bold;
+            color: green;
+        }
+        .treatment_plan_details .treatment_options {
+            font-style: italic;
+            font-size: small;
+            color: gray;
+        }
+        .treatment_recommended {
+            font-size: large;
+        }
+        .treatment_recommended .recommended {
+            color: red;
+            font-weight: bold;
+        }
+        .existing-starts-count {
+            background-color: red;
+            border-radius: 50%;
+            font-family: arial;
+            font-size: medium;
+            color: white;
+            width: 1em;
+            height: 1em;
+            padding: .2em;
+            position: absolute;
+            top: -.75em;
+            right: -.75em;
+        }
+
+
+
+
+        .detail-review {
+            display: inline-block;
+            margin: .25em .5em .25em .5em;
+        }
+        .faux-button, .faux-button:hover, a.faux-button, a.faux-button:hover {
+            color: white !important;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .bottom-button {
+            font-size: large !important;
+            border-radius: .5em !important;
+            padding: .2em .5em .2em !important;
+            position: absolute;
+            bottom: .5em;
+        }
+        .edit {
+            background-color: orange;
+        }
+        .edit, .cancel {
+            left: .5em;
+        }
+        .start {
+            right: .5em;
+            background: cornflowerblue !important;
+            border: none !important;
+            font-weight: normal !important;
+        }
+        .cancel {
+            background-color: gray;
+        }
+        .notes {
+            font-size: large;
+            color: gray;
+            left: 95px;
+            cursor: default;
+            position: absolute;
+            bottom: 11px;
+        }
+        .disabled {
+            color: gray;
+        }
+        .bottom-button.disabled, input[type="submit"]:disabled {
+            background: lightgray !important;
+            cursor: not-allowed;
+        }
+        .bottom-button.waitcursor {
+            cursor: wait !important;
+        }
+
+        .under-modal-fade {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, .5);
+        }
+
+        .modal {
+            position: absolute;
+            left: 10em;
+            top: 1em;
+            z-index: 2;
+            width: 30em;
+            height: 20em;
+            background-color: aliceblue;
+            padding: 1em 2em;
+            border-radius: .5em;
+        }
+        .requiredInput {
+            display: inline-block;
+        }
+        .label {
+            display: inline-block;
+            font-weight: bold;
+            width: 11em;
+            margin: .75em 0;
+            color: gray;
+        }
+        .label.disabled {
+            color: lightgray;
+            font-style: italic;
+        }
+        .modal-header {
+            font-size: medium;
+            font-weight: bold;
+            font-style: italic;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: .5em;
+        }
+        .subhead {
+            font-size: small;
+            margin-bottom: .5em;
+        }
+        .completion-message, .completion-message:hover {
+            display: block;
+            font-size: medium;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 3em;
+        }
+
+        .errorMsg {
+            display: none;
+        }
+    </style>
+
+    <script>
+        function use_fancy_cursor(element) {
+          document.body.classList.add("waitcursor");
+          if (element) {
+              element.disabled = true;
+              element.classList.add("disabled");
+              element.classList.add("waitcursor");
+          }
+        }
+
+        function default_cursor(element) {
+          document.body.classList.remove("waitcursor");
+          if (element) {
+              element.disabled = false;
+              element.classList.remove("disabled");
+              element.classList.remove("waitcursor");
+          }
+        }
+
+        function disable_submit(status) {
+            document.querySelectorAll("[id$=submit]")[0].disabled = status;
+        }
+    </script>
+
+    <apex:outputText value="{!account.Name + account.Referral_Office__c}" rendered="false"/>
+    <apex:form >
+        <apex:actionFunction name="display_modal" action="{!display_modal}" reRender="all">
+            <apex:param name="plan_ID" assignTo="{!selected_treatment_plan_ID}" value="" />
+        </apex:actionFunction>
+        <apex:actionFunction name="drop_modal" action="{!drop_modal}" immediate="true" reRender="all"/>
+        <apex:actionFunction name="refresh_submit" oncomplete="{!if(ready_to_submit, 'disable_submit(false)', 'disable_submit(true)')}" reRender="submit"/>
+        <apex:actionFunction name="refresh_all" reRender="all" oncomplete="refresh_submit()"/>
+        <apex:actionFunction name="start_plan" action="{!start_treatment_plan}" oncomplete="default_cursor(this)" reRender="modal"/>
+
+        <apex:outputPanel id="all" layout="block">
+            <apex:repeat value="{!current_TreatmentPlan_list}" var="tplan">
+                <span class="treatment_plan_box {!if(tplan.plan.Recommended__c,'recommended', 'alternate')} {!if(tplan.plan.Include_on_Handout__c, 'include-on-handout', '')}">
+                    <div class="treatment_plan_details">
+                        <span class="treatment_header"><apex:outputfield value="{!tplan.plan.treatment_option__r.name}" /></span>
+                        <span class="treatment_cost">$<apex:outputfield value="{!tplan.plan.Total_Cost__c}" /></span>
+                        <span class="treatment_recommended"><apex:outputtext value="{!if(tplan.plan.Recommended__c,'Recommended','Alternate')}" styleClass="{!if(tplan.plan.Recommended__c,'recommended','')}" /></span>
+                        <apex:outputPanel styleClass="treatment_options" rendered="{!tplan.plan.Nightguard__c || tplan.plan.Bleaching_Tray__c || tplan.plan.Bone_Grafting__c || tplan.plan.Immediate_Load__c}" >
+                            <apex:outputText value="{!if(tplan.plan.Bleaching_Tray__c,'Bleaching Tray ','')}" styleClass="detail-review"/>
+                            <apex:outputText value="{!if(tplan.plan.Nightguard__c,'NightGuard ','')}"         styleClass="detail-review"/>
+                            <apex:outputText value="{!if(tplan.plan.Bone_Grafting__c,'Bone Grafting ','')}"   styleClass="detail-review"/>
+                            <apex:outputText value="{!if(tplan.plan.Immediate_Load__c,'Immediate Load ','')}" styleClass="detail-review"/>
+                        </apex:outputpanel>
+                    </div>
+                    <a href="/{!tplan.plan.id}" target="__blank" class="faux-button bottom-button edit">
+                        Edit
+                    </a>
+                    <apex:outputPanel layout="block" rendered="{!tplan.plan.Handout_Notes__c != null}" onmouseover="tooltip.show('{!tplan.plan.Handout_Notes__c}')" onmouseout="tooltip.hide()" styleClass="notes">
+                        <i class="ccf-notes"></i>
+                    </apex:outputPanel>
+                    <apex:outputPanel onclick="display_modal('{!tplan.plan.id}')" styleclass="faux-button bottom-button start">
+                        Start Plan
+                    </apex:outputPanel>
+                    <apex:outputText value="{!tplan.existing_starts}" rendered="{!tplan.existing_starts > 0}" styleClass="existing-starts-count"/>
+                </span>
+            </apex:repeat>
+
+            <apex:outputPanel id="under-modal-fade" rendered="{!modal_active}" layout="block" styleClass="under-modal-fade">
+                <apex:outputPanel id="modal" layout="block" styleClass="modal">
+                    <apex:outputPanel id="input_fields" rendered="{! !submitted}">
+                        <div>
+                            <div class="modal-header">New Prosth Exam for {!new_opportunity.Name}</div>
+                            <div class="modal-header subhead">{!selected_treatment_plan.Treatment_Option__r.Name}</div>
+                        </div>
+                        <div>
+                            <div class="label">Prosth Exam Date</div>
+                            <apex:inputField id="field_date" value="{!new_opportunity.CloseDate}" onchange="refresh_all()" styleClass="inline-block"/>
+                        </div>
+                        <div>
+                            <div class="label">Prosth Exam Stage</div>
+                            <apex:inputField id="field_stage" value="{!new_opportunity.StageName}" onchange="refresh_submit()" rendered="{!new_opportunity.CloseDate != null}"/>
+                        </div>
+                        <div>
+                            <div class="label">Windent Patient ID</div>
+                            <apex:inputField id="field_windent" value="{!new_opportunity.Windent_Patient_Id__c}" onkeyup="refresh_submit()" styleClass="inline-block" rendered="{!new_opportunity.CloseDate != null}"/>
+                        </div>
+                        <div>
+                            <div class="label {!if(exam_center_required, '', 'disabled')}">Exam Center</div>
+                            <apex:inputField id="field_exam_center" value="{!new_opportunity.Exam_Center__c}" onchange="refresh_submit()" rendered="{!new_opportunity.CloseDate != null && exam_center_required}" styleClass="inline-block"/>
+                        </div>
+                        <div>
+                            <div class="label {!if(final_referral_track_required, '', 'disabled')}">Final Referral Track</div>
+                            <apex:inputField id="field_referral_track" value="{!new_opportunity.Final_Referral_Track__c}" onchange="refresh_submit()" rendered="{!new_opportunity.CloseDate != null && final_referral_track_required}" styleClass="inline-block"/>
+                        </div>
+
+                        <apex:outputPanel onclick="drop_modal()" styleclass="faux-button" >
+                            <div class="bottom-button cancel">Cancel</div>
+                        </apex:outputPanel>
+                        <apex:commandButton id="submit" value="Submit" disabled="true" onclick="{!if(ready_to_submit, 'start_plan();use_fancy_cursor(this);', '')}" styleclass="faux-button bottom-button start {!if(ready_to_submit, '', 'disabled')}"/>
+                    </apex:outputPanel>
+
+                    <apex:outputPanel id="completion_message" rendered="{!submitted}">
+                        <script>window.open('/{!new_opportunity.ID}', '_blank')</script>
+                        <apex:outputLink value="/{!new_opportunity.ID}" target="_blank" styleClass="completion-message">
+                            A new<br/>
+                            '{!selected_treatment_plan.Treatment_Option__r.Name}'<br/>
+                            Prosth Exam has been created for<br/>
+                            {!account.Name}.<br/><br/>
+
+                            Click for the Prosth Exam page.
+                        </apex:outputLink>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+            </apex:outputPanel>
+
+            <!-- <apex:outputPanel id="debug" layout="block" styleClass="debug">
+                Debug: {!}
+            </apex:outputPanel> -->
+        </apex:outputpanel>
+
+    </apex:form>
+</apex:page>

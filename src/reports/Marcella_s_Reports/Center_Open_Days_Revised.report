@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <filter>
+        <criteriaItems>
+            <column>Center_Open_Day__c.Open_Status__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Open</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Center_Open_Day__c.Center_Information__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Dallas Fort Worth,unknown,Miami,Metro Detroit,Monterey,Market Not Yet Open,Chicago Deerfield/Northbrook,Chicago Evanston,Chicago Naperville,New Jersey - Dental Arts of South Jersey,TBD Q4</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>Center_Open_Day__c.Calendar_Date__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Center_Open_Day__c.Center_Information__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Center Open Days- Revised</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Center_Open_Day__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Center_Open_Day__c.Calendar_Date__c</dateColumn>
+        <endDate>2017-12-31</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2017-10-01</startDate>
+    </timeFrameFilter>
+</Report>

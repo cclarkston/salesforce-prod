@@ -1,0 +1,19 @@
+Hello {!NullValue(Contact.FirstName, "Sir or Madam")}
+
+We want to thank you for choosing CareChoice Dental Implant Center as a possible care provider for your dental treatment.  It is only by obtaining correct information that you can make an informed decision about whether our treatment options will work for you.  Your appointment will:
+     -  Address your dental concerns
+     -  Give you an estimated cost of treatment
+     -  Help you understand and educate yourself to make a good decision
+
+Your free consultation is scheduled for {!Lead.DateTime_Consult_Scheduled__c}.  We have enclosed a map to the clinic to help you find your way.
+
+We have set our standards high above the rest, giving our patients the best possible results.  CareChoice brings together state of the art technology, surgical procedures and restorative techniques to enhance your youthful appearance and lifestyle.  We are not just restoring a healthy smile but giving you back a full, active life!
+
+Dental implants are a final solution to your dental problems!  We are available Monday through Friday @ 416-597-1122 between the hours of 8:00am to 5:00 pm to answer any further questions.
+
+Thank you,
+
+{!Lead.OwnerFullName}
+CareChoice Dental Implant Center
+
+P.S. Please arrive 10 minutes early for your appointment as we will enter your initial information and get your appointment started promptly.

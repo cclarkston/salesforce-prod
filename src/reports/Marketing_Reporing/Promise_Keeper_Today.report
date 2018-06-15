@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_65160876</developerName>
+        <masterLabel>Not Scheduled</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Activity.Outcome__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>VM - LM</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>VM - no message</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>VM - full</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>LM - 3rd Party</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Busy/No Answer</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>PPT will call back</sourceValue>
+            </sourceValues>
+            <value>Voicemail</value>
+        </values>
+        <values>
+            <value>Contacted</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Non-Sales Call</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>No Call Elected</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Wrong Number</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Disconnect/Not in Service</sourceValue>
+            </sourceValues>
+            <value>Non-Sales</value>
+        </values>
+        <values>
+            <value>Cancelled</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Consult Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Consult Rescheduled</sourceValue>
+            </sourceValues>
+            <value>Scheduled</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Not Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Refused Reschedule</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Consult Cancelled</sourceValue>
+            </sourceValues>
+            <value>Not Scheduled</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>ASSIGNED</field>
+    </columns>
+    <columns>
+        <field>Lead.Full_Name__c</field>
+    </columns>
+    <columns>
+        <field>PHONE</field>
+    </columns>
+    <columns>
+        <field>CREATED_DATE</field>
+    </columns>
+    <columns>
+        <field>Activity.Attempt__c</field>
+    </columns>
+    <columns>
+        <field>Activity.CreatedDatetime__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Date_Call_Back_Scheduled__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Pre_Screen__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Marketing_Source__c</field>
+    </columns>
+    <columns>
+        <field>Activity.Outcome__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Activity.Activity_Type__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Outbound Call</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>ASSIGNED</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Devonne Espinoza,Alexandra Chavez,Danny Herrera,Eowyn Suchan,Marianne Mills,Sonja Villalobos,Stan Morr,Travis Quest,Vanessa Soderstrom</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Activity.Attempt__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>1,2,3</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Date_Call_Back_Scheduled__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>TODAY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Marketing_Source__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>contains</operator>
+            <value>ccwebsite</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Promise Keeper Today</name>
+    <params>
+        <name>closed</name>
+        <value>closed</value>
+    </params>
+    <params>
+        <name>type</name>
+        <value>te</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadActivity</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Activity.Outcome__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>DUE_DATE</dateColumn>
+        <interval>INTERVAL_THISWEEK</interval>
+    </timeFrameFilter>
+</Report>

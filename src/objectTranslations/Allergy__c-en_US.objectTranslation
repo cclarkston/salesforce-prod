@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Allergy</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Allergies</value>
+    </caseValues>
+    <fields>
+        <label><!-- Allergy ID --></label>
+        <name>Allergy_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Code Type --></label>
+        <name>Code_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Code --></label>
+        <name>Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- No DoseSpot (added manually) --></label>
+        <name>No_DoseSpot__c</name>
+    </fields>
+    <fields>
+        <label><!-- Onset Date --></label>
+        <name>Onset_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Onset Date (simple) --></label>
+        <name>Onset_Date_simple__c</name>
+    </fields>
+    <fields>
+        <label><!-- Patient --></label>
+        <name>Patient__c</name>
+        <relationshipLabel><!-- Allergies --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Reaction Type --></label>
+        <name>Reaction_Type__c</name>
+        <picklistValues>
+            <masterLabel>AdverseReaction</masterLabel>
+            <translation><!-- AdverseReaction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Allergy</masterLabel>
+            <translation><!-- Allergy --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Reaction --></label>
+        <name>Reaction__c</name>
+    </fields>
+    <fields>
+        <label><!-- RxCUI --></label>
+        <name>RxCUI__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

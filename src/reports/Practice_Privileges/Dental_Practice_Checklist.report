@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>FK_$Dental_Practice__c.Center_Information__c</field>
+    </columns>
+    <columns>
+        <field>FK_NAME</field>
+    </columns>
+    <columns>
+        <field>Implementation_Checklist__c.Asked_Kip_to_contact_GP_re_website__c</field>
+    </columns>
+    <columns>
+        <field>Implementation_Checklist__c.PSA_signed_by_CC_Doctor__c</field>
+    </columns>
+    <columns>
+        <field>Implementation_Checklist__c.PSA_signed_by_GP__c</field>
+    </columns>
+    <format>Summary</format>
+    <name>Dental Practice Checklist</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Implementation_Checklist__c@Implementation_Checklist__c.Dental_Practice__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>FK_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

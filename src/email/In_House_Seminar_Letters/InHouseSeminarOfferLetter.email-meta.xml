@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>We are excited to see you at the seminar</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>ClearChoice_Letterhead</letterhead>
+    <name>In House Seminar Offer Letter</name>
+    <style>freeForm</style>
+    <subject>ClearChoice Dental Implant Center Patient Seminar</subject>
+    <textOnly> 
+Hello {!Contact.FirstName},
+Thank you for your interest in ClearChoice Dental Implant Center. I would like to invite you to our seminar on {!Lead.Well_Formatted_Date__c} at {!Lead.Well_Formatted_Time__c}. Learn how in just ONE DAY,* we can help you achieve your personal best while reclaiming your confidence, youthful outlook and sex appeal!
+You can look forward to:
+
+Receiving a complimentary 3D CAT scan 
+Learning how implants can provide a clear solution for your dental needs 
+Obtaining answers for your specific dental questions 
+Meeting the doctors 
+Touring our clinic 
+We provide a clear advantage through our unique All in One Center. Please feel free to call 888-654-4675 to register for the FREE seminar or reply to this email.
+
+
+Sincerely,
+ 
+{!Lead.OwnerFullName}
+Dental Implant Consultant
+*Nobel Biocare™ Immediate Function™ for qualified patients after initial workup.  Individual results may vary.</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

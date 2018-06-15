@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Creative</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Creative</value>
+    </caseValues>
+    <fields>
+        <label><!-- Approval Reminder flag --></label>
+        <name>Approval_Reminder_flag__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approved By Legal --></label>
+        <name>Approved_By_Legal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approved? --></label>
+        <name>Approved__c</name>
+    </fields>
+    <fields>
+        <label><!-- DMA --></label>
+        <name>DMA__c</name>
+        <relationshipLabel><!-- Creative --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Doctor Approval Status --></label>
+        <name>Doctor_Approval_Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Never Submitted</masterLabel>
+            <translation><!-- Never Submitted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending</masterLabel>
+            <translation><!-- Pending --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Duration --></label>
+        <name>Duration__c</name>
+        <picklistValues>
+            <masterLabel>15s</masterLabel>
+            <translation><!-- 15s --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2m</masterLabel>
+            <translation><!-- 2m --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>30s</masterLabel>
+            <translation><!-- 30s --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>60s</masterLabel>
+            <translation><!-- 60s --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Longform</masterLabel>
+            <translation><!-- Longform --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NA</masterLabel>
+            <translation><!-- NA --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Force Approval --></label>
+        <name>Force_Approval__c</name>
+    </fields>
+    <fields>
+        <label><!-- Legal Approval Due Date --></label>
+        <name>Legal_Approval_Due_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Link to media --></label>
+        <name>Link_to_media__c</name>
+    </fields>
+    <fields>
+        <label><!-- Media type --></label>
+        <name>Media_type__c</name>
+        <picklistValues>
+            <masterLabel>Center Marketing S4</masterLabel>
+            <translation><!-- Center Marketing S4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Direct Mail</masterLabel>
+            <translation><!-- Direct Mail --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Direct Mail CCMS</masterLabel>
+            <translation><!-- Direct Mail CCMS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Direct Mail S4</masterLabel>
+            <translation><!-- Direct Mail S4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Email</masterLabel>
+            <translation><!-- Email --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GLO</masterLabel>
+            <translation><!-- GLO --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Long-form TV</masterLabel>
+            <translation><!-- Long-form TV --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Print Magazine</masterLabel>
+            <translation><!-- Print Magazine --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Print Newspaper</masterLabel>
+            <translation><!-- Print Newspaper --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Radio</masterLabel>
+            <translation><!-- Radio --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TV</masterLabel>
+            <translation><!-- TV --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TV Doc Spot</masterLabel>
+            <translation><!-- TV Doc Spot --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Web Content</masterLabel>
+            <translation><!-- Web Content --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Web Display</masterLabel>
+            <translation><!-- Web Display --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Web SEM</masterLabel>
+            <translation><!-- Web SEM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Web Video</masterLabel>
+            <translation><!-- Web Video --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Note (optional) --></label>
+        <name>Note__c</name>
+    </fields>
+    <fields>
+        <label><!-- Parent Asset --></label>
+        <name>Parent_Asset__c</name>
+        <relationshipLabel><!-- Creative --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Project --></label>
+        <name>Project__c</name>
+        <relationshipLabel><!-- Creative --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Ready for use? --></label>
+        <name>Ready_for_use__c</name>
+    </fields>
+    <fields>
+        <label><!-- Retire Date --></label>
+        <name>Retire_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Retired? --></label>
+        <name>Retired__c</name>
+    </fields>
+    <fields>
+        <label><!-- Retirement Reason --></label>
+        <name>Retirement_Reason__c</name>
+    </fields>
+    <layouts>
+        <layout>For Doctors</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Information --></label>
+            <section>Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Legal Approval</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Information --></label>
+            <section>Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Parent Asset</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Information --></label>
+            <section>Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Public Ad</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Information --></label>
+            <section>Information</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <description><!-- An asset requiring Legal&apos;s approval, prior to producing the final, Public Ad --></description>
+        <label><!-- Parent Asset --></label>
+        <name>Parent_Asset</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- A final creative piece intended for public consumption. Requires approval of doctors if end tags are present. --></description>
+        <label><!-- Public Ad --></label>
+        <name>Public_Ad</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- All_Creative_Shoots --></label>
+        <name>All_Creative_Shoots</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- All_Projects --></label>
+        <name>All_Projects</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Create_National_Public_Ad --></label>
+        <name>Create_National_Public_Ad</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- New_Creative_Shoot --></label>
+        <name>New_Creative_Shoot</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- New_Project --></label>
+        <name>New_Project</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Retire_this_related_ads --></label>
+        <name>Retire_this_related_ads</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Submit_for_Doctor_Approval --></label>
+        <name>Submit_for_Doctor_Approval</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- UnRetire_this_and_related_ads --></label>
+        <name>UnRetire_this_and_related_ads</name>
+    </webLinks>
+</CustomObjectTranslation>

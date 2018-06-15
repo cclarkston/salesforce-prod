@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>false</available>
+    <description>Email sent to Web to Lead Inquiries that could not be contacted by phone.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>ClearChoice_Letterhead</letterhead>
+    <name>First Response to Online Survey (Archived)</name>
+    <style>freeForm</style>
+    <subject>Thank you for taking the survey with ClearChoice Dental Implant Center</subject>
+    <textOnly> 
+{!Lead.CreatedDate}
+ 
+ 
+Hello {!Lead.FirstName},
+ 
+Thank you for recently filling out the dental health survey sponsored by ClearChoice Dental Implant Center and welcome to 21st Century dentistry.  What was nearly impossible just a short time ago, ClearChoice now makes happen thousands of times each year!
+ 
+For many people, missing teeth lead to an unattractive smile, embarrassment from loose dentures, pain, difficulty eating and a less active lifestyle.  If this describes you, why continue to settle for dentures or missing teeth when you can regain your smile and confidence with dental implants.  
+ 
+To get started simply reply to this email with your phone contact information or call us today at 1-888-654-4675 to schedule your FREE consultation and 3D cat scan.  
+ 
+Remember your dental conditions will only worsen and become more expensive the longer treatment is delayed.  
+ 
+Sincerely, 
+ 
+ 
+{!Lead.OwnerFullName}
+Dental Implant Consultant 
+ 
+*Nobel Biocare™ Immediate Function™ for qualified patients after initial workup.  Individual results may vary.  
+ </textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

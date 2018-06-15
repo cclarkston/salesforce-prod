@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Lead$Name</field>
+    </columns>
+    <columns>
+        <field>Lead$Phone</field>
+    </columns>
+    <columns>
+        <field>Lead$Call_Result__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Apt_Histories__r$Name</field>
+    </columns>
+    <columns>
+        <field>Lead.Apt_Histories__r$CreatedBy</field>
+    </columns>
+    <columns>
+        <field>Lead.Apt_Histories__r$CreatedDate</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Lead$Call_Result__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Fielded Lead</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Infocision Scheduled- Fielded Leads</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Apt_History_w_Lead__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead$Date_Booked__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2012-10-09</startDate>
+    </timeFrameFilter>
+</Report>

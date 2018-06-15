@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Captures the details (Center Location, Owner, Completion Date, Consult Result) of completed Consults.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Center_Location__c</fullName>
+        <description>Location where the Consult took place, at the time the snapshot was taken. (Deprecated)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Center Location at the time the snapshot was created</inlineHelpText>
+        <label>Center Location</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Center_Location_sort__c</fullName>
+        <description>Pulls in the Center Locationsort field from the Consult record for use in Excel; this allows the satellite centers to be grouped for display on the Sales Dashboard.</description>
+        <externalId>false</externalId>
+        <formula>Consult__r.Center_Location_sort__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Consult: Center Location sort (live data)</inlineHelpText>
+        <label>Center Location sort</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Consult_Center_Location__c</fullName>
+        <description>Cross-object formula - Consult:Center Location</description>
+        <externalId>false</externalId>
+        <formula>Text( Consult__r.Center_Location__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Consult: Center Location</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Consult_Completed_Date__c</fullName>
+        <description>The date that the Consult was completed.</description>
+        <externalId>false</externalId>
+        <label>Consult Completed Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Consult_Completed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Consult Completed</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Consult_Name__c</fullName>
+        <description>Patient&apos;s name</description>
+        <externalId>false</externalId>
+        <label>Consult Name</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Consult_Owner_Role__c</fullName>
+        <description>Consult Owner&apos;s user role, passed in during the analytic snapshot process.</description>
+        <externalId>false</externalId>
+        <label>Consult Owner: Role</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Consult_Owner_Traveler_Until__c</fullName>
+        <description>Streamlining the process of tracking Travelers; rather than using cross-object formulas and workflow, the Analytic Snapshot source report can access the User: Traveling Until date of the Record Owner.</description>
+        <externalId>false</externalId>
+        <label>Consult Owner: Traveler Until</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Consult_Owner__c</fullName>
+        <externalId>false</externalId>
+        <label>Consult Owner</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Consult_Result__c</fullName>
+        <externalId>false</externalId>
+        <label>Consult Result</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Consult__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The Consult (Account) that the Snapshot was derived from</description>
+        <externalId>false</externalId>
+        <label>Consult</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipName>Consult_Completion_Snapshots</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Exclude_from_Report__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Used for test data, to allow it to remain in SFDC w/o impacting the Excel dashboard.</description>
+        <externalId>false</externalId>
+        <label>Exclude from Report</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Traveler__c</fullName>
+        <description>Identifies Consult Creators that are designated as Travelers on their User record ($User: Traveler)</description>
+        <externalId>false</externalId>
+        <label>Traveler</label>
+        <length>10</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>C.C. Snapshot</label>
+    <nameField>
+        <displayFormat>CCS-{0000}</displayFormat>
+        <label>CCS #</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>C.C. Snapshots</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Center_Location__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Consult_Owner__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Consult_Name__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Consult_Completed__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Consult_Completed_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Consult_Result__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Center_Location__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Consult_Owner__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Consult_Name__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Consult_Completed__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Consult_Completed_Date__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Consult_Result__c</lookupDialogsAdditionalFields>
+        <searchFilterFields>Center_Location__c</searchFilterFields>
+        <searchFilterFields>Consult_Owner__c</searchFilterFields>
+        <searchFilterFields>Consult_Name__c</searchFilterFields>
+        <searchFilterFields>Consult_Completed__c</searchFilterFields>
+        <searchFilterFields>Consult_Completed_Date__c</searchFilterFields>
+        <searchFilterFields>Consult_Result__c</searchFilterFields>
+        <searchResultsAdditionalFields>Center_Location__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Consult_Owner__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Consult_Name__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Consult_Completed__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Consult_Completed_Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Consult_Result__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

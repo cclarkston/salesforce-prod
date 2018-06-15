@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Target: PEC FollowUp_30Day</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Target: PEC FollowUp_30Day</value>
+    </caseValues>
+    <fields>
+        <label><!-- Center Location --></label>
+        <name>Center_Location__c</name>
+        <relationshipLabel><!-- Target: PEC FollowUp_30Day --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- When does this target become effective? (Can be set in advance of becoming effective.) --></help>
+        <label><!-- Effective Date --></label>
+        <name>Effective_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Target Number --></label>
+        <name>Target_Numbert__c</name>
+    </fields>
+    <layouts>
+        <layout>FollowUp_30Day Target Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

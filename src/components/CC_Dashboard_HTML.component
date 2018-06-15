@@ -1,0 +1,229 @@
+<apex:component controller="rpt_call_center_dash" access="global" >
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<style type="text/css" media="print">
+  div.bPageHeader {
+    display:none;
+  }  
+  
+  p.form_holder {
+    display:none; 
+  }
+  
+  a.dlink {
+    display:none;
+  }  
+</style>
+
+<style>
+  
+  table.accs_details {
+    font-family:georgia,arial;
+  }
+  
+  table.accs_details th {
+    font-weight:bold;
+    font-size:12pt;
+    border-bottom:1px solid black; 
+    word-wrap:break-word; 
+    vertical-align:top  
+    padding-left:5px;
+    padding-right:5px;
+    height:30px;  
+  }
+     
+  table.accs_details tr.control {
+      word-wrap:break-word; 
+    font-weight:bold;
+    font-size:12pt;
+    text-align:center;    
+    vertical-align:bottom;    
+  }
+   
+  table.accs_details tr.control td {
+    border-bottom:1px solid black;
+    empty-cells:hide;  
+    vertical-align:bottom;    
+  }
+  
+  table.accs_details tr.subhead {
+    font-weight:bold;
+    font-size:12pt;
+  }
+  
+  table.accs_details tr.subhead td {
+    border-bottom:1px dotted black;
+    padding-top:1em;         
+    color:blue;   
+    padding-left:10px;   
+    empty-cells:hide;  
+  }
+
+  table.accs_details tr.accs {
+
+  }
+   
+  table.accs_details tr.accs td {
+    line-height:25px;   
+    font-size:10pt;
+    border-bottom:1px dashed #5789AE; 
+    empty-cells:hide;   
+  }
+  
+  table.accs_details tr.accs td.indent {
+    padding-left:25px;      
+    font-weight:bold; 
+    font-style:italic;
+    empty-cells:hide;      
+  }
+
+  table.accs_details tr.accs td.right {
+     text-align:right;
+     padding-right:5px;     
+     empty-cells:hide;    
+  }  
+
+  table.accs_details tr.accs_b {
+    background-color:#CECE9D;
+  }
+   
+  table.accs_details tr.accs_b td {
+    line-height:25px;
+    font-size:10pt;  
+    border-bottom:1px dashed #5789AE; 
+    empty-cells:hide;       
+  }
+  
+  table.accs_details tr.accs_b td.indent {
+    padding-left:25px;
+    font-weight:bold;
+    font-style:italic;      
+    empty-cells:hide;  
+  }
+  
+  table.accs_details tr.accs_b td.right {
+    text-align:right;
+    padding-right:5px;     
+    empty-cells:hide;       
+  }  
+  
+  table.accs_details tr.footer {
+    background-color:#A8A8A8;  
+    font-weight:bold;
+    font-size:12pt; 
+  }
+   
+  table.accs_details tr.footer td {
+    color:white;
+    border-top:2px solid black;
+    border-bottom:2px solid black; 
+    empty-cells:hide;         
+  }    
+
+  table.accs_details tr.footer td.right {
+    text-align:right;
+    padding-right:5px    
+    empty-cells:hide;      
+  }  
+
+  table.accs_details tr.footer td.indent {
+    padding-left:25px;
+    empty-cells:hide;      
+  }  
+
+</style>
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+ <div id="header" style="border-bottom:3px solid black;padding-top:0;margin-top:0;">
+<table style="width:100%;padding-top:0;">
+<tr>
+  <td width="400px;">
+  </td>
+  <td><h1 class="report_header">CC Dashboard</h1></td>  
+</tr>
+</table>
+</div>
+
+<apex:outputPanel id="main_holder" rendered="true" layout="block" style="padding-top:2em;">
+<apex:actionStatus startStyle="font-weight:bold;color:red;" stoptext="" id="update_status">
+  <apex:facet name="start">Running Report...Please Wait</apex:facet>        
+</apex:actionStatus><br />      
+<apex:outputText escape="false" style="color:red;font-style:italic;font-weight:bold;" value="{!error_messages}" /><br />
+<h2>Data for&nbsp;<apex:outputfield value="{!sholder.Apt_Date__c}" /> - <apex:outputfield value="{!eholder.Apt_Date__c}" /></h2>
+<table class="accs_details" style="width:1800px">
+<tr class="control" style="font-size:10pt;vertical-align:bottom;">
+  <td style="width:150px;">Center</td>
+  <td style="width:75px;">Dental<br />Inquiry<br />Leads</td>
+  <td style="width:75px;">New Leads<br />GY%</td>
+  <td style="width:75px;">Cslts<br />Booked</td>  
+  <td style="width:75px;">Revived<br />Leads</td>
+  <td style="width:75px;">GY Prescreen<br />of Cslts<br />Booked</td>
+  <td style="width:75px;">Schedule<br />Rate on<br />Phone</td>
+  <td style="width:75px;">Available<br />Consult<br />Chairs</td>
+  <td style="width:75px;">Scheduled<br />Consults<br />Current<br />Week</td>
+  <td style="width:75px;">%<br />Consults<br />Booked</td>      
+  <td style="width:75px;">Initially<br />Scheduled<br />Consults</td>   
+  <td style="width:75px;">Final<br />Scheduled<br />Consults</td>    
+  <td style="width:75px;">Consults<br />Showed</td>
+  <td style="width:75px;">GY<br />Mix of<br />Consults<br />Showed</td>       
+  <td style="width:75px;">Show<br />Rate</td>        
+  <td style="width:75px;">Complete<br />Rate</td>        
+  <td style="width:75px;">Starts</td>      
+  <td style="width:75px;">Close Rate<br />Incl All PP</td>      
+  <td style="width:75px;">Starts<br />MTD</td>      
+  <td style="width:75px;">Actual<br />Consult<br />Chairs<br />Next Week</td>       
+  <td style="width:75px;">Scheduled<br />Consults<br />Next Week</td>         
+  <td style="width:75px;">% of<br />Consults<br />Scheduled<br />Next Week</td>         
+  <td style="width:75px;">% of<br />Consults<br />Scheduled<br />2nd Week</td>         
+  <td style="width:75px;">% of<br />Consults<br />Scheduled<br />3rd Week</td>         
+  <td style="width:75px;">% of<br />Consults<br />Scheduled<br />4th Week</td>               
+  <td style="width:75px;">% to<br />Sales<br />Target</td>               
+  </tr>
+  
+<apex:variable var="rowclassname" value="accs" />
+<apex:repeat value="{!center_numbers}" var="all_centers" >
+  <tr class="{!if(all_centers.my_center.name=='Totals','footer',rowclassname)}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />  
+  <td class="indent">{!all_centers.my_center.name}</td>
+  <td class="right">{!all_centers.di_leads}</td>
+  <td class="right">{!all_centers.di_gy_percent}</td>
+  <td class="right">{!all_centers.di_consults_booked}</td>
+  <td class="right">{!all_centers.revived_leads}</td>
+  <td class="right">{!all_centers.cslts_gy_percent}</td>
+  <td class="right">{!all_centers.schedule_rate}</td>
+  <td class="right">{!all_centers.available_consults}</td>
+  <td class="right">{!all_centers.scheduled_consults}</td>  
+  <td class="right">{!all_centers.consults_booked_rate}</td>
+  <td class="right">{!all_centers.initially_scheduled_consults}</td>
+  <td class="right">{!all_centers.final_scheduled_consults}</td>    
+  <td class="right">{!all_centers.consults_showed}</td> 
+  <td class="right">{!all_centers.show_gy_rate}</td> 
+  <td class="right">{!all_centers.show_rate}</td> 
+  <td class="right">{!all_centers.complete_rate}</td> 
+  <td class="right">{!all_centers.starts}</td>       
+  <td class="right">{!all_centers.close_rate}</td>
+  <td class="right">{!all_centers.starts_mtd}</td>
+  <td class="right">{!all_centers.available_consults_next_week}</td>
+  <td class="right">{!all_centers.scheduled_consults_next_week}</td>
+  <td class="right">{!all_centers.consults_booked_next_rate}</td>    
+  <td class="right">{!all_centers.consults_booked_2_rate}</td>    
+  <td class="right">{!all_centers.consults_booked_3_rate}</td>           
+  <td class="right">{!all_centers.consults_booked_4_rate}</td>             
+  <td class="right">&nbsp;</td>
+</tr> 
+</apex:repeat>
+</table>
+</apex:outputPanel>
+</apex:component>

@@ -1,0 +1,62 @@
+<messaging:emailTemplate subject="Thank you for contacting ClearChoice Dental Implant Center" recipientType="Lead" 
+replyto="reply-to@clearchoice.com">
+<messaging:plainTextEmailBody >
+Dear {!Recipient.FirstName}, 
+
+Thank you for requesting a consultation at ClearChoice Dental Implant Center. A new paradigm is emerging in medicine…the ClearChoice experience! We can help you achieve your personal best, reclaim your confidence and youthful outlook! And it can happen in just ONE DAY*! Is it a miracle? No, it’s just 21st Century dentistry. 
+
+The doctors on the ClearChoice team are among the most experienced in the country. Over the past 40 years, our national panels of doctors have placed over 100,000 dental implants. You can be confident that you can trust us to perform your procedure right the first time. 
+
+Please call us today at 1-888-654-4675 and we will be happy to discuss your dental needs and set up a FREE consultation and 3D CAT scan for you. 
+
+
+Remember your dental conditions will only worsen and become more expensive the longer treatment is delayed. 
+
+
+Sincerely,
+
+{!Recipient.Call_Center_Agent__r.Name}
+Dental Implant Consultant
+
+{!Recipient.Center_Name__c} ClearChoice Dental Center
+{!Recipient.Center__r.Street_1__c} {!Recipient.Center__r.Street_2__c}
+{!Recipient.Center__r.City__c}, {!Recipient.Center__r.State__c} {!Recipient.Center__r.Zip_Code__c}
+{!Recipient.Center_Phone_Number__c}
+
+*Nobel Biocare™ Immediate Function™ for qualified patients after initial workup. Individual results may vary.
+</messaging:plainTextEmailBody>
+<messaging:htmlEmailBody >
+<img id="theImage" src="http://www.clearchoice.com/files/images/EmailTemplates/ClearChoiceLogo.png" width="387" height="114"/> 
+<br/>
+<hr color="DarkBlue"/>
+<div style="text-align:justify;">
+<p style="line-height:1.4;">
+Dear {!Recipient.FirstName},
+
+<br/><br/>
+
+Thank you for requesting a consultation at ClearChoice Dental Implant Center. A new paradigm is emerging in medicine…the ClearChoice experience! We can help you achieve your personal best, reclaim your confidence and youthful outlook! And it can happen in just ONE DAY*! Is it a miracle? No, it’s just 21st Century dentistry. 
+<br/><br/>
+The doctors on the ClearChoice team are among the most experienced in the country. Over the past 40 years, our national panels of doctors have placed over 100,000 dental implants. You can be confident that you can trust us to perform your procedure right the first time. 
+<br/><br/>
+
+Please call us today at 1-888-654-4675 and we will be happy to discuss your dental needs and set up a FREE consultation and 3D CAT scan for you. 
+<br/><br/>
+
+Remember your dental conditions will only worsen and become more expensive the longer treatment is delayed. 
+
+
+</p><br/><br/>
+
+Sincerely,<br/><br/>
+
+{!Recipient.Call_Center_Agent__r.Name}<br />
+Dental Implant Consultant<br /><br />
+{!Recipient.Center_Name__c} ClearChoice Dental Center<br />
+{!Recipient.Center__r.Street_1__c} {!Recipient.Center__r.Street_2__c}<br />
+{!Recipient.Center__r.City__c}, {!Recipient.Center__r.State__c} {!Recipient.Center__r.Zip_Code__c}<br /> 
+{!Recipient.Center_Phone_Number__c}<br /><br />
+<p style="text-align:center;font-size:6pt;font-family:Arial;font-weight:bold;font-style:italic">*Nobel Biocare™ Immediate Function™ for qualified patients after initial workup. Individual results may vary.</p>
+</div>
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

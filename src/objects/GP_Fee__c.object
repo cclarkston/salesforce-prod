@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Collections of values relating to the amounts paid to external doctors sending their patients to us for additional services.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Arch_Count__c</fullName>
+        <description>Should be &apos;1&apos; or &apos;2&apos;</description>
+        <externalId>false</externalId>
+        <label>Arch Count</label>
+        <precision>1</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Center_Information__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Center Information</label>
+        <referenceTo>Center_Information__c</referenceTo>
+        <relationshipLabel>GP Fees</relationshipLabel>
+        <relationshipName>GP_Fees</relationshipName>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>GP_Service__c</fullName>
+        <description>Expecting &apos;1&apos;, &apos;2&apos;, or &apos;3&apos;</description>
+        <externalId>false</externalId>
+        <label>GP Service</label>
+        <precision>1</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Phase_1__c</fullName>
+        <externalId>false</externalId>
+        <label>Phase 1</label>
+        <precision>5</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Phase_2_Titanium__c</fullName>
+        <externalId>false</externalId>
+        <label>Phase 2 Titanium</label>
+        <precision>5</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Phase_2_Zirconia__c</fullName>
+        <externalId>false</externalId>
+        <label>Phase 2 Zirconia</label>
+        <precision>5</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Titanium__c</fullName>
+        <externalId>false</externalId>
+        <label>Titanium</label>
+        <precision>5</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Zirconia__c</fullName>
+        <externalId>false</externalId>
+        <label>Zirconia</label>
+        <precision>5</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <label>GP Fee</label>
+    <nameField>
+        <displayFormat>GPFEE-{0000}</displayFormat>
+        <label>GP Fee Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>GP Fees</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Arch_Count</fullName>
+        <active>true</active>
+        <description>Arch Count must be one or two</description>
+        <errorConditionFormula>Arch_Count__c != 1 &amp;&amp; Arch_Count__c != 2</errorConditionFormula>
+        <errorDisplayField>Arch_Count__c</errorDisplayField>
+        <errorMessage>Arch count must be either &apos;1&apos; or &apos;2&apos;</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>GP_Service</fullName>
+        <active>true</active>
+        <description>GP Service must be 1, 2, or 3</description>
+        <errorConditionFormula>GP_Service__c &lt; 1 || GP_Service__c &gt; 3</errorConditionFormula>
+        <errorDisplayField>GP_Service__c</errorDisplayField>
+        <errorMessage>GP Service must be 1, 2 or 3.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Phase_one_check</fullName>
+        <active>true</active>
+        <description>Phase 1 value must be zero if record is for Phase 2 of phased barless treatment</description>
+        <errorConditionFormula>(GP_Service__c = 2 ||  GP_Service__c = 3) &amp;&amp; Phase_1__c != 0</errorConditionFormula>
+        <errorDisplayField>Phase_1__c</errorDisplayField>
+        <errorMessage>Phase 1 value must be zero is this is related to Phase 2 of a phased barless treatment (GP Service is &apos;1&apos; or &apos;2&apos;)</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Phase_two_check</fullName>
+        <active>true</active>
+        <description>Phase 2 values must be zero if record is for Phase 1 of phased barless treatment</description>
+        <errorConditionFormula>GP_Service__c = 1 &amp;&amp; (Phase_2_Titanium__c != 0 || Phase_2_Zirconia__c != 0)</errorConditionFormula>
+        <errorMessage>Phase 2 values must be zero is this is related to Phase 1 of a phased barless treatment (GP Service is &apos;1&apos;)</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

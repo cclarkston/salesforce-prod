@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_88768878</developerName>
+        <masterLabel>PreScreens</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Lead.Pre_Screen__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Green</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Yellow</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>PO Box</sourceValue>
+            </sourceValues>
+            <value>GYB</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Not Checked</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Red</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Blue (No Hit)</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Website Down-No Prescreen</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Insufficient Information</sourceValue>
+            </sourceValues>
+            <value>RBO</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>STREET</field>
+    </columns>
+    <columns>
+        <field>CITY</field>
+    </columns>
+    <columns>
+        <field>STATE</field>
+    </columns>
+    <columns>
+        <field>ZIP</field>
+    </columns>
+    <columns>
+        <field>BucketField_88768878</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>CITY</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Tucson</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>STATE</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>AZ</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Inbound_Call__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Dental Inquiry</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>RYB by City/State</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadList</reportType>
+    <scope>org</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <endDate>2012-11-15</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2012-06-01</startDate>
+    </timeFrameFilter>
+</Report>

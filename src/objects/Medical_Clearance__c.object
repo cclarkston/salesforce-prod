@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Medical Clearances</relationshipLabel>
+        <relationshipName>Medical_Clearances</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Date_Clearance_Requested__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Clearance Requested</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Doctor_Fax__c</fullName>
+        <externalId>false</externalId>
+        <label>Doctor Fax</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Doctor_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Doctor Name</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Doctor_Phone__c</fullName>
+        <externalId>false</externalId>
+        <label>Doctor Phone</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Doctor_Specialty__c</fullName>
+        <externalId>false</externalId>
+        <label>Doctor Specialty</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Cardiologist</fullName>
+                    <default>false</default>
+                    <label>Cardiologist</label>
+                </value>
+                <value>
+                    <fullName>Chiropractor</fullName>
+                    <default>false</default>
+                    <label>Chiropractor</label>
+                </value>
+                <value>
+                    <fullName>Endocrinologist</fullName>
+                    <default>false</default>
+                    <label>Endocrinologist</label>
+                </value>
+                <value>
+                    <fullName>ENT Referral</fullName>
+                    <default>false</default>
+                    <label>ENT Referral</label>
+                </value>
+                <value>
+                    <fullName>Family medicine</fullName>
+                    <default>false</default>
+                    <label>Family medicine</label>
+                </value>
+                <value>
+                    <fullName>Gastroenterologist</fullName>
+                    <default>false</default>
+                    <label>Gastroenterologist</label>
+                </value>
+                <value>
+                    <fullName>General Practitioner</fullName>
+                    <default>false</default>
+                    <label>General Practitioner</label>
+                </value>
+                <value>
+                    <fullName>Geriatric medicine</fullName>
+                    <default>false</default>
+                    <label>Geriatric medicine</label>
+                </value>
+                <value>
+                    <fullName>Hematologist</fullName>
+                    <default>false</default>
+                    <label>Hematologist</label>
+                </value>
+                <value>
+                    <fullName>Internal medicine</fullName>
+                    <default>false</default>
+                    <label>Internal medicine</label>
+                </value>
+                <value>
+                    <fullName>Nephrologist</fullName>
+                    <default>false</default>
+                    <label>Nephrologist</label>
+                </value>
+                <value>
+                    <fullName>Neurologist</fullName>
+                    <default>false</default>
+                    <label>Neurologist</label>
+                </value>
+                <value>
+                    <fullName>Oncologist</fullName>
+                    <default>false</default>
+                    <label>Oncologist</label>
+                </value>
+                <value>
+                    <fullName>Pain management</fullName>
+                    <default>false</default>
+                    <label>Pain management</label>
+                </value>
+                <value>
+                    <fullName>Psychiatrist</fullName>
+                    <default>false</default>
+                    <label>Psychiatrist</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Health_Condition_Other__c</fullName>
+        <externalId>false</externalId>
+        <label>Health Condition Other</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Health_Condition__c</fullName>
+        <externalId>false</externalId>
+        <label>Health Condition</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Anemic</fullName>
+                    <default>false</default>
+                    <label>Anemic</label>
+                </value>
+                <value>
+                    <fullName>Anticoagulants</fullName>
+                    <default>false</default>
+                    <label>Anticoagulants</label>
+                </value>
+                <value>
+                    <fullName>Asthma</fullName>
+                    <default>false</default>
+                    <label>Asthma</label>
+                </value>
+                <value>
+                    <fullName>Atrial fibrillation</fullName>
+                    <default>false</default>
+                    <label>Atrial fibrillation</label>
+                </value>
+                <value>
+                    <fullName>Bisphosphate</fullName>
+                    <default>false</default>
+                    <label>Bisphosphonate</label>
+                </value>
+                <value>
+                    <fullName>Blood pressure</fullName>
+                    <default>false</default>
+                    <label>Blood pressure</label>
+                </value>
+                <value>
+                    <fullName>Cancer</fullName>
+                    <default>false</default>
+                    <label>Cancer</label>
+                </value>
+                <value>
+                    <fullName>Chronic Pain</fullName>
+                    <default>false</default>
+                    <label>Chronic Pain</label>
+                </value>
+                <value>
+                    <fullName>COPD</fullName>
+                    <default>false</default>
+                    <label>COPD</label>
+                </value>
+                <value>
+                    <fullName>Diabetes</fullName>
+                    <default>false</default>
+                    <label>Diabetes</label>
+                </value>
+                <value>
+                    <fullName>Drug and alcohol treatment</fullName>
+                    <default>false</default>
+                    <label>Drug and alcohol treatment</label>
+                </value>
+                <value>
+                    <fullName>Drug discontinuation</fullName>
+                    <default>false</default>
+                    <label>Drug discontinuation</label>
+                </value>
+                <value>
+                    <fullName>EKG</fullName>
+                    <default>false</default>
+                    <label>EKG</label>
+                </value>
+                <value>
+                    <fullName>ENT Referral</fullName>
+                    <default>false</default>
+                    <label>ENT Referral</label>
+                </value>
+                <value>
+                    <fullName>Epilepsy</fullName>
+                    <default>false</default>
+                    <label>Epilepsy</label>
+                </value>
+                <value>
+                    <fullName>Excessive bleeding</fullName>
+                    <default>false</default>
+                    <label>Excessive bleeding</label>
+                </value>
+                <value>
+                    <fullName>Heart</fullName>
+                    <default>false</default>
+                    <label>Heart</label>
+                </value>
+                <value>
+                    <fullName>Heart attack</fullName>
+                    <default>false</default>
+                    <label>Heart attack</label>
+                </value>
+                <value>
+                    <fullName>Hepatitis</fullName>
+                    <default>false</default>
+                    <label>Hepatitis</label>
+                </value>
+                <value>
+                    <fullName>High Blood Pressure</fullName>
+                    <default>false</default>
+                    <label>High Blood Pressure</label>
+                </value>
+                <value>
+                    <fullName>HIV</fullName>
+                    <default>false</default>
+                    <label>HIV</label>
+                </value>
+                <value>
+                    <fullName>Kidney disease</fullName>
+                    <default>false</default>
+                    <label>Kidney disease</label>
+                </value>
+                <value>
+                    <fullName>Mood disorder</fullName>
+                    <default>false</default>
+                    <label>Mood disorder</label>
+                </value>
+                <value>
+                    <fullName>Organ transplant</fullName>
+                    <default>false</default>
+                    <label>Organ transplant</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>Physical Required</fullName>
+                    <default>false</default>
+                    <label>Physical Required</label>
+                </value>
+                <value>
+                    <fullName>Radiation</fullName>
+                    <default>false</default>
+                    <label>Radiation</label>
+                </value>
+                <value>
+                    <fullName>Respiratory problems</fullName>
+                    <default>false</default>
+                    <label>Respiratory problems</label>
+                </value>
+                <value>
+                    <fullName>Sleep Apnea</fullName>
+                    <default>false</default>
+                    <label>Sleep Apnea</label>
+                </value>
+                <value>
+                    <fullName>Standard</fullName>
+                    <default>false</default>
+                    <label>Standard</label>
+                </value>
+                <value>
+                    <fullName>Stent</fullName>
+                    <default>false</default>
+                    <label>Stent</label>
+                </value>
+                <value>
+                    <fullName>Stroke</fullName>
+                    <default>false</default>
+                    <label>Stroke</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>IsActive__c</fullName>
+        <defaultValue>true</defaultValue>
+        <externalId>false</externalId>
+        <label>IsActive</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Medical Clearances</relationshipLabel>
+        <relationshipName>Medical_Clearances</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Patient_POT__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Patient POT</label>
+        <referenceTo>Patient_POT__c</referenceTo>
+        <relationshipLabel>Medical Clearances</relationshipLabel>
+        <relationshipName>Medical_Clearances</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Request_Note__c</fullName>
+        <externalId>false</externalId>
+        <label>Request Note</label>
+        <length>1000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Request_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Request Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Pending</fullName>
+                    <default>true</default>
+                    <label>Pending</label>
+                </value>
+                <value>
+                    <fullName>Declined</fullName>
+                    <default>false</default>
+                    <label>Declined</label>
+                </value>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Requested_Via__c</fullName>
+        <externalId>false</externalId>
+        <label>Requested Via</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Email</fullName>
+                    <default>false</default>
+                    <label>Email</label>
+                </value>
+                <value>
+                    <fullName>Fax</fullName>
+                    <default>false</default>
+                    <label>Fax</label>
+                </value>
+                <value>
+                    <fullName>Mail</fullName>
+                    <default>false</default>
+                    <label>Mail</label>
+                </value>
+                <value>
+                    <fullName>Patient</fullName>
+                    <default>false</default>
+                    <label>Patient</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Medical Clearance</label>
+    <nameField>
+        <displayFormat>MCN-{0000}</displayFormat>
+        <label>Medical Clearance Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Medical Clearances</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>We are excited to see you at the seminar</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>ClearChoice_Letterhead</letterhead>
+    <name>In House Seminar Reminder Letter</name>
+    <style>freeForm</style>
+    <subject>ClearChoice Dental Implant Center Patient Seminar</subject>
+    <textOnly>Hello {!Lead.FirstName},
+ 
+Just a quick reminder about your reservation to attend the FREE patient seminar at ClearChoice Dental Implant Center on {!Lead.Well_Formatted_Date__c} at {!Lead.Well_Formatted_Time__c}.
+ 
+You can look forward to:
+
+Receiving a complimentary 3D CAT scan 
+Learning how implants can provide a clear solution for your dental needs 
+Obtaining answers for your specific dental questions 
+Meeting the doctors 
+Touring our clinic 
+
+We do request a call at 888-654-4675 to verbally confirm that you will be at this seminar. If something has come up and you can&apos;t make it, please notify us know within 48 hours since we have limited seating. You may also respond to this email.
+ 
+Best regards,
+ 
+{!Lead.OwnerFullName}
+Dental Implant Consultant
+ClearChoice Dental Implant Center</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

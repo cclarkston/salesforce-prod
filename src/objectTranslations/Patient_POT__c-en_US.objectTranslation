@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Patient POT</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Patient POTs</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Patient POTs --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Center Formula --></label>
+        <name>Center_Formula__c</name>
+    </fields>
+    <fields>
+        <label><!-- Doctor Notes --></label>
+        <name>Doctor_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+        <relationshipLabel><!-- Patient POTs --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Plan of Treatment --></label>
+        <name>Plan_of_Treatment__c</name>
+        <relationshipLabel><!-- Patient POTs --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Treatment Description --></label>
+        <name>Treatment_Description__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

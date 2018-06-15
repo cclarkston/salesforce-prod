@@ -1,0 +1,37 @@
+<img id="theImage" src="http://www.clearchoice.com/images/logo.png" width="234" height="92"/> 
+<br/>
+<hr color="DarkBlue"/>
+
+Dear {!Lead.FirstName},<br/>
+<br/>
+I am sure that you are excited about your upcoming consultation.  You’re about to give yourself a wonderful opportunity for a beautiful, radiant smile that will last a lifetime!  
+<br/>
+<br/>
+ClearChoice is America’s #1 Choice for dental implants because it’s all we do. Our world class patient care and experienced specialists, combined with advanced technology and state-of-the-art surgical procedures will allow you to enjoy the life you’ve earned.
+<br/>
+<br/>
+At ClearChoice, we believe knowledge is power, and by obtaining accurate information you can make an informed decision as to whether our dental implant solution is right for you. Your upcoming consultation will provide you with a comprehensive assessment of your dental condition and treatment options, as well as estimated costs for the recommended treatment. 
+<br/>
+<br/>
+This free consultation is scheduled for <b>{!Lead.DateTime_Consult_Scheduled__c}</b><br/>
+<br/> 
+We know your time is valuable, so please plan on arriving 10 minutes early so we can get your appointment started promptly. <a href="{!Lead.Center_Directions_URL__c}">Click Here</a> to view map and directions for the center.<br/>
+<br/>
+
+We look forward to seeing you! In the meantime, please know we are available Monday through Friday at {!Lead.Center_Phone_Number__c} between the hours of 8:00am-5:00pm to answer any questions you have in advance of your consultation with our doctors.  <br/>
+<br/>
+Sincerely,<br/>
+<br/>
+
+{!Lead.Call_Center_Agent__c}<br/>
+Dental Implant Consultant<br/>
+<br/>
+
+{!Lead.Center_Name__c} ClearChoice Dental Center<br/>
+{!Lead.Center_Address__c}
+{!Lead.Center_Phone_Number__c}
+<br/>
+<br/>
+
+<span style="font-style:italics;font-size:8pt;">ClearChoice Dental Implant Centers are locally owned and operated by licensed local dentists, and are part of a professional affiliation of implant practices operated by oral surgeons, prosthodontists and restorative dentists across the U.S. 
+*Qualified patients can have their procedure in one day after initial workup without additional bone graft surgery.  Results may vary in individual cases.</span>

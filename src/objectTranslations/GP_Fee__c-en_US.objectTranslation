@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>GP Fee</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>GP Fees</value>
+    </caseValues>
+    <fields>
+        <label><!-- Arch Count --></label>
+        <name>Arch_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Center Information --></label>
+        <name>Center_Information__c</name>
+        <relationshipLabel><!-- GP Fees --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- GP Service --></label>
+        <name>GP_Service__c</name>
+    </fields>
+    <fields>
+        <label><!-- Phase 1 --></label>
+        <name>Phase_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Phase 2 Titanium --></label>
+        <name>Phase_2_Titanium__c</name>
+    </fields>
+    <fields>
+        <label><!-- Phase 2 Zirconia --></label>
+        <name>Phase_2_Zirconia__c</name>
+    </fields>
+    <fields>
+        <label><!-- Titanium --></label>
+        <name>Titanium__c</name>
+    </fields>
+    <fields>
+        <label><!-- Zirconia --></label>
+        <name>Zirconia__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Arch count must be either &apos;1&apos; or &apos;2&apos; --></errorMessage>
+        <name>Arch_Count</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- GP Service must be 1, 2 or 3. --></errorMessage>
+        <name>GP_Service</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Phase 1 value must be zero is this is related to Phase 2 of a phased barless treatment (GP Service is &apos;1&apos; or &apos;2&apos;) --></errorMessage>
+        <name>Phase_one_check</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Phase 2 values must be zero is this is related to Phase 1 of a phased barless treatment (GP Service is &apos;1&apos;) --></errorMessage>
+        <name>Phase_two_check</name>
+    </validationRules>
+</CustomObjectTranslation>

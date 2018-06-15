@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Practice Contact</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Practice Contacts</value>
+    </caseValues>
+    <fields>
+        <label><!-- Alternate Phone Number --></label>
+        <name>Alternate_Phone_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dental Practice --></label>
+        <name>Dental_Practice__c</name>
+        <relationshipLabel><!-- Practice Contacts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Email Address --></label>
+        <name>Email_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- First Name --></label>
+        <name>First_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Job Title --></label>
+        <name>Job_Title__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Name --></label>
+        <name>Last_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Phone Number --></label>
+        <name>Phone_Number__c</name>
+    </fields>
+    <layouts>
+        <layout>Practice Contact Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

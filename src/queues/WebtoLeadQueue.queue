@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <name>Web to Lead Queue</name>
+    <queueMembers>
+        <users>
+            <user>jcangemi@clearchoice.com</user>
+            <user>jgladstone@clearchoice.com</user>
+            <user>jkuckenmeister@clearchoice.com</user>
+            <user>maryhelen.turner@clearchoice.com</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Lead</sobjectType>
+    </queueSobject>
+</Queue>

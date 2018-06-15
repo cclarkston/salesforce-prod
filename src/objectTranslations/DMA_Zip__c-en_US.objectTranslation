@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>DMA Zip</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>DMA Zips</value>
+    </caseValues>
+    <fields>
+        <label><!-- City Size --></label>
+        <name>City_Size__c</name>
+    </fields>
+    <fields>
+        <label><!-- DMA Rank --></label>
+        <name>DMA_Rank__c</name>
+    </fields>
+    <fields>
+        <label><!-- DMA --></label>
+        <name>DMA__c</name>
+        <relationshipLabel><!-- DMA Zips --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Metro Area --></label>
+        <name>Metro_Area__c</name>
+    </fields>
+    <fields>
+        <label><!-- Zip Demographic --></label>
+        <name>Zip_Demographic__c</name>
+        <relationshipLabel><!-- DMA Zips --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

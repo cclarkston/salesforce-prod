@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Calendar Rebuild</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Calendar Rebuilds</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Calendar Rebuilds --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Apt Date --></label>
+        <name>Apt_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Clinical Apt Calendar --></label>
+        <name>Clinical_Apt_Calendar__c</name>
+        <relationshipLabel><!-- Calendar Rebuilds --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Clinical Room --></label>
+        <name>Clinical_Room__c</name>
+        <relationshipLabel><!-- Calendar Rebuilds --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Doctor --></label>
+        <name>Doctor__c</name>
+        <relationshipLabel><!-- Calendar Rebuilds --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- End Hour --></label>
+        <name>End_Hour__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Minute --></label>
+        <name>End_Minute__c</name>
+    </fields>
+    <fields>
+        <label><!-- Etime --></label>
+        <name>Etime__c</name>
+    </fields>
+    <fields>
+        <label><!-- Patient POT Apt --></label>
+        <name>Patient_POT_Apt__c</name>
+        <relationshipLabel><!-- Calendar Rebuilds --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Row Processed --></label>
+        <name>Row_Processed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Hour --></label>
+        <name>Start_Hour__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Minute --></label>
+        <name>Start_Minute__c</name>
+    </fields>
+    <fields>
+        <label><!-- Stime --></label>
+        <name>Stime__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

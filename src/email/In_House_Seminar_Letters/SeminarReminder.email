@@ -1,0 +1,20 @@
+<table height="400" width="550" cellpadding="5" border="0" cellspacing="5" >
+<tr height="400" valign="top" >
+<td style=" color:#000000; font-size:12pt; background-color:#FFFFFF; font-family:arial; bLabel:main; bEditID:r3st1;" tEditID="c1r1" locked="0" aEditID="c1r1" >
+<![CDATA[<p style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; ">Hello {!Lead.FirstName},</p>
+<p style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; ">&nbsp;</p>
+<p style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; ">Just a quick reminder about your reservation to attend the FREE patient seminar at ClearChoice Dental Implant Center on <font color="#3333ff"><strong>{!Lead.Well_Formatted_Date__c} at&nbsp;</strong></font><span class="Apple-style-span" style="color: rgb(51, 51, 255); "><strong>{!Lead.Well_Formatted_Time__c}</strong></span><span class="Apple-style-span" style="color: rgb(51, 51, 255); "><strong>.</strong></span></p>
+<p style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; ">&nbsp;</p>
+<p style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; ">We have reserved a seat for you at the seminar to hear our doctors and team. You will also receive a free 3D CAT scan.&nbsp;&nbsp;</p>
+<p style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; ">&nbsp;</p>
+<p style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; ">We do request a call at&nbsp;<font color="#3333ff"><strong>{!Lead.Center_Phone_Number__c} </strong><font color="#000000">to<strong> </strong></font></font>verbally confirm that you will be at this seminar.&nbsp; If something has come up and you can't make it, please notify us know within 48 hours so that we can offer the time to another patient.&nbsp; You may also respond to this email.</p>
+<p style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; ">&nbsp;</p>
+<p style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; ">&nbsp;</p>
+<p style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; ">Best regards,</p>
+<p style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; ">&nbsp;</p>
+<p style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; ">{!Lead.OwnerFullName}</p>
+<p style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; ">Dental Implant Consultant</p><p style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; "><br></p>
+<p style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; ">ClearChoice Dental Implant Center</p>
+<p style="color: rgb(0, 0, 0); "><font class="Apple-style-span" face="arial">{!Lead.Center_Address__c}</font></p>]]></td>
+</tr>
+</table>

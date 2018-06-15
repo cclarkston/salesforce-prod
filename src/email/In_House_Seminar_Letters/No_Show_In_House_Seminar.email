@@ -1,0 +1,18 @@
+<table height="400" width="600" cellpadding="5" border="0" cellspacing="5" >
+<tr height="50" valign="top" >
+<td style=" color:#000000; font-size:12pt; background-color:#FFFFFF; font-family:arial; bLabel:main; bEditID:r3st1;" tEditID="c1r1" locked="0" aEditID="c1r1" >
+<![CDATA[<FONT face=Calibri>Hello {!Lead.FirstName},</FONT>]]></td>
+</tr>
+<tr height="300" valign="top" >
+<td style=" color:#000000; font-size:12pt; background-color:#FFFFFF; font-family:arial; bLabel:main; bEditID:r3st1;" tEditID="c1r2" locked="0" aEditID="c1r2" >
+<![CDATA[<P style="MARGIN: 0in 0in 10pt" class=MsoNormal><FONT face=Calibri>We are sorry you were unable to attend our seminar at&nbsp;our Center on<SPAN style="mso-spacerun: yes">&nbsp;{!Lead.DateTime_Consult_Scheduled__c}</SPAN>. We understand that unforeseen circumstances can interrupt the flow of your schedule.</FONT></P>
+<P style="MARGIN: 0in 0in 10pt" class=MsoNormal><FONT face=Calibri>We would like to take this opportunity to schedule your FREE consultation and 3D CAT scan. We will set aside an hour of time for you to speak with our doctors and team. </FONT></P>
+<P style="MARGIN: 0in 0in 10pt" class=MsoNormal><FONT face=Calibri>Please contact our office at&nbsp;888-654-4675 or respond to this email to schedule your free consultation. If you are no longer interested, please contact us so we may update our records. </FONT></P>
+<P style="MARGIN: 0in 0in 10pt" class=MsoNormal><FONT face=Calibri>Looking forward to seeing you!</FONT></P>]]></td>
+</tr>
+<tr height="50" valign="top" >
+<td style=" color:#000000; font-size:12pt; background-color:#FFFFFF; font-family:arial; bLabel:main; bEditID:r3st1;" tEditID="c1r3" locked="0" aEditID="c1r3" >
+<![CDATA[<P class=MsoNormal style="MARGIN: 0in 0in 10pt"><FONT face=Calibri>{!Lead.OwnerFullName}</FONT></P>
+<P class=MsoNormal style="MARGIN: 0in 0in 10pt"><FONT face=Calibri>Dental Implant Consultant</FONT></P>]]></td>
+</tr>
+</table>

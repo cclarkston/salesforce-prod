@@ -1,0 +1,58 @@
+<messaging:emailTemplate subject="We are excited to meet you! " recipientType="Lead" replyTo="callcenter@clearchoice.com">
+<messaging:plainTextEmailBody >
+Hello {!Recipient.FirstName}, 
+
+We just wanted to send a friendly reminder that we have you confirmed for 
+your consultation. 
+
+Your free consultation is scheduled for {!Recipient.Well_Formatted_Date__c} 
+at {!Recipient.Well_Formatted_Time__c}. 
+
+We have set aside 1 hour of time for you to speak with a personal 
+consultant and have the doctor review your dental implant needs. 
+
+Copy and paste the following URL into your browser to access the map.
+ {!recipient.Center__r.Map_Directions_URL__c}
+
+We are excited to meet you,
+
+{!Recipient.Call_Center_Agent__r.Name}
+Dental Implant Consultant
+
+{!Recipient.Center_Name__c} ClearChoice Dental Center
+{!Recipient.Center__r.Future_Street_1__c} {!Recipient.Center__r.Future_Street_2__c}
+{!Recipient.Center__r.Future_City__c}, {!Recipient.Center__r.Future_State__c} {!Recipient.Center__r.Future_Zip_Code__c}
+{!Recipient.Center_Phone_Number__c}
+
+
+ClearChoice Dental Implant Centers are locally owned and operated by licensed local dentists, and are part of a professional affiliation of implant practices operated by oral surgeons, prosthodontists and restorative dentists across the United States.
+*Qualified patients can have their procedure in one day after initial workup without additional bone graft surgery.  Results may vary in individual cases. +Limited services available at satellite offices.
+</messaging:plainTextEmailBody>
+<messaging:htmlEmailBody >
+<img id="theImage" src="http://www.clearchoice.com/files/images/EmailTemplates/ClearChoiceLogo.png" width="387" height="114"/> 
+<br/>
+<hr color="DarkBlue"/>
+<div style="text-align:justify;">
+<p style="line-height:1.4;">
+Dear {!Recipient.FirstName},<br /><br />
+We just wanted to send a friendly reminder that we have you confirmed for your consultation on <b><c:ConsultTime_Format LeadId="{!Recipient.Id}" DFormat="EEEE M/dd/yyyy"/> at <c:ConsultTime_Format LeadId="{!Recipient.Id}" DFormat="h:mm a"/> </b>.
+<br /><br />
+We have set aside 1 hour of time for you to speak with a personal consultant and have the doctor review your dental implant needs.  
+<br /><br />
+Please remember this consultation and panoramic x-ray are free of charge.
+<br /><br />
+<a href="{!recipient.Center__r.Future_Map_Directions__c}">Click Here</a> to view map and directions for the center.
+</p><br /><br />
+We are excited to meet you,<br /><br />
+{!Recipient.Call_Center_Agent__r.Name}<br />
+Dental Implant Consultant<br /><br />
+{!Recipient.Center_Name__c} ClearChoice Dental Center<br />
+{!Recipient.Center__r.Future_Street_1__c} {!Recipient.Center__r.Future_Street_2__c}<br />
+{!Recipient.Center__r.Future_City__c}, {!Recipient.Center__r.Future_State__c} {!Recipient.Center__r.Future_Zip_Code__c}<br /> 
+{!Recipient.Center_Phone_Number__c}<br /><br />
+
+<p style="text-align:center;font-size:6pt;font-family:Arial;font-weight:bold;font-style:italic">ClearChoice Dental Implant Centers are locally owned and operated by licensed local dentists, and are part of a professional affiliation of implant practices operated by oral surgeons, prosthodontists and restorative dentists across the United States.</p>
+<span style="font-family:arial;font-size:6pt;">&#8224;. *Qualified patients can have their procedure in one day after initial workup without additional bone graft surgery.  Results may vary in individual cases. +Limited services available at satellite offices. </span>
+</div>
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

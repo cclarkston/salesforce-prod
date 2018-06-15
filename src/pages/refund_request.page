@@ -1,0 +1,124 @@
+<apex:page standardController="Refund_Request__c" extensions="ctrl_refundrequest" sidebar="false" showHeader="false">
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+<style>
+  span.section_line {
+    display:block;
+    padding-bottom:8px;
+  }
+  
+  span.section_header {
+    display:inline-block;
+    width:150px;
+    font-weight:bold;
+  }
+</style>
+
+
+
+<apex:form >
+<apex:actionfunction name="updated_fields" action="{!quick_save}" rerender="main_holder"  oncomplete="default_cursor(this);"/>
+<apex:outputpanel id="main_holder">
+
+<apex:inputfield value="{!Refund_Request__c.Refund_Status__c}" rendered="false" />
+
+<span class="section_line">
+  <span class="section_header">Date of Request :</span><apex:outputfield value="{!Refund_Request__c.createddate}" />
+</span>
+<span class="section_line">
+  <span class="section_header">PEC :</span><apex:outputfield value="{!Refund_Request__c.createdbyid}" />
+</span>
+<apex:outputpanel rendered="{!if(Refund_Request__c.Opportunity__c!=null,true,false)}">
+<span class="section_line">
+  <span class="section_header">Center Location :</span><apex:outputfield value="{!Refund_Request__c.opportunity__r.Exam_Center_formula__c}" />
+</span>
+<span class="section_line">
+  <span class="section_header">Patient :</span><apex:outputfield value="{!Refund_Request__c.opportunity__r.accountid}" />
+</span>
+<span class="section_line">
+  <span class="section_header">Treatment Plan :</span><apex:outputfield value="{!Refund_Request__c.opportunity__r.Preliminary_Treatment_Plan__c}" />
+</span>
+<span class="section_line">
+  <span class="section_header">PE Date :</span><apex:outputfield value="{!Refund_Request__c.opportunity__r.closedate}" />
+</span>
+</apex:outputpanel>
+<apex:outputpanel rendered="{!if(Refund_Request__c.Private_Practice_Patient__c!=null,true,false)}">
+<span class="section_line">
+  <span class="section_header">Patient :</span><apex:outputfield value="{!Refund_Request__c.Private_Practice_Patient__c}" />
+</span>
+</apex:outputpanel>
+<span class="section_line">
+  <span class="section_header">Net Collections :</span><apex:outputtext value="{!net_collected}" />
+</span>
+<span class="section_line">
+  <span class="section_header">Requested Refund $ :</span><apex:inputfield value="{!Refund_Request__c.Amount_of_Refund__c}" onchange="use_fancy_cursor(this);updated_fields();" />
+</span>
+<span class="section_line">
+  <span class="section_header" style="vertical-align:top;">Reason for Request :</span><apex:inputfield value="{!Refund_Request__c.Reason_for_request__c}" style="width:500px;" onchange="use_fancy_cursor(this);updated_fields();"/>
+</span>
+<apex:outputpanel id="carecredit_holder" rendered="{!display_carecredit}" layout="block">
+<span style="font-style:italic;color:blue;">This patient made some payments via carecredit.  Please provide the carecredit account # if possible :</span><br /><br />
+<span class="section_line">
+  <span class="section_header" style="vertical-align:top;">Carecredit Account # :</span><apex:inputfield value="{!Refund_Request__c.Carecredit_Account__c}" onchange="use_fancy_cursor(this);updated_fields();"/>
+</span>
+</apex:outputpanel>
+
+<apex:outputpanel id="address_holder" rendered="{!display_address}" layout="block">
+<span style="font-style:italic;color:blue;">This patient made some payments by check or cash.  Please provide an address where a refund check should be sent if needed :</span><br /><br />
+<span class="section_line">
+  <span class="section_header" style="vertical-align:top;">Street Address :</span><apex:inputfield value="{!Refund_Request__c.Street_Address__c}" onchange="updated_fields();"/>
+</span>
+<span class="section_line">
+  <span class="section_header" style="vertical-align:top;">City :</span><apex:inputfield value="{!Refund_Request__c.City__c}" onchange="updated_fields();"/>
+</span>
+<span class="section_line">
+  <span class="section_header" style="vertical-align:top;">State :</span><apex:inputfield value="{!Refund_Request__c.State__c}" onchange="updated_fields();"/>
+</span>
+<span class="section_line">
+  <span class="section_header" style="vertical-align:top;">Postal Code :</span><apex:inputfield value="{!Refund_Request__c.Postal_Code__c}" onchange="updated_fields();"/>
+</span>
+</apex:outputpanel>
+
+  <apex:outputpanel id="update_holder">
+  <span class="section_line">
+    <span class="section_header">Refund Type :</span><apex:selectList value="{!Refund_Request__c.Refund_Type__c}" multiselect="false" size="1">
+        <apex:selectOptions value="{!RefundList}"></apex:selectoptions>
+      </apex:selectList> 
+  </span>
+  <span class="section_line">
+  <span style="display:inline-block;width:10px;">&nbsp;</span>
+  <apex:inputfield value="{!Refund_Request__c.Spoke_to_RBD_Doctor__c}" onchange="use_fancy_cursor(this);updated_fields();" /><span style="display:inline-block;width:20px;">&nbsp;</span>
+  <span style="font-weight:bold;color:black;font-size:11pt;">I acknowledge I have spoken to my RBD and Dr. regarding this refund.</span>
+</span>
+
+    <apex:outputpanel rendered="{!display_doctor_signoff}" styleclass="section_line"> 
+      <apex:inputfield value="{!Refund_Request__c.Doctor_approved_PE_refund__c}" onchange="use_fancy_cursor(this);updated_fields();" /><span style="display:inline-block;width:20px;">&nbsp;</span>
+        Doctor Approved Completed Prosth Exam Refund
+    </apex:outputpanel>
+  </apex:outputpanel>
+
+  <apex:outputpanel id="warnings_holder">
+    <apex:commandButton action="{!submit_request}" value="Submit Request" rendered="{!display_save}"  rerender="warnings_holder" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"/><br />
+    <apex:outputpanel rendered="{!if(Refund_Request__c.Refund_Status__c=='Incomplete',false,true)}"><span style="font-weight:bold;color:#5789AE;">This request has been submitted to the refund team.  If you would like to make any changes,  please email the team directly.</span></apex:outputpanel>
+    <apex:outputtext value="{!warning_messages}" escape="false" />
+    <apex:messages style="color:red;font-weight:bold;" /><br />  
+      
+  </apex:outputpanel>
+</apex:outputpanel>
+</apex:form>
+</apex:page>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>false</available>
+    <description>Sent to Web to Lead inquiries requesting a written quote on fees. Archived 3/21</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>ClearChoice_Letterhead</letterhead>
+    <name>Quoting Response (Archived)</name>
+    <style>freeForm</style>
+    <subject>Request for Quote on Dental Implant Fees</subject>
+    <textOnly>Hello {!Lead.FirstName} {!Lead.LastName},
+
+We have several people with this exact question.  There are various conditions that can affect the fee.  Some detailed questions need to be asked and answered:
+
+·         How many teeth are missing/loose?
+·         What area of the mouth are they missing/loose in?
+·         What is the condition of the bone?
+·         What is the condition of the soft tissue?
+·         What is the condition of the remaining teeth? 
+·         What teeth, if any, do you want to save?
+·         What type of dental appliance do you have?  A partial denture, full denture, fixed bridge?
+
+I will be happy to verbally give you some ranges over the phone.  Unfortunately, only the doctor can put fees in writing after studying your x-ray and doing a definitive treatment plan.  
+
+Please call me today at 1-888-654-4675 and I can help to give you a ballpark of cost or I’ll set you up for a free consultation and panoramic x-ray.  
+
+Sincerely,
+{!Lead.OwnerFullName}
+Dental implant Consultant
+ClearChoice Dental Implant Center</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

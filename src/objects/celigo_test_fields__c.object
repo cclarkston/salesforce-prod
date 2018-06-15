@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>Extra settings for Celigo Connector to use based on specific rules and validations.</description>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Test_Fields__c</fullName>
+        <description>A string to provide inputs to Celigo Connector tests.</description>
+        <externalId>false</externalId>
+        <label>Test Fields</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Celigo Connector Test Setting</label>
+    <visibility>Public</visibility>
+</CustomObject>

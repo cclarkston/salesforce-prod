@@ -1,0 +1,387 @@
+<apex:page controller="ctrl_schedule_template" sidebar="false" > 
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+
+<style>
+  span.blank {
+    font-style:italic;
+    font-weight:bold;    
+  }  
+
+  table.calendar_view {
+<!--    background-image:url('https://cs12.salesforce.com/resource/1336491391000/LinesBackground'); -->
+    empty-cells: show;    
+    border-collapse: collapse;
+    border-spacing: 0;  
+  }
+
+  table.calendar_view td {    
+    height:15px; 
+    border-collapse: collapse;
+    border-spacing: 0;      
+  }
+  
+  table.calendar_view tr.maintick {
+    
+  }
+
+  table.calendar_view tr.maintick td {
+    vertical-align:top;   
+    padding:0;
+    margin:0;     
+    padding-left:2px;
+    padding-right:2px;    
+    border-collapse: collapse;
+    border-spacing: 0;      
+  }  
+
+  table.calendar_view tr.maintick td.hour {
+    border-top:1px solid black; 
+    font-weight:bold;
+    height:15px;    
+    width:75px;    
+    border-collapse: collapse;
+    border-spacing: 0; 
+    padding:0;
+    margin:0;      
+  }    
+
+  table.calendar_view tr.subtick {
+
+  }
+
+  table.calendar_view tr.subtick td {    
+    vertical-align:top;  
+    padding:0;
+    margin:0;     
+    padding-left:2px;
+    padding-right:2px;    
+    border-collapse: collapse;
+    border-spacing: 0;              
+  }
+   
+  table.calendar_view tr.subtick td.hour {  
+    border-top:1px dashed #cccccc;
+    font-weight:bold;
+    height:15px;
+    color:white;    
+    width:75px;    
+    border-collapse: collapse;
+    border-spacing: 0; 
+        padding:0;
+    margin:0;  
+  }  
+  
+  span.apt_blue {
+    min-width:65px;    
+    background:#9BDEFF;
+    border-collapse: collapse;
+    border-spacing: 0;      
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;  
+    text-align:center;    
+   }
+ 
+  span.apt_purple {
+    min-width:65px;  
+    border-collapse: collapse;
+    border-spacing: 0;      
+    background:#C9CEE4;    
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;  
+    text-align:center;    
+  } 
+  
+  span.apt_brown {
+    min-width:65px;  
+    border-collapse: collapse;
+    border-spacing: 0;      
+    background:#CECE9D;    
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;  
+    text-align:center;    
+  }   
+
+  span.apt_red {
+    min-width:65px;  
+    border-collapse: collapse;
+    border-spacing: 0;      
+    background:#FFA4A4;    
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;  
+    text-align:center;    
+  }     
+
+  span.apt_green {
+    min-width:65px;  
+    border-collapse: collapse;
+    border-spacing: 0;      
+    background:#C7E1C4;    
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;  
+    text-align:center;    
+  }     
+
+  span.apt_grey {
+    min-width:65px;  
+    border-collapse: collapse;
+    border-spacing: 0;      
+    background:#D2D2D2;    
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;  
+    text-align:center;    
+  }     
+
+  span.apt_yellow {
+    min-width:65px;  
+    border-collapse: collapse;
+    border-spacing: 0;      
+    background:#FFFFAA;    
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;  
+    text-align:center;    
+  }     
+
+  span.apt_orange {
+    min-width:65px;  
+    border-collapse: collapse;
+    border-spacing: 0;      
+    background:#FED681;    
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;  
+    text-align:center;    
+  }   
+  
+  span.apt_barney {
+    min-width:65px;  
+    border-collapse: collapse;
+    border-spacing: 0;      
+    background:#9d04ef;
+    color:black;
+    font-weight:bold;
+    display:block;
+    position:relative;
+    padding:0;
+    margin:0;  
+    text-align:center;    
+  } 
+  
+</style>
+
+<script type="text/javascript">  
+  var key_timeout;
+  var search_in_progress = false;
+   
+  function search_now() {
+    document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+    search_in_progress = false;  
+    search_templates(); 
+  } 
+    
+  function search_key() {    
+    if(search_in_progress)
+      clearTimeout(key_timeout);
+    search_in_progress = true;  
+    key_timeout = setTimeout("search_now()",600);
+  }   
+</script>
+
+<apex:form id="template_form">
+<apex:actionFunction name="search_templates" action="{!template_search}" reRender="template_holder" oncomplete="default_cursor(this);"  />
+
+<table><tr>
+  <td style="width:325px;border-right:1px solid black;padding-left:20px;vertical-align:top;">
+    <apex:outputPanel rendered="{!if(display_admin || display_cc_sup,true,false)}">
+    <apex:actionRegion id="template_new">
+      <apex:commandButton value="New Template" action="{!new_template_form}"  reRender="main_holder" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);"/>
+    </apex:actionRegion><br /><br />
+    </apex:outputPanel>       
+    <apex:actionRegion id="template_search">   
+    <span style="padding-left:10px;margin-left:10px;font-weight:bold;font-size:10pt;font-family:verdana;border-bottom:1px dotted black;color:#5789AE;display:block;margin-bottom:1em;width:200px;">Template Search</span>
+    <p style="padding-left:20px;">    
+    <span style="display:block;padding-bottom:5px;">    
+    <span style="font-weight:bold;width:60px;display:inline-block;">Name : </span> 
+      <apex:inputText value="{!name_filter}" id="search_filter" onkeyup="search_key();"/></span>
+    <span style="display:block;padding-bottom:5px;">          
+    <span style="font-weight:bold;width:60px;display:inline-block;">Center : </span> 
+      <apex:selectList value="{!center_filter}" size="1">      
+        <apex:selectOptions value="{!centerlist}"/>
+      </apex:selectList></span>                                                            
+    <span style="display:block;padding-bottom:5px;"> 
+    <span style="font-weight:bold;width:60px;display:inline-block;">Active? : </span> 
+      <apex:inputcheckbox value="{!display_active}" />
+    </span>
+    <apex:commandButton action="{!template_search}" rerender="template_holder" value="Search Templates" /><br /><br /><br />              </p>
+    </apex:actionRegion>
+    <span style="padding-left:10px;margin-left:10px;font-weight:bold;font-size:10pt;font-family:verdana;border-bottom:1px dotted black;color:#5789AE;display:block;margin-bottom:1em;width:200px;">Active Templates</span>    
+    <apex:outputpanel id="template_holder">
+      <apex:outputText value="{!no_template_matches}" escape="false" />
+      <apex:actionRegion >   
+      <apex:actionFunction name="view_templates" action="{!template_view}" rerender="main_holder" oncomplete="default_cursor(this);">
+       <apex:param name="tid" value="" />
+      </apex:actionFunction>   
+      <apex:repeat value="{!TemplateList}" var="template">
+        <span style="padding-left:20px;color:blue;font-weight:bold;display:block;padding-bottom:5px;" onclick="use_fancy_cursor(this);view_templates('{!template.Id}');">{!template.Name}</span> 
+      </apex:repeat>
+     </apex:actionRegion>          
+    </apex:outputpanel>    
+  </td>
+  <td style="padding-left:20px;vertical-align:top;">
+  <apex:outputPanel id="main_holder">  
+    <apex:outputPanel id="start_holder" rendered="{!if(display_template,'false','true')}">
+      Select a template on the left to view and modify it&#39;s details<br /><br />OR<br /><br />Click the New Template button to start creating a new one
+    </apex:outputPanel>
+    <apex:outputPanel id="template_view_holder" rendered="{!display_template}" layout="block" >
+      <apex:actionRegion >    
+      <span style="font-weight:bold;font-size:12pt;color:blue;font-family:georgia;display:block;padding-bottom:1em;">{!template_header}</span>
+      <span style="font-weight:bold;display:inline-block;width:60px;">Name : </span>
+        <apex:inputField id="template_name" value="{!my_template.name}"  /><br /><br />
+      <apex:outputpanel rendered="{!display_apt}"><span style="font-weight:bold;display:inline-block;width:60px;">Status : </span>           
+        <apex:outputtext value="{!if(my_template.Active__c,'Active','Deactivated')}" style="padding-right:20px;"  />                    
+      <apex:commandbutton action="{!activate_template}" value="Activate Template" rendered="{!if(my_template.Active__c==false,'true','false')}" rerender="main_holder" />   
+      <apex:commandbutton action="{!deactivate_template}" value="Deactivate Template" rendered="{!my_template.Active__c}" rerender="main_holder" />   
+      <apeX:outputtext value="{!active_errors}" style="padding-left:20px;" escape="false" /><br /><br /></apex:outputpanel>
+
+
+  
+  <span style="padding-left:20px;margin-left:0px;font-weight:bold;font-size:10pt;font-family:verdana;border-bottom:1px dotted black;color:#5789AE;display:block;margin-bottom:.5em;width:700px;">Days of the Week Covered</span>  
+    <table><tr><td>  
+      <apex:inputField value="{!my_template.Monday__c}" id="Monday" style="position:relative;top:2px;"/><span style="padding-left:10px;">Monday</span>
+      <span style="display:inline-block;width:30px;"></span></td>
+      <td><apex:inputField value="{!my_template.Tuesday__c}" id="Tuesday" style="position:relative;top:2px;"/><span style="padding-left:10px;">Tuesday</span>
+      <span style="display:inline-block;width:30px;"></span></td>
+      <td><apex:inputField value="{!my_template.Wednesday__c}" id="Wednesday" style="position:relative;top:2px;"/><span style="padding-left:10px;">Wednesday</span>
+      <span style="display:inline-block;width:30px;"></span></td>
+      <td><apex:inputField value="{!my_template.Thursday__c}" id="Thursday" style="position:relative;top:2px;"/><span style="padding-left:10px;">Thursday</span>
+      <span style="display:inline-block;width:30px;"></span></td>
+      <td><apex:inputField value="{!my_template.Friday__c}" id="Friday" style="position:relative;top:2px;"/><span style="padding-left:10px;">Friday</span>
+      <span style="display:inline-block;width:30px;"></span></td>
+      <td><apex:inputField value="{!my_template.Saturday__c}" id="Saturday" style="position:relative;top:2px;"/><span style="padding-left:10px;">Saturday</span>
+      <span style="display:inline-block;width:30px;"></span></td>
+      <td><apex:inputField value="{!my_template.Sunday__c}" id="Sunday" style="position:relative;top:2px;"/><span style="padding-left:10px;">Sunday</span></td></tr></table>            
+      <apex:outputPanel rendered="{!if(display_admin,true,false)}">      
+        <apex:commandButton rendered="{!if(template_header=='New Template','true','false')}" action="{!new_template}" value="Create Template" rerender="main_holder,template_holder" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);" />      
+        <apex:commandButton rendered="{!if(template_header=='New Template','false','true')}" action="{!update_template}" value="Modify Template" status="update_status" rerender="main_holder,template_holder" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);" />                  
+        <apex:actionStatus startStyle="padding-left:20px;font-weight:bold;color:blue;" stoptext="" id="update_status">
+          <apex:facet name="start">Saving...Please Wait</apex:facet>        
+          <apex:facet name="stop"><apex:outputtext style="padding-left:20px;font-weight:bold;color:blue;" value="{!update_msg}" /></apex:facet>        
+        </apex:actionStatus>           
+      </apex:outputPanel>      
+      </apex:actionRegion>      
+    </apex:outputPanel>    
+    <apex:outputPanel id="new_apt_holder" rendered="{!display_apt}" layout="block" style="margin-top:1em;border-top:1px solid black;border-bottom:1px solid black;">
+      <apex:actionRegion id="new_apt_form">
+      <apex:outputText value="{!newapt_errors}" escape="false;"/>            
+      <table><tr>
+        <td align="center" style="width:100px;" rowspan="5"><span style="font-size:10pt;font-weight:bold;color:red;">New<br />Apt</span></td>
+        <td style="width:125px;"><span style="font-weight:bold;width:125px;display:inline-block;">Start Time : </span></td>
+        <td style="width:20px;"><apex:inputField value="{!new_apt.Start_Hour__c}" style="width:20px;text-align:right;display:inline-block;"  /></td><td style="width:5px;text-align:center;"> : </td>
+        <td><apex:inputfield value="{!new_apt.Starting_Minutes__c}" style="width:20px;text-align:right;display:inline-block;" /></td>
+        <td rowspan="4" style="width:200px;" align="center"><apex:commandButton action="{!new_apt}" value="Create Appointment" reRender="apt_holder,new_apt_holder" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);" /></td></tr>
+        <tr><td><span style="font-weight:bold;width:125px;display:inline-block;">End Time : </span></td>
+        <td><apex:inputField value="{!new_apt.Ending_Hour__c}" style="text-align:right;width:20px;display:inline;" /></td><td style="width:5px;text-align:center;"> : </td>
+        <td><apex:inputField value="{!new_apt.Ending_Minutes__c}" style="width:20px;text-align:right;display:inline;"/></td></tr>
+        <tr><td><span style="font-weight:bold;width:125px;display:inline-block;">Pre-Screen Type : </span></td>
+          <td colspan="3"><apex:inputField value="{!new_apt.Pre_Screen_Type__c}" /></td></tr>
+        <tr><td><span style="font-weight:bold;width:125px;display:inline-block;">Color : </span></td>
+          <td colspan="3"><apex:inputField value="{!new_apt.Color_Code__c}" /></td></tr>        
+        <tr><td><span style="font-weight:bold;width:125px;display:inline-block;">Initiative : </span></td>
+          <td colspan="3"><apex:inputField value="{!new_apt.Special_Initiative__c}" /></td></tr>                        
+        </table>      
+      </apex:actionRegion>        
+    </apex:outputPanel><br /> 
+    <apex:outputPanel id="apt_holder" rendered="{!display_apt}" >
+    <apex:actionRegion >
+    <table><tr><td style="vertical-align:top;">
+      <span style="padding-left:10px;margin-left:10px;font-weight:bold;font-size:10pt;font-family:verdana;border-bottom:1px dotted black;color:#5789AE;display:block;margin-bottom:1em;width:550px;">Existing Appointments</span>
+      <apex:outputText value="{!update_errors}" escape="false;"/>      
+      <apex:repeat value="{!existing_apts}" var="apts">
+       <span style="padding-left:20px;display:inline-block;width:275px;padding-bottom:2em;">
+       <table style="display:inline;"><tr>      
+        <td style="width:125px;"><span style="font-weight:bold;width:125px;display:inline-block;">Name : </span></td><td colspan="3">{!apts.Name}</td></tr>
+        <tr><td style="width:125px;"><span style="font-weight:bold;width:125px;display:inline-block;">Start Time : </span></td>
+        <td style="width:20px;"><apex:inputField value="{!apts.Start_Hour__c}" style="width:20px;text-align:right;display:inline-block;"  /></td><td style="width:5px;text-align:center;"> : </td>
+        <td><apex:inputfield value="{!apts.Starting_Minutes__c}" style="width:20px;text-align:right;display:inline-block;" /></td></tr>
+        <tr><td><span style="font-weight:bold;width:125px;display:inline-block;">End Time : </span></td>
+        <td><apex:inputField value="{!apts.Ending_Hour__c}" style="text-align:right;width:20px;display:inline;" /></td><td style="width:5px;text-align:center;"> : </td>
+        <td><apex:inputField value="{!apts.Ending_Minutes__c}" style="width:20px;text-align:right;display:inline;"/></td></tr>
+        <tr><td><span style="font-weight:bold;width:125px;display:inline-block;">Pre-Screen Type : </span></td>
+          <td colspan="3"><apex:inputField value="{!apts.Pre_Screen_Type__c}" /></td></tr>
+        <tr><td><span style="font-weight:bold;width:125px;display:inline-block;">Color : </span></td>
+          <td colspan="3"><apex:inputField value="{!apts.Color_Code__c}" /></td></tr>     
+        <tr><td><span style="font-weight:bold;width:125px;display:inline-block;">Initiative : </span></td>
+          <td colspan="3"><apex:inputField value="{!apts.Special_Initiative__c}" /></td></tr></table>
+        <apex:commandButton action="{!modify_apts}" value="Save Changes" reRender="apt_holder" oncomplete="default_cursor(this);" onclick="use_fancy_cursor(this);" /> <span style="width:20px;display:inline-block;">&nbsp;</span>        
+        <apex:commandButton action="{!deactivate_apt}" value="Deactivate" reRender="apt_holder" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);" >
+          <apex:param name="did" value="{!apts.id}"/>        
+        </apex:commandButton>
+      </span>                      
+      </apex:repeat></td><td style="vertical-align:top;">
+      <span style="padding-left:10px;margin-left:10px;font-weight:bold;font-size:10pt;font-family:verdana;border-bottom:1px dotted black;color:#5789AE;display:block;margin-bottom:1em;width:280px;">Calendar View</span>      
+      <div style="overflow:auto;height:400px;padding-left:20px;">
+        <table class="calendar_view">      
+        <apex:repeat value="{!view_calendar}" var="crows">
+          <tr class="{!crows.cclass}">
+            <td style="height:15px;border-collaps:collapse;" class="hour">{!crows.row_label}</td>
+            <apex:repeat value="{!crows.row_apts}" var="ablocks">
+            <td rowspan="{!ablocks.crowspan}" >
+              <span class="{!ablocks.cclass}" style="height:{!ablocks.cheight}px;position:relative;top:{!ablocks.ctop}px;display:block;">{!ablocks.capt.name}<br />{!ablocks.start_time} - {!ablocks.end_time}<br />{!ablocks.prescreen_label}<br />{!ablocks.capt.special_initiative__c}</span></td>            
+            </apex:repeat>
+          </tr>
+        </apex:repeat>      
+        </table>        
+      </div>     
+    </td></tr></table>
+    </apex:actionRegion>    
+    </apex:outputPanel>     
+  </apex:outputPanel>
+  </td>
+</tr></table>
+</apex:form>
+</apex:page>

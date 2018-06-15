@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Center_Information__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Center Information</label>
+        <referenceTo>Center_Information__c</referenceTo>
+        <relationshipLabel>Plans of Treatment</relationshipLabel>
+        <relationshipName>Plans_of_Treatment</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Cloned_Plan_of_Treatment__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Link back to the plan of treatment this one was cloned from.  Not sure if we&apos;ll need this,  but I&apos;m storing it just in case.</description>
+        <externalId>false</externalId>
+        <label>Cloned Plan of Treatment</label>
+        <referenceTo>Plan_of_Treatment__c</referenceTo>
+        <relationshipLabel>Plans of Treatment</relationshipLabel>
+        <relationshipName>Cloned_Plan_of_Treatment</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Display_Handout_Name__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Display Handout Name</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Doctor__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Doctor</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Plans_of_Treatment</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Lower_Arch__c</fullName>
+        <externalId>false</externalId>
+        <label>Lower Arch</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Crystal Ultra</fullName>
+                    <default>false</default>
+                    <label>Crystal Ultra</label>
+                </value>
+                <value>
+                    <fullName>Denture</fullName>
+                    <default>false</default>
+                    <label>Denture</label>
+                </value>
+                <value>
+                    <fullName>Implant Bridge</fullName>
+                    <default>false</default>
+                    <label>Implant Bridge</label>
+                </value>
+                <value>
+                    <fullName>Multiple</fullName>
+                    <default>false</default>
+                    <label>Multiple</label>
+                </value>
+                <value>
+                    <fullName>None</fullName>
+                    <default>false</default>
+                    <label>None</label>
+                </value>
+                <value>
+                    <fullName>Phased</fullName>
+                    <default>false</default>
+                    <label>Phased</label>
+                </value>
+                <value>
+                    <fullName>Single</fullName>
+                    <default>false</default>
+                    <label>Single</label>
+                </value>
+                <value>
+                    <fullName>Zirconia</fullName>
+                    <default>false</default>
+                    <label>Zirconia</label>
+                </value>
+                <value>
+                    <fullName>Arch Replacement</fullName>
+                    <default>false</default>
+                    <label>Arch Replacement</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Non_Doctor_Selection__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Non Doctor Selection</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Treatment_Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Treatment Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Upper_Arch__c</fullName>
+        <externalId>false</externalId>
+        <label>Upper Arch</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Crystal Ultra</fullName>
+                    <default>false</default>
+                    <label>Crystal Ultra</label>
+                </value>
+                <value>
+                    <fullName>Denture</fullName>
+                    <default>false</default>
+                    <label>Denture</label>
+                </value>
+                <value>
+                    <fullName>Implant Bridge</fullName>
+                    <default>false</default>
+                    <label>Implant Bridge</label>
+                </value>
+                <value>
+                    <fullName>Multiple</fullName>
+                    <default>false</default>
+                    <label>Multiple</label>
+                </value>
+                <value>
+                    <fullName>None</fullName>
+                    <default>false</default>
+                    <label>None</label>
+                </value>
+                <value>
+                    <fullName>Phased</fullName>
+                    <default>false</default>
+                    <label>Phased</label>
+                </value>
+                <value>
+                    <fullName>Single</fullName>
+                    <default>false</default>
+                    <label>Single</label>
+                </value>
+                <value>
+                    <fullName>Zirconia</fullName>
+                    <default>false</default>
+                    <label>Zirconia</label>
+                </value>
+                <value>
+                    <fullName>Arch Replacement</fullName>
+                    <default>false</default>
+                    <label>Arch Replacement</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>isActive__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>isActive</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Plan of Treatment</label>
+    <nameField>
+        <label>Plan of Treatment Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Plans of Treatment</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

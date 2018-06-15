@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <aggregates>
+        <calculatedFormula>Consult_Inventory__c.isConsultScheudled__c:SUM/RowCount</calculatedFormula>
+        <datatype>percent</datatype>
+        <developerName>FORMULA1</developerName>
+        <isActive>true</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Fill Rate</masterLabel>
+        <scale>2</scale>
+    </aggregates>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_83915831</developerName>
+        <masterLabel>Confirmation Agent</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Consult_Inventory__c$Consult_Room__c.Center_Information__c.Name</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Atlanta</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Columbia</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Charlotte</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Walnut Creek</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Tucson</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chicago</sourceValue>
+            </sourceValues>
+            <value>Marcella</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Minneapolis</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Kansas City</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>St. Louis</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Phoenix</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Portland</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Denver</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Austin</sourceValue>
+            </sourceValues>
+            <value>Barb</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Washington Tysons Corner</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Washington Rockville</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Cleveland</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Houston Woodlands</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Salt Lake City</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Seattle</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>San Antonio</sourceValue>
+            </sourceValues>
+            <value>Stacie</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Las Vegas</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>San Diego</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>San Jose</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chicago Naperville</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Chicago Schaumburg</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>San Francisco Daly City</sourceValue>
+            </sourceValues>
+            <value>Lisa</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Dallas</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Dallas Fort Worth</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Miami Fort Lauderdale</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Sacramento</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Houston</sourceValue>
+            </sourceValues>
+            <value>Rochelle</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>Consult_Inventory__c$Name</field>
+    </columns>
+    <description>Marcella Velasquez cities only</description>
+    <filter>
+        <criteriaItems>
+            <column>Consult_Inventory__c$Consult_Room__c.Center_Information__c.Name</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notContain</operator>
+            <value>oakland</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Consult_Inventory__c$Active__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Consult_Inventory__c$Consult_Room__c.Room_Type__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Normal,OverFlow,Manual</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>BucketField_83915831</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Marcella</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>Consult_Inventory__c$Apt_Date__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>Consult_Inventory__c$isConsultScheudled__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Consult_Inventory__c$Consult_Room__c.Center_Information__c.Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_83915831</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Fill Rate by Center-THIS WEEK (MV)</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Consult_Inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Consult_Inventory__c$Apt_Date__c</dateColumn>
+        <interval>INTERVAL_THISWEEK</interval>
+    </timeFrameFilter>
+</Report>

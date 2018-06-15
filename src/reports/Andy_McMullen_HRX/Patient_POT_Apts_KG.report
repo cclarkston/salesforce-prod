@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Patient_POT_Apt__c$Patient_POT__c</field>
+    </columns>
+    <columns>
+        <field>Patient_POT_Apt__c$Patient_POT__c.Account__c.FirstName</field>
+    </columns>
+    <columns>
+        <field>Patient_POT_Apt__c$Patient_POT__c.Account__c.LastName</field>
+    </columns>
+    <columns>
+        <field>Patient_POT_Apt__c$Name</field>
+    </columns>
+    <columns>
+        <field>Patient_POT_Apt__c$Clinical_Appointment__c.isFinal_Delivery__c</field>
+    </columns>
+    <columns>
+        <field>Patient_POT_Apt__c$Clinical_Appointment__c.isProsth_Exam__c</field>
+    </columns>
+    <columns>
+        <field>Patient_POT_Apt__c$Clinical_Appointment__c.isSurgery__c</field>
+    </columns>
+    <format>Tabular</format>
+    <name>Patient POT Apts-KG</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Patient_POT_Apts__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Patient_POT_Apt__c$Patient_POT__c.Account__c.LastName</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Patient_POT_Apt__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CURRENT</interval>
+    </timeFrameFilter>
+</Report>

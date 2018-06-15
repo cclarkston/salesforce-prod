@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Consult Hold</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Consult Holds</value>
+    </caseValues>
+    <fields>
+        <label><!-- Active Hold --></label>
+        <name>Active_Hold__c</name>
+    </fields>
+    <fields>
+        <label><!-- Consult Inventory --></label>
+        <name>Consult_Inventory__c</name>
+        <relationshipLabel><!-- Consult Holds --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Hold By --></label>
+        <name>Hold_By__c</name>
+        <relationshipLabel><!-- Consult Holds --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Hold Time --></label>
+        <name>Hold_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Permanent --></label>
+        <name>Permanent__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

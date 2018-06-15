@@ -1,0 +1,122 @@
+<apex:page controller="ctrl_same_day_consults" showHeader="false" sidebar="false" standardStylesheets="false">
+    <head>
+        <title>Same Day Consults - Confirmation Queue</title>
+    </head>
+    <style>
+        * {
+            font-family: sans-serif;
+            font-size: 2vw;
+            box-sizing: border-box;;
+        }
+        body {
+            background-color: lightgray;
+            margin: 0;
+        }
+        .row {
+            display: block;
+        }
+        .row div {
+            display: inline-block;
+        }
+        .module {
+            background-color: white;
+            border-radius: .3vw;
+            padding: 1vw;
+            margin: 1vw;
+        }
+        .header, .footer {
+            -webkit-margin-before: 0;
+            -webkit-margin-after: 0;
+            background-color: cadetblue;
+            color: white;
+            padding: 1vw;
+        }
+        .header {
+            font-size: 8vw;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 2vw;
+        }
+        .module, .header {
+            box-shadow: 0 .3vw 1vw 0 black;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th {
+            font-size: 2.5vw;
+            background-color: steelblue;
+            color: white;
+            text-align: left;
+        }
+        th, td {
+            vertical-align: baseline;
+            padding: .2vw
+        }
+        th:first-child, td:first-child {
+            padding-left: 1vw;
+        }
+        tr:nth-child(even) {
+            background-color: rgba(220, 220, 255, .5);
+        }
+        tr:hover {
+            background-color: lightgray;
+            cursor: pointer;
+        }
+        td.name {
+            font-weight: bold;
+            text-indent: 1em;
+        }
+        .queue-count, .empty-queue {
+            text-align: center;
+        }
+        .queue-count {
+            margin-top: 1vw;
+        }
+        .footer {
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            text-align: right;
+        }
+    </style>
+    <apex:form id="main">
+        <apex:actionPoller reRender="main" interval="120" />
+        <apex:variable value="{!same_day_consults}" var="consults" />
+        <div class="header">Same Day Consults</div>
+        <div class="module">
+            <apex:outputPanel rendered="{!record_count > 0}">
+                <table>
+                    <thead>
+                        <th>Patient</th>
+                        <th>Center</th>
+                        <th>Local / Denver</th>
+                        <th>Queued</th>
+                        <th>ETA</th>
+                    </thead>
+                    <tbody>
+                        <apex:repeat value="{!consults}" var="consult">
+                            <apex:variable value="{!consult.scheduled_lead_ID + consult.scheduled_account_ID}" var="patient_ID" />
+                            <tr onclick="window.open('../{!patient_ID}', '_blank')">
+                                <td class="name">{!consult.patient_initials}</td>
+                                <td>{!consult.center} ({!consult.time_zone})</td>
+                                <td><apex:outputText value="{0, time, h:mm a}"><apex:param value="{!consult.start_time_local}" /></apex:outputText> / <apex:outputText value="{0, time, h:mm a}"><apex:param value="{!consult.start_time_denver}" /></apex:outputText></td>
+                                <td>{!consult.time_since_scheduled}</td>
+                                <td>{!consult.time_to_consult}</td>
+                            </tr>
+                        </apex:repeat>
+                    </tbody>
+                </table>
+                <div class="queue-count">Queue: {!record_count}</div>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!record_count == 0}">
+                <div class="empty-queue">No consults in queue</div>
+            </apex:outputPanel>
+        </div>
+        <div class="footer">
+            Last refreshed @ <apex:outputText value="{0, time, h:mm a}"><apex:param value="{!NOW() - (7/24)}" /></apex:outputText>
+        </div>
+    </apex:form>
+</apex:page>

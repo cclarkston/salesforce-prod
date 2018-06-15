@@ -1,0 +1,235 @@
+<apex:page controller="ctrl_CallCenterTeam">
+<style>
+<!--  div#main_holder {
+    background-color:#CECE9D;
+  }-->
+  
+  input:focus {
+    background:#D8F3FF;  
+  }  
+
+  h1.report_header {
+    text-align:center;
+    font-size:14pt;
+    font-weight:bold;
+    display:block;
+    padding-bottom:1em; 
+    padding-top:5px;
+    color:blue;    
+  }  
+ 
+  table.accs_details {
+    font-family:georgia,arial;
+  }
+  
+  table.accs_details th {
+    font-weight:bold;
+    font-size:12pt;
+ 
+    border-bottom:1px solid black; 
+  }
+     
+  table.accs_details tr.control {
+    font-weight:bold;
+    font-size:12pt;
+    text-align:center;    
+  }
+   
+  table.accs_details tr.control td {
+    border-bottom:1px solid black;
+    empty-cells:hide;  
+  }
+  
+  table.accs_details tr.subhead {
+    font-weight:bold;
+    font-size:12pt;
+  }
+  
+  table.accs_details tr.subhead td {
+    border-bottom:1px dotted black;
+    padding-top:1em;         
+    color:blue;   
+    padding-left:10px;   
+    empty-cells:hide;  
+  }
+
+  table.accs_details tr.accs {
+
+  }
+   
+  table.accs_details tr.accs td {
+    line-height:25px;   
+    font-size:10pt;
+    border-bottom:1px dashed #5789AE; 
+    empty-cells:hide;   
+  }
+  
+  table.accs_details tr.accs td.indent {
+    padding-left:25px;      
+    font-weight:bold; 
+    font-style:italic;
+    empty-cells:hide;      
+  }
+
+  table.accs_details tr.accs td.right {
+     text-align:right;
+     padding-right:5px;     
+     empty-cells:hide;    
+  }  
+
+  table.accs_details tr.accs_b {
+    background-color:#CECE9D;
+  }
+   
+  table.accs_details tr.accs_b td {
+    line-height:25px;
+    font-size:10pt;  
+    border-bottom:1px dashed #5789AE; 
+    empty-cells:hide;       
+  }
+  
+  table.accs_details tr.accs_b td.indent {
+    padding-left:25px;
+    font-weight:bold;
+    font-style:italic;      
+    empty-cells:hide;  
+  }
+  
+  table.accs_details tr.accs_b td.right {
+    text-align:right;
+    padding-right:5px;     
+    empty-cells:hide;       
+  }  
+  
+  table.accs_details tr.footer {
+    background-color:#A8A8A8;  
+    font-weight:bold;
+    font-size:12pt; 
+  }
+   
+  table.accs_details tr.footer td {
+    color:white;
+    border-top:2px solid black;
+    border-bottom:2px solid black; 
+    empty-cells:hide;         
+  }    
+
+  table.accs_details tr.footer td.right {
+    text-align:right;
+    padding-right:5px    
+    empty-cells:hide;      
+  }  
+
+  table.accs_details tr.footer td.indent {
+    padding-left:25px;
+    empty-cells:hide;      
+  }  
+
+  form.inline_form {
+    display:inline-block;
+    padding:0;
+    margins:0;    
+  }
+
+  span.page_span {
+    display:block;
+    text-align:right;
+    padding-right:20px; 
+    color:#5789AE;
+    font-size:10pt;     
+  }
+</style>
+
+<script type="text/javascript">
+  function clearcell(target) {
+    var inputElem = document.getElementsByTagName("span");
+    for(var i=0; i<inputElem.length; i++) {
+      if (inputElem[i].className == target) {
+        inputElem[i].innerHTML = '';     
+      }   
+    }  
+  }
+
+  function quickSave(target) {
+    var inputElem = document.getElementsByTagName("span");
+    for(var i=0; i<inputElem.length; i++) {
+      if (inputElem[i].className == target) {
+        inputElem[i].innerHTML = '<span style="font-weight:bold;color:blue;font-sie:10pt;">Updated</span>';            
+        setTimeout(function() {clearcell(target);}, 5000);                
+      }   
+    }  
+    save_change(); 
+  }
+  
+  var key_timeout;
+  var search_in_progress = false;
+   
+  function search_now() {
+    search_in_progress = false;  
+    search_users(); 
+  } 
+    
+  function search_key() {    
+    if(search_in_progress)
+      clearTimeout(key_timeout);
+    search_in_progress = true;  
+    key_timeout = setTimeout("search_now()",600);
+  }    
+</script>
+
+
+<apex:form >
+ <apex:actionFunction name="search_users" action="{!user_search}" reRender="main_holder">
+ </apex:actionFunction>
+<div id="header" style="border-bottom:3px solid black;">
+<table style="width:100%">
+<tr>
+  <td width="400px;"><br /><span style="font-weight:bold;width:150px;">User Name : </span>  
+  <apex:inputText value="{!name_filter}" id="search_filter" onkeyup="search_key();" />
+  </td>
+  <td width="150px;" style="border-right:2px solid black;"><br />
+  <apex:commandButton value="Search" action="{!user_search}" reRender="main_holder"/>
+  </td>
+  <td><h1 class="report_header">Call Center Team Assignment</h1></td>  
+</tr>
+</table>
+</div>
+<apex:outputpanel id="msg"></apex:outputpanel>
+<apex:outputPanel id="main_holder" rendered="true" layout="block" style="padding-top:2em;">
+   
+  <apex:actionFunction name="save_change" action="{!save}" reRender="msg">
+  </apex:actionFunction>  
+
+  <apex:variable var="row_count" value="0" />
+  <apex:dataTable value="{!my_users}" var="auser" rowclasses="accs,accs_b" width="100%" styleClass="accs_details">   
+    <apex:column headerValue="Name" styleClass="indent">
+      <apex:outputText value="{!auser.name}" />
+    </apex:column>    
+    <apex:column headerValue="First">
+      <apex:outputText value="{!if(auser.firstname=='','&nbsp;',auser.firstname)}" escape="{!if(auser.firstname=='',false,true)}"/>
+    </apex:column>    
+    <apex:column headerValue="Last">
+      <apex:outputText value="{!if(auser.lastname=='','&nbsp;',auser.lastname)}" escape="{!if(auser.lastname=='',false,true)}"/>
+    </apex:column>    
+    <apex:column headerValue="Role">
+      <apex:outputText value="{!if(auser.User_Role__c=='','&nbsp;',auser.User_Role__c)}" escape="{!if(auser.User_Role__c=='',false,true)}"/>
+    </apex:column>        
+    <apex:column headerValue="Bulk Print" styleClass="indent">
+      <apex:inputField value="{!auser.Bulk_Printing__c}" style="padding-top:5px;" onchange="quickSave('{!auser.id}');" />
+    </apex:column>      
+    <apex:column headerValue="Team">
+      <apex:inputfield style="margin-top:3px;"  value="{!auser.Call_Center_Team__c}" onchange="quickSave('{!auser.id}');" />
+    </apex:column>        
+    <apex:column headerValue="Status">
+      <apex:outputText styleClass="{!auser.id}"></apex:outputText>
+    </apex:column>              
+  </apex:dataTable> 
+<br />
+<span class="page_span">Page {!page} of {!num_pages} 
+    <apex:commandButton value="Prev" action="{!prev}" rendered="{!if(display_prev==true,true,false)}" style="margin-left:20px;" reRender="main_holder" />
+    <apex:commandButton value="Next" action="{!next}" rendered="{!if(display_next==true,true,false)}" style="margin-left:20px;" reRender="main_holder" />
+  </span>     
+</apex:outputPanel>
+<apex:actionStatus startText="Please Wait....Updating" startstyle="color:blue;font-weight:bold;font-size:12pt;font-style:italic;" id="UpdateMsg"/>
+</apex:form>
+</apex:page>

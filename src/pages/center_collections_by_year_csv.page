@@ -1,0 +1,5 @@
+<apex:page controller="ctrl_center_sales_stats" cache="false" contentType="text/csv#{!file_name}" language="en-US"  readonly="true">{!file_header}
+<apex:repeat value="{!csv_output}" var="output">
+    {!output.output_line}
+</apex:repeat>  
+</apex:page>

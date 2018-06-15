@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>SUBJECT</field>
+    </columns>
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>ASSIGNED</field>
+    </columns>
+    <columns>
+        <field>Lead.Call_Center_Agent__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Pre_Screen__c</field>
+    </columns>
+    <columns>
+        <field>Activity.Activity_Type__c</field>
+    </columns>
+    <description>Avengers and Mean Green Teams</description>
+    <filter>
+        <criteriaItems>
+            <column>Activity.Outcome__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Consult Scheduled,Consult Rescheduled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>ASSIGNED</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Barbara Harshman,Chasity Martinez,Karen Martinez,Kris Karge,Kristin Yoelin-Lindhe,Luciano Rocha,Melissa Padilla,Mariann Maestas,Patricia Stewart,Alycia Torrez,David Rodriguez,Emily Fickinger,Jennifer Keever,Kelly Sequera,Kim Goehring,Lance Marney,Lisa Suazo,Maria Jimenez,Wendy Castellano</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Activity Report Consult Scheds IB &amp; OB</name>
+    <params>
+        <name>closed</name>
+        <value>all</value>
+    </params>
+    <params>
+        <name>type</name>
+        <value>te</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadActivity</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Activity.Activity_Type__c</sortColumn>
+    <sortOrder>Desc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>DUE_DATE</dateColumn>
+        <interval>INTERVAL_LASTWEEK</interval>
+    </timeFrameFilter>
+</Report>

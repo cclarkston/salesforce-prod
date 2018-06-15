@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_81582396</developerName>
+        <masterLabel>Call Result</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Call_Result__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Consultation Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Same Day Rescheduled Consult</sourceValue>
+            </sourceValues>
+            <value>Sched</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Not Scheduled</sourceValue>
+            </sourceValues>
+            <value>Not Sched</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_25122115</developerName>
+        <masterLabel>Prescreen</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Pre_Screen__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Green</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Yellow</sourceValue>
+            </sourceValues>
+            <value>GY</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_4329002</developerName>
+        <masterLabel>Team</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Call_Center_Agent_Team__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Imp - IMC API</sourceValue>
+            </sourceValues>
+            <value>API</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Imp - IMC Mansfield</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Imp - IMC NewCastle</sourceValue>
+            </sourceValues>
+            <value>IMC SF</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Imp - Mean Green</sourceValue>
+            </sourceValues>
+            <value>Green</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Imp - Tooth Avengers</sourceValue>
+            </sourceValues>
+            <value>Avengers</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Outbound</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Web To Lead</sourceValue>
+            </sourceValues>
+            <value>OB</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>Lead$Name</field>
+    </columns>
+    <columns>
+        <field>Lead.Consult_Inventory__r$Name</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Lead$LastModifiedBy</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Barb emerick,stacie zimmerman,stephanie palombi,matt wade,rochelle hart,meridith hertach,marcella velasquez</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>BucketField_25122115</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>GY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>BucketField_81582396</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Sched,Not Sched</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_81582396</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_4329002</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>GY Sched Rate - Bonus - Team</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Prospective_Patients_with_Consult_Inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead$CreatedDate</dateColumn>
+        <interval>INTERVAL_LASTMONTH</interval>
+    </timeFrameFilter>
+</Report>

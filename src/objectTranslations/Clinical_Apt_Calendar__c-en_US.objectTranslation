@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Clinical Apt Calendar</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Clinical Apt Calendar</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Clinical Apt Calendar --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Amount Financed --></label>
+        <name>Amount_Financed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Anticipated Payments --></label>
+        <name>Anticipated_Payments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Apt Complete Time --></label>
+        <name>Apt_Complete_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Apt Date --></label>
+        <name>Apt_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Apt Datetime --></label>
+        <name>Apt_Datetime__c</name>
+    </fields>
+    <fields>
+        <label><!-- Apt Month --></label>
+        <name>Apt_Month__c</name>
+    </fields>
+    <fields>
+        <label><!-- Apt Start Time --></label>
+        <name>Apt_Start_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Apt Status --></label>
+        <name>Apt_Status__c</name>
+        <picklistValues>
+            <masterLabel>Appointment Started</masterLabel>
+            <translation><!-- Appointment Started --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Incomplete</masterLabel>
+            <translation><!-- Incomplete --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No Show</masterLabel>
+            <translation><!-- No Show --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Patient Arrived</masterLabel>
+            <translation><!-- Patient Arrived --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Patient Left</masterLabel>
+            <translation><!-- Patient Left --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Patient Ready</masterLabel>
+            <translation><!-- Patient Ready --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Arrival Time --></label>
+        <name>Arrival_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- CR Schedule Block --></label>
+        <name>CR_Schedule_Block__c</name>
+        <relationshipLabel><!-- Clinical Apt Calendar --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Clinical Appointment Arch Count --></label>
+        <name>Clinical_Appointment_Arch_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Clinical Room --></label>
+        <name>Clinical_Room__c</name>
+        <relationshipLabel><!-- Clinical Apt Calendar --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Confirmation Status --></label>
+        <name>Confirmation_Status__c</name>
+        <picklistValues>
+            <masterLabel>Can&apos;t Reach</masterLabel>
+            <translation><!-- Can&apos;t Reach --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Confirmed</masterLabel>
+            <translation><!-- Confirmed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Left Message</masterLabel>
+            <translation><!-- Left Message --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Confirmed</masterLabel>
+            <translation><!-- Not Confirmed --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- DOW --></label>
+        <name>DOW__c</name>
+    </fields>
+    <fields>
+        <label><!-- Doctor --></label>
+        <name>Doctor__c</name>
+        <relationshipLabel><!-- Clinical Apt Calendar --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- End Hour Int --></label>
+        <name>End_Hour_Int__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Hour --></label>
+        <name>End_Hour__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Minute Int --></label>
+        <name>End_Minute_Int__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Minute --></label>
+        <name>End_Minute__c</name>
+    </fields>
+    <fields>
+        <label><!-- Etime --></label>
+        <name>Etime__c</name>
+    </fields>
+    <fields>
+        <label><!-- Finance Fee --></label>
+        <name>Financed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Negotiated Total Amount --></label>
+        <name>Negotiated_Total_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+        <relationshipLabel><!-- Clinical Apt Calendar --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Outstanding Payments- Minus Anticipated --></label>
+        <name>Outstanding_Payments_Minus_Anticipated__c</name>
+    </fields>
+    <fields>
+        <label><!-- Patient Left Time --></label>
+        <name>Patient_Left_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Patient POT Apt --></label>
+        <name>Patient_POT_Apt__c</name>
+        <relationshipLabel><!-- Clinical Apt Calendar --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Plan of Treatment --></label>
+        <name>Plan_of_Treatment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ready Time --></label>
+        <name>Ready_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Hour Int --></label>
+        <name>Start_Hour_Int__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Hour --></label>
+        <name>Start_Hour__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Minute Int --></label>
+        <name>Start_Minute_Int__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Minute --></label>
+        <name>Start_Minute__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status Updates --></label>
+        <name>Status_Updates__c</name>
+    </fields>
+    <fields>
+        <label><!-- Stime --></label>
+        <name>Stime__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Payments --></label>
+        <name>Total_Payments__c</name>
+    </fields>
+    <fields>
+        <label><!-- isDeleted --></label>
+        <name>isDeleted__c</name>
+    </fields>
+    <layouts>
+        <layout>Clinical Apt Calendar Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

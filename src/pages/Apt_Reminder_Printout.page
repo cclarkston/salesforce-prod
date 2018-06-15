@@ -1,0 +1,127 @@
+<apex:page showheader="false" sidebar="false" standardStylesheets="false" controller="dp_clinical_patient" docType="html-5.0">
+<head>
+
+<style type="text/css" media="print">
+  * {transition: none !important}
+
+  .no_print_section {
+    display:none;
+  }
+</style>
+ 
+ <style type="text/css">
+ 
+div.pbreak {page-break-after: always;}
+
+.output_page {
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header_section {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding-top: 2em;
+  padding-bottom:2em;
+}
+
+.header_left_col {
+  width:80%;  
+}
+
+.header_left_center_col {
+  padding-top:1em;
+  line-height:1.5em;  
+}
+
+.header_right_col {
+  padding-top:1em;
+}
+
+.header_section_padded {
+  
+}
+
+.report_name_label {
+  background-color: #0D96D4;
+  width: 100%;
+  color: white;
+  justify-content: center;
+  display: flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.apt_reminder_holder {
+   display:flex;
+   width:100%;
+   flex-direction:column;   
+}
+
+.apt_reminder_row {
+    width: 100%;
+    min-width: 200px;
+    max-width: 400px;
+    flex-direction: column;
+    border: 1px dotted black;
+    margin-right: 2em;
+    padding: 5px;
+    color: rgba(0, 0, 0, 1);
+    background-color: rgba(56, 56, 56, 0.15);
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 8px;
+    padding-right: 5px;
+    padding-left: 10px;
+    border-radius: 4px;
+    align-items: center;
+    font-weight: 400;
+    transition: .25s;
+    margin-top:1.5em;
+}
+
+.apt_name_span {  
+  padding-bottom:1em;
+}
+
+.apt_datetime_span {
+  font-weight:bold;
+  padding-bottom:10px;
+}
+
+.apt_date_span {
+  padding-right:10px;
+}
+
+.apt_time_span {
+  
+}
+
+</style>
+
+</head>
+<body>
+<apex:form >
+  <apex:outputpanel layout="block" id="report_holder">
+    <apex:actionStatus id="ajaxstatus">
+      <apex:facet name="start">
+        <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 10110; background-color: #f2f2f2;">
+          &nbsp;
+        </div>
+        <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 10111; margin: 20% 50%">
+          <!--<apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,'Images/5Wits.gif')}"/>-->
+          <!--<img src="http://upload.wikimedia.org/wikipedia/commons/e/ed/Cursor_Windows_Vista.gif" />-->
+          <img src="{!URLFOR($Resource.Dental_Practice_Resources,'Images/Circle-out.gif')}" />
+          <!--<img src="{!URLFOR($Resource.Dental_Practice_Resources,'Images/5Wits.gif')}" />-->
+        </div>
+      </apex:facet>
+    </apex:actionStatus> 
+    <apex:outputtext value="{!apt_reminder_output}" escape="false" />
+  </apex:outputpanel>
+</apex:form>
+</body>
+</apex:page>

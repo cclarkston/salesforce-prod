@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Non-Comission Payment</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Non-Comission Payments</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Non-Comission Payments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Backdated Payment --></label>
+        <name>Backdated_Payment__c</name>
+    </fields>
+    <fields>
+        <label><!-- CC Sales Order --></label>
+        <name>CC_Sales_Order__c</name>
+        <relationshipLabel><!-- Non-Comission Payments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Center ID --></label>
+        <name>Center_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Center Location --></label>
+        <name>Center_Location__c</name>
+        <picklistValues>
+            <masterLabel>Atlanta</masterLabel>
+            <translation><!-- Atlanta --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Atlanta Alpharetta</masterLabel>
+            <translation><!-- Atlanta Alpharetta --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Austin</masterLabel>
+            <translation><!-- Austin --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Boston Woburn</masterLabel>
+            <translation><!-- Boston Woburn --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Charlotte</masterLabel>
+            <translation><!-- Charlotte --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chicago</masterLabel>
+            <translation><!-- Chicago --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chicago Downers Grove</masterLabel>
+            <translation><!-- Chicago Downers Grove --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chicago Schaumburg</masterLabel>
+            <translation><!-- Chicago Schaumburg --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cleveland</masterLabel>
+            <translation><!-- Cleveland --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Columbia</masterLabel>
+            <translation><!-- Columbia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dallas</masterLabel>
+            <translation><!-- Dallas --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dallas Arlington</masterLabel>
+            <translation><!-- Dallas Arlington --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dallas Fort Worth</masterLabel>
+            <translation><!-- Dallas Fort Worth --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denver</masterLabel>
+            <translation><!-- Denver --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Detroit Southfield</masterLabel>
+            <translation><!-- Detroit Southfield --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Houston</masterLabel>
+            <translation><!-- Houston --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Houston Woodlands</masterLabel>
+            <translation><!-- Houston Woodlands --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Kansas City</masterLabel>
+            <translation><!-- Kansas City --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Las Vegas</masterLabel>
+            <translation><!-- Las Vegas --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Miami Fort Lauderdale</masterLabel>
+            <translation><!-- Miami Fort Lauderdale --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Minneapolis</masterLabel>
+            <translation><!-- Minneapolis --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>New Jersey Roseland</masterLabel>
+            <translation><!-- New Jersey Roseland --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>New Market Not Yet Open</masterLabel>
+            <translation><!-- New Market Not Yet Open --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Orlando Maitland</masterLabel>
+            <translation><!-- Orlando Maitland --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Philadelphia Fort Washington</masterLabel>
+            <translation><!-- Philadelphia Fort Washington --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phoenix</masterLabel>
+            <translation><!-- Phoenix --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Portland</masterLabel>
+            <translation><!-- Portland --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sacramento</masterLabel>
+            <translation><!-- Sacramento --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salt Lake City</masterLabel>
+            <translation><!-- Salt Lake City --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>San Antonio</masterLabel>
+            <translation><!-- San Antonio --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>San Diego</masterLabel>
+            <translation><!-- San Diego --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>San Francisco Daly City</masterLabel>
+            <translation><!-- San Francisco Daly City --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>San Jose</masterLabel>
+            <translation><!-- San Jose --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Seattle</masterLabel>
+            <translation><!-- Seattle --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>St. Louis</masterLabel>
+            <translation><!-- St. Louis --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tampa</masterLabel>
+            <translation><!-- Tampa --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unknown</masterLabel>
+            <translation><!-- Unknown --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Walnut Creek</masterLabel>
+            <translation><!-- Walnut Creek --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Washington Rockville</masterLabel>
+            <translation><!-- Washington Rockville --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Washington Tysons Corner</masterLabel>
+            <translation><!-- Washington Tysons Corner --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Collected Date --></label>
+        <name>Collected_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Comission Doctor --></label>
+        <name>Comission_Doctor__c</name>
+        <picklistValues>
+            <masterLabel>Caesar Butura</masterLabel>
+            <translation><!-- Caesar Butura --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dan Gailndo</masterLabel>
+            <translation><!-- Dan Gailndo --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No Comission</masterLabel>
+            <translation><!-- No Comission --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ole Jensen</masterLabel>
+            <translation><!-- Ole Jensen --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Seung Paik</masterLabel>
+            <translation><!-- Seung Paik --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Confirmation ID --></label>
+        <name>Confirmation_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Coupon Type --></label>
+        <name>Coupon_Type__c</name>
+        <picklistValues>
+            <masterLabel>$25 Off</masterLabel>
+            <translation><!-- $25 Off --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Allergan</masterLabel>
+            <translation><!-- Allergan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Give $25</masterLabel>
+            <translation><!-- Give $25 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Dental Product Amount --></label>
+        <name>Dental_Product_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Esthetics Product Amount --></label>
+        <name>Esthetics_Product_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Esthetics Service Amount --></label>
+        <name>Esthetics_Service_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Finance Fee --></label>
+        <name>Finance_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Finance Net Collections minus GP --></label>
+        <name>Finance_Net_Collections_minus_GP__c</name>
+    </fields>
+    <fields>
+        <label><!-- Insurance Payment --></label>
+        <name>Insurance_Payment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Slipped --></label>
+        <name>Is_Slipped__c</name>
+    </fields>
+    <fields>
+        <label><!-- NS Payment Method --></label>
+        <name>NS_Payment_Method__c</name>
+    </fields>
+    <fields>
+        <label><!-- Net Collection Amount --></label>
+        <name>Net_Collection_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+        <relationshipLabel><!-- Non-Comission Payments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Original Anticipated Payment Date --></label>
+        <name>Original_Anticipated_Payment_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Original Payment Date --></label>
+        <name>Original_Payment_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Parent Owner --></label>
+        <name>Parent_Owner__c</name>
+    </fields>
+    <fields>
+        <label><!-- Past Due --></label>
+        <name>Past_Due__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Amount --></label>
+        <name>Payment_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Date --></label>
+        <name>Payment_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Status (Formula) --></label>
+        <name>Payment_Status_Formula__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Status --></label>
+        <name>Payment_Status__c</name>
+        <picklistValues>
+            <masterLabel>Anticipated</masterLabel>
+            <translation><!-- Anticipated --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Collected</masterLabel>
+            <translation><!-- Collected --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NSF</masterLabel>
+            <translation><!-- NSF --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Refund</masterLabel>
+            <translation><!-- Refund --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Payment Type --></label>
+        <name>Payment_Type__c</name>
+        <picklistValues>
+            <masterLabel>ACH</masterLabel>
+            <translation><!-- ACH --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Alphaeon</masterLabel>
+            <translation><!-- Alphaeon --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>American Express</masterLabel>
+            <translation><!-- American Express --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Aspire</masterLabel>
+            <translation><!-- Aspire --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BD</masterLabel>
+            <translation><!-- BD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CareCredit</masterLabel>
+            <translation><!-- CareCredit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cash</masterLabel>
+            <translation><!-- Cash --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Check</masterLabel>
+            <translation><!-- Check --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Citi</masterLabel>
+            <translation><!-- Citi --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Coupon</masterLabel>
+            <translation><!-- Coupon --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Credit</masterLabel>
+            <translation><!-- Credit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Discover</masterLabel>
+            <translation><!-- Discover --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lending Club</masterLabel>
+            <translation><!-- Lending Club --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Master Card</masterLabel>
+            <translation><!-- Master Card --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Patient Preferred Financing</masterLabel>
+            <translation><!-- Patient Preferred Financing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Promotion</masterLabel>
+            <translation><!-- Promotion --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Series Credit</masterLabel>
+            <translation><!-- Series Credit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Springstone</masterLabel>
+            <translation><!-- Springstone --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TBD (Anticipated Payment)</masterLabel>
+            <translation><!-- TBD (Anticipated Payment) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Visa</masterLabel>
+            <translation><!-- Visa --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wire</masterLabel>
+            <translation><!-- Wire --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Private Practice Patient --></label>
+        <name>Private_Practice_Patient__c</name>
+        <relationshipLabel><!-- Non-Comission Payments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Service Date --></label>
+        <name>Service_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Slipped Payment - Other --></label>
+        <name>Slipped_Payment_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Slipped Payment Reason --></label>
+        <name>Slipped_Payment_Reason__c</name>
+        <picklistValues>
+            <masterLabel>Business Trip</masterLabel>
+            <translation><!-- Business Trip --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CTX results will not allow surgery for several months</masterLabel>
+            <translation><!-- CTX results will not allow surgery for several months --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Family Emergency</masterLabel>
+            <translation><!-- Family Emergency --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>HCF In Process</masterLabel>
+            <translation><!-- HCF In Process --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Health Issues</masterLabel>
+            <translation><!-- Health Issues --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Home Refinancing</masterLabel>
+            <translation><!-- Home Refinancing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Loss of income</masterLabel>
+            <translation><!-- Loss of income --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medical Clearance needed (so couldn&apos;t collect HCF)</masterLabel>
+            <translation><!-- Medical Clearance needed (so couldn&apos;t collect HCF) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medical Clearance needed and doctor directed to not collect</masterLabel>
+            <translation><!-- Medical Clearance needed and doctor directed to not collect --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medical Clearance needed and patient wouldn&apos;t pay yet</masterLabel>
+            <translation><!-- Medical Clearance needed and patient wouldn&apos;t pay yet --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Vacation</masterLabel>
+            <translation><!-- Vacation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Waiting on 401k</masterLabel>
+            <translation><!-- Waiting on 401k --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Waiting on investments</masterLabel>
+            <translation><!-- Waiting on investments --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Tax Amount --></label>
+        <name>Tax_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Windent Patient Id --></label>
+        <name>Windent_Patient_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Writeoff Amount --></label>
+        <name>Writeoff_Amount__c</name>
+    </fields>
+    <layouts>
+        <layout>Private Practice Payment Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- You can not select a payment date from a prior period. Please contact your RSM/RBD/or the refund team for help. --></errorMessage>
+        <name>Backdated_Check</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You must change the payment type to the actual card type when marking this payment as collected --></errorMessage>
+        <name>Collected_Credit_Card</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- This payment has been locked into a collected state. You can not change it at this point. Please contact your RBD, RSM, or the refund team if you need assistance. --></errorMessage>
+        <name>Collected_Status_Lock</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You must enter a finance fee when collecting money from Chase Health, CareCredit, Lending Club, Alphaeon, or SpringStone. --></errorMessage>
+        <name>FFee_Required_Check</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Typo? Expecting Finance Fee to be 1.9% - 20% of payment amount. Please contact IT if you believe there&apos;s a problem. --></errorMessage>
+        <name>FFee_range</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You must enter a value for the Confirmation ID field. If this is a check payment, then please use the check #. For credit cards, please enter the transaction id. --></errorMessage>
+        <name>Payment_Confirmation_ID</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You must enter a slipped payment reason when changing the payment date --></errorMessage>
+        <name>Payment_Slip_Reason</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You must enter something valid for the Slipped Payment Other reason --></errorMessage>
+        <name>Payment_Slipped_Other</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Refunds can only be handled by the refund team. --></errorMessage>
+        <name>Refund_Status_Check</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Payment must be tied to either a prosth exam record, private practice patient, or a consult record. --></errorMessage>
+        <name>Relationship_Check</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can not change the payment amount of a coupon with a specified value. --></errorMessage>
+        <name>Specified_Coupon_Amount_Discrepancy</name>
+    </validationRules>
+</CustomObjectTranslation>

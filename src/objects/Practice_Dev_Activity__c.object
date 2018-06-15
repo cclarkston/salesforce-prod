@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Used to track the sales activities of the Practice Development team</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Dental_Practice__c</fullName>
+        <externalId>false</externalId>
+        <label>Dental Practice</label>
+        <referenceTo>Dental_Practice__c</referenceTo>
+        <relationshipName>Referral_Activities</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Notes__c</fullName>
+        <externalId>false</externalId>
+        <label>Notes</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Sales_Activity__c</fullName>
+        <externalId>false</externalId>
+        <label>Sales Activity</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Cold Call</fullName>
+                    <default>false</default>
+                    <label>Cold Call</label>
+                </value>
+                <value>
+                    <fullName>Center Visit</fullName>
+                    <default>false</default>
+                    <label>Center Visit</label>
+                </value>
+                <value>
+                    <fullName>GP Meeting</fullName>
+                    <default>false</default>
+                    <label>GP Meeting</label>
+                </value>
+                <value>
+                    <fullName>Training</fullName>
+                    <default>false</default>
+                    <label>Training</label>
+                </value>
+                <value>
+                    <fullName>In Office</fullName>
+                    <default>false</default>
+                    <label>In Office</label>
+                </value>
+                <value>
+                    <fullName>Training in CC Practice</fullName>
+                    <default>false</default>
+                    <label>Training in CC Practice</label>
+                </value>
+                <value>
+                    <fullName>Drop-In</fullName>
+                    <default>false</default>
+                    <label>Drop-In</label>
+                </value>
+                <value>
+                    <fullName>Telephone Call</fullName>
+                    <default>false</default>
+                    <label>Telephone Call</label>
+                </value>
+                <value>
+                    <fullName>Email/Marketing/Training</fullName>
+                    <default>false</default>
+                    <label>Email/Marketing/Training</label>
+                </value>
+                <value>
+                    <fullName>Misc./General</fullName>
+                    <default>false</default>
+                    <label>Misc./General</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Practice Dev Activity</label>
+    <nameField>
+        <displayFormat>PD - {00000}</displayFormat>
+        <label>Activity Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Practice Dev Activities</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

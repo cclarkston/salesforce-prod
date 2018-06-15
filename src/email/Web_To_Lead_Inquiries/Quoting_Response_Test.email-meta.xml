@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Quoting Response</name>
+    <style>none</style>
+    <subject>Request for Quote on Dental Implant Fees</subject>
+    <textOnly>Hello {!Lead.FirstName},
+
+Thank you for contacting ClearChoice Dental Implant Centers, America’s #1 choice for dental implants.
+
+We hope to have an opportunity to serve you and understand you have a question about pricing. Because every dental condition is different, this is a question that’s impossible to specifically answer without a doctor’s consult.
+
+Costs follow proper treatment plans, which are influenced by:
+
+•	How many teeth are loose or missing?
+
+•	What area of the mouth are these missing or failing teeth located?
+
+•	What is the condition of the bone?
+
+•	What is the condition of the soft tissue?
+
+•	What is the condition of the remaining teeth?
+
+It is for these reasons that only the doctor can put fees in writing, and only after studying your complimentary x-ray and preparing a definitive treatment plan.
+
+Please call me today at 1-888-654-4675, and I’ll set you up for a Free, No-Risk Consultation and 3D CAT scan (a $700 value).
+
+Sincerely,
+
+{!Lead.Call_Center_Agent__c}
+Dental Implant Consultant
+ClearChoice Dental Center
+
+
+ClearChoice Dental Implant Centers are locally owned and operated by licensed local dentists, and are part of a professional affiliation of implant practices operated by oral surgeons, prosthodontists and restorative dentists across the U.S. *Qualified patients can have their procedure in one day after initial workup without additional bone graft surgery.  Results may vary in individual cases.</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

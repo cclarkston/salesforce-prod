@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Lead$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Lead$Phone</field>
+    </columns>
+    <columns>
+        <field>Lead$DateTime_Consult_Scheduled__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Call_Result__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Status</field>
+    </columns>
+    <columns>
+        <field>Lead.Apt_Histories__r$Consult_Inventory__c.Apt_Date__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Apt_Histories__r$Cancel_Reason__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Apt_Histories__r$LastModifiedBy</field>
+    </columns>
+    <filter>
+        <booleanFilter>1 AND (2 or 3)</booleanFilter>
+        <criteriaItems>
+            <column>Lead$Center_Location__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>New Jersey - Dental Arts of South Jersey</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Apt_Histories__r$Cancel_Reason__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Status</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Rescheduled Consult</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>New Jersey Cancellation Report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Apt_History_w_Lead__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

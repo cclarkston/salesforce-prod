@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_58094415</developerName>
+        <masterLabel>Leadscore</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Scott_Prescreen__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Blue (No Hit)</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Red</sourceValue>
+            </sourceValues>
+            <value>RB</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Orange</sourceValue>
+            </sourceValues>
+            <value>OR</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Green</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Yellow</sourceValue>
+            </sourceValues>
+            <value>GY</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_72382173</developerName>
+        <masterLabel>Result</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Lead$Call_Result__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Consultation Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Same Day Rescheduled Consult</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Seminar Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Off Site Seminar Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Cancelled Appointment</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Same Day Cancellation Appointment</sourceValue>
+            </sourceValues>
+            <value>Sched</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Not Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Out Bound Follow-up</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Shelved Call</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Fielded Lead</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Pending Reschedule</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Renurture</sourceValue>
+            </sourceValues>
+            <value>Not Sched</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_25357701</developerName>
+        <masterLabel>Team</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Call_Center_Agent_Team__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Imp - Mean Green</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Imp - Tooth Avengers</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Implant Consultant</sourceValue>
+            </sourceValues>
+            <value>Inbound CC</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Imp - IMC API</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Imp - IMC Mansfield</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Imp - IMC NewCastle</sourceValue>
+            </sourceValues>
+            <value>IMC</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Web To Lead</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Outbound</sourceValue>
+            </sourceValues>
+            <value>Outbound CC</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Confirmation</sourceValue>
+            </sourceValues>
+            <value>Confirmation</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>Lead$Name</field>
+    </columns>
+    <columns>
+        <field>Lead.Consult_Inventory__r$Name</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>BucketField_72382173</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Sched,Not Sched</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Inbound_Call__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Dental Inquiry</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Call_Result__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Consultation Scheduled,Not Scheduled</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_72382173</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>Lead.Consult_Inventory__r$isConsultScheudled__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_25357701</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_58094415</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Sched consults for payroll report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Prospective_Patients_with_Consult_Inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead$CreatedDate</dateColumn>
+        <interval>INTERVAL_LASTWEEK</interval>
+    </timeFrameFilter>
+</Report>

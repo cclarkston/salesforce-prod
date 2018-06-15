@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_34478957</developerName>
+        <masterLabel>Call Result</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Call_Result__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Consultation Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Same Day Rescheduled Consult</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Seminar Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Off Site Seminar Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Cancelled Appointment</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Same Day Cancellation Appointment</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Pending Reschedule</sourceValue>
+            </sourceValues>
+            <value>Scheduled</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Not Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Out Bound Follow-up</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Shelved Call</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Fielded Lead</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Renurture</sourceValue>
+            </sourceValues>
+            <value>Not Scheduled</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_2053667</developerName>
+        <masterLabel>Pre Screen</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Pre_Screen__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Green</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Yellow</sourceValue>
+            </sourceValues>
+            <value>GY</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Red</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Blue (No Hit)</sourceValue>
+            </sourceValues>
+            <value>RB</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>PO Box</sourceValue>
+            </sourceValues>
+            <value>PO Box</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>number</bucketType>
+        <developerName>BucketField_32559748</developerName>
+        <masterLabel>Target Area</masterLabel>
+        <nullTreatment>z</nullTreatment>
+        <sourceColumnName>Lead$Distance_To_Center__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <to>50</to>
+            </sourceValues>
+            <value>Inside 50</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>50</from>
+            </sourceValues>
+            <value>Outside 50</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>Lead$Contact_Agency_Agent__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Call_Center_Agent_Owner__c</field>
+    </columns>
+    <columns>
+        <field>BucketField_34478957</field>
+    </columns>
+    <columns>
+        <field>BucketField_2053667</field>
+    </columns>
+    <columns>
+        <field>BucketField_32559748</field>
+    </columns>
+    <columns>
+        <field>Lead.Consult_Inventory__r$isConsultScheudled__c</field>
+    </columns>
+    <columns>
+        <field>Lead$CreatedDate</field>
+    </columns>
+    <filter>
+        <booleanFilter>1 AND 2 AND  3 AND 4</booleanFilter>
+        <criteriaItems>
+            <column>Lead$Call_Center_Agent_Team__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>contains</operator>
+            <value>Mansfield,NewCastle</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Inbound_Call__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Dental Inquiry</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Marketing_Source__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>CCWebsitePK,CCWebsiteOS,CCWebsiteCC</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Call_Center_Agent_Team__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notContain</operator>
+            <value>API</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>IMC SF Sched Rate KPI</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Prospective_Patients_with_Consult_Inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead$CreatedDate</dateColumn>
+        <interval>INTERVAL_LASTWEEK</interval>
+    </timeFrameFilter>
+</Report>

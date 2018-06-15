@@ -1,0 +1,237 @@
+<apex:page controller="rpt_center_stretch_stats" sidebar="false" readOnly="true" >
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<style type="text/css" media="print">
+  div.bPageHeader {
+    display:none;
+  }  
+  
+  p.form_holder {
+    display:none; 
+  }
+  
+  a.dlink {
+    display:none;
+  }  
+</style>
+
+
+<style>
+  tr.control td {
+    color:#5789AE;
+  }  
+  
+  table.accs_details td.indent {
+    padding-left:5px;      
+    font-weight:bold; 
+    font-style:italic;
+    empty-cells:hide;                
+  }
+  
+  table.accs_details td.vaca {
+    font-style:italic;   
+    text-align:center;             
+  }   
+</style>
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+<table class="accs_details" style="width:3500px;">
+<tr class="control">
+  <td style="width:160px">&nbsp;</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td>{!all_centers.my_center.name}</td>
+  </apex:repeat> 
+</tr>    
+<apex:variable var="rowclassname" value="accs" />      
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent" style="width:100px;">Net Collections</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td class="right"><apex:outputText value="{0,number,#,###,##0.00}" ><apex:param value="{!all_centers.net_collections}" /></apex:outputText></td>
+  </apex:repeat> 
+</tr>     
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent">Target $</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td class="right"><apex:outputText value="{0,number,#,###,##0.00}" ><apex:param value="{!all_centers.sales_goal}" /></apex:outputText></td>
+  </apex:repeat> 
+</tr>
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent">Variance</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td class="right"><apex:outputText value="{0,number,#,###,##0.00}" ><apex:param value="{!all_centers.variance}" /></apex:outputtext></td>
+  </apex:repeat> 
+</tr>
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent" style="border-bottom:3px solid black;">Variance LY</td>    
+  <apex:repeat value="{!all_center_numbers}" var="all_centers">     
+    <td class="right" style="border-bottom:3px solid black;">N/A</td>     
+  </apex:repeat>     
+</tr>
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent">Consults Scheduled</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td class="right">{!all_centers.scheduled_consults}</td>
+  </apex:repeat> 
+</tr>     
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent">Last Year</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td class="right">{!all_centers.scheduled_consults_ly}</td>
+  </apex:repeat> 
+</tr>    
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent">Consults Showed</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td class="right">{!all_centers.consults_showed}</td>
+  </apex:repeat> 
+</tr>     
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent">Last Year</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td class="right">{!all_centers.consults_showed_ly}</td>
+  </apex:repeat> 
+</tr>      
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent">Sold</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td class="right"><apex:outputText value="{0,number,#,###,##0.00}" ><apex:param value="{!all_centers.net_sold}" /></apex:outputtext></td>
+  </apex:repeat> 
+</tr>         
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent">Last Year</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td class="right"><apex:outputText value="{0,number,#,###,##0.00}" ><apex:param value="{!all_centers.net_sold_ly}" /></apex:outputtext></td>
+  </apex:repeat> 
+</tr>     
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent">Net Starts</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td class="right">{!all_centers.net_starts}</td>
+  </apex:repeat> 
+</tr>         
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent">Last Year</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td class="right">{!all_centers.net_starts_ly}</td>
+  </apex:repeat> 
+</tr>     
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent">Close %</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td class="right"><apex:outputText rendered="{!if(all_centers.consults_showed>0,true,false)}" value="{0,number,##0.0 %}"><apex:param value="{!all_centers.close_rate}" /></apex:outputtext><apex:outputtext rendered="{!if(all_centers.consults_showed==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>
+  </apex:repeat> 
+</tr>         
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent">Last Year</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td class="right"><apex:outputText rendered="{!if(all_centers.consults_showed_ly>0,true,false)}" value="{0,number,##0.0 %}"><apex:param value="{!all_centers.close_rate_ly}" /></apex:outputtext><apex:outputtext rendered="{!if(all_centers.consults_showed_ly==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>
+  </apex:repeat> 
+</tr>     
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent">Refunds</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td class="right"><apex:outputText value="{0,number,#,###,##0.0}" ><apex:param value="{!all_centers.refunded}" /></apex:outputtext></td>
+  </apex:repeat> 
+</tr>         
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent">Last Year</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td class="right"><apex:outputText value="{0,number,#,###,##0.0}" ><apex:param value="{!all_centers.refunded_ly}" /></apex:outputtext></td>
+  </apex:repeat> 
+</tr>     
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent">Finance %</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td class="right"><apex:outputText rendered="{!if(all_centers.consults_showed>0,true,false)}"  value="{0,number,##0.0 %}" ><apex:param value="{!all_centers.finance_rate}" /></apex:outputtext><apex:outputtext rendered="{!if(all_centers.consults_showed==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>                
+  </apex:repeat> 
+</tr>         
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent">Last Year</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td class="right"><apex:outputText rendered="{!if(all_centers.consults_showed_ly>0,true,false)}"  value="{0,number,##0.0 %}" ><apex:param value="{!all_centers.finance_rate_ly}" /></apex:outputtext><apex:outputtext rendered="{!if(all_centers.consults_showed_ly==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>
+  </apex:repeat> 
+</tr>     
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent">Net AO4 Sold</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td class="right"><apex:outputText value="{0,number,#,###,##0.00}"><apex:param value="{!all_centers.net_ao4_sold}" /></apex:outputtext></td>
+  </apex:repeat> 
+</tr>         
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent">Last Year</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td class="right"><apex:outputText value="{0,number,#,###,##0.00}"><apex:param value="{!all_centers.net_ao4_sold_ly}" /></apex:outputtext></td>
+  </apex:repeat> 
+</tr>
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent">Avg AO4 Fee</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td class="right"><apex:outputText rendered="{!if(all_centers.num_ao4_sold>0,true,false)}"  value="{0,number,#,###,##0.00}" ><apex:param value="{!all_centers.avg_ao4_fee}" /></apex:outputtext><apex:outputtext rendered="{!if(all_centers.num_ao4_sold==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>                
+  </apex:repeat> 
+</tr>         
+
+<tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />     
+  <td class="indent">Last Year</td> 
+  <apex:repeat value="{!all_center_numbers}" var="all_centers"> 
+    <td class="right"><apex:outputText rendered="{!if(all_centers.num_ao4_sold_ly>0,true,false)}"  value="{0,number,#,###,##0.00}" ><apex:param value="{!all_centers.avg_ao4_fee_ly}" /></apex:outputtext><apex:outputtext rendered="{!if(all_centers.num_ao4_sold_ly==0,true,false)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>                
+  </apex:repeat> 
+</tr>     
+
+</table>
+<apex:outputLink target="__blank" value="{!csv_link}" style="display:block;padding-top:1em;color:blue;font-weight:bold;">Download CSV File</apex:outputLink>
+</apex:page>

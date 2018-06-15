@@ -1,0 +1,6 @@
+<apex:component controller="rpt_center_stretch_stats"  language="en-US"  access="global">
+{!file_header}
+<apex:repeat value="{!csv_historic_cr_output}" var="output">
+    {!output.output_line}
+</apex:repeat>  
+</apex:component>

@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Quote/Estimate from NetSuite</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipName>R00N60000001i5StEAI</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Currency__c</fullName>
+        <externalId>false</externalId>
+        <label>Currency</label>
+        <length>25</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Discount_Total__c</fullName>
+        <externalId>false</externalId>
+        <label>Discount Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Document_Id__c</fullName>
+        <externalId>false</externalId>
+        <label>Document Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Document__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( Document_Id__c == null , &apos;&apos;, HYPERLINK(&apos;/servlet/servlet.FileDownload?file=&apos; + Document_Id__c , Name + &apos;.pdf&apos;))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Document</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Memo__c</fullName>
+        <externalId>false</externalId>
+        <label>Memo</label>
+        <length>75</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NetSuite_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>NetSuite Id</label>
+        <length>25</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Quotes</relationshipLabel>
+        <relationshipName>R00N60000001i5FyEAI</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Other_Ref_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Other Ref Number</label>
+        <length>25</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Shipping_Total__c</fullName>
+        <description>Estimated shipping costs based on the shipping method selected in NetSuite shipMethod</description>
+        <externalId>false</externalId>
+        <label>Shipping Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <length>75</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Subtotal__c</fullName>
+        <description>Estimate total before any discounts, shipping cost, handling cost or tax is added to the estimate.</description>
+        <externalId>false</externalId>
+        <label>Subtotal</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Tax_Total__c</fullName>
+        <externalId>false</externalId>
+        <label>Tax Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total__c</fullName>
+        <externalId>false</externalId>
+        <label>Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Transaction_Date__c</fullName>
+        <description>Date used to determine the date range in which this transaction appears on the Estimate in NetSuite</description>
+        <externalId>false</externalId>
+        <label>Transaction Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <label>Quote</label>
+    <nameField>
+        <label>Transaction Id</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Quotes</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Transaction_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Total__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Memo__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Document__c</customTabListAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchResultsAdditionalFields>Transaction_Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Subtotal__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Tax_Total__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Shipping_Total__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Discount_Total__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Total__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Memo__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Document__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+    <webLinks>
+        <fullName>Sales_Order</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Sales Order</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var Celigo = {};
+Celigo.SFDC = (function(){ //private members
+    function SalesOrderSyncManager(){
+    
+        //instance vars
+        var that = this;
+        var retries = 0;
+        var maxRetries = 20;
+        
+        //methods
+        this.getURLParameter = function(_url, _name){ //String
+            var regexS;
+            var regex;
+            var results;
+            _name = _name.replace(/[\[]/, &quot;\\\[&quot;).replace(/[\]]/, &quot;\\\]&quot;);
+            regexS = &quot;[\\?&amp;]&quot; + _name + &quot;=([^&amp;#]*)&quot;;
+            regex = new RegExp(regexS);
+            results = regex.exec(_url);
+            if (results === null) {
+                return &quot;&quot;;
+            }
+            else {
+                return results[1];
+            }
+        };
+        
+        this.triggerNsSync = function(){
+        
+            var o = new sforce.SObject(&quot;Opportunity&quot;);
+            o.id = &quot;{!NetSuite_Estimate__c.OpportunityId__c}&quot;;
+            o.Celigo_Sync_Helper__c = &quot;false&quot;;
+            o.Send_to_NetSuite__c = &quot;true&quot;;
+            o.Generate_Sales_Order__c = &quot;true&quot;;
+            o.Celigo_Update__c = &quot;true&quot;;
+            o.NetSuite_Quote__c = &quot;{!NetSuite_Estimate__c.Id}&quot;;
+            result = sforce.connection.update([o]);
+        };
+        
+        this.openPopup = function(){
+        
+            var top = screen.height - (screen.height * .5) - 100;
+            var left = screen.width - (screen.width * .5) - 187;
+            var params = &apos;dependent = yes,resizable=false,scrollbars=false,toolbar=false,menubar=false,location=false,status=true,directories=false,width=375,height=160,top=&apos;;
+            params += top.toString();
+            params += &apos;,left=&apos; + left.toString() + &apos;\&apos;&apos;;
+            
+            return window.open(&apos;/apex/sales_order_status?whence=&apos; + &quot;{!NetSuite_Estimate__c.Id}&quot; + &apos;&amp;opp_id=&apos; + &quot;{!NetSuite_Estimate__c.OpportunityId__c}&quot;, &apos;NetSuite_Synchronization&apos;, params);
+        };
+        
+        this.checkSyncStatus = function(){
+        
+            var url = window.location.href;
+            var endEx = url.lastIndexOf(&apos;?&apos;) &gt; -1 ? url.lastIndexOf(&apos;/&apos;) : url.length;
+            
+            var result = sforce.connection.query(&quot;select Id, Celigo_Sync_Helper__c, Send_to_NetSuite__c, NS_Sync__c from Opportunity where Id = &apos;&quot; + &quot;{!NetSuite_Estimate__c.OpportunityId__c}&quot; + &quot;&apos;&quot;, {
+                onSuccess: function(result){
+                    var records = result.getArray(&quot;records&quot;);
+                    if (records[0].Celigo_Sync_Helper__c === &apos;true&apos; &amp;&amp; records[0].Send_to_NetSuite__c === &apos;false&apos; &amp;&amp; records[0].NS_Sync__c === null) 
+                        window.location.href = window.location.href;
+                    else 
+                        if (retries &lt; maxRetries) {
+                            retries++;
+                            window.setTimeout(that.checkSyncStatus, 5000);
+                        }
+                },
+                onFailure: function(error){
+                    alert(&apos;An error has occurred, please contact your Celigo representative: &apos; + error);
+                }
+            });
+        };
+        
+    }
+    return { //public members
+        main: function(){
+            try {
+                {!REQUIRESCRIPT(&quot;/soap/ajax/13.0/connection.js&quot;)}
+var inProg= sforce.connection.query(&quot;select Id, Send_to_NetSuite__c from Opportunity where Id = &apos;&quot;+ &quot;{!NetSuite_Estimate__c.OpportunityId__c}&quot; + &quot;&apos;&quot;);
+                        var records = inProg.getArray(&apos;records&apos;);
+                        if (records[0].Send_to_NetSuite__c === &apos;true&apos;) 
+                            alert(&quot;Sync already in progress.&quot;);
+else {
+
+                var sosm = new SalesOrderSyncManager();
+                sosm.triggerNsSync();
+				                
+               sforce.connection.query(&quot;select Id, Celigo_Sync_Helper__c, Send_to_NetSuite__c, NS_Sync__c from Opportunity where Id = &apos;&quot; + &quot;{!NetSuite_Estimate__c.OpportunityId__c}&quot; + &quot;&apos;&quot;, {
+                    onSuccess: function(result){
+                        var records = result.getArray(&quot;records&quot;);
+                        if (records.length &gt; 0) 
+                            sosm.openPopup();
+                    },
+                    onFailure: function(error){
+                        alert(&apos;An error has occurred, please contact your Celigo representative: &apos; + error);
+                    }
+                });
+                
+                window.setTimeout(sosm.checkSyncStatus), 5000;
+            } 
+}
+
+            catch (e) {
+                alert(&apos;An error has occurred, please contact your Celigo representative: &apos; + e.name + &apos; - &apos; + e.message);
+            }
+        }
+    }
+})();
+
+Celigo.SFDC.main();</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Sync</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Sync</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var Celigo = {}; 
+Celigo.SFDC = (function(){ //private members 
+function QuoteSyncManager(){ 
+
+//instance vars 
+var that = this; 
+var retries = 0; 
+var maxRetries = 20; 
+
+//methods 
+this.getURLParameter = function(_url, _name){ //String 
+var regexS; 
+var regex; 
+var results; 
+_name = _name.replace(/[\[]/, &quot;\\\[&quot;).replace(/[\]]/, &quot;\\\]&quot;); 
+regexS = &quot;[\\?&amp;]&quot; + _name + &quot;=([^&amp;#]*)&quot;; 
+regex = new RegExp(regexS); 
+results = regex.exec(_url); 
+if (results === null) { 
+return &quot;&quot;; 
+} 
+else { 
+return results[1]; 
+} 
+}; 
+
+this.triggerNsSync = function(){ 
+
+var o = new sforce.SObject(&quot;Opportunity&quot;); 
+o.id = &quot;{!NetSuite_Estimate__c.OpportunityId__c}&quot;; 
+o.Celigo_Sync_Helper__c = &quot;false&quot;; 
+o.Send_to_NetSuite__c = &quot;true&quot;; 
+o.Generate_Estimate__c = &quot;true&quot;; 
+o.Celigo_Update__c = &quot;true&quot;; 
+o.NetSuite_Quote__c = &quot;{!NetSuite_Estimate__c.Id}&quot;; 
+result = sforce.connection.update([o]); 
+}; 
+
+this.openPopup = function(){ 
+
+var top = screen.height - (screen.height * .5) - 100; 
+var left = screen.width - (screen.width * .5) - 187; 
+var params = &apos;dependent = yes,resizable=false,scrollbars=false,toolbar=false,menubar=false,location=false,status=true,directories=false,width=375,height=160,top=&apos;; 
+params += top.toString(); 
+params += &apos;,left=&apos; + left.toString() + &apos;\&apos;&apos;; 
+
+return window.open(&apos;/apex/quote_status?whence=&apos; + &quot;{!NetSuite_Estimate__c.Id}&quot; + &apos;&amp;opp_id=&apos; + &quot;{!NetSuite_Estimate__c.OpportunityId__c}&quot;, &apos;NetSuite_Synchronization&apos;, params); 
+}; 
+
+this.checkSyncStatus = function(){ 
+
+var url = window.location.href; 
+var endEx = url.lastIndexOf(&apos;?&apos;) &gt; -1 ? url.lastIndexOf(&apos;/&apos;) : url.length; 
+
+var result = sforce.connection.query(&quot;select Id, Celigo_Sync_Helper__c, Send_to_NetSuite__c, NS_Sync__c from Opportunity where Id = &apos;&quot; + &quot;{!NetSuite_Estimate__c.OpportunityId__c}&quot; + &quot;&apos;&quot;, { 
+onSuccess: function(result){ 
+var records = result.getArray(&quot;records&quot;); 
+if (records[0].Celigo_Sync_Helper__c === &apos;true&apos; &amp;&amp; records[0].Send_to_NetSuite__c === &apos;false&apos; &amp;&amp; records[0].NS_Sync__c === null) 
+window.location.href = window.location.href; 
+else 
+if (retries &lt; maxRetries) { 
+retries++; 
+window.setTimeout(that.checkSyncStatus, 5000); 
+} 
+}, 
+onFailure: function(error){ 
+alert(&apos;An error has occurred, please contact your Celigo representative: &apos; + error); 
+} 
+}); 
+}; 
+
+} 
+return { //public members 
+main: function(){ 
+try { 
+{!REQUIRESCRIPT(&quot;/soap/ajax/13.0/connection.js&quot;)} 
+var inProg= sforce.connection.query(&quot;select Id, Send_to_NetSuite__c from Opportunity where Id = &apos;&quot;+ &quot;{!NetSuite_Estimate__c.OpportunityId__c}&quot; + &quot;&apos;&quot;); 
+var records = inProg.getArray(&apos;records&apos;); 
+if (records[0].Send_to_NetSuite__c === &apos;true&apos;) 
+alert(&quot;Sync already in progress.&quot;); 
+else { 
+
+var qsm = new QuoteSyncManager(); 
+qsm.triggerNsSync(); 
+
+sforce.connection.query(&quot;select Id, Celigo_Sync_Helper__c, Send_to_NetSuite__c, NS_Sync__c from Opportunity where Id = &apos;&quot; + &quot;{!NetSuite_Estimate__c.OpportunityId__c}&quot; + &quot;&apos;&quot;, { 
+onSuccess: function(result){ 
+var records = result.getArray(&quot;records&quot;); 
+if (records.length &gt; 0) 
+qsm.openPopup(); 
+}, 
+onFailure: function(error){ 
+alert(&apos;An error has occurred, please contact your Celigo representative: &apos; + error); 
+} 
+}); 
+
+window.setTimeout(qsm.checkSyncStatus), 5000; 
+} 
+} 
+
+catch (e) { 
+alert(&apos;An error has occurred, please contact your Celigo representative: &apos; + e.name + &apos; - &apos; + e.message); 
+} 
+} 
+} 
+})(); 
+
+Celigo.SFDC.main();</url>
+    </webLinks>
+</CustomObject>

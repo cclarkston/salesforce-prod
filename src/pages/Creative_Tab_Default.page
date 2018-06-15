@@ -1,0 +1,2 @@
+<apex:page standardController="Creative__c" recordSetVar="a" 
+action="{!URLFOR($Action.Creative__c.List,$ObjectType.Creative__c)}" />

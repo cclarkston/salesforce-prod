@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Clinical_Appointment__c$Center_Information__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Appointment__c.Clinical_Apt_Procedures__r$Clinical_Procedure__c.Name</field>
+    </columns>
+    <columns>
+        <field>Clinical_Appointment__c.Clinical_Apt_Procedures__r$Clinical_Procedure__c.ADA_Code__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Appointment__c.Clinical_Apt_Procedures__r$Clinical_Procedure__c.Cost__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Appointment__c.Clinical_Apt_Procedures__r$Name</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Clinical_Appointment__c$Name</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Wax Try In-Dbl Zirconia</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Account Statement Update</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Clinical_Appointment_with_Procedure__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Clinical_Appointment__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

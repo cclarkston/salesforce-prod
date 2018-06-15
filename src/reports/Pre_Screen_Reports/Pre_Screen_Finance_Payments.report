@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>OPPORTUNITY_NAME</field>
+    </columns>
+    <columns>
+        <field>STAGE_NAME</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>CCPayment__c.Payment_Amount__c</field>
+    </columns>
+    <columns>
+        <field>CCPayment__c.Payment_Type__c</field>
+    </columns>
+    <description>Pre Screened Prosth Exams with payments from Financing - Created by DB 9-17-09</description>
+    <filter>
+        <criteriaItems>
+            <column>Account.Pre_Screen__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Green,Yellow,Red,Blue (No Hit)</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CCPayment__c.Payment_Type__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>MedChoice,Citi,CareCredit,Chase Health</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account.Pre_Screen__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account.Center_Master_Location__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Pre Screen Finance Payments</name>
+    <params>
+        <name>open</name>
+        <value>all</value>
+    </params>
+    <params>
+        <name>probability</name>
+        <value>&gt;0</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>OpportunityCustomEntity$CCPayment__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>ACCOUNT_CREATED_DATE</dateColumn>
+        <endDate>2009-09-30</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2009-07-27</startDate>
+    </timeFrameFilter>
+</Report>

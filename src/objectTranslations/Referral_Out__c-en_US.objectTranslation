@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Referral Out</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Referrals Out</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Referrals Out --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Callback Scheduled --></label>
+        <name>Callback_Scheduled__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearConnect Referral ID --></label>
+        <name>ClearConnect_Referral_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dental Practice --></label>
+        <name>Dental_Practice__c</name>
+        <relationshipLabel><!-- Referrals Out --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Insurance Plan --></label>
+        <name>Insurance_Plan__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead --></label>
+        <name>Lead__c</name>
+        <relationshipLabel><!-- Referrals Out --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Preferred Callback Time --></label>
+        <name>Preferred_Callback_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Procedure(s) Interested In --></label>
+        <name>Procedure_Interested_In__c</name>
+        <picklistValues>
+            <masterLabel>Botox</masterLabel>
+            <translation><!-- Botox --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Crown &amp; Bridge</masterLabel>
+            <translation><!-- Crown &amp; Bridge --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dental Implants</masterLabel>
+            <translation><!-- Dental Implants --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dentures</masterLabel>
+            <translation><!-- Dentures --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Endontics</masterLabel>
+            <translation><!-- Endontics --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hygiene</masterLabel>
+            <translation><!-- Hygiene --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Invisalign</masterLabel>
+            <translation><!-- Invisalign --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Laser Dentistry</masterLabel>
+            <translation><!-- Laser Dentistry --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Teeth Whitening</masterLabel>
+            <translation><!-- Teeth Whitening --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Traditional Orthodontics</masterLabel>
+            <translation><!-- Traditional Orthodontics --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Veneers</masterLabel>
+            <translation><!-- Veneers --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wisdom Teeth Extractions</masterLabel>
+            <translation><!-- Wisdom Teeth Extractions --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Referral Error --></label>
+        <name>Referral_Error__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referral Notes --></label>
+        <name>Referral_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referral Outcome --></label>
+        <name>Referral_Outcome__c</name>
+        <picklistValues>
+            <masterLabel>Dead Air</masterLabel>
+            <translation><!-- Dead Air --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PEC Referral Success</masterLabel>
+            <translation><!-- PEC Referral Success --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Refused Transfer</masterLabel>
+            <translation><!-- Refused Transfer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Test Call</masterLabel>
+            <translation><!-- Test Call --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transfer Failed - Caller Disconnect</masterLabel>
+            <translation><!-- Transfer Failed - Caller Disconnect --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transfer Failed - No Answer</masterLabel>
+            <translation><!-- Transfer Failed - No Answer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transfer Successful</masterLabel>
+            <translation><!-- Transfer Successful --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wrong Number</masterLabel>
+            <translation><!-- Wrong Number --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Vantage Response --></label>
+        <name>Vantage_Response__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

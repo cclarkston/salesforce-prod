@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>GetFeedback Response</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>GetFeedback Responses</value>
+    </caseValues>
+    <fields>
+        <label><!-- Contact --></label>
+        <name>Contact__c</name>
+        <relationshipLabel><!-- GetFeedback Responses --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- How did you learn about us --></label>
+        <name>How_did_you_learn_about_us__c</name>
+        <picklistValues>
+            <masterLabel>Friend or family</masterLabel>
+            <translation><!-- Friend or family --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>General Dentist</masterLabel>
+            <translation><!-- General Dentist --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Newspaper or Printed Advertisement</masterLabel>
+            <translation><!-- Newspaper or Printed Advertisement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Research on the Internet</masterLabel>
+            <translation><!-- Research on the Internet --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Television Advertisement</masterLabel>
+            <translation><!-- Television Advertisement --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- How_informed_after_consult --></label>
+        <name>How_informed_after_consult__c</name>
+        <picklistValues>
+            <masterLabel>A little informed</masterLabel>
+            <translation><!-- A little informed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Adequately informed</masterLabel>
+            <translation><!-- Adequately informed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fully informed</masterLabel>
+            <translation><!-- Fully informed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>My visit was not informative</masterLabel>
+            <translation><!-- My visit was not informative --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- How likely to move forward --></label>
+        <name>How_likely_to_move_forward__c</name>
+        <picklistValues>
+            <masterLabel>Highly likely</masterLabel>
+            <translation><!-- Highly likely --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I need more information before I can make decision</masterLabel>
+            <translation><!-- I need more information before I can make decision --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I&apos;ve scheduled my procedure!</masterLabel>
+            <translation><!-- I&apos;ve scheduled my procedure! --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not likely</masterLabel>
+            <translation><!-- Not likely --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Somewhat likely</masterLabel>
+            <translation><!-- Somewhat likely --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Is_staff_welcoming --></label>
+        <name>Is_staff_welcoming__c</name>
+        <picklistValues>
+            <masterLabel>Adequately welcoming</masterLabel>
+            <translation><!-- Adequately welcoming --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Neither professional or welcoming</masterLabel>
+            <translation><!-- Neither professional or welcoming --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unwelcoming</masterLabel>
+            <translation><!-- Unwelcoming --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Very welcoming</masterLabel>
+            <translation><!-- Very welcoming --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Prospective Patient --></label>
+        <name>Lead__c</name>
+        <relationshipLabel><!-- GetFeedback Responses --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- NPS Detractor Comment --></label>
+        <name>NPS_Detractor_Comment__c</name>
+    </fields>
+    <fields>
+        <label><!-- NPS --></label>
+        <name>NPS__c</name>
+    </fields>
+    <fields>
+        <label><!-- Topic for more info --></label>
+        <name>Topic_for_more_info__c</name>
+        <picklistValues>
+            <masterLabel>Financing and paying for dental implants</masterLabel>
+            <translation><!-- Financing and paying for dental implants --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I am looking into financing and payment options, but plan to move forward</masterLabel>
+            <translation><!-- I am looking into financing and payment options, but plan to move forward --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I have scheduled my next appointment and am excited about designing my smile</masterLabel>
+            <translation><!-- I have scheduled my next appointment and am excited about designing my smile --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Information for family and friends</masterLabel>
+            <translation><!-- Information for family and friends --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Learn more about the health benefits of dental</masterLabel>
+            <translation><!-- Learn more about the health benefits of dental --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Meet a Clearchoice patient</masterLabel>
+            <translation><!-- Meet a Clearchoice patient --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

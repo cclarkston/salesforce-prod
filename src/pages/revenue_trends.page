@@ -1,0 +1,116 @@
+<apex:page controller="rpt_revenue_trending" sidebar="false" readOnly="true">
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<style type="text/css" media="print">
+  div.bPageHeader {
+    display:none;
+  }  
+  
+  p.form_holder {
+    display:none; 
+  }
+  
+  a.dlink {
+    display:none;
+  }  
+</style>
+
+
+<style>
+  tr.control td {
+    color:#5789AE;
+  }  
+  
+  table.accs_details td.indent {
+    padding-left:25px;      
+    font-weight:bold; 
+    font-style:italic;
+    empty-cells:hide;                
+  }
+  
+  table.accs_details td.vaca {
+    font-style:italic;   
+    text-align:center;             
+  }   
+</style>
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+
+<apex:form style="padding-top:0;display:inline;margin-top:0;" >
+ <apex:actionRegion >
+ <div id="header" style="border-bottom:3px solid black;padding-top:0;margin-top:0;">
+<table style="width:100%;padding-top:0;">
+<tr>
+  <td width="300px;"><br />
+  <table><tr><td><span style="font-weight:bold;width:150px;">Start Date : </span></td><td><apex:inputField value="{!sholder.Apt_Date__c}" /></td></tr>
+  <tr><td><span style="font-weight:bold;width:150px;">End Date : </span></td><td><apex:inputField value="{!eholder.Apt_Date__c}" /></td></tr></table>
+  </td>
+  <td width="400px;" style="border-right:2px solid black;"><br />
+  <apex:commandButton value="Run Report" reRender="main_holder" status="update_status" onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);"   />
+  </td>
+  <td><h1 class="report_header">Revenue Trends</h1></td>  
+</tr>
+</table>
+</div>
+</apex:actionRegion>
+
+
+<apex:outputPanel id="main_holder" rendered="true" layout="block" style="padding-top:2em;">
+<apex:actionStatus startStyle="font-weight:bold;color:red;" stoptext="" id="update_status">
+  <apex:facet name="start">Running Report...Please Wait</apex:facet>        
+</apex:actionStatus><br />      
+<apex:outputText escape="false" style="color:red;font-style:italic;font-weight:bold;" value="{!error_messages}" /><br />
+<h2>Data for&nbsp;<apex:outputfield value="{!sholder.Apt_Date__c}" /> - <apex:outputfield value="{!eholder.Apt_Date__c}" /></h2>
+<table class="accs_details" style="100%">
+<tr class="control" style="font-size:10pt;vertical-align:bottom;">
+  <td width="125px">Date</td>   
+  <td width="20px;"></td>
+  <td width="125px">Date<br />Net Collections</td>   
+  <td width="125px">Month<br />Net Collections</td>   
+  <td width="125px">% of Monthly<br />Collections</td>    
+  <td width="125px">Running Total</td>    
+  <td width="25px;"></td>
+  <td width="125px">Date <br />Net Sold Revenue</td>   
+  <td width="125px">Month<br />Net Sold Revenue</td>           
+  <td width="125px">% of Monthly<br />Sold</td>    
+  <td width="125px">Running Total</td>    
+  </tr>
+  
+<apex:variable var="rowclassname" value="accs" />
+<apex:repeat value="{!revenue_trend}" var="rdays" >
+  <tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />  
+  <td class="indent">   
+  <apex:outputtext value="{0,date,M/dd/yyyy - EE}" > 
+  <apex:param value="{!rdays.reporting_date}" />
+  </apex:outputtext></td><td style="background:white;"></td>
+  <td class="right"><apex:outputText value="{0,number,##,##,##0}" ><apex:param value="{!rdays.net_collections}" /></apex:outputtext></td> 
+  <td class="right"><apex:outputText value="{0,number,##,##,##0}" ><apex:param value="{!rdays.mstats.net_collections}" /></apex:outputtext></td>     
+  <td class="right"><apex:outputtext rendered="{!if(rdays.mstats.net_collections<>0,true,false)}" value="{0,number,##0.0 %}"><apex:param value="{!rdays.monthly_collection_percent}" /></apex:outputtext><apex:outputtext rendered="{!if(rdays.mstats.net_collections<>0,false,true)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>
+  <td class="right"><apex:outputtext rendered="{!if(rdays.mstats.net_collections<>0,true,false)}" value="{0,number,##0.0 %}"><apex:param value="{!rdays.running_collection_percent}" /></apex:outputtext><apex:outputtext rendered="{!if(rdays.mstats.net_collections<>0,false,true)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>
+  <td style="background:white;"></td>          
+  <td class="right"><apex:outputText value="{0,number,##,##,##0}" ><apex:param value="{!rdays.net_sales}" /></apex:outputtext></td>    
+  <td class="right"><apex:outputText value="{0,number,##,##,##0}" ><apex:param value="{!rdays.mstats.net_sales}" /></apex:outputtext></td>          
+  <td class="right"><apex:outputtext rendered="{!if(rdays.mstats.net_sales<>0,true,false)}" value="{0,number,##0.0 %}"><apex:param value="{!rdays.monthly_sold_percent}" /></apex:outputtext><apex:outputtext rendered="{!if(rdays.mstats.net_sales<>0,false,true)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>      
+  <td class="right"><apex:outputtext rendered="{!if(rdays.mstats.net_sales<>0,true,false)}" value="{0,number,##0.0 %}"><apex:param value="{!rdays.running_sold_percent}" /></apex:outputtext><apex:outputtext rendered="{!if(rdays.mstats.net_sales<>0,false,true)}" value="N/A" style="font-weight:bold;font-style:italic;" /></td>      
+
+</tr> 
+</apex:repeat>
+</table>
+<apex:outputLink target="__blank" value="{!csv_link}" style="display:block;padding-top:1em;color:blue;font-weight:bold;">Download CSV File</apex:outputLink>
+
+</apex:outputPanel>
+</apex:form>
+</apex:page>

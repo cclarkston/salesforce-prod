@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>USERS.NAME</field>
+    </columns>
+    <columns>
+        <field>ACCOUNT.NAME</field>
+    </columns>
+    <columns>
+        <field>PC_ADDRESS2_LINE1</field>
+    </columns>
+    <columns>
+        <field>PC_ADDRESS2_ZIP</field>
+    </columns>
+    <columns>
+        <field>PHONE1</field>
+    </columns>
+    <columns>
+        <field>Account.Preliminary_Treatment_Plan__c</field>
+    </columns>
+    <description>MISTY UPPER AO4</description>
+    <filter>
+        <criteriaItems>
+            <column>USERS.NAME</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Misty Swetland</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Preliminary_Treatment_Plan__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>includes</operator>
+            <value>AO4 Upper,AO4 Lower,DBL AO4,AO4 Edentulous Upper,AO4 Edentulous Lower,DBL AO4 Edentulous</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>MISTY UPPER AO4</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>AccountList</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <endDate>2015-06-15</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2015-01-01</startDate>
+    </timeFrameFilter>
+</Report>

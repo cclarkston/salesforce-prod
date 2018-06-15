@@ -1,0 +1,1120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Prosth Exam Form</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Prosth Exam Forms</value>
+    </caseValues>
+    <fields>
+        <label><!-- AO4 Bone Reduction Max --></label>
+        <name>AO4_Bone_Reduction_Max__c</name>
+    </fields>
+    <fields>
+        <label><!-- AO4 bone Reduction Mand --></label>
+        <name>AO4_bone_Reduction_Mand__c</name>
+    </fields>
+    <fields>
+        <label><!-- Abrasion Location --></label>
+        <name>Abrasion_Location__c</name>
+        <picklistValues>
+            <masterLabel>Generalized</masterLabel>
+            <translation><!-- Generalized --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Localized</masterLabel>
+            <translation><!-- Localized --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Abrasion Severity --></label>
+        <name>Abrasion_Severity__c</name>
+        <picklistValues>
+            <masterLabel>Mild</masterLabel>
+            <translation><!-- Mild --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Moderate</masterLabel>
+            <translation><!-- Moderate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Severe</masterLabel>
+            <translation><!-- Severe --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Prosth Exam Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- At Rest --></label>
+        <name>At_Rest__c</name>
+        <picklistValues>
+            <masterLabel>Deficient</masterLabel>
+            <translation><!-- Deficient --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Excessive</masterLabel>
+            <translation><!-- Excessive --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Normal</masterLabel>
+            <translation><!-- Normal --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Attrition Location --></label>
+        <name>Attrition_Location__c</name>
+        <picklistValues>
+            <masterLabel>Generalized</masterLabel>
+            <translation><!-- Generalized --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Localized</masterLabel>
+            <translation><!-- Localized --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Attrition Severity --></label>
+        <name>Attrition_Severity__c</name>
+        <picklistValues>
+            <masterLabel>Mild</masterLabel>
+            <translation><!-- Mild --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Moderate</masterLabel>
+            <translation><!-- Moderate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Severe</masterLabel>
+            <translation><!-- Severe --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- BMI Calc --></label>
+        <name>BMI_Calc__c</name>
+    </fields>
+    <fields>
+        <label><!-- BMI --></label>
+        <name>BMI__c</name>
+    </fields>
+    <fields>
+        <label><!-- BP Diastolic --></label>
+        <name>BP_Diastolic__c</name>
+    </fields>
+    <fields>
+        <label><!-- BP Systolic --></label>
+        <name>BP_Systolic__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bone Loss Area --></label>
+        <name>Bone_Loss_Area__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bone Loss Notes --></label>
+        <name>Bone_Loss_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bone Loss Percent --></label>
+        <name>Bone_Loss_Percent__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bone Loss --></label>
+        <name>Bone_Loss__c</name>
+        <picklistValues>
+            <masterLabel>Generalized</masterLabel>
+            <translation><!-- Generalized --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Isolated</masterLabel>
+            <translation><!-- Isolated --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Centric Relation Record --></label>
+        <name>Centric_Relation_Record__c</name>
+    </fields>
+    <fields>
+        <label><!-- Chief Complaint --></label>
+        <name>Chief_Complaint__c</name>
+    </fields>
+    <fields>
+        <label><!-- Clinical Apt Calendar --></label>
+        <name>Clinical_Apt_Calendar__c</name>
+        <relationshipLabel><!-- Prosth Exam Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Clinical Note Instance --></label>
+        <name>Clinical_Note_Instance__c</name>
+        <relationshipLabel><!-- Prosth Exam Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Comments --></label>
+        <name>Comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Condition --></label>
+        <name>Condition__c</name>
+        <picklistValues>
+            <masterLabel>Edentulous</masterLabel>
+            <translation><!-- Edentulous --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Full Complement</masterLabel>
+            <translation><!-- Full Complement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Partially Edentulous</masterLabel>
+            <translation><!-- Partially Edentulous --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Crepitus --></label>
+        <name>Crepitus__c</name>
+        <picklistValues>
+            <masterLabel>Left</masterLabel>
+            <translation><!-- Left --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Left and Right</masterLabel>
+            <translation><!-- Left and Right --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Right</masterLabel>
+            <translation><!-- Right --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Dentofacial Mand Amount --></label>
+        <name>Dentofacial_Mand_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dentofacial Mand Direction --></label>
+        <name>Dentofacial_Mand_Direction__c</name>
+        <picklistValues>
+            <masterLabel>Left</masterLabel>
+            <translation><!-- Left --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Right</masterLabel>
+            <translation><!-- Right --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Dentofacial Max Amount --></label>
+        <name>Dentofacial_Max_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dentofacial Max Direction --></label>
+        <name>Dentofacial_Max_Direction__c</name>
+        <picklistValues>
+            <masterLabel>Left</masterLabel>
+            <translation><!-- Left --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Right</masterLabel>
+            <translation><!-- Right --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Dentofacial WNL --></label>
+        <name>Dentofacial_WNL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Deviations --></label>
+        <name>Deviations__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Dry Mouth --></label>
+        <name>Dry_Mouth__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Erosion Location --></label>
+        <name>Erosion_Location__c</name>
+        <picklistValues>
+            <masterLabel>Generalized</masterLabel>
+            <translation><!-- Generalized --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Localized</masterLabel>
+            <translation><!-- Localized --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Erosion Severity --></label>
+        <name>Erosion_Severity__c</name>
+        <picklistValues>
+            <masterLabel>Mild</masterLabel>
+            <translation><!-- Mild --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Moderate</masterLabel>
+            <translation><!-- Moderate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Severe</masterLabel>
+            <translation><!-- Severe --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Evidence of Bruxism --></label>
+        <name>Evidence_of_Bruxism__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Existing Pros Max --></label>
+        <name>Existing_Pros_Max__c</name>
+        <picklistValues>
+            <masterLabel>Ill Fitting</masterLabel>
+            <translation><!-- Ill Fitting --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>WNL</masterLabel>
+            <translation><!-- WNL --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Existing Prosth Mand Type --></label>
+        <name>Existing_Prosth_Mand_Type__c</name>
+        <picklistValues>
+            <masterLabel>Full denture</masterLabel>
+            <translation><!-- Full denture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Implant Supported Acrylic</masterLabel>
+            <translation><!-- Implant Supported Acrylic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Implant Supported Zirconia</masterLabel>
+            <translation><!-- Implant Supported Zirconia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Metal based partial denture</masterLabel>
+            <translation><!-- Metal based partial denture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Partial denture</masterLabel>
+            <translation><!-- Partial denture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Snap on denture</masterLabel>
+            <translation><!-- Snap on denture --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Existing Prosth Mand --></label>
+        <name>Existing_Prosth_Mand__c</name>
+        <picklistValues>
+            <masterLabel>Ill Fitting</masterLabel>
+            <translation><!-- Ill Fitting --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>WNL</masterLabel>
+            <translation><!-- WNL --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Existing Prosth Max Type --></label>
+        <name>Existing_Prosth_Max_Type__c</name>
+        <picklistValues>
+            <masterLabel>Full denture</masterLabel>
+            <translation><!-- Full denture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Implant Supported Acrylic</masterLabel>
+            <translation><!-- Implant Supported Acrylic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Implant Supported Zirconia</masterLabel>
+            <translation><!-- Implant Supported Zirconia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Metal based partial denture</masterLabel>
+            <translation><!-- Metal based partial denture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Partial denture</masterLabel>
+            <translation><!-- Partial denture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Snap on denture</masterLabel>
+            <translation><!-- Snap on denture --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Existing Prosth Notes --></label>
+        <name>Existing_Prosth_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- FMX --></label>
+        <name>FMX__c</name>
+    </fields>
+    <fields>
+        <label><!-- Facebow --></label>
+        <name>Facebow__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hard Soft Mand RRR --></label>
+        <name>Hard_Soft_Mand_RRR__c</name>
+        <picklistValues>
+            <masterLabel>Mod</masterLabel>
+            <translation><!-- Mod --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Severe</masterLabel>
+            <translation><!-- Severe --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Slight</masterLabel>
+            <translation><!-- Slight --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Hard Soft Max RRR --></label>
+        <name>Hard_Soft_Max_RRR__c</name>
+        <picklistValues>
+            <masterLabel>Mod</masterLabel>
+            <translation><!-- Mod --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Severe</masterLabel>
+            <translation><!-- Severe --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Slight</masterLabel>
+            <translation><!-- Slight --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Hard Soft RRR --></label>
+        <name>Hard_Soft_RRR__c</name>
+        <picklistValues>
+            <masterLabel>Mod</masterLabel>
+            <translation><!-- Mod --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Severe</masterLabel>
+            <translation><!-- Severe --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Slight</masterLabel>
+            <translation><!-- Slight --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Hard Soft WNL --></label>
+        <name>Hard_Soft_WNL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Height Feet --></label>
+        <name>Height_Feet__c</name>
+    </fields>
+    <fields>
+        <label><!-- Height Inches --></label>
+        <name>Height_Inches__c</name>
+    </fields>
+    <fields>
+        <label><!-- Height Total Inches --></label>
+        <name>Height_Total_Inches__c</name>
+    </fields>
+    <fields>
+        <label><!-- How long missing teeth --></label>
+        <name>How_long_missing_teeth__c</name>
+        <picklistValues>
+            <masterLabel>1-5 years</masterLabel>
+            <translation><!-- 1-5 years --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10-15 years</masterLabel>
+            <translation><!-- 10-15 years --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5-10 years</masterLabel>
+            <translation><!-- 5-10 years --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>&lt;1 year</masterLabel>
+            <translation><!-- &lt;1 year --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>&gt;15 years</masterLabel>
+            <translation><!-- &gt;15 years --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Image Notes --></label>
+        <name>Image_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Impressions --></label>
+        <name>Impressions__c</name>
+    </fields>
+    <fields>
+        <label><!-- In Motion --></label>
+        <name>In_Motion__c</name>
+        <picklistValues>
+            <masterLabel>Deficient</masterLabel>
+            <translation><!-- Deficient --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Excessive</masterLabel>
+            <translation><!-- Excessive --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Normal</masterLabel>
+            <translation><!-- Normal --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- L Upon Closing ROM --></label>
+        <name>L_Upon_Closing_ROM__c</name>
+        <picklistValues>
+            <masterLabel>Deviated</masterLabel>
+            <translation><!-- Deviated --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Limited</masterLabel>
+            <translation><!-- Limited --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>WNL</masterLabel>
+            <translation><!-- WNL --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- L Upon Opening ROM --></label>
+        <name>L_Upon_Opening_ROM__c</name>
+        <picklistValues>
+            <masterLabel>Deviated</masterLabel>
+            <translation><!-- Deviated --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Limited</masterLabel>
+            <translation><!-- Limited --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>WNL</masterLabel>
+            <translation><!-- WNL --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Lip Fullness --></label>
+        <name>Lip_Fullness__c</name>
+        <picklistValues>
+            <masterLabel>Thick</masterLabel>
+            <translation><!-- Thick --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Thin</masterLabel>
+            <translation><!-- Thin --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Lip Length --></label>
+        <name>Lip_Length__c</name>
+        <picklistValues>
+            <masterLabel>Average</masterLabel>
+            <translation><!-- Average --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Long</masterLabel>
+            <translation><!-- Long --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Short</masterLabel>
+            <translation><!-- Short --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Mobility Notes --></label>
+        <name>Mobility_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mobility --></label>
+        <name>Mobility__c</name>
+        <picklistValues>
+            <masterLabel>I</masterLabel>
+            <translation><!-- I --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>II</masterLabel>
+            <translation><!-- II --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>III</masterLabel>
+            <translation><!-- III --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Muscles of mastication WNL --></label>
+        <name>Muscles_of_mastication_WNL__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- OCS Asymmetry Location --></label>
+        <name>OCS_Asymmetry_Location__c</name>
+    </fields>
+    <fields>
+        <label><!-- OCS Asymmetry --></label>
+        <name>OCS_Asymmetry__c</name>
+    </fields>
+    <fields>
+        <label><!-- OCS Lymph Location --></label>
+        <name>OCS_Lymph_Location__c</name>
+    </fields>
+    <fields>
+        <label><!-- OCS Lymph --></label>
+        <name>OCS_Lymph__c</name>
+    </fields>
+    <fields>
+        <label><!-- OCS Neg --></label>
+        <name>OCS_Neg__c</name>
+    </fields>
+    <fields>
+        <label><!-- OCS Other Text --></label>
+        <name>OCS_Other_Text__c</name>
+    </fields>
+    <fields>
+        <label><!-- OCS Other --></label>
+        <name>OCS_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- OCS Pos --></label>
+        <name>OCS_Pos__c</name>
+    </fields>
+    <fields>
+        <label><!-- OCS Swelling Location --></label>
+        <name>OCS_Swelling_Location__c</name>
+    </fields>
+    <fields>
+        <label><!-- OCS Swelling --></label>
+        <name>OCS_Swelling__c</name>
+    </fields>
+    <fields>
+        <label><!-- Occlusion Attrition --></label>
+        <name>Occlusion_Attrition__c</name>
+        <picklistValues>
+            <masterLabel>Mild</masterLabel>
+            <translation><!-- Mild --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mod</masterLabel>
+            <translation><!-- Mod --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Severe</masterLabel>
+            <translation><!-- Severe --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Occlusion Dental --></label>
+        <name>Occlusion_Dental__c</name>
+        <picklistValues>
+            <masterLabel>I</masterLabel>
+            <translation><!-- I --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>II</masterLabel>
+            <translation><!-- II --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>III</masterLabel>
+            <translation><!-- III --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Occlusion Hyper Eruption --></label>
+        <name>Occlusion_Hyper_Eruption__c</name>
+    </fields>
+    <fields>
+        <label><!-- Occlusion OB --></label>
+        <name>Occlusion_OB__c</name>
+    </fields>
+    <fields>
+        <label><!-- Occlusion OJ --></label>
+        <name>Occlusion_OJ__c</name>
+    </fields>
+    <fields>
+        <label><!-- Occlusion Plane --></label>
+        <name>Occlusion_Plane__c</name>
+        <picklistValues>
+            <masterLabel>Bi-Plane</masterLabel>
+            <translation><!-- Bi-Plane --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>WNL</masterLabel>
+            <translation><!-- WNL --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Occlusion Skeletal --></label>
+        <name>Occlusion_Skeletal__c</name>
+        <picklistValues>
+            <masterLabel>I</masterLabel>
+            <translation><!-- I --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>II</masterLabel>
+            <translation><!-- II --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>III</masterLabel>
+            <translation><!-- III --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Panorex --></label>
+        <name>Panorex__c</name>
+    </fields>
+    <fields>
+        <label><!-- Perio Chart --></label>
+        <name>Perio_Chart__c</name>
+        <relationshipLabel><!-- Prosth Exam Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Periodontal Type --></label>
+        <name>Periodontal_Type__c</name>
+        <picklistValues>
+            <masterLabel>I</masterLabel>
+            <translation><!-- I --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>II</masterLabel>
+            <translation><!-- II --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>III</masterLabel>
+            <translation><!-- III --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IV</masterLabel>
+            <translation><!-- IV --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Photographs --></label>
+        <name>Photographs__c</name>
+    </fields>
+    <fields>
+        <label><!-- Physiological Location --></label>
+        <name>Physiological_Location__c</name>
+        <picklistValues>
+            <masterLabel>Generalized</masterLabel>
+            <translation><!-- Generalized --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Localized</masterLabel>
+            <translation><!-- Localized --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Physiological Severity --></label>
+        <name>Physiological_Severity__c</name>
+        <picklistValues>
+            <masterLabel>Mild</masterLabel>
+            <translation><!-- Mild --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Moderate</masterLabel>
+            <translation><!-- Moderate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Severity</masterLabel>
+            <translation><!-- Severity --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Pulse Ox --></label>
+        <name>Pulse_Ox__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pulse --></label>
+        <name>Pulse__c</name>
+    </fields>
+    <fields>
+        <label><!-- R Upon Closing ROM --></label>
+        <name>R_Upon_Closing_ROM__c</name>
+        <picklistValues>
+            <masterLabel>Deviated</masterLabel>
+            <translation><!-- Deviated --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Limited</masterLabel>
+            <translation><!-- Limited --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>WNL</masterLabel>
+            <translation><!-- WNL --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- R Upon Opening ROM --></label>
+        <name>R_Upon_Opening_ROM__c</name>
+        <picklistValues>
+            <masterLabel>Deviated</masterLabel>
+            <translation><!-- Deviated --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Limited</masterLabel>
+            <translation><!-- Limited --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>WNL</masterLabel>
+            <translation><!-- WNL --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Radiology Other --></label>
+        <name>Radiology_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Radiology WNL --></label>
+        <name>Radiology_WNL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Range of Motion --></label>
+        <name>Range_of_Motion__c</name>
+        <picklistValues>
+            <masterLabel>45mm+</masterLabel>
+            <translation><!-- 45mm+ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>45mm-30mm</masterLabel>
+            <translation><!-- 45mm-30mm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>&lt;30mm</masterLabel>
+            <translation><!-- &lt;30mm --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Recession Notes --></label>
+        <name>Recession_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Recession --></label>
+        <name>Recession__c</name>
+        <picklistValues>
+            <masterLabel>Pathological</masterLabel>
+            <translation><!-- Pathological --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Physiological</masterLabel>
+            <translation><!-- Physiological --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Records Notes --></label>
+        <name>Records_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reported Bruxism --></label>
+        <name>Reported_Bruxism__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Restorative Prognosis --></label>
+        <name>Restorative_Prognosis__c</name>
+        <picklistValues>
+            <masterLabel>Fair</masterLabel>
+            <translation><!-- Fair --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Good</masterLabel>
+            <translation><!-- Good --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Guarded</masterLabel>
+            <translation><!-- Guarded --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Irredeemable</masterLabel>
+            <translation><!-- Irredeemable --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Poor</masterLabel>
+            <translation><!-- Poor --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Salivary Other --></label>
+        <name>Salivary_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Smile Line Notes --></label>
+        <name>Smile_Line_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Smile Line --></label>
+        <name>Smile_Line__c</name>
+        <picklistValues>
+            <masterLabel>High</masterLabel>
+            <translation><!-- High --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Low</masterLabel>
+            <translation><!-- Low --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Normal</masterLabel>
+            <translation><!-- Normal --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Surgical Reduction Notes --></label>
+        <name>Surgical_Reduction_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- TMJ Notes --></label>
+        <name>TMJ_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- TMJ max opening --></label>
+        <name>TMJ_max_opening__c</name>
+    </fields>
+    <fields>
+        <label><!-- TMJ_pop_click_left --></label>
+        <name>TMJ_pop_click_left__c</name>
+        <picklistValues>
+            <masterLabel>Asymp</masterLabel>
+            <translation><!-- Asymp --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Symp</masterLabel>
+            <translation><!-- Symp --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- TMJ_pop_click_right --></label>
+        <name>TMJ_pop_click_right__c</name>
+        <picklistValues>
+            <masterLabel>Asymp</masterLabel>
+            <translation><!-- Asymp --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Symp</masterLabel>
+            <translation><!-- Symp --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- TMJ_stable_wnl --></label>
+        <name>TMJ_stable_wnl__c</name>
+    </fields>
+    <fields>
+        <label><!-- Temperature --></label>
+        <name>Temperature__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tissue Color --></label>
+        <name>Tissue_Color__c</name>
+        <picklistValues>
+            <masterLabel>Blue</masterLabel>
+            <translation><!-- Blue --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pink</masterLabel>
+            <translation><!-- Pink --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Red</masterLabel>
+            <translation><!-- Red --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Tissue Consistency --></label>
+        <name>Tissue_Consistency__c</name>
+        <picklistValues>
+            <masterLabel>Firm</masterLabel>
+            <translation><!-- Firm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Soft</masterLabel>
+            <translation><!-- Soft --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Tissue Mand --></label>
+        <name>Tissue_Mand__c</name>
+        <picklistValues>
+            <masterLabel>Thick/Flat</masterLabel>
+            <translation><!-- Thick/Flat --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Think/Scalloped</masterLabel>
+            <translation><!-- Think/Scalloped --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Tissue Max --></label>
+        <name>Tissue_Max__c</name>
+        <picklistValues>
+            <masterLabel>Thick/Flat</masterLabel>
+            <translation><!-- Thick/Flat --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Thin/Scalloped</masterLabel>
+            <translation><!-- Thin/Scalloped --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Tissue Notes --></label>
+        <name>Tissue_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tissue Texture --></label>
+        <name>Tissue_Texture__c</name>
+        <picklistValues>
+            <masterLabel>Smooth</masterLabel>
+            <translation><!-- Smooth --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Stippled</masterLabel>
+            <translation><!-- Stippled --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Tooth Mould --></label>
+        <name>Tooth_Mould__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tooth Shade Other --></label>
+        <name>Tooth_Shade_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tooth Shade --></label>
+        <name>Tooth_Shade__c</name>
+        <picklistValues>
+            <masterLabel>A1</masterLabel>
+            <translation><!-- A1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>A2</masterLabel>
+            <translation><!-- A2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>A3</masterLabel>
+            <translation><!-- A3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>A3.5</masterLabel>
+            <translation><!-- A3.5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>A4</masterLabel>
+            <translation><!-- A4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B1</masterLabel>
+            <translation><!-- B1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B2</masterLabel>
+            <translation><!-- B2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B3</masterLabel>
+            <translation><!-- B3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B4</masterLabel>
+            <translation><!-- B4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BL2</masterLabel>
+            <translation><!-- BL2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BL3</masterLabel>
+            <translation><!-- BL3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>C1</masterLabel>
+            <translation><!-- C1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>C2</masterLabel>
+            <translation><!-- C2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>C3</masterLabel>
+            <translation><!-- C3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>C4</masterLabel>
+            <translation><!-- C4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D2</masterLabel>
+            <translation><!-- D2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D3</masterLabel>
+            <translation><!-- D3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D4</masterLabel>
+            <translation><!-- D4 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Tooth Surface Notes --></label>
+        <name>Tooth_Surface_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Weight --></label>
+        <name>Weight__c</name>
+    </fields>
+    <fields>
+        <label><!-- iCAT --></label>
+        <name>iCAT__c</name>
+    </fields>
+    <fields>
+        <label><!-- isactive --></label>
+        <name>isactive__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

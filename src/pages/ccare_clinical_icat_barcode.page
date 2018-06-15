@@ -1,0 +1,155 @@
+<apex:page showheader="false" sidebar="false" standardStylesheets="false" controller="dp_clinical_images" docType="html-5.0">
+<head>
+  <meta charset="UTF-8" />
+  <title>HopeRx</title>
+    <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/dp_css_main.css')}"/>  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  
+<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css' />
+  
+<!--  <apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />-->
+<!--  <apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>-->
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/mmenu_nav.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc.css')}"/>   
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/dp_css_main.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/fonts.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-buttons.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-patient.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-clinical-calendar.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-clinical.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/style.css')}"/>       
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-printClinicalNotes.css')}"/>     
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-notes.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/forms.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-perio.css')}"/>        
+
+<script>
+var $j = jQuery.noConflict();
+// $j is now an alias to the jQuery function; creating the new alias is optional.  
+</script>  
+
+  <apex:includeScript value="{!URLFOR($Resource.Dental_Practice_Resources,'js/cc-clinical-calendar.js')}"/>
+  <apex:includeScript value="{!URLFOR($Resource.Dental_Practice_Resources,'js/cc-patient.js')}"/>
+  <apex:includeScript value="{!URLFOR($Resource.Dental_Practice_Resources,'js/cc-clinical.js')}"/>
+  <apex:includeScript value="{!URLFOR($Resource.Dental_Practice_Resources,'js/cc-notes.js')}"/>
+  <apex:includeScript value="{!URLFOR($Resource.Dental_Practice_Resources,'js/cc-fonts.js')}"/>
+  
+  <apex:includeScript value="{!URLFOR($Resource.Dental_Practice_Resources,'js/code39.js')}"/>
+       
+</head>
+<style type="text/css" media="print"> 
+  * {transition: none !important;}
+
+  .no-print {
+    display:none !important;
+  }
+  
+  .print-only {
+    display:flex !important;
+  }
+</style>
+
+
+<style type="text/css">
+  .print-only {
+    display:none;
+  }
+ 
+  #barcode {font-weight: normal; font-style: normal; line-height:normal; sans-serif; font-size: 12pt}
+  
+  .page_holder {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .scan_row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 5em;
+    align-items: center;
+  }
+  
+  .barcode_label {
+    width: 150px;
+    font-size: 12pt;
+    font-weight: bold;
+    padding-bottom: 25px;
+  }
+  
+  .name_header {
+    font-size: 22pt;
+    padding-bottom: 1em;
+    color: #5789AE;
+    position: relative;
+    left: -10%;
+  }
+</style>
+    
+
+<body>
+<apex:form onsubmit="return true;">
+<apex:outputpanel styleclass="cc-wrapper" layout="block">
+<c:HopeRx_print_header CenterRecord="{!current_center}"  />
+<br />
+<br />
+
+<div class="page_holder">
+
+  <div class="name_header">
+    {!icat_page_header}
+  </div>
+
+  <div class="scan_row">
+    <div class="barcode_label">First Name :</div>
+    <div class="barcode_holder" id="fname_code">{!UPPER(patient.firstname)}</div>
+  </div>
+  
+  <div class="scan_row">
+    <div class="barcode_label">Last Name :</div>
+    <div class="barcode_holder" id="lname_code">{!UPPER(patient.lastname)}</div>
+  </div>
+  
+  <div class="scan_row">
+    <div class="barcode_label">ID :</div>
+    <div class="barcode_holder" id="pid_code">{!UPPER(dexis_patient_id)}</div>
+  </div>
+  
+  <apex:outputpanel layout="block" styleclass="scan_row" rendered="{!if(patient.Date_of_Birth__c=null,false,true)}">
+    <div class="barcode_label">DOB :</div>
+    <div class="barcode_holder" id="dob_code">{!patient_formatted_dob}</div>
+  </apex:outputpanel>
+  
+</div>
+
+</apex:outputpanel>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+  function get_object(id) {
+   var object = null;
+   if (document.layers) {
+    object = document.layers[id];
+   } else if (document.all) {
+    object = document.all[id];
+   } else if (document.getElementById) {
+    object = document.getElementById(id);
+   }
+   return object;
+  }
+get_object("fname_code").innerHTML=DrawCode39Barcode(get_object("fname_code").innerHTML,0);
+//get_object("lname_code").innerHTML=DrawCode39Barcode(get_object("lname_code").innerHTML,0);
+get_object("lname_code").innerHTML=DrawHTMLBarcode_Code39(get_object("lname_code").innerHTML,0,"yes","in", 0,4,1.5,4,"bottom","center", "","black","white");
+//get_object("pid_code").innerHTML=DrawCode39Barcode(get_object("pid_code").innerHTML,0);
+get_object("pid_code").innerHTML=DrawHTMLBarcode_Code39(get_object("pid_code").innerHTML,0,"yes","in", 0,4,2,4,"bottom","center", "","black","white"); 
+get_object("dob_code").innerHTML=DrawCode39Barcode(get_object("dob_code").innerHTML,0);
+/* ]]> */
+</script>
+
+</apex:form>
+</body>
+</apex:page>

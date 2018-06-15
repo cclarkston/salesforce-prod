@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Account.Center_Location__c</field>
+    </columns>
+    <columns>
+        <field>USERS.NAME</field>
+    </columns>
+    <columns>
+        <field>ACCOUNT.NAME</field>
+    </columns>
+    <columns>
+        <field>Account.Consult_Completed__c</field>
+    </columns>
+    <columns>
+        <field>Account.Consult_Completed_Date__c</field>
+    </columns>
+    <columns>
+        <field>Account.Consult_Result__c</field>
+    </columns>
+    <columns>
+        <field>ACCOUNT_ID</field>
+    </columns>
+    <columns>
+        <field>Account.Is_Traveling__c</field>
+    </columns>
+    <columns>
+        <field>Account.Is_Traveler__c</field>
+    </columns>
+    <columns>
+        <field>User.Traveler_Until__c</field>
+    </columns>
+    <columns>
+        <field>User.User_Role__c</field>
+    </columns>
+    <description>[Tabular] Report showing All Consults, Consult Completed Date = Today, with Exclusions.  Used with Consult Completed Analytic Snapshot.</description>
+    <filter>
+        <criteriaItems>
+            <column>Account.Consult_Result__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Not a Candidate,Refered Out to Doctor,Health Disqualification,Doctor Declined Case</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Consult_Completed_Date__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>TODAY</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>[Tab] Consults Comp. Today w/ Exclusions</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>AccountList</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>LAST_UPDATE</dateColumn>
+        <interval>INTERVAL_CURRENT</interval>
+    </timeFrameFilter>
+</Report>

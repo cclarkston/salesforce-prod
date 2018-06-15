@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>OPPORTUNITY_NAME</field>
+    </columns>
+    <columns>
+        <field>Account.Consult_Result__c</field>
+    </columns>
+    <columns>
+        <field>Opportunity.Negotiated_Total_Amount__c</field>
+    </columns>
+    <columns>
+        <field>STAGE_NAME</field>
+    </columns>
+    <columns>
+        <field>CLOSE_DATE</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>CCPayment__c.Payment_Amount__c</field>
+    </columns>
+    <columns>
+        <field>CCPayment__c.Payment_Date__c</field>
+    </columns>
+    <columns>
+        <field>CCPayment__c.Payment_Type__c</field>
+    </columns>
+    <filter>
+        <booleanFilter>((1 AND 2 AND 3) AND 4) AND 5</booleanFilter>
+        <criteriaItems>
+            <column>STAGE_NAME</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Cancelled Not Rescheduled,Paid In Full</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CCPayment__c.Payment_Status__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Collected,Collected Promise Note,Anticipated Payment Cancelled,Refund,HCF In Process,Anticipated Prom Note Payment Cancelled,Anticipated Payment Cancelled Write Off,NSF</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CCPayment__c.Payment_Date__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>lessThan</operator>
+            <value>TODAY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Opportunity.Completed_Stage__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Not Moving Forward,Non Candidate,Doctor Declined Case</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Center_Location__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>contains</operator>
+            <value>Portland,Sacramento,San Francisco Daly City,San Jose,Seattle,Walnut Creek</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account.Center_Location__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>FULL_NAME</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>NW Pmnts to Update</name>
+    <params>
+        <name>open</name>
+        <value>all</value>
+    </params>
+    <params>
+        <name>probability</name>
+        <value>&gt;0</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>OpportunityCustomEntity$CCPayment__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CCPayment__c.Payment_Date__c</dateColumn>
+        <interval>INTERVAL_CURFY</interval>
+    </timeFrameFilter>
+</Report>

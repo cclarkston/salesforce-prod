@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account$Consult_Completed__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Opportunities$Prostho_Exam_Scheduled__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account$Preliminary_Treatment_Fee_Quoted__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Opportunities$Negotiated_Total_Amount__c</field>
+    </columns>
+    <description>By Pre Screen, by Center location and by PEC</description>
+    <filter>
+        <criteriaItems>
+            <column>Account$Pre_Screen__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Not Checked,Green,Yellow,Red,Blue (No Hit)</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account$Center_Location__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account$Owner</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account$Pre_Screen__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Treatment $ Seen vs Revenue $ Sold</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Consults_with_Prostho_Exam_and_Payments__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Account$Consult_Completed_Date__c</dateColumn>
+        <endDate>2009-10-12</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2009-10-01</startDate>
+    </timeFrameFilter>
+</Report>

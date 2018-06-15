@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomPageWebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <availability>online</availability>
+    <description>link to report from DataWarehouse. autopopulates link with active user</description>
+    <displayType>link</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <hasMenubar>false</hasMenubar>
+    <hasScrollbars>true</hasScrollbars>
+    <hasToolbar>false</hasToolbar>
+    <height>600</height>
+    <isResizable>true</isResizable>
+    <linkType>url</linkType>
+    <masterLabel>PEC Daily Activity by user</masterLabel>
+    <openType>newWindow</openType>
+    <position>none</position>
+    <protected>false</protected>
+    <showsLocation>false</showsLocation>
+    <showsStatus>false</showsStatus>
+    <url>http://data-dw02/ReportServer_CLEARCHOICEDW?%2fClearChoiceReports%2fReports%2fPECDailyActivity&amp;PEC={!User.FirstName}+{!User.LastName}&amp;rs%3aParameterLanguage=en-US</url>
+</CustomPageWebLink>

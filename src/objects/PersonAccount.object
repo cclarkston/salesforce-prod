@@ -1,0 +1,2430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <compactLayoutAssignment>SYSTEMPersonAccount</compactLayoutAssignment>
+    <enableHistory>true</enableHistory>
+    <recordTypes>
+        <fullName>ProspectivePatients</fullName>
+        <active>true</active>
+        <description>Person Account for Prospective Patients</description>
+        <label>Prospective Patients</label>
+        <picklistValues>
+            <picklist>Accompanied_By__c</picklist>
+            <values>
+                <fullName>Child</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Friend</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Accompanied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Parent</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sibling</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Spouse</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>AccountSource</picklist>
+            <values>
+                <fullName>Doctor Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flyer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Newspaper</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radio</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VIP Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Website</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Alternate_Treatment_Plan__c</picklist>
+            <values>
+                <fullName>AO4 Edentulous Lower</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AO4 Edentulous Upper</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AO4 Lower</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AO4 Upper</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Custom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DBL AO4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DBL AO4 Edentulous</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lower Denture</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lower Overdenture</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Multiple Implant Bridge</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Multiple Implants</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>None Given</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phased Barless Interim Double AO4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phased Barless Interim Lower AO4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phased Barless Interim Upper AO4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Single Implant</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transitional DBL AO4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Upper Denture</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Upper Overdenture</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CHOICE_Color__c</picklist>
+            <values>
+                <fullName>BLUE %2F Steady Relater</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GREEN %2F Dominant</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ORANGE %2F Trump</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RED %2F Influencer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>YELLOW %2F Cautious</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Call_Center_Owner__c</picklist>
+            <values>
+                <fullName>Audrey Dinges</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Barb Emerick</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Donica Huffman</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Janelle Gladstone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Kim Goehring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lisa Avrett</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mario Breton</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Meridith Hertach</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nathaly Ambos</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Stephanie Gonzalez</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Call_Result__c</picklist>
+            <values>
+                <fullName>Consultation Scheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seminar Scheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VIP Seminar Scheduled</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Center_Location__c</picklist>
+            <values>
+                <fullName>Atlanta</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Atlanta Alpharetta</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Austin</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Baltimore</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Boston Woburn</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Charlotte</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chicago</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chicago Deerfield%2FNorthbrook</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chicago Downers Grove</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chicago Evanston</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chicago Naperville</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chicago Schaumburg</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cincinnati</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cleveland</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cleveland Akron</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dallas</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dallas Arlington</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dallas Fort Worth</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Denver</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Denver Colorado Springs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Denver Implant Denistry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Detroit Southfield</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Houston</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Houston Woodlands</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Kansas City</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Las Vegas</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Los Angeles Orange County</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Los Angeles Torrance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Los Angeles West Covina</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Miami</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Miami Fort Lauderdale</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Minneapolis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Minneapolis Roseville</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Jersey Roseland</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Philadelphia Fort Washington</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phoenix</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phoenix Mesa</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Portland</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sacramento</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Salt Lake City</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>San Antonio</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>San Diego</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>San Francisco Daly City</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>San Francisco Oakland</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>San Jose</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>St%2E Louis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tampa</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tucson</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Walnut Creek</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Washington Rockville</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Washington Tysons Corner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>West Palm Beach</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Condition_Awareness__c</picklist>
+            <values>
+                <fullName>not aware %28i%2Ee%2E%2C only aware of ClearChoice%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>somewhat aware %28i%2Ee%2E%2C only visited ClearChoice%2C but know other options exist%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>very aware %28i%2Ee%2E%2C had researched%2Fvisited competitors%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Consult_Result__c</picklist>
+            <values>
+                <fullName>2nd Consult</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>30 Day Pipeline</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>60 Day Pipeline</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>90 Day Pipeline</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Doctor Declined Case</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Medical Clearance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Longer Interested</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Money</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not a Candidate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prostho Exam Scheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prostho Exam Scheduled Call Back</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Refered Out to Doctor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Treatment Received Elsewhere</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Walked Out</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Dental_Condition__c</picklist>
+            <values>
+                <fullName>Bridge Failing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Crown%28s%29 Failing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dbl Denture</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Existing Implant Failing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lower Denture</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Multiple Teeth</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partial Denture</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Perio Disease</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Single Tooth</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Upper Denture</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Did_Patient_Apply_for_Financing__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Did_Patient_apply_before_CT_Scan__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Did_they_schedule_a_PE__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Fees_Quoted__c</picklist>
+            <values>
+                <fullName>%2420%2C000 to %2430%2C000 for one arch</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%243500 to %245600 Single</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%2440%2C000 to %2460%2C000 for full mouth</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%249800 %26 Up for Bridge</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Fees_Quoted_by_Call_Center__c</picklist>
+            <values>
+                <fullName>%2420%2C00 to %2430%2C000 for one arch</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%243500 to %245600 Single</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%2440%2C000 to %2460%2C000 for full mouth</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%244900 - %247900 anterior maxillary</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%249800 %26 Up for Bridge</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Quote Given</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Finance_Company__c</picklist>
+            <values>
+                <fullName>CareCredit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Citi</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MedChoice</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SpringStone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Financing_Result__c</picklist>
+            <values>
+                <fullName>Approved Full Amount</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Approved Greater or Equal to 50%25</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Approved Less Than 50%25</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Declined</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HCF Not Needed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Insufficient Info to Apply</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not willing to apply for credit in general</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Promissory Note</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Refused to Finance - Due to Credit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Refused to Finance - Due to High Payment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Refused to Finance - Due to Interest Rate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Refused to Finance - Needing Partner Consent</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Refused to Finance - Seeking own Financing</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Gender__c</picklist>
+            <values>
+                <fullName>Female</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Male</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Have_Family_Dentist__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>If_you_shared_it_with_someone_who__c</picklist>
+            <values>
+                <fullName>Another relative</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Children</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Did not share it</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Friend</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grandchildren</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Spouse</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Inbound_Call__c</picklist>
+            <values>
+                <fullName>Dental Inquiry</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Industry</picklist>
+            <values>
+                <fullName>Agriculture</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Apparel</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Banking</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Biotechnology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chemicals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Communications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Construction</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Consulting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Electronics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Energy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Engineering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Entertainment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Environmental</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Finance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Food %26 Beverage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Government</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Healthcare</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospitality</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Insurance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Machinery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manufacturing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not For Profit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recreation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Retail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Telecommunications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transportation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Utilities</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Interests__c</picklist>
+            <values>
+                <fullName>Attending Movies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dining Out</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Exercise</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Golf</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Music</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pets</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reading Books</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tennis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Travel</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Language_Spoken__c</picklist>
+            <values>
+                <fullName>Chinese</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>English</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Spanish</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Major_Medical_Problem__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Marketing_Agent__c</picklist>
+            <values>
+                <fullName>Janelle Gladstone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mary Helen Turner</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Marketing_Agent__pc</picklist>
+            <values>
+                <fullName>Janelle Gladstone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mary Helen Turner</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>MedChoice_Pending_Status__c</picklist>
+            <values>
+                <fullName>Approval Pending</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Declined</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Docs Faxed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waiting on Docs</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Motivation_Appearance__c</picklist>
+            <values>
+                <fullName>Being more attractive to members of the opposite sex</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Impressing friends%2Ffamily</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Increased self-confidence in social situations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Increased self-confidence in workplace</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Making a positive first impression</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Motivational_Reason__c</picklist>
+            <values>
+                <fullName>Appearance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health-Periodontal Disease</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Relationship Issue</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Special Occasion Upcoming</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Spouse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Urging of someone else %28Dr%2E%2C Friend%2C Etc%2E%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Not_Moving_Forward_with_Financing__c</picklist>
+            <values>
+                <fullName>Interest Rate to High</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Payment to High</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>O_B_Marketing_Email__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>O_B_Marketing_Email__pc</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Off_Site_Event__c</picklist>
+            <values>
+                <fullName>4 Points Sheraton Akron</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AUS Omni Hotel Downtown Oct %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AUS Renaissance February 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AUS Sun City TX Comm Association Jul %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AUS Westin Domain Jul %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Akron FourPoints Apr %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Anthem Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Arizona Golf Resort</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Atlanta Marriott Perimeter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Atlanta Westin Feb 10</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Austin Renaissance Apr %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Austin Renaissance Jan %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Austin Renaissance Nov 09</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bali Hai April 2009</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bali Hai Golf Club Apr %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bali Hai Golf Seminar Las Vegas</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bali Hai June %2709</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bali Hai Sept 09</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Barton Creek Austin</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CHI East Bank Club Aug%2E %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CHI Hyatt Schaumberg Aug%2E%27 10</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CHI Schaumburg Westin Chi NW Nov%2E %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CLE Doubletree February 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CLE LaCentre April 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CLV Airport Marriott Apr %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CLV Doubletree Hotel South Oct %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CLV Quail Hollow CC Jul %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CO Springs Broadmoor Dec %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>COS Cheyenne Mtn March %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chagrin Valley CC Cleveland</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cheyenne Mtn Resort CO Sprgs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chicago Art Institute</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chicago Art Institute May %2709</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chicago Doubletree</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chicago Renaissance Jan %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chicago Westin</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chicago Westin Jan %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cleveland Airport Marriott</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cleveland Marriott Feb%2E %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DAL Hilton Arlington Oct %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DAL Marriott Legacy March 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DAL Marriott Legacy Town Center Jul %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DAL doubletree Feb%2E %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DEN Cranbrook March 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DEN Dayton Place April 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DEN Doubletree Dec %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DEN JW Marriott February 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DEN Marriott West May %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DEN Omni Interlocken May %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DEN Springbrooke April 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DEN Westin Westminster February 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dallas Doubletree</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Denver Doubletree SE Sept%2E %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Denver Marriott DTC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Denver-Loveland Embassy Suites Sept%2E %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Entrada St%2E George</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FT Worth Omni Feb%2E %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FTL John Knox January 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FTL Marriott North Jan %2711</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ft%2E Lauderdale Hilton Apr %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ft%2E Lauderdale Renaissance Boca Raton Oct %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Glenmoor Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Greenbriar Hills CC St%2E Louis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HOU Houstonian Dec %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HOU Houstonian Hotel Aug %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HOU Woodlands Waterway Aug %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HOU Woodlands Waterway Hotel Dec %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hotel Arista Naperville</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>InterContinental Miami Mar %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>KC Hilton Airport Aug%2E %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>KC Sheraton Apr %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>KC Sheraton Feb%2E %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>KC Sheraton Overland Park</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>KC Sheraton Overland Park Nov%2E %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LAS Bali Hai April 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LVG Bali Hai Golf Club Sept %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LVG Bali Hai Jan %2711</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LVG Red Rock Casino Jun %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Las Vegas Anthem CC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MIA Doral Golf Resort May %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MIA Doral Silver Club February 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MIA Hilton Ft%2E Lauderdale Airport Jul %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MIA Hyatt Coral Gables Jan %2711</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MIA Hyatt Coral Gables May %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MIA Marriott Dadeland Jul %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MIA Palace Jan %2711</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MIA Palace Retirement Center Jul %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MIA Palace Retirement Ctr Oct %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MIA Trump International May %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MIA Westin Diplomat Resort Oct %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MINN Golf Club April 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MINN Hilton February 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MINN Hilton Minn-St%2E Paul Airport%2C Nov%2E %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Marriott Cleveland August 09</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OAK Embassy Suites February 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PHX Arizona Grand Resort Aug %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PHX Crowne Plaza May %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PHX Glendale Renaissance March %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PHX JW Marriott Camelback Inn Sept %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PHX Phoenician January 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PHX Sun City January 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>POR Crowne Plaza May %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>POR Embassy Suites Downtown Sept %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phoenician off-site</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phoenix Arizona Golf Resort April 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phoenix Fountain Hills April 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phoenix Fountain Hills February 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phoenix Renaissance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phoenix Renaissance Glendale April 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phoenix Sun City February 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renaissance Hotel Austin</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ritz Carlton DC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rockville Bethesda Marriott Nov%2E %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rockville Hilton March 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rolling Green Country Club</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SAC Hilton March %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SAC Marriott March 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SAC Marriott Rancho Cordova Jun %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SAC Marriott Rancho Cordova Sept %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SJO Oakland Claremont Resort Jul %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SJO Sainte Claire il Fornaio Oct %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SJO Santa Clara Marriott Jul %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SJO Westin San Francisco Airport Oct %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SLC Grand America May %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SLC Marriott Downtown Oct %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SLC Thanksgiving Point Aug %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SNA Hilton San Antonio Airport Oct %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>STL Marriott West Jan %2711</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>STU Marriott West Feb%2E %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sacramento Hilton</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Salt Lake City Radisson February 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>San Antonio Grand Hyatt February 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>San Francisco InterContinental April 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>San Jose DoubleTree April 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>San Jose Hyatt Regency February 2011</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>St%2E Louis Hilton Frontenac Aug%2E %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>St%2E Louis Marriott West</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TUC Hilton El Conquistador Jan %2711</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Vienna Sheraton Premiere Nov%2E %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WDC Gaylord March %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WDC Ritz Carlton March %2710</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WDC Ritz Carlton March 2011</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Ownership</picklist>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Private</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Public</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Subsidiary</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Patient_Financing__c</picklist>
+            <values>
+                <fullName>401K</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cash</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Credit Cards</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family Member</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HELOC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Stocks</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Periodontal_Gum_Disease__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Pre_Screen__c</picklist>
+            <values>
+                <fullName>Blue %28No Hit%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Green</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Checked</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PO Box</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Red</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Website Down-No Prescreen</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yellow</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Pregnant__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Preliminary_Treatment_Plan__c</picklist>
+            <values>
+                <fullName>AO4 Edentulous Lower</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AO4 Edentulous Upper</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AO4 Lower</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AO4 Upper</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Custom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DBL AO4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DBL AO4 Edentulous</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lower Denture</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lower Overdenture</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Multiple Implant Bridge</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Multiple Implants</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>None Given</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phased Barless Interim Double AO4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phased Barless Interim Lower AO4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phased Barless Interim Upper AO4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Single Implant</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transitional DBL AO4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Upper Denture</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Upper Overdenture</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Questions_asked_about_the_procedure__c</picklist>
+            <values>
+                <fullName>Cost</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Longevity</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>None of the above</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pain</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Time</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Rating</picklist>
+            <values>
+                <fullName>1 - Consider a no-show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2 - Very weak show possibility</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3 - On the fence get verbal confirmation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5 - Will absolutely show</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Reason_for_not_applying__c</picklist>
+            <values>
+                <fullName>Interest too high</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not willing to apply w%2Fo partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other%3A provide explanation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Payment too high</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unwilling to use credit regardless</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Referral_Source_del__c</picklist>
+            <values>
+                <fullName>Billboard</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Direct Mail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dr%2E Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Magazine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Newspaper</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radio</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VIP Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Website</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yellow Pages</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Referral_Track__c</picklist>
+            <values>
+                <fullName>Track I</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Track II</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Reminder_Call__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Reminder_Text__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Requested_ICat_on_non_start__c</picklist>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Research_Done__c</picklist>
+            <values>
+                <fullName>None</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Online Research</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Read Book%2FMagazine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Read the Smiling Lessons book</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Spoke to Dr%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Spoke to friends%2Ffamily</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Select_all_the_financial_options_covered__c</picklist>
+            <values>
+                <fullName>Family</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HCF</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prom Note</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Savings</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Taking_Bisphosphonates__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Tested_CHOICE_color__c</picklist>
+            <values>
+                <fullName>BLUE %2F Steady Relater</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Did not Complete Test</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GREEN %2F Dominant</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RED %2F Influencer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>YELLOW %2F Cautious</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Trigger_Referral_Source__c</picklist>
+            <values>
+                <fullName>Billboard</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Direct Mail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dr%2E Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Flyer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Friend%2FRelative</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Magazine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mary Ann</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Newspaper</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Patient Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radio</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tony Curtis email response</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Vegas Outside</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web to Lead</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Website</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yellow Pages</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Trumped_CHOICE_color__c</picklist>
+            <values>
+                <fullName>BLUE %2F Steady Relater</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GREEN %2F Dominant</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RED %2F Influencer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>YELLOW %2F Cautious</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Analyst</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Competitor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Customer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Integrator</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Investor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Press</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prospect</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reseller</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Was_PPF_offered__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Was_pricing_a_barrier_to_move_forward__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>What_did_you_do_with_your_image__c</picklist>
+            <values>
+                <fullName>Hid it %2F put it away</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hung on mirror</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hung on refrigerator</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Kept in folder%2Fnothing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shared with someone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>What_financial_resources_are_they_using__c</picklist>
+            <values>
+                <fullName>401K</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family%2FFriend Support</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HCF</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prom Note</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Savings</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>When_do_you_plan_to_move_forward__c</picklist>
+            <values>
+                <fullName>1 year or more</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1-3 Months</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3-6 Months</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6-12 Months</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Never</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Within 1 month</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Why_did_they_not_move_forward__c</picklist>
+            <values>
+                <fullName>Declined HCF</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Int Rates too high to use HCF</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Needs to discuss with partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Savings</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Interested</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not a candidate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Payment too high to use HCF</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Plans to Save %24 and come back</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Why_not_start__c</picklist>
+            <values>
+                <fullName>Concern about treatment plan</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Interest too high on HCF</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Needs to discuss with partner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Payment too high on HCF</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Price too high %28willing to proceed%2C but cannot afford%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wants other quotes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <sharingModel>Private</sharingModel>
+</CustomObject>

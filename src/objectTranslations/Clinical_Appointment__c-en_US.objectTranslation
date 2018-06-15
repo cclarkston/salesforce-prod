@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Clinical Appointment</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Clinical Appointments</value>
+    </caseValues>
+    <fields>
+        <label><!-- Appointment Description --></label>
+        <name>Appointment_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Appointment Filter --></label>
+        <name>Appointment_Filter__c</name>
+        <picklistValues>
+            <masterLabel>Misc</masterLabel>
+            <translation><!-- Misc --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prosth</masterLabel>
+            <translation><!-- Prosth --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Surgical</masterLabel>
+            <translation><!-- Surgical --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Arch Count --></label>
+        <name>Arch_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Border Color --></label>
+        <name>Border_Color__c</name>
+    </fields>
+    <fields>
+        <label><!-- Calendar Color --></label>
+        <name>Calendar_Color__c</name>
+    </fields>
+    <fields>
+        <label><!-- Center Information --></label>
+        <name>Center_Information__c</name>
+        <relationshipLabel><!-- Clinical Appointments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Clinical Notes Form --></label>
+        <name>Clinical_Notes_Form__c</name>
+        <picklistValues>
+            <masterLabel>Conversion Notes Form</masterLabel>
+            <translation><!-- Conversion Notes Form --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Final Notes Form</masterLabel>
+            <translation><!-- Final Notes Form --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>General Repair Notes</masterLabel>
+            <translation><!-- General Repair Notes --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Interim Delivery Notes Form</masterLabel>
+            <translation><!-- Interim Delivery Notes Form --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Jig Notes Form</masterLabel>
+            <translation><!-- Jig Notes Form --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Post Op Notes Form</masterLabel>
+            <translation><!-- Post Op Notes Form --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prosth Exam Form</masterLabel>
+            <translation><!-- Prosth Exam Form --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Redeliver Notes</masterLabel>
+            <translation><!-- Redeliver Notes --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Redo Surgery Form</masterLabel>
+            <translation><!-- Redo Surgery Form --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Repair Work Notes</masterLabel>
+            <translation><!-- Repair Work Notes --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rework Repair Notes</masterLabel>
+            <translation><!-- Rework Repair Notes --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Surgical Notes Form</masterLabel>
+            <translation><!-- Surgical Notes Form --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Try In Notes Form</masterLabel>
+            <translation><!-- Try In Notes Form --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Doctor Time Color --></label>
+        <name>Doctor_Time_Color__c</name>
+    </fields>
+    <fields>
+        <label><!-- Highlight Text Color --></label>
+        <name>Highlight_Text_Color__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lab Days Before --></label>
+        <name>Lab_Days_Before__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lab Time --></label>
+        <name>Lab_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Padding Time --></label>
+        <name>Padding_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Text Color --></label>
+        <name>Text_Color__c</name>
+    </fields>
+    <fields>
+        <label><!-- isFinal Delivery --></label>
+        <name>isFinal_Delivery__c</name>
+    </fields>
+    <fields>
+        <label><!-- isProsth Exam --></label>
+        <name>isProsth_Exam__c</name>
+    </fields>
+    <fields>
+        <label><!-- isRepair --></label>
+        <name>isRepair__c</name>
+    </fields>
+    <fields>
+        <label><!-- isSurgery --></label>
+        <name>isSurgery__c</name>
+    </fields>
+    <fields>
+        <label><!-- isactive --></label>
+        <name>isactive__c</name>
+    </fields>
+    <layouts>
+        <layout>Clinical Appointment Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

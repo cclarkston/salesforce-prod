@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_65160876</developerName>
+        <masterLabel>Not Scheduled</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Activity.Outcome__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>VM - LM</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>VM - no message</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>VM - full</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>LM - 3rd Party</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Busy/No Answer</sourceValue>
+            </sourceValues>
+            <value>Voicemail</value>
+        </values>
+        <values>
+            <value>Contacted</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Non-Sales Call</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>No Call Elected</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Wrong Number</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Disconnect/Not in Service</sourceValue>
+            </sourceValues>
+            <value>Non-Sales</value>
+        </values>
+        <values>
+            <value>Cancelled</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Consult Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Consult Rescheduled</sourceValue>
+            </sourceValues>
+            <value>Scheduled</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Not Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Refused Reschedule</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Consult Cancelled</sourceValue>
+            </sourceValues>
+            <value>Not Scheduled</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>PPT will call back</sourceValue>
+            </sourceValues>
+            <value>PPT Will Call Back</value>
+        </values>
+    </buckets>
+    <filter>
+        <criteriaItems>
+            <column>Activity.Activity_Type__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Outbound Call</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>ASSIGNED</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Alexandra Chavez,Devonne Espinoza,Danny Herrera,Eowyn Suchan,Marianne Mills,Sonja Villalobos,Stan Morr,Travis Quest,Vanessa Soderstrom</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_65160876</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>ASSIGNED</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>OB- Patient Will Call Back</name>
+    <params>
+        <name>closed</name>
+        <value>closed</value>
+    </params>
+    <params>
+        <name>type</name>
+        <value>te</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadActivity</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>DUE_DATE</dateColumn>
+        <endDate>2013-03-19</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2013-03-01</startDate>
+    </timeFrameFilter>
+</Report>

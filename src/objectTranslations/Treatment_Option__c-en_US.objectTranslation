@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Treatment Option</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Treatment Options</value>
+    </caseValues>
+    <fields>
+        <label><!-- Arch count --></label>
+        <name>Arch_count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Benefits --></label>
+        <name>Benefits__c</name>
+    </fields>
+    <fields>
+        <label><!-- Category --></label>
+        <name>Category__c</name>
+        <picklistValues>
+            <masterLabel>Arch Upgrade</masterLabel>
+            <translation><!-- Arch Upgrade --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phased</masterLabel>
+            <translation><!-- Phased --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Standard</masterLabel>
+            <translation><!-- Standard --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Considerations --></label>
+        <name>Considerations__c</name>
+    </fields>
+    <fields>
+        <label><!-- Copy --></label>
+        <name>Copy__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lower Tag --></label>
+        <name>Lower_Tag__c</name>
+        <picklistValues>
+            <masterLabel>AO4</masterLabel>
+            <translation><!-- AO4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Arch Upgrade</masterLabel>
+            <translation><!-- Arch Upgrade --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denture</masterLabel>
+            <translation><!-- Denture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Implant Bridge</masterLabel>
+            <translation><!-- Implant Bridge --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Multiple</masterLabel>
+            <translation><!-- Multiple --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phased</masterLabel>
+            <translation><!-- Phased --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unitary</masterLabel>
+            <translation><!-- Unitary --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Zirconia</masterLabel>
+            <translation><!-- Zirconia --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Old Treatment Map --></label>
+        <name>Old_Treatment_Map__c</name>
+        <picklistValues>
+            <masterLabel>AO4 Edentulous Lower</masterLabel>
+            <translation><!-- AO4 Edentulous Lower --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AO4 Edentulous Upper</masterLabel>
+            <translation><!-- AO4 Edentulous Upper --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AO4 Lower</masterLabel>
+            <translation><!-- AO4 Lower --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AO4 Upper</masterLabel>
+            <translation><!-- AO4 Upper --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Custom</masterLabel>
+            <translation><!-- Custom --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DBL AO4</masterLabel>
+            <translation><!-- DBL AO4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DBL AO4 Edentulous</masterLabel>
+            <translation><!-- DBL AO4 Edentulous --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lower Denture</masterLabel>
+            <translation><!-- Lower Denture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lower Overdenture</masterLabel>
+            <translation><!-- Lower Overdenture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Multiple Implant Bridge</masterLabel>
+            <translation><!-- Multiple Implant Bridge --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Multiple Implants</masterLabel>
+            <translation><!-- Multiple Implants --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>None Given</masterLabel>
+            <translation><!-- None Given --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phased Barless Interim Double AO4</masterLabel>
+            <translation><!-- Phased Barless Interim Double AO4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phased Barless Interim Lower AO4</masterLabel>
+            <translation><!-- Phased Barless Interim Lower AO4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phased Barless Interim Upper AO4</masterLabel>
+            <translation><!-- Phased Barless Interim Upper AO4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Single Implant</masterLabel>
+            <translation><!-- Single Implant --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transitional DBL AO4</masterLabel>
+            <translation><!-- Transitional DBL AO4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Upper Denture</masterLabel>
+            <translation><!-- Upper Denture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Upper Overdenture</masterLabel>
+            <translation><!-- Upper Overdenture --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Start Value --></label>
+        <name>Start_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Timeline --></label>
+        <name>Timeline__c</name>
+    </fields>
+    <fields>
+        <label><!-- Treatment Class --></label>
+        <name>Treatment_Class__c</name>
+        <picklistValues>
+            <masterLabel>AO4 Arch Complex</masterLabel>
+            <translation><!-- AO4 Arch Complex --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AO4 Arch Simple</masterLabel>
+            <translation><!-- AO4 Arch Simple --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Arch Upgrade</masterLabel>
+            <translation><!-- Arch Upgrade --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Double AO4 Arch</masterLabel>
+            <translation><!-- Double AO4 Arch --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Non-Arch Treatment</masterLabel>
+            <translation><!-- Non-Arch Treatment --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Treatment Grade --></label>
+        <name>Treatment_Grade__c</name>
+        <picklistValues>
+            <masterLabel>Best</masterLabel>
+            <translation><!-- Best --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Better</masterLabel>
+            <translation><!-- Better --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Good</masterLabel>
+            <translation><!-- Good --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Treatment Type --></label>
+        <name>Treatment_Type__c</name>
+        <picklistValues>
+            <masterLabel>AO4 Arch</masterLabel>
+            <translation><!-- AO4 Arch --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AO4 Arch - Bridge</masterLabel>
+            <translation><!-- AO4 Arch - Bridge --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AO4 Arch - Denture</masterLabel>
+            <translation><!-- AO4 Arch - Denture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AO4 Arch - Multiple</masterLabel>
+            <translation><!-- AO4 Arch - Multiple --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AO4 Arch - Unitary</masterLabel>
+            <translation><!-- AO4 Arch - Unitary --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Arch Upgrade: Acrylic</masterLabel>
+            <translation><!-- Arch Upgrade: Acrylic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Arch Upgrade: Zirconia</masterLabel>
+            <translation><!-- Arch Upgrade: Zirconia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bridge</masterLabel>
+            <translation><!-- Bridge --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bridge - Denture</masterLabel>
+            <translation><!-- Bridge - Denture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bridge - Double</masterLabel>
+            <translation><!-- Bridge - Double --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bridge - Unitary</masterLabel>
+            <translation><!-- Bridge - Unitary --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Crystal Arch</masterLabel>
+            <translation><!-- Crystal Arch --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Crystal Arch - AO4</masterLabel>
+            <translation><!-- Crystal Arch - AO4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Crystal Arch - Bridge</masterLabel>
+            <translation><!-- Crystal Arch - Bridge --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Crystal Arch - Denture</masterLabel>
+            <translation><!-- Crystal Arch - Denture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Crystal Arch - Multiple</masterLabel>
+            <translation><!-- Crystal Arch - Multiple --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Crystal Arch - Phased Arch</masterLabel>
+            <translation><!-- Crystal Arch - Phased Arch --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Crystal Arch - Unitary</masterLabel>
+            <translation><!-- Crystal Arch - Unitary --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denture</masterLabel>
+            <translation><!-- Denture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denture - Double</masterLabel>
+            <translation><!-- Denture - Double --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Double AO4</masterLabel>
+            <translation><!-- Double AO4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Double Arch - Crystal</masterLabel>
+            <translation><!-- Double Arch - Crystal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Double Arch - Crystal/Zirconia</masterLabel>
+            <translation><!-- Double Arch - Crystal/Zirconia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Double Arch - Zirconia</masterLabel>
+            <translation><!-- Double Arch - Zirconia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Multiple</masterLabel>
+            <translation><!-- Multiple --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Multiple - Bridge</masterLabel>
+            <translation><!-- Multiple - Bridge --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Multiple - Denture</masterLabel>
+            <translation><!-- Multiple - Denture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Multiple - Double</masterLabel>
+            <translation><!-- Multiple - Double --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Multiple - Unitary</masterLabel>
+            <translation><!-- Multiple - Unitary --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phased Arch</masterLabel>
+            <translation><!-- Phased Arch --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phased Arch - AO4</masterLabel>
+            <translation><!-- Phased Arch - AO4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phased Arch - Bridge</masterLabel>
+            <translation><!-- Phased Arch - Bridge --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phased Arch - Denture</masterLabel>
+            <translation><!-- Phased Arch - Denture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phased Arch - Double</masterLabel>
+            <translation><!-- Phased Arch - Double --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phased Arch - Multiple</masterLabel>
+            <translation><!-- Phased Arch - Multiple --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phased Arch - Unitary</masterLabel>
+            <translation><!-- Phased Arch - Unitary --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unitary</masterLabel>
+            <translation><!-- Unitary --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unitary - Denture</masterLabel>
+            <translation><!-- Unitary - Denture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unitary - Double</masterLabel>
+            <translation><!-- Unitary - Double --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Zirconia Arch</masterLabel>
+            <translation><!-- Zirconia Arch --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Zirconia Arch - AO4</masterLabel>
+            <translation><!-- Zirconia Arch - AO4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Zirconia Arch - Bridge</masterLabel>
+            <translation><!-- Zirconia Arch - Bridge --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Zirconia Arch - Denture</masterLabel>
+            <translation><!-- Zirconia Arch - Denture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Zirconia Arch - Multiples</masterLabel>
+            <translation><!-- Zirconia Arch - Multiples --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Zirconia Arch - Phased Arch</masterLabel>
+            <translation><!-- Zirconia Arch - Phased Arch --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Zirconia Arch - Unitary</masterLabel>
+            <translation><!-- Zirconia Arch - Unitary --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Upper Tag --></label>
+        <name>Upper_Tag__c</name>
+        <picklistValues>
+            <masterLabel>AO4</masterLabel>
+            <translation><!-- AO4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Arch Upgrade</masterLabel>
+            <translation><!-- Arch Upgrade --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denture</masterLabel>
+            <translation><!-- Denture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Implant Bridge</masterLabel>
+            <translation><!-- Implant Bridge --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Multiple</masterLabel>
+            <translation><!-- Multiple --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phased</masterLabel>
+            <translation><!-- Phased --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unitary</masterLabel>
+            <translation><!-- Unitary --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Zirconia</masterLabel>
+            <translation><!-- Zirconia --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Treatment Option Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

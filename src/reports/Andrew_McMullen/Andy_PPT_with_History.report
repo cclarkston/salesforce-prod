@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Lead$Name</field>
+    </columns>
+    <columns>
+        <field>Lead.Apt_Histories__r$Name</field>
+    </columns>
+    <columns>
+        <field>Lead$Contact_Agency__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Apt_Histories__r$Action__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Apt_Histories__r$Notes__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Lead$Contact_Agency__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Infocision</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Andy - PPT with History</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Apt_History_w_Lead__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead$CreatedDate</dateColumn>
+        <interval>INTERVAL_CURRENT</interval>
+    </timeFrameFilter>
+</Report>

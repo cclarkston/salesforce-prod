@@ -1,0 +1,110 @@
+<apex:page controller="ctrl_treatment_plan_change" action="{!new_change_request}">
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+<style>
+  span.section_line {
+    display:block;
+    padding-bottom:8px;
+  }
+  
+  hr.style-fade {
+    border: 0;
+    height: 3px;
+    width:900px;
+    display:block;  
+    background-image: -webkit-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.95), rgba(80,180,230,0)); 
+    background-image:    -moz-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.95), rgba(80,180,230,0)); 
+    background-image:     -ms-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.95), rgba(80,180,230,0)); 
+    background-image:      -o-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.95), rgba(80,180,230,0)); 
+  }
+  
+  span.section_header {
+    padding-left:20px;
+    display:inline-block;
+    width:150px;
+    font-weight:bold;
+  }
+  
+  span.blank {
+    font-style:italic;
+  }
+</style>
+
+<apex:form >
+<apex:actionFunction name="select_plan" action="{!switch_treatment_plan}" reRender="main_holder">   
+  <apex:param name="cpid" value="" />
+</apex:actionFunction>
+
+<apex:outputpanel id="main_holder">
+  <span style="padding-top:1em;display:inline-block;width:500px;border-bottom:2px solid black;color:#5789AE;font-weight:bold;font-size:12pt;padding-left:20px;margin-bottom:1em;">Treatment Plan - Change Request</span>
+  <span class="section_line">
+    <span class="section_header">Prosth Exam : </span><apex:outputfield value="{!tp.Opportunity__c}" />
+  </span>
+  <span class="section_line">
+    <span class="section_header">Treatment Option : </span><apex:inputfield value="{!change_request.New_Treatment_Option__c}" />
+  </span>
+  <span class="section_line">
+    <span class="section_header">Initial Cost : </span><apex:inputfield value="{!change_request.New_Initial_Cost__c}" />
+  </span>
+  <span class="section_line">
+    <span class="section_header">Future Cost : </span><apex:inputfield value="{!change_request.New_Treatment_Amount__c}" />
+  </span>
+  <span class="section_line">
+    <span class="section_header">Treatment Stage : </span><apex:inputfield value="{!change_request.Treatment_Stage__c}" />
+  </span>
+  <span class="section_line">
+    <span class="section_header">Reason for Change : </span><apex:inputfield value="{!change_request.Reason_for_Change__c}" />
+  </span>  
+  <span class="section_line">
+    <span class="section_header" style="vertical-align:top;">Reason Notes : </span><apex:inputfield value="{!change_request.Reason_Notes__c}" style="width:350px;"/>
+  </span>
+  <span class="section_line">
+    <span class="section_header">Upgrade Doctor : </span>
+      <apex:selectList value="{!Change_request.Upgrade_Doctor__c}" multiselect="false" size="1">
+        <apex:selectOptions value="{!doctor_list}"></apex:selectoptions>
+      </apex:selectList> 
+  </span>
+<apex:messages style="color:red;"/>
+
+<apex:outputpanel rendered="{!display_save}">
+<span style="display:inline-block;width:25px;">&nbsp;</span>
+<apex:commandButton action="{!save_changes}" value="Save Changes" reRender="main_holder"/>
+</apex:outputpanel>
+
+<br /><br /><apex:outputText escape="false" value="{!warning_msg}" /><br /><br />
+
+<span style="font-size:10pt;font-weight:bold;padding-left:60px;">Treatment Plans offered at Consult</span><br />
+    <hr class="style-fade" />
+    <div style="padding-left:50px;">
+    <table class="accs_details" style="width:800px;">
+      <apex:variable var="rowclassname" value="accs" />
+      <apex:repeat value="{!consult_plans}" var="tplan" >
+        <tr class="{!rowclassname}">
+        <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+          <td width="25%"><apex:outputfield value="{!tplan.treatment_option__r.name}" /></td>
+          <td width="15%"><apex:outputfield value="{!tplan.Total_Cost__c}" /></td>
+          <td width="20%"><apex:outputpanel rendered="{!tplan.Recommended__c}" style="color:blue;">Recommended</apex:outputpanel><apex:outputpanel rendered="{!if(tplan.Recommended__c,false,true)}" style="color:red;">Not Recommended</apex:outputpanel></td>
+          <td width="25%"><apex:outputfield value="{!tplan.clearchoice_doctor__r.name}" /></td>
+          <td width="15%"><apex:commandLink styleclass="btn" style="text-decoration:none;" value="Switch to Plan"  onclick="select_plan('{!tplan.id}');return false;" /></td>
+        </tr>
+      </apex:repeat>
+    </table></div>
+
+</apex:outputpanel>
+
+</apex:form>
+</apex:page>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Action_Plan__c</fullName>
+        <externalId>false</externalId>
+        <label>Action Plan</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Internal Role Plays</fullName>
+                    <default>false</default>
+                    <label>Internal Role Plays</label>
+                </value>
+                <value>
+                    <fullName>RSM/RBD Role Plays</fullName>
+                    <default>false</default>
+                    <label>RSM/RBD Role Plays</label>
+                </value>
+                <value>
+                    <fullName>Coaching Others</fullName>
+                    <default>false</default>
+                    <label>Coaching Others</label>
+                </value>
+                <value>
+                    <fullName>Being Coached</fullName>
+                    <default>false</default>
+                    <label>Being Coached</label>
+                </value>
+                <value>
+                    <fullName>Role Play and debrief w/Doctor</fullName>
+                    <default>false</default>
+                    <label>Role Play and debrief w/Doctor</label>
+                </value>
+                <value>
+                    <fullName>Role Play debrief w/partner PEC</fullName>
+                    <default>false</default>
+                    <label>Role Play debrief w/partner PEC</label>
+                </value>
+                <value>
+                    <fullName>Role Play debrief e/FOA</fullName>
+                    <default>false</default>
+                    <label>Role Play debrief e/FOA</label>
+                </value>
+                <value>
+                    <fullName>Role Play debrief w/RSM</fullName>
+                    <default>false</default>
+                    <label>Role Play debrief w/RSM</label>
+                </value>
+                <value>
+                    <fullName>Watch online Rainmaker videos and debrief</fullName>
+                    <default>false</default>
+                    <label>Watch online Rainmaker videos and debrief</label>
+                </value>
+                <value>
+                    <fullName>Build the bridge activity</fullName>
+                    <default>false</default>
+                    <label>Build the bridge activity</label>
+                </value>
+                <value>
+                    <fullName>Review Rainmaker manual</fullName>
+                    <default>false</default>
+                    <label>Review Rainmaker manual</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Other_Action_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Other Action Type</label>
+        <length>200</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Weekly_Huddle__c</fullName>
+        <externalId>false</externalId>
+        <label>Weekly_Huddle</label>
+        <referenceTo>Weekly_Huddle__c</referenceTo>
+        <relationshipLabel>Weekly Huddle Learning Actions</relationshipLabel>
+        <relationshipName>Weekly_Huddle_Learning_Actions</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <label>Weekly Huddle Learning Action</label>
+    <nameField>
+        <displayFormat>WHLN-{0000}</displayFormat>
+        <label>Weekly Huddle Learning Action Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Weekly Huddle Learning Actions</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

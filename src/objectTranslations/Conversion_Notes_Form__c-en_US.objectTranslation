@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Conversion Notes Form</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Conversion Notes Forms</value>
+    </caseValues>
+    <fields>
+        <label><!-- AP Spread --></label>
+        <name>AP_Spread__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Conversion Notes Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Cantilever Length --></label>
+        <name>Cantilever_Length__c</name>
+    </fields>
+    <fields>
+        <label><!-- Clinical Apt Calendar --></label>
+        <name>Clinical_Apt_Calendar__c</name>
+        <relationshipLabel><!-- Conversion Notes Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Clinical Note Instance --></label>
+        <name>Clinical_Note_Instance__c</name>
+        <relationshipLabel><!-- Conversion Notes Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Confirmation Radiography --></label>
+        <name>Confirmation_Radiography__c</name>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pano</masterLabel>
+            <translation><!-- Pano --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Periapical</masterLabel>
+            <translation><!-- Periapical --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>iCat</masterLabel>
+            <translation><!-- iCat --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Implant Tooth Position --></label>
+        <name>Implant_Tooth_Position__c</name>
+    </fields>
+    <fields>
+        <label><!-- IsActive --></label>
+        <name>IsActive__c</name>
+    </fields>
+    <fields>
+        <label><!-- LL Cantilever Length --></label>
+        <name>LL_Cantilever_Length__c</name>
+    </fields>
+    <fields>
+        <label><!-- LR Cantilever Length --></label>
+        <name>LR_Cantilever_Length__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lower AP Spread --></label>
+        <name>Lower_AP_Spread__c</name>
+    </fields>
+    <fields>
+        <label><!-- UL Cantilever Length --></label>
+        <name>UL_Cantilever_Length__c</name>
+    </fields>
+    <fields>
+        <label><!-- UR Cantilever Length --></label>
+        <name>UR_Cantilever_Length__c</name>
+    </fields>
+    <fields>
+        <label><!-- Upper AP Spread --></label>
+        <name>Upper_AP_Spread__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,599 @@
+<apex:page controller="ctrl_opsdashboard_range" readonly="true" sidebar="false" >
+    <apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+    <apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+
+    <style type="text/css" media="print">
+      div.bPageHeader {
+        display:none;
+      }
+
+      p.form_holder {
+        display:none;
+      }
+    </style>
+
+    <script>
+        function use_fancy_cursor(t) {
+          document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+          t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+        }
+
+        function default_cursor(t) {
+          document.body.style.cursor = 'default';
+          t.style.cursor='default';
+        }
+    </script>
+
+    <style>
+      <!--  div#main_holder {
+        background-color:#CECE9D;
+      }-->
+      a {
+        text-decoration:none;
+      }
+
+      h1.report_header {
+        text-align:center;
+        font-size:14pt;
+        font-weight:bold;
+        display:block;
+        padding-bottom:1em;
+        padding-top:5px;
+        color:blue;
+      }
+
+      table.accs_details {
+        font-family:georgia,arial;
+      }
+
+      table.accs_details tr.control {
+        font-weight:bold;
+        font-size:12pt;
+        text-align:center;
+      }
+
+      table.accs_details tr.control td {
+        border-bottom:1px solid black;
+        empty-cells:hide;
+      }
+
+      table.accs_details tr.subhead {
+        font-weight:bold;
+        font-size:12pt;
+      }
+
+      table.accs_details tr.subhead td {
+        text-align:left;
+        border-bottom:1px dotted black;
+        padding-top:1em;
+        color:blue;
+        padding-left:10px;
+        empty-cells:hide;
+      }
+
+      table.accs_details tr.accs {
+
+      }
+
+      table.accs_details tr.accs td {
+        text-align:left;
+        line-height:20px;
+        font-size:10pt;
+        border-bottom:1px dashed #5789AE;
+        empty-cells:hide;
+      }
+
+      table.accs_details tr.accs td.indent {
+        padding-left:25px;
+        font-weight:bold;
+        font-style:italic;
+        empty-cells:hide;
+      }
+
+      table.accs_details tr.accs td.right {
+         text-align:right;
+         padding-right:5px;
+         empty-cells:hide;
+      }
+
+      table.accs_details tr.accs_b {
+        background-color:#CECE9D;
+      }
+
+      table.accs_details tr.accs_b td {
+        text-align:left;
+        line-height:20px;
+        font-size:10pt;
+        border-bottom:1px dashed #5789AE;
+        empty-cells:hide;
+      }
+
+      table.accs_details tr.accs_b td.indent {
+        padding-left:25px;
+        font-weight:bold;
+        font-style:italic;
+        empty-cells:hide;
+      }
+
+      table.accs_details tr.accs_b td.right {
+        text-align:right;
+        padding-right:5px;
+        empty-cells:hide;
+      }
+
+      table.accs_details tr.footer {
+        background-color:#A8A8A8;
+        font-weight:bold;
+        font-size:12pt;
+      }
+
+      table.accs_details tr.footer td {
+        color:white;
+        border-top:2px solid black;
+        border-bottom:2px solid black;
+        empty-cells:hide;
+        text-align:left;
+      }
+
+      table.accs_details tr.footer td.right {
+        text-align:right;
+        padding-right:5px
+        empty-cells:hide;
+      }
+
+      table.accs_details tr.footer td.indent {
+        padding-left:25px;
+        empty-cells:hide;
+      }
+
+      form.inline_form {
+        display:inline-block;
+        padding:0;
+        margins:0;
+      }
+    </style>
+
+    <!-- Alon's version -->
+    <style>
+        table.main {
+            width: 500px;
+        }
+        table.main td {
+            padding: 5px;
+        }
+        table.large-font {
+            font-size: x-large;
+        }
+        table.striped tr:nth-child(odd){
+            background-color: aliceblue;
+        }
+        table.hover {
+            border-collapse: collapse;
+        }
+        table.hover tr:hover {
+            background-color: lightgray;
+        }
+        tr.subheading, tr.subheading:hover {
+            background-color: cornflowerblue !important;
+            font-size: xx-large;
+        }
+        tr.subheading td {
+            color: white;
+            text-align: center;
+        }
+        tr.important {
+            /*Styling to highlight information in a particular row*/
+            font-weight: bold;
+        }
+        td {
+            text-align: right;
+        }
+        td:first-child {
+            text-align: left;
+            text-indent: 1em;
+        }
+        tr.subheading {
+            text-align: center;
+            font-weight: bold;
+            border-top: 1em solid white;
+            border-bottom: .5em solid white;
+        }
+        tr.subheading td {
+            text-indent: 0;
+        }
+        tr.space-after {
+            border-bottom: 1em solid white;
+        }
+        td a {
+            text-decoration: underline;
+        }
+    </style>
+
+    <div align="center">
+        <p class="form_holder">
+            <apex:form styleClass="inline_form"  Style="display:inline;padding:0;margins:0;">
+                <apex:commandButton value="User" rendered="{!display_user_button}" action="{!display_user}" style="margin-right:10px;" />
+                <apex:commandButton value="Center" rendered="{!display_center_button}"  action="{!display_center}" style="margin-right:10px;" />
+                <apex:commandButton value="All" rendered="{!display_all_button}"  action="{!display_all}" style="margin-right:10px;" />
+
+                <apex:outputPanel rendered="{!display_ca}" id="ca_admin" styleClass="admin_holder">
+                    <span style="font-weight:bold;padding-left:10px;">View Info as : </span>
+                    <apex:selectList value="{!display_pec}" multiselect="false" size="1">
+                        <apex:selectOptions value="{!CAPEClist}"></apex:selectoptions>
+                    </apex:selectList>
+                    <apex:commandButton value="Display Data" action="{!view_auser}" style="margin-left:10px;"/>
+
+                    <span style="font-weight:bold;padding-left:10px;">View Center : </span>
+                    <apex:selectList value="{!display_center}" multiselect="false" size="1">
+                        <apex:selectOptions value="{!CACenterlist}"></apex:selectoptions>
+                    </apex:selectList>
+                    <apex:commandButton value="Display Data" action="{!view_acenter}" style="margin-left:10px;"/>
+                </apex:outputPanel>
+
+                <apex:outputPanel rendered="{!display_admin}" id="admin" styleClass="admin_holder">
+                    <span style="font-weight:bold;padding-left:10px;">View Info as : </span>
+                    <apex:selectList value="{!display_pec}" multiselect="false" size="1">
+                        <apex:selectOptions value="{!PEClist}"></apex:selectoptions>
+                    </apex:selectList>
+                    <apex:commandButton value="Display Data" action="{!view_auser}" style="margin-left:10px;"/>
+
+                    <span style="font-weight:bold;padding-left:10px;">View Center Info : </span>
+                    <apex:selectList value="{!display_center}" multiselect="false" size="1">
+                        <apex:selectOptions value="{!Centerlist}"></apex:selectoptions>
+                    </apex:selectList>
+                    <apex:commandButton value="Display Data" action="{!view_acenter}" style="margin-left:10px;"/>
+
+                    <span style="font-weight:bold;padding-left:10px;">View Region : </span>
+                    <apex:selectList value="{!display_region}" multiselect="false" size="1">
+                        <apex:selectOptions value="{!Regionlist}"></apex:selectoptions>
+                    </apex:selectList>
+                    <apex:commandButton value="Display Region" action="{!view_aregion}" style="margin-left:10px;"/><br /><br />                    
+                </apex:outputPanel>
+                
+                <p style="border-top:1px dashed #5789ae;border-bottom:1px dashed #5789ae;padding-top:5px;padding-bottom:3px;width:800px;">
+                  <span style="width:100px;display:inline-block;font-weight:bold;">Start Date : </span><apex:inputfield value="{!sdate_note.Note_Date__c}" onchange="" />
+                  <span style="width:10px;display:inline-block;">&nbsp;</span>
+                  <span style="width:100px;display:inline-block;font-weight:bold;">End Date : </span><apex:inputfield value="{!edate_note.Note_Date__c}" />
+                  <span style="width:20px;display:inline-block;">&nbsp;</span>
+                  <apex:commandButton value="Display Date Range"  action="{!date_change}"/>
+                </p>                
+            </apex:form>
+        </p>
+
+        <apex:outputPanel id="main_holder" layout="block">
+            <h1 class="report_header" style="width:750px;">Sales Dashboard - {!report_header} ({!start_formatted} - {!end_formatted})</h1>
+
+            <apex:variable var="rowclassname" value="accs" />
+            <table class="accs_details" width="500px;">
+
+                <tr class="control">
+                  <td width="80%" style="border:0px;"></td>
+                  <td width="20%"></td>
+                </tr>
+
+                <tr class="subhead">
+                    <td colspan="6">Collections</td>
+                </tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">Collected</td>
+                    <td class="right">
+                        <a href="{!hyper_prefix}/apex/opsDashcsv?format=5{!download_string}&interval=6" target="_blank">
+                            <apex:outputText value="{0,number,$##,##,##0}">
+                                <apex:param value="{!Collected}" />
+                            </apex:outputtext>
+                        </a>
+                    </td>
+                </tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">Refunded</td>
+                    <td class="right">
+                        <a href="{!hyper_prefix}/apex/opsDashcsv?format=6{!download_string}&interval=6" target="_blank">
+                            <apex:outputText value="{0,number,$##,##,##0}" >
+                                <apex:param value="{!Refunded}" />
+                            </apex:outputtext>
+                        </a>
+                    </td>
+                </tr>
+
+                <tr class="footer">
+                    <td class="indent">Net Collected</td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                            <apex:param value="{!Collected + Refunded}" />
+                        </apex:outputtext>
+                    </td>
+                </tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">Collection Ratio (in period)</td>
+                    <td class="right" onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:12pt;\'>True Collection Ratio</span><br /><br />{!if(TreatmentSold + TreatmentCancelled==0,0,round((Collected + Refunded)/(TreatmentSold + TreatmentCancelled) * 100,1))} %', 200);" onmouseout="tooltip.hide();">
+                        <apex:outputText value="{0,number,##,##,##0.0}%">
+                            <apex:param value="{!if(TreatmentSold + TreatmentCancelledIn==0,0,(Collected + Refunded)/(TreatmentSold + TreatmentCancelledIn) * 100)}" />
+                        </apex:outputtext>
+                    </td>
+                </tr>
+
+                <tr class="subhead">
+                    <td colspan="6">Consults</td>
+                </tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">Consults</td>
+                    <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=7{!download_string}&interval=6" target="_blank">{!ConsultStarts}</a></td>
+                </tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">Applying for finance</td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,##,##,##0.0}%" >
+                            <apex:param value="{!if(ConsultStarts==0,0, FinancedConsults/ConsultStarts * 100)}" />
+                        </apex:outputtext>
+                    </td>
+                </tr>
+
+                <tr class="subhead">
+                    <td colspan="6">Starts</td>
+                </tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">Pending Starts</td>
+                    <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=20{!download_string}&interval=6" target="_blank">{!FLOOR(PendingStarts)}</a></td>
+                </tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">Pending Revenue</td>
+                    <td class="right">${!PendingTreatmentSold}</td>
+                </tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">New Starts</td>
+                    <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=8{!download_string}&interval=6" target="_blank">{!Starts}</a></td>
+                </tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">Same Day Starts</td>
+                    <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=8{!download_string}&interval=6" target="_blank">{!SdStarts}</a></td>
+                </tr>
+
+                <tr><td colspan="6">&nbsp;</td></tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">Cancelled Starts (in period)</td>
+                    <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=9{!download_string}&interval=6" target="_blank">{!StartsCancelledIn}</a></td>
+                </tr>
+
+                <tr class="footer">
+                  <td class="indent">Net Starts (in period)</td>
+                  <td class="right">{!Starts + StartsCancelledIn}</td>
+                </tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">Close Rate (in period)</td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,##0.0}%" >
+                            <apex:param value="{!if(ConsultStarts==0,0,(Starts + StartsCancelledIn)/ConsultStarts * 100)}" />
+                        </apex:outputtext>
+                    </td>
+                </tr>
+
+                <tr><td colspan="6">&nbsp;</td></tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">Cancelled Starts (outside period)</td>
+                    <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=10{!download_string}&interval=6" target="_blank">{!StartsCancelledOut}</a></td>
+                </tr>
+
+                <tr class="footer">
+                    <td class="indent">Net Starts</td>
+                    <td class="right">{!Starts + StartsCancelled}</td>
+                </tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">True Close Rate</td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,##0.0}%" >
+                            <apex:param value="{!if(ConsultStarts==0,0,(Starts + StartsCancelled)/ConsultStarts * 100)}" />
+                        </apex:outputtext>
+                    </td>
+                </tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">Net Collected per Consult</td>
+                    <td class="right">
+                        <apex:outputText value="${0,number,#,##0.00}" >
+                            <apex:param value="{!if(ConsultStarts==0,0,(Collected + Refunded)/ConsultStarts)}" />
+                        </apex:outputtext>
+                    </td>
+                </tr>
+
+                <tr><td colspan="6">&nbsp;</td></tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">Cancel Rate</td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,##0.0}%" >
+                            <apex:param value="{!if(Starts==0,0,abs(StartsCancelled) / Starts  * 100)}" />
+                        </apex:outputtext>
+                    </td>
+                </tr>
+
+                <tr class="subhead">
+                    <td colspan="6">Revenue</td>
+                </tr>
+
+                <!-- 8-15-2016: Per Scott L/Brandon T of Data Audit Team: This should be the revenue of all starts that meet the setup requirements but they needn't meet the minimum negotiated total amount. Ignore the start value.
+                                Changing from 'TreatmentSold' to 'TreatmentSoldValid + TreatmentSold_Small' -->
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">Sold</td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                            <apex:param value="{!TreatmentSoldValid + TreatmentSold_small}" />
+                        </apex:outputtext>
+                    </td>
+                </tr>
+
+                <tr><td colspan="6">&nbsp;</td></tr>
+
+                <!-- 8-15-2016: Per Scott L/Brandon T of Data Audit Team: "This is all cancelled revenue for the period from valid starts in the same period. Ignore the start value."
+                                Changing from 'TreatmentCancelledIn' to 'TreatmentCancelledInValid' -->
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">Cancelled (in period)</td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                            <apex:param value="{!TreatmentCancelledInValid}" />
+                        </apex:outputtext>
+                    </td>
+                </tr>
+
+                <!-- 8-15-2016: Per Scott L/Brandon T of Data Audit Team: This should be the revenue of all valid starts minus in-period and valid cancelled revenue. Ignore the start value.
+                                Changing from 'TreatmentSold + TreatmentCancelledIn' to 'TreatmentSoldValid + TreatmentCancelledInValid' -->
+                <tr class="{!rowclassname}">
+                    <td class="indent">Sold (in period)</td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                            <apex:param value="{!TreatmentSoldValid + TreatmentCancelledInValid}" />
+                        </apex:outputtext>
+                    </td>
+                </tr>
+
+                <!-- 8-15-2016: Per Scott L/Brandon T of Data Audit Team: Sold revenue from valid starts with a treatment value of 1 / start value.
+                                Changing numerator from 'TreatmentSold + TreatmentCancelledIn' to 'TreatmentSoldValid_StartValue1 + TreatmentCancelledInValid_StartValue1' -->
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">Avg Revenue per Start</td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                            <apex:param value="{!if((Starts + StartsCancelledIn)=0,0,(TreatmentSoldValid_StartValue1 + TreatmentCancelledInValid_StartValue1)/(Starts + StartsCancelledIn))}" />
+                        </apex:outputtext>
+                    </td>
+                </tr>
+
+                <!-- 8-15-2016: Per Scott L/Brandon T of Data Audit Team: "Same as Cancelled $ (in period), this is all cancelled revenue outside the period from valid starts in the same period."
+                                Changing from 'TreatmentCancelledOut' to 'TreatmentCancelledOutValid' -->
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                        <td class="indent">Cancelled (outside period)</td>
+                        <td class="right">
+                            <apex:outputText value="{0,number,$##,##,##0}" >
+                                <apex:param value="{!TreatmentCancelledOutValid}" />
+                            </apex:outputtext>
+                        </td>
+                </tr>
+
+                <!-- 8-15-2016: Per Scott L/Brandon T of Data Audit Team
+                                Changing from 'TreatmentSold + TreatmentCancelledOut + TreatmentCancelledIn' to 'TreatmentSoldValid + TreatmentCancelledInValid + TreatmentCancelledOutValid' -->
+                <tr class="footer">
+                    <td class="indent">Net Sold</td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                            <apex:param value="{!TreatmentSoldValid + TreatmentCancelledInValid + TreatmentCancelledOutValid}" />
+                        </apex:outputtext>
+                    </td>
+                </tr>
+
+                <!-- <tr>
+                <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                  <td>Avg Revenue per Start</td>
+                  <td><apex:outputText value="{0,number,##,##,##0}" >
+                    <apex:param value="{!if((Starts + StartsCancelled)=0,0,(TreatmentSold + TreatmentCancelledOut + TreatmentCancelledIn)/(Starts + StartsCancelled))}" />
+                    </apex:outputtext></td>
+                </tr> -->
+
+                <tr><td colspan="6">&nbsp;</td></tr>
+
+                <tr class="subhead">
+                    <td colspan="6">Hygienist Upsell Revenue</td>
+                </tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent" width="30%">Sold</td>
+                    <td class="right" width="14%">
+                        <a href="{!hyper_prefix}/apex/opsDashcsv?format=15{!download_string}&interval=6" target="_blank">
+                            <apex:outputText value="{0,number,$##,##,##0}" >
+                                <apex:param value="{!UpsellSold}" />
+                            </apex:outputtext>
+                        </a>
+                    </td>
+                </tr>
+
+                <tr><td colspan="6">&nbsp;</td></tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent" width="30%">Cancelled (in period)</td>
+                    <td class="right" width="14%">
+                        <a href="{!hyper_prefix}/apex/opsDashcsv?format=16{!download_string}&interval=6" target="_blank">
+                            <apex:outputText value="{0,number,$##,##,##0}" >
+                                <apex:param value="{!UpsellCancelledIn}" />
+                            </apex:outputtext>
+                        </a>
+                    </td>
+                </tr>
+
+                <tr class="footer">
+                    <td class="indent">Net Upsell (in period)</td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                            <apex:param value="{!UpsellSold + UpsellCancelledIn}" />
+                        </apex:outputtext>
+                    </td>
+                </tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">Portion of Net Sold (in period)</td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,##0.0}%" >
+                            <apex:param value="{!if((TreatmentSoldValid + TreatmentCancelledInValid)=0,0,(UpsellSold + UpsellCancelledIn)/(TreatmentSoldValid + TreatmentCancelledInValid) * 100)}" />
+                        </apex:outputtext>
+                    </td>
+                </tr>
+
+                <tr><td colspan="6">&nbsp;</td></tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">Cancelled (outside period)</td>
+                    <td class="right">
+                        <a href="{!hyper_prefix}/apex/opsDashcsv?format=17{!download_string}&interval=6" target="_blank">
+                            <apex:outputText value="{0,number,$##,##,##0}" >
+                                <apex:param value="{!UpsellCancelledOut}" />
+                            </apex:outputtext>
+                        </a>
+                    </td>
+                </tr>
+
+                <tr class="footer">
+                    <td class="indent">Net Upsell</td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                            <apex:param value="{!UpsellSold + UpsellCancelledIn + UpsellCancelledOut}" />
+                        </apex:outputtext>
+                    </td>
+                </tr>
+
+            </table>
+
+        </apex:outputpanel>
+    </div>
+</apex:page>

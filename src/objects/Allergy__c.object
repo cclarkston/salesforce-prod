@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Allergy to medication, used primarily with DoseSpot integration</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Allergy_ID__c</fullName>
+        <description>For use with DoseSpot - DoseSpot’s unique patient allergy identifier</description>
+        <externalId>true</externalId>
+        <label>Allergy ID</label>
+        <precision>15</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Code_Type__c</fullName>
+        <description>For use with DoseSpot - Identifies if the Code is a drug or allergy class</description>
+        <externalId>false</externalId>
+        <label>Code Type</label>
+        <length>15</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Code__c</fullName>
+        <description>Drug or allergy class identifier</description>
+        <externalId>false</externalId>
+        <label>Code</label>
+        <length>15</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>No_DoseSpot__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Denotes that the allergy was manually added (not found through a search of DoseSpot&apos;s medication/allergy set)</description>
+        <externalId>false</externalId>
+        <label>No DoseSpot (added manually)</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Onset_Date__c</fullName>
+        <description>For use with DoseSpot - Date the allergy or adverse reaction was first
+observed</description>
+        <externalId>false</externalId>
+        <label>Onset Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Onset_Date_simple__c</fullName>
+        <description>For use on the Patient Check In (Medical History) form. DoseSpot API requires a datetime value for Onset Date, but we want to take in only a date on the form, so we use this value to take the date on the form and convert it to the Onset_Date__c datetime required by the API.</description>
+        <externalId>false</externalId>
+        <label>Onset Date (simple)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Patient__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Patient</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Allergies</relationshipLabel>
+        <relationshipName>Allergies</relationshipName>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Reaction_Type__c</fullName>
+        <description>For use with DoseSpot - Identifies the reaction as a reaction or an
+adverse reaction</description>
+        <externalId>false</externalId>
+        <label>Reaction Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Allergy</fullName>
+                    <default>false</default>
+                    <label>Allergy</label>
+                </value>
+                <value>
+                    <fullName>AdverseReaction</fullName>
+                    <default>false</default>
+                    <label>AdverseReaction</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Reaction__c</fullName>
+        <description>For use with DoseSpot - Description of the patient’s reaction to the
+allergen</description>
+        <externalId>false</externalId>
+        <label>Reaction</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>RxCUI__c</fullName>
+        <description>For use with DoseSpot - RxNorm drug identifier</description>
+        <externalId>false</externalId>
+        <label>RxCUI</label>
+        <precision>15</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <description>For use with DoseSpot - Identifies the status of the allergy</description>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <length>15</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Allergy</label>
+    <nameField>
+        <label>Allergy Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Allergies</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

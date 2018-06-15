@@ -1,0 +1,49 @@
+<messaging:emailTemplate subject="test" recipientType="Lead" relatedToType="Lead"
+Subject="ClearChoice: Consulta para Implantes Dentales" replyto="reply-to@clearchoice.com">
+<messaging:htmlEmailBody >
+
+<img id="theImage" src="http://www.clearchoice.com/files/images/EmailTemplates/ClearChoiceLogo.png" width="387" height="114"/> 
+<br/>
+<hr color="DarkBlue"/>
+
+{!recipient.FirstName},<br/>
+<br/>
+
+Queremos agradecerle por escoger a ClearChoice Centro de Implantes Dentales como posible proveedor de sus necesidades dentales. Para que usted obtenga la información correcta y pueda evaluar sus opciones en cuanto al tratamiento que servirá para usted. Su cita se tratara de:
+<ul>
+<li>Discutir sus necesidades dentales</li>
+<li>Darle un estimado en cuanto al costo del tratamiento</li>
+<li> Ayudarle a entender y a tomar una decisión educada en cuanto a su tratamiento</li>
+</ul>
+
+<br/>
+Su cita gratuita ha sido reservada  para {!recipient.Well_Formatted_Date__c} a las {!recipient.Well_Formatted_Time__c}.      
+
+<br/> 
+Hemos establecido altos estándares para proveer a nuestros pacientes  con los mejores resultados.  ¡ ClearChoice a juntado  la tecnología más avanzada en el mercado, los procedimientos quirúrgicos y técnicas reconstructivas que mejorarán su apariencia y su estilo de vida ¡
+<br/>
+<br/>
+¡Implantes Dentales es una solución permanente para sus problemas dentales! Estamos disponibles para responder cualquier pregunta {!recipient.Center__r.Call_Center_Marketing__c}, de Lunes a Viernes  entre las horas de 8:00am - 5:00pm.  
+<br/>
+<br/>
+Sinceramente,<br/>
+<br/>
+
+{!recipient.Call_Center_Agent__r.Name}<br/>
+Consultor de Implantes Dentales<br/>
+<br/>
+
+ClearChoice Centro de Implantes Dentales en {!recipient.Center__r.Name}<br/>
+{!recipient.Center__r.Street_1__c}<br/>
+{!recipient.Center__r.Street_2__c}<br/>
+{!recipient.Center__r.City__c}, {!recipient.Center__r.State__c} {!recipient.Center__r.Zip_Code__c}<br/>
+{!recipient.Center_Phone_Number__c}<br/>
+<br/>
+
+<a href="{!recipient.Center__r.Map_Directions_URL__c}">Haga clic aquí</a> para ver el mapa y direcciones para nuestras oficina.<br/>
+<br/>
+<b><i>P.D. Por favor llegar 10 minutos más temprano a su cita para tomar sus datos iniciales y poder empezar puntualmente.</i></b>
+
+
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

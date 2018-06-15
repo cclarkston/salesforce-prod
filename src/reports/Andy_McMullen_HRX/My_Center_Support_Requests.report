@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Center_Support_Request__c$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Center_Support_Request__c$Owner</field>
+    </columns>
+    <columns>
+        <field>Center_Support_Request__c$Approver_for_display__c</field>
+    </columns>
+    <columns>
+        <field>Center_Support_Request__c$Center_Information__c</field>
+    </columns>
+    <columns>
+        <field>Center_Support_Request__c$Status__c</field>
+    </columns>
+    <columns>
+        <field>Center_Support_Request__c$Name</field>
+    </columns>
+    <format>Tabular</format>
+    <name>My Center Support Requests</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Center_Support_Requests_1__c</reportType>
+    <scope>user</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Center_Support_Request__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CURRENT</interval>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <content>Talent_Tab_Default</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This is a single object representing a person in our marketing who is either an existing customer (&apos;Account&apos;), doctor (&apos;User&apos; with &apos;Clinical Doctor&apos; profile), or neither (we call these other actors &apos;Extras&apos;). This is NOT the object to which a talent release would be attached.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Comment__c</fullName>
+        <externalId>false</externalId>
+        <label>Comment</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Customer__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Patient</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Talent</relationshipLabel>
+        <relationshipName>Talent</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Doctor__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Doctor</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>User.Profile.Name</field>
+                <operation>equals</operation>
+                <value>Clinical Doctor</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Talent</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Extra__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>A person recorded for use in our marketing who is not already in our database - meaning, neither a doctor nor customer because they&apos;re already in our system as Users or Accounts.</description>
+        <externalId>false</externalId>
+        <label>Extra</label>
+        <referenceTo>Extra__c</referenceTo>
+        <relationshipLabel>Talent</relationshipLabel>
+        <relationshipName>Talent</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Full Name</label>
+        <length>63</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Talent</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Name__c</columns>
+        <columns>Comment__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>Talent-{0}</displayFormat>
+        <label>Identifier</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Talent</pluralLabel>
+    <searchLayouts>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <listViewButtons>All_Creative_Shoots</listViewButtons>
+        <listViewButtons>New_Extra</listViewButtons>
+        <listViewButtons>New_Creative_Shoot</listViewButtons>
+        <lookupDialogsAdditionalFields>Name__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CREATED_DATE</lookupDialogsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+    <webLinks>
+        <fullName>All_Creative_Shoots</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>All Creative Shoots</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <requireRowSelection>false</requireRowSelection>
+        <url>{!$Site.BaseUrl}/a26/l</url>
+    </webLinks>
+    <webLinks>
+        <fullName>New_Creative_Shoot</fullName>
+        <availability>online</availability>
+        <description>Button linking to New Creative Shoot page</description>
+        <displayType>massActionButton</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>New Creative Shoot</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <requireRowSelection>false</requireRowSelection>
+        <url>{!URLFOR($Action.Creative_Shoot__c.New, null)}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>New_Extra</fullName>
+        <availability>online</availability>
+        <description>Button linking to New Extra page</description>
+        <displayType>massActionButton</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>New Extra</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <requireRowSelection>false</requireRowSelection>
+        <url>{!URLFOR($Action.Extra__c.New, null)}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Retire_Ads</fullName>
+        <availability>online</availability>
+        <description>Retires all Public Ads in which this talent makes an appearance</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Retire Related Ads</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/15.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/15.0/apex.js&quot;)} 
+
+var reason = prompt(&quot;Continuing will retire ALL Public Ads in which this person makes an appearance.\n\nEach ad will be retired and have both its Retire Date and Retirement Response reset.\n\nIf you&apos;d like to proceed, provide a reason for the retirement and press OK.&quot;); 
+
+if (reason) { 
+sforce.apex.execute(&quot;Creative_Button_Retire_from_Talent&quot;,&quot;retire&quot;,{recordID:&quot;{!Talent__c.Id}&quot;, userID: &quot;{!$User.Id}&quot;, retirement_status: true, retirement_reason: reason}); 
+location.reload(true); 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>UnRetire_Ads</fullName>
+        <availability>online</availability>
+        <description>UnRetires all Publics Ads in which this Talent makes an appearance</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>UnRetire Related Ads</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/15.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/15.0/apex.js&quot;)} 
+
+var confirmed = confirm(&quot;Continuing will affect ALL the Public Ads in which this person made an appearance.\n\nAny item that has retirement details will be unretired and have both its Retire Date and Retirement Response reset.&quot;); 
+
+if (confirmed) { 
+sforce.apex.execute(&quot;Creative_Button_Retire_from_Talent&quot;,&quot;retire&quot;,{recordID:&quot;{!Talent__c.Id}&quot;, userID: &quot;{!$User.Id}&quot;, retirement_status: false}); 
+
+location.reload(true); 
+}</url>
+    </webLinks>
+</CustomObject>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Lead.Consult_Inventory__r$Scheduled_by__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Date_Booked__c</field>
+    </columns>
+    <columns>
+        <field>Lead$DateTime_Consult_Scheduled__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Contact_Agency_Agent__c</field>
+    </columns>
+    <columns>
+        <field>Lead$External_ID__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Call_Result__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Status</field>
+    </columns>
+    <description>ALL IMC leads based on last listed Date scheduled</description>
+    <filter>
+        <booleanFilter>((1 or 2) AND 3 AND (4 or 5)) AND 6</booleanFilter>
+        <criteriaItems>
+            <column>Lead$Contact_Agency_Agent__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Online Schedule</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Contact_Agency_Agent__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Contact_Agency__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Infocision</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Consult_Inventory__r$Scheduled_by__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>ccapi site guest user</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Consult_Inventory__r$Scheduled_by__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Status</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Consult Completed,No Show</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>IMC_Completed Consult Audit</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Prospective_Patients_with_Consult_Inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Lead$Status</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Lead$DateTime_Consult_Scheduled__c</dateColumn>
+        <interval>INTERVAL_THISMONTH</interval>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Run Log</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Run Logs</value>
+    </caseValues>
+    <fields>
+        <label><!-- Ad Length --></label>
+        <name>Ad_Length__c</name>
+    </fields>
+    <fields>
+        <label><!-- Campaign --></label>
+        <name>Campaign__c</name>
+        <relationshipLabel><!-- Run Logs --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Clicks --></label>
+        <name>Clicks__c</name>
+    </fields>
+    <fields>
+        <label><!-- ISCI --></label>
+        <name>ISCI__c</name>
+    </fields>
+    <fields>
+        <label><!-- Impressions --></label>
+        <name>Impressions__c</name>
+    </fields>
+    <fields>
+        <label><!-- Local Run Time --></label>
+        <name>Local_Run_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Market --></label>
+        <name>Market__c</name>
+        <relationshipLabel><!-- Run Logs --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Mountain Run Time --></label>
+        <name>Mountain_Run_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Network --></label>
+        <name>Network__c</name>
+    </fields>
+    <fields>
+        <label><!-- Program Name --></label>
+        <name>Program_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rate --></label>
+        <name>Rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Run Date --></label>
+        <name>Run_Date__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

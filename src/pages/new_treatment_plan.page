@@ -1,0 +1,390 @@
+<apex:page controller="account_treatment_plans" sidebar="true" showHeader="true">
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}"  />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+
+<style type="text/css" media="print">  
+input.btn {
+  display:none;
+}
+
+input#edit_btn {
+  display:none;
+}
+ 
+  td.right_border {
+    border:0px; 
+    right-border:0px;
+  }
+
+  img.skiplink {
+    display:none;
+  }
+
+  div.bodyDiv {
+    border:0px;
+  }
+      
+  div.bPageHeader {
+    display:none;
+  }  
+  
+  div.bPageFooter {
+    display:none;
+  } 
+  
+  div.no_print {
+    display:none; 
+  }    
+</style>
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart(initial_cost,future_cost,treatment_name) {
+        initial_cost = initial_cost.replace(',','');
+        future_cost = future_cost.replace(',','');
+        initial_cost = Number(initial_cost);
+        future_cost = Number(future_cost);
+        var num = parseFloat(initial_cost + future_cost).toFixed(2);
+
+        // Create the data table.
+        var center_average = 23000.25;
+        var national_average = 25000.36;
+        var my_color;
+        if(num<23000)
+          my_color = 'red';
+        else 
+          my_color = 'green';
+          
+        var data = google.visualization.arrayToDataTable([
+         ['Source', 'Price', { role: 'style' }, { role: 'annotation' } ],
+         ['National Avg', national_average, '#5789AE', 'National' ],
+         ['Center Avg', center_average, '#0066FF', 'Center' ],
+         ['Final Cost', num, my_color, 'Final' ]
+      ]);
+
+        var my_title = treatment_name + ' Price Analysis';         
+        var options = {'title': my_title,
+                       'width':700,
+                       'height':150,
+                       legend: 'none',
+                       chartArea: {'backgroundColor':'#F0F0E8'},  
+                       vaxis: {format: 'currency'}
+                       };
+        
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+
+<style>
+span.form_line {
+  display:block;
+  padding-bottom:1em;
+  font-size:11pt;
+}
+
+span.form_header {
+  font-weight:bold;
+  display:inline-block;
+  width:175px;
+}
+
+span.treatment_plan_box {
+  display:inline-block;
+  border-top:1px solid black;
+  border-bottom:1px solid black;
+  border-right:1px dotted black;
+  border-left:1px dotted black;
+  margin-top:1em;
+  margin-right:1em;
+  margin-left:1em;
+  padding-left:15px;
+  padding-right:15px;
+  padding-top:7px;
+  padding-bottom:7px;
+  font-family:arial;
+  min-width:150px;
+}
+
+span.treatment_header {
+  display:block;
+  padding-bottom:7px;
+  color:#5789AE;
+  font-size:12pt;
+}
+
+span.treatment_cost {
+  display:block;
+  padding-bottom:7px;
+  font-family:verdana;
+  font-size:11pt;
+}
+
+span.treatment_recommended {
+  display:block;
+  padding-bottom:7px;
+  font-size:11pt;
+}
+
+span.section_header {
+  display:block;
+  width:600px;
+  border-bottom:1px solid black;
+  font-size:12pt;
+  padding-left:15px;
+  margin-left:10px;
+  color:black;
+  margin-bottom:.5em;
+}
+
+p.match_overflow {
+  display:inline-block;    
+<!--  border-top: 1px dotted black;
+  border-bottom: 1px dotted black;-->
+  padding:0px;     
+  width:100%;
+  position:relative;
+  left:-1px;
+  height:150px;
+  overflow:auto; 
+  min-width:300px; 
+}    
+
+hr.style-fade {
+    border: 0;
+    height: 2px;
+    width:1000px;
+    display:block;  
+  background-image: -webkit-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0)); 
+    background-image:    -moz-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0)); 
+    background-image:     -ms-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0)); 
+    background-image:      -o-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0)); 
+  }
+  
+span.hodd {
+  display:block;  
+  font-size:11pt;
+  line-height:25px;
+  border-bottom:1px dashed #5789AE; 
+}
+  
+span.heven {
+  display:block;
+  font-size:11pt;
+  background-color:#CECE9D;
+  line-height:25px;  
+  border-bottom:1px dashed #5789AE; 
+}
+
+span.treatment_options {
+  font-style:italic;
+  font-size:8pt;
+    display:block;
+  padding-bottom:7px;
+
+}
+
+.tbutton {
+  display: inline-block;
+  margin: 10px;
+  padding: 8px 15px;
+  width:150px;
+  background: #66CCFF;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+  transition: all 0.3s ease-out;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.5),
+    0 2px 2px rgba(0,0,0,0.3),
+    0 0 4px 1px rgba(0,0,0,0.2);
+  /* Font styles */
+  text-decoration: none;
+  text-align:center;
+  font-weight:bold;
+  font-size:11pt;
+  text-shadow: 0 1px rgba(255,255,255,0.7);
+}
+
+.tbutton:hover  { background: #33CCCC; color:white }
+
+.embossed-link {
+  box-shadow: 
+    inset 0 3px 2px rgba(255,255,255,.22), 
+    inset 0 -3px 2px rgba(0,0,0,.17), 
+    inset 0 20px 10px rgba(255,255,255,.12), 
+    0 0 4px 1px rgba(0,0,0,.1), 
+    0 3px 2px rgba(0,0,0,.2);
+}
+
+.tbutton.embossed-link {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.5),
+    0 2px 2px rgba(0,0,0,0.3),
+    0 0 4px 1px rgba(0,0,0,0.2),
+    inset 0 3px 2px rgba(255,255,255,.22), 
+    inset 0 -3px 2px rgba(0,0,0,.15), 
+    inset 0 20px 10px rgba(255,255,255,.12), 
+    0 0 4px 1px rgba(0,0,0,.1), 
+    0 3px 2px rgba(0,0,0,.2);
+}
+
+.tbutton.embossed-link:active {
+  box-shadow: 
+    inset 0 -2px 1px rgba(255,255,255,0.2),
+    inset 0 3px 2px rgba(0,0,0,0.12);
+}
+
+
+</style>
+
+<apex:form ><br />
+<apex:actionFunction oncomplete="default_cursor(this);" name="select_plan" action="{!change_treatment_option}" reRender="new_plan_holder">   
+  <apex:param name="tid" value="" />
+</apex:actionFunction>
+<apex:actionFunction oncomplete="default_cursor(this);" name="search_plan" rerender="treatment_match_holder" />
+<apex:actionFunction oncomplete="default_cursor(this);" name="remove_plan" action="{!remove_treatment_plan}" reRender="current_plan_holder">   
+  <apex:param name="dtpid" value="" />
+</apex:actionFunction>
+
+
+<span class="form_line">
+  <span class="form_header">Consult :</span>
+  <apex:outputfield value="{!new_plan.Account__c}" />
+  <span style="display:inline-block;width:100px;">&nbsp;</span>
+  <apex:commandButton value="Back to Consult" action="{!return_to_consult}" style="font-size:8pt;" />
+  <span style="display:inline-block;width:20px;">&nbsp;</span>
+  <a href="/apex/treatment_handout?aid={!a.id}" target="handout"><button type="button">Treatment Handout</button></a>
+</span>
+
+<span class="section_header">Current Treatment Plans</span>
+
+<apex:outputPanel layout="block" id="current_plan_holder" style="padding-bottom:3em;vertical-align:top;">
+<apex:repeat value="{!current_treatment_plans}" var="tplan">
+<span class="treatment_plan_box">
+  <span class="treatment_header"><apex:outputfield value="{!tplan.treatment_option__r.name}" /></span>
+  <span class="treatment_cost">$<apex:outputfield value="{!tplan.Total_Cost__c}" /></span>
+  <apex:outputPanel styleClass="treatment_options" rendered="{!if(tplan.Nightguard__c || tplan.Bleaching_Tray__c || tplan.Bone_Grafting__c || tplan.Immediate_Load__c,true,false)}" >
+  <apex:outputtext value="{!if(tplan.Bleaching_Tray__c,'Bleaching Tray ','')}" />
+    <apex:outputtext value="{!if(tplan.Nightguard__c,'NightGuard ','')}" />
+    <apex:outputtext value="{!if(tplan.Bone_Grafting__c,'Bone Grafting ','')}" />
+    <apex:outputtext value="{!if(tplan.Immediate_Load__c,'Immediate Load ','')}" />
+  </apex:outputpanel>
+  <apex:outputPanel styleClass="treatment_options" rendered="{!if(tplan.Nightguard__c || tplan.Bleaching_Tray__c || tplan.Bone_Grafting__c || tplan.Immediate_Load__c,false,true)}" >
+    No Options
+  </apex:outputpanel>
+  <span class="treatment_recommended"><apex:outputtext value="{!if(tplan.Recommended__c,'Recommended','Alternate')}" style="{!if(tplan.Recommended__c,'color:red;font-weight:bold','color:black')}" /></span>
+  <span class="treatment_recommended"><apex:commandLink styleclass="btn" style="text-decoration:none;" value="Delete Plan"  onclick="remove_plan('{!tplan.id}');return false;"/></span>
+</span>
+</apex:repeat>
+</apex:outputpanel>
+
+<apex:messages style="color:red;font-weight:bold;" /><br /> 
+
+<span class="section_header" style="margin-bottom:1em;">New Treatment Plan</span>
+<apex:outputpanel layout="block" id="new_plan_holder" style="padding-left:20px;">
+<table><tr><td><br />
+  <span class="form_line">
+    <span class="form_header">Upper :</span>
+    <apex:selectList value="{!upper_option}" multiselect="false" size="1" onchange="use_fancy_cursor(this);search_plan();" >
+      <apex:selectOptions value="{!tag_options}"></apex:selectoptions>
+    </apex:selectList>
+  </span><br />
+  <span class="form_line">
+    <span class="form_header">Lower :</span>
+    <apex:selectList value="{!lower_option}" multiselect="false" size="1" onchange="use_fancy_cursor(this);search_plan();" >
+      <apex:selectOptions value="{!tag_options}"></apex:selectoptions>
+    </apex:selectList>
+  </span></td>
+  <td style="padding-left:40px;"><span style="font-weight:bold;color:blue;">Select Treatment Option</span>
+    <apex:outputpanel id="treatment_match_holder">
+      <p class="match_overflow">
+      <apex:variable var="rowclassname" value="hodd" /> 
+        <apex:repeat value="{!treatment_matches}" var="plan">
+          <span  onclick="use_fancy_cursor(this);tooltip.hide();select_plan('{!plan.id}')"  onmouseover="tooltip.show('<p>Click to select <span style=color:aqua>{!plan.name}</span> as the treatment option</p>');" onmouseout="tooltip.hide();" >
+            <span class="tbutton"><apex:outputfield value="{!plan.name}" /></span>
+          </span>
+          <apex:variable var="rowclassname" value="{!if(rowclassname=='hodd','heven','hodd')}" />      
+          <apex:outputpanel rendered="{!if(rowclassname=='hodd',true,false)}"><br /></apex:outputpanel>  
+        </apex:repeat>
+      </p>
+    </apex:outputpanel>
+  </td>
+</tr></table><br /><hr class="style-fade" /><br />
+<span class="form_line">
+  <span class="form_header">Treatment : </span><apex:outputText value="{!selected_treatment_name}" escape="false" />
+</span>
+<span class="form_line">
+  <span class="form_header">Timeline : </span><apex:inputfield value="{!new_plan.Timeline__c}" />
+</span>
+<span class="form_line">
+  <span class="form_header">Initial Cost : </span><apex:inputfield id="initial_cost" value="{!new_plan.Initial_Cost__c}" />
+  <!--onchange="drawChart(this.value, document.getElementById('{!$Component.future_cost}').value, '{!selected_treatment_name}');"-->
+</span>
+<span class="form_line">
+  <span class="form_header">Future Cost : </span><apex:inputfield id="future_cost" value="{!new_plan.Final_Cost__c}" />
+  <!--onchange="drawChart(document.getElementById('{!$Component.initial_cost}').value, this.value,'{!selected_treatment_name}');"-->
+</span>
+<!--
+removing this on 11/2/2015 - legal feels this is collusion - no comment CM
+<apex:outputpanel id="graph_holder"><div id="chart_div"></div></apex:outputpanel>-->
+<span class="form_line">
+  <span class="form_header">Recommended : </span><apex:inputfield value="{!new_plan.Recommended__c}" />
+</span>
+<span class="form_line">
+  <span class="form_header">Doctor : </span>
+  <apex:selectList value="{!new_plan.ClearChoice_Doctor__c}" multiselect="false" size="1"  >
+      <apex:selectOptions value="{!doctorlist}"></apex:selectoptions>
+    </apex:selectList>
+</span>
+<span class="form_line">
+  <span class="form_header">Include on Handout : </span><apex:inputfield value="{!new_plan.Include_on_Handout__c}" />
+</span>
+<span class="form_line">
+  <span class="form_header">Bleaching Tray : </span><apex:inputfield value="{!new_plan.Bleaching_Tray__c}" />
+</span>
+<span class="form_line">
+  <span class="form_header">Nightguard : </span><apex:inputfield value="{!new_plan.Nightguard__c}" />
+</span>
+<span class="form_line">
+  <span class="form_header">Bone Grafting : </span><apex:inputfield value="{!new_plan.Bone_Grafting__c}" />
+</span>
+<span class="form_line">
+  <span class="form_header">Immediate Load : </span><apex:inputfield value="{!new_plan.Immediate_Load__c}" />
+</span>
+<span class="form_line">
+  <table><tr><td><span class="form_header">Handout Notes : </span></td><td><apex:inputField style="width:400px;height:75px;"  value="{!new_plan.Handout_Notes__c}"  /></td></tr></table>
+</span>
+
+<apex:commandButton value="Add Treatment Plan" action="{!add_treatment_plan}" />
+  <span style="display:inline-block;width:100px;">&nbsp;</span>
+   <apex:commandButton value="Reset Form" action="{!reset_treatment_plan}" />
+</apex:outputpanel>
+
+
+
+</apex:form>
+</apex:page>

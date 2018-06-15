@@ -1,0 +1,246 @@
+<apex:page standardController="Lead" extensions="lead_creditcheck" action="{!check_cc_counter}" >
+<script src="../../soap/ajax/23.0/connection.js" type="text/javascript"></script>
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+<style>
+    h2.maintitle  {
+      width:500px;
+      font-size:14pt;
+      font-family:georgia;  
+      margin-left:5px;      
+      padding-left:10px;
+      border-bottom:3px solid black;
+      margin-bottom:1em;
+      padding-bottom:1px;   
+      display:block; 
+      padding-top:10px; 
+      color:#5789AE;   
+    }     
+    
+    h2.cctitle  {
+      width:600px;
+      font-size:12pt;
+      font-family:georgia;  
+      margin-left:5px;      
+      padding-left:10px;
+      border-bottom:1px dotted gray;      
+      border-top:1px dotted gray;
+      display:block; 
+      padding-top:2px; 
+      padding-bottom:2px;      
+      margin-bottom:1em;      
+      color:#5789AE;   
+    }     
+    
+    span.section_header {
+      display:inline-block; 
+      font-size:11pt;
+      width:150px;
+      padding-left:20px;
+      padding-right:10px;    
+      font-weight:bold;  
+      font-family:arial,georgia;      
+    }    
+
+    span.display_value {
+      font-size:12pt;       
+      font-family:arial,georgia;      
+    }   
+     
+    span.section_line {
+      display:block;
+      padding-bottom:11px; 
+    }   
+
+    span.sp_italics {
+      font-style:italic;
+      font-weight:bold;
+    }  
+    
+    a.form_link {
+      font-weight:bold;
+      color:blue; 
+    }   
+
+   a {  
+     color:#5789AE;  
+     font-weight:bold;   
+   }   
+</style>        
+
+<apex:form > 
+        
+<h2 class="maintitle">Credit Check for Prospective Patient</h2>
+<apex:outputpanel id="detail_holder" style="padding-left:15px;">
+<apex:outputfield value="{!lead.Prospect_All_Score__c}" rendered="false" />
+<apex:outputfield value="{!lead.Prospect_All_Tier__c}" rendered="false" />
+<apex:outputfield value="{!lead.Prospect_IQ_Score__c}" rendered="false" />
+<apex:outputfield value="{!lead.Prospect_IQ_Tier__c}" rendered="false" />
+<apex:messages style="color:red;" />     
+     <span>Center Location is </span><span id="Center" class="sp_italics">{!lead.Center_Master_Location__c}</span><br /><br />
+     <apex:outputpanel rendered="{!if(cctype=1,'false','true')}"  layout="inline" style="padding-left:15px;">SFCU Pre Screen website: Click <a href="https://www.sfcstu.com/" target="_blank" class="form_link">here</a></apex:outputpanel><br /> <br /> 
+<!--  <apex:outputpanel rendered="{!if(cctype=1,'false','true')}"  layout="inline" style="padding-left:15px;">SFCU Pre Screen website: Click <a href="http://stu.svcfin.com/" target="_blank" class="form_link">here</a></apex:outputpanel><br /> <br /> -->
+    <span class="section_line">  
+      <span class="section_header">SalesForce ID :</span>
+      <apex:outputLink value="{!lead_url}" >{!lead.ID}</apex:outputLink></span>
+    <span class="section_line">  
+      <span class="section_header">First Name :</span>
+        <span id="copyFName" onclick="ClipBoard2('copyFName');"  title="Click to copy First Name" class="display_value">{!lead.firstname}</span></span>        
+    <span class="section_line">  
+      <span class="section_header">Last Name :</span>
+        <span id="copySName" onclick="ClipBoard2('copySName');"  title="Click to copy Last Name" class="display_value">{!lead.lastname}</span></span>        
+   <span class="section_line">  
+      <span class="section_header">Street :</span>
+        <span id="copyStreet" onclick="ClipBoard2('copyStreet');"  title="Click to copy Street" class="display_value">{!lead.street}</span></span>
+   <span class="section_line">  
+      <span class="section_header">City :</span>
+        <span id="copyCity" onclick="ClipBoard2('copyCity');"  title="Click to copy City" class="display_value">{!UPPER(lead.city,"EN")}</span></span>
+   <span class="section_line">  
+      <span class="section_header">State :</span>
+        <span id="copyState" onclick="ClipBoard2('copyState');"  title="Click to copy State" class="display_value">{!lead.state}</span></span>        
+   <span class="section_line">  
+      <span class="section_header">Zip Code :</span>
+        <span id="copyZIP" onclick="ClipBoard2('copyZIP');"  title="Click to copy Zip Code" class="display_value">{!lead.postalcode}</span></span>
+
+    <textarea id="holdtext" style="display:none;"></textarea> 
+  </apex:outputpanel>
+    
+
+   
+  <apex:outputPanel rendered="{!if(cctype = 1,'false','true')}" style="padding-left:15px;padding-top:1em;">        
+    <h2 class="cctitle">SFCU Credit Check</h2>  
+    <span class="section_line">
+      <span class="section_header">Pre Screen Result :</span> 
+      <apex:inputField value="{!lead.Pre_Screen__c}"/> </span>     
+    <span class="section_line">
+      <span class="section_header">Fees Quoted :</span> 
+      <apex:inputField value="{!lead.Fees_Quoted__c}"/> </span>     
+    
+    <span style="width:15px;">&nbsp;</span>    
+    <apex:commandButton action="{!update_sfcu_check}" value="Save PreScreen Results" onclick="use_fancy_cursor(this);" oncomplete="default_cursor();" />    
+    <span style="width:40px;">&nbsp;</span>    
+    
+    <apex:outputPanel rendered="{!if(lead.Prescreen_Street_Name__c==null||lead.Prescreen_Street_Name__c=='',false,true)}">    
+      <input type="button" name="credit_submit" id="credit_submit" value="Run Credit Check" class="btn" onclick="check_user_id();" />     
+    </apex:outputPanel>   
+    <apex:outputtext rendered="{!if(lead.Prescreen_Street_Name__c==null||lead.Prescreen_Street_Name__c=='',true,false)}" style="color:red;font-weight:bold;" value="Error - Address info is not available.  Please rerun verification or notify your supervisor."/>
+    </apex:outputPanel>
+
+    <apex:outputPanel rendered="{!if(cctype=1,'true','false')}">
+      <h2 class="cctitle">Experian Credit Check</h2>
+        <span style="width:15px;">&nbsp;</span>      <apex:commandButton action="{!run_experian_check}" value="Run Credit Check" onclick="use_fancy_cursor(this);" oncomplete="default_cursor();" />    
+    </apex:outputPanel>
+
+</apex:form>
+
+    <span id="main_holder"></span>
+    
+
+<script>
+/* ====version of the form that works on the sandbox
+ <form name="form1" action="https://www.sfcstu.com/creditresult.asp" target="credit_results" method="POST" style="display:inline-block;">
+  <input type="hidden" name="salesforceid" id="salesforceid" value="{!lead.ID}" >
+  <input type="hidden" name="firstname" id="firstname" value="{!lead.firstname}" >
+  <input type="hidden" name="middlename" id="middlename" value="">
+  <input type="hidden" name="lastname" id="lastname" value="{!lead.lastname}">
+  <input type="hidden" name="streetnum" id="streetnum" value="">
+  <input type="hidden" name="predirection" id="predirection" value="">
+  <input type="hidden" name="address" id="address" value="{!lead.street}">
+  <input type="hidden" name="streettype" id="streettype" value="">
+  <input type="hidden" name="unitnum" id="unitnum" value=""></td>
+  <input type="hidden" name="city" id="city" value="{!lead.city}">
+  <input type="hidden" name="state" id="state" value="{!lead.state}">
+  <input type="hidden" name="zip" id="zip" value="{!lead.PostalCode}">  
+  <input type="hidden" name="MM_insert" value="form1" />
+</form>  */
+</script>     
+
+ <form name="form2" action="https://www.sfcstu.com/index.asp?accessdenied=%2Fcreditresult%2Easp" target="credit_results" method="POST" style="display:inline-block;">
+<!-- <form name="form2" action="http://stu.svcfin.com/index.asp?accessdenied=%2Fcreditresult%2Easp" target="credit_results" method="POST" style="display:inline-block;"> -->
+  <input type="hidden" name="username" id="username" value="cmcdowell" />
+  <input type="hidden" name="password" id="password" value="password" />
+</form>
+
+<form name="form1" action="https://www.sfcstu.com/creditresult.asp" target="credit_results" method="POST" style="display:inline-block;"> 
+<!--  <form name="form1" action="http://stu.svcfin.com/creditresult.asp" target="credit_results" method="POST" style="display:inline-block;"> -->
+  <input type="hidden" name="salesforceid" id="salesforceid" value="{!lead.ID}" />
+  <input type="hidden" name="firstname" id="firstname" value="{!lead.firstname}" />
+  <input type="hidden" name="middlename" id="middlename" value=""/>
+  <input type="hidden" name="lastname" id="lastname" value="{!lead.lastname}"/>
+  <input type="hidden" name="streetnum" id="streetnum" value="{!lead.Prescreen_Street_Number__c}"/>
+  <input type="hidden" name="predirection" id="predirection" value="{!lead.Prescreen_Pre_Directional__c}"/>
+  <input type="hidden" name="address" id="address" value="{!lead.Prescreen_Street_Name__c}"/>
+  <input type="hidden" name="streettype" id="streettype" value="{!UPPER(lead.Prescreen_Type__c)}"/>
+  <input type="hidden" name="unitnum" id="unitnum" value="{!lead.Prescreen_ExtensionNumber__c}"/>
+  <input type="hidden" name="city" id="city" value="{!lead.city}"/>
+  <input type="hidden" name="state" id="state" value="{!lead.state}"/>
+  <input type="hidden" name="zip" id="zip" value="{!lead.PostalCode}"/>  
+  <input type="hidden" name="MM_insert" value="form1" />
+</form> 
+
+<input type="hidden" name="pre_post_direction" value="{!lead.Prescreen_Post_Directional__c}" />
+<input type="hidden" name="pre_pre_direction" value="{!lead.Prescreen_Pre_Directional__c}" />
+<input type="hidden" name="pre_status" value="{!lead.Pre_Screen_Status__c}" />
+<input type="hidden" name="pre_street_name" value="{!lead.Prescreen_Street_Name__c}" />
+<input type="hidden" name="pre_street_number" value="{!lead.Prescreen_Street_Number__c}" />
+<input type="hidden" name="pre_screen_time" value="{!lead.Pre_Screen_Time__c}" />
+<input type="hidden" name="pre_screen_type" value="{!lead.Prescreen_Type__c}" />
+<input type="hidden" name="astatus" value="{!lead.Address_Status__c}" />
+<input type="hidden" name="astatus" value="{!lead.StrikeForce1__USAddress_Address_Status_Display__c}" />
+<input type="hidden" name="astatus" value="{!lead.StrikeForce1__USAddress_Address_Status__c}" />
+    
+<script>
+var xmlHttp;
+var changeid;
+var mywindowhandler;
+
+  function ClipBoard(theSel) {
+    holdtext.innerText = theSel.innerText;
+    Copied = holdtext.createTextRange();
+    Copied.execCommand("Copy");
+  }
+    
+  function ClipBoard2(my_target) {
+    var my_text = document.getElementById(my_target).innerHTML;
+    window.clipboardData.setData("Text",my_text); 
+  }
+
+  function new_window_focus() {
+    if(window.focus) {
+      mywindowhandler.focus();
+      alert("tried");      
+    }      
+  }
+  
+  function check_user_id() { 
+    if(mywindowhandler==null) {
+      mywindowhandler = window.open('about:blank','credit_results');  
+      document.form2.submit(); 
+      setTimeout(function () { document.form1.submit(); }, 500);             
+      mywindowhandler.focus();           
+    }
+    else {
+      if(!mywindowhandler.closed) {  
+        mywindowhandler.close();
+      }
+      mywindowhandler = window.open('about:blank','credit_results');     
+      document.form1.submit();  
+      mywindowhandler.focus();            
+    }   
+
+  }
+</script>    
+
+
+</apex:page>

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Center Support Request</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Center Support Requests</value>
+    </caseValues>
+    <fields>
+        <label><!-- Approval Reminder Count --></label>
+        <name>Approval_Reminder_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approved --></label>
+        <name>Approved__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approver --></label>
+        <name>Approver__c</name>
+        <relationshipLabel><!-- Center Support Requests (Approver) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Approver --></label>
+        <name>Approver_for_display__c</name>
+    </fields>
+    <fields>
+        <label><!-- Calendar Event ID --></label>
+        <name>Calendar_Event_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Center --></label>
+        <name>Center_Information__c</name>
+        <relationshipLabel><!-- Center Support Requests --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Clinical Staff --></label>
+        <name>Clinical_Staff__c</name>
+    </fields>
+    <fields>
+        <label><!-- Declined --></label>
+        <name>Declined__c</name>
+    </fields>
+    <fields>
+        <label><!-- Doctor --></label>
+        <name>Doctor__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hippa_Notice --></label>
+        <name>Hippa_Notice__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lab --></label>
+        <name>Lab__c</name>
+    </fields>
+    <fields>
+        <label><!-- Do you need to contact legal/compliance? --></label>
+        <name>Legal_Compliance__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Need by date --></label>
+        <name>Need_by_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- OM --></label>
+        <name>OM__c</name>
+    </fields>
+    <fields>
+        <label><!-- Obtained Center Approval --></label>
+        <name>Obtained_Center_Approval__c</name>
+    </fields>
+    <fields>
+        <label><!-- PEC --></label>
+        <name>PEC__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Closed</masterLabel>
+            <translation><!-- Closed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Open</masterLabel>
+            <translation><!-- Open --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Submit Reminder Count --></label>
+        <name>Submit_Reminder_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submitted Date Time --></label>
+        <name>Submitted_Date_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submitted for Approval --></label>
+        <name>Submitted_for_Approval__c</name>
+    </fields>
+    <fields>
+        <label><!-- Purpose of Visit --></label>
+        <name>Summary__c</name>
+    </fields>
+    <fields>
+        <label><!-- Travel Departure --></label>
+        <name>Travel_Departure__c</name>
+    </fields>
+    <fields>
+        <label><!-- Travel Return --></label>
+        <name>Travel_Return__c</name>
+    </fields>
+    <fields>
+        <label><!-- Traveler --></label>
+        <name>Traveler__c</name>
+        <relationshipLabel><!-- Center Support Requests (Traveler) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Support Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Clinical</masterLabel>
+            <translation><!-- Clinical --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Compliance</masterLabel>
+            <translation><!-- Compliance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cultural</masterLabel>
+            <translation><!-- Cultural --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hope RX</masterLabel>
+            <translation><!-- Hope RX --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lab</masterLabel>
+            <translation><!-- Lab --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Leadership</masterLabel>
+            <translation><!-- Leadership --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>On boarding PEC</masterLabel>
+            <translation><!-- On boarding PEC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Operations</masterLabel>
+            <translation><!-- Operations --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Practice Mastery</masterLabel>
+            <translation><!-- Practice Mastery --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rainmaker</masterLabel>
+            <translation><!-- Rainmaker --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales</masterLabel>
+            <translation><!-- Sales --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Center Support Request Layout</layout>
+        <sections>
+            <label><!-- Approver --></label>
+            <section>Approver</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Meeting With --></label>
+            <section>Meeting With</section>
+        </sections>
+        <sections>
+            <label><!-- Travel --></label>
+            <section>Travel</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <description><!-- Request initiated from CCMS --></description>
+        <label><!-- From CCMS --></label>
+        <name>CCMS</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Request initiated from an RBD --></description>
+        <label><!-- From RBD --></label>
+        <name>Center</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Date cannot not be before today&apos;s date --></errorMessage>
+        <name>Departure_cannot_be_before_today</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Must select someone with whom to meet --></errorMessage>
+        <name>Must_select_a_Meeting_With_option</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Return date cannot be before departure --></errorMessage>
+        <name>Return_cannot_be_before_departure</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Travel info cannot be partially filled in. If a traveler&apos;s name is entered you need to enter travel dates; if a departure date is entered you need to enter a return date, etc. --></errorMessage>
+        <name>Travel_info_is_all_or_nothing</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Calendar --></label>
+        <name>Calendar</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Cancel --></label>
+        <name>Cancel</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- New_Center_Support_Request --></label>
+        <name>New_Center_Support_Request</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- New_Center_Support_Request_detail --></label>
+        <name>New_Center_Support_Request_detail</name>
+    </webLinks>
+</CustomObjectTranslation>

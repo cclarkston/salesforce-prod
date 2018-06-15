@@ -1,0 +1,152 @@
+<apex:page controller="rpt_call_center_dash" sidebar="false" readOnly="true">
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<style type="text/css" media="print">
+  div.bPageHeader {
+    display:none;
+  }  
+  
+  p.form_holder {
+    display:none; 
+  }
+  
+  a.dlink {
+    display:none;
+  }  
+</style>
+
+
+<style>
+  tr.control td {
+    color:#5789AE;
+  }  
+  
+  table.accs_details td.indent {
+    padding-left:25px;      
+    font-weight:bold; 
+    font-style:italic;
+    empty-cells:hide;                
+  }
+  
+  table.accs_details td.vaca {
+    font-style:italic;   
+    text-align:center;             
+  }   
+</style>
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+
+<apex:form style="padding-top:0;display:inline;margin-top:0;" >
+ <apex:actionRegion >
+ <div id="header" style="border-bottom:3px solid black;padding-top:0;margin-top:0;">
+<table style="width:100%;padding-top:0;">
+<tr>
+  <td width="300px;"><br />
+  <table><tr><td><span style="font-weight:bold;width:150px;">Start Date : </span></td><td><apex:inputField value="{!sholder.Apt_Date__c}" /></td></tr>
+  <tr><td><span style="font-weight:bold;width:150px;">End Date : </span></td><td><apex:inputField value="{!eholder.Apt_Date__c}" /></td></tr></table>
+  </td>
+  <td width="400px;" style="border-right:2px solid black;"><br />
+  <apex:commandButton value="Run Report" action="{!rerun_report}" reRender="main_holder" status="update_status" onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);"   />
+  <apex:commandButton value="View Utilization" action="{!view_utilization}" style="margin-left:10px;"/>
+  <apex:commandButton value="WTL Dashboard" action="{!view_wtl_dash}" style="margin-left:10px;"/>     
+  <apex:commandButton value="Monthly" action="{!view_month_dash}" style="margin-left:10px;"/>          
+  </td>
+  <td><h1 class="report_header">CC Dashboard</h1></td>  
+</tr>
+</table>
+</div>
+</apex:actionRegion>
+
+
+<apex:outputPanel id="main_holder" rendered="true" layout="block" style="padding-top:2em;">
+<apex:actionStatus startStyle="font-weight:bold;color:red;" stoptext="" id="update_status">
+  <apex:facet name="start">Running Report...Please Wait</apex:facet>        
+</apex:actionStatus><br />      
+<apex:outputText escape="false" style="color:red;font-style:italic;font-weight:bold;" value="{!error_messages}" /><br />
+<h2>Data for&nbsp;<apex:outputfield value="{!sholder.Apt_Date__c}" /> - <apex:outputfield value="{!eholder.Apt_Date__c}" /></h2>
+<table class="accs_details" style="width:2000px">
+<tr class="control" style="font-size:10pt;vertical-align:bottom;">
+  <td style="width:150px;">Center</td>
+  <td style="width:75px;">Dental<br />Inquiry<br />Leads</td>
+  <td style="width:75px;">New Leads<br />GY%</td>
+  <td style="width:75px;">Cslts<br />Booked</td>  
+  <td style="width:75px;">Revived<br />Leads</td>
+  <td style="width:75px;">GY Prescreen<br />of Cslts<br />Booked</td>
+  <td style="width:75px;">Schedule<br />Rate on<br />Phone</td>
+  <td style="width:75px;">Available<br />Consult<br />Chairs</td>
+  <td style="width:75px;">Target<br />Consults<br />Current<br />Week</td>  
+  <td style="width:75px;">Scheduled<br />Consults<br />Current<br />Week</td>
+  <td style="width:75px;">%<br />Consults<br />Booked</td>      
+  <td style="width:75px;">Initially<br />Scheduled<br />Consults</td>   
+  <td style="width:75px;">Final<br />Scheduled<br />Consults</td>    
+  <td style="width:75px;">Final<br />Scheduled<br />Consults<br />GY %</td>    
+  <td style="width:75px;">Consults<br />Showed</td>
+  <td style="width:75px;">GY<br />Mix of<br />Consults<br />Showed</td>       
+  <td style="width:75px;">Show<br />Rate</td>        
+  <td style="width:75px;">Complete<br />Rate</td>        
+  <td style="width:75px;">Starts</td>      
+  <td style="width:75px;">Close Rate<br />Incl All PP</td>      
+  <td style="width:75px;">Starts<br />MTD</td>      
+  <td style="width:75px;">Actual<br />Consult<br />Chairs<br />Next Week</td>       
+  <td style="width:75px;">Scheduled<br />Consults<br />Next Week</td>         
+  <td style="width:75px;">% of<br />Consults<br />Scheduled<br />Next Week</td>         
+  <td style="width:75px;">% of<br />Consults<br />Scheduled<br />2nd Week</td>         
+  <td style="width:75px;">% of<br />Consults<br />Scheduled<br />3rd Week</td>         
+  <td style="width:75px;">% of<br />Consults<br />Scheduled<br />4th Week</td>                            
+  </tr>
+  
+<apex:variable var="rowclassname" value="accs" />
+<apex:repeat value="{!center_numbers}" var="all_centers" >
+  <tr class="{!if(all_centers.my_center.name=='Totals','footer',rowclassname)}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />  
+  <td class="indent">{!all_centers.my_center.name}</td>
+  <td class="right">{!all_centers.di_leads}</td>
+  <td class="right"><apex:outputText value="{0,number,##,##,##0 %}"><apex:param value="{!all_centers.di_gy_percent}" /></apex:outputtext></td>
+  <td class="right">{!all_centers.di_consults_booked}</td>
+  <td class="right">{!all_centers.revived_leads}</td>
+  <td class="right"><apex:outputText value="{0,number,##,##,##0 %}"><apex:param value="{!all_centers.cslts_gy_percent}" /></apex:outputtext></td>
+  <td class="right"><apex:outputText value="{0,number,##,##,##0 %}"><apex:param value="{!all_centers.schedule_rate}" /></apex:outputtext></td>
+
+  
+  <td class="right"><apex:outputtext value="{!all_centers.available_consults}" rendered="{!if(all_centers.available_consults==0,false,true)}"  /><apex:outputText value="VACA" rendered="{!if(all_centers.available_consults==0,true,false)}" /></td>
+  <td class="right"><apex:outputtext value="{!all_centers.budgeted_consults_week}" rendered="{!if(all_centers.available_consults==0,false,true)}"  /><apex:outputText value="VACA" rendered="{!if(all_centers.available_consults==0,true,false)}" /></td>  
+  <td class="right"><apex:outputtext value="{!all_centers.scheduled_consults}" rendered="{!if(all_centers.available_consults==0,false,true)}" /><apex:outputText value="VACA" rendered="{!if(all_centers.available_consults==0,true,false)}" /></td>  
+  <td class="right"><apex:outputText value="{0,number,##,##,##0 %}" rendered="{!if(all_centers.available_consults==0,false,true)}" ><apex:param value="{!all_centers.consults_booked_rate}" /></apex:outputtext><apex:outputText value="VACA" rendered="{!if(all_centers.available_consults==0,true,false)}" /></td>
+  <td class="right"><apex:outputtext value="{!all_centers.initially_scheduled_consults}" rendered="{!if(all_centers.available_consults==0,false,true)}"  /><apex:outputText value="VACA" rendered="{!if(all_centers.available_consults==0,true,false)}" /></td>
+  <td class="right"><apex:outputtext value="{!all_centers.final_scheduled_consults}" rendered="{!if(all_centers.available_consults==0,false,true)}"  /><apex:outputText value="VACA" rendered="{!if(all_centers.available_consults==0,true,false)}" /></td>    
+  <td class="right"><apex:outputtext value="{0,number,##,##,##0 %}" rendered="{!if(all_centers.available_consults==0,false,true)}"  ><apex:param value="{!all_centers.final_gy_rate}" /></apex:outputtext><apex:outputText value="VACA" rendered="{!if(all_centers.available_consults==0,true,false)}" /></td>    
+  <td class="right"><apex:outputtext value="{!all_centers.consults_showed}" rendered="{!if(all_centers.available_consults==0,false,true)}" /><apex:outputText value="VACA" rendered="{!if(all_centers.available_consults==0,true,false)}" /></td> 
+  <td class="right"><apex:outputText value="{0,number,##,##,##0 %}" rendered="{!if(all_centers.available_consults==0,false,true)}" ><apex:param value="{!all_centers.show_gy_rate}" /></apex:outputtext><apex:outputText value="VACA" rendered="{!if(all_centers.available_consults==0,true,false)}" /></td> 
+  <td class="right"><apex:outputText value="{0,number,##,##,##0 %}" rendered="{!if(all_centers.available_consults==0,false,true)}" ><apex:param value="{!all_centers.show_rate}" /></apex:outputtext><apex:outputText value="VACA" rendered="{!if(all_centers.available_consults==0,true,false)}" /></td> 
+  <td class="right"><apex:outputText value="{0,number,##,##,##0 %}" rendered="{!if(all_centers.available_consults==0,false,true)}" ><apex:param value="{!all_centers.complete_rate}" /></apex:outputtext><apex:outputText value="VACA" rendered="{!if(all_centers.available_consults==0,true,false)}" /></td> 
+  <td class="right"><apex:outputtext value="{!all_centers.starts}" rendered="{!if(all_centers.available_consults==0,false,true)}" /><apex:outputText value="VACA" rendered="{!if(all_centers.available_consults==0,true,false)}" /></td>       
+  <td class="right"><apex:outputText value="{0,number,##,##,##0 %}" rendered="{!if(all_centers.available_consults==0,false,true)}" ><apex:param value="{!all_centers.close_rate}" /></apex:outputtext><apex:outputText value="VACA" rendered="{!if(all_centers.available_consults==0,true,false)}" /></td>    
+  
+  <td class="right">{!all_centers.starts_mtd}</td>
+  <td class="right"><apex:outputText value="VACA" rendered="{!if(all_centers.available_consults_next_week==0,true,false)}" /><apex:outputText value="{!all_centers.available_consults_next_week}" rendered="{!if(all_centers.available_consults_next_week==0,false,true)}" /></td>
+  <td class="right"><apex:outputText value="VACA" rendered="{!if(all_centers.available_consults_next_week==0,true,false)}" /><apex:outputText value="{!all_centers.scheduled_consults_next_week}" rendered="{!if(all_centers.available_consults_next_week==0,false,true)}" /></td>     
+  <td class="right"><apex:outputText value="VACA" rendered="{!if(all_centers.available_consults_next_week==0,true,false)}" /><apex:outputText value="{0,number,##,##,##0 %}" rendered="{!if(all_centers.available_consults_next_week==0,false,true)}"><apex:param value="{!all_centers.consults_booked_next_rate}" /></apex:outputtext></td>   
+  <td class="{!if(all_centers.available_consults_two_week==0,'vaca','right')}"><apex:outputText value="{0,number,##,##,##0 %}" rendered="{!if(all_centers.available_consults_two_week==0,false,true)}" ><apex:param value="{!all_centers.consults_booked_2_rate}" /></apex:outputtext><apex:outputText value="VACA" rendered="{!if(all_centers.available_consults_two_week==0,true,false)}" /></td>  
+  <td class="{!if(all_centers.available_consults_three_week==0,'vaca','right')}"><apex:outputText value="{0,number,##,##,##0 %}" rendered="{!if(all_centers.available_consults_three_week==0,false,true)}" ><apex:param value="{!all_centers.consults_booked_3_rate}" /></apex:outputtext><apex:outputText value="VACA" rendered="{!if(all_centers.available_consults_three_week==0,true,false)}" /></td>  
+  <td class="{!if(all_centers.available_consults_four_week==0,'vaca','right')}"><apex:outputText value="{0,number,##,##,##0 %}" rendered="{!if(all_centers.available_consults_four_week==0,false,true)}" ><apex:param value="{!all_centers.consults_booked_4_rate}" /></apex:outputtext><apex:outputText value="VACA" rendered="{!if(all_centers.available_consults_four_week==0,true,false)}" /></td>              
+</tr> 
+</apex:repeat>
+</table>
+<apex:outputLink target="__blank" value="{!csv_link}" style="display:block;padding-top:1em;color:blue;font-weight:bold;">Download CSV File</apex:outputLink>
+<apex:outputLink target="__blank" value="{!csv_altlink}" style="display:block;padding-top:1em;color:blue;font-weight:bold;">Download CSV File - Alternate Format</apex:outputLink>
+<apex:outputLink target="__blank" value="{!csv_altlink_po}" style="display:block;padding-top:1em;color:blue;font-weight:bold;">Download CSV File - Alternate Format (PO details)</apex:outputLink>
+</apex:outputPanel>
+</apex:form>
+</apex:page>

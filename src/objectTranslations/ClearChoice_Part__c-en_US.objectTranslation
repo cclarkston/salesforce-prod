@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>ClearChoice Part</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>ClearChoice Parts</value>
+    </caseValues>
+    <fields>
+        <label><!-- Brand --></label>
+        <name>Brand__c</name>
+        <picklistValues>
+            <masterLabel>Allergan</masterLabel>
+            <translation><!-- Allergan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dysport</masterLabel>
+            <translation><!-- Dysport --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EltaMD</masterLabel>
+            <translation><!-- EltaMD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GLO</masterLabel>
+            <translation><!-- GLO --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Galderma</masterLabel>
+            <translation><!-- Galderma --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Latisse</masterLabel>
+            <translation><!-- Latisse --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SkinCeuticals</masterLabel>
+            <translation><!-- SkinCeuticals --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SkinMedica</masterLabel>
+            <translation><!-- SkinMedica --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SunFx</masterLabel>
+            <translation><!-- SunFx --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Cost --></label>
+        <name>Cost__c</name>
+    </fields>
+    <fields>
+        <label><!-- Injectable? --></label>
+        <name>Injectable__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Active --></label>
+        <name>Is_Active__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Taxable --></label>
+        <name>Is_Taxable__c</name>
+    </fields>
+    <fields>
+        <label><!-- Item Price --></label>
+        <name>Item_Price__c</name>
+    </fields>
+    <fields>
+        <label><!-- Network Wide Quantity --></label>
+        <name>Network_Wide_Quantity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Part Description --></label>
+        <name>Part_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Product Size --></label>
+        <name>Product_Size__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Dental Product</masterLabel>
+            <translation><!-- Dental Product --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Esthetics Product</masterLabel>
+            <translation><!-- Esthetics Product --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Esthetics Service</masterLabel>
+            <translation><!-- Esthetics Service --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- UPC --></label>
+        <name>UPC__c</name>
+    </fields>
+    <layouts>
+        <layout>ClearChoice Part - Product</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>ClearChoice Part - Service</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>ClearChoice Part Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <description><!-- A part with inventory, that will usually be taxed and has a cost, brand, UPC --></description>
+        <label><!-- Product --></label>
+        <name>Product</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- A medical service. This will not use the cost, qty, or upc fields. --></description>
+        <label><!-- Service --></label>
+        <name>Service</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- You must select a Type. --></errorMessage>
+        <name>Must_select_type</name>
+    </validationRules>
+</CustomObjectTranslation>

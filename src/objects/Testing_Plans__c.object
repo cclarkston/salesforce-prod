@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>InDevelopment</deploymentStatus>
+    <description>This table contains a list of all business (primarily marketing) hypothesis testing plans</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Conclusion__c</fullName>
+        <externalId>false</externalId>
+        <label>Conclusion</label>
+        <length>1500</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>6</visibleLines>
+    </fields>
+    <fields>
+        <fullName>DMA__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>This is the market that the test is occurring in.</description>
+        <externalId>false</externalId>
+        <label>DMA</label>
+        <referenceTo>DMA__c</referenceTo>
+        <relationshipName>Testing_Plans</relationshipName>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>End_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>End Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Hypothesis__c</fullName>
+        <defaultValue>&quot;I believe: &quot;</defaultValue>
+        <description>This is the written statement of what the hypothesis being tested is.</description>
+        <externalId>false</externalId>
+        <label>Hypothesis</label>
+        <length>1500</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>8</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Proposed_Approach__c</fullName>
+        <externalId>false</externalId>
+        <label>Proposed Approach</label>
+        <length>1500</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Proposed_Test_Length__c</fullName>
+        <description>How many days do you expect it will take to run the  test and get a clean result?</description>
+        <externalId>false</externalId>
+        <label>Proposed Test Length</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Result__c</fullName>
+        <externalId>false</externalId>
+        <label>Result</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Status__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Pass</fullName>
+                    <default>false</default>
+                    <label>Pass</label>
+                </value>
+                <value>
+                    <fullName>Fail</fullName>
+                    <default>false</default>
+                    <label>Fail</label>
+                </value>
+                <value>
+                    <fullName>Inconclusive</fullName>
+                    <default>false</default>
+                    <label>Inconclusive</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Complete</controllingFieldValue>
+                <valueName>Pass</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Complete</controllingFieldValue>
+                <valueName>Fail</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Risks__c</fullName>
+        <externalId>false</externalId>
+        <label>Risks</label>
+        <length>1500</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Start_Date__c</fullName>
+        <description>The date the test went live</description>
+        <externalId>false</externalId>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Proposed</fullName>
+                    <default>true</default>
+                    <label>Proposed</label>
+                </value>
+                <value>
+                    <fullName>Scheduled</fullName>
+                    <default>false</default>
+                    <label>Scheduled</label>
+                </value>
+                <value>
+                    <fullName>Active</fullName>
+                    <default>false</default>
+                    <label>Active</label>
+                </value>
+                <value>
+                    <fullName>Complete</fullName>
+                    <default>false</default>
+                    <label>Complete</label>
+                </value>
+                <value>
+                    <fullName>Legacy</fullName>
+                    <default>false</default>
+                    <label>Legacy</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Success_Measure__c</fullName>
+        <externalId>false</externalId>
+        <label>Success Measure</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Summary__c</fullName>
+        <externalId>false</externalId>
+        <label>Summary</label>
+        <length>45</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Test_Type__c</fullName>
+        <description>What category of test would this hypothesis fall into?</description>
+        <externalId>false</externalId>
+        <label>Testing Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Broadcast Buying</fullName>
+                    <default>false</default>
+                    <label>Broadcast Buying</label>
+                </value>
+                <value>
+                    <fullName>Print Buying</fullName>
+                    <default>false</default>
+                    <label>Print Buying</label>
+                </value>
+                <value>
+                    <fullName>Broadcast Creative</fullName>
+                    <default>false</default>
+                    <label>Broadcast Creative</label>
+                </value>
+                <value>
+                    <fullName>Print Creative</fullName>
+                    <default>false</default>
+                    <label>Print Creative</label>
+                </value>
+                <value>
+                    <fullName>Digital Display</fullName>
+                    <default>false</default>
+                    <label>Digital Display</label>
+                </value>
+                <value>
+                    <fullName>Digital Search</fullName>
+                    <default>false</default>
+                    <label>Digital Search</label>
+                </value>
+                <value>
+                    <fullName>Website Optimization</fullName>
+                    <default>false</default>
+                    <label>Website Optimization</label>
+                </value>
+                <value>
+                    <fullName>Business Operations</fullName>
+                    <default>false</default>
+                    <label>Business Operations</label>
+                </value>
+                <value>
+                    <fullName>Direct Mail Campaign</fullName>
+                    <default>false</default>
+                    <label>Direct Mail Campaign</label>
+                </value>
+                <value>
+                    <fullName>Email Campaign</fullName>
+                    <default>false</default>
+                    <label>Email Campaign</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Testing Plan</label>
+    <listViews>
+        <fullName>Active_Test_Plans</fullName>
+        <columns>NAME</columns>
+        <columns>Status__c</columns>
+        <columns>DMA__c</columns>
+        <columns>Test_Type__c</columns>
+        <columns>Success_Measure__c</columns>
+        <columns>Start_Date__c</columns>
+        <columns>End_Date__c</columns>
+        <columns>Result__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>End_Date__c</field>
+            <operation>lessOrEqual</operation>
+            <value>TODAY</value>
+        </filters>
+        <filters>
+            <field>Start_Date__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>TODAY</value>
+        </filters>
+        <label>Active Test Plans</label>
+    </listViews>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>Summary__c</columns>
+        <columns>OWNER.LAST_NAME</columns>
+        <columns>NAME</columns>
+        <columns>DMA__c</columns>
+        <columns>Start_Date__c</columns>
+        <columns>End_Date__c</columns>
+        <columns>Hypothesis__c</columns>
+        <columns>Conclusion__c</columns>
+        <columns>Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>Test-{000000}</displayFormat>
+        <label>Test Number</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Testing Plans</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Valid_Window</fullName>
+        <active>true</active>
+        <description>A test cannot have a negative time window.</description>
+        <errorConditionFormula>Start_Date__c &lt;  End_Date__c</errorConditionFormula>
+        <errorDisplayField>Start_Date__c</errorDisplayField>
+        <errorMessage>The test date ranges are invalid.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

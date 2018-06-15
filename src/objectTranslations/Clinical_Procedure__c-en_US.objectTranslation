@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Clinical Procedure</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Clinical Procedures</value>
+    </caseValues>
+    <fields>
+        <label><!-- ADA Code --></label>
+        <name>ADA_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Allow Tooth Selection --></label>
+        <name>Allow_Tooth_Selection__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assistants Needed --></label>
+        <name>Assistants_Needed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Center Information --></label>
+        <name>Center_Information__c</name>
+        <relationshipLabel><!-- Clinical Procedures --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Cost --></label>
+        <name>Cost__c</name>
+    </fields>
+    <fields>
+        <label><!-- Default Teeth Selection --></label>
+        <name>Default_Teeth_Selection__c</name>
+    </fields>
+    <fields>
+        <label><!-- Doctor Required --></label>
+        <name>Doctor_Required__c</name>
+    </fields>
+    <fields>
+        <label><!-- Insurance Fee --></label>
+        <name>Insurance_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Markup Max --></label>
+        <name>Markup_Max__c</name>
+    </fields>
+    <fields>
+        <label><!-- Markup Min --></label>
+        <name>Markup_Min__c</name>
+    </fields>
+    <fields>
+        <label><!-- Procedure Description --></label>
+        <name>Procedure_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Procedure Filter --></label>
+        <name>Procedure_Filter__c</name>
+        <picklistValues>
+            <masterLabel>Misc</masterLabel>
+            <translation><!-- Misc --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prosth</masterLabel>
+            <translation><!-- Prosth --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Surgical</masterLabel>
+            <translation><!-- Surgical --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Time Required --></label>
+        <name>Time_Required__c</name>
+    </fields>
+    <fields>
+        <label><!-- isactive --></label>
+        <name>isactive__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,4 @@
+<apex:component controller="dp_header_generator" access="global" >
+<apex:attribute name="CenterRecord" description="Passed in Center Information record" type="Center_Information__c" assignTo="{!current_center}" />
+<apex:outputtext value="{!center_one_line_html}" escape="false" />
+</apex:component>

@@ -1,0 +1,1165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Table that holds the inventory of consult appointments that can be assigned to lead ids.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Active__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Indicates if the appointment block is active in the system</description>
+        <externalId>false</externalId>
+        <label>Active</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Add_Ons__c</fullName>
+        <externalId>false</externalId>
+        <label>Add Ons</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <controllingField>Treatment__c</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Peppermint Lip Treatment</fullName>
+                    <default>false</default>
+                    <label>Peppermint Lip Treatment</label>
+                </value>
+                <value>
+                    <fullName>Hand Facial</fullName>
+                    <default>false</default>
+                    <label>Hand Facial</label>
+                </value>
+                <value>
+                    <fullName>Eye Treatment</fullName>
+                    <default>false</default>
+                    <label>Eye Treatment</label>
+                </value>
+                <value>
+                    <fullName>Glycolic 30%</fullName>
+                    <default>false</default>
+                    <label>Glycolic 30%</label>
+                </value>
+                <value>
+                    <fullName>Alpha Beta</fullName>
+                    <default>false</default>
+                    <label>Alpha Beta</label>
+                </value>
+                <value>
+                    <fullName>Retinol + C Exfoliant</fullName>
+                    <default>false</default>
+                    <label>Retinol + C Exfoliant</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Admin_Notes__c</fullName>
+        <externalId>false</externalId>
+        <label>Admin Notes</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Apt_Date__c</fullName>
+        <description>Date the appointment block is for</description>
+        <externalId>false</externalId>
+        <label>Apt Date</label>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Apt_Datetime__c</fullName>
+        <description>Adding this field just to help out Scott with using the Excel connector.  It shouldn&apos;t really beused for anything,  and hopefully we can just pull this someday in the future.</description>
+        <externalId>false</externalId>
+        <formula>/* reworking this...adding 7 to starting hour is not the correct way to handle this.  It fails when we have late day apts as 17 + 7 puts us into the next day
+DATETIMEVALUE( TEXT(Apt_Date__c) &amp; &quot; &quot; &amp; TEXT(Start_Hour_Int__c+7)  &amp; &quot;:&quot;&amp;Start_Minute__c&amp;&quot;:00&quot;) */
+
+DATETIMEVALUE( TEXT(Apt_Date__c) &amp; &quot; &quot; &amp; TEXT(Start_Hour_Int__c) &amp; &quot;:&quot;&amp; if(len(Start_Minute__c)=1,&quot;0&quot; &amp; Start_Minute__c,Start_Minute__c) &amp; &quot;:00&quot;) + (7/24)</formula>
+        <label>Apt Datetime</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Apt_Notes__c</fullName>
+        <description>Any notes entered when the appointment was schedueld</description>
+        <externalId>false</externalId>
+        <label>Apt Notes</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Arrival_Time__c</fullName>
+        <description>Timestamp for when the patient arrives at the office and begins filling out paperwork</description>
+        <externalId>false</externalId>
+        <label>Arrival Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Auto_Holder__c</fullName>
+        <description>Just using this field temporarily to hold values from the existing auto_reminder__c field.  The team has requested we switch that field from a checkbox to a picklist,  so we can have null values.  Making that change will delete all existing data,  so I need to store it elsewhere and push it back after the change.</description>
+        <externalId>false</externalId>
+        <label>Auto Holder</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Auto_Reminder__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates if the team will call with an apt reminder</description>
+        <externalId>false</externalId>
+        <label>Auto Reminder</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Callback_Consult_PEC__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Callback Consult PEC</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Consult_Inventory3</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Callback_Consult__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Callback Consult</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Check_In_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>Check In Code</label>
+        <length>7</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Color__c</fullName>
+        <description>Color Code for this appointment block on the calendar</description>
+        <externalId>false</externalId>
+        <label>Color Code</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Light Green</fullName>
+                    <default>false</default>
+                    <label>Light Green</label>
+                </value>
+                <value>
+                    <fullName>Light Purple</fullName>
+                    <default>false</default>
+                    <label>Light Purple</label>
+                </value>
+                <value>
+                    <fullName>Light Red</fullName>
+                    <default>false</default>
+                    <label>Light Red</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Confirmation_Status__c</fullName>
+        <description>Field to store the confirmation status for an appointment block</description>
+        <externalId>false</externalId>
+        <label>Confirmation Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Confirmed</fullName>
+                    <color>#0B6FCE</color>
+                    <default>false</default>
+                    <label>Confirmed</label>
+                </value>
+                <value>
+                    <fullName>Not Confirmed</fullName>
+                    <color>#78C953</color>
+                    <default>true</default>
+                    <label>Not Confirmed</label>
+                </value>
+                <value>
+                    <fullName>LVM</fullName>
+                    <color>#E27001</color>
+                    <default>false</default>
+                    <label>LVM</label>
+                </value>
+                <value>
+                    <fullName>Transfered</fullName>
+                    <color>#FF0000</color>
+                    <default>false</default>
+                    <label>Transfered</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Consult_Completed__c</fullName>
+        <description>Timestamp for when the consultation is completed</description>
+        <externalId>false</externalId>
+        <label>Consult Completed</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Consult_PEC__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>PEC that handled the consult</description>
+        <externalId>false</externalId>
+        <label>Consult PEC</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Consult_Inventory2</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Consult_Room__c</fullName>
+        <description>The consult room the appointment blocks are tied to.</description>
+        <externalId>false</externalId>
+        <label>Consult Room</label>
+        <referenceTo>Consult_Rooms__c</referenceTo>
+        <relationshipLabel>Consult Inventory</relationshipLabel>
+        <relationshipName>Consult_Inventory</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Consult_Show_Status__c</fullName>
+        <description>Tracking the consultation final disposition with this field.</description>
+        <externalId>false</externalId>
+        <label>Consult Show Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Consult Completed</fullName>
+                    <default>false</default>
+                    <label>Consult Completed</label>
+                </value>
+                <value>
+                    <fullName>No Show</fullName>
+                    <default>false</default>
+                    <label>No Show</label>
+                </value>
+                <value>
+                    <fullName>Patient Left</fullName>
+                    <default>false</default>
+                    <label>Patient Left</label>
+                </value>
+                <value>
+                    <fullName>Arrived</fullName>
+                    <default>false</default>
+                    <label>Arrived</label>
+                </value>
+                <value>
+                    <fullName>Ready for Consult</fullName>
+                    <default>false</default>
+                    <label>Ready for Consult</label>
+                </value>
+                <value>
+                    <fullName>Consult Started</fullName>
+                    <default>false</default>
+                    <label>Consult Started</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Consult_Started__c</fullName>
+        <description>Timestamp for when the patient has begun the consultation with the doctor.</description>
+        <externalId>false</externalId>
+        <label>Consult Started</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DOW_int__c</fullName>
+        <description>Field to hold the day of the week value from a datetime format. 1 = Monday / 7 = Sunday</description>
+        <externalId>false</externalId>
+        <label>DOW_int</label>
+        <precision>1</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Double_Consult__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>A &apos;Double Consult&apos; is an appointment for a patient who is coming in for a consult with another new patient - ie, two appointments for two different people who know each and are coming in together. This field links one double consult appointment to another. In practice, if one appointment has a double consult link, the linked record should have its own double consult link pointing back to the original (and when one is removed, the other should be automatically removed as well).</description>
+        <externalId>false</externalId>
+        <label>Double Consult</label>
+        <referenceTo>Consult_Inventory__c</referenceTo>
+        <relationshipLabel>Consult Inventory</relationshipLabel>
+        <relationshipName>Consult_Inventory</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>End_Hour__c</fullName>
+        <description>Text display for the ending hour of this appointment block</description>
+        <externalId>false</externalId>
+        <label>End Hour</label>
+        <length>2</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>End_Minute__c</fullName>
+        <description>Text display for the ending minutes of the appointment block</description>
+        <externalId>false</externalId>
+        <label>End Minute</label>
+        <length>2</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>External_Agent__c</fullName>
+        <description>Name of the agent from an external agency that registered this task or activity.</description>
+        <externalId>false</externalId>
+        <label>External Agent</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>GC_Offered__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Was this consult offered a gift card to come in?</description>
+        <externalId>false</externalId>
+        <label>GC Offered</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Last_Reschedule_Time__c</fullName>
+        <description>The datetime the last reschedule event occured</description>
+        <externalId>false</externalId>
+        <label>Last Reschedule Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Last_Rescheduled_By__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>User id for the last person who rescheduled this appointment.</description>
+        <externalId>false</externalId>
+        <label>Last Rescheduled By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Rescheduled_By</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Leadscore_At_Schedule_Time__c</fullName>
+        <description>The value in the leadscore field at the time the consult was scheduled.</description>
+        <externalId>false</externalId>
+        <label>Leadscore At Schedule Time</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Left_Time__c</fullName>
+        <description>Timestamp marking when a patient left. This would be after arrival time, but prior to the consultation being completed.</description>
+        <externalId>false</externalId>
+        <label>Left Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>No_Show_Contacted_Notes__c</fullName>
+        <description>Notes entered by the front desk when they contact a no show appointment.</description>
+        <externalId>false</externalId>
+        <label>No Show Contacted Notes</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>No_Show_Contacted__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates if a patient was contacted by the front desk after not showing up for an appointment.</description>
+        <externalId>false</externalId>
+        <label>No Show Contacted</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Patient_Converted__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(isnull(Scheduled_Lead__c),if(isnull(Scheduled_Account__c),0,1),if(Scheduled_Lead__r.IsConverted,1,0))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Patient Converted</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Patient_Mobile__c</fullName>
+        <description>Using this field to store the lead or account mobile phone.  This is necessary due to our use of force.com app license for the centers.  This license does not have access to the lead object,  so it has to be stored in the custom object.  will need a trigger to keep this in synch with the lead record.</description>
+        <externalId>false</externalId>
+        <formula>if(Scheduled_Lead__c&lt;&gt;null,Scheduled_Lead__r.MobilePhone,
+  if(Scheduled_Account__c&lt;&gt;null,&apos;&apos;,&apos;&apos;))</formula>
+        <label>Patient_Mobile</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Patient_Name__c</fullName>
+        <description>Using this field to store the lead name. This is necessary due to our use of force.com app license for the centers. This license does not have access to the lead object, so it has to be stored in the custom object. will need a trigger to keep this in synch with the lead record.</description>
+        <externalId>false</externalId>
+        <formula>/* if(isnull(Scheduled_Lead__c),if(isnull(Scheduled_Account__c),&apos;&apos;, Scheduled_Account__r.Name),Scheduled_Lead__r.Full_Name__c) */
+
+Scheduled_Lead__r.Full_Name__c + Scheduled_Account__r.FirstName + &apos; &apos; + Scheduled_Account__r.LastName</formula>
+        <label>Patient Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Patient_Phone__c</fullName>
+        <description>Using this field to store the lead or account phone.  This is necessary due to our use of force.com app license for the centers.  This license does not have access to the lead object,  so it has to be stored in the custom object.  will need a trigger to keep this in synch with the lead record.</description>
+        <externalId>false</externalId>
+        <formula>if(Scheduled_Lead__c&lt;&gt;null,Scheduled_Lead__r.Phone,
+  if(Scheduled_Account__c&lt;&gt;null,Scheduled_Account__r.Phone,&apos;&apos;))</formula>
+        <label>Patient Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Patient_Referral_Office__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(Scheduled_Lead__c&lt;&gt;null,Scheduled_Lead__r.Referral_Location__c, 
+ if(Scheduled_Account__c&lt;&gt;null,Scheduled_Account__r.Referral_Location__c,null))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Patient Referral Office</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Patient_Warranty_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>Scheduled_Lead__r.Warranty_ID__c + Scheduled_Account__r.Warranty_ID__c</formula>
+        <label>Patient Warranty ID</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Patient_Work__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(Scheduled_Lead__c&lt;&gt;null,Scheduled_Lead__r.Work__c, 
+if(Scheduled_Account__c&lt;&gt;null,&apos;&apos;,&apos;&apos;))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Patient Work</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Pre_Screen_Type__c</fullName>
+        <description>Pre-Screen restrictions for this block</description>
+        <externalId>false</externalId>
+        <label>Pre-Screen Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Green/Yellow</fullName>
+                    <default>false</default>
+                    <label>Green/Yellow</label>
+                </value>
+                <value>
+                    <fullName>Green/Yellow Only</fullName>
+                    <default>false</default>
+                    <label>Green/Yellow Only</label>
+                </value>
+                <value>
+                    <fullName>Any</fullName>
+                    <default>false</default>
+                    <label>Any</label>
+                </value>
+                <value>
+                    <fullName>Seminar</fullName>
+                    <default>false</default>
+                    <label>Seminar</label>
+                </value>
+                <value>
+                    <fullName>Red/Blue Only</fullName>
+                    <default>false</default>
+                    <label>Red/Blue Only</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Ready_Time__c</fullName>
+        <description>Timestamp that indicates when the patient has finished filling out their paperwork and is ready to be seen by the PEC</description>
+        <externalId>false</externalId>
+        <label>Ready Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Scheduled_Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Link to a scheduled consult. Team needs the ability to schedule these as we sometimes convert a lead and then have them come back for a second (or third etc) consult.</description>
+        <externalId>false</externalId>
+        <label>Scheduled Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Consult Inventory</relationshipLabel>
+        <relationshipName>Consult_Inventory</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Scheduled_Lead__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lead scheduled in this appointment block</description>
+        <externalId>false</externalId>
+        <label>Scheduled Lead</label>
+        <referenceTo>Lead</referenceTo>
+        <relationshipLabel>Consult Inventory</relationshipLabel>
+        <relationshipName>Consult_Inventory</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Scheduled_Patient__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Scheduled Patient</label>
+        <referenceTo>Private_Practice_Patient__c</referenceTo>
+        <relationshipLabel>Consult Inventory</relationshipLabel>
+        <relationshipName>Consult_Inventory</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Scheduled_Time__c</fullName>
+        <description>Time the appointment was scheduled</description>
+        <externalId>false</externalId>
+        <label>Scheduled Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Scheduled_by__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>User who scheduled this appointment</description>
+        <externalId>false</externalId>
+        <label>Scheduled by</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Consult_Inventory</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Send_Holder__c</fullName>
+        <description>Just using this field temporarily to hold values from the existing auto_reminder__c field.  The team has requested we switch that field from a checkbox to a picklist,  so we can have null values.  Making that change will delete all existing data,  so I need to store it elsewhere and push it back after the change.</description>
+        <externalId>false</externalId>
+        <label>Send Holder</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Send_Reminder__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Controls whether or not the system will send an automatic text reminder to the patient</description>
+        <externalId>false</externalId>
+        <label>Send Reminder</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Special_Initiative__c</fullName>
+        <externalId>false</externalId>
+        <label>Special Initiative</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Firm Appt Date</fullName>
+                    <default>false</default>
+                    <label>Firm Appt Date</label>
+                </value>
+                <value>
+                    <fullName>Group Consult</fullName>
+                    <default>false</default>
+                    <label>Group Consult</label>
+                </value>
+                <value>
+                    <fullName>Hard Stop</fullName>
+                    <default>false</default>
+                    <label>Hard Stop</label>
+                </value>
+                <value>
+                    <fullName>Orange Crush</fullName>
+                    <default>false</default>
+                    <label>Orange Crush</label>
+                </value>
+                <value>
+                    <fullName>Ruby Red</fullName>
+                    <default>false</default>
+                    <label>Ruby Red</label>
+                </value>
+                <value>
+                    <fullName>Wait List</fullName>
+                    <default>false</default>
+                    <label>Wait List</label>
+                </value>
+                <value>
+                    <fullName>White Glove</fullName>
+                    <default>false</default>
+                    <label>White Glove</label>
+                </value>
+                <value>
+                    <fullName>Workshop</fullName>
+                    <default>false</default>
+                    <label>Workshop</label>
+                </value>
+                <value>
+                    <fullName>V2</fullName>
+                    <default>false</default>
+                    <label>V2</label>
+                </value>
+                <value>
+                    <fullName>Red Rally</fullName>
+                    <default>false</default>
+                    <label>Red Rally</label>
+                </value>
+                <value>
+                    <fullName>Double Decker</fullName>
+                    <default>false</default>
+                    <label>Double Decker</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Start_Hour_Int__c</fullName>
+        <description>Integer Value of Start Hour</description>
+        <externalId>false</externalId>
+        <formula>Value( Start_Hour__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Start Hour Int</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Start_Hour__c</fullName>
+        <description>Text display for the starting hour of the appointment block</description>
+        <externalId>false</externalId>
+        <label>Start Hour</label>
+        <length>2</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Start_Minute_Int__c</fullName>
+        <description>Integer value of starting minute field</description>
+        <externalId>false</externalId>
+        <formula>value( Start_Minute__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Start Minute Int</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Start_Minute__c</fullName>
+        <description>text display for the starting minutes of this appointment block</description>
+        <externalId>false</externalId>
+        <label>Start Minute</label>
+        <length>2</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Started_By_Someone_Else__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Was the consultation started by someone else?</description>
+        <externalId>false</externalId>
+        <label>Started By Someone Else</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Status_Exported__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Checkbox to track if the show status changes were exported to the lead record where possible.</description>
+        <externalId>false</externalId>
+        <label>Status Exported</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Template_Apt__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Link to the template apt id that this block was generated by. This will be used in case the origional template appointment is adjusted and we want to modify any open blocks tied to it.</description>
+        <externalId>false</externalId>
+        <label>Template Apt ID</label>
+        <referenceTo>Template_Apt__c</referenceTo>
+        <relationshipLabel>Consult Inventory</relationshipLabel>
+        <relationshipName>Consult_Inventory</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Treatment__c</fullName>
+        <description>Type of operation the patient is coming in for a consult on</description>
+        <externalId>false</externalId>
+        <label>Treatment</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Complimentary Consult</fullName>
+                    <default>false</default>
+                    <label>Complimentary Consult</label>
+                </value>
+                <value>
+                    <fullName>Complimentary Injectables w/Consult</fullName>
+                    <default>false</default>
+                    <label>Complimentary Injectables w/Consult</label>
+                </value>
+                <value>
+                    <fullName>Complimentary Laser w/Consult</fullName>
+                    <default>false</default>
+                    <label>Complimentary Laser w/Consult</label>
+                </value>
+                <value>
+                    <fullName>Complimentary Skin Care w/Consult</fullName>
+                    <default>false</default>
+                    <label>Complimentary Skin Care w/Consult</label>
+                </value>
+                <value>
+                    <fullName>Medi Facial</fullName>
+                    <default>false</default>
+                    <label>Medi Facial</label>
+                </value>
+                <value>
+                    <fullName>Neurotoxin</fullName>
+                    <default>false</default>
+                    <label>Neurotoxin</label>
+                </value>
+                <value>
+                    <fullName>Dermal Filler</fullName>
+                    <default>false</default>
+                    <label>Dermal Filler</label>
+                </value>
+                <value>
+                    <fullName>Deoxycholic Acid</fullName>
+                    <default>false</default>
+                    <label>Deoxycholic Acid</label>
+                </value>
+                <value>
+                    <fullName>IPL</fullName>
+                    <default>false</default>
+                    <label>IPL</label>
+                </value>
+                <value>
+                    <fullName>Sublime</fullName>
+                    <default>false</default>
+                    <label>Sublime</label>
+                </value>
+                <value>
+                    <fullName>Sublative</fullName>
+                    <default>false</default>
+                    <label>Sublative</label>
+                </value>
+                <value>
+                    <fullName>LHR</fullName>
+                    <default>false</default>
+                    <label>LHR</label>
+                </value>
+                <value>
+                    <fullName>Neurotoxin/Filler</fullName>
+                    <default>false</default>
+                    <label>Neurotoxin/Filler</label>
+                </value>
+                <value>
+                    <fullName>Numbing</fullName>
+                    <default>false</default>
+                    <label>Numbing</label>
+                </value>
+                <value>
+                    <fullName>Microblading</fullName>
+                    <default>false</default>
+                    <label>Microblading</label>
+                </value>
+                <value>
+                    <fullName>Chemical Peels</fullName>
+                    <default>false</default>
+                    <label>Chemical Peels</label>
+                </value>
+                <value>
+                    <fullName>Microneedling</fullName>
+                    <default>false</default>
+                    <label>Microneedling</label>
+                </value>
+                <value>
+                    <fullName>Waxing</fullName>
+                    <default>false</default>
+                    <label>Waxing</label>
+                </value>
+                <value>
+                    <fullName>Dermaplane</fullName>
+                    <default>false</default>
+                    <label>Dermaplane</label>
+                </value>
+                <value>
+                    <fullName>Single</fullName>
+                    <default>false</default>
+                    <label>Single</label>
+                </value>
+                <value>
+                    <fullName>Multiple</fullName>
+                    <default>false</default>
+                    <label>Multiple</label>
+                </value>
+                <value>
+                    <fullName>AO4</fullName>
+                    <default>false</default>
+                    <label>AO4</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>User__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>PEC that handled the consult</description>
+        <externalId>false</externalId>
+        <label>User</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Consult_Inventory1</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Walk_Out_Reason__c</fullName>
+        <externalId>false</externalId>
+        <label>Walk Out Reason</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Emergency</fullName>
+                    <default>false</default>
+                    <label>Emergency</label>
+                </value>
+                <value>
+                    <fullName>Long Wait</fullName>
+                    <default>false</default>
+                    <label>Long Wait</label>
+                </value>
+                <value>
+                    <fullName>No Reason</fullName>
+                    <default>false</default>
+                    <label>No Reason</label>
+                </value>
+                <value>
+                    <fullName>Patient Late for Consult</fullName>
+                    <default>false</default>
+                    <label>Patient Late for Consult</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Will_Patient_Show__c</fullName>
+        <description>indicates the scheduling agent thought the patient would show up for the consult</description>
+        <externalId>false</externalId>
+        <label>Will Patient Show?</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Low</fullName>
+                    <default>false</default>
+                    <label>Low</label>
+                </value>
+                <value>
+                    <fullName>High</fullName>
+                    <default>false</default>
+                    <label>High</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Will_Patient_Start__c</fullName>
+        <description>Indicates if the scheduling agent thought the patient would end up starting or not</description>
+        <externalId>false</externalId>
+        <label>Will Patient Start?</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Low</fullName>
+                    <default>false</default>
+                    <label>Low</label>
+                </value>
+                <value>
+                    <fullName>High</fullName>
+                    <default>false</default>
+                    <label>High</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>isConsultArrived__c</fullName>
+        <externalId>false</externalId>
+        <formula>if( ISNULL(Arrival_Time__c) ,0,1)</formula>
+        <label>isConsultArrived</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>isConsultScheudled__c</fullName>
+        <description>Shoudl be a 1 when a consult is scheduled or 0 when not.</description>
+        <externalId>false</externalId>
+        <formula>if( Scheduled_Lead__c != null || Scheduled_Account__c != null ||  Scheduled_Patient__c != null, 1, 0)</formula>
+        <label>isConsultScheduled</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>isValidCallBack__c</fullName>
+        <externalId>false</externalId>
+        <formula>if( Callback_Consult__c, 
+if( ISBLANK(Consult_PEC__c),false, 
+if(Consult_PEC__c&lt;&gt;Callback_Consult_PEC__c,false,true) 
+) , false)</formula>
+        <label>isValidCallBack</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Consult Inventory</label>
+    <listViews>
+        <fullName>CEC</fullName>
+        <booleanFilter>1 AND (2 OR 3)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Scheduled_Patient__c</columns>
+        <columns>Scheduled_Account__c</columns>
+        <columns>Apt_Date__c</columns>
+        <columns>Treatment__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Consult_Room__c</field>
+            <operation>equals</operation>
+            <value>GLO Room 1</value>
+        </filters>
+        <filters>
+            <field>Scheduled_Account__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <filters>
+            <field>Scheduled_Patient__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <label>CEC</label>
+    </listViews>
+    <nameField>
+        <label>Consult Inventory Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Consult Inventory</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

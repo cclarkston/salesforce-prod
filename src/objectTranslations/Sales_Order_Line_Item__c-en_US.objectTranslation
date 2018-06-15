@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Sales Order Line Item</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Sales Order Line Items</value>
+    </caseValues>
+    <fields>
+        <label><!-- CC Sales Order --></label>
+        <name>CC_Sales_Order__c</name>
+        <relationshipLabel><!-- Sales Order Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- ClearChoice Center Part --></label>
+        <name>ClearChoice_Center_Part__c</name>
+        <relationshipLabel><!-- Sales Order Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- ClearChoice Part --></label>
+        <name>ClearChoice_Part__c</name>
+        <relationshipLabel><!-- Sales Order Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Line Cost --></label>
+        <name>Line_Cost__c</name>
+    </fields>
+    <fields>
+        <label><!-- Line Note --></label>
+        <name>Line_Note__c</name>
+    </fields>
+    <fields>
+        <label><!-- Line Tax Total --></label>
+        <name>Line_Tax_Total__c</name>
+    </fields>
+    <fields>
+        <label><!-- Line Total --></label>
+        <name>Line_Total__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quantity --></label>
+        <name>Quantity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unit Cost --></label>
+        <name>Unit_Cost__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unit Price --></label>
+        <name>Unit_Price__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

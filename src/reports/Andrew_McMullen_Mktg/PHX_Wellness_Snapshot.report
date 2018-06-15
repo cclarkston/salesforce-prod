@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Campaign.Market__c</field>
+    </columns>
+    <columns>
+        <field>CAMPAIGN_NAME</field>
+    </columns>
+    <columns>
+        <field>NUM_LEADS</field>
+    </columns>
+    <columns>
+        <field>NUM_CONTACTS</field>
+    </columns>
+    <columns>
+        <field>NUM_OPPORTUNITIES</field>
+    </columns>
+    <columns>
+        <field>AMOUNT_ALL</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Campaign.Creative_Name__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>contains</operator>
+            <value>Wellness hour</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Campaign.Market__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Phoenix</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>PHX Wellness Snapshot</name>
+    <params>
+        <name>scopeid</name>
+        <value></value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CampaignList</reportType>
+    <scope>orgAll</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+</Report>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>ClearChoice Doctor</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>ClearChoice Doctors</value>
+    </caseValues>
+    <fields>
+        <label><!-- Active --></label>
+        <name>Active__c</name>
+    </fields>
+    <fields>
+        <label><!-- Battle Group Stars --></label>
+        <name>Battle_Group_Stars__c</name>
+    </fields>
+    <fields>
+        <label><!-- Battlegroup Stars --></label>
+        <name>Battlegroup_Stars__c</name>
+    </fields>
+    <fields>
+        <help><!-- ClearChoice Continuing Education Credits --></help>
+        <label><!-- CCE Credits --></label>
+        <name>CCE_Credits__c</name>
+    </fields>
+    <fields>
+        <label><!-- Center Information --></label>
+        <name>Center_Information__c</name>
+        <relationshipLabel><!-- ClearChoice Doctors --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Doctor Type --></label>
+        <name>Doctor_Type__c</name>
+        <picklistValues>
+            <masterLabel>GP</masterLabel>
+            <translation><!-- GP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>OMS</masterLabel>
+            <translation><!-- OMS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prosthodontist</masterLabel>
+            <translation><!-- Prosthodontist --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Email Address --></label>
+        <name>Email_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Employee Start Date --></label>
+        <name>Employee_Start_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- First Name --></label>
+        <name>First_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Name --></label>
+        <name>Last_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Management Essentials Completed --></label>
+        <name>Management_Essentials_Completed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Onboarding Complete --></label>
+        <name>Onboarding_Complete__c</name>
+    </fields>
+    <fields>
+        <label><!-- Overall Mastery Level --></label>
+        <name>Overall_Mastery_Level__c</name>
+    </fields>
+    <fields>
+        <label><!-- Overall Mastery --></label>
+        <name>Overall_Mastery__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pacesetter --></label>
+        <name>Pacesetter__c</name>
+    </fields>
+    <fields>
+        <label><!-- Part Time --></label>
+        <name>Part_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Practice Leadership Completed --></label>
+        <name>Practice_Leadership_Completed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Practice Mastery 2 Completed --></label>
+        <name>Practice_Mastery_2_Completed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Practice Mastery Completed --></label>
+        <name>Practice_Mastery_Completed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Practice Owner --></label>
+        <name>Practice_Owner__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rainmaker Training --></label>
+        <name>Rainmaker_Training__c</name>
+    </fields>
+    <fields>
+        <label><!-- Scorecard Exempt --></label>
+        <name>Scorecard_Exempt__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Arches Delivered --></label>
+        <name>Total_Arches_Delivered__c</name>
+    </fields>
+    <fields>
+        <label><!-- User --></label>
+        <name>User__c</name>
+        <relationshipLabel><!-- ClearChoice Doctors --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>ClearChoice Doctor Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Dr Mastery Scorecard --></label>
+            <section>Dr Mastery Scorecard</section>
+        </sections>
+        <sections>
+            <label><!-- Training Completed --></label>
+            <section>Training Completed</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>RDM - ClearChoice Doctor Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- Add_Battlegroup_Star --></label>
+        <name>Add_Battlegroup_Star</name>
+    </webLinks>
+</CustomObjectTranslation>

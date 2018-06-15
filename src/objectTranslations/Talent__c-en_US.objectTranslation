@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Talent</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Talent</value>
+    </caseValues>
+    <fields>
+        <label><!-- Comment --></label>
+        <name>Comment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Patient --></label>
+        <name>Customer__c</name>
+        <relationshipLabel><!-- Talent --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Doctor --></label>
+        <name>Doctor__c</name>
+        <relationshipLabel><!-- Talent --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Extra --></label>
+        <name>Extra__c</name>
+        <relationshipLabel><!-- Talent --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Full Name --></label>
+        <name>Name__c</name>
+    </fields>
+    <layouts>
+        <layout>Talent Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- All_Creative_Shoots --></label>
+        <name>All_Creative_Shoots</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- New_Creative_Shoot --></label>
+        <name>New_Creative_Shoot</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- New_Extra --></label>
+        <name>New_Extra</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Retire_Ads --></label>
+        <name>Retire_Ads</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- UnRetire_Ads --></label>
+        <name>UnRetire_Ads</name>
+    </webLinks>
+</CustomObjectTranslation>

@@ -1,0 +1,1051 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Surgical Notes Form</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Surgical Notes Forms</value>
+    </caseValues>
+    <fields>
+        <label><!-- ASA --></label>
+        <name>ASA__c</name>
+        <picklistValues>
+            <masterLabel>I</masterLabel>
+            <translation><!-- I --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>II</masterLabel>
+            <translation><!-- II --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>III</masterLabel>
+            <translation><!-- III --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Surgical Notes Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Alveolectomy Amount --></label>
+        <name>Alveolectomy_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Alveolectomy Leveling --></label>
+        <name>Alveolectomy_Leveling__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Alveolectomy --></label>
+        <name>Alveolectomy__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Ambulating without assistance --></label>
+        <name>Ambulating_without_assistance__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Assistants --></label>
+        <name>Assistants__c</name>
+    </fields>
+    <fields>
+        <label><!-- Avoiding Strenuous Activity --></label>
+        <name>Avoiding_Strenuous_Activity__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- BMI Calc --></label>
+        <name>BMI_Calc__c</name>
+    </fields>
+    <fields>
+        <label><!-- Benadryl --></label>
+        <name>Benadryl__c</name>
+    </fields>
+    <fields>
+        <label><!-- Betadine Chlorhexidine Prep --></label>
+        <name>Betadine__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Blade Num --></label>
+        <name>Blade_Num__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bone Graft Area --></label>
+        <name>Bone_Graft_Area__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bone Graft Harvest Site --></label>
+        <name>Bone_Graft_Harvest_Site__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bone Graft Material Multi --></label>
+        <name>Bone_Graft_Material_Multi__c</name>
+        <picklistValues>
+            <masterLabel>Allograft</masterLabel>
+            <translation><!-- Allograft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Autograft</masterLabel>
+            <translation><!-- Autograft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Xenograft</masterLabel>
+            <translation><!-- Xenograft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>rhBMP</masterLabel>
+            <translation><!-- rhBMP --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Bone Graft Material Note --></label>
+        <name>Bone_Graft_Material_Note__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bone Graft Material --></label>
+        <name>Bone_Graft_Material__c</name>
+        <picklistValues>
+            <masterLabel>Allograft</masterLabel>
+            <translation><!-- Allograft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Autograft</masterLabel>
+            <translation><!-- Autograft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Xenograft</masterLabel>
+            <translation><!-- Xenograft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>rhBMP</masterLabel>
+            <translation><!-- rhBMP --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Bone Graft Type --></label>
+        <name>Bone_Graft_Type__c</name>
+        <picklistValues>
+            <masterLabel>Onlay</masterLabel>
+            <translation><!-- Onlay --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sinus lift</masterLabel>
+            <translation><!-- Sinus lift --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Socket preservation</masterLabel>
+            <translation><!-- Socket preservation --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Buccal cortex intact --></label>
+        <name>Buccal_cortex_intact__c</name>
+        <picklistValues>
+            <masterLabel>N/A</masterLabel>
+            <translation><!-- N/A --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Buccal hockey stick --></label>
+        <name>Buccal_hockey_stick__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Carbocaine --></label>
+        <name>Carbocaine__c</name>
+    </fields>
+    <fields>
+        <label><!-- Clinical Apt Calendar --></label>
+        <name>Clinical_Apt_Calendar__c</name>
+        <relationshipLabel><!-- Surgical Notes Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Clinical Note Instance --></label>
+        <name>Clinical_Note_Instance__c</name>
+        <relationshipLabel><!-- Surgical Notes Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Confirmation Radiography --></label>
+        <name>Confirmation_Radiography__c</name>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pano</masterLabel>
+            <translation><!-- Pano --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Periapical</masterLabel>
+            <translation><!-- Periapical --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>i-CAT</masterLabel>
+            <translation><!-- i-CAT --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Consent Accurate and Signed --></label>
+        <name>Consent_Accurate_and_Signed__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Denies Pregnancy --></label>
+        <name>Denies_Pregnancy__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Dexamethasone --></label>
+        <name>Dexamethasone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Discussed Oral Hygiene --></label>
+        <name>Discussed_Oral_Hygiene__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Emergency Cart Ready --></label>
+        <name>Emergency_Cart_Ready__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Envelope --></label>
+        <name>Envelope__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Extractions --></label>
+        <name>Extractions__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fentanyl --></label>
+        <name>Fentanyl__c</name>
+    </fields>
+    <fields>
+        <label><!-- Findings Complications --></label>
+        <name>Findings_Complications__c</name>
+    </fields>
+    <fields>
+        <label><!-- Flap Design --></label>
+        <name>Flap_Design__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Height Feet --></label>
+        <name>Height_Feet__c</name>
+    </fields>
+    <fields>
+        <label><!-- Height Inches --></label>
+        <name>Height_Inches__c</name>
+    </fields>
+    <fields>
+        <label><!-- Height Total Inches --></label>
+        <name>Height_Total_Inches__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ibuprofin --></label>
+        <name>Ibuprofin__c</name>
+    </fields>
+    <fields>
+        <label><!-- Icepack Placed --></label>
+        <name>Icepack_Placed__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Implant System Other --></label>
+        <name>Implant_System_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Implant System --></label>
+        <name>Implant_System__c</name>
+        <picklistValues>
+            <masterLabel>Neodent</masterLabel>
+            <translation><!-- Neodent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nobel Biocare</masterLabel>
+            <translation><!-- Nobel Biocare --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Straumann</masterLabel>
+            <translation><!-- Straumann --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Implant Tooth Position --></label>
+        <name>Implant_Tooth_Position__c</name>
+    </fields>
+    <fields>
+        <label><!-- Implant Type --></label>
+        <name>Implant_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Impression material used --></label>
+        <name>Impression_material_used__c</name>
+    </fields>
+    <fields>
+        <label><!-- Interim Night Guard Delivered --></label>
+        <name>Interim_Night_Guard_Delivered__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- IsActive --></label>
+        <name>IsActive__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ketamine --></label>
+        <name>Ketamine__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lateral sinus corticotomies --></label>
+        <name>Lateral_sinus_corticotomies__c</name>
+        <picklistValues>
+            <masterLabel>N/A</masterLabel>
+            <translation><!-- N/A --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Lidocaine 50 --></label>
+        <name>Lidocaine_50__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lidocaine --></label>
+        <name>Lidocaine__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lingual cortex intact --></label>
+        <name>Lingual_cortex_intact__c</name>
+        <picklistValues>
+            <masterLabel>N/A</masterLabel>
+            <translation><!-- N/A --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Local Anesthetic Other --></label>
+        <name>Local_Anesthetic_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Marcaine --></label>
+        <name>Marcaine__c</name>
+    </fields>
+    <fields>
+        <label><!-- Medical History Reviewed --></label>
+        <name>Medical_History_Reviewed__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Monitors in place --></label>
+        <name>Monitors_in_place__c</name>
+        <picklistValues>
+            <masterLabel>N/A</masterLabel>
+            <translation><!-- N/A --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Morphine --></label>
+        <name>Morphine__c</name>
+    </fields>
+    <fields>
+        <label><!-- NPO Confirmed --></label>
+        <name>NPO_Confirmed__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Occlusal Adjustment --></label>
+        <name>Occlusal_Adjustment__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Patient Examined --></label>
+        <name>Patient_Examined_Heart_Lungs__c</name>
+        <picklistValues>
+            <masterLabel>N/A</masterLabel>
+            <translation><!-- N/A --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Placed seals using --></label>
+        <name>Placed_seals_using__c</name>
+    </fields>
+    <fields>
+        <label><!-- Post Op BP Diastolic --></label>
+        <name>Post_Op_BP_Diastolic__c</name>
+    </fields>
+    <fields>
+        <label><!-- Post Op BP Systolic --></label>
+        <name>Post_Op_BP_Systolic__c</name>
+    </fields>
+    <fields>
+        <label><!-- Post Op Care Comments --></label>
+        <name>Post_Op_Care_Comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Post Op General Condition Notes --></label>
+        <name>Post_Op_General_Condition_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Post Op General Condition --></label>
+        <name>Post_Op_General_Condition__c</name>
+        <picklistValues>
+            <masterLabel>Dizziness</masterLabel>
+            <translation><!-- Dizziness --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Doing Well</masterLabel>
+            <translation><!-- Doing Well --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fever</masterLabel>
+            <translation><!-- Fever --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pronounced Swelling</masterLabel>
+            <translation><!-- Pronounced Swelling --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Post Op Hematosis --></label>
+        <name>Post_Op_Hematosis__c</name>
+        <picklistValues>
+            <masterLabel>Bleeding controlled</masterLabel>
+            <translation><!-- Bleeding controlled --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No significant bleeding</masterLabel>
+            <translation><!-- No significant bleeding --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Persistent bleeding</masterLabel>
+            <translation><!-- Persistent bleeding --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Post Op Instruction Given --></label>
+        <name>Post_Op_Instruction_Given__c</name>
+        <picklistValues>
+            <masterLabel>Verbal</masterLabel>
+            <translation><!-- Verbal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Written</masterLabel>
+            <translation><!-- Written --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Post Op Instructions Reviewed --></label>
+        <name>Post_Op_Instructions_Reviewed__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Post Op Mental Status Notes --></label>
+        <name>Post_Op_Mental_Status_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Post Op Mental Status --></label>
+        <name>Post_Op_Mental_Status__c</name>
+        <picklistValues>
+            <masterLabel>Awake/Alert</masterLabel>
+            <translation><!-- Awake/Alert --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Confused</masterLabel>
+            <translation><!-- Confused --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Drowsy</masterLabel>
+            <translation><!-- Drowsy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Oriented</masterLabel>
+            <translation><!-- Oriented --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Post Op Oral Intake --></label>
+        <name>Post_Op_Oral_Intake__c</name>
+        <picklistValues>
+            <masterLabel>N/A</masterLabel>
+            <translation><!-- N/A --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nausea without vomiting</masterLabel>
+            <translation><!-- Nausea without vomiting --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Persistent nausea and vomiting</masterLabel>
+            <translation><!-- Persistent nausea and vomiting --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tolerating Oral intake</masterLabel>
+            <translation><!-- Tolerating Oral intake --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Vomiting (less than 3 episodes)</masterLabel>
+            <translation><!-- Vomiting (less than 3 episodes) --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Post Op Pain Management --></label>
+        <name>Post_Op_Pain_Management__c</name>
+        <picklistValues>
+            <masterLabel>Adequate pain control with meds</masterLabel>
+            <translation><!-- Adequate pain control with meds --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inadequate pain control</masterLabel>
+            <translation><!-- Inadequate pain control --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No complaint of pain</masterLabel>
+            <translation><!-- No complaint of pain --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Post Op Pulse OX --></label>
+        <name>Post_Op_Pulse_OX__c</name>
+    </fields>
+    <fields>
+        <label><!-- Post Op Pulse --></label>
+        <name>Post_Op_Pulse__c</name>
+    </fields>
+    <fields>
+        <label><!-- Post Operative Pain Controlled --></label>
+        <name>Post_Operative_Pain_Controlled__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Post Surgery Lidocaine --></label>
+        <name>Post_Surgery_Lidocaine__c</name>
+    </fields>
+    <fields>
+        <label><!-- Post Surgery Marcaine --></label>
+        <name>Post_Surgery_MarCaine__c</name>
+    </fields>
+    <fields>
+        <label><!-- Post Surgery Septocaine --></label>
+        <name>Post_Surgery_Septocaine__c</name>
+    </fields>
+    <fields>
+        <label><!-- Post operative bleeding controlled --></label>
+        <name>Post_operative_bleeding_controlled__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Post operative nausea --></label>
+        <name>Post_operative_nausea__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Pre Op BP Systolic --></label>
+        <name>Pre_Op_BP_Systolic__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pre Op Notes --></label>
+        <name>Pre_Op_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pre Op Pulse Ox --></label>
+        <name>Pre_Op_Pulse_Ox__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pre Op Pulse --></label>
+        <name>Pre_Op_Pulse__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pre op medications given --></label>
+        <name>Pre_op_medications_given__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Procedure Site Confirmed --></label>
+        <name>Procedure_Site_Confirmed__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Procedure Verified --></label>
+        <name>Procedure_Verified__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Propofol --></label>
+        <name>Propofol__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prosth Screw Torque Value --></label>
+        <name>Prosth_Screw_Torque_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Radiographs Available and up to date --></label>
+        <name>Radiographs_Available_and_up_to_date__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Re-anesthetized --></label>
+        <name>Re_anesthetized__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Releasing Incision --></label>
+        <name>Releasing_Incision__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Responsible Adult Driver --></label>
+        <name>Responsible_Adult_Driver__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Reviewed Soft Food Diet --></label>
+        <name>Reviewed_Soft_Food_Diet__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- STO - Procedure &amp; Consent Confirmed --></label>
+        <name>STO_Procedure_Consent_Confirmed__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sedation Other --></label>
+        <name>Sedation_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sedation Used --></label>
+        <name>Sedation_Used__c</name>
+        <picklistValues>
+            <masterLabel>IV Sedation</masterLabel>
+            <translation><!-- IV Sedation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Local</masterLabel>
+            <translation><!-- Local --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nitrous Oxide/Oxygen</masterLabel>
+            <translation><!-- Nitrous Oxide/Oxygen --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Oral Sedation</masterLabel>
+            <translation><!-- Oral Sedation --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Septocaine --></label>
+        <name>Septocaine__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sinus Communication Left --></label>
+        <name>Sinus_Communication_Left__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sinus Communication Notes --></label>
+        <name>Sinus_Communication_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sinus Communication Right --></label>
+        <name>Sinus_Communication_Right__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sinus Communication --></label>
+        <name>Sinus_Communication__c</name>
+        <picklistValues>
+            <masterLabel>N/A</masterLabel>
+            <translation><!-- N/A --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sinus Lift Left Max Type --></label>
+        <name>Sinus_Lift_Left_Max_Type__c</name>
+        <picklistValues>
+            <masterLabel>Both</masterLabel>
+            <translation><!-- Both --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>External</masterLabel>
+            <translation><!-- External --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Internal</masterLabel>
+            <translation><!-- Internal --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sinus Lift Left Max --></label>
+        <name>Sinus_Lift_Left_Max__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sinus Lift Right Max Type --></label>
+        <name>Sinus_Lift_Right_Max_Type__c</name>
+        <picklistValues>
+            <masterLabel>Both</masterLabel>
+            <translation><!-- Both --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>External</masterLabel>
+            <translation><!-- External --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Internal</masterLabel>
+            <translation><!-- Internal --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sinus Lift Right Max --></label>
+        <name>Sinus_Lift_Right_Max__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sutures - Other --></label>
+        <name>Sutures_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sutures --></label>
+        <name>Sutures__c</name>
+        <picklistValues>
+            <masterLabel>3-O Chromic Gut</masterLabel>
+            <translation><!-- 3-O Chromic Gut --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3-O Silk</masterLabel>
+            <translation><!-- 3-O Silk --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4-O Chromic Gut</masterLabel>
+            <translation><!-- 4-O Chromic Gut --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4-O Vicryl</masterLabel>
+            <translation><!-- 4-O Vicryl --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PTFE 4.0</masterLabel>
+            <translation><!-- PTFE 4.0 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Versed --></label>
+        <name>Versed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Vital Signs --></label>
+        <name>Vital_Signs__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Weight --></label>
+        <name>Weight__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pre OP BP Diastolic --></label>
+        <name>pre_op_BP_Diastolic__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

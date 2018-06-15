@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>P.E. Snapshot</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>P.E. Snapshots</value>
+    </caseValues>
+    <fields>
+        <label><!-- AO4 Count --></label>
+        <name>AO4_Count__c</name>
+    </fields>
+    <fields>
+        <help><!-- 1 day before Snapshot was created, unless Do not override as of date is checked. --></help>
+        <label><!-- Adj As Of Date --></label>
+        <name>Adj_As_Of_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Center Location (when snapshot was taken) --></help>
+        <label><!-- Center Location --></label>
+        <name>Center_Location__c</name>
+    </fields>
+    <fields>
+        <help><!-- Hard-coded sort field for use by Excel, pulled from the Consult record. --></help>
+        <label><!-- Center Location sort --></label>
+        <name>Center_Location_sort__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the current value, vs. Center Location (at the time of the snapshot). --></help>
+        <label><!-- Consult: Center Location --></label>
+        <name>Consult_Center_Location__c</name>
+    </fields>
+    <fields>
+        <label><!-- Consult Name --></label>
+        <name>Consult_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Consult --></label>
+        <name>Consult__c</name>
+        <relationshipLabel><!-- P.E. Snapshots --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Lookup to the Payment: Payment Date field. --></help>
+        <label><!-- Current Payment Date --></label>
+        <name>Current_Payment_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Current Payment Status --></label>
+        <name>Current_Payment_Status__c</name>
+    </fields>
+    <fields>
+        <help><!-- Indicates Payment records deleted from SFDC (before that privilege was removed) --></help>
+        <label><!-- Deleted Payment record --></label>
+        <name>Deleted_Payment_record__c</name>
+    </fields>
+    <fields>
+        <help><!-- When creating records directly (DataLoader or SFDC), set to 1 (True) to prevent workflow from overriding Snapshot As Of Date. --></help>
+        <label><!-- Do not override As/Of Date --></label>
+        <name>Do_not_override_As_Of_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Exam Date --></label>
+        <name>Exam_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Exclude from Report --></label>
+        <name>Exclude_from_Report__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: Which satellite group (if any) does this Center belong to? --></help>
+        <label><!-- Group Location --></label>
+        <name>Group_Location__c</name>
+    </fields>
+    <fields>
+        <label><!-- Negotiated Total Amount --></label>
+        <name>Negotiated_Total_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- PE Last Modified Date --></label>
+        <name>PE_Last_Modified_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Amount --></label>
+        <name>Payment_Amount__c</name>
+    </fields>
+    <fields>
+        <help><!-- Is Payment Date = Snapshot Date? (1=True) --></help>
+        <label><!-- Payment Date = Snapshot Date --></label>
+        <name>Payment_Date_Snapshot_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Date --></label>
+        <name>Payment_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Ref. Number --></label>
+        <name>Payment_Ref_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Status --></label>
+        <name>Payment_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment --></label>
+        <name>Payment__c</name>
+        <relationshipLabel><!-- P.E. Snapshots --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Prostho Exam Owner: Traveler Until --></label>
+        <name>Prostho_Exam_Owner_Traveler_Until__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prostho Exam --></label>
+        <name>Prostho_Exam__c</name>
+        <relationshipLabel><!-- P.E. Snapshots --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Prostho Owner: Role --></label>
+        <name>Prostho_Owner_Role__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prostho Owner --></label>
+        <name>Prostho_Owner__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prostho Owner_lookup --></label>
+        <name>Prostho_Owner_lookup__c</name>
+        <relationshipLabel><!-- P.E. Snapshots --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Payment Amount when Payment Status = Collected --></help>
+        <label><!-- Revenue Collected --></label>
+        <name>Revenue_Collected__c</name>
+    </fields>
+    <fields>
+        <help><!-- When did the activity occur? --></help>
+        <label><!-- Snapshot as of date --></label>
+        <name>Snapshot_as_of_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Stage --></label>
+        <name>Stage__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Date --></label>
+        <name>Start_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Is Today &lt;= Traveler Until Date? --></help>
+        <label><!-- Traveler --></label>
+        <name>Traveler__c</name>
+    </fields>
+    <layouts>
+        <layout>Prostho Exam Payment Snapshot Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Payment Information --></label>
+            <section>Payment Information</section>
+        </sections>
+        <sections>
+            <label><!-- Prostho Exam Information --></label>
+            <section>Prostho Exam Information</section>
+        </sections>
+        <sections>
+            <label><!-- Traveler Information --></label>
+            <section>Traveler Information</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

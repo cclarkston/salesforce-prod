@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Practice Dev Activity</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Practice Dev Activities</value>
+    </caseValues>
+    <fields>
+        <label><!-- Date --></label>
+        <name>Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dental Practice --></label>
+        <name>Dental_Practice__c</name>
+        <relationshipLabel><!-- Practice Dev Activities --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Notes --></label>
+        <name>Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Activity --></label>
+        <name>Sales_Activity__c</name>
+        <picklistValues>
+            <masterLabel>Center Visit</masterLabel>
+            <translation><!-- Center Visit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cold Call</masterLabel>
+            <translation><!-- Cold Call --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Drop-In</masterLabel>
+            <translation><!-- Drop-In --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Email/Marketing/Training</masterLabel>
+            <translation><!-- Email/Marketing/Training --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GP Meeting</masterLabel>
+            <translation><!-- GP Meeting --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Office</masterLabel>
+            <translation><!-- In Office --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Misc./General</masterLabel>
+            <translation><!-- Misc./General --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Telephone Call</masterLabel>
+            <translation><!-- Telephone Call --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Training</masterLabel>
+            <translation><!-- Training --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Training in CC Practice</masterLabel>
+            <translation><!-- Training in CC Practice --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Referral Activity Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

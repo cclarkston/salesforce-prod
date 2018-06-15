@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Clinical Apt History</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Clinical Apt Histories</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Clinical Apt Histories --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Action Reason --></label>
+        <name>Action_Reason__c</name>
+    </fields>
+    <fields>
+        <label><!-- Action --></label>
+        <name>Action__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cancel Reason --></label>
+        <name>Cancel_Reason__c</name>
+        <picklistValues>
+            <masterLabel>Center Request</masterLabel>
+            <translation><!-- Center Request --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Conflict with Schedule</masterLabel>
+            <translation><!-- Conflict with Schedule --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Emergency/Sick</masterLabel>
+            <translation><!-- Emergency/Sick --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Family Conference</masterLabel>
+            <translation><!-- Family Conference --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GLO</masterLabel>
+            <translation><!-- GLO --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Interested- Bad Review</masterLabel>
+            <translation><!-- Not Interested- Bad Review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Interested- Cost</masterLabel>
+            <translation><!-- Not Interested- Cost --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Interested- Distance</masterLabel>
+            <translation><!-- Not Interested- Distance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Interested- Insurance</masterLabel>
+            <translation><!-- Not Interested- Insurance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Patient Request</masterLabel>
+            <translation><!-- Patient Request --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Reassign Doctor</masterLabel>
+            <translation><!-- Reassign Doctor --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Schedule Management</masterLabel>
+            <translation><!-- Schedule Management --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transportation Issues</masterLabel>
+            <translation><!-- Transportation Issues --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Weather</masterLabel>
+            <translation><!-- Weather --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Clinical Apt Calendar --></label>
+        <name>Clinical_Apt_Calendar__c</name>
+        <relationshipLabel><!-- Clinical Apt Histories --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Delete Reason --></label>
+        <name>Delete_Reason__c</name>
+        <picklistValues>
+            <masterLabel>Center Request</masterLabel>
+            <translation><!-- Center Request --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Doctor Request</masterLabel>
+            <translation><!-- Doctor Request --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GLO</masterLabel>
+            <translation><!-- GLO --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PEC Sick/Schedule</masterLabel>
+            <translation><!-- PEC Sick/Schedule --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Schedule Management</masterLabel>
+            <translation><!-- Schedule Management --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Traveler/master Schedule Update</masterLabel>
+            <translation><!-- Traveler/master Schedule Update --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Weather Closures</masterLabel>
+            <translation><!-- Weather Closures --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Incomplete Reason --></label>
+        <name>Incomplete_Reason__c</name>
+        <picklistValues>
+            <masterLabel>Emergency</masterLabel>
+            <translation><!-- Emergency --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Insufficient Healing</masterLabel>
+            <translation><!-- Insufficient Healing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medical Reason</masterLabel>
+            <translation><!-- Medical Reason --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mini-Prosth</masterLabel>
+            <translation><!-- Mini-Prosth --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Non-candidate</masterLabel>
+            <translation><!-- Non-candidate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Patient Conflict</masterLabel>
+            <translation><!-- Patient Conflict --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Staged Appointment</masterLabel>
+            <translation><!-- Staged Appointment --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Notes --></label>
+        <name>Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Patient POT Apt --></label>
+        <name>Patient_POT_Apt__c</name>
+        <relationshipLabel><!-- Clinical Apt Histories --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Reschedule Reason --></label>
+        <name>Reschedule_Reason__c</name>
+        <picklistValues>
+            <masterLabel>Conflict with Schedule</masterLabel>
+            <translation><!-- Conflict with Schedule --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Emergency/Sick</masterLabel>
+            <translation><!-- Emergency/Sick --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Late</masterLabel>
+            <translation><!-- Late --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Schedule Management</masterLabel>
+            <translation><!-- Schedule Management --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transporatation Issues</masterLabel>
+            <translation><!-- Transporatation Issues --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Weather</masterLabel>
+            <translation><!-- Weather --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Rescheduled From --></label>
+        <name>Rescheduled_From__c</name>
+        <relationshipLabel><!-- Clinical Apt Histories (Rescheduled From) --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Clinical Apt History Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

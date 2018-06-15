@@ -1,0 +1,42 @@
+<messaging:emailTemplate subject="We are excited to see you at the ClearChoice Seminar" recipientType="Lead" relatedToType="CampaignMember">
+<messaging:htmlEmailBody >
+
+<img id="theImage" src="http://www.clearchoice.com/files/images/EmailTemplates/ClearChoiceLogo.png" width="387" height="114"/> 
+<br/>
+<hr color="DarkBlue"/>
+
+Hello {!Relatedto.First_Name__c},<br/>
+<br/>
+<br/>
+We have reserved a seat for you at the ClearChoice patient seminar on {!Relatedto.Campaign_Date_Time__c} at the <b>{!Relatedto.Campaign_Location_Name__c}.</b><br/>
+<br/>
+You can look forward to:
+<br/>
+<ul>
+<li>Learning how implants can provide a clear solution to your dental needs </li>
+<li>Answers to questions that address your dental condition </li>
+<li>Hear a past patient’s experience with ClearChoice</li>
+<li>Meeting the doctors and patients</li>
+<li>Refreshments!! 
+</li>
+</ul>
+
+<br/> 
+We provide a clear advantage through our unique All in One Center.  Please feel free to call {!Relatedto.Campaign_Center_Phone_Number__c} if you need further directions. 
+<br/>
+<br/> 
+Best regards,<br/>
+<br/>
+<br/>
+{!Relatedto.Lead.Owner.Name}<br/>
+Dental Implant Consultant<br/>
+<br/>
+<br/>
+
+{!Relatedto.Campaign.Center__r.Name} ClearChoice Dental Center<br/>
+{!Relatedto.Campaign.Center__r.Street_1__c} {!Relatedto.Campaign.Center__r.Street_2__c}<br/>
+{!Relatedto.Campaign.Center__r.City__c}, {!Relatedto.Campaign.Center__r.State__c} {!Relatedto.Campaign.Center__r.Zip_Code__c}<br/>
+<br/>
+<a href="{!RelatedTo.Campaign.Seminar_Map_Location__c}">Click Here</a> to view map and directions for the seminar.
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

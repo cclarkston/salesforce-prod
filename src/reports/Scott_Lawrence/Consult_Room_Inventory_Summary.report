@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_83432880</developerName>
+        <masterLabel>Completed</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Consult_Inventory__c$Consult_Show_Status__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Consult Completed</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Arrived</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Ready for Consult</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Consult Started</sourceValue>
+            </sourceValues>
+            <value>Completed</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>No Show</sourceValue>
+            </sourceValues>
+            <value>No Show</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Patient Left</sourceValue>
+            </sourceValues>
+            <value>Patient left</value>
+        </values>
+    </buckets>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Consult_Inventory__c$isConsultScheudled__c</field>
+    </columns>
+    <columns>
+        <field>BucketField_83432880</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Scheduled_Time__c</field>
+    </columns>
+    <description>Matrix view of the Consult Room Inventory</description>
+    <filter>
+        <criteriaItems>
+            <column>Consult_Inventory__c$Active__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>Consult_Inventory__c$Consult_Room__c.Center_Information__c.Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>Consult_Inventory__c$Consult_Room__c.Room_Type__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Month</dateGranularity>
+        <field>Consult_Inventory__c$Apt_Date__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Consult Room Inventory Summary</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Consult_Inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Consult_Inventory__c$Apt_Date__c</dateColumn>
+        <endDate>2013-02-28</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2012-08-01</startDate>
+    </timeFrameFilter>
+</Report>

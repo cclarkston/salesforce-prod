@@ -1,0 +1,122 @@
+<apex:page controller="rpt_unconverted_contacts" sidebar="false" readOnly="true">
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<style type="text/css" media="print">
+  div.bPageHeader {
+    display:none;
+  }  
+  
+  p.form_holder {
+    display:none; 
+  }
+  
+  a.dlink {
+    display:none;
+  }  
+</style>
+
+
+<style>
+  tr.control td {
+    color:#5789AE;
+  }  
+  
+  table.accs_details td.indent {
+    padding-left:25px;      
+    font-weight:bold; 
+    font-style:italic;
+    empty-cells:hide;                
+  }
+  
+  table.accs_details td.vaca {
+    font-style:italic;   
+    text-align:center;             
+  }   
+</style>
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+<apex:form style="padding-top:0;display:inline;margin-top:0;" >
+ <apex:actionRegion >
+ <apex:actionFunction name="update_results" rerender="main_holder" status="update_status" />
+ <div id="header" style="border-bottom:3px solid black;padding-top:0;margin-top:0;">
+<table style="width:100%;padding-top:0;">
+<tr>
+  <td width="500px;"><br />
+  <table>
+    <tr><td><span style="font-weight:bold;width:100px;display:inline-block;">Start Date : </span></td><td><apex:inputField value="{!sholder.Date_of_Birth__c}" /><br /></td></tr>
+    <tr><td><span style="font-weight:bold;width:100px;display:inline-block;">End Date : </span></td><td><apex:inputField value="{!eholder.Date_of_Birth__c}" /></td></tr>
+  </table>
+  <span style="display:block;padding-bottom:5px;padding-top:5px;">
+    <span style="font-weight:bold;width:100px;display:inline-block;">Center :</span>  
+      <apex:selectList value="{!center_filter}" multiselect="false" size="1" onchange="update_results();">
+      <apex:selectOptions value="{!CenterList}"></apex:selectoptions>
+    </apex:selectList>
+    </span>
+    <span style="display:block;padding-bottom:5px;">
+        <span style="font-weight:bold;width:100px;display:inline-block;">Region :</span>  
+      <apex:selectList value="{!region_filter}" multiselect="false" size="1" onchange="update_results();">
+      <apex:selectOptions value="{!RegionList}"></apex:selectoptions>
+    </apex:selectList>
+    </span>
+    <span style="display:block;padding-bottom:5px;">
+        <span style="font-weight:bold;width:100px;display:inline-block;">User :</span>  
+      <apex:selectList value="{!user_filter}" multiselect="false" size="1" onchange="update_results();">
+      <apex:selectOptions value="{!UserList}"></apex:selectoptions>
+    </apex:selectList>
+    </span>
+  </td>
+  <td width="300px;" style="border-right:2px solid black;"><br />
+  <apex:commandButton value="Run Report" action="{!rerun_report}" reRender="main_holder" status="update_status" onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);"   />
+  </td>
+  <td><h1 class="report_header">Unconverted Consults</h1></td>  
+</tr>
+</table>
+</div>
+</apex:actionRegion>
+
+<apex:outputPanel id="main_holder" rendered="true" layout="block" style="padding-top:2em;">
+<apex:actionStatus startStyle="font-weight:bold;color:red;" stoptext="" id="update_status">
+  <apex:facet name="start">Running Report...Please Wait</apex:facet>        
+</apex:actionStatus><br />      
+<apex:outputText escape="false" style="color:red;font-style:italic;font-weight:bold;" value="{!error_messages}" /><br />
+<h2>Data for&nbsp;<apex:outputfield value="{!sholder.Date_of_Birth__c}" /> - &nbsp;<apex:outputfield value="{!eholder.Date_of_Birth__c}" /></h2><br /><br />
+<table class="accs_details" style="width:900px;">
+<tr class="control" style="font-size:10pt;vertical-align:bottom;">
+  <td width="20%">Name</td>    
+  <td width="10%">Apt Date</td>   
+  <td width="20%">Consult Status</td>   
+  <td width="15%">Center</td>                 
+  <td width="15%">Region</td>
+  <td width="20%">Consult PEC</td>    
+</tr>
+
+<apex:variable var="rowclassname" value="accs" />
+<apex:repeat value="{!unconverted_consults}" var="consult" >
+  <tr class="{!rowclassname}">
+    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />    
+    <td class="indent"><apex:outputField value="{!consult.Scheduled_Lead__c}"  /></td>   
+    <td style="padding-left:5px;"><apex:outputField value="{!consult.Apt_Date__c}"  /></td>   
+    <td style="padding-left:5px;"><Apex:outputField value="{!consult.Consult_Show_Status__c}" /></td>      
+    <td style="padding-left:5px;"><Apex:outputField value="{!consult.consult_room__r.Center_Information__c}" /></td>    
+    <td style="padding-left:5px;"><Apex:outputField value="{!consult.consult_room__r.center_information__r.Sales_Region__c}" /></td>   
+    <td style="padding-left:5px;"><apex:outputField value="{!consult.Consult_PEC__c}" /></td>
+  </tr>
+</apex:repeat>
+</table><br />
+<a href="{!download_link}" target="_blank">Download Details</a>
+
+</apex:outputPanel>
+</apex:form>
+</apex:page>

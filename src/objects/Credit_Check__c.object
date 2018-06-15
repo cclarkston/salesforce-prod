@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>A table that stores the results for any credit check on a customer. 1:M relationship to leads</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Blue_Model_Error__c</fullName>
+        <description>The Error Message value returned by a Prospect IQ lookup</description>
+        <externalId>false</externalId>
+        <label>Blue Model Error</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Blue_Model_Name__c</fullName>
+        <description>name of the model used by Prospect IQ to score this check</description>
+        <externalId>false</externalId>
+        <label>Blue Model Name</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Blue_Model_Response__c</fullName>
+        <description>This is the actual XML response received back from Prospect IQ. I&apos;ll probably drop this field down the road, but it&apos;ll be a helpful troubleshooting tool for now.</description>
+        <externalId>false</externalId>
+        <label>Blue Model Response</label>
+        <length>20000</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Blue_Model_Result__c</fullName>
+        <description>The Result Code from a Prospect IQ lookup</description>
+        <externalId>false</externalId>
+        <label>Blue Model Result</label>
+        <length>4</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Blue_Model_Score__c</fullName>
+        <description>This is actually a numeric value, but since I don&apos;t have any information on the size of this field or the number of decimals, I&apos;m just storing it in a text field for now. This might change at a later date. This is the score returned by Prospect IQ for a blue credit check</description>
+        <externalId>false</externalId>
+        <label>Blue Model Score</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Blue_Model_Tier__c</fullName>
+        <description>The tier value return for a blue credit check from Prospect IQ</description>
+        <externalId>false</externalId>
+        <label>Blue Model Tier</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Tier A</fullName>
+                    <default>false</default>
+                    <label>Tier A</label>
+                </value>
+                <value>
+                    <fullName>Tier B</fullName>
+                    <default>false</default>
+                    <label>Tier B</label>
+                </value>
+                <value>
+                    <fullName>Tier C</fullName>
+                    <default>false</default>
+                    <label>Tier C</label>
+                </value>
+                <value>
+                    <fullName>Tier D</fullName>
+                    <default>false</default>
+                    <label>Tier D</label>
+                </value>
+                <value>
+                    <fullName>Tier E</fullName>
+                    <default>false</default>
+                    <label>Tier E</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Blue_Model_Type__c</fullName>
+        <description>Model Type used to score this lead by Prospect IQ</description>
+        <externalId>false</externalId>
+        <label>Blue Model Type</label>
+        <length>10</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Credit_Check_Errors__c</fullName>
+        <description>Error message return by credit check process when available</description>
+        <externalId>false</externalId>
+        <label>Credit Check Errors</label>
+        <length>250</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Credit_Check_Method__c</fullName>
+        <description>Lists the Credit Source used for this Credit Check</description>
+        <externalId>false</externalId>
+        <label>Credit Check Method</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Experian</fullName>
+                    <default>false</default>
+                    <label>Experian</label>
+                </value>
+                <value>
+                    <fullName>SFCU</fullName>
+                    <default>false</default>
+                    <label>SFCU</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Credit_Check_Score__c</fullName>
+        <description>The actual score value returned by a credit check. This will not be available on all credit sources</description>
+        <externalId>false</externalId>
+        <label>Credit Check Score</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Credit_Check_Value__c</fullName>
+        <description>The color code return by the credit check source. This value should always be required.</description>
+        <externalId>false</externalId>
+        <label>Credit Check Value</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Green</fullName>
+                    <default>false</default>
+                    <label>Green</label>
+                </value>
+                <value>
+                    <fullName>Yellow</fullName>
+                    <default>false</default>
+                    <label>Yellow</label>
+                </value>
+                <value>
+                    <fullName>Red</fullName>
+                    <default>false</default>
+                    <label>Red</label>
+                </value>
+                <value>
+                    <fullName>Blue (No Hit)</fullName>
+                    <default>false</default>
+                    <label>Blue (No Hit)</label>
+                </value>
+                <value>
+                    <fullName>Blue</fullName>
+                    <default>false</default>
+                    <label>Blue</label>
+                </value>
+                <value>
+                    <fullName>Orange</fullName>
+                    <default>false</default>
+                    <label>Orange</label>
+                </value>
+                <value>
+                    <fullName>Website Down-No Prescreen</fullName>
+                    <default>false</default>
+                    <label>Website Down-No Prescreen</label>
+                </value>
+                <value>
+                    <fullName>PO Box</fullName>
+                    <default>false</default>
+                    <label>PO Box</label>
+                </value>
+                <value>
+                    <fullName>Insufficient Information</fullName>
+                    <default>false</default>
+                    <label>Insufficient Information</label>
+                </value>
+                <value>
+                    <fullName>Black</fullName>
+                    <default>false</default>
+                    <label>Black</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Lead_Scored__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>A table that stores the results for any credit check on a customer. 1:M relationship to leads</description>
+        <externalId>false</externalId>
+        <label>Lead</label>
+        <referenceTo>Lead</referenceTo>
+        <relationshipLabel>Credit Checks</relationshipLabel>
+        <relationshipName>Credit_Checks</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>No_Credit_Check_Performed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Under certain circumstances, the process to initiate a credit check can be started even though we lack the necessary patient info (name and address) to get good information back. In such a case, we don&apos;t make the call to the credit check vendor and activate this flag to indicate that we pre-empted the credit check.</description>
+        <externalId>false</externalId>
+        <label>No Credit Check Performed</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Credit Check</label>
+    <nameField>
+        <displayFormat>CCK-{00000}</displayFormat>
+        <label>Credit Check Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Credit Checks</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

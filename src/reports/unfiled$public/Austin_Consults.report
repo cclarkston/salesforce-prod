@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>ACCOUNT.NAME</field>
+    </columns>
+    <columns>
+        <field>PHONE1</field>
+    </columns>
+    <columns>
+        <field>PC_EMAIL</field>
+    </columns>
+    <columns>
+        <field>PC_EMAIL_OPT_OUT</field>
+    </columns>
+    <columns>
+        <field>DUE_DATE</field>
+    </columns>
+    <columns>
+        <field>LAST_UPDATE</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Account.Consult_Result__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Prostho Exam Outside Sales,2nd Consult,30 Day Pipeline,60 Day Pipeline,90 Day Pipeline,Outside Financing,Medical Clearance,Outbound Sales Prospective Patient,Refered Out to Doctor,Referred to Satellite Doctor,No Longer Interested,No Money,Walked Out</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Center_Location__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Austin</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Consult_Result_Start_Did_Not_Star__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Did Not Start</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Austin Consults</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>AccountList</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <endDate>2013-06-01</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2012-12-01</startDate>
+    </timeFrameFilter>
+</Report>

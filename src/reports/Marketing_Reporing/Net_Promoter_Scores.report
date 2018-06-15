@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>OPPORTUNITY_NAME</field>
+    </columns>
+    <columns>
+        <field>Account.Center__c</field>
+    </columns>
+    <columns>
+        <field>AMOUNT</field>
+    </columns>
+    <columns>
+        <field>CLOSE_DATE</field>
+    </columns>
+    <columns>
+        <field>Opportunity.Windent_Surgery_Date__c</field>
+    </columns>
+    <columns>
+        <field>Opportunity.Windent_Final_Date__c</field>
+    </columns>
+    <columns>
+        <field>Opportunity.Net_Promoter_Score__c</field>
+    </columns>
+    <columns>
+        <field>Opportunity.Net_Promoter_Time__c</field>
+    </columns>
+    <columns>
+        <field>Opportunity.Preliminary_Treatment_Plan__c</field>
+    </columns>
+    <description>Base Report to show net promoter scores from email</description>
+    <format>Tabular</format>
+    <name>Net Promoter Scores</name>
+    <params>
+        <name>open</name>
+        <value>all</value>
+    </params>
+    <params>
+        <name>probability</name>
+        <value>&gt;0</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Opportunity</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Opportunity.Net_Promoter_Time__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Opportunity.Net_Promoter_Time__c</dateColumn>
+        <interval>INTERVAL_THISMONTH</interval>
+    </timeFrameFilter>
+</Report>

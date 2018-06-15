@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Center Open Day</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Center Open Days</value>
+    </caseValues>
+    <fields>
+        <label><!-- Calendar Date --></label>
+        <name>Calendar_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Center Information --></label>
+        <name>Center_Information__c</name>
+        <relationshipLabel><!-- Center Open Days --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Closed Note --></label>
+        <name>Closed_Note__c</name>
+    </fields>
+    <fields>
+        <label><!-- Closed Reason --></label>
+        <name>Closed_Reason__c</name>
+        <picklistValues>
+            <masterLabel>Doctor Personal Reasons</masterLabel>
+            <translation><!-- Doctor Personal Reasons --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Doctor Professional Development</masterLabel>
+            <translation><!-- Doctor Professional Development --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Holiday</masterLabel>
+            <translation><!-- Holiday --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>RBD Approved</masterLabel>
+            <translation><!-- RBD Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Training</masterLabel>
+            <translation><!-- Training --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Vacation</masterLabel>
+            <translation><!-- Vacation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Weather</masterLabel>
+            <translation><!-- Weather --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Open Status --></label>
+        <name>Open_Status__c</name>
+        <picklistValues>
+            <masterLabel>Closed</masterLabel>
+            <translation><!-- Closed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Holiday</masterLabel>
+            <translation><!-- Holiday --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Open</masterLabel>
+            <translation><!-- Open --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Pending Close Requests --></label>
+        <name>Pending_Close_Requests__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

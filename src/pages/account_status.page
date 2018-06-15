@@ -1,0 +1,47 @@
+<apex:page id="account_status" controller="CeligoAccountSyncPoller" tabStyle="Account" showHeader="false">    
+    <style>
+        h1 {
+            color: #205d8b;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+            padding: 10px 0 0 0;
+        }
+        
+        img.loader {
+            padding-top: 5px;
+            margin: 0em;
+            align: middle;
+        }
+        
+        div.background {
+            border-style: none;
+            padding-left: 20px;
+            margin: 40px 20px;
+        }
+    </style>
+
+    <apex:form >
+		<apex:actionStatus id="status" 
+         onStart="document.body.style.cursor = 'wait';return true;" 
+         onStop="document.body.style.cursor = 'default';return true;" >
+        </apex:actionStatus> 
+	
+		<apex:outputPanel id="content" layout="block">
+			<apex:pageBlock >
+				<div class="background" >
+					<h1>
+						<apex:outputText value="{!message}"/>
+					</h1>
+					<br />
+                	<apex:image id="loader" value="{!$Resource.SquareLoaderBar}" rendered="{!showLoader}"/>
+                	<br /><br />
+              	</div>
+             </apex:pageBlock>
+		</apex:outputPanel>
+		
+		<apex:actionPoller action="{!checkSyncStatus}" rerender="content" status="status" interval="5" timeout="60000"/>
+	</apex:form>
+
+
+</apex:page>

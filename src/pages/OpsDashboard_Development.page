@@ -1,0 +1,2060 @@
+<apex:page controller="ctrl_OpsDashboard_Development" readonly="true" sidebar="false" >
+    <apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+    <apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+
+    <style type="text/css" media="print">
+      div.bPageHeader {
+        display:none;
+      }
+
+      p.form_holder {
+        display:none;
+      }
+    </style>
+
+    <style>
+      <!--  div#main_holder {
+        background-color:#CECE9D;
+      }-->
+      a {
+        text-decoration:none;
+      }
+
+      h1.report_header {
+        text-align:center;
+        font-size:14pt;
+        font-weight:bold;
+        display:block;
+        padding-bottom:1em;
+        padding-top:5px;
+        color:blue;
+      }
+
+      table.accs_details {
+        font-family:georgia,arial;
+      }
+
+      table.accs_details tr.control {
+        font-weight:bold;
+        font-size:12pt;
+        text-align:center;
+      }
+
+      table.accs_details tr.control td {
+        border-bottom:1px solid black;
+        empty-cells:hide;
+      }
+
+      table.accs_details tr.subhead {
+        font-weight:bold;
+        font-size:12pt;
+      }
+
+      table.accs_details tr.subhead td {
+        text-align:left;
+        border-bottom:1px dotted black;
+        padding-top:1em;
+        color:blue;
+        padding-left:10px;
+        empty-cells:hide;
+      }
+
+      table.accs_details tr.accs {
+
+      }
+
+      table.accs_details tr.accs td {
+        text-align:left;
+        line-height:20px;
+        font-size:10pt;
+        border-bottom:1px dashed #5789AE;
+        empty-cells:hide;
+      }
+
+      table.accs_details tr.accs td.indent {
+        padding-left:25px;
+        font-weight:bold;
+        font-style:italic;
+        empty-cells:hide;
+      }
+
+      table.accs_details tr.accs td.right {
+         text-align:right;
+         padding-right:5px;
+         empty-cells:hide;
+      }
+
+      table.accs_details tr.accs_b {
+        background-color:#CECE9D;
+      }
+
+      table.accs_details tr.accs_b td {
+        text-align:left;
+        line-height:20px;
+        font-size:10pt;
+        border-bottom:1px dashed #5789AE;
+        empty-cells:hide;
+      }
+
+      table.accs_details tr.accs_b td.indent {
+        padding-left:25px;
+        font-weight:bold;
+        font-style:italic;
+        empty-cells:hide;
+      }
+
+      table.accs_details tr.accs_b td.right {
+        text-align:right;
+        padding-right:5px;
+        empty-cells:hide;
+      }
+
+      table.accs_details tr.footer {
+        background-color:#A8A8A8;
+        font-weight:bold;
+        font-size:12pt;
+      }
+
+      table.accs_details tr.footer td {
+        color:white;
+        border-top:2px solid black;
+        border-bottom:2px solid black;
+        empty-cells:hide;
+        text-align:left;
+      }
+
+      table.accs_details tr.footer td.right {
+        text-align:right;
+        padding-right:5px
+        empty-cells:hide;
+      }
+
+      table.accs_details tr.footer td.indent {
+        padding-left:25px;
+        empty-cells:hide;
+      }
+
+      table.accs_details tr.lgreen {
+        background-color:#C9E4E4;
+        font-size:10pt;
+      }
+
+      table.accs_details tr.lgreen td {
+        color:black;
+        border-top:1px solid #008080;
+        border-bottom:1px solid #008080;
+        empty-cells:hide;
+            text-align:left;
+      }
+
+      table.accs_details tr.lgreen td.right {
+        text-align:right;
+        padding-right:5px;
+        empty-cells:hide;
+      }
+
+      table.accs_details tr.lgreen td.indent {
+        padding-left:25px;
+        empty-cells:hide;
+             font-style:italic;
+        font-weight:bold;
+      }
+
+      table.accs_details tr.dgreen {
+        background-color:#147585;
+        font-weight:bold;
+        font-size:12pt;
+      }
+
+      table.accs_details tr.dgreen td {
+        color:white;
+        border-top:1px solid #008080;
+        border-bottom:1px solid #008080;
+        empty-cells:hide;
+        text-align:left;
+      }
+
+      table.accs_details tr.dgreen td.right {
+        text-align:right;
+        padding-right:5px;
+        empty-cells:hide;
+      }
+
+      table.accs_details tr.dgreen td.indent {
+        padding-left:25px;
+        empty-cells:hide;
+      }
+
+
+      form.inline_form {
+        display:inline-block;
+        padding:0;
+        margins:0;
+      }
+
+      hr.style-fade {
+        border: 0;
+        height: 2px;
+        width:1000px;
+        display:block;
+        background-image: -webkit-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0));
+        background-image:    -moz-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0));
+        background-image:     -ms-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0));
+        background-image:      -o-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0));
+      }
+
+
+      span.box_head {
+        font-weight:bold;
+        font-size:12pt;
+        display:block;
+      }
+
+      span.ribbon_header {
+        font-weight:bold;
+        font-size:10pt;
+        display:block;
+      }
+
+      image.ribbon {
+        <!--position:relative;-->
+      }
+
+      span.ribbon_rank_large {
+        position:relative;
+        top:-113px;
+        left:-0px;
+        font-weight:bold;
+        font-size:18pt;
+        color:white;
+        text-align:center;
+        display:inline;
+        width:20px;
+      }
+
+      span.ribbon_rank_large_dark {
+        position:relative;
+        top:-113px;
+        left:-0px;
+        font-weight:bold;
+        font-size:18pt;
+        color:black;
+        text-align:center;
+        display:inline;
+        width:20px;
+      }
+
+      table.rounded {
+         border-bottom-left-radius:10px;
+        -moz-border-bottom-left-radius:10px;
+        -webkit-border-bottom-left-radius:10px;
+        border:1px solid black;
+        border-bottom-right-radius:10px;
+        -moz-border-bottom-right-radius:10px;
+        -webkit-border-bottom-right-radius:10px;
+        box-shadow: 7px 7px 11px 1px rgba(74, 78, 79, 0.75);
+        -moz-box-shadow: 7px 7px 11px 1px rgba(74, 78, 79, 0.75);
+        -webkit-box-shadow: 7px 7px 11px 1px rgba(74, 78, 79, 0.75);
+      }
+
+      table.rounded tr.header td {
+        /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjM0Ii8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC43NSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+        background: -moz-linear-gradient(top,  rgba(0,0,0,0.34) 0%, rgba(0,0,0,0.75) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.34)), color-stop(100%,rgba(0,0,0,0.75))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(0,0,0,0.34) 0%,rgba(0,0,0,0.75) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(0,0,0,0.34) 0%,rgba(0,0,0,0.75) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(0,0,0,0.34) 0%,rgba(0,0,0,0.75) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(0,0,0,0.34) 0%,rgba(0,0,0,0.75) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#57000000', endColorstr='#bf000000',GradientType=0 ); /* IE6-8 */
+        border-bottom:2px solid black;
+        color:white;
+      }
+
+      table.rounded tr.header_white td {
+        border-bottom:2px solid black;
+        padding-top:2px;
+        padding-bottom:2px;
+      }
+
+      table.rounded td.grey_grad {
+      color:white;
+      /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjY1Ii8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMCIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+        background: -moz-linear-gradient(top,  rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.65)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-8 */
+      }
+
+      table.rounded td.orange_grad {
+        /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VkOTAxNyIgc3RvcC1vcGFjaXR5PSIwLjc1Ii8+CiAgICA8c3RvcCBvZmZzZXQ9IjElIiBzdG9wLWNvbG9yPSIjZWQ5MTE5IiBzdG9wLW9wYWNpdHk9IjAuNzUiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2Y2ZTZiNCIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+        background: -moz-linear-gradient(top,  rgba(237,144,23,0.75) 0%, rgba(237,145,25,0.75) 1%, rgba(246,230,180,0) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(237,144,23,0.75)), color-stop(1%,rgba(237,145,25,0.75)), color-stop(100%,rgba(246,230,180,0))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(237,144,23,0.75) 0%,rgba(237,145,25,0.75) 1%,rgba(246,230,180,0) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(237,144,23,0.75) 0%,rgba(237,145,25,0.75) 1%,rgba(246,230,180,0) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(237,144,23,0.75) 0%,rgba(237,145,25,0.75) 1%,rgba(246,230,180,0) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(237,144,23,0.75) 0%,rgba(237,145,25,0.75) 1%,rgba(246,230,180,0) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfed9017', endColorstr='#00f6e6b4',GradientType=0 ); /* IE6-8 */
+      }
+
+      table.rounded td.blue_grad {
+        /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2IwZDRlMyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM4OGJhY2YiIHN0b3Atb3BhY2l0eT0iMCIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+        background: -moz-linear-gradient(top,  rgba(176,212,227,1) 0%, rgba(136,186,207,0) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(176,212,227,1)), color-stop(100%,rgba(136,186,207,0))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(176,212,227,1) 0%,rgba(136,186,207,0) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(176,212,227,1) 0%,rgba(136,186,207,0) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(176,212,227,1) 0%,rgba(136,186,207,0) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(176,212,227,1) 0%,rgba(136,186,207,0) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b0d4e3', endColorstr='#0088bacf',GradientType=0 ); /* IE6-8 */
+      }
+
+      table.rounded td.brown_grad {
+        /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Q1Y2VhNiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjQwJSIgc3RvcC1jb2xvcj0iI2M5YzE5MCIgc3RvcC1vcGFjaXR5PSIwLjYiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2I3YWQ3MCIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+        background: -moz-linear-gradient(top,  rgba(213,206,166,1) 0%, rgba(201,193,144,0.6) 40%, rgba(183,173,112,0) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(213,206,166,1)), color-stop(40%,rgba(201,193,144,0.6)), color-stop(100%,rgba(183,173,112,0))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(213,206,166,1) 0%,rgba(201,193,144,0.6) 40%,rgba(183,173,112,0) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(213,206,166,1) 0%,rgba(201,193,144,0.6) 40%,rgba(183,173,112,0) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(213,206,166,1) 0%,rgba(201,193,144,0.6) 40%,rgba(183,173,112,0) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(213,206,166,1) 0%,rgba(201,193,144,0.6) 40%,rgba(183,173,112,0) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d5cea6', endColorstr='#00b7ad70',GradientType=0 ); /* IE6-8 */
+      }
+
+      table.rounded td.green_grad {
+        /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzYxYzQxOSIgc3RvcC1vcGFjaXR5PSIwLjc1Ii8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNiNGUzOTEiIHN0b3Atb3BhY2l0eT0iMCIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+        background: -moz-linear-gradient(top,  rgba(97,196,25,0.75) 0%, rgba(180,227,145,0) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(97,196,25,0.75)), color-stop(100%,rgba(180,227,145,0))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(97,196,25,0.75) 0%,rgba(180,227,145,0) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(97,196,25,0.75) 0%,rgba(180,227,145,0) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(97,196,25,0.75) 0%,rgba(180,227,145,0) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(97,196,25,0.75) 0%,rgba(180,227,145,0) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bf61c419', endColorstr='#00b4e391',GradientType=0 ); /* IE6-8 */
+      }
+
+      table.rounded td.lpink_grad {
+        /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZjNzFhMiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmYzcxYTIiIHN0b3Atb3BhY2l0eT0iMCIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+        background: -moz-linear-gradient(top,  rgba(252,113,162,1) 0%, rgba(252,113,162,0) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,113,162,1)), color-stop(100%,rgba(252,113,162,0))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(252,113,162,1) 0%,rgba(252,113,162,0) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(252,113,162,1) 0%,rgba(252,113,162,0) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(252,113,162,1) 0%,rgba(252,113,162,0) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(252,113,162,1) 0%,rgba(252,113,162,0) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fc71a2', endColorstr='#00fc71a2',GradientType=0 ); /* IE6-8 */
+      }
+
+      #border-seperator {
+        border-bottom: 3px solid gray;
+      }
+
+      table {
+        border-collapse: collapse;
+      }
+
+    </style>
+
+    <script>
+        function use_fancy_cursor(t) {
+            document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+            t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+        }
+
+        function default_cursor(t) {
+            document.body.style.cursor = 'default';
+            t.style.cursor='default';
+        }
+
+            var key_timeout;
+            var search_in_progress = false;
+
+        function calculate_now() {
+            search_in_progress = false;
+            payout_calc();
+        }
+
+        function calc_key() {
+            if(search_in_progress)
+                clearTimeout(key_timeout);
+            search_in_progress = true;
+            key_timeout = setTimeout("calculate_now()",600);
+        }
+    </script>
+
+
+    <div align="center">
+        <p class="form_holder">
+        <apex:form styleClass="inline_form"  Style="display:inline;padding:0;margins:0;" onsubmit="">
+        <apex:commandButton value="Today" rendered="{!if(yesterday_filter==' yesterday ',true,false)}" action="{!display_today}" style="margin-right:10px;" />
+        <apex:commandButton value="Yesterday" rendered="{!if(yesterday_filter==' yesterday ',false,true)}" action="{!display_yesterday}" style="margin-right:10px;" />
+
+        <apex:commandButton value="User" rendered="{!display_user_button}" action="{!display_user}" style="margin-right:10px;" />
+        <apex:commandButton value="Center" rendered="{!display_center_button}"  action="{!display_center}" style="margin-right:10px;" />
+        <apex:commandButton value="All" rendered="{!display_all_button}"  action="{!display_all}" style="margin-right:10px;" />
+
+        <apex:outputPanel rendered="{!display_ca}" id="ca_admin" styleClass="admin_holder">
+          <span style="font-weight:bold;padding-left:10px;">View Info as : </span>
+          <apex:selectList value="{!display_pec}" multiselect="false" size="1">
+            <apex:selectOptions value="{!CAPEClist}"></apex:selectoptions>
+          </apex:selectList>
+          <apex:commandButton value="Display Data" action="{!view_auser}" style="margin-left:10px;"/>
+
+          <span style="font-weight:bold;padding-left:10px;">View Center : </span>
+          <apex:selectList value="{!display_center}" multiselect="false" size="1">
+            <apex:selectOptions value="{!CACenterlist}"></apex:selectoptions>
+          </apex:selectList>
+          <apex:commandButton value="Display Data" action="{!view_acenter}" style="margin-left:10px;"/>
+        </apex:outputPanel>
+
+        <apex:outputPanel rendered="{!display_admin}" id="admin" styleClass="admin_holder">
+          <apex:commandButton value="User Goals" action="{!set_salesgoals}" style="margin-right:10px;" rendered="{!if(display_all_button && !display_ppriv,true,false)}" />
+          <apex:commandButton value="Center Goals" action="{!set_centergoals}" style="margin-right:10px;" rendered="{!if(display_all_button && !display_ppriv,true,false)}" />
+          <apex:commandButton value="Run Rates" action="{!view_historic_rates}" style="margin-right:10px;" />
+           <apex:commandButton value="Date Range" action="{!ops_daterange}" style="margin-right:10px;" />
+          <span style="font-weight:bold;padding-left:10px;">View Info as : </span>
+          <apex:selectList value="{!display_pec}" multiselect="false" size="1">
+            <apex:selectOptions value="{!PEClist}"></apex:selectoptions>
+          </apex:selectList>
+          <apex:commandButton value="Display Data" action="{!view_auser}" style="margin-left:10px;"/>
+
+          <span style="font-weight:bold;padding-left:10px;">View Center Info : </span>
+          <apex:selectList value="{!display_center}" multiselect="false" size="1">
+            <apex:selectOptions value="{!Centerlist}"></apex:selectoptions>
+          </apex:selectList>
+          <apex:commandButton value="Display Data" action="{!view_acenter}" style="margin-left:10px;"/>
+
+          <span style="font-weight:bold;padding-left:10px;">View Region : </span>
+          <apex:selectList value="{!display_region}" multiselect="false" size="1">
+            <apex:selectOptions value="{!Regionlist}"></apex:selectoptions>
+          </apex:selectList>
+          <apex:commandButton value="Display Region" action="{!view_aregion}" style="margin-left:10px;"/>
+
+
+        </apex:outputPanel>
+        </apex:form></p>
+
+
+        <apex:outputPanel id="main_holder" layout="block" rendered="{!display_dashboard}">
+            <h1 class="report_header" style="width:750px;">Sales Dashboard - {!report_header}
+            <apex:outputpanel rendered="{!if(action=='region' || action=='center' || action=='all',true,false)}"  >
+             <span style="font-weight:bold;font-size:12pt;"><span style="color:black;">(&nbsp;# Open Days :</span> <apex:outputText value="{!total_open_days}" /></span><span style="display:inline-block;width:20px;">&nbsp;</span>
+             <span style="font-weight:bold;font-size:12pt;"><span style="color:black;">% Days Used :</span> <apex:outputText value="{0,number,##,##,##0.0%}" >
+                <apex:param value="{!if(total_open_days==0,0,completed_open_days/total_open_days)}" />
+                </apex:outputtext>
+              </span><span style="color:black;">)</span>
+            </apex:outputpanel>
+
+            </h1>
+
+            <apex:outputpanel id="ribbon_holder" rendered="{!if(action=='user',true,false)}" layout="block" style="padding-bottom:15px;">
+
+              <apex:outputpanel rendered="{!display_ribbons}" >
+              <table>
+              <tr><td>
+                <a href="{!ranking_url}?inittab=overall" target="_blank">
+                <table class="rounded" cellspacing="0" style="border:2px solid #5789AE;">
+                  <tr class="header_white" style="border:2px solid #5789AE;"><td colspan="2" align="center" ><span class="box_head" style="color:black;"> Overall &nbsp;&nbsp;<span style="color:red"><apex:outputText value="{0,number,#,##0}" >
+                <apex:param value="{!user_rank.National_Overall_Rank__c}" />
+                </apex:outputtext></span></span></td></tr>
+                  <tr>
+                    <td align="center" width="110px" style="padding-left:20px;padding-right:20px;" class="grey_grad">
+                      <span class="ribbon_header">National</span>
+                      <apex:variable var="imageVar" value="{!national_overall_ribbon}"/>
+                      <apex:image url="{!URLFOR($Resource.Ribbon_Images, imageVar)}" styleClass="ribbon" style="width:121px;height:180px;" />
+                      <span class="{!national_overall_ribbon_font}"  style="top:-137px;font-size:26pt;width:35px;"><apex:outputText value="{0,number,#,##0}" ><apex:param value="{!user_rank.National_Overall_Rank__c}" /></apex:outputtext>
+                      </span>
+                    </td>
+                </tr>
+                </table></a>
+              </td>
+              <td style="width:40px;">&nbsp;</td>
+              <td>
+                <a href="{!ranking_url}?inittab=close_rate" target="_blank">
+                <table class="rounded" cellspacing="0">
+                <tr class="header"><td  colspan="2" align="center"><span class="box_head">True Close Rate &nbsp;&nbsp;<apex:outputText value="{0,number,#,##0.0}" ><apex:param value="{!user_rank.True_Close_Rate__c}" /></apex:outputtext> %</span></td></tr>
+                <tr>
+                  <td class="orange_grad" style="border-right:2px solid black;" align="center" width="110px" >
+                    <span class="ribbon_header">National</span>
+                    <apex:variable var="imageVar" value="{!tcr_national_ribbon}"/>
+                    <apex:image url="{!URLFOR($Resource.Ribbon_Images, imageVar)}" styleClass="ribbon"/>
+                    <span class="{!tcr_national_ribbon_font}"><apex:outputText value="{0,number,#,##0}" ><apex:param value="{!user_rank.True_Close_Rate_National_Rank__c}" /></apex:outputtext> </span>
+                  </td>
+                  <td class="orange_grad" align="center" width="110px;">
+                    <span class="ribbon_header">Regional</span>
+                    <apex:variable var="imageVar" value="{!tcr_regional_ribbon}"/>
+                    <apex:image url="{!URLFOR($Resource.Ribbon_Images, imageVar)}" styleClass="ribbon"/>
+                    <span class="{!tcr_regional_ribbon_font}"><apex:outputText value="{0,number,#,##0}" ><apex:param value="{!user_rank.True_Close_Rate_Regional_Rank__c}" /></apex:outputtext> </span>
+                  </td>
+                </tr>
+              </table></a>
+              </td>
+              <td style="width:40px;">&nbsp;</td>
+              <td>
+              <a href="{!ranking_url}?inittab=callback" target="_blank">
+              <table class="rounded" cellspacing="0">
+                <tr class="header"><td colspan="2" align="center"><span class="box_head">Callback &nbsp;&nbsp;<apex:outputText value="{0,number,#,##0}" ><apex:param value="{!user_rank.Callbacks_Num__c}" /></apex:outputtext></span></td></tr>
+                <tr>
+                  <td class="blue_grad" style="border-right:2px solid black;" align="center" width="110px" >
+                    <span class="ribbon_header">National</span>
+                    <apex:variable var="imageVar" value="{!callback_national_ribbon}"/>
+                    <apex:image url="{!URLFOR($Resource.Ribbon_Images, imageVar)}" styleClass="ribbon"/>
+                    <span class="{!callback_national_ribbon_font}"><apex:outputText value="{0,number,#,##0}" ><apex:param value="{!user_rank.Callback_National_Rank__c}" /></apex:outputtext> </span>
+                  </td>
+                  <td class="blue_grad" align="center" width="110px;">
+                    <span class="ribbon_header">Regional</span>
+                    <apex:variable var="imageVar" value="{!callback_regional_ribbon}"/>
+                    <apex:image url="{!URLFOR($Resource.Ribbon_Images, imageVar)}" styleClass="ribbon"/>
+                    <span class="{!callback_regional_ribbon_font}"><apex:outputText value="{0,number,#,##0}" ><apex:param value="{!user_rank.Callback_Regional_Rank__c}" /></apex:outputtext> </span>
+                  </td>
+                </tr>
+              </table></a>
+              </td>
+              <td style="width:40px;">&nbsp;</td>
+              <td>
+              <a href="{!ranking_url}?inittab=rainmaker" target="_blank">
+              <table class="rounded" cellspacing="0">
+                <tr class="header"><td colspan="2" align="center" style="border-bottom:2px solid black;"><span class="box_head">Rainmaker Score &nbsp;&nbsp;<apex:outputText value="{0,number,#,##0.0}" ><apex:param value="{!user_rank.Avg_Rainmaker_Score__c}" /></apex:outputtext> %</span></td></tr>
+                <tr>
+                  <td class="brown_grad" style="border-right:2px solid black;" align="center" width="110px" >
+                    <span class="ribbon_header">National</span>
+                    <apex:variable var="imageVar" value="{!rainmaker_national_ribbon}"/>
+                    <apex:image url="{!URLFOR($Resource.Ribbon_Images, imageVar)}" styleClass="ribbon"/>
+                    <span class="{!rainmaker_national_ribbon_font}"><apex:outputText value="{0,number,#,##0}" ><apex:param value="{!user_rank.Rainmaker_National_Rank__c}" /></apex:outputtext> </span>
+                  </td>
+                  <td class="brown_grad" align="center" width="110px;">
+                    <span class="ribbon_header">Regional</span>
+                    <apex:variable var="imageVar" value="{!rainmaker_regional_ribbon}"/>
+                    <apex:image url="{!URLFOR($Resource.Ribbon_Images, imageVar)}" styleClass="ribbon"/>
+                    <span class="{!rainmaker_regional_ribbon_font}"><apex:outputText value="{0,number,#,##0}" ><apex:param value="{!user_rank.Rainmaker_Regional_Rank__c}" /></apex:outputtext> </span>
+                  </td>
+                </tr>
+              </table></a>
+              </td>
+              <td style="width:40px;">&nbsp;</td>
+              <td>
+                  <a href="{!ranking_url}?inittab=learning" target="_blank">
+              <table class="rounded" cellspacing="0">
+                <tr class="header"><td colspan="2" align="center" style="border-bottom:2px solid black;"><span class="box_head">Learning Activity &nbsp;&nbsp;<apex:outputText value="{0,number,#,##0}" ><apex:param value="{!user_rank.Learning_Activity_Num__c}" /></apex:outputtext></span></td></tr>
+                <tr>
+                  <td class="green_grad" style="border-right:2px solid black;" align="center" width="110px" >
+                    <span class="ribbon_header">National</span>
+                    <apex:variable var="imageVar" value="{!learning_national_ribbon}"/>
+                    <apex:image url="{!URLFOR($Resource.Ribbon_Images, imageVar)}" styleClass="ribbon"/>
+                    <span class="{!learning_national_ribbon_font}"><apex:outputText value="{0,number,#,##0}" ><apex:param value="{!user_rank.Learning_Activity_National_Rank__c}" /></apex:outputtext> </span>
+                  </td>
+                  <td class="green_grad" align="center" width="110px;">
+                    <span class="ribbon_header">Regional</span>
+                    <apex:variable var="imageVar" value="{!learning_regional_ribbon}"/>
+                    <apex:image url="{!URLFOR($Resource.Ribbon_Images, imageVar)}" styleClass="ribbon"/>
+                    <span class="{!learning_regional_ribbon_font}"><apex:outputText value="{0,number,#,##0}" ><apex:param value="{!user_rank.Learning_Activity_Regional_Rank__c}" /></apex:outputtext> </span>
+                  </td>
+                </tr>
+              </table></a>
+              </td>
+              <td style="width:40px;">&nbsp;</td>
+              <td>
+                  <a href="{!ranking_url}?inittab=finance" target="_blank">
+              <table class="rounded" cellspacing="0">
+                <tr class="header"><td colspan="2" align="center" style="border-bottom:2px solid black;"><span class="box_head">Financial Needs &nbsp;&nbsp;<apex:outputText value="{0,number,#,##0}" ><apex:param value="{!user_rank.Avg_Financial_Needs_Score__c}" /></apex:outputtext></span></td></tr>
+                <tr>
+                  <td class="lpink_grad" style="border-right:2px solid black;" align="center" width="110px" >
+                    <span class="ribbon_header">National</span>
+                    <apex:variable var="imageVar" value="{!financial_national_ribbon}"/>
+                    <apex:image url="{!URLFOR($Resource.Ribbon_Images, imageVar)}" styleClass="ribbon"/>
+                    <span class="{!learning_national_ribbon_font}"><apex:outputText value="{0,number,#,##0}" ><apex:param value="{!user_rank.Financial_Needs_National_Rank__c}" /></apex:outputtext> </span>
+                  </td>
+                  <td class="lpink_grad" align="center" width="110px;">
+                    <span class="ribbon_header">Regional</span>
+                    <apex:variable var="imageVar" value="{!financial_regional_ribbon}"/>
+                    <apex:image url="{!URLFOR($Resource.Ribbon_Images, imageVar)}" styleClass="ribbon"/>
+                    <span class="{!learning_regional_ribbon_font}"><apex:outputText value="{0,number,#,##0}" ><apex:param value="{!user_rank.Financial_Needs_Regional_Rank__c}" /></apex:outputtext> </span>
+                  </td>
+                </tr>
+              </table></a>
+              </td>
+              </tr></table>
+              </apex:outputpanel>
+
+              <apex:outputpanel rendered="{!if(display_ribbons,false,true)}" >
+              <hr class="style-fade" />
+              <table style="width:600px;font-weight:bold;">
+                <tr><td colspan="5" align="center" style="font-size:12pt;padding-bottom:5px;"> View PEC Ranking Details</td></tr>
+                <tr>
+                  <td style="width:120px;"><a href="{!ranking_url}?inittab=overall" target="_blank" style="color:purple;">Overall</a></td>
+                  <td style="width:120px;"><a href="{!ranking_url}?inittab=close_rate" target="_blank" style="color:purple;">True Close Rate</a></td>
+                  <td style="width:120px;"><a href="{!ranking_url}?inittab=callback" target="_blank" style="color:purple;">Callbacks</a></td>
+                  <td style="width:120px;"><a href="{!ranking_url}?inittab=rainmaker" target="_blank" style="color:purple;">Rainmaker</a></td>
+                  <td style="width:120px;"><a href="{!ranking_url}?inittab=learning" target="_blank" style="color:purple;">Learning activity</a></td>
+                </tr>
+              </table>
+              <hr class="style-fade" />
+              </apex:outputpanel>
+            </apex:outputpanel>
+
+            <apex:variable var="rowclassname" value="accs" />
+
+            <apex:outputpanel layout="block" rendered="{!if(action=='user' && !display_ppriv,true,false)}">
+                <apex:form >
+                <apex:actionFunction oncomplete="default_cursor(this);" name="payout_calc"  rerender="payout_holder, payout_holder_cpc, payout_holder_total, payout_modifier_holder" />
+
+                <table class="accs_details" width="1000px;">
+                <tr class="control" style="height:25px;">
+                  <td width="20%" style="color:blue;border-bottom:1px dotted black;">Bonus Compensation</td>
+                  <td width="17%">Previous Tier</td>
+                  <td width="17%" style="background:#98DEFF;border-left:2px solid gray;border-right:2px solid gray;">Current Tier</td>
+                  <td width="17%">Next Tier</td>
+                  <td width="29%">Calculator</td>
+                </tr>
+
+                <!-- START TCR COMPENSATION ROWS -->
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{! if(rowclassname == 'accs','accs_b','accs')}" />
+                    <td class="indent">TCR Payout Tier</td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,##,##,##0}" >
+                            <apex:param value="{!bonus_calc.previous_tier}" />
+                        </apex:outputtext>
+                    </td>
+                    <td class="right" style="background:#98DEFF;border-left:2px solid gray;border-right:2px solid gray;"><apex:outputText value="{0,number,##,##,##0}" >
+                        <apex:param value="{!bonus_calc.current_tier}" />
+                        </apex:outputtext>
+                    </td>
+                    <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                        <apex:param value="{!bonus_calc.next_tier}" />
+                        </apex:outputtext>
+                    </td>
+                    <td style="padding-left:15px;"><span style="display:inline-block;width:180px;font-weight:bold;">Net Collections</span>
+                        <apex:inputText value="{!payout_collections}" size="10" style="text-align:right;"  onkeyup="calc_key();" />
+                    </td>
+                </tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">TCR Payout %</td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,##,##,##0.00 %}" >
+                            <apex:param value="{!bonus_calc.previous_payout}" />
+                        </apex:outputtext>
+                    </td>
+                    <td class="right" style="background:#98DEFF;border-left:2px solid gray;border-right:2px solid gray;">
+                        <apex:outputText value="{0,number,##,##,##0.00 %}" >
+                            <apex:param value="{!bonus_calc.current_payout}" />
+                        </apex:outputtext>
+                    </td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,##,##,##0.00 %}" >
+                            <apex:param value="{!bonus_calc.next_payout}" />
+                        </apex:outputtext>
+                    </td>
+                    <td style="padding-left:15px;">
+                        <span style="display:inline-block;width:180px;font-weight:bold;">True Close Rate</span>
+                        <apex:inputText value="{!payout_close}" size="10" style="text-align:right;" onkeyup="calc_key();" />
+                    </td>
+                </tr>
+
+                <tr class="{!rowclassname}" id="border-seperator">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">TCR Payout $</td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,$##,##,##0.00}" >
+                            <apex:param value="{!bonus_calc.previous_payout_amount}" />
+                        </apex:outputtext>
+                    </td>
+                    <td class="right" style="background:#98DEFF;border-left:2px solid gray;border-right:2px solid gray;">
+                        <apex:outputText value="{0,number,$##,##,##0.00}" >
+                            <apex:param value="{!bonus_calc.current_payout_amount}" />
+                        </apex:outputtext></td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,$##,##,##0.00}" >
+                            <apex:param value="{!bonus_calc.next_payout_amount}" />
+                        </apex:outputtext>
+                    </td>
+                    <td style="padding-left:15px;">
+                        <apex:outputpanel id="payout_holder">
+                            <span style="display:inline-block;width:125px;font-weight:bold;"></span>
+                            <span style="display:inline-block;width:100px;text-align:right;">
+                                <apex:outputText value="{0,number,$##,##,##0.00}" >
+                                    <apex:param value="{!calculated_payout_amount.current_payout_amount}" />
+                                </apex:outputtext>
+                            </span>
+                        </apex:outputpanel>
+                    </td>
+                </tr>
+                <!-- END TCR COMPENSATION ROWS -->
+
+
+                <!-- START CPC COMPENSATION ROWS -->
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{! if(rowclassname == 'accs','accs_b','accs')}" />
+                    <td class="indent">CPC Payout Tier</td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,##,##,##0}" >
+                            <apex:param value="{!bonus_calc.previous_tier_cpc}" />
+                        </apex:outputtext>
+                    </td>
+                    <td class="right" style="background:#98DEFF;border-left:2px solid gray;border-right:2px solid gray;"><apex:outputText value="{0,number,##,##,##0}" >
+                        <apex:param value="{!bonus_calc.current_tier_cpc}" />
+                        </apex:outputtext>
+                    </td>
+                    <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                        <apex:param value="{!bonus_calc.next_tier_cpc}" />
+                        </apex:outputtext>
+                    </td>
+                    <td>
+            <span style="display:inline-block;width:180px;font-weight:bold;"></span>
+          </td>
+                </tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">CPC Payout %</td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,##,##,##0.00 %}" >
+                            <apex:param value="{!bonus_calc.previous_payout_cpc}" />
+                        </apex:outputtext>
+                    </td>
+                    <td class="right" style="background:#98DEFF;border-left:2px solid gray;border-right:2px solid gray;">
+                        <apex:outputText value="{0,number,##,##,##0.00 %}" >
+                            <apex:param value="{!bonus_calc.current_payout_cpc}" />
+                        </apex:outputtext>
+                    </td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,##,##,##0.00 %}" >
+                            <apex:param value="{!bonus_calc.next_payout_cpc}" />
+                        </apex:outputtext>
+                    </td>
+                    <td style="padding-left:15px;">
+                        <span style="display:inline-block;width:180px;font-weight:bold;">Collection Per Consult</span>
+                        <apex:inputText value="{!payout_cpc}" size="10" style="text-align:right;" onkeyup="calc_key();" />
+                    </td>
+                </tr>
+
+                <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">CPC Payout $</td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,$##,##,##0.00}" >
+                            <apex:param value="{!bonus_calc.previous_payout_amount_cpc}" />
+                        </apex:outputtext>
+                    </td>
+                    <td class="right" style="background:#98DEFF;border-left:2px solid gray;border-right:2px solid gray;">
+                        <apex:outputText value="{0,number,$##,##,##0.00}" >
+                            <apex:param value="{!bonus_calc.current_payout_amount_cpc}" />
+                        </apex:outputtext></td>
+                    <td class="right">
+                        <apex:outputText value="{0,number,$##,##,##0.00}" >
+                            <apex:param value="{!bonus_calc.next_payout_amount_cpc}" />
+                        </apex:outputtext>
+                    </td>
+                    <td style="padding-left:15px;">
+                        <apex:outputpanel id="payout_holder_cpc">
+                            <span style="display:inline-block;width:125px;font-weight:bold;"></span>
+                            <span style="display:inline-block;width:100px;text-align:right;">
+                                <apex:outputText value="{0,number,$##,##,##0.00}" >
+                                    <apex:param value="{!calculated_payout_amount.current_payout_amount_cpc}" />
+                                </apex:outputtext>
+                            </span>
+                        </apex:outputpanel>
+                    </td>
+                </tr>
+                <!-- END CPC COMPENSATION ROWS -->
+
+                <tr class="{!rowclassname} dgreen">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                    <td class="indent">COMBINED</td>
+                    <td>
+                        <span style="display:inline-block;width:125px;font-weight:bold;"></span>
+                    </td>
+                    <td>
+                        <span style="display:inline-block;width:125px;font-weight:bold;"></span>
+                    </td>
+                    <td>
+                        <span style="display:inline-block;width:125px;font-weight:bold;"></span>
+                    </td>
+                    <td style="padding-left:15px;">
+                        <apex:outputpanel id="payout_holder_total">
+                            <span style="display:inline-block;width:125px;font-weight:bold;font-color:black">Total</span>
+                            <span style="display:inline-block;width:100px;text-align:right;">
+                                <apex:outputText value="{0,number,$##,##,##0.00}" >
+                                    <apex:param value="{!calculated_payout_amount.current_payout_amount + calculated_payout_amount.current_payout_amount_cpc}" />
+                                </apex:outputtext>
+                            </span>
+                        </apex:outputpanel>
+                    </td>
+                </tr>
+
+
+
+
+                <!-- <apex:outputpanel rendered="{! !bonus_calc.payout_modifier == 1}" >
+                <tr class="{!rowclassname}">
+                <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                  <td class="indent">Payout Modifier</td>
+                  <td class="right" onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:12pt;\'>Collections Threshold</span><br /><br />{!display_collections_limit}', 200);" onmouseout="tooltip.hide();" ><apex:outputText value="{0,number,##,##,##0.00}" >
+                    <apex:param value="{!bonus_calc.payout_modifier}" />
+                    </apex:outputtext></td>
+                  <td class="right" style="background:#98DEFF;border-left:2px solid gray;border-right:2px solid gray;" onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:12pt;\'>Collections Threshold</span><br /><br />{!display_collections_limit}', 200);" onmouseout="tooltip.hide();" ><apex:outputText value="{0,number,##,##,##0.00}" >
+                    <apex:param value="{!bonus_calc.payout_modifier}" />
+                    </apex:outputtext></td>
+                  <td class="right" onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:12pt;\'>Collections Threshold</span><br /><br />{!display_collections_limit}', 200);" onmouseout="tooltip.hide();" ><apex:outputText value="{0,number,##,##,##0.00}" >
+                    <apex:param value="{!bonus_calc.payout_modifier}" />
+                    </apex:outputtext></td>
+                  <td style="padding-left:15px;" onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:12pt;\'>Collections Threshold</span><br /><br />{!display_collections_limit}', 200);" onmouseout="tooltip.hide();" ><apex:outputpanel id="payout_modifier_holder">
+                  <span style="display:inline-block;width:125px;font-weight:bold;"></span>
+                    <span style="display:inline-block;width:100px;text-align:right;">
+                    <apex:outputText value="{0,number,##,##,##0.00}" >
+                    <apex:param value="{!calculated_payout_amount.payout_modifier}" />
+                    </apex:outputtext>
+                    </span></apex:outputpanel>
+                  </td>
+                </tr>
+                </apex:outputpanel> -->
+
+
+                <!--<table class="accs_details" width="1000px;">
+                <tr class="control">
+                  <td width="30%" style="border:0px;"></td>
+                  <td width="14%">&nbsp;</td>
+                  <td width="14%">Tier 1</td>
+                  <td width="14%">Tier 2</td>
+                  <td width="14%">Quarter</td>
+                  <td width="14%">Total</td>
+                </tr>
+
+                <tr class="subhead">
+                  <td colspan="6">Bonus Compensation for Current Month</td>
+                </tr>
+
+                <tr class="{!rowclassname}">
+                <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                  <td class="indent">Goal</td>
+                    <td class="right">&nbsp;</td>
+                  <td class="right"><apex:outputText value="{0,number,##,##,##0.00}" >
+                    <apex:param value="{!bonus_1_floor}" />
+                    </apex:outputtext></td>
+                  <td class="right"><apex:outputText value="{0,number,##,##,##0.00}" >
+                    <apex:param value="{!bonus_2_floor}" />
+                    </apex:outputtext></td>
+                  <td class="right"><apex:outputText value="{0,number,##,##,##0.00}" >
+                    <apex:param value="{!bonus_3_qtr_floor}" />
+                    </apex:outputtext></td>
+                  <td class="right">&nbsp;</td>
+                </tr>
+
+                <tr class="{!rowclassname}">
+                <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                  <td class="indent">Compensation</td>
+                    <td class="right">&nbsp;</td>
+                  <td class="right"><apex:outputText value="{0,number,##,##,##0.00}" >
+                    <apex:param value="{!bonus_1_amount}" />
+                    </apex:outputtext></td>
+                  <td class="right"><apex:outputText value="{0,number,##,##,##0.00}" >
+                    <apex:param value="{!bonus_2_amount}" />
+                    </apex:outputtext></td>
+                  <td class="right"><apex:outputText value="{0,number,##,##,##0.00}" >
+                    <apex:param value="{!bonus_3_qtr_amount}" />
+                    </apex:outputtext></td>
+                  <td class="right"><apex:outputText value="{0,number,##,##,##0.00}" >
+                    <apex:param value="{!bonus_all_amount}" />
+                    </apex:outputtext></td>
+                </tr>
+
+
+                </table>-->
+
+                </table>
+
+                <a href="{!hyper_prefix}/apex/opsDashcsv?format=21{!download_string}&interval=1" target="_blank" style="color:blue;">Download Bonus Targets</a>
+                <br /><br />
+                </apex:form>
+            </apex:outputpanel>
+
+            <!--commented out on 4/1/2016 by cm - based on request from Dan Mckelvey-->
+            <!--<apex:outputpanel layout="block" rendered="{!if(action=='region' && display_region_compensation,true,false)}">
+            <apex:form >
+            <apex:actionFunction oncomplete="default_cursor(this);" name="payout_calc"  rerender="payout_holder_rsm" />
+
+            <table class="accs_details" width="1000px;">
+            <tr class="control" style="height:25px;">
+              <td width="20%" style="color:blue;border-bottom:1px dotted black;">Bonus Compensation</td>
+              <td width="17%">Previous Tier</td>
+              <td width="17%" style="background:#98DEFF;border-left:2px solid gray;border-right:2px solid gray;">Current Tier</td>
+              <td width="17%">Next Tier</td>
+              <td width="29%">Calculator</td>
+            </tr>
+
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Payout Tier</td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!rsm_bonus_calc.previous_tier}" />
+                </apex:outputtext></td>
+              <td class="right" style="background:#98DEFF;border-left:2px solid gray;border-right:2px solid gray;"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!rsm_bonus_calc.current_tier}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!rsm_bonus_calc.next_tier}" />
+                </apex:outputtext></td>
+              <td style="padding-left:15px;"><span style="display:inline-block;width:125px;font-weight:bold;">Net Collections</span>
+                <apex:inputText value="{!payout_collections}" size="10" style="text-align:right;"  onkeyup="calc_key();" />
+              </td>
+            </tr>
+
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Payout %</td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0.00 %}" >
+                <apex:param value="{!rsm_bonus_calc.previous_payout}" />
+                </apex:outputtext></td>
+              <td class="right" style="background:#98DEFF;border-left:2px solid gray;border-right:2px solid gray;"><apex:outputText value="{0,number,##,##,##0.00 %}" >
+                <apex:param value="{!rsm_bonus_calc.current_payout}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0.00 %}" >
+                <apex:param value="{!rsm_bonus_calc.next_payout}" />
+                </apex:outputtext></td>
+              <td style="padding-left:15px;"><span style="display:inline-block;width:125px;font-weight:bold;">True Close Rate</span>
+                <apex:inputText value="{!payout_close}" size="10" style="text-align:right;" onkeyup="calc_key();" />
+              </td>
+            </tr>
+
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Payout $</td>
+              <td class="right"><apex:outputText value="{0,number,$##,##,##0.00}" >
+                <apex:param value="{!rsm_bonus_calc.previous_payout_amount}" />
+                </apex:outputtext></td>
+              <td class="right" style="background:#98DEFF;border-left:2px solid gray;border-right:2px solid gray;"><apex:outputText value="{0,number,$##,##,##0.00}" >
+                <apex:param value="{!rsm_bonus_calc.current_payout_amount}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,$##,##,##0.00}" >
+                <apex:param value="{!rsm_bonus_calc.next_payout_amount}" />
+                </apex:outputtext></td>
+              <td style="padding-left:15px;"><apex:outputpanel id="payout_holder_rsm">
+              <span style="display:inline-block;width:125px;font-weight:bold;"></span>
+                <span style="display:inline-block;width:100px;text-align:right;">
+                <apex:outputText value="{0,number,$##,##,##0.00}" >
+                <apex:param value="{!calculated_rsm_payout_amount.current_payout_amount}" />
+                </apex:outputtext>
+                </span></apex:outputpanel>
+              </td>
+            </tr>
+
+            </table>
+
+            <a href="{!hyper_prefix}/apex/opsDashcsv?format=22{!download_string}&interval=1" target="_blank" style="color:blue;">Download Bonus Targets</a>
+            <br /><br />
+            </apex:form>
+            </apex:outputpanel>-->
+
+
+
+            <apex:variable var="rowclassname" value="accs" />
+            <table class="accs_details" width="1000px;">
+            <tr class="control">
+              <td width="30%" style="border:0px;"></td>
+              <td width="14%">{!if(yesterday_filter==' yesterday ','Yesterday','Today')}</td>
+              <td width="14%">Month to Date</td>
+              <td width="14%">Current QTR</td>
+              <td width="14%">Last Month</td>
+              <td width="14%">Year to Date</td>
+            </tr>
+
+            <tr class="subhead">
+              <td colspan="6">Collections</td>
+            </tr>
+
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Collected</td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=5{!download_string}&interval=1" target="_blank">
+                <apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Collected.previous_day}" />
+                </apex:outputtext></a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=5{!download_string}&interval=2" target="_blank">
+                <apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Collected.MTD}" />
+                </apex:outputtext></a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=5{!download_string}&interval=3" target="_blank">
+                <apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Collected.QTD}" />
+                </apex:outputtext></a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=5{!download_string}&interval=4" target="_blank">
+                <apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Collected.previous_month}" />
+                </apex:outputtext></a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=5{!download_string}&interval=5" target="_blank">
+                <apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Collected.YTD}" />
+                </apex:outputtext></a></td>
+            </tr>
+
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Refunded</td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=6{!download_string}&interval=1" target="_blank">
+                <apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Refunded.previous_day}" />
+                </apex:outputtext></a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=6{!download_string}&interval=2" target="_blank">
+                <apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Refunded.MTD}" />
+                </apex:outputtext></a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=6{!download_string}&interval=3" target="_blank">
+                <apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Refunded.QTD}" />
+                </apex:outputtext></a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=6{!download_string}&interval=4" target="_blank">
+                <apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Refunded.previous_month}" />
+                </apex:outputtext></a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=6{!download_string}&interval=5" target="_blank">
+                <apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Refunded.YTD}" />
+                </apex:outputtext></a></td>
+            </tr>
+
+            <tr class="lgreen">
+              <td class="indent">GP Fees</td>
+              <td class="right">
+                <apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!GPCollectedFees.previous_day + GPRefundedFees.previous_day}" />
+                </apex:outputtext></td>
+              <td class="right">
+                <apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!GPCollectedFees.MTD + GPRefundedFees.MTD}" />
+                </apex:outputtext></td>
+              <td class="right">
+                <apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!GPCollectedFees.QTD + GPRefundedFees.QTD}" />
+                </apex:outputtext></td>
+              <td class="right">
+                <apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!GPCollectedFees.previous_month + GPRefundedFees.previous_month}" />
+                </apex:outputtext></td>
+              <td class="right">
+                <apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!GPCollectedFees.YTD + GPRefundedFees.YTD}" />
+                </apex:outputtext></td>
+            </tr>
+
+            <tr class="footer">
+              <td class="indent">Net Collected</td>
+                <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Collected.previous_day + Refunded.previous_day}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Collected.MTD + Refunded.MTD}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Collected.QTD + Refunded.QTD}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Collected.previous_month + Refunded.previous_month}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Collected.YTD + Refunded.YTD}" />
+                </apex:outputtext></td>
+            </tr>
+
+            <tr class="dgreen">
+              <td class="indent">Net Collected (after GP Fees)</td>
+                <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Collected.previous_day + GPCollectedFees.previous_day + GPRefundedFees.previous_day + Refunded.previous_day}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Collected.MTD + GPCollectedFees.MTD + GPRefundedFees.MTD + Refunded.MTD}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Collected.QTD + GPCollectedFees.QTD + GPRefundedFees.QTD + Refunded.QTD}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Collected.previous_month + GPCollectedFees.previous_month + GPRefundedFees.previous_month + Refunded.previous_month}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Collected.YTD + GPCollectedFees.YTD + GPRefundedFees.YTD + Refunded.YTD}" />
+                </apex:outputtext></td>
+            </tr>
+            <!-- pulled by cm on 2012-2-23 - Jason did not want this metric on display
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Net Collections per Consult</td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0.00}" >
+                <apex:param value="{!if(ConsultStarts.MTD==0,0,(Collected.MTD + Refunded.MTD)/ConsultStarts.MTD)}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0.00}" >
+                <apex:param value="{!if(ConsultStarts.QTD==0,0,(Collected.QTD + Refunded.QTD)/ConsultStarts.QTD)}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0.00}" >
+                <apex:param value="{!if(ConsultStarts.previous_month==0,0,(Collected.previous_month + Refunded.previous_month)/ConsultStarts.previous_month)}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0.00}" >
+                <apex:param value="{!if(ConsultStarts.YTD==0,0,(Collected.YTD + Refunded.YTD)/COnsultStarts.YTD)}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0.00}" >
+                <apex:param value="{!if(ConsultStarts.last_year==0,0,(Collected.last_year + Refunded.last_year)/ConsultStarts.last_year)}" />
+                </apex:outputtext></td>
+            </tr>
+            -->
+
+            <tr class="{!rowclassname}">
+              <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Collection Ratio (in period)</td>
+              <td class="right" onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:12pt;\'>True Collection Ratio</span><br /><br />{!if(TreatmentSold.previous_day + TreatmentCancelled.previous_day==0,0,round((Collected.previous_day + Refunded.previous_day)/(TreatmentSold.previous_day + TreatmentCancelled.previous_day) * 100,1))} %', 200);" onmouseout="tooltip.hide();">
+                  <apex:outputText value="{0,number,##,##,##0.0}%">
+                    <apex:param value="{!if(TreatmentSold.previous_day + TreatmentCancelledIn.previous_day==0,0,(Collected.previous_day + Refunded.previous_day)/(TreatmentSold.previous_day + TreatmentCancelledIn.previous_day) * 100)}" />
+                  </apex:outputtext>
+                </td>
+              <td class="right" onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:12pt;\'>True Collection Ratio</span><br /><br />{!if(TreatmentSold.MTD + TreatmentCancelled.MTD==0,0,round((Collected.MTD + Refunded.MTD)/(TreatmentSold.MTD + TreatmentCancelled.MTD) * 100,1))} %', 200);" onmouseout="tooltip.hide();">
+                  <apex:outputText value="{0,number,##,##,##0.0}%" >
+                    <apex:param value="{!if(TreatmentSold.MTD + TreatmentCancelledIn.MTD==0,0,(Collected.MTD + Refunded.MTD)/(TreatmentSold.MTD + TreatmentCancelledIn.MTD) * 100)}" />
+                  </apex:outputtext>
+                </td>
+              <td class="right" onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:12pt;\'>True Collection Ratio</span><br /><br />{!if(TreatmentSold.QTD + TreatmentCancelled.QTD==0,0,round((Collected.QTD + Refunded.QTD)/(TreatmentSold.QTD + TreatmentCancelled.QTD) * 100,1))} %', 200);" onmouseout="tooltip.hide();">
+                  <apex:outputText value="{0,number,##,##,##0.0}%" >
+                    <apex:param value="{!if(TreatmentSold.QTD + TreatmentCancelledIn.QTD==0,0,(Collected.QTD + Refunded.QTD)/(TreatmentSold.QTD + TreatmentCancelledIn.QTD) * 100)}" />
+                  </apex:outputtext>
+                </td>
+              <td class="right" onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:12pt;\'>True Collection Ratio</span><br /><br />{!if(TreatmentSold.previous_month + TreatmentCancelled.previous_month==0,0,round((Collected.previous_month + Refunded.previous_month)/(TreatmentSold.previous_month + TreatmentCancelled.previous_month) * 100,1))} %', 200);" onmouseout="tooltip.hide();">
+                  <apex:outputText value="{0,number,##,##,##0.0}%" >
+                    <apex:param value="{!if(TreatmentSold.previous_month + TreatmentCancelledIn.previous_month==0,0,(Collected.previous_month + Refunded.previous_month)/(TreatmentSold.previous_month + TreatmentCancelledIn.previous_month) * 100)}" />
+                  </apex:outputtext>
+                </td>
+              <td class="right" onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:12pt;\'>True Collection Ratio</span><br /><br />{!if(TreatmentSold.YTD + TreatmentCancelled.YTD==0,0,round((Collected.YTD + Refunded.YTD)/(TreatmentSold.YTD + TreatmentCancelled.YTD) * 100,1))} %', 200);" onmouseout="tooltip.hide();">
+                  <apex:outputText value="{0,number,##,##,##0.0}%" >
+                    <apex:param value="{!if(TreatmentSold.YTD + TreatmentCancelledIn.YTD==0,0,(Collected.YTD + Refunded.YTD)/(TreatmentSold.YTD + TreatmentCancelledIn.YTD) * 100)}" />
+                  </apex:outputtext>
+                </td>
+            </tr>
+            <tr class="footer">
+              <td class="indent">Net Non Comission</td>
+                <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=25{!download_string}&interval=1" style="color:white" target="_blank">
+                <apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!PrivateCollected.previous_day + PrivateRefunded.previous_day}" />
+                </apex:outputtext></a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=25{!download_string}&interval=2" style="color:white" target="_blank">
+                <apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!PrivateCollected.MTD + PrivateRefunded.MTD}" />
+                </apex:outputtext></a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=25{!download_string}&interval=3" style="color:white" target="_blank">
+              <apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!PrivateCollected.QTD + PrivateRefunded.QTD}" />
+                </apex:outputtext></a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=25{!download_string}&interval=4" style="color:white" target="_blank">
+              <apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!PrivateCollected.previous_month + PrivateRefunded.previous_month}" />
+                </apex:outputtext></a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=25{!download_string}&interval=5" style="color:white" target="_blank">
+              <apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!PrivateCollected.YTD + PrivateRefunded.YTD}" />
+                </apex:outputtext></a></td>
+            </tr>
+
+            <tr class="dgreen">
+              <td class="indent">All Collections</td>
+                <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Collected.previous_day + Refunded.previous_day + PrivateCollected.previous_day + PrivateRefunded.previous_day}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Collected.MTD + Refunded.MTD + PrivateCollected.MTD + PrivateRefunded.MTD}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Collected.QTD + Refunded.QTD + PrivateCollected.QTD + PrivateRefunded.QTD}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Collected.previous_month + Refunded.previous_month + PrivateCollected.previous_month + PrivateRefunded.previous_month}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!Collected.YTD + Refunded.YTD + PrivateCollected.YTD + PrivateRefunded.YTD}" />
+                </apex:outputtext></td>
+            </tr>
+
+            <tr class="subhead">
+              <td colspan="6">Consults</td>
+            </tr>
+
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Consults</td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=7{!download_string}&interval=1" target="_blank">{!ConsultStarts.previous_day}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=7{!download_string}&interval=2" target="_blank">{!ConsultStarts.MTD}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=7{!download_string}&interval=3" target="_blank">{!ConsultStarts.QTD}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=7{!download_string}&interval=4" target="_blank">{!ConsultStarts.previous_month}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=7{!download_string}&interval=5" target="_blank">{!ConsultStarts.YTD}</a></td>
+            </tr>
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Callback Consults</td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=24{!download_string}&interval=1" target="_blank">{!CallbackConsultStarts.previous_day}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=24{!download_string}&interval=2" target="_blank">{!CallbackConsultStarts.MTD}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=24{!download_string}&interval=3" target="_blank">{!CallbackConsultStarts.QTD}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=24{!download_string}&interval=4" target="_blank">{!CallbackConsultStarts.previous_month}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=24{!download_string}&interval=5" target="_blank">{!CallbackConsultStarts.YTD}</a></td>
+            </tr>
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Applying for finance</td>
+              <td class="right">
+                  <apex:outputText value="{0,number,##,##,##0.0}%" >
+                    <apex:param value="{!if(ConsultStarts.previous_day==0,0, FinancedConsults.previous_day/ConsultStarts.previous_day * 100)}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,##,##,##0.0}%" >
+                    <apex:param value="{!if(ConsultStarts.MTD==0,0, FinancedConsults.MTD/ConsultStarts.MTD * 100)}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,##,##,##0.0}%" >
+                    <apex:param value="{!if(ConsultStarts.QTD==0,0, FinancedConsults.QTD/ConsultStarts.QTD * 100)}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,##,##,##0.0}%" >
+                    <apex:param value="{!if(ConsultStarts.previous_month==0,0, FinancedConsults.previous_month/ConsultStarts.previous_month * 100)}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,##,##,##0.0}%" >
+                    <apex:param value="{!if(ConsultStarts.YTD==0,0, FinancedConsults.YTD/ConsultStarts.YTD * 100)}" />
+                  </apex:outputtext>
+              </td>
+            </tr>
+
+
+            <tr class="subhead">
+              <td colspan="6">Starts</td>
+            </tr>
+
+            <tr class="lgreen">
+              <td class="indent">Pending Starts</td>
+              <!-- Pending starts is a Decimal value derived from an integer (using count() instead of sum()), so we use the FLOOR function to format the output without the decimal -->
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=20{!download_string}&interval=1" target="_blank">{!FLOOR(PendingStarts.previous_day)}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=20{!download_string}&interval=2" target="_blank">{!FLOOR(PendingStarts.MTD)}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=20{!download_string}&interval=3" target="_blank">{!FLOOR(PendingStarts.QTD)}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=20{!download_string}&interval=4" target="_blank">{!FLOOR(PendingStarts.previous_month)}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=20{!download_string}&interval=5" target="_blank">{!FLOOR(PendingStarts.YTD)}</a></td>
+            </tr>
+
+            <tr class="footer">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Pending Revenue</td>
+              <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!PendingTreatmentSold.previous_day}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!PendingTreatmentSold.MTD}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!PendingTreatmentSold.QTD}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!PendingTreatmentSold.previous_month}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                <apex:param value="{!PendingTreatmentSold.YTD}" />
+                </apex:outputtext></td>
+            </tr>
+
+
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">New Starts</td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=8{!download_string}&interval=1" target="_blank">{!Starts.previous_day}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=8{!download_string}&interval=2" target="_blank">{!Starts.MTD}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=8{!download_string}&interval=3" target="_blank">{!Starts.QTD}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=8{!download_string}&interval=4" target="_blank">{!Starts.previous_month}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=8{!download_string}&interval=5" target="_blank">{!Starts.YTD}</a></td>
+            </tr>
+
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Same Day Starts</td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=8{!download_string}&interval=1" target="_blank">{!SdStarts.previous_day}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=8{!download_string}&interval=2" target="_blank">{!SdStarts.MTD}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=8{!download_string}&interval=3" target="_blank">{!SdStarts.QTD}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=8{!download_string}&interval=4" target="_blank">{!SdStarts.previous_month}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=8{!download_string}&interval=5" target="_blank">{!SdStarts.YTD}</a></td>
+            </tr>
+
+            <tr><td colspan="6">&nbsp;</td></tr>
+
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Cancelled Starts (in period)</td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=9{!download_string}&interval=1" target="_blank">{!StartsCancelledIn.previous_day}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=9{!download_string}&interval=2" target="_blank">{!StartsCancelledIn.MTD}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=9{!download_string}&interval=3" target="_blank">{!StartsCancelledIn.QTD}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=9{!download_string}&interval=4" target="_blank">{!StartsCancelledIn.previous_month}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=9{!download_string}&interval=5" target="_blank">{!StartsCancelledIn.YTD}</a></td>
+            </tr>
+
+            <tr class="footer">
+              <td class="indent">Net Starts (in period)</td>
+              <td class="right">{!Starts.previous_day + StartsCancelledIn.previous_day}</td>
+              <td class="right">{!Starts.MTD + StartsCancelledIn.MTD}</td>
+              <td class="right">{!Starts.QTD + StartsCancelledIn.QTD}</td>
+              <td class="right">{!Starts.previous_month + StartsCancelledIn.previous_month}</td>
+              <td class="right">{!Starts.YTD + StartsCancelledIn.YTD}</td>
+            </tr>
+
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Close Rate (in period)</td>
+              <td class="right"><apex:outputText value="{0,number,##0.0}%" >
+                <apex:param value="{!if(ConsultStarts.previous_day==0,0,(Starts.previous_day + StartsCancelledIn.previous_day)/ConsultStarts.previous_day * 100)}" />
+              </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##0.0}%" >
+                <apex:param value="{!if(ConsultStarts.MTD==0,0,(Starts.MTD + StartsCancelledIn.MTD)/ConsultStarts.MTD * 100)}" />
+              </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##0.0}%" >
+                <apex:param value="{!if(ConsultStarts.QTD==0,0,(Starts.QTD + StartsCancelledIn.QTD)/ConsultStarts.QTD * 100)}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##0.0}%" >
+                <apex:param value="{!if(ConsultStarts.previous_month==0,0,(Starts.previous_month + StartsCancelledIn.previous_month)/ConsultStarts.previous_month * 100)}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##0.0}%" >
+                <apex:param value="{!if(ConsultStarts.YTD==0,0,(Starts.YTD + StartsCancelledIn.YTD)/ConsultStarts.YTD * 100)}" />
+                </apex:outputtext></td>
+            </tr>
+
+            <tr><td colspan="6">&nbsp;</td></tr>
+
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Cancelled Starts (outside period)</td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=10{!download_string}&interval=1" target="_blank">{!StartsCancelledOut.previous_day}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=10{!download_string}&interval=2" target="_blank">{!StartsCancelledOut.MTD}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=10{!download_string}&interval=3" target="_blank">{!StartsCancelledOut.QTD}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=10{!download_string}&interval=4" target="_blank">{!StartsCancelledOut.previous_month}</a></td>
+              <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=10{!download_string}&interval=5" target="_blank">{!StartsCancelledOut.YTD}</a></td>
+            </tr>
+
+            <tr class="footer">
+              <td class="indent">Net Starts</td>
+              <td class="right">{!Starts.previous_day + StartsCancelled.previous_day}</td>
+              <td class="right">{!Starts.MTD + StartsCancelled.MTD}</td>
+              <td class="right">{!Starts.QTD + StartsCancelled.QTD}</td>
+              <td class="right">{!Starts.previous_month + StartsCancelled.previous_month}</td>
+              <td class="right">{!Starts.YTD + StartsCancelled.YTD}</td>
+            </tr>
+
+            <tr class="dgreen">
+            <!--<apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />-->
+              <td class="indent">True Close Rate</td>
+              <td class="right">
+                  <apex:outputText value="{0,number,##0.0}%" >
+                    <apex:param value="{!if(ConsultStarts.previous_day==0,0,(Starts.previous_day + StartsCancelled.previous_day)/ConsultStarts.previous_day * 100)}" />
+                </apex:outputtext>
+               </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,##0.0}%" >
+                    <apex:param value="{!if(ConsultStarts.MTD==0,0,(Starts.MTD + StartsCancelled.MTD)/ConsultStarts.MTD * 100)}" />
+                </apex:outputtext>
+               </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,##0.0}%" >
+                    <apex:param value="{!if(ConsultStarts.QTD==0,0,(Starts.QTD + StartsCancelled.QTD)/ConsultStarts.QTD * 100)}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,##0.0}%" >
+                    <apex:param value="{!if(ConsultStarts.previous_month==0,0,(Starts.previous_month + StartsCancelled.previous_month)/ConsultStarts.previous_month * 100)}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,##0.0}%" >
+                    <apex:param value="{!if(ConsultStarts.YTD==0,0,(Starts.YTD + StartsCancelled.YTD)/ConsultStarts.YTD * 100)}" />
+                  </apex:outputtext>
+              </td>
+            </tr>
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Collection per Consult</td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!if(ConsultStarts.previous_day==0,0,(Collected.previous_day + GPCollectedFees.previous_day + GPRefundedFees.previous_day + Refunded.previous_day)/ConsultStarts.previous_day)}" />
+                </apex:outputtext>
+               </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!if(ConsultStarts.MTD==0,0,(Collected.MTD + GPCollectedFees.MTD + GPRefundedFees.MTD + Refunded.MTD)/ConsultStarts.MTD)}" />
+                </apex:outputtext>
+               </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!if(ConsultStarts.QTD==0,0,(Collected.QTD + GPCollectedFees.QTD + GPRefundedFees.QTD + Refunded.QTD)/ConsultStarts.QTD)}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!if(ConsultStarts.previous_month==0,0,(Collected.previous_month + GPCollectedFees.previous_month + GPRefundedFees.previous_month + Refunded.previous_month)/ConsultStarts.previous_month)}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!if(ConsultStarts.YTD==0,0,(Collected.YTD + GPCollectedFees.YTD + GPRefundedFees.YTD + Refunded.YTD)/ConsultStarts.YTD)}" />
+                  </apex:outputtext>
+              </td>
+            </tr>
+
+            <tr><td colspan="6">&nbsp;</td></tr>
+
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Cancel Rate</td>
+              <td class="right">
+                  <apex:outputText value="{0,number,##0.0}%" >
+                    <apex:param value="{!if(Starts.previous_day==0,0,abs(StartsCancelled.previous_day) / Starts.previous_day  * 100)}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,##0.0}%" >
+                    <apex:param value="{!if(Starts.MTD==0,0,abs(StartsCancelled.MTD) / Starts.MTD  * 100)}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,##0.0}%" >
+                    <apex:param value="{!if(Starts.QTD==0,0,abs(StartsCancelled.QTD) / Starts.QTD  * 100)}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,##0.0}%" >
+                    <apex:param value="{!if(Starts.previous_month==0,0,abs(StartsCancelled.previous_month) / Starts.previous_month * 100)}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,##0.0}%" >
+                    <apex:param value="{!if(Starts.YTD==0,0,abs(StartsCancelled.YTD) / Starts.YTD * 100)}" />
+                  </apex:outputtext>
+              </td>
+            </tr>
+
+            <tr class="subhead">
+              <td colspan="6">Revenue</td>
+            </tr>
+
+            <!-- 8-1-2016: Per Scott L/Brandon T of Data Audit Team: "This should be the revenue of all valid starts.  Ignore the start value."
+                            * Changing to only include revenue from VALID starts (TreatmentSoldValid)
+                 8-10-2016: Per Scott L: Changing to include 'small revenue'. That is, revenue for sales with a negotiated_total_amount less than the defined minimum but which otherwise meets the valid start requirements -->
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Sold</td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentSoldValid.previous_day + TreatmentSold_small.previous_day}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentSoldValid.MTD + TreatmentSold_small.MTD}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentSoldValid.QTD + TreatmentSold_small.QTD}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentSoldValid.previous_month + TreatmentSold_small.previous_month}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentSoldValid.YTD + TreatmentSold_small.YTD}" />
+                  </apex:outputtext>
+              </td>
+            </tr>
+
+            <!-- 8-1-2016: Per Scott L/Brandon T of Data Audit Team, removing Sold $ (valid starts)
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Sold $ (valid starts)</td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!treatmentsoldvalid.previous_day}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!treatmentsoldvalid.MTD}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!treatmentsoldvalid.QTD}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!treatmentsoldvalid.previous_month}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!treatmentsoldvalid.YTD}" />
+                </apex:outputtext></td>
+            </tr> -->
+
+            <tr><td colspan="6">&nbsp;</td></tr>
+
+            <!-- 8-1-2016: Per Scott L/Brandon T of Data Audit Team: "This is all cancelled revenue for the period from valid starts in the same period. Ignore the start value."
+                            * Changing to only include revenue from VALID starts (TreatmentCancelledInValid) -->
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Cancelled (in period)</td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentCancelledInValid.previous_day}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentCancelledInValid.MTD}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentCancelledInValid.QTD}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentCancelledInValid.previous_month}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentCancelledInValid.YTD}" />
+                  </apex:outputtext>
+              </td>
+            </tr>
+
+            <!-- 8-1-2016: Per Scott L/Brandon T of Data Audit Team: This should be the revenue of all valid starts minus in-period and valid cancelled revenue. Ignore the start value.
+                            * Changing to only include revenue from VALID starts (TreatmentSoldValid, TreatmentCancelledInValid) -->
+            <tr class="footer">
+              <td class="indent">Sold (in period)</td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentSoldValid.previous_day + TreatmentCancelledInValid.previous_day}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentSoldValid.MTD + TreatmentCancelledInValid.MTD}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentSoldValid.QTD + TreatmentCancelledInValid.QTD}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentSoldValid.previous_month + TreatmentCancelledInValid.previous_month}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentSoldValid.YTD + TreatmentCancelledInValid.YTD}" />
+                  </apex:outputtext>
+              </td>
+            </tr>
+
+            <!-- 8-2-2016: Per Scott L/Brandon T of Data Audit Team: Sold revenue from valid starts with a treatment value of 1 / start value.
+                            * Changing to only include revenue from VALID starts (TreatmentSoldValid_StartValue1, TreatmentCancelledInValid_StartValue1) -->
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Avg Revenue per Start</td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!if((Starts.previous_day + StartsCancelledIn.previous_day)=0,0,(TreatmentSoldValid_StartValue1.previous_day + TreatmentCancelledInValid_StartValue1.previous_day)/(Starts.previous_day + StartsCancelledIn.previous_day))}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!if((Starts.MTD + StartsCancelledIn.MTD)=0,0,(TreatmentSoldValid_StartValue1.MTD + TreatmentCancelledInValid_StartValue1.MTD)/(Starts.MTD + StartsCancelledIn.MTD))}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!if((Starts.QTD + StartsCancelledIn.QTD)=0,0,(TreatmentSoldValid_StartValue1.QTD + TreatmentCancelledInValid_StartValue1.QTD)/(Starts.QTD + StartsCancelledIn.QTD))}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!if((Starts.previous_month + StartsCancelledIn.previous_month)=0,0,(TreatmentSoldValid_StartValue1.previous_month + TreatmentCancelledInValid_StartValue1.previous_month)/(Starts.previous_month + StartsCancelledIn.previous_month))}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!if((Starts.YTD + StartsCancelledIn.YTD)=0,0,(TreatmentSoldValid_StartValue1.YTD + TreatmentCancelledInValid_StartValue1.YTD)/(Starts.YTD + StartsCancelledIn.YTD))}" />
+                  </apex:outputtext>
+              </td>
+            </tr>
+
+            <!-- <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Avg Sold Revenue per Valid Start</td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!if((Starts.previous_day + StartsCancelledIn.previous_day)=0,0,(TreatmentSoldValid.previous_day + TreatmentCancelledInValid.previous_day)/(Starts.previous_day + StartsCancelledIn.previous_day))}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!if((Starts.MTD + StartsCancelledIn.MTD)=0,0,(TreatmentSoldValid.MTD + TreatmentCancelledInValid.MTD)/(Starts.MTD + StartsCancelledIn.MTD))}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!if((Starts.QTD + StartsCancelledIn.QTD)=0,0,(TreatmentSoldValid.QTD + TreatmentCancelledInValid.QTD)/(Starts.QTD + StartsCancelledIn.QTD))}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!if((Starts.previous_month + StartsCancelledIn.previous_month)=0,0,(TreatmentSoldValid.previous_month + TreatmentCancelledInValid.previous_month)/(Starts.previous_month + StartsCancelledIn.previous_month))}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!if((Starts.YTD + StartsCancelledIn.YTD)=0,0,(TreatmentSoldValid.YTD + TreatmentCancelledInValid.YTD)/(Starts.YTD + StartsCancelledIn.YTD))}" />
+                </apex:outputtext></td>
+            </tr> -->
+
+            <tr><td colspan="6">&nbsp;</td></tr>
+
+            <!-- 8-2-2016: Per Scott L/Brandon T of Data Audit Team: "Same as Cancelled $ (in period), this is all cancelled revenue outside the period from valid starts in the same period."
+                            * Changing to only include revenue from VALID starts (TreatmentCancelledOutValid) -->
+            <tr class="{!rowclassname}">
+              <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Cancelled (outside period)</td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentCancelledOutValid.previous_day}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentCancelledOutValid.MTD}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentCancelledOutValid.QTD}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentCancelledOutValid.previous_month}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentCancelledOutValid.YTD}" />
+                  </apex:outputtext>
+              </td>
+            </tr>
+
+            <tr class="footer">
+              <td class="indent">Net Sold</td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentSoldValid.previous_day + TreatmentCancelledInValid.previous_day + TreatmentCancelledOutValid.previous_day}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentSoldValid.MTD + TreatmentCancelledInValid.MTD + TreatmentCancelledOutValid.MTD}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentSoldValid.QTD + TreatmentCancelledInValid.QTD + TreatmentCancelledOutValid.QTD}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentSoldValid.previous_month + TreatmentCancelledInValid.previous_month + TreatmentCancelledOutValid.previous_month}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!TreatmentSoldValid.YTD + TreatmentCancelledInValid.YTD + TreatmentCancelledOutValid.YTD}" />
+                  </apex:outputtext>
+              </td>
+            </tr>
+
+            <!-- 03-31-2017: Adding new row for Scott L. Should be equivalent to Net Sold / Consults -->
+            <tr class="footer">
+              <td class="indent">Net Sold per Consult</td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!IF(ConsultStarts.previous_day == 0, 0, (TreatmentSoldValid.previous_day + TreatmentCancelledInValid.previous_day + TreatmentCancelledOutValid.previous_day) / ConsultStarts.previous_day)}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!IF(ConsultStarts.MTD == 0, 0, (TreatmentSoldValid.MTD + TreatmentCancelledInValid.MTD + TreatmentCancelledOutValid.MTD) / ConsultStarts.MTD)}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!IF(ConsultStarts.QTD == 0, 0, (TreatmentSoldValid.QTD + TreatmentCancelledInValid.QTD + TreatmentCancelledOutValid.QTD) / ConsultStarts.QTD)}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!IF(ConsultStarts.previous_month == 0, 0, (TreatmentSoldValid.previous_month + TreatmentCancelledInValid.previous_month + TreatmentCancelledOutValid.previous_month) / ConsultStarts.previous_month)}" />
+                  </apex:outputtext>
+              </td>
+              <td class="right">
+                  <apex:outputText value="{0,number,$##,##,##0}" >
+                    <apex:param value="{!IF(ConsultStarts.YTD == 0, 0, (TreatmentSoldValid.YTD + TreatmentCancelledInValid.YTD + TreatmentCancelledOutValid.YTD) / ConsultStarts.YTD)}" />
+                  </apex:outputtext>
+              </td>
+            </tr>
+
+            <!-- 8-1-2016: Per Scott L/Brandon T of Data Audit Team, removing Net Sold Revenue $ (valid starts)
+            <tr class="dgreen">
+              <td class="indent">Net Sold Revenue $ (valid starts)</td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!TreatmentSoldvalid.previous_day + TreatmentCancelledinvalid.previous_day + TreatmentCancelledoutvalid.previous_day}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!TreatmentSoldvalid.MTD + TreatmentCancelledinvalid.MTD + TreatmentCancelledoutvalid.MTD}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!TreatmentSoldvalid.QTD + TreatmentCancelledinvalid.QTD + TreatmentCancelledoutvalid.MTD}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!TreatmentSoldvalid.previous_month + TreatmentCancelledinvalid.previous_month + TreatmentCancelledoutvalid.MTD}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!TreatmentSoldvalid.YTD + TreatmentCancelledinvalid.YTD + TreatmentCancelledoutvalid.MTD}" />
+                </apex:outputtext></td>
+            </tr> -->
+
+            <!-- 8-1-2016: Per Scott L/Brandon T of Data Audit Team, removing Avg Net Sold Revenue per Start
+            <tr class="{!rowclassname}">
+              <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Avg Net Sold Revenue per Start</td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!if((Starts.previous_day + StartsCancelled.previous_day)=0,0,(TreatmentSold.previous_day + TreatmentCancelled.previous_day)/(Starts.previous_day + StartsCancelled.previous_day))}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!if((Starts.MTD + StartsCancelled.MTD)=0,0,(TreatmentSold.MTD + TreatmentCancelled.MTD)/(Starts.MTD + StartsCancelled.MTD))}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!if((Starts.QTD + StartsCancelled.QTD)=0,0,(TreatmentSold.QTD + TreatmentCancelled.QTD)/(Starts.QTD + StartsCancelled.QTD))}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!if((Starts.previous_month + StartsCancelled.previous_month)=0,0,(TreatmentSold.previous_month + TreatmentCancelled.previous_month)/(Starts.previous_month + StartsCancelled.previous_month))}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!if((Starts.YTD + StartsCancelled.YTD)=0,0,(TreatmentSold.YTD + TreatmentCancelled.YTD)/(Starts.YTD + StartsCancelled.YTD))}" />
+                </apex:outputtext></td>
+            </tr> -->
+
+            <!-- 8-1-2016: Per Scott L/Brandon T of Data Audit Team, removing Avg Net Sold Revenue per Valid Start
+            <tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Avg Net Sold Revenue per Valid Start</td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!if((Starts.previous_day + StartsCancelled.previous_day)=0,0,(TreatmentSoldvalid.previous_day + TreatmentCancelledinvalid.previous_day + TreatmentCancelledoutvalid.previous_day)/(Starts.previous_day + StartsCancelled.previous_day))}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!if((Starts.MTD + StartsCancelled.MTD)=0,0,(TreatmentSoldvalid.MTD + TreatmentCancelledinvalid.MTD + TreatmentCancelledoutvalid.MTD)/(Starts.MTD + StartsCancelled.MTD))}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!if((Starts.QTD + StartsCancelled.QTD)=0,0,(TreatmentSoldvalid.QTD + TreatmentCancelledinvalid.QTD + TreatmentCancelledoutvalid.QTD)/(Starts.QTD + StartsCancelled.QTD))}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!if((Starts.previous_month + StartsCancelled.previous_month)=0,0,(TreatmentSoldvalid.previous_month + TreatmentCancelledinvalid.previous_month + TreatmentCancelledoutvalid.previous_month)/(Starts.previous_month + StartsCancelled.previous_month))}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!if((Starts.YTD + StartsCancelled.YTD)=0,0,(TreatmentSoldvalid.YTD + TreatmentCancelledinvalid.YTD + TreatmentCancelledoutvalid.YTD)/(Starts.YTD + StartsCancelled.YTD))}" />
+                </apex:outputtext></td>
+            </tr> -->
+
+            <!--<tr class="{!rowclassname}">
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+              <td class="indent">Avg AO4 fee</td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!AO4_avg.previous_day}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!AO4_avg.MTD}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!AO4_avg.QTD}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!AO4_avg.previous_month}" />
+                </apex:outputtext></td>
+              <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+                <apex:param value="{!AO4_avg.YTD}" />
+                </apex:outputtext></td>
+            </tr>-->
+            <!--  <td class="right">{!Starts.previous_day + StartsCancelled.previous_day}</td>   -->
+
+            <tr><td colspan="6">&nbsp;</td></tr></table>
+
+
+            <apex:outputpanel id="exceptions_holder">
+                <apex:form id="form2">
+                  <apex:commandbutton rerender="exceptions_holder"  action="{!display_exception_section}" value="Display Anticipated,  Pipeline,  and Exceptions" rendered="{!if(display_exception,false,true)}" />
+                <apex:outputpanel rendered="{!display_exception}" >
+                <table class="accs_details" style="width:1000px;">
+                <tr class="subhead">
+                  <td colspan="2"><apex:outputtext rendered="{!if(anticipated_filter=='all','true','false')}" value="Anticipated Non-Prom" />
+                    <apex:outputtext rendered="{!if(anticipated_filter=='prom','true','false')}" value="Anticipated Prom" />
+                    <span style="text-align:right;display:inline-block;width:110px;" >
+                      <apex:commandbutton rerender="exceptions_holder" rendered="{!if(anticipated_filter=='all','true','false')}" action="{!display_prom_payments}" value="View Prom" />
+                      <apex:commandbutton rerender="exceptions_holder" rendered="{!if(anticipated_filter=='prom','true','false')}" action="{!display_all_payments}" value="View Non-Prom" />
+                  </span></td>
+                  <td style="border:0;"></td>
+                  <td colspan="2">Pipeline Sales</td>
+                  <td style="border:0;"></td>
+                  <td colspan="2" style="color:red;">Data Update Dashboard</td>
+                </tr>
+
+                <tr class="{!rowclassname}">
+                <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                  <td class="indent" width="15%">Current Month</td>
+                  <td class="right" width="15%"><a href="{!hyper_prefix}/apex/opsDashcsv?format=4&pfilter={!anticipated_filter}{!download_string}" target="_blank">
+                    <apex:outputText value="{0,number,##,##,##0}" >
+                    <apex:param value="{!AnticipatedPayments.MTD}" />
+                    </apex:outputtext></a></td><td width="5%" style="border:0;background-color:white;"></td>
+                  <td class="indent" width="15%">30 Day</td>
+                  <td class="right" width="15%"><a href="{!hyper_prefix}/apex/opsDashcsv?format=11{!download_string}" target="_blank">
+                    {!Pipeline.MTD}</a></td><td width="5%" style="border:0;background-color:white;"></td>
+                  <td class="indent" width="20%">Unconverted Consults</td>
+                  <td class="right" width="10%"><a href="{!hyper_prefix}/apex/unconverted_consults" target="_blank"><apex:outputText value="{!lead_exceptions}" escape="false"/></a></td>
+                    </tr>
+
+                <tr class="{!rowclassname}">
+                <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                  <td class="indent">Next Month</td>
+                  <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=3&pfilter={!anticipated_filter}{!download_string}" target="_blank">
+                    <apex:outputText value="{0,number,##,##,##0}" >
+                    <apex:param value="{!AnticipatedPayments.last_year}" />
+                    </apex:outputtext></a></td><td style="border:0;background-color:white;"></td>
+                    <td class="indent">60 Day</td>
+                    <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=12{!download_string}" target="_blank">
+                      {!Pipeline.last_90}</a></td><td style="border:0;background-color:white;"></td>
+                    <td class="indent">Consults Missing Info</td>
+                    <td class="right"><a href="{!hyper_prefix}/{!consult_reportid}" target="_blank">{!consult_exceptions}</a></td>
+                    </tr>
+
+                <tr class="{!rowclassname}">
+                <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                  <td class="indent">60 Days +</td>
+                  <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=2&pfilter={!anticipated_filter}{!download_string}" target="_blank">
+                    <apex:outputText value="{0,number,##,##,##0}" >
+                    <apex:param value="{!AnticipatedPayments.YTD}" />
+                    </apex:outputtext></a></td><td style="border:0;background-color:white;"></td>
+                    <td class="indent">90 Day</td>
+                    <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=13{!download_string}" target="_blank">
+                      {!Pipeline.YTD}</a></td><td style="border:0;background-color:white;"></td>
+                    <td class="indent">Prosth Exams to Update</td>
+                    <td class="right"><a href="{!hyper_prefix}/{!prost_reportid}" target="_blank">{!prost_exceptions}</a></td>
+                    </tr>
+
+                <tr class="{!rowclassname}">
+                <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                  <td class="indent" style="color:red;">Past Due</td>
+                  <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=1&pfilter={!anticipated_filter}{!download_string}" target="_blank">
+                    <apex:outputText value="{0,number,##,##,##0}" >
+                    <apex:param value="{!PastDue}" />
+                    </apex:outputtext></a></td>
+                  <td style="border:0;background-color:white;"></td>
+                  <td class="indent">2nd Consult</td>
+                  <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=14{!download_string}" target="_blank">
+                    {!Pipeline.QTD}</a></td><td style="border:0;background-color:white;"></td>
+                <!--  <td class="indent">Prost Exams w/o Payment</td>
+                      <td class="right"><a href="{!hyper_prefix}/{!prost_payment_reportid}" target="_blank">{!prost_payment_exceptions}</a></td>         -->
+                  <td class="indent">Arrangement Exceptions</td>
+                      <td class="right"><a href="{!hyper_prefix}/{!arrangement_reportid}" target="_blank"><apex:outputText value="{0,number,##,##,##0}" >
+                    <apex:param value="{!arrangement_exceptions}" />
+                    </apex:outputtext></a></td>
+                </tr>
+
+                <tr class="{!rowclassname}">
+                <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                  <td style="border:0;background-color:white;"></td>
+                      <td style="border:0;background-color:white;"></td>
+                  <td style="border:0;background-color:white;"></td>
+                  <td style="border:0;background-color:white;"></td>
+                      <td style="border:0;background-color:white;"></td>
+                  <td style="border:0;background-color:white;"></td>
+                  <td class="indent">Past Due Payments</td>
+                      <td class="right"><a href="{!hyper_prefix}/{!update_payment_reportid}" target="_blank"><apex:outputText value="{0,number,##,##,##0}" >
+                    <apex:param value="{!update_payment_exceptions}" />
+                    </apex:outputtext></a></td>
+                </tr>
+
+                <!--<tr class="{!rowclassname}">
+                <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                  <td style="border:0;background-color:white;"></td>
+                      <td style="border:0;background-color:white;"></td>
+                  <td style="border:0;background-color:white;"></td>
+                  <td style="border:0;background-color:white;"></td>
+                      <td style="border:0;background-color:white;"></td>
+                  <td style="border:0;background-color:white;"></td>
+                  <td class="indent">Arrangement Exceptions</td>
+                      <td class="right"><a href="{!hyper_prefix}/{!arrangement_reportid}" target="_blank"><apex:outputText value="{0,number,##,##,##0}" >
+                    <apex:param value="{!arrangement_exceptions}" />
+                    </apex:outputtext></a></td>
+                </tr>-->
+
+
+                </table>
+                </apex:outputpanel><br /><br />
+                </apex:form>
+            </apex:outputpanel>
+        </apex:outputpanel>
+
+        <apex:outputpanel id="hygiene_holder">
+            <apex:form id="form3">
+                <apex:commandbutton rerender="hygiene_holder"  action="{!display_hygiene_revenue}" value="Display Hygienist Revenue" rendered="{!if(display_hygiene,false,true)}" />
+                <apex:outputpanel rendered="{!display_hygiene}">
+                    <table class="accs_details" style="width:1000px;">
+                    <tr><td colspan="6"></td></tr>
+
+                    <tr class="subhead">
+                      <td colspan="6">Hygienist Revenue</td>
+                    </tr>
+
+                    <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                      <td class="indent" width="30%">Sold</td>
+                      <td class="right" width="14%"><a href="{!hyper_prefix}/apex/opsDashcsv?format=15{!download_string}&interval=1" target="_blank">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellSold.previous_day}" />
+                        </apex:outputtext></a></td>
+                      <td class="right" width="14%"><a href="{!hyper_prefix}/apex/opsDashcsv?format=15{!download_string}&interval=2" target="_blank">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellSold.MTD}" />
+                        </apex:outputtext></a></td>
+                      <td class="right" width="14%"><a href="{!hyper_prefix}/apex/opsDashcsv?format=15{!download_string}&interval=3" target="_blank">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellSold.QTD}" />
+                        </apex:outputtext></a></td>
+                      <td class="right" width="14%"><a href="{!hyper_prefix}/apex/opsDashcsv?format=15{!download_string}&interval=4" target="_blank">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellSold.previous_month}" />
+                        </apex:outputtext></a></td>
+                      <td class="right" width="14%"><a href="{!hyper_prefix}/apex/opsDashcsv?format=15{!download_string}&interval=5" target="_blank">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellSold.YTD}" />
+                        </apex:outputtext></a></td>
+                    </tr>
+
+
+                    <tr><td colspan="6">&nbsp;</td></tr>
+
+                    <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                      <td width="30%" class="indent">Cancelled (in period)</td>
+                      <td class="right" width="14%"><a href="{!hyper_prefix}/apex/opsDashcsv?format=16{!download_string}&interval=1" target="_blank">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellCancelledIn.previous_day}" />
+                        </apex:outputtext></a></td>
+                      <td class="right" width="14%"><a href="{!hyper_prefix}/apex/opsDashcsv?format=16{!download_string}&interval=2" target="_blank">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellCancelledIn.MTD}" />
+                        </apex:outputtext></a></td>
+                      <td class="right" width="14%"><a href="{!hyper_prefix}/apex/opsDashcsv?format=16{!download_string}&interval=3" target="_blank">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellCancelledIn.QTD}" />
+                        </apex:outputtext></a></td>
+                      <td class="right" width="14%"><a href="{!hyper_prefix}/apex/opsDashcsv?format=16{!download_string}&interval=4" target="_blank">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellCancelledIn.previous_month}" />
+                        </apex:outputtext></a></td>
+                      <td class="right" width="14%"><a href="{!hyper_prefix}/apex/opsDashcsv?format=16{!download_string}&interval=5" target="_blank">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellCancelledIn.YTD}" />
+                        </apex:outputtext></a></td>
+                    </tr>
+
+                    <tr class="footer">
+                      <td class="indent">Net Upsell (in period)</td>
+                      <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellSold.previous_day + UpsellCancelledIn.previous_day}" />
+                        </apex:outputtext></td>
+                      <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellSold.MTD + UpsellCancelledIn.MTD}" />
+                        </apex:outputtext></td>
+                      <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellSold.QTD + UpsellCancelledIn.QTD}" />
+                        </apex:outputtext></td>
+                      <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellSold.previous_month + UpsellCancelledIn.previous_month}" />
+                        </apex:outputtext></td>
+                      <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellSold.YTD + UpsellCancelledIn.YTD}" />
+                        </apex:outputtext></td>
+                    </tr>
+
+                    <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                      <td class="indent">Portion of Net Sold (in period)</td>
+                      <td class="right"><apex:outputText value="{0,number,##0.0}%" >
+                        <apex:param value="{!if((TreatmentSoldValid.previous_day + TreatmentCancelledInValid.previous_day)=0,0,(UpsellSold.previous_day + UpsellCancelledIn.previous_day)/(TreatmentSoldValid.previous_day + TreatmentCancelledInValid.previous_day) * 100)}" />
+                        </apex:outputtext></td>
+                      <td class="right"><apex:outputText value="{0,number,##0.0}%" >
+                        <apex:param value="{!if((TreatmentSoldValid.MTD + TreatmentCancelledInValid.MTD)=0,0,(UpsellSold.MTD + UpsellCancelledIn.MTD)/(TreatmentSoldValid.MTD + TreatmentCancelledInValid.MTD) * 100)}" />
+                        </apex:outputtext></td>
+                      <td class="right"><apex:outputText value="{0,number,##0.0}%" >
+                        <apex:param value="{!if((TreatmentSoldValid.QTD + TreatmentCancelledInValid.QTD)=0,0,(UpsellSold.QTD + UpsellCancelledIn.QTD)/(TreatmentSoldValid.QTD + TreatmentCancelledInValid.QTD) * 100)}" />
+                        </apex:outputtext></td>
+                      <td class="right"><apex:outputText value="{0,number,##0.0}%" >
+                        <apex:param value="{!if((TreatmentSoldValid.previous_month + TreatmentCancelledInValid.previous_month)=0,0,(UpsellSold.previous_month + UpsellCancelledIn.previous_month)/(TreatmentSoldValid.previous_month + TreatmentCancelledInValid.previous_month) * 100)}" />
+                        </apex:outputtext></td>
+                      <td class="right"><apex:outputText value="{0,number,##0.0}%" >
+                        <apex:param value="{!if((TreatmentSoldValid.YTD + TreatmentCancelledInValid.YTD)=0,0,(UpsellSold.YTD + UpsellCancelledIn.YTD)/(TreatmentSoldValid.YTD + TreatmentCancelledInValid.YTD) * 100)}" />
+                        </apex:outputtext></td>
+                    </tr>
+
+                    <tr><td colspan="6">&nbsp;</td></tr>
+
+                    <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+                      <td class="indent">Cancelled (outside period)</td>
+                      <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=17{!download_string}&interval=1" target="_blank">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellCancelledOut.previous_day}" />
+                        </apex:outputtext></a></td>
+                      <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=17{!download_string}&interval=2" target="_blank">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellCancelledOut.MTD}" />
+                        </apex:outputtext></a></td>
+                      <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=17{!download_string}&interval=3" target="_blank">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellCancelledOut.QTD}" />
+                        </apex:outputtext></a></td>
+                      <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=17{!download_string}&interval=4" target="_blank">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellCancelledOut.previous_month}" />
+                        </apex:outputtext></a></td>
+                      <td class="right"><a href="{!hyper_prefix}/apex/opsDashcsv?format=17{!download_string}&interval=5" target="_blank">
+                        <apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellCancelledOut.YTD}" />
+                        </apex:outputtext></a></td>
+                    </tr>
+
+                    <tr class="footer">
+                      <td class="indent">Net Upsell</td>
+                      <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellSold.previous_day + UpsellCancelledIn.previous_day + UpsellCancelledOut.previous_day}" />
+                        </apex:outputtext></td>
+                      <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellSold.MTD + UpsellCancelledIn.MTD + UpsellCancelledOut.MTD}" />
+                        </apex:outputtext></td>
+                      <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellSold.QTD + UpsellCancelledIn.QTD + UpsellCancelledOut.QTD}" />
+                        </apex:outputtext></td>
+                      <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellSold.previous_month + UpsellCancelledIn.previous_month + UpsellCancelledOut.QTD}" />
+                        </apex:outputtext></td>
+                      <td class="right"><apex:outputText value="{0,number,$##,##,##0}" >
+                        <apex:param value="{!UpsellSold.YTD + UpsellCancelledIn.YTD + UpsellCancelledOut.QTD}" />
+                        </apex:outputtext></td>
+                    </tr>
+
+                    </table>
+                </apex:outputPanel>
+            </apex:form>
+        </apex:outputpanel>
+    </div>
+</apex:page>

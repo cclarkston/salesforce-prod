@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Clinical_Note_Instance__c$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Clinical_Note_Instance__c$Account__c.Center__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Note_Instance__c$Apt_Note__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Note_Instance__c$Name</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Clinical_Note_Instance__c$Account__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>john karwowski</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Clinical_Note_Instance__c$Account__c.Center__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Boston Woburn</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Clinical Note Instances-Woburn</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Clinical_Note_Instances__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Clinical_Note_Instance__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

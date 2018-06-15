@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>PE Date</value>
+        </caseValues>
+        <name>date_opportunitylineitem</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <label><!-- Added at Prostho Exam --></label>
+        <name>Added_at_Prostho_Exam__c</name>
+    </fields>
+    <fields>
+        <label><!-- Celigo Product Group Internal Order --></label>
+        <name>Celigo_Product_Group_Internal_Order__c</name>
+    </fields>
+    <fields>
+        <label><!-- Product Group Quantity --></label>
+        <name>Celigo_Product_Group_Quantity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Celigo Product Group --></label>
+        <name>Celigo_Product_Group__c</name>
+        <relationshipLabel><!-- Opportunity Product --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- remove --></label>
+        <name>remove__c</name>
+    </fields>
+    <layouts>
+        <layout>Opportunity Product Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>

@@ -1,0 +1,26 @@
+<apex:page standardController="account" extensions="account_consultschedule" sidebar="false" showHeader="false" >
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+
+<apex:variable var="rowclassname" value="accs" />  
+<table class="accs_details" style="width:600px;">
+  <tr class="control">
+    <td width="20%">Apt Date</td>
+    <td width="15%">Apt Time</td>
+    <td width="20%">Outcome</td>
+    <td width="30%">Consult PEC</td>
+    <td width="15%">Sched Type</td>
+  </tr>        
+  <apex:repeat value="{!consult_history_list}" var="apts">
+      <tr class="{!rowclassname}">
+      <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+        <td style="padding-left:5px;"><apex:outputField value="{!apts.Apt_Date__c}" /> </td>
+        <td style="padding-left:5px;"><apex:outputfield value="{!apts.Start_Hour__c}" />:<apex:outputfield value="{!apts.Start_Minute__c}" /></td>
+        <td style="padding-left:5px;"><apex:outputfield value="{!apts.Consult_Show_Status__c}" /></td>
+        <td style="padding-left:5px;"><apex:outputfield value="{!apts.consult_pec__r.name}" /></td>    
+        <td style="padding-left:5px;"><apex:outputText escape="false" value="{!if(apts.Scheduled_Lead__c==null,'Account','Lead')}" /></td>          
+      </tr>      
+  </apex:repeat> 
+</table> 
+</apex:page>

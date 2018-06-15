@@ -1,0 +1,1177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>CallHighlightAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>DeleteBannerPhotoAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>EditUserAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>EmailHighlightAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>FreezeUserAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>LinkToSetupUserDetailAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ManagePermSetsAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>PasswordUnlockAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ResetPasswordAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SmsHighlightAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>UpdateBannerPhotoAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>UserActivationAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>true</enableFeeds>
+    <externalSharingModel>Private</externalSharingModel>
+    <fields>
+        <fullName>Baseline_Target_CPC__c</fullName>
+        <externalId>false</externalId>
+        <label>Baseline Target CPC</label>
+        <precision>9</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Baseline_Target__c</fullName>
+        <description>Used with the new commission program 1/27/2015,  this number indicates the baseline target,  from which all other tiers are calculated</description>
+        <externalId>false</externalId>
+        <label>Baseline Target TCR</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bulk_Printing__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates if a user will have access to the Bulk Printing Queue or not.</description>
+        <externalId>false</externalId>
+        <label>Bulk Printing</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Call_Center_Team__c</fullName>
+        <description>This is a field to store the call center team assignments for users. Will ideally be administered by the call center supervisors.</description>
+        <externalId>false</externalId>
+        <label>Call Center Team</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>IMP - MM</fullName>
+                    <default>false</default>
+                    <label>IMP - MM</label>
+                </value>
+                <value>
+                    <fullName>Confirmation</fullName>
+                    <default>false</default>
+                    <label>Confirmation</label>
+                </value>
+                <value>
+                    <fullName>IMP - MV</fullName>
+                    <default>false</default>
+                    <label>IMP - MV</label>
+                </value>
+                <value>
+                    <fullName>QAM - SM</fullName>
+                    <default>false</default>
+                    <label>QAM - SM</label>
+                </value>
+                <value>
+                    <fullName>IMP - FN</fullName>
+                    <default>false</default>
+                    <label>IMP - FN</label>
+                </value>
+                <value>
+                    <fullName>Outbound</fullName>
+                    <default>false</default>
+                    <label>Outbound</label>
+                </value>
+                <value>
+                    <fullName>Implant Consultant</fullName>
+                    <default>false</default>
+                    <label>Implant Consultant</label>
+                </value>
+                <value>
+                    <fullName>Imp - IMC API</fullName>
+                    <default>false</default>
+                    <label>Imp - IMC API</label>
+                </value>
+                <value>
+                    <fullName>Imp - IMC Mansfield</fullName>
+                    <default>false</default>
+                    <label>Imp - IMC Mansfield</label>
+                </value>
+                <value>
+                    <fullName>Imp - IMC NewCastle</fullName>
+                    <default>false</default>
+                    <label>Imp - IMC NewCastle</label>
+                </value>
+                <value>
+                    <fullName>Imp - Mean Green</fullName>
+                    <default>false</default>
+                    <label>Imp - Mean Green</label>
+                </value>
+                <value>
+                    <fullName>Imp - Tooth Avengers</fullName>
+                    <default>false</default>
+                    <label>Imp - Tooth Avengers</label>
+                </value>
+                <value>
+                    <fullName>Online Sched</fullName>
+                    <default>false</default>
+                    <label>Online Sched</label>
+                </value>
+                <value>
+                    <fullName>Seminar</fullName>
+                    <default>false</default>
+                    <label>Seminar</label>
+                </value>
+                <value>
+                    <fullName>Web To Lead</fullName>
+                    <default>false</default>
+                    <label>Web To Lead</label>
+                </value>
+                <value>
+                    <fullName>IMP - KV</fullName>
+                    <default>false</default>
+                    <label>IMP - KV</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Center_Administrator__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates if the user is a center administrator. This field is used in the Sales Dashboard to allow a center admin to view the numbers for PEC assigned to the same center.</description>
+        <externalId>false</externalId>
+        <label>Center Administrator</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Center_PEC__c</fullName>
+        <description>Stores the ID for a center_information__c record. I&apos;m using this field to tie users to centers for the sales dashboard and sales goal project. Blanks will not be PEC/DEC&apos;s and travelers will go to unknown.</description>
+        <externalId>false</externalId>
+        <label>Center PEC</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Clinic_Calendar__c</fullName>
+        <description>Clinic Calendar this user will default to.</description>
+        <externalId>false</externalId>
+        <label>Clinic Calendar</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Atlanta</fullName>
+                    <default>false</default>
+                    <label>Atlanta</label>
+                </value>
+                <value>
+                    <fullName>Atlanta Alpharetta</fullName>
+                    <default>false</default>
+                    <label>Atlanta Alpharetta</label>
+                </value>
+                <value>
+                    <fullName>Austin</fullName>
+                    <default>false</default>
+                    <label>Austin</label>
+                </value>
+                <value>
+                    <fullName>Boston Woburn</fullName>
+                    <default>false</default>
+                    <label>Boston Woburn</label>
+                </value>
+                <value>
+                    <fullName>Charlotte</fullName>
+                    <default>false</default>
+                    <label>Charlotte</label>
+                </value>
+                <value>
+                    <fullName>Chicago</fullName>
+                    <default>false</default>
+                    <label>Chicago</label>
+                </value>
+                <value>
+                    <fullName>Chicago Deerfield/Northbrook</fullName>
+                    <default>false</default>
+                    <label>Chicago Deerfield/Northbrook</label>
+                </value>
+                <value>
+                    <fullName>Chicago Downers Grove</fullName>
+                    <default>false</default>
+                    <label>Chicago Downers Grove</label>
+                </value>
+                <value>
+                    <fullName>Chicago Evanston</fullName>
+                    <default>false</default>
+                    <label>Chicago Evanston</label>
+                </value>
+                <value>
+                    <fullName>Chicago Naperville</fullName>
+                    <default>false</default>
+                    <label>Chicago Naperville</label>
+                </value>
+                <value>
+                    <fullName>Chicago Schaumburg</fullName>
+                    <default>false</default>
+                    <label>Chicago Schaumburg</label>
+                </value>
+                <value>
+                    <fullName>Cincinnati</fullName>
+                    <default>false</default>
+                    <label>Cincinnati</label>
+                </value>
+                <value>
+                    <fullName>Cleveland</fullName>
+                    <default>false</default>
+                    <label>Cleveland</label>
+                </value>
+                <value>
+                    <fullName>Colorado Springs</fullName>
+                    <default>false</default>
+                    <label>Colorado Springs</label>
+                </value>
+                <value>
+                    <fullName>Columbia</fullName>
+                    <default>false</default>
+                    <label>Columbia</label>
+                </value>
+                <value>
+                    <fullName>Dallas</fullName>
+                    <default>false</default>
+                    <label>Dallas</label>
+                </value>
+                <value>
+                    <fullName>Dallas Arlington</fullName>
+                    <default>false</default>
+                    <label>Dallas Arlington</label>
+                </value>
+                <value>
+                    <fullName>Dallas Fort Worth</fullName>
+                    <default>false</default>
+                    <label>Dallas Fort Worth</label>
+                </value>
+                <value>
+                    <fullName>Denver</fullName>
+                    <default>false</default>
+                    <label>Denver</label>
+                </value>
+                <value>
+                    <fullName>Detroit Southfield</fullName>
+                    <default>false</default>
+                    <label>Detroit Southfield</label>
+                </value>
+                <value>
+                    <fullName>Houston</fullName>
+                    <default>false</default>
+                    <label>Houston</label>
+                </value>
+                <value>
+                    <fullName>Houston Woodlands</fullName>
+                    <default>false</default>
+                    <label>Houston Woodlands</label>
+                </value>
+                <value>
+                    <fullName>Kansas City</fullName>
+                    <default>false</default>
+                    <label>Kansas City</label>
+                </value>
+                <value>
+                    <fullName>Las Vegas</fullName>
+                    <default>false</default>
+                    <label>Las Vegas</label>
+                </value>
+                <value>
+                    <fullName>Los Angeles Orange County</fullName>
+                    <default>false</default>
+                    <label>Los Angeles Orange County</label>
+                </value>
+                <value>
+                    <fullName>Los Angeles Torrence</fullName>
+                    <default>false</default>
+                    <label>Los Angeles Torrence</label>
+                </value>
+                <value>
+                    <fullName>Los Angeles West Covina</fullName>
+                    <default>false</default>
+                    <label>Los Angeles West Covina</label>
+                </value>
+                <value>
+                    <fullName>Metro Detroit</fullName>
+                    <default>false</default>
+                    <label>Metro Detroit</label>
+                </value>
+                <value>
+                    <fullName>Miami</fullName>
+                    <default>false</default>
+                    <label>Miami</label>
+                </value>
+                <value>
+                    <fullName>Miami Fort Lauderdale</fullName>
+                    <default>false</default>
+                    <label>Miami Fort Lauderdale</label>
+                </value>
+                <value>
+                    <fullName>Minneapolis</fullName>
+                    <default>false</default>
+                    <label>Minneapolis</label>
+                </value>
+                <value>
+                    <fullName>Minneapolis Roseville</fullName>
+                    <default>false</default>
+                    <label>Minneapolis Roseville</label>
+                </value>
+                <value>
+                    <fullName>Monterey</fullName>
+                    <default>false</default>
+                    <label>Monterey</label>
+                </value>
+                <value>
+                    <fullName>New Jersey - Dental Arts of South Jersey</fullName>
+                    <default>false</default>
+                    <label>New Jersey - Dental Arts of South Jersey</label>
+                </value>
+                <value>
+                    <fullName>New Jersey Roseland</fullName>
+                    <default>false</default>
+                    <label>New Jersey Roseland</label>
+                </value>
+                <value>
+                    <fullName>Orlando Maitland</fullName>
+                    <default>false</default>
+                    <label>Orlando Maitland</label>
+                </value>
+                <value>
+                    <fullName>Philadelphia - By Design Dental Implant Center</fullName>
+                    <default>false</default>
+                    <label>Philadelphia - By Design Dental Implant Center</label>
+                </value>
+                <value>
+                    <fullName>Philadelphia Fort Washington</fullName>
+                    <default>false</default>
+                    <label>Philadelphia Fort Washington</label>
+                </value>
+                <value>
+                    <fullName>Philadelphia Mount Laurel</fullName>
+                    <default>false</default>
+                    <label>Philadelphia Mount Laurel</label>
+                </value>
+                <value>
+                    <fullName>Phoenix</fullName>
+                    <default>false</default>
+                    <label>Phoenix</label>
+                </value>
+                <value>
+                    <fullName>Phoenix Mesa</fullName>
+                    <default>false</default>
+                    <label>Phoenix Mesa</label>
+                </value>
+                <value>
+                    <fullName>Portland</fullName>
+                    <default>false</default>
+                    <label>Portland</label>
+                </value>
+                <value>
+                    <fullName>Sacramento</fullName>
+                    <default>false</default>
+                    <label>Sacramento</label>
+                </value>
+                <value>
+                    <fullName>Salt Lake City</fullName>
+                    <default>false</default>
+                    <label>Salt Lake City</label>
+                </value>
+                <value>
+                    <fullName>San Antonio</fullName>
+                    <default>false</default>
+                    <label>San Antonio</label>
+                </value>
+                <value>
+                    <fullName>San Diego</fullName>
+                    <default>false</default>
+                    <label>San Diego</label>
+                </value>
+                <value>
+                    <fullName>San Francisco Daly City</fullName>
+                    <default>false</default>
+                    <label>San Francisco Daly City</label>
+                </value>
+                <value>
+                    <fullName>San Francisco Oakland</fullName>
+                    <default>false</default>
+                    <label>San Francisco Oakland</label>
+                </value>
+                <value>
+                    <fullName>San Jose</fullName>
+                    <default>false</default>
+                    <label>San Jose</label>
+                </value>
+                <value>
+                    <fullName>Seattle</fullName>
+                    <default>false</default>
+                    <label>Seattle</label>
+                </value>
+                <value>
+                    <fullName>St. Louis</fullName>
+                    <default>false</default>
+                    <label>St. Louis</label>
+                </value>
+                <value>
+                    <fullName>Tampa</fullName>
+                    <default>false</default>
+                    <label>Tampa</label>
+                </value>
+                <value>
+                    <fullName>Tucson</fullName>
+                    <default>false</default>
+                    <label>Tucson</label>
+                </value>
+                <value>
+                    <fullName>Unknown</fullName>
+                    <default>false</default>
+                    <label>Unknown</label>
+                </value>
+                <value>
+                    <fullName>Walnut Creek</fullName>
+                    <default>false</default>
+                    <label>Walnut Creek</label>
+                </value>
+                <value>
+                    <fullName>Washington Rockville</fullName>
+                    <default>false</default>
+                    <label>Washington Rockville</label>
+                </value>
+                <value>
+                    <fullName>Washington Tysons Corner</fullName>
+                    <default>false</default>
+                    <label>Washington Tysons Corner</label>
+                </value>
+                <value>
+                    <fullName>West Palm Beach</fullName>
+                    <default>false</default>
+                    <label>West Palm Beach</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Collections_Threshold__c</fullName>
+        <externalId>false</externalId>
+        <label>Collections Threshold</label>
+        <precision>9</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Comments__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Please enter account creation and deactivation information: Request by. Completed by. Completed date.</inlineHelpText>
+        <label>Comments</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Custom_Screenpop__c</fullName>
+        <externalId>false</externalId>
+        <label>Custom Screenpop</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>DOB__c</fullName>
+        <externalId>false</externalId>
+        <label>DOB</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Default_Calendar_Color_View__c</fullName>
+        <externalId>false</externalId>
+        <label>Default Calendar Color View</label>
+        <length>20</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Default_Calendar_Room__c</fullName>
+        <externalId>false</externalId>
+        <label>Default Calendar Room</label>
+        <length>30</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Default_Calendar_View__c</fullName>
+        <externalId>false</externalId>
+        <label>Default Calendar View</label>
+        <length>20</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Dental_Practice__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact.Account.Dental_Practice_Partner__c</formula>
+        <label>Dental Practice</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Doctor_Scorecard_Admin__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Doctor Scorecard Admin</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Doctor_Suffix__c</fullName>
+        <externalId>false</externalId>
+        <label>Doctor Suffix</label>
+        <length>150</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DoseSpot_User_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>DoseSpot User ID</label>
+        <length>15</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Enable_Patient_Quick_Search__c</fullName>
+        <defaultValue>true</defaultValue>
+        <externalId>false</externalId>
+        <label>Enable Patient Quick Search</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Field_Deploy_Date__c</fullName>
+        <description>This is the date the PEC was effectively deployed in the field. This is a data point used in on-boarding performance metrics.</description>
+        <externalId>false</externalId>
+        <label>Field Deploy Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Goal_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Goal Type</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>None</fullName>
+                    <default>true</default>
+                    <label>None</label>
+                </value>
+                <value>
+                    <fullName>Center</fullName>
+                    <default>false</default>
+                    <label>Center</label>
+                </value>
+                <value>
+                    <fullName>User</fullName>
+                    <default>false</default>
+                    <label>User</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>InContact_Agent_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>InContact Agent Number</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Last_Calendar_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Last Calendar Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ManagerId</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <type>Hierarchy</type>
+    </fields>
+    <fields>
+        <fullName>National_Provider_Identifier__c</fullName>
+        <externalId>false</externalId>
+        <label>National Provider Identifier</label>
+        <length>30</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>On_End_Tags__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>(Intended only for doctors - users with the &apos;Clinical Doctor&apos; Profile) Denotes that doctor&apos;s appears on the end tags of our creative material (and therefore must approve it)</description>
+        <externalId>false</externalId>
+        <label>On End Tags</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PaychexID__c</fullName>
+        <description>This is the Paychex Payment ID. This was added by the analytics team to help simplify the bonus calculation process for PECs specifically.</description>
+        <externalId>false</externalId>
+        <label>PaychexID</label>
+        <length>8</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Practice_Privileges_Provider__c</fullName>
+        <externalId>false</externalId>
+        <label>Practice Privileges Provider</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>ClearViewTV</fullName>
+                    <default>false</default>
+                    <label>ClearViewTV</label>
+                </value>
+                <value>
+                    <fullName>ClearTrain</fullName>
+                    <default>false</default>
+                    <label>ClearTrain</label>
+                </value>
+                <value>
+                    <fullName>ClearWeb</fullName>
+                    <default>false</default>
+                    <label>ClearWeb</label>
+                </value>
+                <value>
+                    <fullName>ClearVantage</fullName>
+                    <default>false</default>
+                    <label>ClearVantage</label>
+                </value>
+                <value>
+                    <fullName>ClearConnect</fullName>
+                    <default>false</default>
+                    <label>ClearConnect</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Qualify_Scorecards__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Qualify Scorecards</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Region_PEC__c</fullName>
+        <description>Sales Region the PEC is assigned to.</description>
+        <externalId>false</externalId>
+        <label>Region_PEC</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>East</fullName>
+                    <default>false</default>
+                    <label>East</label>
+                </value>
+                <value>
+                    <fullName>Central</fullName>
+                    <default>false</default>
+                    <label>Central</label>
+                </value>
+                <value>
+                    <fullName>West</fullName>
+                    <default>false</default>
+                    <label>West</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Regional_Traveler__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>A Regional Traveler is a PEC who may consult in any Centers of a region. Within Salesforce, this is accomplished by assigning the PEC to any center in the PEC&apos;s region AND checking this box. Ultimately, this is used to disallow the assignment of consults to PEC&apos;s who do not work in the center where the consult occurred.</description>
+        <externalId>false</externalId>
+        <label>Regional Traveler</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Remove_from_Comission_Report__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Checking this will keep someone from appearing on the comission report that payroll pulls</description>
+        <externalId>false</externalId>
+        <label>Remove from Comission Report</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Reset_Override__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Gives the user the ability to reset patient status on the clinic calendar,  regardless of other settings.</description>
+        <externalId>false</externalId>
+        <label>Reset Override</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SFDC_Query_Result__c</fullName>
+        <externalId>false</externalId>
+        <label>SFDC Query Result</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>SSN__c</fullName>
+        <externalId>false</externalId>
+        <label>SSN</label>
+        <length>15</length>
+        <maskChar>X</maskChar>
+        <maskType>ssn</maskType>
+        <required>false</required>
+        <type>EncryptedText</type>
+    </fields>
+    <fields>
+        <fullName>Sales_Goal__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Monthly sales target for PECs</description>
+        <externalId>false</externalId>
+        <label>Sales Goal</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Tier_1_Floor__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Tier 1 Floor</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Tier_2_Floor__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Tier 2 Floor</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Tier_3_Floor__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Quarter Target</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Traveler_Until__c</fullName>
+        <description>Travelers&apos; records (Consults and Prostho Exams) are reported by PEC (as a summary) as well as by the Center Location where the work is performed.  All records through to the end of the month when the PEC stops traveling are included as part of the summary.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The month end date when this PEC is no longer traveling; if travel ends on 8/15/2010 for example, enter 8/31/2010.</inlineHelpText>
+        <label>Traveler Until</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>UltiPro_Id__c</fullName>
+        <description>This is the UltiPro Payment ID. This was requested by the Data Analytics Team to help simplify the bonus calculation process, for PEC&apos;s specifically.</description>
+        <externalId>false</externalId>
+        <label>UltiPro_Id</label>
+        <length>8</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>User_License_Reporting_Lookup__c</fullName>
+        <description>Used to report on user license usage.</description>
+        <externalId>false</externalId>
+        <formula>Profile.UserLicense.Name</formula>
+        <label>User License Reporting Lookup</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>User_Role__c</fullName>
+        <description>User Role, to pass into analytic snapshots</description>
+        <externalId>false</externalId>
+        <formula>UserRole.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>User Role</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>et4ae5__Default_ET_Page__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Default Marketing Cloud Page</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>et4ae5__Default_MID__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Default MID</label>
+        <length>20</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>et4ae5__ExactTargetForAppExchangeAdmin__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Marketing Cloud for AppExchange Admin</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>et4ae5__ExactTargetForAppExchangeUser__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Marketing Cloud for AppExchange User</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>et4ae5__ExactTargetUsername__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Marketing Cloud Username</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>et4ae5__ExactTarget_OAuth_Token__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>@deprecated</label>
+        <length>175</length>
+        <maskChar>asterisk</maskChar>
+        <maskType>all</maskType>
+        <required>false</required>
+        <type>EncryptedText</type>
+    </fields>
+    <fields>
+        <fullName>et4ae5__ValidExactTargetAdmin__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Valid Marketing Cloud Admin</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>et4ae5__ValidExactTargetUser__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Valid Marketing Cloud User</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>icAgentConsole__incCustomScreenpop__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Value of this field to be updated from inContact Agent Console app, use this field to get the value of inContact script variables.</description>
+        <externalId>false</externalId>
+        <label>inContact Custom Screenpop</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <listViews>
+        <fullName>ActiveTravelers</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>Traveler_Until__c</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>Traveler_Until__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>THIS_MONTH</value>
+        </filters>
+        <label>Active Travelers</label>
+    </listViews>
+    <listViews>
+        <fullName>Active_Users_Only</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>Clinic_Calendar__c</columns>
+        <columns>MANAGER</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>Active Users Only</label>
+    </listViews>
+    <listViews>
+        <fullName>AdminUsers</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.PROFILE.NAME</field>
+            <operation>equals</operation>
+            <value>System Administrator</value>
+        </filters>
+        <label>Admin Users</label>
+    </listViews>
+    <listViews>
+        <fullName>AllUsers</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>Traveler_Until__c</columns>
+        <columns>CORE.USERS.DIVISION</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.PROFILE.NAME</field>
+            <operation>equals</operation>
+            <value>Force.com Clinic Calendar</value>
+        </filters>
+        <label>Force.com Clinic Calendar</label>
+    </listViews>
+    <listViews>
+        <fullName>DIC</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>InContact_Agent_Number__c</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>Call_Center_Team__c</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>MANAGER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USER_ROLE.NAME</field>
+            <operation>equals</operation>
+            <value>Dental Implant Consultant</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CORE.PROFILE.NAME</field>
+            <operation>notEqual</operation>
+            <value>Call Center Agent Infocision,Limited System Administrator</value>
+        </filters>
+        <filters>
+            <field>CORE.PROFILE.NAME</field>
+            <operation>notEqual</operation>
+            <value>Marketing Administrator w/o Delete,Call Center - Supervisor Infocision</value>
+        </filters>
+        <label>DIC</label>
+    </listViews>
+    <listViews>
+        <fullName>Inactive_Users_Only</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>MANAGER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <label>Inactive Users Only</label>
+    </listViews>
+    <listViews>
+        <fullName>Users_Last_Login</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>MANAGER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>Users Last Login</label>
+        <sharedTo>
+            <role>COO</role>
+        </sharedTo>
+    </listViews>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>FULL_NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CORE.USER_ROLE.NAME</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>FULL_NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CORE.USER_ROLE.NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CORE.USERS.PHONE</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CORE.USERS.EXTENSION</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CORE.USERS.CELL</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>FULL_NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USERS.TITLE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USERS.PHONE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USERS.EMAIL</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Read</sharingModel>
+</CustomObject>

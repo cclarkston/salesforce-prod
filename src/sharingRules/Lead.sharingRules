@@ -1,0 +1,882 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Arlington</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Arlington</label>
+        <sharedTo>
+            <role>Arlington_PEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Dallas Arlington,Dallas Fort Worth</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Atlanta</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Atlanta</label>
+        <sharedTo>
+            <role>AtlantaPEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Atlanta,Atlanta Alpharetta</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Austin</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Austin</label>
+        <sharedTo>
+            <role>AustinPEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Austin</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Boston</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Boston</label>
+        <sharedTo>
+            <role>Boston_PEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Boston Woburn</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>CC_Manager_2</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>CC Manager 2</label>
+        <sharedTo>
+            <role>CallCenterManager</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Inbound_Call__c</field>
+            <operation>equals</operation>
+            <value>Non-Sales Call,Dental Inquiry</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Charlotte</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Charlotte</label>
+        <sharedTo>
+            <role>CharlottePEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Charlotte</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Chicago</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Sharing Setting for Chicago (Chicago, Evanston, Deerfield) users that need access to records in multiple locations.</description>
+        <label>Chicago</label>
+        <sharedTo>
+            <role>ChicagoPEC</role>
+        </sharedTo>
+        <booleanFilter>1</booleanFilter>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Chicago Evanston,Chicago Deerfield/Northbrook,Chicago</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Cincinnati_PEC</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Cincinnati - PEC</label>
+        <sharedTo>
+            <role>Cincinnati_PEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Cincinnati</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Cleveland</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Cleveland</label>
+        <sharedTo>
+            <role>ClevelandPEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Cleveland</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Columbia</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Columbia</label>
+        <sharedTo>
+            <role>Baltimore_CA</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Columbia</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Columbia_2</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Columbia 2</label>
+        <sharedTo>
+            <role>Baltimore_PEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Columbia</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Dallas</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Dallas</label>
+        <sharedTo>
+            <role>DallasPEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Dallas,Dallas Fort Worth</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Dental</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Dental</label>
+        <sharedTo>
+            <role>DentalImplantConsultant</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Lead_Number__c</field>
+            <operation>notEqual</operation>
+            <value>0</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Dental_Implant_Consultant_2</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Dental Implant Consultant 2</label>
+        <sharedTo>
+            <role>DentalImplantConsultant</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Inbound_Call__c</field>
+            <operation>equals</operation>
+            <value>Referrals,Dental Inquiry,Non-Sales Call</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Denver</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Denver</label>
+        <sharedTo>
+            <role>DenverPEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Denver</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Detroit_Southfield_PEC</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Detroit Southfield - PEC</label>
+        <sharedTo>
+            <role>Detroit_PEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Detroit Southfield</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Director_2</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Director 2</label>
+        <sharedTo>
+            <role>DirectorPatientEducationConsulting</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Inbound_Call__c</field>
+            <operation>equals</operation>
+            <value>Non-Sales Call,Dental Inquiry</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>EvanstonPEC</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>EvanstonPEC</label>
+        <sharedTo>
+            <role>Chicago_Evanston_PEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Chicago Evanston</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Houston</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Houston</label>
+        <sharedTo>
+            <role>HoustonPEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Houston,Houston Woodlands</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Jersey</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Jersey</label>
+        <sharedTo>
+            <role>NJ_PEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>New Jersey Roseland</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Kansas_City</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Kansas City</label>
+        <sharedTo>
+            <role>KansasCityPEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Kansas City</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Las_Vegas</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Las Vegas</label>
+        <sharedTo>
+            <role>LasVegasPEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Las Vegas</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Los_Angeles_Newport_Beach</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Los Angeles Newport Beach</label>
+        <sharedTo>
+            <role>Los_Angeles_Orange_County_PEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Los Angeles Orange County</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Los_Angeles_Torrance</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Los Angeles Torrance</label>
+        <sharedTo>
+            <role>Los_Angeles_Torrance_PEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Los Angeles Torrance</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Los_Angeles_West_Covina</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Los Angeles West Covina</label>
+        <sharedTo>
+            <role>Los_Angeles_West_PEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Los Angeles West Covina</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Miami</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Miami</label>
+        <sharedTo>
+            <role>MiamiPEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>West Palm Beach,Miami Fort Lauderdale,Miami</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Minneapolis</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Minneapolis</label>
+        <sharedTo>
+            <role>MinneapolisPEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Minneapolis,Minneapolis Roseville</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Multi_Center_Chicago</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Sharing Setting for Chicago (All Centers) contract Doctors that need access to records in multiple locations.</description>
+        <label>Multi-Center Chicago</label>
+        <sharedTo>
+            <role>Multi_Center_Chicago</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Chicago Schaumburg,Chicago Downers Grove,Chicago Evanston,Chicago,Chicago Naperville,Chicago Deerfield/Northbrook</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Multi_Center_Great_Lakes</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Sharing Setting for Great Lakes (Detroit Southfield, Cleveland) contract Doctors that need access to records in multiple locations.</description>
+        <label>Multi-Center Great Lakes</label>
+        <sharedTo>
+            <role>Multi_Center_Great_Lakes</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Cleveland,Detroit Southfield</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Multi_Center_San_Antonio_Dallas</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Sharing Setting for San Antonio/Dallas contract Doctors that need access to records in multiple locations.</description>
+        <label>Multi-Center San Antonio/Dallas</label>
+        <sharedTo>
+            <role>Multi_Center_San_Antonio_Dallas</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Dallas,San Antonio,Dallas Fort Worth</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Multi_Center_Tampa_Orlando</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Sharing Setting for Tampa/Orlando contract Doctors that need access to records in multiple locations.</description>
+        <label>Multi-Center Tampa/Orlando</label>
+        <sharedTo>
+            <role>Multi_Center_Tampa_Orlando</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Tampa,Orlando Maitland</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>NJ_Rule</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>NJ Rule</label>
+        <sharedTo>
+            <role>NJ_Calendar_Supervisor</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>New Jersey - Dental Arts of South Jersey</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Orlando</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Orlando</label>
+        <sharedTo>
+            <role>Orlando_PEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Orlando Maitland</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>PA_Network_Center</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Allows PA center users to modify and view leads assigned to that center</description>
+        <label>PA - Network Center</label>
+        <sharedTo>
+            <role>PA_Calendar_Supervisor</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Philadelphia - By Design Dental Implant Center</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Philly_PEC</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Philly PEC</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>Philadelphia_PEC</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Philadelphia Fort Washington,Philadelphia Mount Laurel</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Phoenix</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Phoenix</label>
+        <sharedTo>
+            <role>PhoenixPEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Phoenix Mesa,Phoenix</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Portland</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Portland</label>
+        <sharedTo>
+            <role>PortlandPEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Portland</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Rockville</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Rockville</label>
+        <sharedTo>
+            <role>RockvillePEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Washington Rockville</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Sacramento</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Sacramento</label>
+        <sharedTo>
+            <role>SacramentoPEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Sacramento</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Salt_Lake</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Salt Lake</label>
+        <sharedTo>
+            <role>SaltLakeCityPEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Salt Lake City</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>San_Antonio</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>San Antonio</label>
+        <sharedTo>
+            <role>SanAntonioPEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>San Antonio</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>San_Diego</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>San Diego</label>
+        <sharedTo>
+            <role>SanDiegoPEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>San Diego</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>San_Jose</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>San Jose</label>
+        <sharedTo>
+            <role>SanJosePEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>San Francisco Oakland,San Francisco Daly City,San Jose</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Seattle_CA</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Seattle CA</label>
+        <sharedTo>
+            <role>Seattle_CA</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Seattle</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Seattle_PEC</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Seattle PEC</label>
+        <sharedTo>
+            <role>Seattle_PEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Seattle</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Site_Users</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>For API</description>
+        <label>Site Users</label>
+        <sharedTo>
+            <group>Site_Users</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Inbound_Call__c</field>
+            <operation>equals</operation>
+            <value>Non-Sales Call,Dental Inquiry</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>St_Louis</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>St Louis</label>
+        <sharedTo>
+            <role>StLouisPEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>St. Louis</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Tampa_PEC</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Tampa - PEC</label>
+        <sharedTo>
+            <role>Tampa_PEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Tampa</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Texas_Traveler_3</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Texas Traveler 3</label>
+        <sharedTo>
+            <role>Texas_Travelers</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Austin,San Antonio</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Traveler_2</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Traveler 2</label>
+        <sharedTo>
+            <role>TravelerPEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Inbound_Call__c</field>
+            <operation>equals</operation>
+            <value>Non-Sales Call,Dental Inquiry</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Tucson</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Tucson</label>
+        <sharedTo>
+            <role>Tucson</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Tucson</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Tysons</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Tysons</label>
+        <sharedTo>
+            <role>WashingtonTysonsCornerPEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Washington Rockville,Washington Tysons Corner</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Walnut_Creek</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Walnut Creek</label>
+        <sharedTo>
+            <role>Walnut_Creek_PEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Walnut Creek</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>WebSite_Access</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Set up to allow the website to create tasks and update records on duplicates it detects</description>
+        <label>WebSite Access</label>
+        <sharedTo>
+            <group>External_API_Users</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Inbound_Call__c</field>
+            <operation>equals</operation>
+            <value>Dental Inquiry</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>West_Chicago_PEC</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Sharing Setting for Chicago (Downers Grove, Schaumburg, Naperville) users that need access to records in multiple locations.</description>
+        <label>West Chicago - PEC</label>
+        <sharedTo>
+            <role>West_Chicago_PEC</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Center_Location__c</field>
+            <operation>equals</operation>
+            <value>Chicago Naperville,Chicago Schaumburg,Chicago Downers Grove</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>CC_Manager</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>CC Manager</label>
+        <sharedTo>
+            <role>CallCenterManager</role>
+        </sharedTo>
+        <sharedFrom>
+            <allInternalUsers></allInternalUsers>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>CEO</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>CEO</label>
+        <sharedTo>
+            <role>CEO</role>
+        </sharedTo>
+        <sharedFrom>
+            <allInternalUsers></allInternalUsers>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>CFO</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>CFO</label>
+        <sharedTo>
+            <role>CFO</role>
+        </sharedTo>
+        <sharedFrom>
+            <allInternalUsers></allInternalUsers>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>COO</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>COO</label>
+        <sharedTo>
+            <role>COO</role>
+        </sharedTo>
+        <sharedFrom>
+            <allInternalUsers></allInternalUsers>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Director_PEC</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Director PEC</label>
+        <sharedTo>
+            <role>DirectorPatientEducationConsulting</role>
+        </sharedTo>
+        <sharedFrom>
+            <allInternalUsers></allInternalUsers>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Finance_Team</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Finance Team</label>
+        <sharedTo>
+            <roleAndSubordinates>CFO</roleAndSubordinates>
+        </sharedTo>
+        <sharedFrom>
+            <allInternalUsers></allInternalUsers>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Implant_Consultants</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Implant Consultants</label>
+        <sharedTo>
+            <role>DentalImplantConsultant</role>
+        </sharedTo>
+        <sharedFrom>
+            <allInternalUsers></allInternalUsers>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Partner_DIC</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Partner - DIC</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>DentalImplantConsultant</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <allPartnerUsers></allPartnerUsers>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Payroll_Manager</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Payroll Manager</label>
+        <sharedTo>
+            <role>Payroll_Manager</role>
+        </sharedTo>
+        <sharedFrom>
+            <allInternalUsers></allInternalUsers>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Portal_Traveller_PEC</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Portal - Traveller PEC</label>
+        <sharedTo>
+            <role>TravelerPEC</role>
+        </sharedTo>
+        <sharedFrom>
+            <allPartnerUsers></allPartnerUsers>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Site_2</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Site 2</label>
+        <sharedTo>
+            <group>Site_Users</group>
+        </sharedTo>
+        <sharedFrom>
+            <allInternalUsers></allInternalUsers>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Texas_Traveler_1</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Texas Traveler 1</label>
+        <sharedTo>
+            <role>Texas_Travelers</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>AustinPEC</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Texas_Traveler_2</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Texas Traveler 2</label>
+        <sharedTo>
+            <role>Texas_Travelers</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>SanAntonioPEC</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Traveler</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Traveler</label>
+        <sharedTo>
+            <role>TravelerPEC</role>
+        </sharedTo>
+        <sharedFrom>
+            <allInternalUsers></allInternalUsers>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

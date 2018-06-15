@@ -1,0 +1,1497 @@
+<apex:page controller="ctrl_clinicschedule" sidebar="false" showHeader="true" action="{!check_for_weather_data}">
+    <apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+    <apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+    <apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+
+    <script>
+        function use_fancy_cursor(t) {
+          document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+          t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+        }
+
+        function default_cursor(t) {
+          document.body.style.cursor = 'default';
+          t.style.cursor='default';
+        }
+    </script>
+
+    <style type="text/css" media="print">
+
+.hour {
+  min-width:75px;
+}
+
+      table.print_break {
+        page-break-after:always;
+      }
+
+      td.right_border {
+        border:0px;
+        right-border:0px;
+      }
+
+      img.skiplink {
+        display:none;
+      }
+
+      div.bodyDiv {
+        border:0px;
+      }
+
+      div.bPageHeader {
+        display:none;
+      }
+
+      div.bPageFooter {
+        display:none;
+      }
+
+      div.no_print {
+        display:none;
+      }
+    </style>
+
+    <script>
+        var ie_check = false;
+        var ie_ver;
+
+        function getInternetExplorerVersion()
+        // Returns the version of Internet Explorer or a -1
+        // (indicating the use of another browser).
+        {
+          var rv = -1; // Return value assumes failure.
+          if (navigator.appName == 'Microsoft Internet Explorer') {
+            var ua = navigator.userAgent;
+            var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+            if (re.exec(ua) != null)
+              rv = parseFloat( RegExp.$1 );
+          }
+          return rv;
+        }
+
+        function ietruebody(){
+        return (document.compatMode && document.compatMode!="BackCompat")? document.documentElement : document.body
+        }
+
+        var ie=document.all;
+        var ns6=document.getElementById && !document.all
+        var offsetxpoint=-250;
+        var offsetypoint=20;
+
+        function apt_modal(e,apt_id) {
+          getScrollXY() ;
+          alertSize();
+          if(!ie_check)
+            ie_ver = getInternetExplorerVersion();
+        //  alert('Height : ' + scrH + ' Width : ' + scrW + ' X Pos : ' + scrX + ' Y Pos : ' + scrY + ' PageY : ' + e.pageY + ' PageX : ' + e.pageX);
+          if (! document.styleSheets) return
+            var CSSRules;  // IE uses rules...
+            for (var i = 0; i < document.styleSheets.length; i++) {
+                (document.styleSheets[0].cssRules) ? CSSRules = 'cssRules' : CSSRules = 'rules';
+                var my_ref = document.styleSheets[i].href || 'Unknown';
+                //alert(my_ref);
+                if(my_ref.indexOf("modal") != -1) {
+                for (var j = 0; j < document.styleSheets[i][CSSRules].length; j++) {
+                    if (document.styleSheets[i][CSSRules][j].selectorText == '.modalPopup_outer') {
+          //            alert('Test');
+                      var curX=(ns6)?e.pageX : e.clientX+ietruebody().scrollLeft;
+                      var curY=(ns6)?e.pageY : e.clientY+ietruebody().scrollTop;
+            //          alert('Cur X: ' + curX + ' Cur Y : ' + curY);
+              //        alert('ietruebody.clientwidth : ' + ietruebody().clientWidth + ' Client X : ' + e.clientX + ' Offset : ' + offsetxpoint );
+                      var rightedge=ie&&!window.opera? e.clientX+offsetxpoint + 500 : e.clientX+offsetxpoint-20 + 500;
+                      var bottomedge=ie&&!window.opera? ietruebody().clientHeight-e.clientY-offsetypoint : window.innerHeight-e.clientY-offsetypoint-20
+                //      alert('Right Edge : ' + rightedge + ' bottom edge : ' + bottomedge);
+                  //    alert('Width : ' + document.styleSheets[i][CSSRules][j].style.width );
+                      var leftedge=(offsetxpoint<0)? offsetxpoint*(-1) : -1000
+                    //  alert('Left Edge : ' + leftedge);
+                      var newleft;
+                      var newtop;
+
+                      if (rightedge>scrW)
+                        newleft = curX-500+"px";
+                      else if (curX<leftedge)
+                        newleft = curX;
+                      else
+                        newleft = curX+offsetxpoint+"px";
+               //       alert(newleft);
+                      document.styleSheets[i][CSSRules][j].style.left = newleft;
+                      if(curY-scrY<300)
+                        newtop = scrY-75;
+                      else
+                        newtop = curY-300;
+                      document.styleSheets[i][CSSRules][j].style.top = newtop+"px";
+              }
+            }
+            }
+          }
+
+          display_apt(apt_id);
+        }
+    </script>
+
+    <style>
+
+    .weather_tooltip {
+  position: relative;
+}
+
+.weather_tooltip .weather_tiptext {
+  visibility: hidden;
+  width: 150px;
+  background-color: white;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  border:1px solid black;
+
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -75px;
+  font-size:11pt;
+}
+
+.weather_tooltip:hover .weather_tiptext {
+  visibility: visible;
+}
+
+      td.right_border {
+        width:210px;
+        border-right:1px solid black;
+        vertical-align:top;
+      }
+
+      p.print_apt {
+        display:block;
+        border:1px solid black;
+        padding-top:5px;
+        padding-bottom:10px;
+        margin-bottom:10px;
+        padding-right:7px;
+        padding-left:7px;
+      }
+
+      p.print_apt_gold {
+        display:block;
+        border:1px solid black;
+        padding-top:5px;
+        padding-bottom:10px;
+        margin-bottom:10px;
+        padding-right:7px;
+        background-image: url({!URLFOR($Resource.GoldLabel)});
+        background-repeat: no-repeat;
+        padding-left:22px;
+      }
+
+      div.bPageHeader {
+        z-index:-1;
+      }
+
+      div.searchBoxClearContainer {
+        z-index: 5;
+      }
+
+      div#tabContainer {
+        z-index:-1;
+      }
+
+      table.history {
+        font-family:verdana,arial;
+      }
+
+      table.history tr.control {
+        font-weight:bold;
+        font-size:10pt;
+      }
+
+      table.history tr.control td {
+        border-bottom:1px solid black;
+        padding-bottom:3px;
+        empty-cells:hide;
+      }
+
+      table.history tr.hodd td {
+        text-align:left;
+        padding-top:2px; padding-bottom:3px;
+        font-size:10pt;
+        border-bottom:1px dashed #5789AE;
+        empty-cells:hide;
+      }
+
+      span.print_header {
+        font-size:12pt;
+        font-weight:bold;
+        display:block;
+      }
+
+      table.history tr.heven {
+        background-color:#C9E4E4;
+      }
+
+      table.history tr.heven td {
+        text-align:left;
+        padding-top:2px; padding-bottom:3px;
+        font-size:10pt;
+        border-bottom:1px dashed #5789AE;
+        empty-cells:hide;
+      }
+
+      span.button_spacer {
+        display:inline-block;
+        width:20px;
+      }
+
+      span.blank {
+        font-style:italic;
+        font-weight:bold;
+      }
+
+      span.scheduling_header {
+        display:block;
+        color:black;
+        font-weight:bold;
+        padding-left:10px;
+      }
+
+      .room_note_header {
+         display:none;
+         font-weight:normal;
+
+      }
+
+      .modalPopup_history{
+         display:inline-block;
+         background-color: white;
+         border-width: 1px;
+         border-style: solid;
+         padding:0px;
+         width:100%;
+         position:relative;
+         left:-1px;
+         height:200px;
+         overflow:auto;
+      }
+
+      .modalPopup_action{
+        display:inline-block;
+        background-color: white;
+        border-width: 1px;
+        border-style: solid;
+        padding:0px;
+        margin-top:5px;
+        width:100%;
+        position:relative;
+        left:-1px;
+      }
+
+      .room_note {
+        font-style:italic;
+        display:block;
+        width:215px;
+      }
+
+      .room_holder {
+        display:inline;
+        padding-right:75px;
+        float:left;
+      }
+
+      span.room_header {
+        font-weight:bold;
+        font-size:12pt;
+        color:#5789AE;
+        display:block;
+        padding-bottom:.5em;
+        text-align:center;
+      }
+
+      table.calendar_view {
+          <!--    background-image:url('https://cs12.salesforce.com/resource/1336491391000/LinesBackground'); -->
+        empty-cells: show;
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+
+      table.calendar_view td {
+        height:15px;
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+
+      table.calendar_view tr.maintick {
+
+      }
+
+      table.calendar_view tr.maintick td {
+        vertical-align:top;
+        padding:0;
+        margin:0;
+        padding-left:2px;
+        padding-right:2px;
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+
+      table.calendar_view tr.maintick td.hour {
+        border-top:1px solid black;
+        font-weight:bold;
+        height:15px;
+        width:75px;
+        border-collapse: collapse;
+        border-spacing: 0;
+        padding:0;
+        margin:0;
+      }
+
+      table.calendar_view tr.subtick {
+
+      }
+
+      table.calendar_view tr.subtick td {
+        vertical-align:top;
+        padding:0;
+        margin:0;
+        padding-left:2px;
+        padding-right:2px;
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+
+      table.calendar_view tr.subtick td.hour {
+        border-top:1px dashed #cccccc;
+        font-weight:bold;
+        height:15px;
+        color:white;
+        width:75px;
+        border-collapse: collapse;
+        border-spacing: 0;
+            padding:0;
+        margin:0;
+      }
+
+      span.apt_blue {
+        min-width:65px;
+        <!--    background:#9BDEFF; -->
+        background:#90C1EC;
+        border-collapse: collapse;
+        border-spacing: 0;
+        color:black;
+        font-weight:bold;
+        display:block;
+        position:relative;
+        padding:0;
+        margin:0;
+        text-align:center;
+        background: rgb(160,216,239); /* Old browsers */
+        /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+        background: -moz-linear-gradient(top,  rgba(160,216,239,1) 0%, rgba(160,216,239,1) 0%, rgba(216,244,255,1) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(160,216,239,1)), color-stop(0%,rgba(160,216,239,1)), color-stop(100%,rgba(216,244,255,1))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(160,216,239,1) 0%,rgba(160,216,239,1) 0%,rgba(216,244,255,1) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(160,216,239,1) 0%,rgba(160,216,239,1) 0%,rgba(216,244,255,1) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(160,216,239,1) 0%,rgba(160,216,239,1) 0%,rgba(216,244,255,1) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(160,216,239,1) 0%,rgba(160,216,239,1) 0%,rgba(216,244,255,1) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a0d8ef', endColorstr='#d8f4ff',GradientType=0 ); /* IE6-8 */
+        border:1px solid black;
+      }
+
+      span.apt_blue:hover {
+        box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black;
+        border-collapse: separate;
+      }
+
+      span.apt_purple {
+        min-width:65px;
+        border-collapse: collapse;
+        border-spacing: 0;
+        background:#C9CEE4;
+        color:black;
+        font-weight:bold;
+        display:block;
+        position:relative;
+        padding:0;
+        margin:0;
+        text-align:center;
+      }
+
+      span.apt_purple:hover {
+        box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black;
+        border-collapse: separate;
+      }
+
+      span.apt_brown {
+        min-width:65px;
+        border-collapse: collapse;
+        border-spacing: 0;
+        background:#CECE9D;
+        color:black;
+        font-weight:bold;
+        display:block;
+        position:relative;
+        padding:0;
+        margin:0;
+        text-align:center;
+          /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+
+        background: -moz-linear-gradient(top,  rgba(213,206,166,1) 0%, rgba(201,193,144,0.6) 40%, rgba(183,173,112,0) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(213,206,166,1)), color-stop(40%,rgba(201,193,144,0.6)), color-stop(100%,rgba(183,173,112,0))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(213,206,166,1) 0%,rgba(201,193,144,0.6) 40%,rgba(183,173,112,0) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(213,206,166,1) 0%,rgba(201,193,144,0.6) 40%,rgba(183,173,112,0) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(213,206,166,1) 0%,rgba(201,193,144,0.6) 40%,rgba(183,173,112,0) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(213,206,166,1) 0%,rgba(201,193,144,0.6) 40%,rgba(183,173,112,0) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d5cea6', endColorstr='#00b7ad70',GradientType=0 ); /* IE6-8 */
+        border:1px solid black;
+      }
+
+      span.apt_brown:hover {
+        box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black;
+        border-collapse: separate;
+      }
+
+      span.apt_red {
+        min-width:65px;
+        border-collapse: collapse;
+        border-spacing: 0;
+        <!--    background:#FFA4A4;    -->
+        <!--    background:#CF1414;  -->
+        background:  #D83333;
+        color:black;
+        font-weight:bold;
+        display:block;
+        position:relative;
+        padding:0;
+        margin:0;
+        text-align:center;
+          /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+        background: -moz-linear-gradient(top,  rgba(255,0,132,0.75) 0%, rgba(255,0,132,0) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,0,132,0.75)), color-stop(100%,rgba(255,0,132,0))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(255,0,132,0.75) 0%,rgba(255,0,132,0) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(255,0,132,0.75) 0%,rgba(255,0,132,0) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(255,0,132,0.75) 0%,rgba(255,0,132,0) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(255,0,132,0.75) 0%,rgba(255,0,132,0) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfff0084', endColorstr='#00ff0084',GradientType=0 ); /* IE6-8 */
+        border:1px solid black;
+      }
+
+      span.apt_red:hover {
+        box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black;
+        border-collapse: separate;
+      }
+
+      span.apt_green {
+        min-width:65px;
+        border-collapse: collapse;
+        border-spacing: 0;
+        <!--    background:#C7E1C4;    -->
+        background:#53BD5C;
+        color:black;
+        font-weight:bold;
+        display:block;
+        position:relative;
+        padding:0;
+        margin:0;
+        text-align:center;
+          /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+
+        background: -moz-linear-gradient(top,  rgba(97,196,25,0.75) 0%, rgba(180,227,145,0) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(97,196,25,0.75)), color-stop(100%,rgba(180,227,145,0))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(97,196,25,0.75) 0%,rgba(180,227,145,0) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(97,196,25,0.75) 0%,rgba(180,227,145,0) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(97,196,25,0.75) 0%,rgba(180,227,145,0) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(97,196,25,0.75) 0%,rgba(180,227,145,0) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bf61c419', endColorstr='#00b4e391',GradientType=0 ); /* IE6-8 */
+        border:1px solid black;
+      }
+
+      span.apt_green:hover {
+        box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black;
+        border-collapse: separate;
+      }
+
+      span.apt_grey {
+        min-width:65px;
+        border-collapse: collapse;
+        border-spacing: 0;
+        <!--    background:#D2D2D2;    -->
+        background: #B8BBBF;
+        color:black;
+        font-weight:bold;
+        display:block;
+        position:relative;
+        padding:0;
+        margin:0;
+        text-align:center;
+        background: rgb(142,142,142); /* Old browsers */
+
+        /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz4KICAgIDxzdG9wIG9mZnNldD0iNDYlIiBzdG9wLWNvbG9yPSIjNjY2NjY2IiBzdG9wLW9wYWNpdHk9IjAuMzciLz4KICAgIDxzdG9wIG9mZnNldD0iODIlIiBzdG9wLWNvbG9yPSIjYjJiMmIyIiBzdG9wLW9wYWNpdHk9IjAuMjYiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2RkZGRkZCIgc3RvcC1vcGFjaXR5PSIwLjIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+        background: -moz-linear-gradient(top,  rgba(0,0,0,0.5) 0%, rgba(102,102,102,0.37) 46%, rgba(178,178,178,0.26) 82%, rgba(221,221,221,0.21) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.5)), color-stop(46%,rgba(102,102,102,0.37)), color-stop(82%,rgba(178,178,178,0.26)), color-stop(100%,rgba(221,221,221,0.21))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(0,0,0,0.5) 0%,rgba(102,102,102,0.37) 46%,rgba(178,178,178,0.26) 82%,rgba(221,221,221,0.21) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(0,0,0,0.5) 0%,rgba(102,102,102,0.37) 46%,rgba(178,178,178,0.26) 82%,rgba(221,221,221,0.21) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(0,0,0,0.5) 0%,rgba(102,102,102,0.37) 46%,rgba(178,178,178,0.26) 82%,rgba(221,221,221,0.21) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(0,0,0,0.5) 0%,rgba(102,102,102,0.37) 46%,rgba(178,178,178,0.26) 82%,rgba(221,221,221,0.21) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80000000', endColorstr='#36dddddd',GradientType=0 ); /* IE6-8 */
+
+
+
+
+        border:1px solid black;
+      }
+
+      span.apt_grey:hover {
+        box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black;
+        border-collapse: separate;
+      }
+
+      span.apt_yellow {
+        min-width:65px;
+        border-collapse: collapse;
+        border-spacing: 0;
+        <!--    background:#FFFFAA;    -->
+        <!--    background: #E6EE44; -->
+        background: #F3E275;
+        color:black;
+        font-weight:bold;
+        display:block;
+        position:relative;
+        padding:0;
+        margin:0;
+        text-align:center;
+
+      }
+
+        span.apt_teal {
+        min-width:65px;
+        border-collapse: collapse;
+        border-spacing: 0;
+        background: #147585;
+        color:white;
+        font-weight:bold;
+        display:block;
+        position:relative;
+        padding:0;
+        padding-left:1px;
+        margin:0;
+        text-align:center;
+      }
+
+      span.apt_yellow:hover {
+        box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black;
+        border-collapse: separate;
+      }
+
+      span.apt_orange {
+        min-width:65px;
+        border-collapse: collapse;
+        border-spacing: 0;
+        <!--   background:#FED681;    -->
+        background: #E28526;
+        color:black;
+        font-weight:bold;
+        display:block;
+        position:relative;
+        padding:0;
+        margin:0;
+        text-align:center;
+          /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+        background: -moz-linear-gradient(top,  rgba(237,144,23,0.75) 0%, rgba(237,145,25,0.75) 1%, rgba(246,230,180,0) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(237,144,23,0.75)), color-stop(1%,rgba(237,145,25,0.75)), color-stop(100%,rgba(246,230,180,0))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(237,144,23,0.75) 0%,rgba(237,145,25,0.75) 1%,rgba(246,230,180,0) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(237,144,23,0.75) 0%,rgba(237,145,25,0.75) 1%,rgba(246,230,180,0) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(237,144,23,0.75) 0%,rgba(237,145,25,0.75) 1%,rgba(246,230,180,0) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(237,144,23,0.75) 0%,rgba(237,145,25,0.75) 1%,rgba(246,230,180,0) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfed9017', endColorstr='#00f6e6b4',GradientType=0 ); /* IE6-8 */
+        border:1px solid black;
+      }
+
+      span.apt_orange:hover {
+        box-shadow: 5px 5px 5px #888, inset 0px 0px 3px black;
+        border-collapse: separate;
+      }
+
+      span.calendar_name {
+        width:200px;
+        font-size:12pt;
+        font-weight:bold;
+        font-family:verdana;
+        display:block;
+        padding-bottom:10px;
+      }
+
+      .cal_commands {
+        font-size:10pt;
+        font-weight:bold;
+        color:blue;
+        display:block;
+        padding-left:10px;
+        text-decoration:none;
+        padding-bottom:1em;
+      }
+
+      .cal_commands:hover {
+        color:red;
+        text-decoration:none;
+        border:0;
+      }
+
+      span.center_line {
+        display:block;
+        padding-bottom:5px;
+        text-align:center;
+        width:200px;
+      }
+
+      span.center_tag {
+        font-weight:bold;
+        width:75px;
+      }
+
+      span.month_name {
+        text-align:left;
+        width:145px;
+        display:inline-block;
+      }
+
+      span.year_name {
+        text-align:right;
+        width:40px;
+        display:inline-block;
+      }
+
+      table.calendar {
+        width:200px;
+      }
+
+      table.calendar tr.cheader {
+        font-weight:bold;
+      }
+
+      table.calendar tr.cheader td {
+        border-bottom:1px solid black;
+      }
+
+      table.calendar td {
+        text-align:right;
+        margin-left:1px;
+        padding-right:5px;
+      }
+
+      table.calendar td.selected {
+        border:1px dotted black;
+        background : #ECF9FF;
+        font-weight:bold;
+      }
+
+      table.calendar td.no_apt {
+        color:gray;
+      }
+
+      table.calendar td.empty {
+        color:green;
+        font-weight:bold;
+      }
+
+      table.calendar td.near_full {
+        color:blue;
+        font-weight:bold;
+      }
+
+      table.calendar td.full {
+        color:red;
+        font-weight:bold;
+      }
+
+      table.calendar tr.mname td {
+        font-size:10pt;
+        text-align:center;
+        height:20px;
+      }
+
+      table.calendar tr.year td {
+        font-size:10pt;
+        text-align:center;
+        height:20px;
+      }
+
+      span.form_header {
+        display:block;
+        margin-bottom:1em;
+        color:#5789AE;
+        font-size:12pt;
+        font-weight:bold;
+        padding-left:20px;
+        margin-left:20px;
+        border-bottom:1px solid black;
+        width:400px;
+      }
+      span.form_line {
+        display:block;
+        padding-bottom:1em;
+      }
+      span.apt_line {
+        display:block;
+        padding-bottom:5px;
+      }
+      span.form_tag {
+        font-weight:bold;
+        width:125px;
+        display:inline-block;
+      }
+      span.apt_tag {
+        font-weight:bold;
+        width:100px;
+        display:inline-block;
+      }
+      input:focus {
+            background:#E8E8D0;
+      }
+
+      span.inprocess_span {
+        display:block;
+        font-size:12pt;
+        width:150px;
+        padding-left:20px;
+        border-bottom:1px solid black;
+        color:#5789AE;
+        font-weight:bold;
+      }
+      span.noshows {
+        padding-left:20px;
+        display:block;
+        font-weight:bold;
+      }
+      span.arrivals {
+        padding-left:20px;
+        display:block;
+        font-weight:bold;
+        width:100%;
+      }
+      span.ready {
+        padding-left:20px;
+        display:block;
+        font-weight:bold;
+      }
+      span.starts {
+        padding-left:20px;
+        display:block;
+        font-weight:bold;
+      }
+      span.completed {
+        padding-left:10px;
+        display:block;
+        font-weight:bold;
+      }
+      span.left {
+        padding-left:20px;
+        display:block;
+        font-weight:bold;
+      }
+      span.timer {
+        color:blue;
+        padding-right:5px;
+        text-align:right;
+        font-weight:bold;
+      }
+      span.timer_alert {
+        color:red;
+        padding-right:5px;
+        text-align:right;
+        font-weight:bold;
+      }
+
+      .confirmation-status {
+        position: absolute;
+        right: -0.6em;
+        top: -0.1em;
+      }
+      p.confirmation-status {
+        color: green;
+        font-size: 25px;
+      }
+      .appointment-container {
+        position: relative;
+      }
+    </style>
+
+    <apex:form id="calendar_form">
+
+        <table>
+            <tr>
+                <td class="right_border" >
+                    <apex:actionRegion >
+                        <apex:actionFunction oncomplete="default_cursor(this);"  name="refresh_inprocess" action="{!refresh_inprogress}" rerender="action_holder,main_holder" />
+                        <apex:actionFunction oncomplete="default_cursor(this);"  name="view_months" action="{!display_months}" rerender="calendar_holder" />
+                        <apex:actionFunction oncomplete="default_cursor(this);"  name="view_years" action="{!display_years}" rerender="calendar_holder" />
+                        <apex:actionFunction oncomplete="default_cursor(this);"  name="next_month" action="{!add_month}" rerender="calendar_holder,main_holder,action_holder" />
+                        <apex:actionFunction oncomplete="default_cursor(this);"  name="prev_month" action="{!subtract_month}" rerender="calendar_holder,main_holder,action_holder" />
+                        <apex:actionFunction oncomplete="default_cursor(this);"  name="change_calendar_month" action="{!change_month}" rerender="calendar_holder,main_holder,action_holder">
+                            <apex:param name="mnum" value="" />
+                        </apex:actionFunction>
+                        <apex:actionFunction oncomplete="default_cursor(this);"  name="change_calendar_day" action="{!change_calendar_day}" rerender="calendar_holder,main_holder,action_holder">
+                            <apex:param name="mday" value="" />
+                        </apex:actionFunction>
+                        <apex:actionFunction oncomplete="default_cursor(this);"  name="change_calendar_year" action="{!change_calendar_year}" rerender="calendar_holder,main_holder,action_holder">
+                            <apex:param name="cyear" value="" />
+                        </apex:actionFunction>
+                        <apex:actionFunction oncomplete="default_cursor(this);"  name="change_center" action="{!change_center}" rerender="calendar_holder,main_holder,action_holder" />
+                        <apex:outputPanel layout="block" id="calendar_holder" style="padding-bottom:1em;" styleClass="no_print">
+                            <!--  <apex:outputPanel rendered="{!display_admin}">-->
+                            <span class="center_line">
+                                <apex:selectList value="{!selected_center}" onchange="use_fancy_cursor(this);change_center();" size="1" >
+                                    <apex:selectOptions value="{!center_list}"></apex:selectOptions>
+                                </apex:selectList>
+                            </span>
+                            <!--  </apex:outputPanel>
+                             <apex:outputPanel rendered="{!if(display_admin,false,true)}">
+                                <span class="center_line"><apex:outputText value="{!selected_center_name}" /></span>
+                              </apex:outputPanel> -->
+                            <span class="calendar_name">
+                                <span class="month_name" >
+                                    <apex:image url="{!$Resource.LArrow}" style="position:relative;top:2px;" onclick="use_fancy_cursor(this);prev_month();"/><span onclick="use_fancy_cursor(this);view_months()">{!cmonth.monthname}</span>
+                                    <apex:image url="{!$Resource.RArrow}" style="position:relative;top:3px;" onclick="use_fancy_cursor(this);next_month();"/>
+                                </span>
+                                <span class="year_name" onclick="use_fancy_cursor(this);view_years();">{!cmonth.yearnum}</span>
+                            </span>
+                            <apex:outputPanel id="calendar_view" rendered="{!if(calendar_view=='calendar','true','false')}">
+                                <table class="calendar">
+                                    <tr class="cheader">
+                                        <td>Su</td>
+                                        <td>M</td>
+                                        <td>Tu</td>
+                                        <td>W</td>
+                                        <td>Th</td>
+                                        <td>F</td>
+                                        <td>Sa</td>
+                                    </tr>
+                                    <apex:repeat value="{!cmonth.weeks}" var="week">
+                                        <tr>
+                                            <apex:repeat value="{!week.days}" var="day">
+                                                <td class="{!day.css_style}" onclick="{!if(day.display_date,'use_fancy_cursor(this);change_calendar_day(' + text(day.date_num) + ');','return false;')}"><apex:outputText rendered="{!day.display_date}" escape="false;" value="{!day.date_num}" /></td>
+                                            </apex:repeat>
+                                        </tr>
+                                    </apex:repeat>
+                                </table>
+                            </apex:outputPanel>
+                            <apex:outputPanel id="month_view" rendered="{!if(calendar_view=='months','true','false')}">
+                                <table class="calendar" >
+                                    <apex:variable var="mnum" value="1" />
+                                    <apex:repeat value="{!month_list}" var="mrow">
+                                        <tr class="mname">
+                                            <apex:repeat value="{!mrow}" var="mname">
+                                                <td class="{!if(mname==selected_monthname,'selected','none')}"><span onclick="use_fancy_cursor(this);change_calendar_month({!mnum});">{!mname}</span></td>
+                                                <apex:variable var="mnum" value="{!(value(mnum)+1)}" />
+                                            </apex:repeat>
+                                        </tr>
+                                    </apex:repeat>
+                                </table>
+                            </apex:outputPanel>
+                            <apex:outputPanel id="year_view" rendered="{!if(calendar_view=='years','true','false')}">
+                                <table class="calendar">
+                                    <apex:repeat value="{!year_list}" var="yrow">
+                                        <tr class="year">
+                                            <apex:repeat value="{!yrow}" var="yvalue">
+                                                <td class="{!if(yvalue==selected_year,'selected','none')}"><span onclick="use_fancy_cursor(this);change_calendar_year({!yvalue})">{!yvalue}</span></td>
+                                            </apex:repeat>
+                                        </tr>
+                                    </apex:repeat>
+                                </table>
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+                    </apex:actionRegion>
+
+                    <apex:outputPanel layout="block" id="action_holder"  style="padding-top:1em;border-top:1px solid #5789AE;" styleClass="no_print">
+                        <span style="font-weight:bold;font-style:italic;">Total Open Days for Month : {!center_total_open_days}</span><br /><br /><br />
+                        <apex:commandLink value="{!today_text}" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);" action="{!display_today}" rerender="calendar_holder,main_holder,action_holder" styleClass="cal_commands" onmouseover="tooltip.show('<p>This option will return you to the current day on the consult calendar</p>');" onmouseout="tooltip.hide();"  />
+                        <apex:commandLink onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);"  value="Display Consult Schedule" action="{!display_consults}" rerender="main_holder,modal_holder" styleClass="cal_commands" onmouseover="tooltip.show('<p>This option will return you to the main consult calendar view at any point in time.  Any unsaved work will be lost</p>');" onmouseout="tooltip.hide();" />
+                        <apex:commandLink onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);" value="Display Print View" action="{!display_printview}" rerender="main_holder,modal_holder" styleClass="cal_commands" onmouseover="tooltip.show('<p>This option will display a printer friendly version of the consult calendar.  Any unsaved work will be lost</p>');" onmouseout="tooltip.hide();" />
+                        <apex:commandLink onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);" value="Search Consults" action="{!display_search}" rerender="main_holder,modal_holder" styleClass="cal_commands" onmouseover="tooltip.show('<p>This option will display a search form to help locate a particular patient</p>');" onmouseout="tooltip.hide();" />
+                        <apex:outputLink rendered="{!display_admin}" target="consult_calendar" value="{!consult_link}" styleClass="cal_commands" >Open Consult Calendar</apex:outputLink>
+                        <!-- display weather info -->
+  <apex:outputpanel layout="block" rendered="{!if(current_weather!='',true,false)}" styleclass="weather_tooltip" style="font-size:14pt;">
+    <apex:image value="{!URLFOR($Resource.WeatherIcons, current_weather.Icon__c + '.gif')}" style="height:30px;width:30px;margin-left:10px;" />
+    &nbsp;
+    <apex:outputText value="{0,number,##0}" style="color:red;margin-left:5px;"><apex:param value="{!current_weather.Temp_High__c}" /></apex:outputtext>&deg;
+    <apex:outputText value="{0,number,##0}" style="color:blue;margin-left:5px;"><apex:param value="{!current_weather.Temp_Low__c}" /></apex:outputtext>&deg;
+    <apex:outputpanel layout="block" styleclass="weather_tiptext" style="opacity: 1; z-index: 5100;','')} ">
+      <div style="text-align:center;width:100%;">
+        <div style="padding-bottom:5px;">
+          <apex:outputText value="{0,number,##0}" style="color:red;margin-left:5px;"><apex:param value="{!current_weather.Temp_High__c}" /></apex:outputtext>&deg;
+            &nbsp;&#124;&nbsp;
+          <apex:outputText value="{0,number,##0}" style="color:blue;margin-left:5px;"><apex:param value="{!current_weather.Temp_Low__c}" /></apex:outputtext>&deg;
+        </div>
+        <div style="padding-bottom:5px;">
+          <apex:image value="{!URLFOR($Resource.WeatherIcons, current_weather.Icon__c + '.gif')}" /><br />
+          <span style="font-size:9pt;font-weight:bold;">{!current_weather.conditions__c}</span>
+        </div>
+        <apex:outputpanel layout="block" rendered="{!if(current_weather.Snow_AllDay__c>0,true,false)}">Snow : {!current_weather.Snow_AllDay__c} in <span style="font-size:9pt;">({!current_weather.POP__c}%)</span></apex:outputpanel>
+        <apex:outputpanel layout="block" rendered="{!if(current_weather.QPF_Allday__c>0,true,false)}">Rain : {!current_weather.QPF_Allday__c} in <span style="font-size:9pt;">({!current_weather.POP__c}%)</span></apex:outputpanel>
+      </div>
+    </apex:outputpanel><br />
+    <apex:image id="WULogo" value="{!URLFOR($Resource.WeatherIcons, 'WUndergroundLogo.png')}" style="width:90px;padding-left:10px;" /><br /><br />
+  </apex:outputPanel>
+
+                        <span class="inprocess_span">Arrived (<span style="color:black;">{!arrived_list_size}</span>)</span>
+                        <table width="100%">
+                            <apex:repeat value="{!arrived_list}" var="arrivals">
+                                <!--    <apex:outputPanel rendered="{!if(arrivals.scheduled_lead__r.name==null,false,true)}" styleClass="arrivals">{!arrivals.scheduled_lead__r.name}</apex:outputPanel>
+                                <apex:outputPanel rendered="{!if(arrivals.scheduled_account__r.name==null,false,true)}" styleClass="arrivals">{!arrivals.scheduled_account__r.name}</apex:outputPanel>    -->
+                                <tr><td><span class="left">{!arrivals.pname}</span></td><td width="50px"><apex:outputtext escape="false" value="{!arrivals.time_label}" /></td></tr>
+                            </apex:repeat>
+                        </table><br /><br />
+
+                        <span class="inprocess_span">Ready (<span style="color:black;">{!ready_list_size}</span>)</span>
+                        <table width="100%">
+                            <apex:repeat value="{!ready_list}" var="ready">
+                                <!--    <apex:outputPanel rendered="{!if(ready.scheduled_lead__r.name==null,false,true)}" styleClass="ready">{!ready.scheduled_lead__r.name}</apex:outputPanel>
+                                <apex:outputPanel rendered="{!if(ready.scheduled_account__r.name==null,false,true)}" styleClass="ready">{!ready.scheduled_account__r.name}</apex:outputPanel>    -->
+                                <tr><td><span class="left">{!ready.pname}</span></td><td style="width:50px;"><apex:outputtext escape="false" value="{!ready.time_label}" /></td></tr>
+                            </apex:repeat>
+                        </table><br /><br />
+
+                        <table width="100%">
+                            <span class="inprocess_span">Started (<span style="color:black;">{!started_list_size}</span>)</span>
+                            <apex:repeat value="{!started_list}" var="start">
+                                <!--    <apex:outputPanel rendered="{!if(start.scheduled_lead__r.name==null,false,true)}" styleClass="starts">{!start.scheduled_lead__r.name}</apex:outputPanel>
+                                <apex:outputPanel rendered="{!if(start.scheduled_account__r.name==null,false,true)}" styleClass="starts">{!start.scheduled_account__r.name}</apex:outputPanel>    -->
+                                <tr><td><span class="left">{!start.pname}</span></td><td width="50px"><apex:outputtext escape="false" value="{!start.time_label}" /></td></tr>
+                            </apex:repeat>
+                        </table><br /><br />
+
+                        <span class="inprocess_span">Completed (<span style="color:black;">{!completed_list_size}</span>)</span>
+                        <apex:repeat value="{!completed_list}" var="complete">
+                            <!--    <apex:outputPanel rendered="{!if(complete.scheduled_lead__r.name==null,false,true)}" styleClass="completed">{!complete.scheduled_lead__r.name}</apex:outputPanel>
+                            <apex:outputPanel rendered="{!if(complete.scheduled_account__r.name==null,false,true)}" styleClass="completed">{!complete.scheduled_account__r.name}</apex:outputPanel>    -->
+                            <span class="completed">{!complete.pname} (<apex:outputtext escape="false" value="{!complete.converted_status}" />)</span>
+                        </apex:repeat><br /><br />
+
+                        <span class="inprocess_span">No Show (<span style="color:black;">{!noshow_list_size}</span>)</span>
+                        <apex:repeat value="{!noshow_list}" var="noshow">
+                            <!--    <apex:outputPanel rendered="{!if(noshow.scheduled_lead__r.name==null,false,true)}" styleClass="noshows">{!noshow.scheduled_lead__r.name}</apex:outputPanel>
+                            <apex:outputPanel rendered="{!if(noshow.scheduled_account__r.name==null,false,true)}" styleClass="noshows">{!noshow.scheduled_account__r.name}</apex:outputPanel>    -->
+                            <span class="left">{!noshow.pname}</span>
+                        </apex:repeat><br /><br />
+
+                        <span class="inprocess_span">Walk Out (<span style="color:black;">{!left_list_size}</span>)</span>
+                        <apex:repeat value="{!left_list}" var="left">
+                            <!--    <apex:outputPanel rendered="{!if(left.scheduled_lead__r.name==null,false,true)}" styleClass="left">{!left.scheduled_lead__r.name}</apex:outputPanel>
+                            <apex:outputPanel rendered="{!if(left.scheduled_account__r.name==null,false,true)}" styleClass="left">{!left.scheduled_account__r.name}</apex:outputPanel>    -->
+                            <span class="left">{!left.pname}</span>
+                        </apex:repeat><br /><br />
+
+                    </apex:outputpanel>
+                </td>
+                <td style="vertical-align:top;padding-left:20px;">
+                    <apex:outputPanel id="main_holder" layout="block" style="display:flex;flex-direction:row;flex-wrap:nowrap;overflow-y:auto;" >
+
+                        <!-- -----  Start main consult schedule view -------------------------------------------------------- -->
+                        <apex:outputPanel layout="block" id="consultview_holder" rendered="{!if(main_view=='consult_view','true','false')}" style="display: flex; flex-wrap: nowrap; flex-direction: row;    overflow-y: auto; flex-shrink:0; ">
+                            <apex:actionRegion >
+                                <apex:actionFunction oncomplete="default_cursor(this);"   action="{!display_apt_details}" name="display_apt" reRender="modal_holder" >
+                                    <apex:param name="anum" value="" />
+                                </apex:actionFunction>
+                                <apex:repeat value="{!view_allrooms}" var="consult_room">
+                                    <div class="room_holder">
+                                        <apex:outputPanel >
+                                            <span class="room_header">{!consult_room.room.name}</span>
+                                        </apex:outputPanel>
+
+                                        <apex:outputText rendered="{!if(consult_room.num_notes=0,'false','true')}"><span style='font-weight:bold;'>Notes : </span></apex:outputText>
+                                        <apex:repeat value="{!consult_room.all_notes}" var="room_notes">
+                                            <span class="room_note_header">{!room_notes.createdby.name} -&nbsp; <apex:outputField value="{!room_notes.createddate}" /></span>
+                                            <span class="room_note"><apex:outputtext value="{!room_notes.Comment__c}" escape="false" /></span><br />
+                                        </apex:repeat>
+                                        <br /><br />
+                                        <table class="calendar_view">
+                                            <apex:repeat value="{!consult_room.consult_view}" var="crows">
+                                                <tr class="{!crows.cclass}">
+                                                    <td style="height:15px;border-collaps:collapse;" class="hour">
+                                                      <apex:outputPanel >{!crows.row_label}</apex:outputPanel>
+                                                    </td>
+                                                    <apex:repeat value="{!crows.row_apts}" var="ablocks">
+                                                        <td rowspan="{!ablocks.crowspan}" >
+                                                          <div class="appointment-container">
+                                                             <!-- <span class="{!ablocks.cclass}" style="font-size:{!ablocks.fontsize};line-height:{!ablocks.lheight};padding-left:5px;padding-right:5px;height:{!ablocks.cheight}px;position:relative;top:{!ablocks.ctop}px;display:block;" onclick="use_fancy_cursor(this);apt_modal(event,'{!ablocks.capt.id}');" >-->
+                                                            <apex:outputPanel styleclass="{!ablocks.cclass}" rendered="{!if(ablocks.capt.Leadscore_At_Schedule_Time__c=='Gold',true,false)}" style="background-image: url({!URLFOR($Resource.GoldLabel)}); background-repeat: no-repeat;padding-left:22px;font-size:{!ablocks.fontsize};line-height:{!ablocks.lheight};padding-right:5px;height:{!ablocks.cheight}px;position:relative;top:{!ablocks.ctop}px;display:block;" onclick="use_fancy_cursor(this);apt_modal(event,'{!ablocks.capt.id}');" >
+                                                                <apex:outputPanel rendered="{!if(ablocks.capt.Patient_Name__c=='' && ablocks.capt.Scheduled_Account__c==null && ablocks.capt.Scheduled_Patient__c==null,'true','false')}">
+                                                                    <!--<apex:outputPanel rendered="{!if(ablocks.capt.Scheduled_Lead__c==null && ablocks.capt.Scheduled_Account__c==null,'true','false')}">-->
+                                                                    <!---figure out if the block is avaliable or not
+                                                                    <span class="blank">Available</span><br />{!ablocks.capt.pre_screen_type__c}              -->
+                                                                    <apex:outputText escape="false" value="{!ablocks.avail_text}" style="position:relative;top:3px;" />
+                                                                </apex:outputPanel>
+                                                                <apex:outputPanel rendered="{!if(ablocks.capt.Patient_Name__c=='' && ablocks.capt.Scheduled_Account__c==null && ablocks.capt.Scheduled_Patient__c==null,'false','true')}">
+                                                                    <!--              <apex:outputPanel rendered="{!if(ablocks.capt.Scheduled_Lead__c==null && ablocks.capt.Scheduled_Account__c==null,'false','true')}">-->
+                                                                    <apex:outputText escape="false"  value="{!ablocks.block_text}" style="position:relative;top:3px;" />
+                                                                </apex:outputPanel>
+                                                            </apex:outputPanel>
+                                                            <apex:outputPanel styleclass="{!ablocks.cclass}" rendered="{!if(ablocks.capt.Leadscore_At_Schedule_Time__c=='Gold',false,true)}" style="font-size:{!ablocks.fontsize};line-height:{!ablocks.lheight};padding-right:5px;height:{!ablocks.cheight}px;position:relative;top:{!ablocks.ctop}px;display:block;" onclick="use_fancy_cursor(this);apt_modal(event,'{!ablocks.capt.id}');" >
+                                                                <apex:outputPanel rendered="{!if(ablocks.capt.Patient_Name__c=='' && ablocks.capt.Scheduled_Account__c==null && ablocks.capt.Scheduled_Patient__c==null,'true','false')}">
+                                                                    <!--<apex:outputPanel rendered="{!if(ablocks.capt.Scheduled_Lead__c==null && ablocks.capt.Scheduled_Account__c==null,'true','false')}">-->
+                                                                    <!--figure out if the block is avaliable or not
+                                                                    <span class="blank">Available</span><br />{!ablocks.capt.pre_screen_type__c}              -->
+                                                                    <apex:outputText escape="false" value="{!ablocks.avail_text}" style="position:relative;top:3px;" />
+                                                                </apex:outputPanel>
+                                                                <apex:outputPanel rendered="{!if(ablocks.capt.Patient_Name__c=='' && ablocks.capt.Scheduled_Account__c==null && ablocks.capt.Scheduled_Patient__c==null,'false','true')}">
+                                                                    <!--              <apex:outputPanel rendered="{!if(ablocks.capt.Scheduled_Lead__c==null && ablocks.capt.Scheduled_Account__c==null,'false','true')}">-->
+                                                                    <apex:outputText escape="false"  value="{!ablocks.block_text}" style="position:relative;top:3px;" />
+                                                                </apex:outputPanel>
+                                                            </apex:outputPanel>
+                                                          <apex:outputPanel rendered="{! ablocks.capt.Confirmation_Status__c == 'Confirmed'}" layout="block" styleClass="confirmation-status">
+                                                            <p class="confirmation-status">&#x2713;</p>
+                                                          </apex:outputPanel>
+                                                          </div>
+                                                        </td>
+                                                    </apex:repeat>
+                                                </tr>
+                                            </apex:repeat>
+                                        </table>
+                                    </div>
+                                </apex:repeat>
+                            </apex:actionRegion>
+                        </apex:outputPanel>
+                        <!-- End main consult schedule view -->
+
+                        <!-- Patient Search Holder -->
+                        <script>
+                          var key_timeout;
+                          var search_in_progress = false;
+
+                          function search_now() {
+                            search_in_progress = false;
+                            search_consults();
+                          }
+                            //oncomplete="default_cursor(this);"
+                          function search_key() {
+                            if(search_in_progress)
+                              clearTimeout(key_timeout);
+                            search_in_progress = true;
+                            key_timeout = setTimeout("search_now()",600);
+                          }
+                        </script>
+                        <apex:outputPanel id="searchview_holder" layout="block" styleClass="print_div" rendered="{!if(main_view=='consult_search',true,false)}">
+                            <Apex:actionRegion >
+                                <apex:actionFunction name="search_consults" action="{!consult_search}" reRender="search_results_holder" oncomplete="default_cursor(this);"></apex:actionFunction>
+                                <apex:actionFunction oncomplete="default_cursor(this);"  name="view_apt_date" action="{!lookup_apt_date}" rerender="calendar_holder,main_holder,action_holder">
+                                    <apex:param name="aid" value="" />
+                                </apex:actionFunction>
+                                <span style="color:#5789AE;font-weight:black;display:block;padding-left:10px;marging-left:10px;font-size:14pt;width:300px;border-bottom:1px solid black;margin-bottom:1em;">Search for Patient By</span>
+                                <p style="padding-left:20px;">
+                                    <span style="display:block;padding-bottom:5px;">
+                                        <span style="font-weight:bold;width:75px;display:inline-block;">Name :</span><apex:inputtext value="{!search_name}" onkeyup="search_key();" />
+                                    </span>
+                                    <span style="display:block;padding-bottom:5px;">
+                                        <span style="font-weight:bold;width:75px;display:inline-block;">Phone :</span><apex:inputtext value="{!search_phone}" onkeyup="search_key();" />
+                                    </span>
+                                    <span style="display:block;padding-bottom:5px;">
+                                        <apex:inputCheckbox value="{!search_past}" onchange="search_key();" /> Search Apts in the past
+                                    </span>
+                                    <apex:commandButton value="Search Consults" action="{!consult_search}" onclick="use_fancy_cursor(this);clearTimeout(key_timeout);"  oncomplete="default_cursor(this);" reRender="search_results_holder"  />
+                                    <span style="display:inline-block;width:30px;">&nbsp;</span><apex:commandButton value="Back to Schedule" action="{!display_consults}"  rerender="main_holder,modal_holder"  onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);" /><br /><br />
+                                </p>
+                                <span style="color:red;font-weight:black;display:block;padding-left:10px;marging-left:10px;font-size:14pt;width:750px;border-bottom:1px solid black;margin-bottom:1em;">Possible Matches</span>
+                                <apex:outputPanel layout="block" id="search_results_holder" style="padding-left:20px;">
+                                    <apex:outputText rendered="{!if(search_size==0,true,false)}" style="font-style:italics;" value="There are no matches for your current search criteria.<br />" escape="false"/>
+                                    <apex:outputtext escape="false" value="{!search_issues}" />
+                                    <apex:outputPanel rendered="{!if(search_size==0,false,true)}" >
+                                        <table class="accs_details" style="width:725px;">
+                                            <tr class="control">
+                                                <td width="30%">Name</td>
+                                                <td width="20%">Center</td>
+                                                <td width="15%">Home Phone</td>
+                                                <td width="15%">Mobile</td>
+                                                <td width="20%">Apt Date</td>
+                                            </tr>
+                                            <apex:variable var="rowclassname" value="accs" />
+                                            <apex:repeat value="{!search_results}" var="cmatch">
+                                            <tr class="{!rowclassname}">
+                                                <td>
+                                                    <apex:outputtext value="{!cmatch.Patient_Name__c}" rendered="{!if(cmatch.Patient_Name__c<>'',true,false)}" />
+                                                    <apex:outputtext value="{!cmatch.scheduled_account__r.name}" rendered="{!if(cmatch.Patient_Name__c<>'',false,true)}" />
+                                                    <apex:outputtext value="{!cmatch.scheduled_patient__r.Full_Name__c}" rendered="{!if(cmatch.Scheduled_Patient__c!=null,true,false)}" />
+                                                </td>
+                                                <td><apex:outputField value="{!cmatch.consult_room__r.Center_Information__r.name}" /></td>
+                                                <td>
+                                                    <apex:outputtext value="{!cmatch.Patient_Phone__c}" rendered="{!if(cmatch.Patient_Name__c<>'',true,false)}" />
+                                                    <apex:outputtext value="{!cmatch.scheduled_account__r.PersonHomePhone}" rendered="{!if(cmatch.Patient_Name__c<>'',false,true)}" />&nbsp;
+                                                    <apex:outputtext value="{!cmatch.scheduled_patient__r.Main_Phone__c}" rendered="{!if(cmatch.Scheduled_Patient__c!=null,true,false)}" />
+                                                </td>
+                                                <td>
+                                                    <apex:outputtext value="{!cmatch.Patient_Mobile__c}" rendered="{!if(cmatch.Patient_Name__c<>'',true,false)}" />
+                                                    <apex:outputtext value="{!cmatch.scheduled_account__r.PersonMobilePhone}" rendered="{!if(cmatch.Patient_Name__c<>'',false,true)}" />&nbsp;
+                                                    <apex:outputtext value="{!cmatch.scheduled_patient__r.Alt_Phone__c}" rendered="{!if(cmatch.Scheduled_Patient__c!=null,true,false)}" />
+                                                </td>
+                                                <td onclick="view_apt_date('{!cmatch.id}');tooltip.hide();" style="color:blue;font-weight:bold;" onmouseover="tooltip.show('<p>Click to open the calendar to this day</p>');" onmouseout="tooltip.hide();">
+                                                    <apex:outputText value="{0,date,M/d/yyyy}">
+                                                        <apex:param value="{!cmatch.Apt_Date__c}" />
+                                                    </apex:outputText>&nbsp;
+                                                    <Apex:outputtext value="{0,number,##,##,##0}" >
+                                                        <apex:param value="{!if(cmatch.Start_Hour_Int__c>12,cmatch.Start_Hour_Int__c-12,cmatch.Start_Hour_Int__c)}" />
+                                                    </apex:outputtext>:
+                                                    <apex:outputtext value="{!if(cmatch.Start_Minute_Int__c<10,('0' + cmatch.Start_Minute__c),cmatch.Start_Minute__c)}" />&nbsp;
+                                                    <apex:outputtext value="{!if(cmatch.Start_Hour_Int__c>12,'PM','AM')}" />
+                                                </td>
+                                            </tr>
+                                            </apex:repeat>
+                                        </table><br />
+                                        <span class="page_span" style="width:700px;">Page {!page} of {!num_pages}
+                                            <apex:commandButton value="Prev" action="{!prev_page}" rendered="{!if(display_prev==true,true,false)}" style="margin-left:20px;" reRender="searchview_holder" />
+                                            <apex:commandButton value="Next" action="{!next_page}" rendered="{!if(display_next==true,true,false)}" style="margin-left:20px;" reRender="searchview_holder" />
+                                        </span>
+
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                            </apex:actionregion>
+                        </apex:outputPanel>
+                        <!-- End Patient Search Holder  -->
+
+                        <!-- Print View Holder -->
+                        <apex:outputPanel id="printview_holder" layout="block" styleClass="print_div" rendered="{!if(main_view=='print_view',true,false)}">
+                            <apex:variable var="row_count" value="{!0}" />
+                            <table class="print_break" style="page-break-after:always;">
+                                <tr>
+                                    <td>
+                                        <span class="print_header">{!selected_center_name} - Consult Room Schedule ({!formatted_sdate}) </span><br />
+                                        <apex:repeat value="{!view_allprintrooms}" var="consult_room">
+                                            <div class="room_holder">
+                                                <apex:outputPanel >
+                                                    <span class="room_header">{!consult_room.room.name}</span>
+                                                </apex:outputPanel>
+
+                                                <apex:outputText rendered="{!if(consult_room.num_notes=0,'false','true')}"><span style='font-weight:bold;'>Notes : </span></apex:outputText>
+                                                <apex:repeat value="{!consult_room.all_notes}" var="room_notes">
+                                                    <span class="room_note_header">{!room_notes.createdby.name} -&nbsp; <apex:outputField value="{!room_notes.createddate}" /></span>
+                                                    <span class="room_note">{!room_notes.Comment__c}</span><br />
+                                                </apex:repeat>
+                                                <br /><br />
+                                                <table class="calendar_view">
+                                                <tr>
+                                                    <td>
+                                                        <apex:repeat value="{!consult_room.all_apts}" var="ablocks">
+                                                            <p class="{!if(ablocks.capt.leadscore_at_schedule_time__c=='Gold','print_apt_gold','print_apt')}" >
+                                                                <apex:outputPanel rendered="{!if(ablocks.capt.Patient_Name__c=='' && ablocks.capt.Scheduled_Account__c==null && ablocks.capt.Scheduled_Patient__c==null,'true','false')}">
+                                                                    <apex:outputText escape="false" value="{!ablocks.avail_text}" style="position:relative;top:3px;" />
+                                                                </apex:outputPanel>
+                                                                <apex:outputPanel rendered="{!if(ablocks.capt.Patient_Name__c=='' && ablocks.capt.Scheduled_Account__c==null && ablocks.capt.Scheduled_Patient__c==null,'false','true')}">
+                                                                    <apex:outputText escape="false"  value="{!ablocks.block_text}" style="position:relative;top:3px;" />
+                                                                </apex:outputPanel>
+                                                                <apex:outputpanel rendered="{!if(ablocks.capt.Leadscore_At_Schedule_Time__c=='Gold',true,false)}" ><br /><span style="position:relative;top:3px;font-weight:bold;" >GOLD</span></apex:outputpanel>
+                                                            </p>
+                                                        </apex:repeat>
+                                                    </td>
+                                                </tr>
+                                                </table>
+                                            </div>
+                                            <!--pulled the header out until I can keep it from printing when we only have 4 rooms.-->
+                                            <!--<span class='print_header'>{!selected_center_name} - Consult Room Schedule ({!formatted_sdate}) </span>-->
+                                            <apex:outputText rendered="{!if(row_count>=3,true,false)}" value="</td></tr></table><div style='page-break-after:always;'>&nbsp;</div><br /><table><tr><td>" escape="false" />
+                                            <apex:variable var="row_count" value="{!0}" rendered="{!if(row_count>=3,true,false)}"/>
+                                            <apex:variable var="row_count" value="{!row_count+1}" />
+                                        </apex:repeat>
+                                    </td>
+                                </tr>
+                            </table>
+                        </apex:outputPanel>
+
+                        <!-- -----  End Print View Holder ------ -->
+
+                    </apex:outputPanel>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Modal pop-up holder -->
+        <apex:outputPanel id="modal_holder" style="z-index:9999;" >
+        <apex:actionRegion >
+          <apex:actionFunction oncomplete="default_cursor(this);"  name="change_pec" action="{!change_consult_pec}"  status="modal_status" reRender="modal_holder,main_holder" />
+          <apex:actionFunction oncomplete="default_cursor(this);"  name="mark_someone" action="{!mark_someone_else}"  status="modal_status" reRender="modal_holder,main_holder" />
+          <apex:actionFunction oncomplete="default_cursor(this);"  action="{!close_modal}" name="close_pop" rerender="modal_holder"/>
+          <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!modal_display}"/>
+            <apex:outputPanel styleClass="modalPopup_outer" layout="block" rendered="{!modal_display}" id="outerpop" style="z-index:9999;">
+            <span class="modalPopup_outerheader" onclick="use_fancy_cursor(this);close_pop();">Close X</span>
+
+              <apex:outputPanel styleClass="modalPopup_inner" rendered="{!if(modal_display && modal_type=='apt_view',true,false)}" id="innerpop" style="z-index:9999;">
+              <table><tr><td style="width:250px;vertical-align:top;">
+              <!---lead scheduled---->
+        <!--      <apex:outputPanel rendered="{!if(view_apt.scheduled_lead__r.id==null && view_apt.scheduled_account__r.id==null,true,false)}">-->
+              <apex:outputPanel rendered="{!if(view_apt.Patient_Name__c=='' && view_apt.Scheduled_Account__c==null && view_apt.Scheduled_Patient__c==null,true,false)}">
+                  <span class="apt_line">
+                  <span class="apt_tag">Lead : </span><span class="blank" style="color:red;">Consult Avaliable</span></span>
+                  <apex:outputText rendered="{!if(allow_hold,false,true)}" value="{!hold_message}" escape="false" />
+              </apex:outputPanel>
+              <apex:outputPanel rendered="{!if(view_apt.Patient_Name__c<>'',true,false)}">
+              <!--<apex:outputpanel rendered="{!if(view_apt.scheduled_lead__r.id==null,false,true)}" >      -->
+        <!-- Pulled this out due to force.com license restriction
+                  <span class="apt_line">
+                  <span class="apt_tag">Lead : </span>
+                    <apex:outputLink value="../{!view_apt.scheduled_lead__r.id}" style="color:blue;font-weight:bold;">
+                    <apex:outputText value="{!view_apt.scheduled_lead__r.name}" /></apex:outputLink></span>
+                  <span class="apt_line">
+                  <span class="apt_tag">Phone # : </span>{!view_apt.scheduled_lead__r.phone}</span>
+                  <span class="apt_line">
+                  <span class="apt_tag">Mobile # : </span>{!view_apt.scheduled_lead__r.mobilephone}</span>-->
+                  <span class="apt_line">
+                  <span class="apt_tag">Lead : </span>
+                    <apex:outputPanel rendered="{!if(display_admin || display_pec,true,false)}"><apex:outputField value="{!slead_id.Scheduled_Lead__c}" /> </apex:outputPanel>
+                    <apex:outputPanel rendered="{!if(display_admin || display_pec,false,true)}"><apex:outputText value="{!view_apt.Patient_Name__c}" /></apex:outputPanel></span>
+                  <span class="apt_line">
+                  <span class="apt_tag">Phone # : </span>{!view_apt.Patient_Phone__c}</span>
+                  <span class="apt_line">
+                  <span class="apt_tag">Mobile # : </span>{!view_apt.Patient_Mobile__c}</span>
+                  <span class="apt_line">
+                  <span class="apt_tag">Work # : </span>{!view_apt.Patient_Work__c}</span>
+                  <apex:outputpanel rendered="{!if(block_pec,false,true)}" >   <span class="apt_line">
+                  <span class="apt_tag">Scheduled By : </span>{!view_apt.scheduled_by__r.name}</span></apex:outputpanel>
+                  <span class="apt_line">
+                  <span class="apt_tag">Treatment : </span><apex:outputField value="{!view_apt.Treatment__c}" /></span>
+                  <span class="apt_line">
+                  <span class="apt_tag">Confirmation: </span>
+                    <apex:outputField value="{!view_apt.Confirmation_Status__c}" />
+                  </span>
+                  <span class="apt_line">
+                  <span class="apt_tag">Status : </span><apex:outputField value="{!view_apt.Consult_Show_Status__c}" /></span>
+              </apex:outputPanel>
+              <apex:outputpanel rendered="{!if(view_apt.scheduled_account__r.id<>null,true,false)}" >
+                  <span class="apt_line">
+                  <span class="apt_tag">Consult : </span>
+                    <apex:outputLink value="../{!view_apt.scheduled_account__r.id}" style="color:blue;font-weight:bold;"><apex:outputText value="{!view_apt.scheduled_account__r.name}" /></apex:outputLink></span>
+                  <span class="apt_line">
+                  <span class="apt_tag">Phone # : </span>{!view_apt.scheduled_account__r.phone}</span>
+                  <span class="apt_line">
+                  <span class="apt_tag">Mobile # : </span>{!view_apt.scheduled_account__r.personmobilephone}</span>
+                  <apex:outputpanel rendered="{!if(block_pec,false,true)}" >   <span class="apt_line">
+                  <span class="apt_tag">Scheduled By : </span>{!view_apt.scheduled_by__r.name}</span>
+                  <span class="apt_line">
+                  <span class="apt_tag">Treatment : </span><apex:outputField value="{!view_apt.Treatment__c}"  /></span> </apex:outputpanel>
+                  <span class="apt_line">
+                  <span class="apt_tag">Confirmation Status: </span>
+                    <apex:outputField value="{!view_apt.Confirmation_Status__c}" />
+                  </span>
+                  <span class="apt_line">
+                  <span class="apt_tag">Status : </span><apex:outputField value="{!view_apt.Consult_Show_Status__c}" /></span>
+              </apex:outputPanel>
+              <apex:outputpanel rendered="{!if(view_apt.Scheduled_Patient__c<>null,true,false)}" >
+                  <span class="apt_line">
+                  <span class="apt_tag">Patient : </span>
+                    <apex:outputLink value="../{!view_apt.scheduled_patient__r.id}" style="color:blue;font-weight:bold;"><apex:outputText value="{!view_apt.scheduled_patient__r.Full_Name__c}" /></apex:outputLink></span>
+                  <span class="apt_line">
+                  <span class="apt_tag">Main Phone # : </span>{!view_apt.scheduled_patient__r.Main_Phone__c}</span>
+                  <span class="apt_line">
+                  <span class="apt_tag">Alt Phone # : </span>{!view_apt.scheduled_patient__r.Alt_Phone__c}</span>
+                  <apex:outputpanel rendered="{!if(block_pec,false,true)}" >   <span class="apt_line">
+                  <span class="apt_tag">Scheduled By : </span>{!view_apt.scheduled_by__r.name}</span>
+                  <span class="apt_line">
+                  <span class="apt_tag">Treatment : </span><apex:outputField value="{!view_apt.Treatment__c}"  /></span>
+                  </apex:outputpanel>
+
+                  <span class="apt_line">
+                  <span class="apt_tag">Status : </span><apex:outputField value="{!view_apt.Consult_Show_Status__c}" /></span>
+              </apex:outputPanel>
+              </td>
+              <td style="vertical-align:top;">
+              <apex:outputPanel >
+                  <span class="apt_line">
+                  <span class="apt_tag" >Room : </span>{!view_apt.consult_room__r.name}</span>
+                  <span class="apt_line">
+                  <span class="apt_tag" >Date : </span><apex:outputField value="{!view_apt.Apt_Date__c}" /></span>
+                  <span class="apt_line">
+                  <span class="apt_tag" >Apt Time : </span>{!view_apt.start_hour__c}:{!view_apt.Start_Minute__c} - {!view_apt.end_hour__c}:{!view_apt.End_Minute__c}</span>
+                  <apex:outputPanel rendered="{!if(view_apt.Consult_Show_Status__c=='No Show',false,true)}" >
+                  <span class="apt_line">
+                  <span class="apt_tag" >Arrival: </span>{!arrival_time}</span>
+                  <span class="apt_line">
+                  <span class="apt_tag" >Ready Time : </span>{!ready_time}</span>
+                  <span class="apt_line">
+                  <span class="apt_tag" >Start Time : </span>{!started_time}</span>
+                  <span class="apt_line">
+                  <span class="apt_tag" >Finish Time : </span>{!completed_time}</span>
+                  <!--<apex:outputpanel rendered="{!if(view_apt.Scheduled_Patient__c==null,true,false)}"><span class="apt_line">
+                  <span class="apt_tag" >Warranty ID : </span>{!view_apt.Patient_Warranty_ID__c}</span>           </apex:outputpanel>-->
+                  <apex:outputpanel rendered="{!if(view_apt.Scheduled_Patient__c==null,true,false)}"><span class="apt_line">
+                  <span class="apt_tag" >Check In Code: </span>{!check_in_code}</span>  </apex:outputpanel>
+                  <apex:outputPanel rendered="{!if(view_apt.Consult_Show_Status__c=='Consult Started' || view_apt.Consult_Show_Status__c=='Ready for Consult',true,false)}">
+                  <span class="apt_line">
+                    <span class="apt_tag" >PEC : </span><apex:selectList value="{!consult_pec}" size="1" onchange="use_fancy_cursor(this);change_pec();" >
+                      <apex:selectOptions value="{!pec_list}"></apex:selectOptions>
+                    </apex:selectList> </span>
+                    <span class="apt_tag" style="width: 200px;">Started By Someone Else : <apex:inputfield style="display:inline-block;position:relative;top:2px;left:5px;" value="{!view_apt.Started_By_Someone_Else__c}" onclick="use_fancy_cursor(this);mark_someone();" />  </span>
+                  </apex:outputPanel>
+                  <apex:outputPanel rendered="{!if(view_apt.Consult_Show_Status__c=='Consult Completed',true,false)}">
+                    <apex:outputPanel rendered="{!if(pec_override,false,true)}">
+                      <span class="apt_line">
+                        <span class="apt_tag" >PEC : </span><apex:outputField value="{!view_apt.Consult_PEC__c}"/></span>
+                    </apex:outputpanel>
+                    <apex:outputPanel rendered="{!pec_override}">
+                    <span class="apt_line">
+                    <span class="apt_tag" >PEC : </span><apex:selectList value="{!consult_pec}" size="1" onchange="use_fancy_cursor(this);change_pec();" >
+                      <apex:selectOptions value="{!pec_list}"></apex:selectOptions>
+                    </apex:selectList> </span>
+                    <span class="apt_tag" style="width: 200px;">Started By Someone Else : <apex:inputfield style="display:inline-block;position:relative;top:2px;left:5px;" value="{!view_apt.Started_By_Someone_Else__c}" onclick="use_fancy_cursor(this);mark_someone();" />  </span>
+                    </apex:outputpanel>
+                  </apex:outputPanel>
+
+
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!if(view_apt.Consult_Show_Status__c='No Show',true,false)}" >
+                   <span class="apt_line">
+                   <span class="apt_tag" style="width:150px;">No Show Contacted? : </span><apex:inputField value="{!view_apt.No_Show_Contacted__c}" /></span>
+                   <span class="apt_line">
+                   <span class="apt_tag">No Show Notes : </span><apex:inputField value="{!view_apt.No_Show_Contacted_Notes__c}" /></span>
+                   <apex:commandButton onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);" value="Save Changes" action="{!update_nocontact}" reRender="modal_holder"  />
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!if(view_apt.Consult_Show_Status__c='Patient Left',true,false)}" >
+                   <span class="apt_line">
+                   <span class="apt_tag" style="width:175px;">Walk Out Reason : </span><apex:inputField value="{!view_apt.Walk_Out_Reason__c}" /></span>
+                   <apex:commandButton onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);" value="Save Changes" action="{!update_woreason}" reRender="modal_holder"  />
+                </apex:outputPanel>
+              </apex:outputPanel>
+              </td></tr></table>
+              <table>
+                <tr><td style="width:75px;font-weight:bold;">Add-Ons :</td><td><apex:outputfield value="{!view_apt.Add_Ons__c}" /></td></tr>
+                <tr><td style="width:75px;font-weight:bold;">Notes :</td>
+                <td><apex:outputField value="{!view_apt.Apt_Notes__c}" style="width:380px;height:20px;"  />
+                </td></tr></table>
+              <apex:outputtext escape="false" value="{!modal_out}" />
+              </apex:outputPanel>
+
+            <apex:outputPanel styleClass="modalPopup_history" rendered="{!if(modal_display && modal_type=='history_view',true,false)}" id="historypop">
+              <apex:variable var="rowclassname" value="hodd" />
+              <table class="history" width="100%">
+                <tr class="control">
+                  <td width="30%">Change By</td>
+                  <td width="30%">Action/Patient</td>
+                  <td>Notes</td></tr>
+                  <apex:repeat value="{!apt_history}" var="ahist">
+                    <tr class="{!rowclassname}">
+                    <apex:variable var="rowclassname" value="{!if(rowclassname=='hodd','heven','hodd')}" />
+                      <td><apex:outputpanel rendered="{!if(block_pec,false,true)}" >   <apex:outputField value="{!ahist.createdbyid}"/></apex:outputpanel><br /><apex:outputfield value="{!ahist.createddate}" /></td>
+                      <td><span style="font-weight:bold;">{!ahist.action__c}</span><br /><apex:outputField value="{!ahist.Lead__c}" rendered="{!if(ahist.Lead__c==null,false,true)}" /><apex:outputField value="{!ahist.Account__c}" rendered="{!if(ahist.Account__c==null,false,true)}" /><apex:outputfield value="{!ahist.Private_Practice_Patient__c}" rendered="{!if(ahist.Private_Practice_Patient__c==null,false,true)}" /></td>
+                      <td><apex:outputtext escape="false" value="{!ahist.Notes__c}" /></td>
+                    </tr>
+                  </apex:repeat>
+               </table>
+            </apex:outputPanel>
+
+              <!--displaying action buttons-->
+            <apex:outputPanel styleClass="modalPopup_action" rendered="{!modal_display}" id="modaction">
+              <p style="padding:2px;">
+                <apex:outputPanel rendered="{!if(modal_type=='apt_view',true,false)}" ><apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);"  status="modal_status" value="View History" action="{!history_view}" rerender="modal_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+                <apex:outputPanel rendered="{!if(modal_type=='history_view',true,false)}" ><apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);"  status="modal_status" value="View Apt Info" action="{!apt_view}" rerender="modal_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+                <apex:outputPanel rendered="{!display_arrived_btn}" ><apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);"  status="modal_status" value="Patient Arrived" action="{!mark_patient_arrived}" rerender="modal_holder,consultview_holder,action_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+                <apex:outputPanel rendered="{!display_ready_btn}" ><apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);"  status="modal_status" value="Patient Ready" action="{!mark_patient_ready}" rerender="modal_holder,consultview_holder,action_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+                <apex:outputPanel rendered="{!display_started_btn}" ><apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);"  status="modal_status" value="Consult Started" action="{!mark_patient_started}" rerender="modal_holder,consultview_holder,action_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+                <apex:outputPanel rendered="{!display_completed_btn}" ><apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);"  status="modal_status" value="Consult Completed" action="{!mark_patient_complete}" rerender="modal_holder,consultview_holder,action_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+                <apex:outputPanel rendered="{!display_left_btn}" ><apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);"  status="modal_status" value="Patient Left" action="{!mark_patient_left}" rerender="modal_holder,consultview_holder,action_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+                <apex:outputPanel rendered="{!display_noshow_btn}" ><apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);"  status="modal_status" value="No Show" action="{!mark_patient_noshow}" rerender="modal_holder,consultview_holder,action_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+                <apex:outputPanel rendered="{!allow_hold}" ><apex:commandButton value="Place Hold" onclick="use_fancy_cursor(this);" oncomplete="default_cursor(this);" action="{!place_hold}" rerender="modal_holder,action_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+                <apex:outputPanel rendered="{!display_reset}" ><apex:commandButton style="color:red;" onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);"  status="modal_status" value="Reset Status" action="{!mark_patient_reset}" rerender="modal_holder,consultview_holder,action_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+                <apex:outputPanel rendered="{!display_check_in_code_btn}" ><apex:commandButton onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);"  status="modal_status" value="Check In Code" action="{!generate_checkin_code}" rerender="modal_holder,consultview_holder,action_holder" /><span class="button_spacer">&nbsp;</span></apex:outputPanel>
+                <apex:actionStatus startStyle="font-weight:bold;color:blue;" stoptext="" id="modal_status">
+                  <apex:facet name="start">Loading...Please Wait</apex:facet>
+                </apex:actionStatus>
+              </p>
+            </apex:outputPanel>
+          </apex:outputPanel>
+        </apex:actionRegion>
+        </apex:outputPanel>
+
+        <script>
+          function refresh_window() {
+            refresh_inprocess();
+            setTimeout("refresh_window()",60000);
+          }
+
+          var previousOnload = window.onload;
+          window.onload = function() {
+            if (previousOnload) {
+              previousOnload();
+            }
+            if (document.getElementsByClassName == undefined) {
+            document.getElementsByClassName = function(className)    {
+                var hasClassName = new RegExp("(?:^|\\s)" + className + "(?:$|\\s)");
+                var allElements = document.getElementsByTagName("*");
+                var results = [];
+
+                var element;
+                for (var i = 0; (element = allElements[i]) != null; i++) {
+                    var elementClass = element.className;
+                    if (elementClass && elementClass.indexOf(className) != -1 && hasClassName.test(elementClass))
+                        results.push(element);
+                }
+
+                return results;
+            }
+            }
+            setTimeout("refresh_window()",60000);
+            setInterval(echo_timers, 1000);
+          }
+
+
+        function echo_timers() {
+          var my_element;
+          var all_elements = document.getElementsByClassName('timer_alert');
+          for(var i = 0; (my_element = all_elements[i]) != null; i++) {
+            var current_time = my_element.innerHTML;
+            var minutes;
+            var seconds;
+            if(current_time.search(':')==-1) {
+              minutes = 0;
+              seconds = current_time;
+            }
+            else {
+              minutes = current_time.substring(0,current_time.search(':'));
+              seconds = current_time.substring((current_time.search(':') + 1));
+              if(seconds.charAt(0)=='0')
+                seconds = seconds.substring(1);
+            }
+            var total_seconds = 0;
+            total_seconds = parseInt(minutes) * 60 + parseInt(seconds) + 1;
+            seconds = total_seconds%60 + "";
+            if(seconds.length<2)
+              seconds = '0' + seconds;
+            if(total_seconds>=60) {
+              minutes = parseInt(total_seconds/60);
+              my_element.innerHTML = minutes + ':' + seconds;
+            }
+            else
+              my_element.innerHTML = '0:' + seconds;
+          }
+
+          all_elements = document.getElementsByClassName('timer');
+          for(i = 0; (my_element = all_elements[i]) != null; i++) {
+            var current_time = my_element.innerHTML;
+            var minutes;
+            var seconds;
+            if(current_time.search(':')==-1) {
+              minutes = 0;
+              seconds = current_time;
+            }
+            else {
+              minutes = current_time.substring(0,current_time.search(':'));
+              seconds = current_time.substring((current_time.search(':') + 1));
+              if(seconds.charAt(0)=='0')
+                seconds = seconds.substring(1);
+            }
+            var total_seconds = 0;
+            total_seconds = parseInt(minutes) * 60 + parseInt(seconds) + 1;
+            seconds = total_seconds%60 + "";
+            if(seconds.length<2)
+              seconds = '0' + seconds;
+            if(total_seconds>=60) {
+              minutes = parseInt(total_seconds/60);
+              if(parseInt(total_seconds/60) >= 15 && parseInt((total_seconds-1)/60)<15)
+                my_element.className = 'timer_alert';
+              my_element.innerHTML = minutes + ':' + seconds;
+            }
+            else
+              my_element.innerHTML = '0:' + seconds;
+          }
+
+        }
+        </script>
+
+
+        <!---------- End Modal Pop-up Holder -------------------------------------->
+    </apex:form>
+</apex:page>

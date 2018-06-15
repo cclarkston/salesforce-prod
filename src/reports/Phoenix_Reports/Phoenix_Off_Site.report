@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>FULL_NAME</field>
+    </columns>
+    <columns>
+        <field>OPPORTUNITY_NAME</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Prostho_Exam_Scheduled_del__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Opportunity.Total_Payments__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Account.Center_Location__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Phoenix,Phoenix Mesa</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Off_Site_Event__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Arizona Golf Resort,Phoenix Renaissance,Phoenician off-site,PHX Glendale Renaissance March &apos;10,PHX Crowne Plaza May &apos;10,PHX Arizona Grand Resort Aug &apos;10,PHX JW Marriott Camelback Inn Sept &apos;10,PHX Sun City January 2011,PHX Phoenician January 2011,Phoenix Fountain Hills February 2011,Phoenix Sun City February 2011,Phoenix Renaissance Glendale April 2011,Phoenix Arizona Golf Resort April 2011,Phoenix Fountain Hills April 2011</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account.Off_Site_Event__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Opportunity.Total_Collected__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Phoenix Off Site Totals</name>
+    <params>
+        <name>open</name>
+        <value>all</value>
+    </params>
+    <params>
+        <name>probability</name>
+        <value>&gt;0</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Opportunity</reportType>
+    <roleHierarchyFilter>PhoenixPEC</roleHierarchyFilter>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CLOSE_DATE</dateColumn>
+        <interval>INTERVAL_PREVCURFY</interval>
+    </timeFrameFilter>
+</Report>

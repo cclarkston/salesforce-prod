@@ -1,0 +1,2 @@
+<apex:page standardController="Talent__c" recordSetVar="a" 
+action="{!URLFOR($Action.Talent__c.List,$ObjectType.Talent__c)}" />

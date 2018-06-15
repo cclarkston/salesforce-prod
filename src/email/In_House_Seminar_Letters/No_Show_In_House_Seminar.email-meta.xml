@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>General letter for no shows at in-house seminars.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>ClearChoice_Letterhead</letterhead>
+    <name>No Show In-House Seminar</name>
+    <style>formalLetter</style>
+    <subject>ClearChoice Dental Implant Center: We&apos;re sorry we missed you at the Seminar!</subject>
+    <textOnly>Hello {!Lead.FirstName},
+We are sorry you were unable to attend our seminar at our Center on {!Lead.DateTime_Consult_Scheduled__c}. We understand that unforeseen circumstances can interrupt the flow of your schedule.
+
+We would like to take this opportunity to schedule your FREE consultation and 3D CAT scan. We will set aside an hour of time for you to speak with our doctors and team. 
+
+Please contact our office at 888-654-4675 or respond to this email to schedule your free consultation. If you are no longer interested, please contact us so we may update our records. 
+
+Looking forward to seeing you!
+{!Lead.OwnerFullName}
+Dental Implant Consultant</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

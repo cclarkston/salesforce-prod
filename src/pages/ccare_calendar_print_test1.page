@@ -1,0 +1,434 @@
+<apex:page showheader="false" sidebar="false" standardStylesheets="false" controller="dp_clinical_calendar" docType="html-5.0">
+<head>
+
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/forms.css')}"/> 
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-hrxfont.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/fonts.css')}"/>
+
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc.css')}"/>   
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/dp_css_main.css')}"/>
+  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-buttons.css')}"/>  
+
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-clinical-calendar.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-clinical.css')}"/> 
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-patient.css')}"/> 
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-pot.css')}"/> 
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-modal.css')}"/> 
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/style.css')}"/>   
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-calendar-blocks.css')}"/>        
+
+<style type="text/css" media="print">
+  * {transition: none !important}
+
+  .no_print_section {
+    display:none;
+  }
+  
+  div.pbreak {page-break-after: always;padding-bottom:1em;}
+
+  .no-print {
+    display:none !important;
+  }
+  
+  .header_logo img {
+    width:50% !important;
+  }
+  
+  .print-only {
+    display:flex !important;
+  }
+  
+  .cc-cc-datepicker {
+    font-size:10px !important;    
+  }
+  
+  .cc-cc-datepicker::-webkit-inner-spin-button,
+  .cc-cc-datepicker::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+  }
+  
+  .cc-content-wrapper {
+    margin-top:0px;
+  }
+  
+  .cc-clinical-calendar-schedule-cell-time-container {
+    max-height:11px !important;
+    min-height:11px !important;
+    font-size:7px !important;
+    min-width: 80px;
+  }
+  
+  .cc-clinical-calendar-schedule-cell-time-container-generic {
+    max-height:11px !important;
+    min-height:11px !important;
+    font-size:7px !important;
+    margin-top:0 !important;
+    margin-bottom:0 !important;
+  }
+  
+  .cc-clinical-calendar-schedule-cell-time-container-generic i {
+    font-size:7px !important;
+  }
+  
+  .pad-main-wrapper {
+    margin-top:0;
+  }
+</style>
+ 
+<style type="text/css">
+  .print-only {
+    display:none;
+  }
+
+ html {
+	min-height: 100%;
+	min-width: 100%;
+	-ms-text-size-adjust: none;
+ }
+ 
+ .filter_span {
+    padding-left: 20px;
+    font-style: italic;
+ }
+
+.rfilter_head {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    padding-top: 1em;
+    border-bottom: 2px solid black;
+    padding-bottom: 1em;
+}
+
+.filter_item {
+  padding-right:40px;
+}
+
+.rf-cc-datepicker {
+  min-height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 22px;
+  border: 2px solid #ccc;
+  padding-left: 5px;
+  margin-left: 10px;
+  padding-top: 1px;
+  min-width:200px;
+}
+
+.rf-cal-dateout {
+  display:flex;
+  align-items: center;
+  padding-left: 2px;
+  padding-right: 2px; 
+  height:100%; 
+  width:100%;
+}
+
+.rf_modal_cal_container {
+    position: absolute;
+    top:45px;
+    margin-left: -1px;
+    z-index: 7300;
+    background: white;
+    padding: 8px;
+    border: 1px solid #ccc;
+    min-width:190px;
+  }
+  
+  .calendar {
+    font-size:8pt;
+    width:100%;
+  }
+  
+  .calendar td {
+    padding-left:6px;
+    padding-right:6px;
+    padding-top:2px;
+    padding-bottom:2px;
+    text-align:center;
+  }
+  
+  .calendar td.selected {
+    background: rgb(175, 211, 221);
+    border:1px solid #999999;
+  }
+  
+  .calendar .cheader {
+    background:#eee;
+    border-bottom:1px solid #ccc;
+  }
+
+  .mcal_nav_box {
+    border: 1px solid #cccccc;
+    background: #eee;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+  }
+  
+  .mcal_nav_box i {
+    font-size: 5pt;
+    color: #555555;
+  }
+  
+  td.unselected:hover {
+    background: #eee;
+    box-shadow: 0px 1px 1px #aaa;
+  }
+  
+  .cc-clinical-calendar-schedule-cell-time-container { min-width: 80px; }
+  
+  .modal_cal_container {
+    position: relative;
+    left:0px;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    top: 5px;
+    z-index: 7300;
+    background: white;
+    padding: 8px;
+    border: 1px solid #ccc;
+    min-width:190px;
+    line-height:15px;
+    box-shadow: 2px 2px 5px #9fcff3;
+  }
+  
+  .calendar_name {
+    display: flex;
+    flex-direction: row;
+    height: 18px;
+    margin-bottom: 5px;
+  }
+  
+  .month_name {
+    font-size:10pt;
+    display:flex;
+    flex-grow:1;
+  }
+  
+  .year_name {
+    font-size:10pt;
+  }
+  
+  .cc-cc-datepicker {
+    display:block;
+    line-height: 25px;
+  }
+  
+  .room_filter {
+    padding-left: 20px;
+  }
+  
+  .cc-clinical-calendar-select {
+    border:2px solid #bbb;
+    font-size:12pt;
+    height:25px;
+  }
+</style>
+
+</head>
+<body>
+<apex:form >
+  <apex:actionFunction name="rdate_change" status="ajaxstatus" rerender="report_holder" />
+    
+  <!-- Start -- custom cal nav  -->
+  <apex:actionFunction name="to_today" action="{!calendar_select_today}" rerender="report_filters_holder,report_holder" status="ajaxstatus" />
+  <apex:actionFunction name="p_calendar_day" action="{!prev_calendar_day}" rerender="report_filters_holder,report_holder" status="ajaxstatus" />
+  <apex:actionFunction name="n_calendar_day" action="{!next_calendar_day}" rerender="report_filters_holder,report_holder" status="ajaxstatus" />
+  <apex:actionFunction name="calendar_drop" action="{!display_calendar_navigation}" rerender="report_filters_holder,report_holder" status="ajaxstatus" />
+  <apex:actionFunction name="close_nav_calendar" action="{!close_calendar_navigation}" rerender="report_filters_holder,report_holder" status="ajaxstatus" />
+
+  <apex:actionFunction name="n_calendar_month" action="{!next_calendar_month}" rerender="report_filters_holder,report_holder" status="ajaxstatus" />
+  <apex:actionFunction name="p_calendar_month" action="{!prev_calendar_month}" rerender="report_filters_holder,report_holder" status="ajaxstatus" />
+  <apex:actionFunction name="change_cdate" action="{!select_calendar_day}" rerender="report_filters_holder,report_holder" status="ajaxstatus" >
+    <apex:param name="cyear" value="" />
+    <apex:param name="cmonth" value="" />
+    <apex:param name="cday" value="" />
+  </apex:actionFunction>
+
+  <apex:actionFunction name="modal_cal_month_view" action="{!display_calendar_month_navigation}" rerender="modal_cal_holder" status="ajaxstatus" />
+  <apex:actionFunction name="modal_nav_change_month" action="{!select_calendar_month}" rerender="modal_cal_holder" status="ajaxstatus" >
+    <apex:param name="mnum" value="" />
+  </apex:actionFunction>
+
+  <apex:actionFunction name="modal_cal_year_view" action="{!display_calendar_year_navigation}" rerender="modal_cal_holder" status="ajaxstatus" />
+  <apex:actionFunction name="modal_nav_change_year" action="{!select_calendar_year}" rerender="modal_cal_holder" status="ajaxstatus" >
+    <apex:param name="myear" value="" />
+  </apex:actionFunction> 
+  <!-- End -- custom cal nav  -->
+
+  <apex:outputpanel layout="block" id="report_filters_holder" styleclass="no_print_section">
+    <apex:outputpanel styleclass="rfilter_head">
+      Calendar Date : 
+      <apex:outputpanel layout="block" styleClass="rf-cc-datepicker" >        
+        <div class="rf-cal-dateout">
+          <div style="flex-grow:1;"><apex:outputtext value="{0,date,M/dd/yyyy}" ><apex:param value="{!current_date}" /></apex:outputtext></div>
+          <div onclick="to_today();">
+            <i class="hrxicon-today " style="font-size:14px; padding-right:5px;"></i>
+          </div>
+          <div onclick="p_calendar_day();">
+            <i class="ccf-left-arrow" style="font-size: 14px;  padding-right: 5px;" ></i>
+          </div>
+          <div onclick="n_calendar_day();">
+            <i class="ccf-right-arrow" style="font-size: 14px;  padding-right: 5px;" ></i>
+          </div>
+          <div onclick="calendar_drop();">
+            <i class="ccf-calendar" style="font-size: 14px;  padding-right: 5px;" ></i>
+          </div>
+        </div>
+        <apex:outputpanel layout="block" id="modal_cal_holder" rendered="{!display_calendar_view}" styleclass="rf_modal_cal_container">
+               <div class="calendar_name">
+                 <div class="month_name" >
+                   <div class="mcal_nav_box" style="margin-right:5px;" onclick="p_calendar_month();" >
+                     <i class="ccf-left-arrow"  ></i>
+                   </div>                   
+                   <span onclick="modal_cal_month_view();" >{!cmonth.monthname}</span>
+                   <div class="mcal_nav_box" style="margin-left:5px;"  onclick="n_calendar_month();" >
+                     <i class="ccf-right-arrow"  ></i>
+                   </div>
+                 </div>            
+                 <div class="year_name" onclick="modal_cal_year_view();">{!cmonth.yearnum}</div>                 
+                 <div class="mcal_nav_box" style="margin-left:5px;">
+                   <i class="ccf-cancel" onclick="close_nav_calendar();" ></i>
+                 </div>
+               </div>
+               <apex:outputPanel layout="block" styleclass="cal_table_holder" rendered="{!if(modal_calendar_view=='calendar','true','false')}">
+                 <table class="calendar">
+                   <tr class="cheader">
+                     <td>Sun</td>
+                     <td>Mon</td>
+                     <td>Tue</td>
+                     <td>Wed</td>
+                     <td>Thu</td>
+                     <td>Fri</td>
+                     <td>Sat</td>
+                   </tr>
+                   <apex:repeat value="{!cmonth.weeks}" var="week">
+                     <tr>
+                       <apex:repeat value="{!week.days}" var="day">
+                         <td class="{!day.css_style}" onclick="{!if(day.display_date,'change_cdate(' + text(cmonth.YearNum) + ',' + text(cmonth.MonthNum) + ',' + text(day.date_num) + ');','return false;')}"><apex:outputText rendered="{!day.display_date}" escape="false;" value="{!day.date_num}" /></td>
+                       </apex:repeat>
+                     </tr>
+                   </apex:repeat>
+                 </table>
+               </apex:outputPanel>
+               <apex:outputPanel layout="block" styleclass="cal_table_holder" rendered="{!if(modal_calendar_view=='month','true','false')}">
+                 <table class="calendar"  style="font-size:10pt;">
+                   <apex:variable var="mnum" value="1" />
+                   <apex:repeat value="{!month_list}" var="mrow">
+                     <tr class="mname">
+                       <apex:repeat value="{!mrow}" var="mname"> 
+                         <td class="{!if(mname==cmonth.ShortMonthName,'selected','unselected')}"><span onclick="modal_nav_change_month({!mnum});">{!mname}</span></td>
+                         <apex:variable var="mnum" value="{!(value(mnum)+1)}" />
+                       </apex:repeat>
+                    </tr>
+                  </apex:repeat>
+                </table>
+               </apex:outputPanel>
+               <apex:outputPanel layout="block" styleclass="cal_table_holder" rendered="{!if(modal_calendar_view=='year','true','false')}">
+                 <table class="calendar" style="font-size:10pt;">
+                   <apex:repeat value="{!year_list}" var="yrow">
+                     <tr class="year">
+                       <apex:repeat value="{!yrow}" var="yvalue">
+                         <td class="{!if(yvalue==cmonth.yearnum,'selected','unselected')}"><span onclick="modal_nav_change_year({!yvalue});">{!yvalue}</span></td>
+                       </apex:repeat>
+                     </tr>
+                   </apex:repeat>
+                 </table>                 
+               </apex:outputPanel>
+             </apex:outputpanel>
+           </apex:outputpanel>
+          
+      <apex:outputPanel layout="block" styleclass="room_filter">
+        <apex:selectList value="{!room_type}" styleClass="cc-clinical-calendar-select" multiselect="false" size="1" onchange="rdate_change();" style="color:black;" >
+          <apex:selectOptions value="{!room_type_list}" />
+        </apex:selectList> 
+      </apex:outputPanel>  
+      
+      <span class="filter_span">
+        <apex:inputcheckbox value="{!display_open_blocks}" onchange="rdate_change();"/> Display Open Blocks
+      </span>
+      <span class="filter_span">
+        <apex:inputcheckbox value="{!display_room_restrictions}" onchange="rdate_change();" /> Display Room Restrictions
+      </span>
+      
+    </apex:outputpanel>
+  </apex:outputpanel>  
+  
+  <apex:outputpanel layout="block" id="report_holder">
+    <apex:actionStatus id="ajaxstatus">
+      <apex:facet name="start">
+        <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 10110; background-color: #f2f2f2;">
+          &nbsp;
+        </div>
+        <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 10111; margin: 20% 50%">
+          <!--<apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,'Images/5Wits.gif')}"/>-->
+          <!--<img src="http://upload.wikimedia.org/wikipedia/commons/e/ed/Cursor_Windows_Vista.gif" />-->
+          <img src="{!URLFOR($Resource.Dental_Practice_Resources,'Images/Circle-out.gif')}" />
+          <!--<img src="{!URLFOR($Resource.Dental_Practice_Resources,'Images/5Wits.gif')}" />-->
+        </div>
+      </apex:facet>
+    </apex:actionStatus>
+    <apex:messages /> 
+    <!-- {!report_sdate} - {!report_edate}<br /><br /> -->
+    <apex:outputpanel layout="block" styleclass="output_page">
+           
+      <apex:outputpanel layout="block" styleclass="cc-cc-notificationContent" style="display:flex;flex-direction:row;align-items:center;" >
+        <div style="display:flex;font-size:18pt;font-weight:400;width:400px;padding-left:10px;align-items:center;">
+          {!selected_day_of_week} &nbsp; <apex:outputText value="{0,date,M'/'dd'/'yyyy}">
+            <apex:param value="{!current_date}" />
+          </apex:outputText> &nbsp; 
+          <apex:outputpanel layout="block" rendered="{!if(current_weather!='',true,false)}" styleclass="weather_tooltip" style="display:flex;align-items:center;"> 
+            <apex:image value="{!URLFOR($Resource.WeatherIcons, current_weather.Icon__c + '.gif')}" style="height:30px;width:30px;margin-left:10px;" />
+             &nbsp;
+            <apex:outputText value="{0,number,##0}" style="color:red;margin-left:5px;"><apex:param value="{!current_weather.Temp_High__c}" /></apex:outputtext>&deg;<apex:outputText value="{0,number,##0}" style="color:blue;margin-left:5px;"><apex:param value="{!current_weather.Temp_Low__c}" /></apex:outputtext>&deg;          
+          </apex:outputPanel>                
+        </div>
+        <div class="cc-cc-notificationHeader" style="color:#b13968;font-weight:bold;padding-top:10px;flex-direction:column; align-items:flex-start;"> 
+          <apex:repeat var="cnote" value="{!calendar_notes}" >          
+            <apex:outputpanel layout="block" style="display:flex;" rendered="{!if(cnote.id!=current_edit_id,true,false)}">
+              <apex:outputpanel >{!cnote.Calendar_Note__c}</apex:outputpanel> 
+            </apex:outputpanel>          
+          </apex:repeat>           
+        </div>
+      </apex:outputpanel>  
+    
+    
+      <apex:outputpanel layout="block" styleclass="cc-clinical-calendar-schedule-container" style="margin-top:5px;">
+      <apex:repeat var="col" value="{!day_calendar_info}">
+        <apex:outputpanel layout="block" styleclass="cc-clinical-calendar-schedule-cell" style="{!if(col.header_name=='Time Label','',column_override_css)}" >
+          <apex:outputpanel layout="block" styleclass="cc-clinical-calendar-schedule-cell-header">
+            <apex:outputText value="{!col.header_name}" rendered="{!if(col.header_name=='Time Label',false,true)}" />
+          </apex:outputpanel>
+          <apex:outputpanel layout="block" styleclass="cc-clinical-calendar-schedule-date-draw-container">
+            <apex:repeat var="cell" value="{!col.all_cells}">
+            <!-- onclick="{!if(manual_search,'override_manual_modal(\'cell.apt.id\',cell.current_time);','')}" -->
+              <apex:outputpanel layout="block" styleclass="{!cell.cell_css} {!if(col.header_name=='Time Label',' pad-right','')} {!if(cell.display_picture,' cc-clinical-calendar-schedule-cell-time-container-first', '')}" style="{!cell.top_css}" >
+                <apex:outputpanel styleclass="{!if(col.header_name=='Time Label','','cc-cc-calendar-cell-content')}" layout="block" onclick="{!cell.onclick_event}" onmouseover="{!cell.onmouseover_event}" onmouseout="{!cell.onmouseout_event}" style="width:100%;{!cell.cell_style}">              
+                  <apex:outputpanel rendered="{!cell.image_display}"><i class="{!cell.image_name}"></i>&nbsp;</apex:outputpanel>                  
+                  <apex:outputtext value="{!cell.cell_text}" escape="false" />&nbsp;                                                                                                                       
+                                    
+                </apex:outputpanel>
+                <apex:outputpanel layout="block" styleclass="cc-cal-minuteIndicator-container" style="top: 2px;" rendered="{!cell.current_time}">
+                 <div class="cc-cal-minuteIndicator-line cc-bgColor-brightPurple" style="z-index:-1;"></div>
+                  <div class="cc-cal-minuteIndicator-triangle" style="z-index:2;">
+                   <i class="cc-cal-minuteIndicator cc-color-font-brightPurple ccf-right-arrow" style="z-index:2;" ></i>
+                  </div>
+                </apex:outputpanel>
+              </apex:outputpanel>
+            </apex:repeat>
+          </apex:outputpanel>
+        </apex:outputpanel>
+      </apex:repeat>
+    </apex:outputPanel> <!--end calendar schedule container - Week view-->
+    
+    </apex:outputpanel>
+  </apex:outputpanel>
+</apex:form>
+</body>
+</apex:page>

@@ -1,0 +1,42 @@
+2014-11-07 20:57:45.270 INFO [inContactControlledSearch.callCustomSearch] - contactId:5446178631, phoneNumber :6108664592, scriptVariable :https%3A%2F%2Fhome-c4.incontact.com%2Fincontact%2FAgent%2FScreenPopPrintVars.aspx%3Fsfdc0%3DLead.Id%253e00Q4000000jhdf8EAA%26ani%3D6108664592%26dnis%3D4086000996%26_c%3D5446178631, inboundObject :{"Account":[{"displayName":"Consult Name","apiName":"Name"}],"Contact":[{"displayName":"Name","apiName":"Name"}],"Lead":[{"displayName":"Name","apiName":"Name"}]}, popSetting :{"screenPopsOpenWithin":"ExistingWindow","NoMatch":{"screenPopType":"PopToEntity","screenPopData":"Lead"},"SingleMatch":{"screenPopType":"PopToEntity"},"MultipleMatches":{"screenPopType":"DoNotPop"}}
+2014-11-07 20:57:45.272 INFO [inContactControlledSearch.getQuery] - scriptVar:https://home-c4.incontact.com/incontact/Agent/ScreenPopPrintVars.aspx?sfdc0=Lead.Id%3e00Q4000000jhdf8EAA&ani=6108664592&dnis=4086000996&_c=5446178631
+2014-11-07 20:57:45.272 INFO [inContactControlledSearch.getQuery] - query:sfdc0=Lead.Id>00Q4000000jhdf8EAA&ani=6108664592&dnis=4086000996&_c=5446178631
+2014-11-07 20:57:45.274 INFO [inContactControlledSearch.parseParameters] - Key:sfdc0 , Value: Lead.Id>00Q4000000jhdf8EAA
+2014-11-07 20:57:45.274 INFO [inContactControlledSearch.parseParameters] - Key:ani , Value: 6108664592
+2014-11-07 20:57:45.274 INFO [inContactControlledSearch.parseParameters] - Key:dnis , Value: 4086000996
+2014-11-07 20:57:45.274 INFO [inContactControlledSearch.parseParameters] - Key:_c , Value: 5446178631
+2014-11-07 20:57:45.274 INFO [inContactControlledSearch.callCustomSearch] - Hascontrolledsearch : true
+2014-11-07 20:57:45.276 INFO [inContactControlledSearch.runCustomUrlCommand] - Parsing the script variable:dnis value:4086000996
+2014-11-07 20:57:45.276 INFO [inContactControlledSearch.runCustomUrlCommand] - Parsing the script variable:ani value:6108664592
+2014-11-07 20:57:45.277 INFO [inContactControlledSearch.runCustomUrlCommand] - Parsing the script variable:sfdc0 value:Lead.Id>00Q4000000jhdf8EAA
+2014-11-07 20:57:45.277 INFO [inContactControlledSearch.runCustomUrlCommand] - Split Size :3
+2014-11-07 20:57:45.277 INFO [inContactControlledSearch.runCustomUrlCommand] - Parsing the script variable:_c value:5446178631
+2014-11-07 20:57:45.277 INFO [inContactControlledSearch.runCustomUrlCommand] - Sfdc variables : 1
+2014-11-07 20:57:45.277 INFO [inContactControlledSearch.getNameField] - ObjectName:lead, nameField:Name
+2014-11-07 20:57:45.277 INFO [inContactControlledSearch.runCustomUrlCommand] - SfdcQuery variables : 0, isWorkItem Search :false, Count :1
+2014-11-07 20:57:45.277 INFO [inContactControlledSearch.runCustomUrlCommand] - SfdcQuery variables : 0
+2014-11-07 20:57:45.277 INFO [inContactControlledSearch.runCustomUrlCommand] - Key Set Size : 1
+2014-11-07 20:57:45.281 INFO [inContactControlledSearch.executeQuery] - Executing query:select Name,Id from lead where Id = '00Q4000000jhdf8EAA'
+2014-11-07 20:57:45.287 INFO [inContactControlledSearch.getUrl] - count:1 , payload: 00Q4000000jhdf8EAA, query:sfdc0=Lead.Id>00Q4000000jhdf8EAA&ani=6108664592&dnis=4086000996&_c=5446178631
+2014-11-07 20:57:45.288 INFO [inContactControlledSearch.callCustomSearch] - Searchresult {"00Q4000000jhdf8EAA":{"object":"Lead","Name":"William Santillo"}}, screenPopUrl :00Q4000000jhdf8EAA, isQueryError :false error :
+2014-11-07 21:04:28.575 INFO [inContactControlledSearch.callCustomSearch] - contactId:5446186344, phoneNumber :4105006510, scriptVariable :https%3A%2F%2Fhome-c4.incontact.com%2Fincontact%2FAgent%2FScreenPopPrintVars.aspx%3Fsfdc0%3DLead.Id%253e00Q4000000kazj0EAA%26ani%3D4105006510%26dnis%3D8884754034%26_c%3D5446186344, inboundObject :{"Account":[{"displayName":"Consult Name","apiName":"Name"}],"Contact":[{"displayName":"Name","apiName":"Name"}],"Lead":[{"displayName":"Name","apiName":"Name"}]}, popSetting :{"screenPopsOpenWithin":"ExistingWindow","MultipleMatches":{"screenPopType":"DoNotPop"},"SingleMatch":{"screenPopType":"PopToEntity"},"NoMatch":{"screenPopType":"PopToEntity","screenPopData":"Lead"}}
+2014-11-07 21:04:28.576 INFO [inContactControlledSearch.getQuery] - scriptVar:https://home-c4.incontact.com/incontact/Agent/ScreenPopPrintVars.aspx?sfdc0=Lead.Id%3e00Q4000000kazj0EAA&ani=4105006510&dnis=8884754034&_c=5446186344
+2014-11-07 21:04:28.576 INFO [inContactControlledSearch.getQuery] - query:sfdc0=Lead.Id>00Q4000000kazj0EAA&ani=4105006510&dnis=8884754034&_c=5446186344
+2014-11-07 21:04:28.579 INFO [inContactControlledSearch.parseParameters] - Key:sfdc0 , Value: Lead.Id>00Q4000000kazj0EAA
+2014-11-07 21:04:28.579 INFO [inContactControlledSearch.parseParameters] - Key:ani , Value: 4105006510
+2014-11-07 21:04:28.579 INFO [inContactControlledSearch.parseParameters] - Key:dnis , Value: 8884754034
+2014-11-07 21:04:28.579 INFO [inContactControlledSearch.parseParameters] - Key:_c , Value: 5446186344
+2014-11-07 21:04:28.579 INFO [inContactControlledSearch.callCustomSearch] - Hascontrolledsearch : true
+2014-11-07 21:04:28.581 INFO [inContactControlledSearch.runCustomUrlCommand] - Parsing the script variable:dnis value:8884754034
+2014-11-07 21:04:28.581 INFO [inContactControlledSearch.runCustomUrlCommand] - Parsing the script variable:ani value:4105006510
+2014-11-07 21:04:28.582 INFO [inContactControlledSearch.runCustomUrlCommand] - Parsing the script variable:sfdc0 value:Lead.Id>00Q4000000kazj0EAA
+2014-11-07 21:04:28.582 INFO [inContactControlledSearch.runCustomUrlCommand] - Split Size :3
+2014-11-07 21:04:28.582 INFO [inContactControlledSearch.runCustomUrlCommand] - Parsing the script variable:_c value:5446186344
+2014-11-07 21:04:28.582 INFO [inContactControlledSearch.runCustomUrlCommand] - Sfdc variables : 1
+2014-11-07 21:04:28.582 INFO [inContactControlledSearch.getNameField] - ObjectName:lead, nameField:Name
+2014-11-07 21:04:28.582 INFO [inContactControlledSearch.runCustomUrlCommand] - SfdcQuery variables : 0, isWorkItem Search :false, Count :1
+2014-11-07 21:04:28.582 INFO [inContactControlledSearch.runCustomUrlCommand] - SfdcQuery variables : 0
+2014-11-07 21:04:28.582 INFO [inContactControlledSearch.runCustomUrlCommand] - Key Set Size : 1
+2014-11-07 21:04:28.587 INFO [inContactControlledSearch.executeQuery] - Executing query:select Name,Id from lead where Id = '00Q4000000kazj0EAA'
+2014-11-07 21:04:28.595 INFO [inContactControlledSearch.getUrl] - count:1 , payload: 00Q4000000kazj0EAA, query:sfdc0=Lead.Id>00Q4000000kazj0EAA&ani=4105006510&dnis=8884754034&_c=5446186344
+2014-11-07 21:04:28.597 INFO [inContactControlledSearch.callCustomSearch] - Searchresult {"00Q4000000kazj0EAA":{"object":"Lead","Name":"Sandra Langdon"}}, screenPopUrl :00Q4000000kazj0EAA, isQueryError :false error :

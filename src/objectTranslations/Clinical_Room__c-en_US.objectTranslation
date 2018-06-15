@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Clinical Room</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Clinical Rooms</value>
+    </caseValues>
+    <fields>
+        <label><!-- Center Information --></label>
+        <name>Center_Information__c</name>
+        <relationshipLabel><!-- Clinical Rooms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Cut Off Date --></label>
+        <name>Cut_Off_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Room Type --></label>
+        <name>Room_Type__c</name>
+        <picklistValues>
+            <masterLabel>Hybrid</masterLabel>
+            <translation><!-- Hybrid --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hygiene</masterLabel>
+            <translation><!-- Hygiene --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prosth</masterLabel>
+            <translation><!-- Prosth --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Recovery</masterLabel>
+            <translation><!-- Recovery --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Surgery</masterLabel>
+            <translation><!-- Surgery --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sort Order --></label>
+        <name>Sort_Order__c</name>
+    </fields>
+    <fields>
+        <label><!-- isactive --></label>
+        <name>isactive__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

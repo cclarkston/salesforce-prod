@@ -1,0 +1,457 @@
+<apex:page controller="ctrl_pec_ranking_display" sidebar="false"  >
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}"  />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+<style>
+  p.navbar {
+    border-top:1px solid black;
+    border-bottom:1px solid black;
+    font-weight:bold;
+    font-size:14pt;
+    padding-top:1px;
+    padding-bottom:1px;
+  }
+  
+  span.selected-gradient {
+    display:inline-block;
+    height:25px;
+    padding-top:3px;
+    padding-left:50px;
+    padding-right:50px;    
+    background: #4588b2; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzQ1ODhiMiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjM0JSIgc3RvcC1jb2xvcj0iI2JiZTlmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjY2JSIgc3RvcC1jb2xvcj0iI2JiZTlmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0YThhYjIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #4588b2 0%, #bbe9ff 34%, #bbe9ff 66%, #4a8ab2 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4588b2), color-stop(34%,#bbe9ff), color-stop(66%,#bbe9ff), color-stop(100%,#4a8ab2)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #4588b2 0%,#bbe9ff 34%,#bbe9ff 66%,#4a8ab2 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #4588b2 0%,#bbe9ff 34%,#bbe9ff 66%,#4a8ab2 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #4588b2 0%,#bbe9ff 34%,#bbe9ff 66%,#4a8ab2 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #4588b2 0%,#bbe9ff 34%,#bbe9ff 66%,#4a8ab2 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4588b2', endColorstr='#4a8ab2',GradientType=0 ); /* IE6-8 */
+  }
+  
+  span.non-gradient {
+    display:inline-block;
+    height:25px;
+    padding-top:3px;
+            vertical-align:center;
+    padding-left:50px;
+    padding-right:50px;
+    background: #408080; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzQwODA4MCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjM0JSIgc3RvcC1jb2xvcj0iI2M5ZTRlNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjY2JSIgc3RvcC1jb2xvcj0iI2M5ZTRlNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0MDgwODAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #408080 0%, #c9e4e4 34%, #c9e4e4 66%, #408080 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#408080), color-stop(34%,#c9e4e4), color-stop(66%,#c9e4e4), color-stop(100%,#408080)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #408080 0%,#c9e4e4 34%,#c9e4e4 66%,#408080 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #408080 0%,#c9e4e4 34%,#c9e4e4 66%,#408080 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #408080 0%,#c9e4e4 34%,#c9e4e4 66%,#408080 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #408080 0%,#c9e4e4 34%,#c9e4e4 66%,#408080 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#408080', endColorstr='#408080',GradientType=0 ); /* IE6-8 */
+  }
+
+  span.report_header {
+    font-weight:bold;
+    font-size:18pt;
+    display:block;
+    font-family:georgia;
+    padding-bottom:.5em;
+    color:red;
+  }
+  
+  table.pec_ranking {
+    width:95%;
+  }
+  
+  table.pec_ranking tr.header {
+    font-weight:bold;
+    font-size:11pt;
+    text-align:center;    
+  }
+  
+  table.pec_ranking tr.header td {
+    border-bottom:1px solid black;
+    empty-cells:hide;    
+  }
+  
+  table.pec_ranking tr.row_odd td {
+    text-align:left;  
+    line-height:20px;   
+    font-size:10pt;
+    border-bottom:1px dashed #5789AE; 
+    empty-cells:hide;    
+    padding-left:10px;  
+  }
+  
+  table.pec_ranking tr.row_even {
+    background-color:#CECE9D;
+  }
+   
+  table.pec_ranking tr.row_even td {
+    text-align:left;  
+    line-height:20px;
+    font-size:10pt;  
+    border-bottom:1px dashed #5789AE; 
+    empty-cells:hide;       
+    padding-left:10px;  
+  }
+  
+  table.pec_ranking tr.row_self {
+    background-color:#C9E4E4;  
+    font-weight:bold;
+    font-size:12pt; 
+  }
+
+  table.pec_ranking tr.row_self td {
+    color:black;
+    border-top:1px solid #008080;
+    border-bottom:1px solid #008080; 
+    empty-cells:hide;         
+  } 
+
+  table.pec_ranking tr.row_self td.right {
+    text-align:right;
+    padding-right:5px;    
+    empty-cells:hide;      
+  }  
+
+</style>
+
+
+
+<!--[if gte IE 9]>
+  <style type="text/css">
+    .non-gradient {
+       filter: none;
+    }
+    
+    .selected-gradient {
+       filter: none;
+    }
+  </style>
+<![endif]-->
+
+<apex:form >
+<apex:actionFunction oncomplete="default_cursor(this);" action="{!select_overall_tab}"  name="overall_tab" reRender="main_holder" />
+<apex:actionFunction oncomplete="default_cursor(this);" action="{!select_close_rate_tab}"  name="close_rate_tab" reRender="main_holder" />
+<apex:actionFunction oncomplete="default_cursor(this);" action="{!select_callback_tab}"  name="callback_tab" reRender="main_holder" />
+<apex:actionFunction oncomplete="default_cursor(this);" action="{!select_rainmaker_tab}"  name="rainmaker_tab" reRender="main_holder" />
+<apex:actionFunction oncomplete="default_cursor(this);" action="{!select_learning_tab}"  name="learning_tab" reRender="main_holder" />
+<apex:actionFunction oncomplete="default_cursor(this);" action="{!select_finance_tab}"  name="finance_tab" reRender="main_holder" />
+
+<apex:actionfunction name="sort_by_overall" action="{!overall_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_pec" action="{!pec_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_region" action="{!region_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_tcr_rank" action="{!tcr_rank_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_callbacks_rank" action="{!callback_rank_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_rainmaker_rank" action="{!rainmaker_rank_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_learning_rank" action="{!learning_rank_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_tcr_region_rank" action="{!tcr_region_rank_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_tcr" action="{!tcr_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_callbacks" action="{!callbacks_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_rainmaker" action="{!rainmaker_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_learning" action="{!learning_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_callback_region_rank" action="{!callback_region_rank_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_rainmaker_region_rank" action="{!rainmaker_region_rank_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_learning_region_rank" action="{!learning_region_rank_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_finance_region_rank" action="{!finance_region_rank_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_finance_rank" action="{!finance_rank_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_finance" action="{!fneeds_sort}" rerender="main_holder" />
+
+<apex:outputpanel id="main_holder">
+<apex:messages style="color:red;font-weight:bold;" /><br />
+
+<span class="report_header">PEC Ranking - {!report_header}</span>
+
+<p class="navbar">
+  <apex:outputpanel styleClass="{!if(tab_display=='overall','selected-gradient','non-gradient')}" onmouseover="tooltip.show('Click to view the Overall PEC Ranking', 270);" onmouseout="tooltip.hide();" onclick="tooltip.hide();use_fancy_cursor(this);overall_tab();">Overall</apex:outputpanel>
+  &nbsp;<apex:outputpanel styleClass="{!if(tab_display=='close_rate','selected-gradient','non-gradient')}" onmouseover="tooltip.show('Click to view the True Close Rate PEC Ranking', 270);" onmouseout="tooltip.hide();" onclick="tooltip.hide();use_fancy_cursor(this);close_rate_tab();">True Close Rate</apex:outputpanel>
+  &nbsp;<apex:outputpanel styleClass="{!if(tab_display=='callback','selected-gradient','non-gradient')}" onmouseover="tooltip.show('Click to view the Callback PEC Ranking', 270);" onmouseout="tooltip.hide();" onclick="tooltip.hide();use_fancy_cursor(this);callback_tab();">Callbacks</apex:outputpanel>
+  &nbsp;<apex:outputpanel styleClass="{!if(tab_display=='rainmaker','selected-gradient','non-gradient')}" onmouseover="tooltip.show('Click to view the Rainmaker Score PEC Ranking', 270);" onmouseout="tooltip.hide();" onclick="tooltip.hide();use_fancy_cursor(this);rainmaker_tab();">Rainmaker Score</apex:outputpanel>
+  &nbsp;<apex:outputpanel styleClass="{!if(tab_display=='learning','selected-gradient','non-gradient')}" onmouseover="tooltip.show('Click to view the Learning Activity PEC Ranking', 270);" onmouseout="tooltip.hide();" onclick="tooltip.hide();use_fancy_cursor(this);learning_tab();">Learning Activites</apex:outputpanel>
+  &nbsp;<apex:outputpanel styleClass="{!if(tab_display=='finance','selected-gradient','non-gradient')}" onmouseover="tooltip.show('Click to view the Financial Needs PEC Ranking', 270);" onmouseout="tooltip.hide();" onclick="tooltip.hide();use_fancy_cursor(this);finance_tab();">Financial Needs</apex:outputpanel>
+</p><br />
+
+<span style="display:block;padding-bottom:1em;padding-left:10px;font-size:12pt;">
+  <span style="font-weight:bold;display:inline-block;width:125px;">Sales Region :</span>
+      <apex:selectList value="{!region_filter}" multiselect="false" size="1" onchange="sort_by_overall();">
+        <apex:selectOptions value="{!Regionoptions}"></apex:selectoptions>
+      </apex:selectList> 
+  </span>
+
+<!------------------------------ OVERALL DETAILS ------------------------------------------------------->
+<apex:outputpanel rendered="{!if(tab_display=='overall',true,false)}">
+<table class="pec_ranking">
+<tr class="header">
+  <td width="10%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by National Overall Rank</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_overall();">Overall</span></td>
+  <td width="30%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by PEC Name</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_pec();">PEC</span></td>
+  <td width="15%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Sales Region</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_region();">Region</span></td>
+  <td width="9%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by True Close Rate National Rank</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_tcr_rank();">True Close Rate Rank</span></td>
+  <td width="9%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Callback National Rank</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_callbacks_rank();">Callbacks Rank</span></td>
+  <td width="9%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Rainmaker National Rank</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_rainmaker_rank();">Rainmaker Rank</span></td>
+  <td width="9%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Learning Activities National Rank</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_learning_rank();">Learning Activities Rank</span></td>
+  <td width="9%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Financial Needs National Rank</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_finance_rank();">Financial Needs Rank</span></td>
+</tr>
+</table>
+<div style="overflow:auto:height:500px;">
+<table class="pec_ranking">
+<apex:variable var="rowclassname" value="row_odd" /> 
+<apex:repeat value="{!pec_rank_list}" var="plist">
+ <tr class="{!if(plist.user__r.name==current_user_name,'row_self',rowclassname)}">
+   <apex:variable var="rowclassname" value="{!if(rowclassname=='row_odd','row_even','row_odd')}" />
+   <td style="width:10%">{!plist.National_Overall_Rank__c}</td>
+   <td style="width:30%"><apex:outputText value="{!plist.user__r.name}" /></td>
+   <td style="width:15%">{!plist.Sales_Region__c}</td>
+   <td style="width:9%">{!plist.True_Close_Rate_National_Rank__c}</td>
+   <td style="width:9%">{!plist.Callback_National_Rank__c}</td>
+   <td style="width:9%">{!plist.Rainmaker_National_Rank__c}</td>
+   <td style="width:9%">{!plist.Learning_Activity_National_Rank__c}</td>
+   <td style="width:9%">{!plist.Financial_Needs_National_Rank__c}</td>
+ </tr>
+</apex:repeat>
+</table>
+</div>
+</apex:outputpanel>
+
+<!--------------------------------- CLOSE RATE DETAILS ------------------------------>
+<apex:outputpanel rendered="{!if(tab_display=='close_rate',true,false)}">
+<table class="pec_ranking">
+<tr class="header">
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by True Close Rate National Rank</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_tcr_rank();">National Rank</span></td>
+  <td width="30%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by PEC Name</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_pec();">PEC</span></td>
+  <td width="15%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Sales Region</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_region();">Region</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by True Close Rate Regional Rank</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_tcr_region_rank();">Regional Rank</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by True Close Rate</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_tcr();">True Close Rate</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Callbacks</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_callbacks();">Callbacks</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Rainmaker Score</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_rainmaker();">Rainmaker Score</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Learning Activities</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_learning();">Learning Activities</span></td>
+  <td width="5%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Financial Needs Score</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_finance();">Financial Score</span></td>    
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by National Overall Rank</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_overall();">Overall</span></td>
+</tr>
+</table>
+<div style="overflow:auto:height:500px;">
+<table class="pec_ranking">
+<apex:variable var="rowclassname" value="row_odd" /> 
+<apex:repeat value="{!pec_rank_list}" var="plist">
+ <tr class="{!if(plist.user__r.name==current_user_name,'row_self',rowclassname)}">
+   <apex:variable var="rowclassname" value="{!if(rowclassname=='row_odd','row_even','row_odd')}" />
+   <td style="width:7%">{!plist.True_Close_Rate_National_Rank__c}</td>
+   <td style="width:30%"><apex:outputText value="{!plist.user__r.name}" /></td>
+   <td style="width:15%">{!plist.Sales_Region__c}</td>
+   <td style="width:7%">{!plist.True_Close_Rate_Regional_Rank__c}</td>
+   <td style="width:7%"><apex:outputText value="{0,number,##,##,##0.00}" >
+            <apex:param value="{!plist.True_Close_Rate__c}" />   
+          </apex:outputtext> %</td>
+   <td style="width:7%">{!plist.Callbacks_Num__c}</td>
+   <td style="width:7%"><apex:outputText value="{0,number,##,##,##0.00}" >
+            <apex:param value="{!plist.Avg_Rainmaker_Score__c}" />   
+          </apex:outputtext> %</td>
+   <td style="width:7%">{!plist.Learning_Activity_Num__c}</td>
+     <td style="width:5%"><apex:outputText value="{0,number,##,##,##0.00}" >
+            <apex:param value="{!plist.Avg_Financial_Needs_Score__c}" />   
+          </apex:outputtext> %</td>      
+   <td style="width:7%">{!plist.National_Overall_Rank__c}</td>
+ </tr>
+</apex:repeat>
+</table>
+</div>
+</apex:outputpanel>
+
+<!----------------  CALLBACK DETAILS ------------------------------------------->
+<apex:outputpanel rendered="{!if(tab_display=='callback',true,false)}" >
+<table class="pec_ranking">
+<tr class="header">
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Callback National Rank</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_callback_rank();">National Rank</span></td>
+  <td width="30%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by PEC Name</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_pec();">PEC</span></td>
+  <td width="15%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Sales Region</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_region();">Region</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Callback Regional Rank</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_callback_region_rank();">Regional Rank</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Callbacks</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_callbacks();">Callbacks</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by True Close Rate</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_tcr();">True Close Rate</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Rainmaker Score</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_rainmaker();">Rainmaker Score</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Learning Activities</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_learning();">Learning Activities</span></td>
+  <td width="5%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Financial Needs Score</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_finance();">Financial Score</span></td>    
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by National Overall Rank</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_overall();">Overall</span></td>
+</tr>
+</table>
+<div style="overflow:auto:height:500px;">
+<table class="pec_ranking">
+<apex:variable var="rowclassname" value="row_odd" /> 
+<apex:repeat value="{!pec_rank_list}" var="plist">
+ <tr class="{!if(plist.user__r.name==current_user_name,'row_self',rowclassname)}">
+   <apex:variable var="rowclassname" value="{!if(rowclassname=='row_odd','row_even','row_odd')}" />
+   <td style="width:7%">{!plist.Callback_National_Rank__c}</td>
+   <td style="width:30%"><apex:outputText value="{!plist.user__r.name}" /></td>
+   <td style="width:15%">{!plist.Sales_Region__c}</td>
+   <td style="width:7%">{!plist.Callback_Regional_Rank__c}</td>
+   <td style="width:7%">{!plist.Callbacks_Num__c}</td>   
+   <td style="width:7%"><apex:outputText value="{0,number,##,##,##0.00}" >
+            <apex:param value="{!plist.True_Close_Rate__c}" />   
+          </apex:outputtext> %</td>
+   <td style="width:7%"><apex:outputText value="{0,number,##,##,##0.00}" >
+            <apex:param value="{!plist.Avg_Rainmaker_Score__c}" />   
+          </apex:outputtext> %</td>
+   <td style="width:7%">{!plist.Learning_Activity_Num__c}</td>
+     <td style="width:5%"><apex:outputText value="{0,number,##,##,##0.00}" >
+            <apex:param value="{!plist.Avg_Financial_Needs_Score__c}" />   
+          </apex:outputtext> %</td>      
+   <td style="width:7%">{!plist.National_Overall_Rank__c}</td>
+ </tr>
+</apex:repeat>
+</table>
+</div>
+
+</apex:outputpanel>
+
+<!---------------------------------------------- RAINMAKER DETAILS --------------------------------------------->
+<apex:outputpanel rendered="{!if(tab_display=='rainmaker',true,false)}" >
+<table class="pec_ranking">
+<tr class="header">
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Rainmaker National Rank</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_rainmaker_rank();">National Rank</span></td>
+  <td width="30%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by PEC Name</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_pec();">PEC</span></td>
+  <td width="15%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Sales Region</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_region();">Region</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Rainmaker Regional Rank</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_rainmaker_region_rank();">Regional Rank</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Rainmaker Score</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_rainmaker();">Rainmaker Score</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by True Close Rate</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_tcr();">True Close Rate</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Callbacks</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_callbacks();">Callbacks</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Learning Activities</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_learning();">Learning Activities</span></td>
+  <td width="5%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Financial Needs Score</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_finance();">Financial Score</span></td>  
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by National Overall Rank</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_overall();">Overall</span></td>
+</tr>
+</table>
+<div style="overflow:auto:height:500px;">
+<table class="pec_ranking">
+<apex:variable var="rowclassname" value="row_odd" /> 
+<apex:repeat value="{!pec_rank_list}" var="plist">
+ <tr class="{!if(plist.user__r.name==current_user_name,'row_self',rowclassname)}">
+   <apex:variable var="rowclassname" value="{!if(rowclassname=='row_odd','row_even','row_odd')}" />
+   <td style="width:7%">{!plist.Callback_National_Rank__c}</td>
+   <td style="width:30%"><apex:outputText value="{!plist.user__r.name}" /></td>
+   <td style="width:15%">{!plist.Sales_Region__c}</td>
+   <td style="width:7%">{!plist.Rainmaker_Regional_Rank__c}</td>
+     <td style="width:7%"><apex:outputText value="{0,number,##,##,##0.00}" >
+            <apex:param value="{!plist.Avg_Rainmaker_Score__c}" />   
+          </apex:outputtext> %</td>
+   <td style="width:7%"><apex:outputText value="{0,number,##,##,##0.00}" >
+            <apex:param value="{!plist.True_Close_Rate__c}" />   
+          </apex:outputtext> %</td>          
+   <td style="width:7%">{!plist.Callbacks_Num__c}</td>   
+   <td style="width:7%">{!plist.Learning_Activity_Num__c}</td>
+     <td style="width:5%"><apex:outputText value="{0,number,##,##,##0.00}" >
+            <apex:param value="{!plist.Avg_Financial_Needs_Score__c}" />   
+          </apex:outputtext> %</td>      
+   <td style="width:7%">{!plist.National_Overall_Rank__c}</td>
+ </tr>
+</apex:repeat>
+</table>
+</div>
+
+</apex:outputpanel>
+
+<!---------------------------------------------- LEARNING ACTIVITIES DETAILS ---------------------------------------------->
+<apex:outputpanel rendered="{!if(tab_display=='learning',true,false)}" >
+<table class="pec_ranking">
+<tr class="header">
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Learning Activity National Rank</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_rainmaker_rank();">National Rank</span></td>
+  <td width="30%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by PEC Name</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_pec();">PEC</span></td>
+  <td width="15%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Sales Region</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_region();">Region</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Learning Activity Regional Rank</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_learning_region_rank();">Regional Rank</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Learning Activities</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_learning();">Learning Activities</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by True Close Rate</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_tcr();">True Close Rate</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Callbacks</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_callbacks();">Callbacks</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Rainmaker Score</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_rainmaker();">Rainmaker Score</span></td>
+  <td width="5%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Financial Needs Score</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_finance();">Financial Score</span></td>    
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by National Overall Rank</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_overall();">Overall</span></td>
+</tr>
+</table>
+<div style="overflow:auto:height:500px;">
+<table class="pec_ranking">
+<apex:variable var="rowclassname" value="row_odd" /> 
+<apex:repeat value="{!pec_rank_list}" var="plist">
+ <tr class="{!if(plist.user__r.name==current_user_name,'row_self',rowclassname)}">
+   <apex:variable var="rowclassname" value="{!if(rowclassname=='row_odd','row_even','row_odd')}" />
+   <td style="width:7%">{!plist.Callback_National_Rank__c}</td>
+   <td style="width:30%"><apex:outputText value="{!plist.user__r.name}" /></td>
+   <td style="width:15%">{!plist.Sales_Region__c}</td>
+   <td style="width:7%">{!plist.Learning_Activity_Regional_Rank__c}</td>
+   <td style="width:7%">{!plist.Learning_Activity_Num__c}</td>   
+   <td style="width:7%"><apex:outputText value="{0,number,##,##,##0.00}" >
+            <apex:param value="{!plist.True_Close_Rate__c}" />   
+          </apex:outputtext> %</td>          
+   <td style="width:7%">{!plist.Callbacks_Num__c}</td>   
+        <td style="width:7%"><apex:outputText value="{0,number,##,##,##0.00}" >
+            <apex:param value="{!plist.Avg_Rainmaker_Score__c}" />   
+          </apex:outputtext> %</td>
+     <td style="width:5%"><apex:outputText value="{0,number,##,##,##0.00}" >
+            <apex:param value="{!plist.Avg_Financial_Needs_Score__c}" />   
+          </apex:outputtext> %</td>             
+   <td style="width:7%">{!plist.National_Overall_Rank__c}</td>
+ </tr>
+</apex:repeat>
+</table>
+</div>
+</apex:outputpanel>
+
+<!---------------------------------------------- Financial Needs --------------------------------------------->
+<apex:outputpanel rendered="{!if(tab_display=='finance',true,false)}" >
+<table class="pec_ranking">
+<tr class="header">
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Financial Needs National Rank</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_finance_rank();">National Rank</span></td>
+  <td width="30%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by PEC Name</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_pec();">PEC</span></td>
+  <td width="15%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Sales Region</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_region();">Region</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Financial Needs Regional Rank</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_financie_region_rank();">Regional Rank</span></td>
+  <td width="5%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Financial Needs Score</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_finance();">Financial Score</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Rainmaker Score</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_rainmaker();">Rainmaker Score</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by True Close Rate</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_tcr();">True Close Rate</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Callbacks</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_callbacks();">Callbacks</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Learning Activities</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_learning();">Learning Activities</span></td>
+  <td width="7%"><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by National Overall Rank</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_overall();">Overall</span></td>
+</tr>
+</table>
+<div style="overflow:auto:height:500px;">
+<table class="pec_ranking">
+<apex:variable var="rowclassname" value="row_odd" /> 
+<apex:repeat value="{!pec_rank_list}" var="plist">
+ <tr class="{!if(plist.user__r.name==current_user_name,'row_self',rowclassname)}">
+   <apex:variable var="rowclassname" value="{!if(rowclassname=='row_odd','row_even','row_odd')}" />
+   <td style="width:7%">{!plist.Callback_National_Rank__c}</td>
+   <td style="width:30%"><apex:outputText value="{!plist.user__r.name}" /></td>
+   <td style="width:15%">{!plist.Sales_Region__c}</td>
+   <td style="width:7%">{!plist.Rainmaker_Regional_Rank__c}</td>
+     <td style="width:5%"><apex:outputText value="{0,number,##,##,##0.00}" >
+            <apex:param value="{!plist.Avg_Financial_Needs_Score__c}" />   
+          </apex:outputtext> %</td>   
+     <td style="width:7%"><apex:outputText value="{0,number,##,##,##0.00}" >
+            <apex:param value="{!plist.Avg_Rainmaker_Score__c}" />   
+          </apex:outputtext> %</td>
+   <td style="width:7%"><apex:outputText value="{0,number,##,##,##0.00}" >
+            <apex:param value="{!plist.True_Close_Rate__c}" />   
+          </apex:outputtext> %</td>          
+   <td style="width:7%">{!plist.Callbacks_Num__c}</td>   
+   <td style="width:7%">{!plist.Learning_Activity_Num__c}</td>
+   <td style="width:7%">{!plist.National_Overall_Rank__c}</td>
+ </tr>
+</apex:repeat>
+</table>
+</div>
+
+</apex:outputpanel>
+
+<br /><br />
+<a href="{!csv_download_url}" style="color:blue;" target="_blank" >Download All Ranking Detail</a>
+</apex:outputpanel>
+</apex:form>
+</apex:page>

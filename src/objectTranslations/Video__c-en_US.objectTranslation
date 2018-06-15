@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Video</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Videos</value>
+    </caseValues>
+    <fields>
+        <label><!-- Consult --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Videos --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Link --></label>
+        <name>Link__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Doctor Download</masterLabel>
+            <translation><!-- Doctor Download --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Patient Consult</masterLabel>
+            <translation><!-- Patient Consult --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Roleplay</masterLabel>
+            <translation><!-- Roleplay --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

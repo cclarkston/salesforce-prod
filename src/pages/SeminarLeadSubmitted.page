@@ -1,0 +1,13 @@
+<apex:page title="Seminar Lead Submitted" 
+           showHeader="false" standardStylesheets="true">
+  <apex:composition template="{!$Site.Template}">
+    <apex:define name="body"> 
+        <br/>
+        <center>
+        <apex:outputText value="Your information is saved. "/>
+        </center>
+        <br/>
+        <br/>
+    </apex:define>
+  </apex:composition>
+</apex:page>

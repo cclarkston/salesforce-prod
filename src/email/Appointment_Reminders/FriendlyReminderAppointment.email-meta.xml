@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>false</available>
+    <description>Email Reminder AFTER Confirmation</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>ClearChoice_Letterhead</letterhead>
+    <name>A Friendly Reminder</name>
+    <style>freeForm</style>
+    <subject>We are excited to meet you!</subject>
+    <textOnly>Hello {!Lead.FirstName}
+ 
+We just wanted to send a friendly reminder that we have you confirmed for your consultation on {!Lead.DateTime_Consult_Scheduled__c}.
+ 
+We have set aside 1 hour of time for you to talk with the doctor and a personal consultant.  
+ 
+Please remember this consultation and panoramic x-ray are free of charge.
+ 
+ 
+We are excited to meet you,
+ 
+{!Lead.00N40000002G2cJ}
+Dental Implant Consultant
+ </textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CAMPAIGN_NAME</field>
+    </columns>
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>LEAD_STATUS</field>
+    </columns>
+    <columns>
+        <field>PHONE</field>
+    </columns>
+    <columns>
+        <field>Lead.Pre_Screen__c</field>
+    </columns>
+    <columns>
+        <field>CampaignMember.Lead_Created_Date__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Marketing_Source__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>LEAD_STATUS</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Consult Scheduled,Seminar Scheduled,Consult Completed,Rescheduled Consult,Not Scheduled,No Show,Same Day Cancellation,Rescheduled Seminar,Seminar Completed,Same Day Cancelation</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Infocision Transfers w/ marketing source</name>
+    <params>
+        <name>scopeid</name>
+        <value>70140000000RtkO</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>0</value>
+    </params>
+    <reportType>CampaignLead</reportType>
+    <scope>one</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>CampaignMember.Lead_Created_Date__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+</Report>

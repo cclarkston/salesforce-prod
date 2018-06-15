@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_24847440</developerName>
+        <masterLabel>CC Team</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead.Call_Center_Agent_Team__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Confirmation</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>IMP - LA</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>IMP - MP</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>IMP - MV</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>IMP - SG</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>IMP - SV</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Outbound</sourceValue>
+            </sourceValues>
+            <value>ClearChoice</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Imp - IMC API</sourceValue>
+            </sourceValues>
+            <value>IMC</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Online Sched</sourceValue>
+            </sourceValues>
+            <value>Online Schedule</value>
+        </values>
+    </buckets>
+    <filter>
+        <criteriaItems>
+            <column>Lead.LeadScore__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>,Red,Blue (No Hit),Website Down-No Prescreen,PO Box,Not Checked</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.DateTime_Consult_Scheduled__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>greaterThan</operator>
+            <value>3/27/2016 12:00 AM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.DateTime_Consult_Scheduled__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>lessThan</operator>
+            <value>4/2/2016 12:00 AM</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Month</dateGranularity>
+        <field>Lead.Date_Booked__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Lead.Center_Location__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Pre-Confirm Overview</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadList</reportType>
+    <scope>org</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead.Date_Booked__c</dateColumn>
+        <endDate>2016-02-22</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2016-01-01</startDate>
+    </timeFrameFilter>
+</Report>

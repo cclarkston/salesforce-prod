@@ -1,0 +1,519 @@
+<apex:page controller="pecscorecard_tab" docType="html-5.0">
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+<style>
+hr.style-fade {
+    border: 0;
+    height: 2px;
+    width:1000px;
+    display:block;  
+  background-image: -webkit-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0)); 
+    background-image:    -moz-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0)); 
+    background-image:     -ms-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0)); 
+    background-image:      -o-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0)); 
+  }
+
+table.accs_details tr.subhead td {
+  font-size:10pt;
+  padding:0;
+  margins:0;
+  line-height:17px;
+}
+
+table.accs_details tr.accs_b td {
+  font-size:10pt;
+  line-height:17px;
+}
+
+table.accs_details tr.accs td {
+  font-size:10pt;
+  line-height:17px;
+}
+
+</style>
+
+
+<apex:form >
+<div style="padding-top:1em;">
+<table style="width:1000px;">
+<tr>
+  <td style="width:400px;">
+    <span style="font-weight:bold;font-size:18pt;padding-left:20px;margin-left:20px;width:320px;border-bottom:1px solid black;color:#5789AE;display:inline-block;margin-bottom:1em;">PEC Scorecards</span>
+    <span style="display:block;padding-bottom:7px;padding-left:10px;">
+      <span style="font-weight:bold;display:inline-block;width:150px;">Last Consultation :</span>
+      <apex:outputpanel rendered="{!if(last_consultation==null,true,false)}"><span style="font-style:italic;color:red;">N/A</span></apex:outputpanel>
+      <apex:outputpanel rendered="{!if(last_consultation==null,false,true)}">
+        <apex:outputText value="{0,number,##0.0 %}" >
+          <apex:param value="{!if(last_consultation.Total_Possible_Score__c==0,0,last_consultation.Total_Score__c/last_consultation.Total_Possible_Score__c)}" />     
+        </apex:outputtext><span style="display:inline-block;width:20px;">&nbsp;</span>
+        <apex:outputtext value="{!last_consult_date}" /><span style="display:inline-block;width:20px;">&nbsp;</span>
+        <a style="color:blue;font-weight:bold;" href="/apex/pec_scorecard?id={!last_consultation.id}" target="_blank">View</a>
+      </apex:outputpanel>  
+    </span>
+    <span style="display:block;padding-bottom:7px;padding-left:10px;">
+      <span style="font-weight:bold;display:inline-block;width:150px;">Last Role Play Consult :</span>
+      <apex:outputpanel rendered="{!if(last_roleplay==null,true,false)}"><span style="font-style:italic;color:red;">N/A</span></apex:outputpanel>
+      <apex:outputpanel rendered="{!if(last_roleplay==null,false,true)}">
+        <apex:outputText value="{0,number,##0.0 %}" >
+          <apex:param value="{!if(last_roleplay.Total_Possible_Score__c==0,0,last_roleplay.Total_Score__c/last_roleplay.Total_Possible_Score__c)}" />     
+        </apex:outputtext><span style="display:inline-block;width:20px;">&nbsp;</span>
+        <apex:outputtext value="{!last_roleplay_date}" /><span style="display:inline-block;width:20px;">&nbsp;</span>
+        <a style="color:blue;font-weight:bold;" href="/apex/pec_scorecard?id={!last_roleplay.id}" target="_blank">View</a>
+      </apex:outputpanel>  
+    </span>
+    <span style="display:block;padding-bottom:7px;padding-left:10px;">
+      <span style="font-weight:bold;display:inline-block;width:150px;">Last Call Back :</span>
+      <apex:outputpanel rendered="{!if(last_callback==null,true,false)}"><span style="font-style:italic;color:red;">N/A</span></apex:outputpanel>
+      <apex:outputpanel rendered="{!if(last_callback==null,false,true)}">
+        <apex:outputText value="{0,number,##0.0 %}" >
+          <apex:param value="{!if(last_callback.Total_Possible_Score__c==0,0,last_callback.Total_Score__c/last_callback.Total_Possible_Score__c)}" />     
+        </apex:outputtext><span style="display:inline-block;width:20px;">&nbsp;</span>
+        <apex:outputtext value="{!last_callback_date}" /><span style="display:inline-block;width:20px;">&nbsp;</span>
+        <a style="color:blue;font-weight:bold;" href="/apex/pec_scorecard?id={!last_callback.id}" target="_blank">View</a>
+      </apex:outputpanel>  
+    </span>  
+    <span style="display:block;padding-bottom:7px;padding-left:10px;">
+      <span style="font-weight:bold;display:inline-block;width:150px;">Last Role Play Call Back :</span>
+      <apex:outputpanel rendered="{!if(last_roleplay_callback==null,true,false)}"><span style="font-style:italic;color:red;">N/A</span></apex:outputpanel>
+      <apex:outputpanel rendered="{!if(last_roleplay_callback==null,false,true)}">
+        <apex:outputText value="{0,number,##0.0 %}" >
+          <apex:param value="{!if(last_roleplay_callback.Total_Possible_Score__c==0,0,last_roleplay_callback.Total_Score__c/last_roleplay_callback.Total_Possible_Score__c)}" />     
+        </apex:outputtext><span style="display:inline-block;width:20px;">&nbsp;</span>
+        <apex:outputtext value="{!last_roleplay_callback_date}" /><span style="display:inline-block;width:20px;">&nbsp;</span>
+        <a style="color:blue;font-weight:bold;" href="/apex/pec_scorecard?id={!last_roleplay_callback.id}" target="_blank">View</a>
+      </apex:outputpanel>  
+    </span>  
+  </td>
+  <td style="width:550px;padding-left:20px;">
+    <table class="accs_details" width="630px;">
+    <tr>
+      <td>&nbsp;</td>
+      <td colspan="3" style="color:#77796b;font-size:10pt;text-align:center;border-bottom:2px dotted #d7eff2;">My Scorecards</td>
+      <td></td>
+      <td colspan="3" style="color:#77796b;font-size:10pt;text-align:center;border-bottom:2px dotted #d7eff2;">Company Scorecards</td>
+    </tr>
+    <tr class="control" style="font-size:8pt;padding-top:2px;">
+      <td style="border:0;">&nbsp;</td>
+      <td width="11%">This Month</td>
+      <td width="11%">Last Month</td>
+      <td width="11%">This Year</td>
+      <td style="width:5px;border:0;">&nbsp;</td>
+      <td width="11%">This Month</td>
+      <td width="11%">Last Month</td>
+      <td width="11%">This Year</td>
+    </tr>
+    <apex:variable var="rowclassname" value="accs" />
+        <tr class="subhead"><td colspan="8">Consults</td></tr>
+    <tr class="{!rowclassname}">
+    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+      <td class="indent"># Scored</td>
+      <td class="right"><apex:outputtext value="{!my_consults_scored_this_month}" /></td>
+      <td class="right"><apex:outputtext value="{!my_consults_scored_last_month}" /></td>
+      <td class="right"><apex:outputtext value="{!my_consults_scored_this_year}" /></td>
+      <td></td>
+      <td class="right"><apex:outputtext value="{!company_consults_scored_this_month}" /></td>
+      <td class="right"><apex:outputtext value="{!company_consults_scored_last_month}" /></td>
+      <td class="right"><apex:outputtext value="{!company_consults_scored_this_year}" /></td>      
+    </tr>
+    <tr class="{!rowclassname}">
+    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+      <td class="indent">Avg Score</td>
+      <td class="right">
+        <apex:outputpanel rendered="{!if(my_consults_scored_this_month>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(my_consults_scored_this_month>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!my_consults_avg_this_month}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td>
+      <td class="right">
+        <apex:outputpanel rendered="{!if(my_consults_scored_last_month>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(my_consults_scored_last_month>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!my_consults_avg_last_month}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td>
+      <td class="right">
+        <apex:outputpanel rendered="{!if(my_consults_scored_this_year>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(my_consults_scored_this_year>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!my_consults_avg_this_year}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td>
+      <td></td>
+      <td class="right">
+        <apex:outputpanel rendered="{!if(company_consults_scored_this_month>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(company_consults_scored_this_month>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!company_consults_avg_this_month}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td> 
+      <td class="right">
+        <apex:outputpanel rendered="{!if(company_consults_scored_last_month>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(company_consults_scored_last_month>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!company_consults_avg_last_month}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td>   
+      <td class="right">
+        <apex:outputpanel rendered="{!if(company_consults_scored_this_year>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(company_consults_scored_this_year>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!company_consults_avg_this_year}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td>      
+    </tr>
+    <tr class="subhead"><td colspan="8">Roleplay Consults</td></tr>
+    <apex:variable var="rowclassname" value="accs" />
+    <tr class="{!rowclassname}">
+    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+      <td class="indent"># Scored</td>
+      <td class="right"><apex:outputtext value="{!my_roleplay_scored_this_month}" /></td>
+      <td class="right"><apex:outputtext value="{!my_roleplay_scored_last_month}" /></td>
+      <td class="right"><apex:outputtext value="{!my_roleplay_scored_this_year}" /></td>
+      <td></td>
+      <td class="right"><apex:outputtext value="{!company_roleplay_scored_this_month}" /></td>
+      <td class="right"><apex:outputtext value="{!company_roleplay_scored_last_month}" /></td>
+      <td class="right"><apex:outputtext value="{!company_roleplay_scored_this_year}" /></td>      
+    </tr>
+    <tr class="{!rowclassname}">
+    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+      <td class="indent">Avg Score</td>
+      <td class="right">
+        <apex:outputpanel rendered="{!if(my_roleplay_scored_this_month>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(my_roleplay_scored_this_month>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!my_roleplay_avg_this_month}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td>
+      <td class="right">
+        <apex:outputpanel rendered="{!if(my_roleplay_scored_last_month>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(my_roleplay_scored_last_month>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!my_roleplay_avg_last_month}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td>
+      <td class="right">
+        <apex:outputpanel rendered="{!if(my_roleplay_scored_this_year>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(my_roleplay_scored_this_year>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!my_roleplay_avg_this_year}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td>
+      <td></td>
+      <td class="right">
+        <apex:outputpanel rendered="{!if(company_roleplay_scored_this_month>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(company_roleplay_scored_this_month>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!company_roleplay_avg_this_month}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td> 
+      <td class="right">
+        <apex:outputpanel rendered="{!if(company_roleplay_scored_last_month>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(company_roleplay_scored_last_month>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!company_roleplay_avg_last_month}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td>   
+      <td class="right">
+        <apex:outputpanel rendered="{!if(company_roleplay_scored_this_year>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(company_roleplay_scored_this_year>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!company_roleplay_avg_this_year}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td>      
+    </tr>
+    <tr class="subhead"><td colspan="8">Call Backs</td></tr>
+    <apex:variable var="rowclassname" value="accs" />
+    <tr class="{!rowclassname}">
+    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+      <td class="indent"># Scored</td>
+      <td class="right"><apex:outputtext value="{!my_callbacks_scored_this_month}" /></td>
+      <td class="right"><apex:outputtext value="{!my_callbacks_scored_last_month}" /></td>
+      <td class="right"><apex:outputtext value="{!my_callbacks_scored_this_year}" /></td>
+      <td></td>
+      <td class="right"><apex:outputtext value="{!company_callbacks_scored_this_month}" /></td>
+      <td class="right"><apex:outputtext value="{!company_callbacks_scored_last_month}" /></td>
+      <td class="right"><apex:outputtext value="{!company_callbacks_scored_this_year}" /></td>      
+    </tr>
+    <tr class="{!rowclassname}">
+    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+      <td class="indent">Avg Score</td>
+      <td class="right">
+        <apex:outputpanel rendered="{!if(my_callbacks_scored_this_month>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(my_callbacks_scored_this_month>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!my_callbacks_avg_this_month}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td>
+      <td class="right">
+        <apex:outputpanel rendered="{!if(my_callbacks_scored_last_month>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(my_callbacks_scored_last_month>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!my_callbacks_avg_last_month}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td>
+      <td class="right">
+        <apex:outputpanel rendered="{!if(my_callbacks_scored_this_year>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(my_callbacks_scored_this_year>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!my_callbacks_avg_this_year}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td>
+      <td></td>
+      <td class="right">
+        <apex:outputpanel rendered="{!if(company_callbacks_scored_this_month>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(company_callbacks_scored_this_month>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!company_callbacks_avg_this_month}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td> 
+      <td class="right">
+        <apex:outputpanel rendered="{!if(company_callbacks_scored_last_month>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(company_callbacks_scored_last_month>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!company_callbacks_avg_last_month}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td>   
+      <td class="right">
+        <apex:outputpanel rendered="{!if(company_callbacks_scored_this_year>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(company_callbacks_scored_this_year>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!company_callbacks_avg_this_year}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td>      
+    </tr>
+    <tr class="subhead"><td colspan="8">Roleplay Call Backs</td></tr>
+    <apex:variable var="rowclassname" value="accs" />
+    <tr class="{!rowclassname}">
+    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+      <td class="indent"># Scored</td>
+      <td class="right"><apex:outputtext value="{!my_roleplay_callback_scored_this_month}" /></td>
+      <td class="right"><apex:outputtext value="{!my_roleplay_callback_scored_last_month}" /></td>
+      <td class="right"><apex:outputtext value="{!my_roleplay_callback_scored_this_year}" /></td>
+      <td></td>
+      <td class="right"><apex:outputtext value="{!company_roleplay_callback_scored_this_month}" /></td>
+      <td class="right"><apex:outputtext value="{!company_roleplay_callback_scored_last_month}" /></td>
+      <td class="right"><apex:outputtext value="{!company_roleplay_callback_scored_this_year}" /></td>      
+    </tr>
+    <tr class="{!rowclassname}">
+    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+      <td class="indent">Avg Score</td>
+      <td class="right">
+        <apex:outputpanel rendered="{!if(my_roleplay_callback_scored_this_month>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(my_roleplay_callback_scored_this_month>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!my_roleplay_callback_avg_this_month}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td>
+      <td class="right">
+        <apex:outputpanel rendered="{!if(my_roleplay_callback_scored_last_month>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(my_roleplay_callback_scored_last_month>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!my_roleplay_callback_avg_last_month}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td>
+      <td class="right">
+        <apex:outputpanel rendered="{!if(my_roleplay_callback_scored_this_year>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(my_roleplay_callback_scored_this_year>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!my_roleplay_callback_avg_this_year}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td>
+      <td></td>
+      <td class="right">
+        <apex:outputpanel rendered="{!if(company_roleplay_callback_scored_this_month>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(company_roleplay_callback_scored_this_month>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!company_roleplay_callback_avg_this_month}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td> 
+      <td class="right">
+        <apex:outputpanel rendered="{!if(company_roleplay_callback_scored_last_month>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(company_roleplay_callback_scored_last_month>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!company_roleplay_callback_avg_last_month}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td>   
+      <td class="right">
+        <apex:outputpanel rendered="{!if(company_roleplay_callback_scored_this_year>0,false,true)}"><span style="font-style:italic;">N/A</span></apex:outputpanel>
+        <apex:outputpanel rendered="{!if(company_roleplay_callback_scored_this_year>0,true,false)}">
+          <apex:outputText value="{0,number,##,##,##0.0 %}" >
+            <apex:param value="{!company_roleplay_callback_avg_this_year}" />   
+          </apex:outputtext>
+        </apex:outputpanel>
+      </td>      
+    </tr>
+    </table>
+  </td>
+</tr>
+</table>
+</div>
+
+<apex:outputpanel layout="block" id="search_holder" style="border-top:1px solid black;margin-top:1em;border-bottom:1px solid black">
+<apex:actionfunction name="sort_by_pec" action="{!pec_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_huddle_pec" action="{!huddle_pec_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_date" action="{!date_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_huddle_date" action="{!huddle_date_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_card" action="{!card_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_coach" action="{!coach_sort}" rerender="main_holder" />
+<apex:actionfunction name="sort_by_score" action="{!score_sort}" rerender="main_holder" />
+<table class="accs_details" style="width:1000px;">
+<tr><td width="50%">
+  <span style="display:block;padding-bottom:7px;padding-top:10px;padding-left:10px;">
+  <span style="font-weight:bold;display:inline-block;width:125px;">PEC Scored :</span>
+    <apex:outputpanel rendered="{!display_user_search}">  <apex:inputfield value="{!start_filter.Pec_Scored__c}"  /></apex:outputpanel>
+    <apex:outputpanel rendered="{!if(display_user_search,false,true)}"> <apex:outputfield value="{!start_filter.Pec_Scored__c}"  /></apex:outputpanel>
+  </span>
+  <span style="display:block;padding-bottom:7px;padding-left:10px;">
+  <span style="font-weight:bold;display:inline-block;width:125px;">Scorecard Type :</span>
+      <apex:selectList value="{!card_type}" multiselect="false" size="1">
+        <apex:selectOptions value="{!cardtypeoptions}"></apex:selectoptions>
+      </apex:selectList> 
+  </span>  
+  <span style="display:block;padding-bottom:7px;padding-left:10px;">
+  <span style="font-weight:bold;display:inline-block;width:125px;">Sales Region :</span>
+      <apex:selectList value="{!region_filter}" multiselect="false" size="1">
+        <apex:selectOptions value="{!Regionoptions}"></apex:selectoptions>
+      </apex:selectList> 
+  </span> 
+   
+<apex:commandbutton value="Search Scorecards" action="{!run_search}" reRender="main_holder" /></td>
+<td style="padding-top:10px;">
+  <span style="display:block;padding-bottom:7px;padding-left:10px;">
+  <span style="font-weight:bold;display:inline-block;width:125px;">Start Date :</span>
+    <apex:inputfield value="{!start_filter.Score_Date__c}"  />
+  </span>
+  <span style="display:block;padding-bottom:7px;padding-left:10px;">
+  <span style="font-weight:bold;display:inline-block;width:125px;">End Date :</span>
+    <apex:inputfield value="{!end_filter.Score_Date__c}"  />
+  </span>
+  <span style="display:block;padding-bottom:7px;padding-left:10px;">
+  <span style="font-weight:bold;display:inline-block;width:125px;">Completed Only :</span>
+    <apex:inputcheckbox value="{!completed_cards}"  />
+  </span>
+</td>
+</tr></table><br />
+</apex:outputpanel>
+
+<apex:outputpanel layout="block" id="main_holder" style="padding-top:1em;width:1050px;">
+<apex:actionfunction name="per_page_change" action="{!run_search}" rerender="main_holder" />
+<apex:outputpanel rendered="{!if(card_type=='Huddle',false,true)}">
+<apex:outputpanel rendered="{!if(num_scorecards>0,true,false)}" >
+<apex:variable var="rowclassname" value="accs" />
+<table class="accs_details" style="width:1000px;">
+<tr class="control">
+  <td width="10%">Action</td>
+  <td width="20%" onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by PEC Scored</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_pec();">PEC Scored</td>
+  <td width="20%" onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Date</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_date();">Date</td>
+  <td width="20%" onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Scorecard Type</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_card();">Scorecard Type</td>
+  <td width="20%" onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Coached By</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_coach();">Coached By</td>
+  <td width="10%" onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Score</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_score();">Score</td>
+</tr>
+<apex:repeat value="{!score_search_results}" var="sclist">
+<tr class="{!rowclassname}">
+<apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+  <td align="center"><a style="color:blue;font-weight:bold;" href="/apex/pec_scorecard?id={!sclist.id}" target="_blank">View</a></td>
+  <td style="padding-left:10px;"><apex:outputfield value="{!sclist.Pec_Scored__c}" /></td>
+  <td style="padding-left:10px;"><apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+    <apex:param value="{!sclist.Score_Date__c}" /> 
+    </apex:outputText></td>
+  <td style="padding-left:10px;"><apex:outputfield value="{!sclist.recordtype.name}" /></td>
+  <td style="padding-left:10px;"><apex:outputfield value="{!sclist.createdby.name}" /></td>
+  <td style="padding-left:10px;"><apex:outputText value="{0,number,##,##,##0.00 %}" >
+    <apex:param value="{!sclist.Overall_Score__c}" />   
+    </apex:outputtext>
+  </td>
+</tr>
+</apex:repeat>
+</table>
+
+<br />
+<span class="page_span">Page {!page} of {!num_pages} 
+    <apex:commandButton value="Prev" action="{!prev}" rendered="{!if(display_prev==true,true,false)}" style="margin-left:20px;" reRender="main_holder" />
+    <apex:commandButton value="Next" action="{!next}" rendered="{!if(display_next==true,true,false)}" style="margin-left:20px;" reRender="main_holder" />
+  </span>     
+<i># Records per page &nbsp;<apex:input value="{!records_per_page}"  style="width:30px;text-align:right;" onchange="per_page_change();" /></i><br />    
+</apex:outputpanel>
+<apex:outputpanel rendered="{!if(num_scorecards==0,true,false)}" >
+<span style="font-style:italic;color:red;">There are currently no scorecards matching your search criteria</span>
+</apex:outputpanel>
+
+</apex:outputpanel>
+
+<apex:outputpanel rendered="{!if(card_type=='Huddle',true,false)}">
+  <apex:outputpanel rendered="{!if(num_huddles>0,true,false)}" >
+<apex:variable var="rowclassname" value="accs" />
+<table class="accs_details" style="width:500px;">
+<tr class="control">
+  <td width="10%">Action</td>
+  <td width="50%" onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by PEC</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_huddle_pec();">PEC</td>
+  <td width="30%" onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Date</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();sort_by_huddle_date();">Week</td>
+</tr>
+<apex:repeat value="{!huddle_search_results}" var="sclist">
+<tr class="{!rowclassname}">
+<apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+  <td align="center"><a style="color:blue;font-weight:bold;" href="/apex/weekly_huddle?id={!sclist.id}" target="_blank">View</a></td>
+  <td style="padding-left:10px;"><apex:outputfield value="{!sclist.Createdbyid}" /></td>
+  <td style="padding-left:10px;"><apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+    <apex:param value="{!sclist.Week_Start__c}" /> 
+    </apex:outputText></td>
+</tr>
+</apex:repeat>
+</table>
+
+<br />
+<span class="page_span">Page {!page} of {!num_pages} 
+    <apex:commandButton value="Prev" action="{!prev}" rendered="{!if(display_prev==true,true,false)}" style="margin-left:20px;" reRender="main_holder" />
+    <apex:commandButton value="Next" action="{!next}" rendered="{!if(display_next==true,true,false)}" style="margin-left:20px;" reRender="main_holder" />
+  </span>     
+<i># Records per Page &nbsp;<apex:input value="{!records_per_page}"  style="width:30px;text-align:right;" onchange="per_page_change();" /></i><br />  
+</apex:outputpanel>
+
+<apex:outputpanel rendered="{!if(num_huddles==0,true,false)}" >
+<span style="font-style:italic;color:red;">There are currently no weekly huddles matching your search criteria</span>
+</apex:outputpanel>
+</apex:outputpanel>
+
+</apex:outputpanel>
+
+
+</apex:form>
+</apex:page>

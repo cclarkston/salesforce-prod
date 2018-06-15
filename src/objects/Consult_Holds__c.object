@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Table that holds a record of every hold placed on a consult inventory block.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Active_Hold__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Indicates if a hold is still active. Just a quick way of filtering this down to the records I have to check against.</description>
+        <externalId>false</externalId>
+        <label>Active Hold</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Consult_Inventory__c</fullName>
+        <description>Link to the consult inventory block that this hold applies to.</description>
+        <externalId>false</externalId>
+        <label>Consult Inventory</label>
+        <referenceTo>Consult_Inventory__c</referenceTo>
+        <relationshipLabel>Consult Holds</relationshipLabel>
+        <relationshipName>Consult_Holds</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Hold_By__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>User that placed the consult hold</description>
+        <externalId>false</externalId>
+        <label>Hold By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Consult_Holds</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Hold_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>Hold Time</label>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Permanent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates that a hold is permanent and will not expire. Permanent holds have to be manually removed.</description>
+        <externalId>false</externalId>
+        <label>Permanent</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Consult Hold</label>
+    <nameField>
+        <displayFormat>Hold-{0}</displayFormat>
+        <label>Consult Hold Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Consult Holds</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

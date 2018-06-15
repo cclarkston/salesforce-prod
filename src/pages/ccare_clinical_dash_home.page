@@ -1,0 +1,1134 @@
+<apex:page showheader="false" sidebar="false" standardStylesheets="false" controller="dp_clinical_home" docType="html-5.0">
+<head>
+  <meta charset="UTF-8" />
+  <title>HopeRx</title>
+    <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/dp_css_main.css')}"/>  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  
+<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css' />
+  
+<!--  <apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />-->
+<!--  <apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>-->
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/mmenu_nav.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc.css')}"/>   
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/dp_css_main.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/fonts.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-buttons.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-patient.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-clinical-calendar.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/style.css')}"/>   
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-clinical.css')}"/>   
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-pot.css')}"/>     
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-modal.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/forms.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-hrxfont.css')}"/>
+
+  <apex:includeScript value="{!URLFOR($Resource.Dental_Practice_Resources,'js/cc-clinical-calendar.js')}"/>
+  <apex:includeScript value="{!URLFOR($Resource.Dental_Practice_Resources,'js/cc-patient.js')}"/>
+       
+</head> 
+
+<style type="text/css" media="print">
+  * {transition: none !important;}
+
+  .no-print {
+    display:none !important;
+  }
+  
+  .print-only {
+    display:flex !important;
+  }
+</style>
+
+<style>
+
+  .print-only {
+    display:none;
+  }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0 auto;
+    padding: 0;
+  }  
+  
+  .pad-main-wrapper {
+    margin-top:145px;
+  }
+  
+  a.nav_anchor {
+    color:black;
+    font-weight:300;
+    font-size: 12pt;
+    letter-spacing: 1px;
+  }
+  
+  a.nav_anchor:hover {
+    color:white;
+    text-decoration:none;
+  }
+  
+  span.dateFormat {
+    display:none;
+  }
+  
+  .cc-field-label {
+    display:inline-block;
+    padding-right:5px;
+    font-weight:bold;
+  }
+  
+  .cc-field-input {
+    border:none;
+    outline:0;
+    font-szie:12pt;    
+  }
+  
+  .cc-email-attachment-item {
+    display:inline-block;
+    padding-right:20px;    
+  }
+  
+  .cc-email-attachment-remove {
+    padding-left:10px;
+    display:inline-block;
+  }
+  
+  .cc-section-header-right-button-container a:hover {
+    color:white;
+    text-decoration:none;
+  }
+  
+  .filter_header {
+    font-weight: bold;
+    width: 100px;
+    display: inline-flex;
+  }
+  
+  table.bend_table {
+      width:100%;      
+    }
+    
+    tr.bend_header {
+      font-weight: bold;
+      color: #5789AE;
+      border-bottom: 2px solid #5789AE;
+    }
+    
+    .gray_under {
+       display:inline-block;
+       border-bottom:1px solid #bfbfbf;
+       padding-left:5px;
+       padding-right:5px;
+     <!--text-decoration: underline;
+      -moz-text-decoration-color: #bfbfbf; /* Code for Firefox */
+      text-decoration-color: #bfbfbf;-->
+    }
+    
+    tr.bend_header td {
+
+    }
+    
+    tr.odd {
+    
+    }
+    
+    tr.odd td {
+      padding-left:5px;
+      border-bottom:1px dotted #bfbfbf;
+      line-height:30px;
+    }
+    
+    tr.even {
+        
+    }
+    
+    tr.even td {
+      padding-left:5px;
+      background:#f5f5f5;
+      border-bottom:1px dotted #bfbfbf;
+      line-height:30px;
+    }
+
+    .patient_label {
+      color:#0000FF;
+      font-weight:bold;
+    }
+    
+    .report_tab_container {
+      display:flex;
+      flex-direction:row;
+      flex-wrap:nowrap;
+      width:100%;  
+      font-family:'Source Sans Pro', sans-serif;
+      font-size:14pt;
+    }
+    
+    .selected_report_tab {
+      display: flex;
+      padding-left:30px;
+      padding-right:20px;
+      min-width: 200px;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      background: #ebf9fb;
+      border-right: 1px solid #dedede;
+    }
+    
+    .report_tab {
+      display: flex;
+      padding-left:30px;
+      padding-right:20px;
+      min-width: 200px;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid #dedede;
+      background-image: -webkit-linear-gradient(top, #ffffff, #ededed);
+      background-image: -moz-linear-gradient(top, #ffffff, #ededed);
+      background-image: -ms-linear-gradient(top, #ffffff, #ededed);
+      background-image: -o-linear-gradient(top, #ffffff, #ededed);
+      background-image: linear-gradient(to bottom, #ffffff, #ededed);
+    }
+    
+    .report_tab:hover {
+      background-image: -webkit-linear-gradient(top, #ffffff, #b0b0b0);
+      background-image: -moz-linear-gradient(top, #ffffff, #b0b0b0);
+      background-image: -ms-linear-gradient(top, #ffffff, #b0b0b0);
+      background-image: -o-linear-gradient(top, #ffffff, #b0b0b0);
+      background-image: linear-gradient(to bottom, #ffffff, #b0b0b0);
+      cursor:pointer;
+    }
+    
+    .report_filter_holder {
+      background-image: -webkit-linear-gradient(top, #ebf9fb, #ffffff);
+      background-image: -moz-linear-gradient(top, #ebf9fb, #ffffff);
+      background-image: -ms-linear-gradient(top, #ebf9fb, #ffffff);
+      background-image: -o-linear-gradient(top, #ebf9fb, #ffffff);
+      background-image: linear-gradient(to bottom, #ebf9fb, #ffffff);
+      padding-top: 6px;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding-right: 20px;
+      display: flex;
+      width: 100%;
+      padding-bottom: 6px;
+      font-weight: bold;
+      font-family: arial;
+    }
+        
+    .fancy_break {
+      /*height:10px;
+      background-image: -webkit-linear-gradient(top, #ebf9fb, #ffffff);
+      background-image: -moz-linear-gradient(top, #ebf9fb, #ffffff);
+      background-image: -ms-linear-gradient(top, #ebf9fb, #ffffff);
+      background-image: -o-linear-gradient(top, #ebf9fb, #ffffff);
+      background-image: linear-gradient(to bottom, #ebf9fb, #ffffff);*/      
+    }
+    
+    .report_view_holder {
+    
+    }
+    
+    .report_detail_holder {
+      overflow:auto;
+      max-height:650px;
+      width:100%;
+      height: 650px;
+    }
+    
+    .mc_patient_col {
+      width:40%;  
+    }
+    
+    .mc_condition_col {
+      width:20%;
+    }
+    
+    .mc_doctor_col {
+      width:20%;
+    }
+    
+    .mc_surgery_col {
+      width:20%;
+    }
+    
+    .odd_mc {
+      /*padding-top: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed #ddd;
+      padding-left: 15px;
+      padding-right: 15px;
+      background: #f5f5f5;
+      display:flex;
+      flex-direction:row;*/
+      /*position: relative;
+      left: -15px;*/
+      margin-bottom: 7px;
+      box-shadow: 2px 3px 3px #ccc;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+      padding-left: 15px;
+      padding-right: 15px;
+      background: #f5f5f5;
+      display: flex;
+      flex-direction: row;
+    }
+    
+    .even_mc {
+      /*padding-top: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed #ddd;
+      padding-left: 15px;
+      padding-right: 15px;
+      display:flex;
+      flex-direction:row;
+      margin-bottom: 7px;
+      box-shadow: 5px 5px 3px #ccc;*/
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+      padding-left: 15px;
+      padding-right: 15px;
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 7px;
+      box-shadow: 3px 2px 5px #ccc;
+      border-left: 1px solid #eee;
+      border-top: 1px solid #eee;
+    }
+    
+    .tbd_span {
+      font-style: italic;
+    }
+    
+    .cc-content-wrapper {
+      width:95%;
+      margin-top:115px;
+    }
+    
+    .report_detail_inset {
+      width: 95%;
+      margin-left: 2%; 
+    }
+    
+    .filter_select {
+      font-weight:normal;
+      border-color:#8f5f84;
+      box-shadow: 2px 2px 3px 0px #8f5f84;
+    }
+    
+    .filter_select:active {
+      border-color:#8f5f84;
+      box-shadow: 2px 2px 3px 0px #8f5f84;
+    }
+    
+    .filter_select:focus {
+      border-color:#8f5f84;
+      box-shadow: 2px 2px 3px 0px #8f5f84;
+      outline-color:#8f5f84;
+    }
+    
+    .surgery_days_warning {
+      font-weight:bold;
+      color:red;
+    }
+    
+    .doc_name_holder {
+      font-weight: bold;
+      color: #5789AE;
+      font-size: 12pt;
+      /* padding-left: 20px; */
+      left: -10px;
+      position: relative;
+      width: 100%;
+      border-bottom: 2px solid #5789AE;
+      margin-bottom: 10px;
+    }
+    
+    div.google-visualization-tooltip {
+      width:200px;
+    }
+    
+     .filter_header2 {
+    margin-bottom: 2em;
+    font-weight: bold;
+    font-size: 14pt;
+    justify-content: flex-start;
+    align-items: center;
+  }   
+  
+  .summary_holder_box {
+    display: flex;
+    background: #eeeeee;
+    max-width: 900px;
+    border: 1px solid #bbbbbb;
+    border-radius: 5px 5px 5px 0px;
+    min-width:650px;
+    flex-wrap:wrap;
+  }
+  
+  .summary_box_col {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    min-width: 300px;
+  }
+  
+  .summary_doctor_info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .subscript_span {
+    font-size: 8pt;
+    font-style: italic;
+    padding-bottom: 5px;
+  }
+  
+  .doctor_name {
+    font-weight: bold;
+    font-size: 14pt;
+    padding-bottom: 10px;
+  }
+  
+  .next_steps_holder {  
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-left: 10px;
+    padding-top: 5px;
+  }
+  
+  .scorecard_date {
+    font-size:12pt;
+  }
+  
+  .summary_mastery_info {
+    display: flex;
+    flex-direction: column;
+    border: 1px dotted #bbbbbb;
+    border-radius: 0px 7px 7px 0px;
+    padding: 3px;
+  }
+  
+  .mastery_score {
+    width: 100%;
+    display: inline-flex;
+    height: 30px;
+    justify-content: center;
+    font-size: 12pt;
+    align-items: center;
+    font-weight:bold;    
+  }
+  
+  .Associate {
+    background : white;
+  }
+
+  .Fellow {
+    background : #39b17f;
+  }
+  
+  .Diplomate {
+    background : #9e9e9e;
+  }
+  
+  .Director {
+    background :  #FFDF00;
+  }  
+
+  
+  .background_layer {
+    
+  }
+  
+  ul li {
+    margin-left: .5em;
+  }
+  
+  li {
+    font-style:italic;
+    line-height:20px;
+  }
+  
+  .metrics_holder {
+    display: flex;
+    min-width: 350px;
+    max-width: 350px;
+    background: white;
+    padding:5px;
+  }    
+  
+  .metrics_box_col {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    padding-right: 15px;
+    height:100px;
+  }
+  
+  .metrics_label_box {
+    display: flex;
+    font-weight: bold;
+    font-size: 12pt;
+    width:100%;
+  }
+  
+  .metrics_label {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    font-size:10pt;
+  }
+    
+  .metrics_box_score {
+    display: flex;
+    flex-direction: column;
+    height: 45px;
+    border: 1px dotted #cccccc;
+    margin-bottom: 3px;
+    padding-top: 1px;
+    padding-left: 3px;
+  }
+  
+  .metrics_score {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 15px;
+    font-size: 14pt;
+    font-style: italic;
+  }
+  
+  .subscore_section {
+    display:flex;
+    padding-top:1em;
+  }
+  
+  .next_steps_hover {
+    width:30px;
+  }
+  
+  .metrics_label_tooltip {
+    visibility: hidden;
+    position: absolute;
+    z-index: 100;
+    background: #eeeeee;
+    color: black;
+    padding: 7px;
+    border-radius: 5px;
+    border: 1px solid #bbbbbb;
+    font-size: 8pt;
+    font-weight: 400;
+  }
+  
+  .next_steps_hover:hover .metrics_label_tooltip {
+    visibility:visible;
+  }
+  
+  .detail_holder {
+    width:1100px;
+    padding-top:1em;
+  }
+  
+  .metrics_line {
+    display:flex;
+    flex-direction:row;
+    width:100%;
+    padding-top: 5px;
+    padding-bottom: 2px;
+    flex-grow: 1;
+    align-items: flex-end;
+    min-height:40px;
+  }
+  
+  .metrics_header {
+    font-weight:bold;
+    background: #30827a;
+    background: #189ad6;
+    color:white;
+  }
+  
+  .metrics_criteria_name {
+    width:15%;
+    padding-left:5px;
+    font-weight:bold;
+    font-style:italics;
+  }
+  
+  .metrics_value {
+    width:9%;
+    padding-left:5px;
+    display:flex;
+    justify-content:center;
+  }    
+  
+  .metrics_checkbox {
+    width:19%;
+    padding-left:5px;
+    display:flex;
+    align-self:center;
+    justify-content:center;
+    flex-direction:row;
+  }
+  
+  .metrics_checkbox  i {
+    font-size:14pt;    
+  }
+  
+  .metrics_odd {
+    background: #f3f3f3;
+    border-bottom: 1px dashed #c3c3c3;
+    align-items: center;
+  }
+  
+  .metrics_even {
+    align-items: center;
+    
+  }
+  
+  .gm_holder {
+    display: flex;
+    flex-direction: column;
+    padding-left: 2em;
+    padding-top: 5px;
+  }
+  
+  .gm_head {
+    font-weight: bold;
+    display: flex;
+    padding-bottom: 1em;
+  }
+  
+  .gm_line {
+    display: flex;
+    padding-bottom: 10px;
+  }
+  
+  .gm_label {
+    width: 125px;
+    font-weight: bold;
+  }
+    
+</style>
+
+<script type="text/javascript">    
+  var key_timeout;
+  var search_in_progress = false;
+  var apt_search_timeout;
+  var apt_search_in_progress = false;
+  
+  function apt_search_delay() {    
+    if(apt_search_in_progress)
+      clearTimeout(apt_search_timeout);
+    apt_search_in_progress = true;  
+    apt_search_timeout = setTimeout("search_apts()",1200);
+  }   
+      
+  function qsearch_key(e) {    
+    if(search_in_progress)
+      clearTimeout(key_timeout);
+    search_in_progress = true;  
+    key_timeout = setTimeout("search_patients()",600);
+  }   
+  
+  function show_update_text(x) {
+    x.innerHTML = 'Update';
+  }
+  
+  $(function(){
+    /*
+     * this swallows backspace keys on any non-input element.
+     * stops backspace -> back
+     */
+    var rx = /INPUT|SELECT|TEXTAREA/i;
+
+    $(document).bind("keydown", function(e){
+        //alert('Alert Pressed : ' + e.which);
+        if( e.which == 8 ){ // 8 == backspace
+            if(!rx.test(e.target.tagName) || e.target.disabled || e.target.readOnly ){
+                e.preventDefault();
+            }
+        }
+        if(e.which== 116) {
+          e.preventDefault();
+        }
+    });
+});
+</script>    
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+<body>
+<apex:form onsubmit="return true;">
+<apex:outputpanel styleclass="cc-wrapper" layout="block">
+<apex:actionFunction name="body_refresh" rerender="calendar_nav,main_holder" status="ajaxstatus" />
+<apex:actionFunction name="nav_bar_refresh" rerender="nav_content" />
+
+<apex:actionFunction name="nav_to" action="{!navigate_to}" rerender="none" status="ajaxstatus">
+  <apex:param name="navid" value=""  />
+</apex:actionFunction>
+<apex:actionFunction name="center_switch" action="{!change_center}" rerender="nav_content,calendar_nav,main_holder" status="ajaxstatus" >
+  <apex:param name="cid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="tab_change" action="{!change_selected_tab}" rerender="dash_holder" status="ajaxstatus" oncomplete="drawChart();">
+  <apex:param name="stab" value="" />
+</apex:actionFunction>
+
+<apex:actionFunction name="report_refresh" rerender="dash_holder" status="ajaxstatus" />
+<apex:actionFunction name="chart_refresh" rerender="dash_holder" status="ajaxstatus" oncomplete="drawChart();" />
+<apex:actionFunction name="snap_date_change" action="{!refresh_scorecard}" status="ajaxstatus" rerender="mholder" />
+
+<c:HopeRx_print_header CenterRecord="{!current_center}"  />
+
+<apex:outputpanel layout="block" styleclass="cc-nav-wrapper no-print">
+  <apex:outputpanel styleclass="cc-nav-container">
+    <apex:outputpanel styleclass="cc-top-nav-container" id="nav_content" layout="block">
+      <div class="cc-top-nav-left">
+        <apex:outputpanel id="back_holder" styleclass="cc-back-container" layout="block" >
+          <apex:outputpanel ><a href="javascript:window.history.go(-1);" class="nav_color">&lt; Back</a></apex:outputpanel>
+        </apex:outputpanel>  
+      </div>
+      <div class="cc-top-nav-center">
+        <div class="cc-link-dropdown-container">
+          <span class="dropdown drop-hover">
+          <a class="dropdown-toggle nav_color " data-toggle="dropdown"><apex:outputtext value="{!current_center.name}"  style="padding-right:5px;" styleClass="c-pointer"  /><span class="caret"></span></a>
+            <ul class="dropdown-menu overflow-menu" >
+              <apex:repeat var="center" value="{!center_list}">
+                <li class="dropdown-lineitem">
+                  <a href="javascript:center_switch('{!center.id}');" style="color:#189BEB"><apex:outputtext value="{!center.name}" /></a>
+                </li>
+              </apex:repeat>
+            </ul>
+          </span>
+        </div>
+      </div>
+      <div class="cc-top-nav-right">
+        <span class="dropdown drop-hover">
+          <a class="dropdown-toggle nav_color" data-toggle="dropdown"><apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}" width="25" height="25" styleClass="c-pointer"
+            onmouseover="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_black.png')}';"
+            onmouseout="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}';"
+            onclick="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}';"
+             /></a>
+          <ul class="dropdown-menu gear-menu dropdown-menu-right">
+            <apex:repeat var="gitem" value="{!gear_menu}" >
+                <li class="dropdown-lineitem" style="display:inline-block;">
+                  <a href="{!gitem.page_url}" style="color:#189BEB;" target="{!gitem.nav_page.hyperlink_target__c}"  
+                      onmouseover="this.firstChild.src='{!URLFOR($Resource.Dental_Practice_Resources,gitem.nav_page.Image_Name_Hover__c)}';this.style.color='black';" 
+                      onmouseout="this.firstChild.src='{!URLFOR($Resource.Dental_Practice_Resources,gitem.nav_page.Image_Name__c)}';this.style.color='#189BEB';">
+                    <apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,gitem.nav_page.Image_Name__c)}" width="{!if(gitem.nav_page.name=='Salesforce','30','20')}" height="20" style="display:inline;{!if(gitem.nav_page.name=='Salesforce','position:relative;left:-7px;margin-right:-6px;','margin-right:5px;')}" />&nbsp;&nbsp;{!gitem.nav_page.name}
+                  </a>
+                </li>
+            </apex:repeat>
+          </ul>        
+          </span>
+      </div>
+    </apex:outputpanel>
+    <div class="cc-sub-nav-container" >
+      <apex:repeat var="mitem" value="{!common_header.clinical_header_items}">
+        <apex:outputpanel layout="block" styleclass="cc-sub-nav-cell" onclick="nav_to('{!mitem.id}')">
+          <button class="cc-sub-nav-top-button cc-color-{!mitem.css_class__c} cc-hover-tooltips-dark-anchor-nav">
+            <i class="{!if(mitem.image_name__c=='home','hrxicon','ccf')}-{!mitem.image_name__c} cc-color-font-white"></i>
+            <div>{!mitem.name}</div>                      
+          </button>
+          <div class="cc-button-text">          
+            {!mitem.name}
+          </div>
+          <div class="cc-button_bg cc-color-{!mitem.css_class__c}">
+            <apex:outputpanel rendered="{!if(mitem.name=='Notifications',true,false)}" layout="block"  styleclass="cc-calBadge-badge">{!dosespot_notification_count}</apex:outputpanel>
+          </div>          
+        </apex:outputpanel>
+      </apex:repeat>
+    </div> 
+
+   
+  </apex:outputpanel>
+</apex:outputpanel>
+
+<apex:outputpanel layout="block" styleclass="cc-content-wrapper" id="main_holder">
+  <apex:outputpanel layout="block" styleclass="cc-content-container">
+  <apex:outputpanel id="error_holder" ><apex:messages style="color:red;font-style:italics;padding-top:3px;" /></apex:outputpanel>
+  <apex:actionStatus id="ajaxstatus">
+    <apex:facet name="start">
+      <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1110; background-color: #f2f2f2;">
+        &nbsp;
+      </div>
+      <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1111; margin: 20% 50%">
+        <!--<apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,'Images/5Wits.gif')}"/>-->
+        <!--<img src="http://upload.wikimedia.org/wikipedia/commons/e/ed/Cursor_Windows_Vista.gif" />-->
+        <img src="{!URLFOR($Resource.Dental_Practice_Resources,'Images/Circle-out.gif')}" />
+        <!--<img src="{!URLFOR($Resource.Dental_Practice_Resources,'Images/5Wits.gif')}" />-->
+      </div>
+    </apex:facet>
+  </apex:actionStatus>  
+    
+  
+  <apex:outputpanel layout="block" styleclass="cc-clinical-content-container" style="padding-top:1em;" id="dash_holder">
+  
+  <script type="text/javascript">
+    google.charts.load("current", {packages:["timeline"]});
+    google.charts.load('current', {'packages':['corechart']});
+  </script>  
+
+ <apex:outputpanel rendered="{!if(current_tab=='Doctor Tracker',true,false)}">  
+ <script type="text/javascript">
+  function drawChart() {         
+
+    var options = {
+      {!timeline_options_tooltip}
+    };
+      
+    <apex:repeat var="timeline" value="{!doctor_timelines}">
+      var data_{!timeline.doc.id} = new google.visualization.DataTable();
+      data_{!timeline.doc.id}.addColumn({ type: 'string', id: 'Room' });
+      data_{!timeline.doc.id}.addColumn({ type: 'string', id: 'Patient' });
+      data_{!timeline.doc.id}.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+      data_{!timeline.doc.id}.addColumn({ type: 'date', id: 'Start' });
+      data_{!timeline.doc.id}.addColumn({ type: 'date', id: 'End' });
+      data_{!timeline.doc.id}.addRows({!timeline.chart_data_tooltip});
+      var chart_{!timeline.doc.id} = new google.visualization.Timeline(document.getElementById('holder_{!timeline.doc.id}'));
+      chart_{!timeline.doc.id}.draw(data_{!timeline.doc.id}, options);  
+    </apex:repeat> 
+  }  
+  
+ </script>
+ </apex:outputpanel>
+  
+ <apex:outputpanel rendered="{!if(current_tab=='Overview',true,false)}">  
+ <script type="text/javascript">  
+  function drawChart() {         
+
+   /* var options = {
+      isStacked: true,
+      height: 600,
+      width: 600,
+      legend: {position: 'top', maxLines:3},
+      colors: ['#4285f4', '#51A1A1', '#93f5cc', '#b13968', '#555555'],
+      vAxis: {minValue: 0},
+      title: 'Collections Overview'
+    };
+
+    var data = google.visualization.arrayToDataTable({!collections_pipe_chart_data});  
+    var chart = new google.visualization.SteppedAreaChart(document.getElementById('collections_chart_div'));
+    chart.draw(data, options);
+
+    var options_bar = {
+      isStacked: 'percent'
+      ,height: 350
+      ,width: 600
+      ,legend: {position: 'top', maxLines: 3}
+      ,hAxis: {
+        minValue: 0,
+        ticks: [0, .3, .6, .9, 1]
+      }
+      ,colors: ['#4285f4', '#51A1A1', '#93f5cc', '#b13968', '#555555']
+      ,title: 'Collections Overview'
+    };
+    //var bar_data = google.visualization.arrayToDataTable({!collections_stacked_barchart_data});
+    var bar_data = google.visualization.arrayToDataTable({!collections_stacked_barchart_data});
+    var column_chart = new google.visualization.ColumnChart(document.getElementById("collections_columnchart_div"));
+    //[['Interval','Net Collections','Anticipated','Rescheduled Anticipated','Past Due','Goal'],['Last Month', 0.944040307692307692307692307692308,0,0,0E+1,72747.60],['This Month', 0.247512229629629629629629629629630,0.0170740740740740740740740740740741,0.0513888888888888888888888888888889,0.235374074074074074074074074074074,605678.49],['Next Month', 0,0.00433332857142857142857142857142857,0.000800892857142857142857142857142857,0,1392812.09]]
+    column_chart.draw(bar_data, options_bar);
+    var bar_chart = new google.visualization.BarChart(document.getElementById("collections_barchart_div"));
+    bar_chart.draw(bar_data, options_bar);*/
+    
+    var pie_data = google.visualization.arrayToDataTable([
+          ['NPS Category', 'Patient'],
+          ['Promoters',     {!lifetime_promoter}],
+          ['Passives',      {!lifetime_passive}],
+          ['Detractors',  {!lifetime_detractor}]
+        ]);
+
+        var options_pie = {
+          title: 'Lifetime NPS Score',
+          is3D: true
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('nps_lifetime_div'));
+        chart.draw(pie_data, options_pie);
+  }  
+  
+ </script>
+ </apex:outputpanel>
+  
+    <apex:outputpanel layout="block" styleclass="report_tab_container">   
+      <apex:repeat var="tab" value="{!report_list}">
+        <apex:outputpanel layout="block" styleclass="{!if(tab==current_tab,'selected_report_tab','report_tab')}" onclick="tab_change('{!tab}');">{!tab}</apex:outputpanel>
+      </apex:repeat>
+    </apex:outputpanel>
+     
+      
+    <apex:outputpanel layout="block" styleclass="report_view_holder">
+      <apex:outputpanel layout="block" styleclass="report_filter_holder">
+        <apex:outputpanel layout="block" rendered="{!if(current_tab=='Doctor Tracker',true,false)}">
+          Calendar Date : &nbsp; <apex:input type="date" value="{!timeline_date}"  onchange="chart_refresh();" />
+        </apex:outputpanel>      
+        <apex:outputpanel layout="block" rendered="{!if(current_tab=='Medical Clearance',true,false)}">
+          Sort by :&nbsp; <apex:selectList value="{!mc_sort_order}" size="1" styleclass="filter_select" onchange="report_refresh();">
+			          <apex:selectOptions value="{!clearance_sort_options}" />
+			        </apex:selectList>
+        </apex:outputpanel>
+        <apex:outputpanel layout="block" rendered="{!if(current_tab=='Upcoming Surgeries',true,false)}">
+          Sort by :&nbsp; <apex:selectList value="{!us_sort_order}" size="1" styleclass="filter_select" onchange="report_refresh();">
+			          <apex:selectOptions value="{!upcoming_surgery_sort_options}" />
+			        </apex:selectList>
+        </apex:outputpanel>
+        &nbsp;
+      </apex:outputpanel>
+      
+      <apex:outputpanel layout="block" rendered="{!if(current_tab=='Overview',true,false)}" styleclass="report_detail_holder">
+        <div class="report_detail_inset" style="display:flex;align-items:center;padding-top:0;flex-wrap:wrap;">
+          <!-- <div id="collections_chart_div" style="position:relative;top:-60px;display:hidden;"></div> <br />
+          <div id="collections_barchart_div" style="position:relative;top:-60px;display:hidden;"></div> <br />
+          <div id="collections_columnchart_div" style="position:relative;top:-60px;display:hidden;"></div> <br /> -->
+          <div style="display:flex;"><div id="nps_lifetime_div" style="position:relative;top:-60px;width:900px;height:500px;"></div>
+            <div><span style="font-size:16pt;font-weight:bold;">Net Promoter Score</span><br />
+            <span style="font-size:30pt;font-weight:bold;">{!lifetime_nps}&nbsp;%</span></div></div> <br />
+        </div>
+      </apex:outputpanel>
+      
+      
+      <apex:outputpanel layout="block" rendered="{!if(current_tab=='Doctor Tracker',true,false)}" styleclass="report_detail_holder">
+        <div class="report_detail_inset">
+          <!-- <div class="doc_name_holder">Dr. Bob</div>
+          <div id="example2.1" style="height: 200px;"></div><br /><br /><br /> --> 
+          <apex:repeat var="timeline" value="{!doctor_timelines}">
+            <div class="doc_name_holder">{!timeline.doc.name}</div>
+            <div id="holder_{!timeline.doc.id}" ></div><br />    
+          </apex:repeat>
+        </div>
+      </apex:outputpanel>
+      
+      <apex:outputpanel layout="block" rendered="{!if(current_tab=='Medical Clearance',true,false)}" styleclass="report_detail_holder">
+        <div class="report_detail_inset">
+        <apex:variable var="rowclassname" value="odd_mc" />
+        <apex:repeat var="mc" value="{!open_medical_clearances}">
+          <div class="{!rowclassname}">
+            <div class="mc_patient_col">
+              <apex:outputtext value="{!mc.clearance.account__r.name}" /><br />
+              <a href="ccare_clinical_pot?ptid={!mc.clearance.account__c}&ctrid={!current_center.id}" target="__blank">
+                <apex:outputtext value="{!mc.clearance.patient_pot__r.name}" />
+              </a>              
+            </div>
+            <div class="mc_condition_col">
+              <apex:outputfield value="{!mc.clearance.Health_Condition__c}" /><br />
+              <apex:outputfield value="{!mc.clearance.Date_Clearance_Requested__c}" />&nbsp;-&nbsp;<apex:outputfield value="{!mc.clearance.Requested_Via__c}" />
+              <apex:outputpanel rendered="{!if(mc.clearance.Doctor_Phone__c!='',true,false)}"><br /><b>Phone :</b> {!mc.clearance.doctor_phone__c}</apex:outputpanel> 
+            </div>
+            <div class="mc_doctor_col">
+              <apex:outputfield value="{!mc.clearance.Doctor_Name__c}" /><br />
+              <apex:outputfield value="{!mc.clearance.Doctor_Specialty__c}" />
+              <apex:outputpanel rendered="{!if(mc.clearance.Doctor_Fax__c!='',true,false)}"><br /><b>Fax :</b> {!mc.clearance.doctor_fax__c}</apex:outputpanel>              
+            </div>
+            <div class="mc_surgery_col">
+              Surgery Date :&nbsp; <apex:outputtext value="{!mc.surgical_date}" escape="false" /><br />
+              <apex:outputpanel rendered="{!mc.display_surgery_days_out}">
+                <span class="{!if(mc.num_surgery_days_out<=5,'surgery_days_warning','')}"> {!mc.num_surgery_days_out}&nbsp;Days Out</span>
+              </apex:outputpanel> 
+            </div>
+          </div>
+          <apex:variable var="rowclassname" value="{!if(rowclassname=='odd_mc','even_mc','odd_mc')}" />
+        </apex:repeat>
+        </div>
+      </apex:outputpanel>
+      
+      <apex:outputpanel layout="block" rendered="{!if(current_tab=='Upcoming Surgeries',true,false)}" styleclass="report_detail_holder">
+        <div class="report_detail_inset">
+        <table class="bend_table">
+          <tr class="bend_header">
+            <td>Patient</td>
+            <td>Surgery Date</td>
+            <td>Doctor</td>
+            <td>Appointment</td>
+          </tr>
+          <apex:variable var="rowclassname" value="odd" />        
+          <apex:repeat var="surgery" value="{!upcoming_surgery_appointments}">
+            <tr class="{!rowclassname}">            
+              <td>
+                <a href="ccare_clinical_patient?ptid={!surgery.Account__c}&ctrid={!current_center.id}" target="__blank">
+                  <apex:outputtext value="{!surgery.account__r.name}" />
+                </a>                  
+              </td>              
+              <td>
+                <apex:outputText value="{0,date,M'/'dd'/'yyyy}">
+                  <apex:param value="{!surgery.Apt_Date__c}"/>
+                </apex:outputText>
+              </td>             
+              <td><apex:outputtext value="{!surgery.doctor__r.name}" /></td>             
+              <td><apex:outputtext value="{!surgery.patient_pot_apt__r.name}" /></td>                                      
+            </tr>
+            <apex:variable var="rowclassname" value="{!if(rowclassname=='odd','even','odd')}" />
+          </apex:repeat>
+        </table>
+        </div>
+      </apex:outputpanel>
+      
+      <apex:outputpanel layout="block" rendered="{!if(current_tab=='Dr Mastery',true,false)}" id="mholder">
+      <p class="filter_header2">Scorecard for &nbsp;&nbsp;
+  <apex:selectList value="{!scorecard_user}" onchange="snap_date_change();" size="1" >
+    <apex:selectOptions value="{!user_option_list}" />
+  </apex:selectList>&nbsp;&nbsp;
+
+  <apex:selectList value="{!current_month}" onchange="snap_date_change();" size="1" >
+    <apex:selectOptions value="{!month_option_list}" />
+  </apex:selectList>&nbsp;&nbsp;
+  <apex:selectList value="{!current_year}" onchange="snap_date_change();" size="1" >
+    <apex:selectOptions value="{!year_option_list}" />
+  </apex:selectList>
+</p>  
+    
+  <apex:outputpanel id="error_holder2" ><apex:messages style="color:red;font-style:italics;padding-top:3px;" /></apex:outputpanel>
+  <apex:outputpanel layout="block" id="sholder" rendered="{!if(scorecard_data.size>0 && render_scorecard,true,false)}">    
+    <div style="display:flex;width:100%;">
+    <div class="summary_holder_box">     
+      <div class="summary_box_col">
+        <p class="summary_doctor_info">
+          <span class="subscript_span">Summary for</span>
+          <span class="doctor_name">{!scorecard_name}</span>
+          <span class="scorecard_date">{!formatted_card_date}</span>
+        </p>
+        <p class="summary_mastery_info">        
+          <span class="subscript_span"><b>Overall</b> Mastery Level</span>
+          <span class="background_layer">
+            <span class="mastery_score {!scorecard.overall_mastery_text}">{!scorecard.overall_mastery_text}</span>
+          </span>
+        </p>
+      </div>
+      <div class="summary_box_col" style="flex-grow:1;padding-right:5px;padding-top:5px;padding-bottom:5px;">
+        <div class="next_steps_holder">
+          <span class="subscript_span">Next Steps</span>
+          <ul class="next_steps_list">
+            <apex:repeat var="nstep" value="{!scorecard.overall_next_steps}">
+              <li class="next_steps_step">{!nstep}</li>
+            </apex:repeat>            
+          </ul>
+        </div>
+      </div>
+ 
+    </div>
+     
+    <div class="gm_holder">
+      <apex:outputtext escape="false" value="{!gross_margin_target_text}" />
+    </div>
+    
+    </div>
+    
+    <div class="subscore_section">
+      <div class="metrics_holder">
+        <div class="metrics_box_col">
+          <div class="metrics_label_box">
+            <span class="metrics_label">Mastery Path Education Credits (MPEs)</span>
+            <div class="next_steps_hover"><i class="ccf-search"></i>
+              <div class="metrics_label_tooltip">
+                <span class="subscript_span">Next Steps</span>
+                <ul class="next_steps_list">
+                  <apex:repeat var="nstep" value="{!scorecard.cce_next_steps}">
+                    <li class="next_steps_step">{!nstep}</li>
+                  </apex:repeat>            
+                </ul>      
+              </div>
+            </div>
+          </div>
+          <p class="summary_mastery_info">        
+            <span class="subscript_span">Mastery Level</span>
+            <span class="background_layer">
+              <span class="mastery_score {!scorecard.cce_mastery_level_text}">{!scorecard.cce_mastery_level_text}</span>
+            </span>
+          </p>
+        </div>
+      </div>
+      
+      <div class="metrics_holder">
+        <div class="metrics_box_col">
+          <div class="metrics_label_box">
+            <span class="metrics_label">In Network</span>
+            <div class="next_steps_hover"><i class="ccf-search"></i>
+              <div class="metrics_label_tooltip">
+                <span class="subscript_span">Next Steps</span>
+                <ul class="next_steps_list">
+                  <apex:repeat var="nstep" value="{!scorecard.network_next_steps}">
+                    <li class="next_steps_step">{!nstep}</li>
+                  </apex:repeat>            
+                </ul>      
+              </div>            
+            </div>
+          </div>
+          <p class="summary_mastery_info">        
+            <span class="subscript_span">Mastery Level</span>
+            <span class="background_layer">
+              <span class="mastery_score {!scorecard.in_network_mastery_text}">{!scorecard.in_network_mastery_text}</span>
+            </span>
+          </p>
+        </div>
+      </div>
+      
+      <div class="metrics_holder">
+        <div class="metrics_box_col">
+          <div class="metrics_label_box">
+            <span class="metrics_label">Centers of Excellence (COE)</span>
+            <div class="next_steps_hover"><i class="ccf-search"></i>
+              <div class="metrics_label_tooltip">
+                <span class="subscript_span">Next Steps</span>
+                <ul class="next_steps_list">
+                  <apex:repeat var="nstep" value="{!scorecard.coe_next_steps}">
+                    <li class="next_steps_step">{!nstep}</li>
+                  </apex:repeat>            
+                </ul>      
+              </div> 
+            </div>
+          </div>
+          <p class="summary_mastery_info">        
+            <span class="subscript_span">Mastery Level</span>
+            <span class="background_layer">
+              <span class="mastery_score {!scorecard.coe_mastery_text}">{!scorecard.coe_mastery_text}</span>
+            </span>
+          </p>
+        </div>
+      </div>
+             
+    </div>   
+    
+    <!-- Metrics Breakout Table -->
+     
+    <div class="detail_holder">
+      <apex:outputtext value="{!scorecard.details_table_html}" escape="false"/>
+    </div>
+     
+    <br /><br /><apex:image value="{!$Resource.DoctorMasteryPathImage}"/> 
+        
+  </apex:outputpanel>
+  
+  <apex:outputtext value="There is no scorecard data available to display" rendered="{!if(scorecard_data.size>0,false,true)}" />      
+      </apex:outputpanel>
+    
+    </apex:outputpanel> 
+  </apex:outputpanel>
+  
+  
+  
+  </apex:outputpanel> <!--end cc-content-container-->
+</apex:outputpanel> <!--end cc-content-wrapper-->
+</apex:outputpanel>
+
+<script>  
+  function refresh_top_nav() { 
+    nav_bar_refresh();  
+    setTimeout("refresh_top_nav()",600000); 
+  }  
+
+  window.onload = function() { 
+    setTimeout("refresh_top_nav();",600000);  
+  }
+</script>
+
+</apex:form>
+</body>
+</apex:page>

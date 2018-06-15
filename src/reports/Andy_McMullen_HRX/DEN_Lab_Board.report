@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Account__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Patient_POT_Apt__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Patient_POT_Apt__c.Doctor_Notes__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Patient_POT_Apt__c.Clinical_Appointment__c.Lab_Time__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Clinical_Apt_Calendar__c$Account__c.Center_Location__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Denver</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Clinical_Apt_Calendar__c$Patient_POT_Apt__c.Clinical_Appointment__c.Lab_Time__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Clinical_Apt_Calendar__c$Patient_POT_Apt__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>Prosth Exam</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Clinical_Apt_Calendar__c$Apt_Date__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>DEN-Lab Board</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Clinical_Apt_Calendar_Only__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Clinical_Apt_Calendar__c$Patient_POT_Apt__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Clinical_Apt_Calendar__c$Apt_Date__c</dateColumn>
+        <interval>INTERVAL_NEXT30</interval>
+    </timeFrameFilter>
+</Report>

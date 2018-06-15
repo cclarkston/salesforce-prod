@@ -1,0 +1,50 @@
+<messaging:emailTemplate subject="test" recipientType="Lead" relatedToType="Lead"
+Subject="ClearChoice Dental Implant Consultation Appointment">
+<messaging:htmlEmailBody >
+
+<img id="theImage" src="http://www.clearchoice.com/files/images/EmailTemplates/ClearChoiceLogo.png" width="387" height="114"/> 
+<br/>
+<hr color="DarkBlue"/>
+
+Hello {!recipient.FirstName},<br/>
+<br/>
+
+We want to thank you for choosing ClearChoice Dental Implant Center as a possible care provider for your dental treatment.  It is only by obtaining correct information that you can make an informed decision whether our treatment options will work for you.   Your appointment will:<br/>
+<ul>
+<li>Address your dental concerns</li>
+<li>Give you an estimated cost of treatment</li>
+<li>Help you understand and educate yourself to make a good decision</li>
+</ul>
+
+<br/>
+Your free consultation is scheduled for {!recipient.DateTime_Consult_Scheduled__c}      
+<br/>
+<br/> 
+We have set our standards high, to provide our patients with the best possible results.  ClearChoice brings together state of the art technology, surgical procedures and restorative techniques to enhance your youthful appearance and lifestyle. We are not just restoring a healthy smile but giving you back a full, active life! 
+<br/>
+<br/>
+Dental implants are a final answer to your dental problems!  We are available Monday through Friday {!recipient.Center__r.Call_Center_Marketing__c} between the hours of 8:00am-5:00pm to answer any further questions. 
+<br/>
+<br/>
+Sincerely,<br/>
+<br/>
+
+{!recipient.Call_Center_Agent__r.Name}<br/>
+Dental Implant Consultant<br/>
+<br/>
+
+{!recipient.Center__r.Name} ClearChoice Dental Center<br/>
+{!recipient.Center__r.Street_1__c}&nbsp;
+{!recipient.Center__r.Street_2__c}<br/>
+{!recipient.Center__r.City__c}, {!recipient.Center__r.State__c} {!recipient.Center__r.Zip_Code__c}<br/>
+{!recipient.Center__r.Call_Center_Marketing__c}
+<br/>
+<br/>
+
+<a href="{!recipient.Center__r.Map_Directions_URL__c}">Click Here</a> to view map and directions for the center.<br/>
+<br/>
+<b><i>P.S. Please arrive 10 minutes early for your appointment as we will enter your initial information and get your appointment started promptly.</i></b>
+
+
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

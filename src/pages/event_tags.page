@@ -1,0 +1,90 @@
+<apex:page sidebar="false" showHeader="false" controller="ctrl_workshop_badge" >
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}"  />
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<style>
+  p.break {
+    page-break-after:always;
+  }
+  
+  p.ticket_box {
+    border:1px solid black;
+    width:288px;
+    height:384px;
+    max-height:384px;
+    margin-left:10px;
+    margin-top:2em;
+    margin-bottom:5em;
+
+    margin-right:2em;
+    box-shadow: 4px 4px 10px 4px rgba(36, 161, 163, 0.81);
+    -moz-box-shadow: 4px 4px 10px 4px rgba(36, 161, 163, 0.81);
+    -webkit-box-shadow: 4px 4px 10px 4px rgba(36, 161, 163, 0.81);
+    display:inline-block;
+    float: left;
+    position:relative;
+  }
+  
+  p.ticket_box span.footer {
+    position: absolute;
+    bottom: 30px;
+    right: 20px;
+  }
+  
+  span.rotation {
+     transform:rotate(90deg);
+     -ms-transform:rotate(90deg); /* IE 9 */
+     -webkit-transform:rotate(90deg); /* Opera, Chrome, and Safari */
+     position:relative;
+     right:-20px;
+     top:55px;
+     display:block;
+     width:280px;
+  }
+  
+  div.tag_holder {
+    width:700px;
+  }
+</style>
+
+<apex:repeat value="{!all_tags}" var="tags" >
+  <div class="tag_holder">
+  <p class='ticket_box'><span class="rotation">
+  <br /><span style='font-weight:bold;font-size:18pt;'>{!tags.tag_detail.practice_doctor__r.title__c} {!tags.tag_detail.practice_doctor__r.first_name__c} {!tags.tag_detail.practice_doctor__r.last_name__c} </span>
+  <br /><br />
+  <span style='font-style:italic;font-size:12pt;'>{!tags.tag_detail.pp_workshop__r.name}</span>
+  <br /> 
+  <apex:outputtext value="{!tags.tag_detail.pp_workshop__r.Location_Address__c}" escape="false" />
+  <br />
+
+  <br /><br /><br />
+  <apex:image url="{!URLFOR($Resource.PracticePrivLogo)}" /></span>   
+  <br /><br />  <span class="footer"><!--<apex:image alt="testing"  url="http://www.cmcdportal.com/includes/barcode.php?size=60&text={!tags.tag_detail.id}" />--></span>
+  </p>
+<apex:outputPanel rendered="{!tags.page_break}"><p class="break">&nbsp;</p></apex:outputPanel>
+  </div>
+</apex:repeat>
+
+<apex:outputPanel rendered="{!print_blanks}">
+<p class="break">&nbsp;</p>
+
+<apex:repeat value="{!free_tags}" var="tags" >
+  <div class="tag_holder">
+  <p class='ticket_box'><span class="rotation">
+  <br /><span style='font-weight:bold;font-size:18pt;'>&nbsp;</span><br />
+  <br /><br />
+  <span style='font-style:italic;font-size:12pt;'>&nbsp;</span>
+  <br /> 
+  <br /><br /><br />
+  <br />
+
+  <br /><br /><br />
+  <apex:image url="{!URLFOR($Resource.PracticePrivLogo)}" /></span>   
+  <br /><br />  <span class="footer"><!--<apex:image alt="testing"  url="http://www.cmcdportal.com/includes/barcode.php?size=60&text={!tags.workshop_detail.id}" />--></span>
+  </p>
+<apex:outputPanel rendered="{!tags.page_break}"><p class="break">&nbsp;</p></apex:outputPanel>
+  </div>
+</apex:repeat>
+
+</apex:outputPanel>
+
+</apex:page>

@@ -1,0 +1,3369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>AddInfluence</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <fields>
+        <fullName>AO4_Count__c</fullName>
+        <description>In order to count the # of AO4s for the Center Dashboard reports, Preliminary Treatment Plan must be evaluated. Multi-select picklists must be evaluated one possible value at time, hence the nested IF statements.</description>
+        <externalId>false</externalId>
+        <formula>/*Old version of the formula - changed on 3/7/2013 by CM*/
+/*IF(INCLUDES( Preliminary_Treatment_Plan__c , &quot;AO4 Upper&quot;),
+     IF(INCLUDES( Preliminary_Treatment_Plan__c , &quot;AO4 Lower&quot;), 2, 
+           IF(INCLUDES( Preliminary_Treatment_Plan__c , &quot;AO4 Edentulous Lower&quot;), 2, 
+           1)),
+IF(INCLUDES( Preliminary_Treatment_Plan__c , &quot;AO4 Edentulous Upper&quot;),
+     IF(INCLUDES( Preliminary_Treatment_Plan__c , &quot;AO4 Lower&quot;), 2, 
+           IF(INCLUDES( Preliminary_Treatment_Plan__c , &quot;AO4 Edentulous Lower&quot;), 2, 
+           1)), 
+IF(INCLUDES( Preliminary_Treatment_Plan__c , &quot;AO4 Lower&quot;),
+     IF(INCLUDES( Preliminary_Treatment_Plan__c , &quot;AO4 Upper&quot;), 2, 
+           IF(INCLUDES( Preliminary_Treatment_Plan__c , &quot;AO4 Edentulous Upper&quot;), 2, 
+           1)),
+IF(INCLUDES( Preliminary_Treatment_Plan__c , &quot;AO4 Edentulous Lower&quot;),
+     IF(INCLUDES( Preliminary_Treatment_Plan__c , &quot;AO4 Upper&quot;), 2, 
+           IF(INCLUDES( Preliminary_Treatment_Plan__c , &quot;AO4 Edentulous Upper&quot;), 2, 
+           1)),
+IF(INCLUDES( Preliminary_Treatment_Plan__c , &quot;DBL AO4&quot;), 
+     2, 
+           IF(INCLUDES( Preliminary_Treatment_Plan__c , &quot;DBL AO4 Edentulous&quot;), 
+           2, 
+     0
+     )
+    )
+   )
+  )
+ )
+)*/
+/*new version of the formula - it&apos;s easier to manage and I can drive validation rules off this one to catch when people enter too many treatment options (CM 3/7/2013)*/
+0 + if(includes(Preliminary_Treatment_Plan__c, &quot;AO4 Upper&quot;),1,0) 
++ if(includes(Preliminary_Treatment_Plan__c, &quot;AO4 Lower&quot;),1,0) 
++ if(includes(Preliminary_Treatment_Plan__c, &quot;AO4 Edentulous Upper&quot;),1,0) 
++ if(includes(Preliminary_Treatment_Plan__c, &quot;AO4 Edentulous Lower&quot;),1,0) 
+
++ if(includes(Preliminary_Treatment_Plan__c, &quot;DBL AO4 Edentulous&quot;),2,0) 
++ if(includes(Preliminary_Treatment_Plan__c, &quot;Transitional DBL AO4&quot;),2,if(includes(Preliminary_Treatment_Plan__c, &quot;DBL AO4&quot;),2,0)) 
++ if(includes(Preliminary_Treatment_Plan__c, &quot;Phased Barless Interim Upper AO4&quot;),1,0) 
++ if(includes(Preliminary_Treatment_Plan__c, &quot;Phased Barless Interim Lower AO4&quot;),1,0) 
++ if(includes(Preliminary_Treatment_Plan__c, &quot;Phased Barless Interim Double AO4&quot;),2,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>AO4 Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AO_4_Amount__c</fullName>
+        <description>Displays the Negotiated Total Amount of treatments involving AO-4 procedures, for Center Sales Dashboard comparison.</description>
+        <externalId>false</externalId>
+        <formula>IF(  OR(INCLUDES( Preliminary_Treatment_Plan__c , &quot;AO4 Upper&quot;),
+             INCLUDES( Preliminary_Treatment_Plan__c , &quot;AO4 Lower&quot;),
+             INCLUDES( Preliminary_Treatment_Plan__c , &quot;AO4 Edentulous Upper&quot;),
+             INCLUDES( Preliminary_Treatment_Plan__c , &quot;AO4 Edentulous Lower&quot;),
+             INCLUDES( Preliminary_Treatment_Plan__c , &quot;DBL AO4&quot;),
+             INCLUDES( Preliminary_Treatment_Plan__c , &quot;DBL AO4 Edentulous&quot;)
+            ), 
+       Negotiated_Total_Amount__c, 
+       0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>AO-4 Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>AccountId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Additional_Treatment_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Prostho Exam Adjustment Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Amount</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Amount_Collected_Before_Final_Bridge__c</fullName>
+        <externalId>false</externalId>
+        <label>Amount Collected Before Final Bridge</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Amount_Collected_Before_Surgery__c</fullName>
+        <externalId>false</externalId>
+        <label>Amount Collected Before Surgery</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Amount_Collected_at_Consult__c</fullName>
+        <externalId>false</externalId>
+        <label>Amount Collected at Consult</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Amount_Collected_at_Prostho_Exam__c</fullName>
+        <externalId>false</externalId>
+        <label>Amount Collected at Prostho Exam</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Amount_Due_Before_Final_Bridge__c</fullName>
+        <externalId>false</externalId>
+        <label>Amount Due Before Final Bridge</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Amount_Due_Before_Surgery__c</fullName>
+        <externalId>false</externalId>
+        <label>Amount Due Before Surgery</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Amount_Financed__c</fullName>
+        <externalId>false</externalId>
+        <label>Amount Financed</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Anticipated_Payments__c</fullName>
+        <externalId>false</externalId>
+        <label>Anticipated Payments</label>
+        <summarizedField>CCPayment__c.Payment_Amount__c</summarizedField>
+        <summaryFilterItems>
+            <field>CCPayment__c.Payment_Status__c</field>
+            <operation>equals</operation>
+            <value>Anticipated, Anticipated Promise Note,HCF In Process, Anticipated PPF</value>
+        </summaryFilterItems>
+        <summaryForeignKey>CCPayment__c.Opportunity__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>At_Risk_Reason__c</fullName>
+        <externalId>false</externalId>
+        <label>At Risk Reason</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>At_Risk__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>At Risk</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Audit_Follow_Up_Date__c</fullName>
+        <description>This is a key field for the audit team to follow up on records in the future.</description>
+        <externalId>false</externalId>
+        <label>Audit Follow Up Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Audit_Notes__c</fullName>
+        <description>This is an available field for the data team to use while auditing starts.</description>
+        <externalId>false</externalId>
+        <label>Audit Notes</label>
+        <length>1024</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Audit_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Audit Status</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Manager Follow Up Requested</fullName>
+                    <default>false</default>
+                    <label>Manager Follow Up Requested</label>
+                </value>
+                <value>
+                    <fullName>Audit Passed</fullName>
+                    <default>false</default>
+                    <label>Audit Passed</label>
+                </value>
+                <value>
+                    <fullName>Investigating</fullName>
+                    <default>false</default>
+                    <label>Investigating</label>
+                </value>
+                <value>
+                    <fullName>Issue Corrected</fullName>
+                    <default>false</default>
+                    <label>Issue Corrected</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Balance_Due__c</fullName>
+        <externalId>false</externalId>
+        <formula>Negotiated_Total_Amount__c  -  Total_Collected__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Balance Due</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>CDate__c</fullName>
+        <description>The date representation of the records created date</description>
+        <externalId>false</externalId>
+        <formula>DATEVALUE( CreatedDate)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>CDate</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Call_Back__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(DATEvalue(Account.CreatedDate) == DATEvalue(CreatedDate) ,0,1)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Used for Reports</inlineHelpText>
+        <label>Call Back</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CampaignId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Cancel_Date__c</fullName>
+        <description>Field that tracks the time a start was actually cancelled.  The only way this resets,  is if a start goes to a noncancelled status,  and then gets reset back into a cancelled state later.  WIll be used for Dashboard reporting.</description>
+        <externalId>false</externalId>
+        <label>Cancel Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Cancel_Reason__c</fullName>
+        <externalId>false</externalId>
+        <label>Cancel Reason</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>StageName</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Spouse</fullName>
+                    <default>false</default>
+                    <label>Spouse</label>
+                </value>
+                <value>
+                    <fullName>Financial</fullName>
+                    <default>false</default>
+                    <label>Financial</label>
+                </value>
+                <value>
+                    <fullName>Relocating</fullName>
+                    <default>false</default>
+                    <label>Relocating</label>
+                </value>
+                <value>
+                    <fullName>Death in the Family</fullName>
+                    <default>false</default>
+                    <label>Death in the Family</label>
+                </value>
+                <value>
+                    <fullName>Patient Died</fullName>
+                    <default>false</default>
+                    <label>Patient Died</label>
+                </value>
+                <value>
+                    <fullName>Poor Patient Service</fullName>
+                    <default>false</default>
+                    <label>Poor Patient Service</label>
+                </value>
+                <value>
+                    <fullName>Health Issues</fullName>
+                    <default>false</default>
+                    <label>Health Issues</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>Doctor Declined Case</fullName>
+                    <default>false</default>
+                    <label>Doctor Declined Case</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Cancelled Not Rescheduled</controllingFieldValue>
+                <valueName>Spouse</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cancelled Not Rescheduled</controllingFieldValue>
+                <valueName>Financial</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cancelled Not Rescheduled</controllingFieldValue>
+                <valueName>Relocating</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cancelled Not Rescheduled</controllingFieldValue>
+                <valueName>Death in the Family</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cancelled Not Rescheduled</controllingFieldValue>
+                <valueName>Patient Died</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cancelled Not Rescheduled</controllingFieldValue>
+                <valueName>Poor Patient Service</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cancelled Not Rescheduled</controllingFieldValue>
+                <valueName>Health Issues</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cancelled Not Rescheduled</controllingFieldValue>
+                <valueName>Other</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cancelled Not Rescheduled</controllingFieldValue>
+                <valueName>Doctor Declined Case</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Cancel_Simple_Date__c</fullName>
+        <description>The date representation of the canellation datetime</description>
+        <externalId>false</externalId>
+        <formula>DATEVALUE( Cancel_Date__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Cancel Simple Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>CareCredit_Dispute_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>CareCredit Dispute Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>CareCredit_Dispute__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>CareCredit Dispute?</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Cash_Check_CC__c</fullName>
+        <externalId>false</externalId>
+        <label>Cash/Check/CC</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Celigo_Sync_Helper__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Celigo Sync Helper</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Celigo_Update__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Celigo Update</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Center_Information__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Center Information</label>
+        <referenceTo>Center_Information__c</referenceTo>
+        <relationshipLabel>Opportunities</relationshipLabel>
+        <relationshipName>Opportunities</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Center_Sales_Region__c</fullName>
+        <externalId>false</externalId>
+        <formula>text(  Account.Center__r.Sales_Region__c )</formula>
+        <label>Center Sales Region</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Check_In_Code__c</fullName>
+        <externalId>false</externalId>
+        <formula>Short_Code__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Check In Code</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Check_In_Username__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+NOT(ISBLANK(Short_Code__c)),
+    Account.LastName,
+    &apos;&apos;
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Check In Username</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Christmas_In_July__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Christmas In July</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CloseDate</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Completed_Stage__c</fullName>
+        <externalId>false</externalId>
+        <label>Completed Stage</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>StageName</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Payment Arrangements Made</fullName>
+                    <default>false</default>
+                    <label>Payment Arrangements Made</label>
+                </value>
+                <value>
+                    <fullName>Payment Expected This Month</fullName>
+                    <default>false</default>
+                    <label>Payment Expected This Month</label>
+                </value>
+                <value>
+                    <fullName>Payment Expected Next Month</fullName>
+                    <default>false</default>
+                    <label>Payment Expected Next Month</label>
+                </value>
+                <value>
+                    <fullName>Payment Expected TBD</fullName>
+                    <default>false</default>
+                    <label>Payment Expected TBD</label>
+                </value>
+                <value>
+                    <fullName>Multipile Payments</fullName>
+                    <default>false</default>
+                    <label>Multipile Payments</label>
+                </value>
+                <value>
+                    <fullName>Financing Difficulty</fullName>
+                    <default>false</default>
+                    <label>Financing Difficulty</label>
+                </value>
+                <value>
+                    <fullName>Patient Non Responsive</fullName>
+                    <default>false</default>
+                    <label>Patient Non Responsive</label>
+                </value>
+                <value>
+                    <fullName>Medical Clearance Pending</fullName>
+                    <default>false</default>
+                    <label>Medical Clearance Pending</label>
+                </value>
+                <value>
+                    <fullName>Not Moving Forward</fullName>
+                    <default>false</default>
+                    <label>Not Moving Forward</label>
+                </value>
+                <value>
+                    <fullName>Non Candidate</fullName>
+                    <default>false</default>
+                    <label>Non Candidate</label>
+                </value>
+                <value>
+                    <fullName>Doctor Declined Case</fullName>
+                    <default>false</default>
+                    <label>Doctor Declined Case</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Completed</controllingFieldValue>
+                <valueName>Payment Arrangements Made</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Completed</controllingFieldValue>
+                <valueName>Payment Expected This Month</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Completed</controllingFieldValue>
+                <valueName>Payment Expected Next Month</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Completed</controllingFieldValue>
+                <valueName>Payment Expected TBD</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Completed</controllingFieldValue>
+                <valueName>Financing Difficulty</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Completed</controllingFieldValue>
+                <valueName>Patient Non Responsive</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Completed</controllingFieldValue>
+                <valueName>Medical Clearance Pending</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Completed</controllingFieldValue>
+                <valueName>Not Moving Forward</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Completed</controllingFieldValue>
+                <valueName>Non Candidate</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Completed</controllingFieldValue>
+                <valueName>Doctor Declined Case</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Consult_Pre_Screen__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE(Account.Pre_Screen__c, &quot;Green&quot;, 1, &quot;Yellow&quot;, 1, &quot;Not Checked&quot;, 1, 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Used for Report Calculations</inlineHelpText>
+        <label>Consult Pre Screen</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ContractId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Current_Owner__c</fullName>
+        <externalId>false</externalId>
+        <formula>Current_Prosth_Owner__r.FirstName + &apos; &apos; + Current_Prosth_Owner__r.LastName</formula>
+        <label>Current Owner</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Current_Prosth_Owner__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The pec currently responsible for this start.</description>
+        <externalId>false</externalId>
+        <label>Current Prosth Owner</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Opportunities</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Data_Team_Cancelled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If the Data team is forced to cancel a start, they will check this box. Accumulation of Data Team cancellations will reflect poor data hygiene on the PEC&apos;s hygiene scores.</description>
+        <externalId>false</externalId>
+        <label>Data_Team_Cancelled</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Date_Amount_Due_or_Date_Payment_Made__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Amount Due or Date Payment Made</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Days_Since_Consult__c</fullName>
+        <description>Calculates the number of days between the start date and the consult date</description>
+        <externalId>false</externalId>
+        <formula>/*Modified by cm on 2015-01-08
+  Now using prosth_exam_date_paid__c as the date a start is considered valid
+DATEVALUE( CreatedDate ) - DATEVALUE( Account.CreatedDate )*/
+
+if(isblank(Prosth_Exam_Paid_Date__c),today()   -  DATEVALUE( Account.CreatedDate ),Prosth_Exam_Paid_Date__c - DATEVALUE( Account.CreatedDate ))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Days Since Consult</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Days_btwn_Prostho_Exam_Date_Creation__c</fullName>
+        <externalId>false</externalId>
+        <formula>CloseDate - DATEVALUE( CreatedDate)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Days btwn Prostho Exam Date &amp; Creation</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Description</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Disbursed_Adjustment__c</fullName>
+        <externalId>false</externalId>
+        <label>Disbursed Adjustment</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Disbursed_Finance_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Disbursed Finance Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Earliest_Payment_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Earliest Payment Date</label>
+        <summarizedField>CCPayment__c.Payment_Date__c</summarizedField>
+        <summaryFilterItems>
+            <field>CCPayment__c.Payment_Status__c</field>
+            <operation>equals</operation>
+            <value>Anticipated, Anticipated Promise Note, Collected, Collected Promise Note, Anticipated Payment Cancelled</value>
+        </summaryFilterItems>
+        <summaryForeignKey>CCPayment__c.Opportunity__c</summaryForeignKey>
+        <summaryOperation>min</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Eligible_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Eligible Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Email_Address__c</fullName>
+        <description>For the Eloqua team</description>
+        <externalId>false</externalId>
+        <formula>if(isblank( Account.PersonEmail),     Account.Email__c, Account.PersonEmail)</formula>
+        <label>Email Address</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Exam_Center__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>A field to store the center that the prosth exam will actually take place.  This is being added for Chicago right now,  but might apply elsewhere eventually</description>
+        <externalId>false</externalId>
+        <label>Exam Center</label>
+        <referenceTo>Center_Information__c</referenceTo>
+        <relationshipLabel>Opportunities (Exam Center)</relationshipLabel>
+        <relationshipName>Opportunities1</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Exam_Center_formula__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( AND
+              (AO4_Count__c &gt; 0,
+               NOT(ISBLANK( Account.Center__r.Prosth_Exam_Center_AO4__r.Name))
+),
+Account.Center__r.Prosth_Exam_Center_AO4__r.Name,
+ Account.Center__r.Name)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Exam Center (formula)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ExpectedRevenue</fullName>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Final_Bridge_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Final Bridge Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Final_Referral_Track__c</fullName>
+        <description>The final track selection used on a referral patient.  Will be required when creating a start record.  Selected by the doctor.</description>
+        <externalId>false</externalId>
+        <label>Final Referral Track</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Track I</fullName>
+                    <default>false</default>
+                    <label>Track I</label>
+                </value>
+                <value>
+                    <fullName>Track II</fullName>
+                    <default>false</default>
+                    <label>Track II</label>
+                </value>
+                <value>
+                    <fullName>Track III</fullName>
+                    <default>false</default>
+                    <label>Track III</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Finance_Company_Fee__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the fee imposed by the Finance Company.  This amount is the difference between the Amount the patient financed and what you actually received from the Finance Company.</inlineHelpText>
+        <label>Finance Company Fee</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Finance_Fee_Summary__c</fullName>
+        <description>Finance Fee Summary - total of finance fees</description>
+        <externalId>false</externalId>
+        <label>Finance Fee Summary</label>
+        <summarizedField>CCPayment__c.Finance_Fee__c</summarizedField>
+        <summaryForeignKey>CCPayment__c.Opportunity__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>GP_Fee_1__c</fullName>
+        <description>Fee to GP for Phase 1</description>
+        <externalId>false</externalId>
+        <label>GP Fee 1</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>GP_Fee_2__c</fullName>
+        <description>Fee to GP for Phase 2 (sum of service fee 2 and service fee 3)</description>
+        <externalId>false</externalId>
+        <label>GP Fee 2</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>GP_Fee_Phase_1_Check_Number__c</fullName>
+        <description>Form of payment - check number/ACH - for payment to referring doctor.</description>
+        <externalId>false</externalId>
+        <label>GP Fee Phase 1 Check Number</label>
+        <length>10</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>GP_Fee_Phase_1_Payment_Date__c</fullName>
+        <description>Date the referring is paid.</description>
+        <externalId>false</externalId>
+        <label>GP Fee Phase 1 Payment Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>GP_Fee_Phase_1__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Fee paid to referring doctors.</description>
+        <externalId>false</externalId>
+        <label>GP Fee Phase 1</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>GP_Fee_Rate__c</fullName>
+        <description>The GP rate for the final track at the time of the start</description>
+        <externalId>false</externalId>
+        <label>GP Fee Rate</label>
+        <precision>7</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>GP_Fee_Total__c</fullName>
+        <externalId>false</externalId>
+        <formula>If(Exam_Center_formula__c != &apos;Houston Woodlands&apos;, 
+   (Total_Net_Payments__c - Refund_Payments__c) * if(ISNULL(GP_Fee_Rate__c), 0, GP_Fee_Rate__c) 
+, 
+   MIN( 
+      (Total_Net_Payments__c - Refund_Payments__c) * if(ISNULL(GP_Fee_Rate__c), 0, GP_Fee_Rate__c), 
+      4050 * if(AO4_Count__c &lt; 2, 1, 2) 
+   ) 
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>GP Fee Total (old method)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>GP_Phase_1_Amount__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(GP_Fee_Phase_1__c == true, 1500, 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>GP Phase 1 Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>GP_Referral_Payment_1_Check__c</fullName>
+        <externalId>false</externalId>
+        <label>GP Referral Payment 1 Check#</label>
+        <length>31</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>GP_Referral_Payment_1_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>GP Referral Payment 1 Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>GP_Referral_Payment_1__c</fullName>
+        <description>First of two payments to referring doctor - generally paid after surgery date</description>
+        <externalId>false</externalId>
+        <label>GP Fee 1 Paid</label>
+        <precision>8</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>GP_Referral_Payment_2_Check__c</fullName>
+        <externalId>false</externalId>
+        <label>GP Referral Payment 2 Check#</label>
+        <length>31</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>GP_Referral_Payment_2_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>GP Referral Payment 2 Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>GP_Referral_Payment_2__c</fullName>
+        <description>Second of two payments to referring doctor - generally paid after final delivery date</description>
+        <externalId>false</externalId>
+        <label>GP Fee 2 Paid</label>
+        <precision>8</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>GP_Service_1__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>GP Service 1</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>GP_Service_2__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>GP Service 2</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>GP_Service_3__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>GP Service 3</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Generate_Estimate__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Generate Estimate</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Generate_Sales_Order__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Generate Sales Order</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>HCF_Payments__c</fullName>
+        <externalId>false</externalId>
+        <label>HCF Payments</label>
+        <summarizedField>CCPayment__c.Payment_Amount__c</summarizedField>
+        <summaryFilterItems>
+            <field>CCPayment__c.Payment_Status__c</field>
+            <operation>equals</operation>
+            <value>HCF In Process</value>
+        </summaryFilterItems>
+        <summaryForeignKey>CCPayment__c.Opportunity__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Has_Treatment_Option__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Used in the definition of is_Valid_Start - a workflow rule (in the Visual Process Builder) controls this. If a Treatment Plan related to the Opportunity has a Treatment Option selected, this checkbox will be set to true, and if that Treatment Option is set to null, this checkbox will be set to false.</description>
+        <externalId>false</externalId>
+        <label>Has Treatment Option?</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Ignored_Cancel__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Todd DeYoung announced amnesty for any cancellations on 5.4.15 and 5.515. This box removes a cancel from the True Close Rate definition, and can only be used by the data audit team.</description>
+        <externalId>false</externalId>
+        <label>Ignored Cancel</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Initial_Prosth_Owner__c</fullName>
+        <externalId>false</externalId>
+        <formula>Owner.FirstName + &apos; &apos; + Owner.LastName</formula>
+        <label>Initial Prosth Owner</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IqScore</fullName>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>IsPrivate</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Is_Legacy_Import__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Is Legacy Import</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Same_Day_Start__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(ISNULL(Days_Since_Consult__c), FALSE, Days_Since_Consult__c = 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Same Day Start</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Traveling__c</fullName>
+        <description>Looks to the &apos;Created by&apos; User record to identify PECs that travel to multiple Center Locations; returns &apos;True&apos; if User:Traveler Until date is &gt;= Today().  Added by Opfocus, Summer 2009, for Center Dashboard reporting.</description>
+        <externalId>false</externalId>
+        <formula>IF( LastModifiedBy.Traveler_Until__c &gt;= Today() , 
+     &quot;True&quot;, 
+     &quot;False&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Formula: Does the owner of this record travel, based on their User record?</inlineHelpText>
+        <label>Is Traveling</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Latest_Payment_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Latest Payment Date</label>
+        <summarizedField>CCPayment__c.Payment_Date__c</summarizedField>
+        <summaryFilterItems>
+            <field>CCPayment__c.Payment_Status__c</field>
+            <operation>equals</operation>
+            <value>Anticipated, Anticipated Promise Note, Collected, Collected Promise Note, Anticipated Payment Cancelled</value>
+        </summaryFilterItems>
+        <summaryForeignKey>CCPayment__c.Opportunity__c</summaryForeignKey>
+        <summaryOperation>max</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>LeadLifeID__c</fullName>
+        <externalId>false</externalId>
+        <label>LeadLifeID</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeadSource</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Marketing_Agent__c</fullName>
+        <description>Marketing agent sending out marketing email.</description>
+        <externalId>false</externalId>
+        <label>Marketing Agent</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Jennifer Lewis</fullName>
+                    <default>false</default>
+                    <label>Jennifer Lewis</label>
+                </value>
+                <value>
+                    <fullName>Janelle Gladstone</fullName>
+                    <default>false</default>
+                    <label>Janelle Gladstone</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>NS_Sync__c</fullName>
+        <externalId>false</externalId>
+        <label>NetSuite Sync</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>NS_run_item_group__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>how many item groups are present in the opportunity</description>
+        <externalId>false</externalId>
+        <label>NS run item group</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Name</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Negotiated_Total_Amount__c</fullName>
+        <externalId>false</externalId>
+        <formula>Treatment_Amount__c + Additional_Treatment_Amount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Negotiated Total Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>NetSuite_Id__c</fullName>
+        <externalId>true</externalId>
+        <label>NetSuite Id</label>
+        <length>25</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NetSuite_Mapping__c</fullName>
+        <externalId>false</externalId>
+        <label>NetSuite Mapping</label>
+        <length>10</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NetSuite_Quote__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>NetSuite Quote</label>
+        <referenceTo>NetSuite_Estimate__c</referenceTo>
+        <relationshipLabel>Opportunities</relationshipLabel>
+        <relationshipName>Opportunities</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>NetSuite_Sync_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>NetSuite Sync Time</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>NetSuite_Warning__c</fullName>
+        <externalId>false</externalId>
+        <label>NetSuite Warning</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Net_Promoter_Score__c</fullName>
+        <externalId>false</externalId>
+        <label>Net Promoter Score</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Net_Promoter_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>Net Promoter Time</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Net_Total_Payments__c</fullName>
+        <description>Sum of total payments minus refund payments</description>
+        <externalId>false</externalId>
+        <formula>Total_Payments__c -  Refund_Payments__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Net Total Payments</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>NextStep</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Next_Month_Surgery_Carryover__c</fullName>
+        <description>If (surgery is next year)
+      return the amount due before surgery minus the amount collected
+else 
+      If (surgery is later than this month) 
+             return the amount due before surgery minus the amount collected
+      else
+             return 0</description>
+        <externalId>false</externalId>
+        <formula>IF ( Surgery_Status__c = 1 , Amount_Due_Before_Surgery__c -  Amount_Collected_Before_Surgery__c, 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Next Month Surgery Carryover</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Notes__c</fullName>
+        <externalId>false</externalId>
+        <label>Notes</label>
+        <length>32000</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Num_of_Payments__c</fullName>
+        <description>Count of the # of Payments associated to a Prostho Exam, for Snapshot reporting</description>
+        <externalId>false</externalId>
+        <inlineHelpText>How many payments are associated to this PE?</inlineHelpText>
+        <label>Num of Payments</label>
+        <summaryForeignKey>CCPayment__c.Opportunity__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Outbound_Email_Marketing__c</fullName>
+        <description>An email has been sent by marketing to follow up on patients who cancel or No show at Prostho appoint and do not schedule surgery.</description>
+        <externalId>false</externalId>
+        <label>Marketing Outbound Email</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Outstanding_Balance1__c</fullName>
+        <externalId>false</externalId>
+        <formula>Amount  - Total_Payments__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Outstanding Balance1</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Outstanding_Balance__c</fullName>
+        <externalId>false</externalId>
+        <formula>Negotiated_Total_Amount__c   - Total_Payments__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Outstanding Balance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Outstanding_Balance_incl_anticipated__c</fullName>
+        <externalId>false</externalId>
+        <formula>Negotiated_Total_Amount__c   - Total_Payments__c - Anticipated_Payments__c+Refund_Payments__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Outstanding Balance (minus anticipated)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Outstanding_Balance_incl_anticpated1__c</fullName>
+        <externalId>false</externalId>
+        <formula>Amount  - Total_Payments__c - Anticipated_Payments__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Outstanding Balance (incl anticipated)1</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Override_Final_Date_Note__c</fullName>
+        <description>Note describing why an override value is being used for this value</description>
+        <externalId>false</externalId>
+        <label>Override Final Date Note</label>
+        <length>250</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Override_Final_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Override Final Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Override_Prosth_Date_Note__c</fullName>
+        <description>Note describing why an override value is being used for this value</description>
+        <externalId>false</externalId>
+        <label>Override Prosth Date Note</label>
+        <length>250</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Override_Prosth_Date__c</fullName>
+        <description>This field will be used to overwrite the value in the windent prosth date field for Deferred Revenue reporting.  Adding this to help with some old Windent cleanup issues</description>
+        <externalId>false</externalId>
+        <label>Override Prosth Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Override_Surgery_Date_Note__c</fullName>
+        <description>Note describing why an override value is being used for this value</description>
+        <externalId>false</externalId>
+        <label>Override Surgery Date Note</label>
+        <length>250</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Override_Surgery_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Override Surgery Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Override_Windent_Padding__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Causes the formula field that calculates the unique windent id, to ignore zero padding rules. This is in place to handle Windent anomalies.</description>
+        <externalId>false</externalId>
+        <label>Override Windent Padding</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>OwnerId</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Panopto__TrackingNumber__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Tracking Number</label>
+        <length>12</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PartnerAccountId</fullName>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Patient_Initials__c</fullName>
+        <externalId>false</externalId>
+        <formula>left(  Account.FirstName ,1) + &apos; &apos; + left( Account.LastName ,1)</formula>
+        <label>Patient Initials</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payment_Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( Negotiated_Total_Amount__c =  Total_Collected__c ,&quot;Paid in Full&quot;,
+&quot;Partial Payment Received&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Payment Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Pending_Cancel__c</fullName>
+        <description>This field will populate when a start has been flagged for cancellation.</description>
+        <externalId>false</externalId>
+        <label>Pending Cancel</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Preliminary_Treatment_Plan__c</fullName>
+        <externalId>false</externalId>
+        <label>Preliminary Treatment Plan</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Single Implant</fullName>
+                    <default>false</default>
+                    <label>Single Implant</label>
+                </value>
+                <value>
+                    <fullName>Multiple Implants</fullName>
+                    <default>false</default>
+                    <label>Multiple Implants</label>
+                </value>
+                <value>
+                    <fullName>Multiple Implant Bridge</fullName>
+                    <default>false</default>
+                    <label>Multiple Implant Bridge</label>
+                </value>
+                <value>
+                    <fullName>AO4 Upper</fullName>
+                    <default>false</default>
+                    <label>AO4 Upper</label>
+                </value>
+                <value>
+                    <fullName>AO4 Lower</fullName>
+                    <default>false</default>
+                    <label>AO4 Lower</label>
+                </value>
+                <value>
+                    <fullName>AO4 Edentulous Upper</fullName>
+                    <default>false</default>
+                    <label>AO4 Edentulous Upper</label>
+                </value>
+                <value>
+                    <fullName>AO4 Edentulous Lower</fullName>
+                    <default>false</default>
+                    <label>AO4 Edentulous Lower</label>
+                </value>
+                <value>
+                    <fullName>DBL AO4</fullName>
+                    <default>false</default>
+                    <label>DBL AO4</label>
+                </value>
+                <value>
+                    <fullName>DBL AO4 Edentulous</fullName>
+                    <default>false</default>
+                    <label>DBL AO4 Edentulous</label>
+                </value>
+                <value>
+                    <fullName>Upper Denture</fullName>
+                    <default>false</default>
+                    <label>Upper Denture</label>
+                </value>
+                <value>
+                    <fullName>Lower Denture</fullName>
+                    <default>false</default>
+                    <label>Lower Denture</label>
+                </value>
+                <value>
+                    <fullName>Custom</fullName>
+                    <default>false</default>
+                    <label>Custom</label>
+                </value>
+                <value>
+                    <fullName>Transitional DBL AO4</fullName>
+                    <default>false</default>
+                    <label>Transitional DBL AO4</label>
+                </value>
+                <value>
+                    <fullName>Lower Overdenture</fullName>
+                    <default>false</default>
+                    <label>Lower Overdenture</label>
+                </value>
+                <value>
+                    <fullName>Upper Overdenture</fullName>
+                    <default>false</default>
+                    <label>Upper Overdenture</label>
+                </value>
+                <value>
+                    <fullName>Phased Barless Interim Upper AO4</fullName>
+                    <default>false</default>
+                    <label>Phased Barless Interim Upper AO4</label>
+                </value>
+                <value>
+                    <fullName>Phased Barless Interim Lower AO4</fullName>
+                    <default>false</default>
+                    <label>Phased Barless Interim Lower AO4</label>
+                </value>
+                <value>
+                    <fullName>Phased Barless Interim Double AO4</fullName>
+                    <default>false</default>
+                    <label>Phased Barless Interim Double AO4</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Pricebook2Id</fullName>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Probability</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Promissory_Note__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Promissory Note</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Prosth_Exam_Paid_Date__c</fullName>
+        <description>Indicates when we collected a $1000 on this record. This date will be used as the official start date going forward. All records before the switch over will default this value to the createddate of the prosth exam record</description>
+        <externalId>false</externalId>
+        <label>Prosth Exam Paid Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Prosth_Exam_Paid__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates that we collected a $1000 dollars on the start record (the prosth exam has been paid)</description>
+        <externalId>false</externalId>
+        <label>Prosth Exam Paid</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Prosth_Exam_Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>/*IF(ISPICKVAL( StageName ,&quot;Cancelled Not Rescheduled&quot;),&quot;Lost&quot;,&quot;Won&quot;)*/
+CASE(StageName,
+&quot;Scheduled&quot;,&quot;Scheduled&quot;,
+&quot;Rescheduled&quot;,&quot;Rescheduled&quot;,
+&quot;Completed&quot;,&quot;Complete&quot;,
+&quot;Cancelled Not Rescheduled&quot;,&quot;Cancelled&quot;,
+&quot;Paid In Full&quot;,&quot;Paid in Full&quot;,
+&quot;Scheduled for Satellite&quot;,&quot;Scheduled&quot;,
+&quot;Completed for Satellite&quot;,&quot;Complete&quot;,
+&quot;Paid in Full Satellite&quot;,&quot;Paid In Full&quot;,
+&quot;Closed Won&quot;,&quot;Scheduled&quot;,
+&quot;Consult Completed&quot;,&quot;Cancelled&quot;,
+&quot;Consult Prostho Exam Scheduled&quot;,&quot;Cancelled&quot;,
+&quot;Consult Prostho Exam Completed&quot;,&quot;Scheduled&quot;,
+&quot;Consult Scheduled&quot;,&quot;Cancelled&quot;,
+&quot;Consult No Show&quot;,&quot;Cancelled&quot;,
+&quot;Surgery Scheduled&quot;,&quot;Scheduled&quot;,
+&quot;Consult Doctor Declined&quot;,&quot;Cancelled&quot;,
+&quot;Prostho Exam Scheduled&quot;,&quot;Cancelled&quot;,
+&quot;Prostho Exam Completed&quot;,&quot;Scheduled&quot;,
+&quot;Medical Clearance&quot;,&quot;Cancelled&quot;,
+&quot;PIF Surgery Scheduled&quot;,&quot;Scheduled&quot;,
+&quot;Financing&quot;,&quot;Cancelled&quot;,
+&quot;Medical Clearance Pending&quot;,&quot;Cancelled&quot;,
+&quot;Arranging Financing&quot;,&quot;Cancelled&quot;,
+&quot;Cancelled Not Scheduled&quot;,&quot;Cancelled&quot;,
+&quot;Non Candidate&quot;,&quot;Cancelled&quot;,
+&quot;Financing Difficulty&quot;,&quot;Cancelled&quot;,
+&quot;Medical Clearance Approved&quot;,&quot;Cancelled&quot;,
+&quot;PE Complete Not Moving Forward&quot;,&quot;Cancelled&quot;,
+&quot;Negotiation/Review&quot;,&quot;Cancelled&quot;,
+&quot;Proposal/Price Quote&quot;,&quot;Cancelled&quot;,
+&quot;Perception Analysis&quot;,&quot;Cancelled&quot;,
+&quot;Id. Decision Makers&quot;,&quot;Cancelled&quot;,
+&quot;Value Proposition&quot;,&quot;Cancelled&quot;,
+&quot;Needs Analysis&quot;,&quot;Cancelled&quot;,
+&quot;Qualification&quot;,&quot;Cancelled&quot;,
+&quot;Prospecting&quot;,&quot;Cancelled&quot;,
+&quot;Closed Lost&quot;,&quot;Cancelled&quot;,
+&quot;&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Prosth Exam Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Prostho_Exam_Scheduled__c</fullName>
+        <defaultValue>true</defaultValue>
+        <externalId>false</externalId>
+        <label>Prostho Exam Scheduled</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Referral_Doctor_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Account.Referral_Doctor__r.First_Last__c</formula>
+        <label>Referral Doctor Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Referral_Office_Address__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(!isnull(Account.Referral_Office__c), Account.Referral_Office__r.Street__c + BR() ,&apos;&apos;) + 
+if(!isnull(Account.Referral_Office__c), Account.Referral_Office__r.City__c + &apos;, &apos; ,&apos;&apos;) + 
+if(!isnull(Account.Referral_Office__c), Account.Referral_Office__r.State_Province__c + &apos; &apos; ,&apos;&apos;) + 
+if(!isnull(Account.Referral_Office__c), Account.Referral_Office__r.Postal_Code__c ,&apos;&apos;)</formula>
+        <label>Referral Office Address</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Referral_Office_Contact__c</fullName>
+        <externalId>false</externalId>
+        <formula>Account.Referral_Office__r.Primary_Contact_Name__c</formula>
+        <label>Referral Office Contact</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Referral_Office_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Account.Referral_Office__r.Name</formula>
+        <label>Referral Office Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Referral_Office_Phone__c</fullName>
+        <externalId>false</externalId>
+        <formula>Account.Referral_Office__r.Phone__c</formula>
+        <label>Referral Office Phone</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Referral_Track__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Account.Referral_Track__c)</formula>
+        <label>Referral Track</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Refund_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Refund Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Refund_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Refund Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Refund_Payments__c</fullName>
+        <externalId>false</externalId>
+        <label>Refund Payments</label>
+        <summarizedField>CCPayment__c.Payment_Amount__c</summarizedField>
+        <summaryFilterItems>
+            <field>CCPayment__c.Payment_Status_Formula__c</field>
+            <operation>equals</operation>
+            <value>Refunded</value>
+        </summaryFilterItems>
+        <summaryForeignKey>CCPayment__c.Opportunity__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Rescheduled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Rescheduled</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Resolved__c</fullName>
+        <externalId>false</externalId>
+        <label>Resolved</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Roll_Up_Center_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( ISBLANK( Exam_Center__c ) , Account.Center__r.Name, Exam_Center__r.Name)</formula>
+        <label>Roll Up Center Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Roll_Up_Center__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( ISBLANK( Exam_Center__c ) , CASESAFEID(Account.Center__c), CASESAFEID(Exam_Center__c))</formula>
+        <label>Roll Up Center</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Satellite_Center__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Satellite Center</label>
+        <referenceTo>Center_Information__c</referenceTo>
+        <relationshipLabel>Opportunities (Satellite Center)</relationshipLabel>
+        <relationshipName>Satellite_Opportunities</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Segment_Code__c</fullName>
+        <description>LeadLife Segment Code</description>
+        <externalId>false</externalId>
+        <label>Segment Code</label>
+        <length>80</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Send_to_NetSuite__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Send to NetSuite</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Short_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>Short Code</label>
+        <length>15</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StageName</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>StageNameState__c</fullName>
+        <externalId>false</externalId>
+        <label>StageNameState</label>
+        <length>99</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Start_Date__c</fullName>
+        <description>Date at which Prostho Exam:Stage = Scheduled, and the Prostho Exam should be flagged as a Start.  Set via Workflow Rule.    Created by OpFocus for Center Reporting Dashboard project, Summer 2009</description>
+        <externalId>false</externalId>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Start_Value__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>If a Treatment Plan related to the Opportunity has a Treatment Option selected, this is set to match the Start Value of that Treatment Option. If the Treatment Option is removed, this value is set to zero. A workflow rule (in the Visual Process Builder) controls this.</description>
+        <externalId>false</externalId>
+        <label>Start Value</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Surgery_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Surgery Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Surgery_Scheduled__c</fullName>
+        <externalId>false</externalId>
+        <label>Surgery Scheduled</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Surgery_Status__c</fullName>
+        <description>0 = This month
+1 = future month
+2 = past 
+3 = undetermined</description>
+        <externalId>false</externalId>
+        <formula>IF (ISNULL(Surgery_Date__c) , 3 , 
+IF ( YEAR(Surgery_Date__c) &gt; YEAR(TODAY()),   
+    1,
+    IF (  YEAR(Surgery_Date__c) &lt; YEAR(TODAY()),   
+         2,
+         IF( Month(Surgery_Date__c) = MONTH(TODAY()) , 0, IF( Month(Surgery_Date__c) &gt; MONTH(TODAY()), 1, 2)))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Surgery Status</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Surgery_has_been_Rescheduled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Surgery has been Rescheduled</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SyncedQuoteId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Time_from_Consult_Prosth_Schedule_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF((DATEVALUE(CreatedDate)  - DATEVALUE(Account.CreatedDate)) &lt; 0,&quot;0-Scheduled Same Day&quot;,
+IF(DATEVALUE(CreatedDate)   =  DATEVALUE(Account.CreatedDate), &quot;0-Scheduled Same Day&quot;,
+IF((DATEVALUE(CreatedDate)  - DATEVALUE(Account.CreatedDate)) &lt; 8,&quot;1-Week&quot;,
+IF((DATEVALUE(CreatedDate)  - DATEVALUE(Account.CreatedDate)) &lt; 15,&quot;2-Weeks&quot;,
+&quot;More than 3 Weeks&quot;
+))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Time from Consult &amp; Prosth Schedule Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TotalOpportunityQuantity</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Total_Collected__c</fullName>
+        <externalId>false</externalId>
+        <formula>Amount_Collected_at_Prostho_Exam__c +  Amount_Collected_at_Consult__c  +  Amount_Collected_Before_Surgery__c  +  Amount_Collected_Before_Final_Bridge__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Collected</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_Net_Payments__c</fullName>
+        <description>Payment amount minus fees - roll up of net collection amount</description>
+        <externalId>false</externalId>
+        <label>Total Net Payments</label>
+        <summarizedField>CCPayment__c.Net_Collection_Amount__c</summarizedField>
+        <summaryFilterItems>
+            <field>CCPayment__c.Payment_Status_Formula__c</field>
+            <operation>equals</operation>
+            <value>Collected</value>
+        </summaryFilterItems>
+        <summaryForeignKey>CCPayment__c.Opportunity__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Net_Payments_minus_gp__c</fullName>
+        <externalId>false</externalId>
+        <formula>Total_Net_Payments__c - (Total_Net_Payments__c * if(ISNULL(GP_Fee_Rate__c ) ,0,GP_Fee_Rate__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Net Payments minus gp</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_Payments__c</fullName>
+        <externalId>false</externalId>
+        <label>Total Payments</label>
+        <summarizedField>CCPayment__c.Payment_Amount__c</summarizedField>
+        <summaryFilterItems>
+            <field>CCPayment__c.Payment_Status_Formula__c</field>
+            <operation>equals</operation>
+            <value>Collected</value>
+        </summaryFilterItems>
+        <summaryForeignKey>CCPayment__c.Opportunity__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Treatment_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Total Treatment Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Treatment_Added_at_Prostho_Exam__c</fullName>
+        <externalId>false</externalId>
+        <label>Treatment Added at Prostho Exam</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Single Implant</fullName>
+                    <default>false</default>
+                    <label>Single Implant</label>
+                </value>
+                <value>
+                    <fullName>Multiple Implants</fullName>
+                    <default>false</default>
+                    <label>Multiple Implants</label>
+                </value>
+                <value>
+                    <fullName>Multiple Implant Bridge</fullName>
+                    <default>false</default>
+                    <label>Multiple Implant Bridge</label>
+                </value>
+                <value>
+                    <fullName>AO4 Upper</fullName>
+                    <default>false</default>
+                    <label>AO4 Upper</label>
+                </value>
+                <value>
+                    <fullName>AO4 Lower</fullName>
+                    <default>false</default>
+                    <label>AO4 Lower</label>
+                </value>
+                <value>
+                    <fullName>AO4 Edentulous Upper</fullName>
+                    <default>false</default>
+                    <label>AO4 Edentulous Upper</label>
+                </value>
+                <value>
+                    <fullName>AO4 Edentulous Lower</fullName>
+                    <default>false</default>
+                    <label>AO4 Edentulous Lower</label>
+                </value>
+                <value>
+                    <fullName>DBL AO4</fullName>
+                    <default>false</default>
+                    <label>DBL AO4</label>
+                </value>
+                <value>
+                    <fullName>DBL AO4 Edentulous</fullName>
+                    <default>false</default>
+                    <label>DBL AO4 Edentulous</label>
+                </value>
+                <value>
+                    <fullName>Upper Denture</fullName>
+                    <default>false</default>
+                    <label>Upper Denture</label>
+                </value>
+                <value>
+                    <fullName>Lower Denture</fullName>
+                    <default>false</default>
+                    <label>Lower Denture</label>
+                </value>
+                <value>
+                    <fullName>Custom</fullName>
+                    <default>false</default>
+                    <label>Custom</label>
+                </value>
+                <value>
+                    <fullName>Phased Barless Interim Upper AO4</fullName>
+                    <default>false</default>
+                    <label>Phased Barless Interim Upper AO4</label>
+                </value>
+                <value>
+                    <fullName>Phased Barless Interim Lower AO4</fullName>
+                    <default>false</default>
+                    <label>Phased Barless Interim Lower AO4</label>
+                </value>
+                <value>
+                    <fullName>Phased Barless Interim Double AO4</fullName>
+                    <default>false</default>
+                    <label>Phased Barless Interim Double AO4</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Treatment_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Treatment Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Type</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Unbalanced_Amount__c</fullName>
+        <externalId>false</externalId>
+        <formula>Negotiated_Total_Amount__c   - Total_Payments__c - Anticipated_Payments__c+Refund_Payments__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Unbalanced Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Unique_Windent_ID__c</fullName>
+        <description>Should evaluate to match windent patient_id field</description>
+        <externalId>false</externalId>
+        <formula>/*if(isblank(Windent_Patient_Id__c),null,
+   if(isblank( Exam_Center__c), Account.Center__r.Windent_Clinic_ID__c, Exam_Center__r.Windent_Clinic_ID__c)   + &apos;_&apos; + 
+  if(len(Windent_Patient_Id__c) = 1, &apos;00000&apos; + Windent_Patient_Id__c,
+    if(len(Windent_Patient_Id__c) = 2, &apos;0000&apos; + Windent_Patient_Id__c,
+      if(len(Windent_Patient_Id__c) = 3, &apos;000&apos; + Windent_Patient_Id__c,
+        if(len(Windent_Patient_Id__c) = 4, &apos;00&apos; + Windent_Patient_Id__c,
+          if(len(Windent_Patient_Id__c) = 5, &apos;0&apos; + Windent_Patient_Id__c,Windent_Patient_Id__c)
+        )
+      )
+    )
+  )
+)*/
+
+if(isblank(Windent_Patient_Id__c),null,  
+  if(isblank( Exam_Center__c), Account.Center__r.Windent_Clinic_ID__c,  Exam_Center__r.Windent_Clinic_ID__c) + &apos;_&apos; + 
+  if( Override_Windent_Padding__c , Windent_Patient_Id__c,
+    if(len(Windent_Patient_Id__c) = 1, &apos;00000&apos; + Windent_Patient_Id__c, 
+      if(len(Windent_Patient_Id__c) = 2, &apos;0000&apos; + Windent_Patient_Id__c, 
+        if(len(Windent_Patient_Id__c) = 3, &apos;000&apos; + Windent_Patient_Id__c, 
+          if(len(Windent_Patient_Id__c) = 4, &apos;00&apos; + Windent_Patient_Id__c, 
+            if(len(Windent_Patient_Id__c) = 5, &apos;0&apos; + Windent_Patient_Id__c,Windent_Patient_Id__c) 
+          ) 
+        ) 
+      ) 
+    )
+  )
+)</formula>
+        <label>Unique Windent ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Upsell_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Upsell Amount</label>
+        <summarizedField>OpportunityLineItem.UnitPrice</summarizedField>
+        <summaryFilterItems>
+            <field>OpportunityLineItem.Added_at_Prostho_Exam__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>OpportunityLineItem.OpportunityId</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Valid_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Valid Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Weeks_to_Surgery__c</fullName>
+        <externalId>false</externalId>
+        <formula>(Surgery_Date__c - TODAY())/7</formula>
+        <label>Weeks to Surgery</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Windent_Final_Date__c</fullName>
+        <description>Date of the most recent final apt for this patient (tied by unique patient id)</description>
+        <externalId>false</externalId>
+        <label>Windent Final Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Windent_Last_Apt__c</fullName>
+        <description>Date of the last apt in Windent for this patient (based on patient id)</description>
+        <externalId>false</externalId>
+        <label>Windent Last Apt</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Windent_Num_Apts__c</fullName>
+        <description>The number of apts this patient has attended in Windent</description>
+        <externalId>false</externalId>
+        <label>Windent Num Apts</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Windent_Patient_Id__c</fullName>
+        <externalId>false</externalId>
+        <label>Windent Patient Id</label>
+        <length>12</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Windent_Prosth_Date__c</fullName>
+        <description>Date of the most recent prosth exam apt for this patient (tied by unique patient id)</description>
+        <externalId>false</externalId>
+        <label>Windent Prosth Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Windent_Surgery_Date__c</fullName>
+        <description>Date of the most recent surgery apt for this patient (tied by unique patient id)</description>
+        <externalId>false</externalId>
+        <label>Windent Surgery Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>is_Minimum_Negotiated_Total_Amount__c</fullName>
+        <externalId>false</externalId>
+        <formula>Negotiated_Total_Amount__c &gt;= 2500</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>is Minimum Negotiated Total Amount</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>is_Requirement_Met__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(Prosth_Exam_Paid_Date__c &gt;= DATE(2016, 7, 1), 
+Prosth_Exam_Paid__c &amp;&amp; Has_Treatment_Option__c
+, 
+Prosth_Exam_Paid__c
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>is Requirement Met</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>is_Valid_Start__c</fullName>
+        <description>Indicates if the prosth exam record meets the start definition. negotiated_total_amount__c &gt;= 2500 and prosth_exam_paid__c = true</description>
+        <externalId>false</externalId>
+        <formula>/*if(Negotiated_Total_Amount__c &gt;= 2500 &amp;&amp; Prosth_Exam_Paid__c,true,false)*/
+
+is_Minimum_Negotiated_Total_Amount__c &amp;&amp; is_Requirement_Met__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>is_Valid_Start?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <listViews>
+        <fullName>AllOpportunities</fullName>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>OPPORTUNITY.CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>7/28/2009 12:00 AM</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>8/3/2009 12:00 AM</value>
+        </filters>
+        <label>dutton</label>
+    </listViews>
+    <listViews>
+        <fullName>ClosingNextMonth</fullName>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.CLOSED</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.CLOSE_DATE</field>
+            <operation>equals</operation>
+            <value>NEXT_MONTH</value>
+        </filters>
+        <label>Closing Next Month</label>
+    </listViews>
+    <listViews>
+        <fullName>ClosingThisMonth_Modified</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>Total_Treatment_Amount__c</columns>
+        <columns>Preliminary_Treatment_Plan__c</columns>
+        <columns>Prosth_Exam_Paid__c</columns>
+        <columns>Current_Owner__c</columns>
+        <columns>Call_Back__c</columns>
+        <columns>Amount_Collected_at_Consult__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.CLOSED</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.CLOSE_DATE</field>
+            <operation>equals</operation>
+            <value>THIS_MONTH</value>
+        </filters>
+        <filters>
+            <field>Prostho_Exam_Scheduled__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>March 2018</label>
+        <sharedTo>
+            <group>Testing</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>DenverCurrentMonthScheduledPE</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>CORE.USERS.FULL_NAME</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>Negotiated_Total_Amount__c</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.CLOSE_DATE</field>
+            <operation>equals</operation>
+            <value>THIS_MONTH</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.FIRST_NAME</field>
+            <operation>contains</operation>
+            <value>janelle,somin,chemenn,jennifer</value>
+        </filters>
+        <label>Denver Current Month Scheduled PE</label>
+    </listViews>
+    <listViews>
+        <fullName>Kansas_City_Pros_Exams</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>Completed_Stage__c</columns>
+        <columns>Anticipated_Payments__c</columns>
+        <columns>CORE.USERS.LAST_NAME</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>Negotiated_Total_Amount__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.CLOSE_DATE</field>
+            <operation>greaterOrEqual</operation>
+            <value>8/1/2009</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_NAME</field>
+            <operation>equals</operation>
+            <value>blosser,elliott</value>
+        </filters>
+        <label>Kansas City Pros Exams</label>
+        <sharedTo>
+            <role>DirectorPatientEducationConsulting</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Minneapolis_Prost_Exam</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>OPPORTUNITY.AMOUNT</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.CLOSE_DATE</field>
+            <operation>greaterThan</operation>
+            <value>8/1/2010</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_NAME</field>
+            <operation>equals</operation>
+            <value>smallwood,addington</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.STAGE_NAME</field>
+            <operation>equals</operation>
+            <value>Scheduled,Rescheduled,Completed,Paid In Full</value>
+        </filters>
+        <label>Minneapolis Prost Exams</label>
+    </listViews>
+    <listViews>
+        <fullName>MyOpportunities</fullName>
+        <columns>OPPORTUNITY.NAME</columns>
+        <columns>OPPORTUNITY.CLOSE_DATE</columns>
+        <columns>OPPORTUNITY.STAGE_NAME</columns>
+        <columns>Negotiated_Total_Amount__c</columns>
+        <columns>Total_Payments__c</columns>
+        <columns>Anticipated_Payments__c</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>CORE.USERS.ALIAS</field>
+            <operation>equals</operation>
+            <value>afall</value>
+        </filters>
+        <filters>
+            <field>Start_Date__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>7/1/2009</value>
+        </filters>
+        <label>My Opportunities</label>
+    </listViews>
+    <listViews>
+        <fullName>NewThisWeek</fullName>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>THIS_WEEK</value>
+        </filters>
+        <label>New This Week</label>
+    </listViews>
+    <listViews>
+        <fullName>Won</fullName>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OPPORTUNITY.WON</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>OPPORTUNITY.CLOSED</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.FULL_NAME</field>
+            <operation>equals</operation>
+            <value>Amy Hall</value>
+        </filters>
+        <label>Won</label>
+    </listViews>
+    <searchLayouts>
+        <customTabListAdditionalFields>OPPORTUNITY.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>ACCOUNT.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>OPPORTUNITY.CLOSE_DATE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>OPPORTUNITY.STAGE_NAME</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>OPPORTUNITY.NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>ACCOUNT.NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>ACCOUNT.SITE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>OPPORTUNITY.STAGE_NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>OPPORTUNITY.CLOSE_DATE</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>OPPORTUNITY.NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ACCOUNT.NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ACCOUNT.SITE</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>OPPORTUNITY.STAGE_NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>OPPORTUNITY.CLOSE_DATE</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>Center_Information__c</searchFilterFields>
+        <searchFilterFields>OPPORTUNITY.STAGE_NAME</searchFilterFields>
+        <searchFilterFields>OPPORTUNITY.CLOSE_DATE</searchFilterFields>
+        <searchResultsAdditionalFields>OPPORTUNITY.NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ACCOUNT.NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ACCOUNT.SITE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>OPPORTUNITY.STAGE_NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>OPPORTUNITY.CLOSE_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USERS.ALIAS</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Private</sharingModel>
+    <validationRules>
+        <fullName>Additional_Treatment_greater_than_zero</fullName>
+        <active>true</active>
+        <description>Ensure that the additional treatment amount is greater than or equal to 0. (no negative amounts)</description>
+        <errorConditionFormula>Additional_Treatment_Amount__c &lt; 0  &amp;&amp; ($Profile.Name != &apos;System Administrator&apos;)</errorConditionFormula>
+        <errorMessage>Prost Exam Adjustment Amount can not be negative.  Please adjust and save the record.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Arch_Count_Validation</fullName>
+        <active>true</active>
+        <description>Verifies that we don&apos;t have a treatment plan selected that would result in an arch count &gt; 2</description>
+        <errorConditionFormula>AO4_Count__c &gt;2 &amp;&amp; ($Profile.Name != &apos;System Administrator&apos;)</errorConditionFormula>
+        <errorDisplayField>Preliminary_Treatment_Plan__c</errorDisplayField>
+        <errorMessage>You have selected a treatment plan that will result in an arch count &gt; 2.  Please adjust it or contact the helpdesk if you feel this is an error.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Consult_Check</fullName>
+        <active>true</active>
+        <description>Verify the start record has a consult tied to it</description>
+        <errorConditionFormula>ISBLANK( AccountId ) &amp;&amp; $Profile.Name &lt;&gt; &apos;System Administrator&apos;</errorConditionFormula>
+        <errorDisplayField>AccountId</errorDisplayField>
+        <errorMessage>You must select a consult to tie this prosth exam record to. If the patient is not already in the system, please create the consult record first.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Exam_Center_Selected</fullName>
+        <active>true</active>
+        <description>Requires the exam center to be filled out when the profile is PEC - Exam Center</description>
+        <errorConditionFormula>$Profile.Name == &apos;PEC - Exam Center&apos; &amp;&amp; isblank(Exam_Center__c)
+&amp;&amp; CreatedDate &gt;= DATETIMEVALUE(&quot;2014-10-14 00:00:00&quot;)</errorConditionFormula>
+        <errorDisplayField>Exam_Center__c</errorDisplayField>
+        <errorMessage>You must select the center where this exam will take place</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Owner_Change_Check</fullName>
+        <active>true</active>
+        <description>Should limit anyone from changing the prost exam owner unless they are authorized to do so.</description>
+        <errorConditionFormula>AND( 
+ISCHANGED(OwnerId), 
+PRIORVALUE(OwnerId)&lt;&gt; $User.Id, 
+$Profile.Name &lt;&gt; &quot;System Administration - Test&quot;, 
+$Profile.Name &lt;&gt; &quot;New System Administrator&quot;, 
+$Profile.Name &lt;&gt; &quot;Limited System Administrator&quot;, 
+$Profile.Name &lt;&gt; &quot;System Administrator&quot;,
+$Profile.Name &lt;&gt; &quot;RBD&quot;,
+$Profile.Name &lt;&gt; &quot;Data Audit Team&quot;)</errorConditionFormula>
+        <errorMessage>You are not authorized to change the owner of this record. Please contact the Operations team or IT if you need assistance.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Require_At_Risk_Reason_if_box_is_checked</fullName>
+        <active>true</active>
+        <errorConditionFormula>and(
+      At_Risk__c 
+    ,len( At_Risk_Reason__c )=0
+    )</errorConditionFormula>
+        <errorDisplayField>At_Risk_Reason__c</errorDisplayField>
+        <errorMessage>You must enter a reason why you are marking this Prostho Exam as At Risk</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Generate_Check_In_Code</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Generate Check In Code</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/apex.js&quot;)} 
+sforce.apex.execute(&quot;guidGenerator&quot;,&quot;generateSignInCode&quot;,{opp_ID:&quot;{!Opportunity.Id}&quot;}); 
+document.location.reload(true)</url>
+    </webLinks>
+    <webLinks>
+        <fullName>New_Treatment_Plan</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>New Treatment Plan</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>javascript:parent.navigateToUrl(&apos;/apex/new_treatment_plan?aid={!Opportunity.AccountId}&apos;);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Panopto__DeliveryStatus</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>true</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>true</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Delivery Status</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>true</showsLocation>
+        <showsStatus>true</showsStatus>
+        <url>http://www.fedex.com/cgi-bin/tracking?tracknumbers={!Opportunity.Panopto__TrackingNumber__c}&amp;action=track&amp;language=english&amp;cntry_code=us</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Quote</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Quote</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var Celigo = {};
+Celigo.SFDC = (function() { //private members
+	function QuoteSyncManager() {
+
+		//instance vars
+		var that = this;
+		this.retries = 0;
+		this.maxRetries = 20;
+		this.pu;
+
+		//methods
+		this.triggerNsSync = function() {
+
+			var o = new sforce.SObject(&quot;Opportunity&quot;);
+			o.id = &quot;{!Opportunity.Id}&quot;;
+			o.NetSuite_Quote__c = null;
+			o.Celigo_Sync_Helper__c = &quot;false&quot;;
+			o.Send_to_NetSuite__c = &quot;true&quot;;
+			o.Generate_Estimate__c = &quot;true&quot;;
+			o.Celigo_Update__c = &quot;true&quot;;
+			o.NS_Sync__c = null;
+			sforce.connection.update([o],{
+				onSuccess:function(result){
+					var resObj = result[0];
+					if(resObj.success == &apos;false&apos;){
+						//something wrong
+						var error;
+						if(resObj.errors instanceof Array){
+							error = resObj.errors[0];
+						}else{
+							error = resObj.errors;
+						}
+						//alert the error and done
+						Celigo.SFDC.showMsg(&apos;StatusCode: &apos;+error.statusCode+&apos;\r\nMessage: &apos;+error.message);
+					}else{
+						//success, open pop up and etc
+						celigo_qsm.openPopup();
+						celigo_qsm.checkSyncStatus();
+					}
+				}, 
+				onFailure:function(error){
+					//alert the error and done
+					Celigo.SFDC.showMsg(&apos;Error: &apos;+error.name+&apos;\r\nMessage: &apos;+error.message);
+				}
+			});
+		};
+		
+		this.revertFlags = function(){
+			var o = new sforce.SObject(&quot;Opportunity&quot;);
+			o.id = &quot;{!Opportunity.Id}&quot;;
+			o.Celigo_Sync_Helper__c = &quot;false&quot;;
+			o.Send_to_NetSuite__c = &quot;false&quot;;
+			o.Generate_Estimate__c = &quot;false&quot;;
+			o.Celigo_Update__c = &quot;false&quot;;
+			sforce.connection.update([o]);
+		};
+		
+		this.openPopup = function() {
+
+			var top = screen.height - (screen.height * .5) - 100;
+			var left = screen.width - (screen.width * .5) - 187;
+			var params = &apos;dependent = yes,resizable=false,scrollbars=false,toolbar=false,menubar=false,location=false,status=true,directories=false,width=375,height=160,top=&apos;;
+			params += top.toString();
+			params += &apos;,left=&apos; + left.toString() + &apos;\&apos;&apos;;
+
+			this.pu = window.open(&apos;/apex/quote_status?whence=&apos; + &quot;{!Opportunity.Id}&quot;, &apos;NetSuite_Synchronization&apos;, params);
+		};
+		this.checkSyncStatus = function() {
+
+			var url = window.location.href;
+			var endEx = url.lastIndexOf(&apos;?&apos;) &gt; -1 ? url.lastIndexOf(&apos;/&apos;) : url.length;
+
+			var result = sforce.connection.query(&quot;select Id, Celigo_Sync_Helper__c, Send_to_NetSuite__c, NS_Sync__c from Opportunity where Id = &apos;&quot;+ &quot;{!Opportunity.Id}&quot; +&quot;&apos;&quot;, {
+				onSuccess: function(result) {
+					var records = result.getArray(&quot;records&quot;);
+					if (records[0].Celigo_Sync_Helper__c === &apos;true&apos; &amp;&amp; records[0].Send_to_NetSuite__c === &apos;false&apos; &amp;&amp; records[0].NS_Sync__c === null)
+						window.location.href = window.location.href;
+					else if(records[0].NS_Sync__c){
+						if(celigo_qsm.pu&amp;&amp;!celigo_qsm.pu.closed){
+							celigo_qsm.pu.close();
+						}
+						celigo_qsm.revertFlags();
+						Celigo.SFDC.showMsg(records[0].NS_Sync__c +&apos;\r\n&apos;);
+					
+					}else if(celigo_qsm.retries &lt; celigo_qsm.maxRetries) {
+						celigo_qsm.retries++;
+						window.setTimeout(celigo_qsm.checkSyncStatus, 5000);
+					}else{
+						if(celigo_qsm.pu&amp;&amp;!celigo_qsm.pu.closed){
+							celigo_qsm.pu.close();
+						}
+						celigo_qsm.revertFlags();
+						Celigo.SFDC.showMsg(&apos;Sync Request Timed Out. \r\n&apos;);
+					}
+				},
+				onFailure: function(error) {
+					celigo_qsm.revertFlags();
+					Celigo.SFDC.showMsg(error);
+				}
+			});
+		};
+	}
+
+	return { //public members
+		main: function() {
+			try {
+				{!REQUIRESCRIPT(&quot;/soap/ajax/20.0/connection.js&quot;)}
+				var inProg= sforce.connection.query(&quot;select Id, Send_to_NetSuite__c from Opportunity where Id = &apos;&quot;+ &quot;{!Opportunity.Id}&quot; + &quot;&apos;&quot;);
+				var records = inProg.getArray(&apos;records&apos;);
+				if (records[0].Send_to_NetSuite__c === &apos;true&apos;)
+					alert(&quot;Sync already in progress.&quot;);
+				else {
+					celigo_qsm = new QuoteSyncManager();
+					celigo_qsm.triggerNsSync();
+				}
+			} catch (e) {
+				this.showMsg(e.name+&apos;\r\n&apos;+e.message);
+			}
+		},
+		
+		showMsg : function(error){
+		    var template = &apos;An error has occurred. Details:\r\n {%details%} \r\n If error persists, please contact your Celigo representative.&apos;;
+		    var msg = &apos;&apos;;
+			//error could be js error, sf fault obj, string
+		    if(Object.prototype.toString.call(error) === &apos;[Object String]&apos;){
+		    	msg = template.replace(/{%details%}/, error);
+		    }else if(error.name &amp;&amp; error.message){
+		    	msg = template.replace(/{%details%}/, error.name+&apos;\r\n&apos;+error.message);
+		    }else if(error.faultcode &amp;&amp; error.faultstring){
+		    	msg = template.replace(/{%details%}/, error.faultcode+&apos;\r\n&apos;+error.faultstring);
+		    }else{
+		    	msg = msg = template.replace(/{%details%}/, new String(error));
+		    }
+		    if(msg)		
+		    	alert(msg);
+		}
+	}
+})();
+Celigo.SFDC.main();</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Reoccuring_Payment</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Reoccuring Payment</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>navigateToUrl(&apos;https://c.na2.visual.force.com/apex/reoccuring_payment?oid={!Opportunity.Id}&apos;,&apos;DETAIL&apos;);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Sales_Order</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Sales Order</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var Celigo = {};
+Celigo.SFDC = (function(){ //private members
+    function SalesOrderSyncManager(){
+    
+        //instance vars
+        var that = this;
+		this.retries = 0;
+		this.maxRetries = 20;
+		this.pu;
+        
+        //methods
+		this.getURLParameter = function(_url, _name){ //String
+		    var regexS;
+		    var regex;
+		    var results;
+		    _name = _name.replace(/[\[]/, &quot;\\\[&quot;).replace(/[\]]/, &quot;\\\]&quot;);
+		    regexS = &quot;[\\?&amp;]&quot; + _name + &quot;=([^&amp;#]*)&quot;;
+		    regex = new RegExp(regexS);
+		    results = regex.exec(_url);
+		    if (results === null) {
+		        return &quot;&quot;;
+		    }
+		    else {
+		        return results[1];
+		    }
+		};
+		
+        this.triggerNsSync = function(){
+        
+			var o = new sforce.SObject(&quot;Opportunity&quot;);
+			o.id = &quot;{! Opportunity.Id}&quot;;
+			o.NetSuite_Quote__c = null;
+			o.Celigo_Sync_Helper__c =&quot;false&quot;; 
+			o.Send_to_NetSuite__c= &quot;true&quot;;
+			o.Generate_Sales_Order__c=&quot;true&quot;;
+			o.Celigo_Update__c = &quot;true&quot;;
+                        o.NS_Sync__c = null;
+			sforce.connection.update([o],{
+				onSuccess:function(result){
+					var resObj = result[0];
+					if(resObj.success == &apos;false&apos;){
+						//something wrong
+						var error;
+						if(resObj.errors instanceof Array){
+							error = resObj.errors[0];
+						}else{
+							error = resObj.errors;
+						}
+						//alert the error and done
+						Celigo.SFDC.showMsg(&apos;StatusCode: &apos;+error.statusCode+&apos;\r\nMessage: &apos;+error.message);
+					}else{
+						//success, open pop up and etc
+						celigo_sosm.openPopup();
+						celigo_sosm.checkSyncStatus();
+					}
+				}, 
+				onFailure:function(error){
+					//alert the error and done
+					Celigo.SFDC.showMsg(&apos;Error: &apos;+error.name+&apos;\r\nMessage: &apos;+error.message);
+				}
+			});
+        };
+        
+		this.revertFlags = function(){
+			var o = new sforce.SObject(&quot;Opportunity&quot;);
+			o.id = &quot;{! Opportunity.Id}&quot;;
+			o.Celigo_Sync_Helper__c =&quot;false&quot;; 
+			o.Send_to_NetSuite__c= &quot;false&quot;;
+			o.Generate_Sales_Order__c=&quot;false&quot;;
+			o.Celigo_Update__c = &quot;false&quot;;
+			sforce.connection.update([o]);
+		};
+		
+        this.openPopup = function(){
+        
+            var top = screen.height - (screen.height * .5) - 100;
+            var left = screen.width - (screen.width * .5) - 187;
+            var params = &apos;dependent = yes,resizable=false,scrollbars=false,toolbar=false,menubar=false,location=false,status=true,directories=false,width=375,height=160,top=&apos;;
+            params += top.toString();
+            params += &apos;,left=&apos; + left.toString() + &apos;\&apos;&apos;;
+            
+            this.pu = window.open(&apos;/apex/sales_order_status?whence=&apos;+&quot;{!Opportunity.Id}&quot;, &apos;NetSuite_Synchronization&apos;, params);
+        };
+        
+        this.checkSyncStatus = function(){
+            var result = sforce.connection.query(&quot;select Id, Celigo_Sync_Helper__c, Send_to_NetSuite__c, NS_Sync__c from Opportunity where Id = &apos;&quot;+ &quot;{!Opportunity.Id}&quot; +&quot;&apos;&quot;, {
+                onSuccess: function(result){
+                    var records = result.getArray(&quot;records&quot;);
+                    if (records[0].Celigo_Sync_Helper__c === &apos;true&apos; &amp;&amp; records[0].Send_to_NetSuite__c === &apos;false&apos; &amp;&amp; records[0].NS_Sync__c === null) 
+						window.location.href = window.location.href;
+					else if(records[0].NS_Sync__c){
+						if(celigo_sosm.pu&amp;&amp;!celigo_sosm.pu.closed){
+							celigo_sosm.pu.close();
+						}
+						celigo_sosm.revertFlags();
+						Celigo.SFDC.showMsg(records[0].NS_Sync__c+&apos;\r\n&apos;);
+					}else if(celigo_sosm.retries &lt; celigo_sosm.maxRetries){
+						celigo_sosm.retries++;
+						window.setTimeout(celigo_sosm.checkSyncStatus, 5000);
+					}else{
+						if(celigo_sosm.pu&amp;&amp;!celigo_sosm.pu.closed){
+							celigo_sosm.pu.close();
+						}
+						celigo_sosm.revertFlags();
+						Celigo.SFDC.showMsg(&apos;Sync Request Timed Out.\r\n&apos;);
+					}
+                },
+                onFailure: function(error){
+					if(celigo_sosm.pu&amp;&amp;!celigo_sosm.pu.closed){
+							celigo_sosm.pu.close();
+						}
+					celigo_sosm.revertFlags();
+					Celigo.SFDC.showMsg(error);
+                }
+            });
+        };
+        
+    }
+    return { //public members
+        main: function(){
+            try {
+                {!REQUIRESCRIPT(&quot;/soap/ajax/13.0/connection.js&quot;)}
+				var inProg= sforce.connection.query(&quot;select Id, Send_to_NetSuite__c from Opportunity where Id = &apos;&quot;+ &quot;{!Opportunity.Id}&quot; + &quot;&apos;&quot;);
+                var records = inProg.getArray(&apos;records&apos;);
+				if (records[0].Send_to_NetSuite__c === &apos;true&apos;) 
+						alert(&quot;Sync already in progress.&quot;);
+				else {
+					celigo_sosm = new SalesOrderSyncManager();
+					celigo_sosm.triggerNsSync();
+				} 
+			}catch (e) {
+                this.showMsg(e.name+&apos;\r\n&apos;+e.message);
+            }
+        },
+		
+		showMsg : function(error){
+		    var template = &apos;An error has occurred. Details:\r\n {%details%} \r\n If error persists, please contact your Celigo representative.&apos;;
+		    var msg = &apos;&apos;;
+			//error could be js error, sf fault obj, string
+		    if(Object.prototype.toString.call(error) === &apos;[Object String]&apos;){
+		    	msg = template.replace(/{%details%}/, error);
+		    }else if(error.name &amp;&amp; error.message){
+		    	msg = template.replace(/{%details%}/, error.name+&apos;\r\n&apos;+error.message);
+		    }else if(error.faultcode &amp;&amp; error.faultstring){
+		    	msg = template.replace(/{%details%}/, error.faultcode+&apos;\r\n&apos;+error.faultstring);
+		    }else{
+		    	msg = msg = template.replace(/{%details%}/, new String(error));
+		    }
+		    if(msg)		
+		    	alert(msg);
+		}
+    }
+})();
+Celigo.SFDC.main();</url>
+    </webLinks>
+    <webLinks>
+        <fullName>View_Health_History</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>View Health History</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>navigateToUrl(&apos;/apex/health_history_printout?aid={!Opportunity.AccountId }&apos;,&apos;hhistory&apos;);</url>
+    </webLinks>
+</CustomObject>

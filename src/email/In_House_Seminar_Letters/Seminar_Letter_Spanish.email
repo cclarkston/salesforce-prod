@@ -1,0 +1,48 @@
+<messaging:emailTemplate subject="test" recipientType="Lead" relatedToType="Lead"
+Subject="Estamos  emocionados en verle en el Seminario!">
+<messaging:htmlEmailBody >
+
+<img id="theImage" src="http://www.clearchoice.com/files/images/EmailTemplates/ClearChoiceLogo.png" width="387" height="114"/> 
+<br/>
+<hr color="DarkBlue"/>
+
+<font size="5">Estamos emocionados en verle en el seminario!</font>
+<br/>
+<br/>
+Hola {!recipient.FirstName},<br/>
+<br/>
+
+Hemos reservado un puesto para usted en el seminario que tendremos en Clear Choice el {!recipient.Well_Formatted_Date__c} a las {!recipient.Well_Formatted_Time__c}.
+<br/>
+<br/> 
+Tomaremos un 3D CAT scan después que el seminario termine.<br/>
+<br/>
+Usted puede esperar:<br/>
+<ul> 
+<li>Aprenderá como los implantes proveen la solución clara de sus necesidades dentales.</li>
+<li>Respuestas a sus preguntas acerca de su condición dental.</li>
+<li>Conocerá a nuestros odontólogos</li>
+<li>Aperitivos!</li>
+</ul>
+<br/>
+<br/>
+Atentamente,<br/>
+<br/>
+
+{!recipient.Call_Center_Agent__r.Name}<br/>
+Consultor de Implantes Dentales<br/>
+<br/>
+
+ClearChoice Centro de Implantes Dentales en {!recipient.Center__r.Name}<br/>
+{!recipient.Center__r.Street_1__c}&nbsp;
+{!recipient.Center__r.Street_2__c}<br/>
+{!recipient.Center__r.City__c}, {!recipient.Center__r.State__c} {!recipient.Center__r.Zip_Code__c}<br/>
+{!recipient.Center__r.Call_Center_Marketing__c}
+<br/>
+<br/>
+
+<a href="{!recipient.Center__r.Map_Directions_URL__c}">Haga clic aquí</a> para ver el mapa y direcciones para nuestras oficina.<br/>
+<br/>
+
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

@@ -1,0 +1,18 @@
+<apex:page standardController="lead" extensions="lead_deomgraphics" sidebar="false" showHeader="false">
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+
+<apex:outputpanel layout="block" style="padding-left:30px;">
+  <span style="display:block;padding-bottom:5px;">
+  <span style="font-weight:bold;width:150px;display:inline-block;">Average Home Value : </span>
+    <apex:outputText value="{0,number,$ ##,##,##0}" >
+    <apex:param value="{!average_house_value}" />   
+    </apex:outputtext></span>
+  <span style="display:block;padding-bottom:5px;">
+  <span style="font-weight:bold;width:150px;display:inline-block;">Average Income : </span>    
+    <apex:outputText value="{0,number,$ ##,##,##0}" >
+    <apex:param value="{!average_income}" />   
+    </apex:outputtext></span>
+</apex:outputPanel>      
+</apex:page>

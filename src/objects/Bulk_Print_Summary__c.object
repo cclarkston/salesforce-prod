@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Table holding a summary record of a bulk print job</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Bulk_Form__c</fullName>
+        <description>The type of form that was printed in the bulk print job</description>
+        <externalId>false</externalId>
+        <label>Bulk Form</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>BCP Letter</fullName>
+                    <default>false</default>
+                    <label>BCP Letter</label>
+                </value>
+                <value>
+                    <fullName>Welcome Letter</fullName>
+                    <default>false</default>
+                    <label>Welcome Letter</label>
+                </value>
+                <value>
+                    <fullName>Seminar Letter</fullName>
+                    <default>false</default>
+                    <label>Seminar Letter</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Num_Printed__c</fullName>
+        <description>Should record the number of documents printed in this job</description>
+        <externalId>false</externalId>
+        <label>Num Printed</label>
+        <summaryForeignKey>Bulk_Print_Detail__c.Bulk_Print_No__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Print_Successful__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates if the bulk print job was marked as successful - checked is a success</description>
+        <externalId>false</externalId>
+        <label>Print Successful</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Printed_By__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>User that ran the bulk print job</description>
+        <externalId>false</externalId>
+        <label>Printed By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Bulk_Print_User</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Printed_Time__c</fullName>
+        <defaultValue>NOW()</defaultValue>
+        <description>Time the bulk print job was run</description>
+        <externalId>false</externalId>
+        <label>Printed Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <label>Bulk Print Summary</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>{0}</displayFormat>
+        <label>Bulk Print Summary Num</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Bulk Print Summaries</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

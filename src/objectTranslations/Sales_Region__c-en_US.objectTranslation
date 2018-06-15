@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Sales Region</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Sales Regions</value>
+    </caseValues>
+    <fields>
+        <label><!-- Active --></label>
+        <name>Active__c</name>
+    </fields>
+    <fields>
+        <label><!-- Alternate RDM --></label>
+        <name>Alternate_RDM__c</name>
+        <relationshipLabel><!-- Sales Regions (Alternate RDM) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Baseline Target --></label>
+        <name>Baseline_Target__c</name>
+    </fields>
+    <fields>
+        <label><!-- RBD --></label>
+        <name>RBD__c</name>
+        <relationshipLabel><!-- Sales Regions (RBD) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- RDM --></label>
+        <name>RSM__c</name>
+        <relationshipLabel><!-- Sales Regions (RDM) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Sales Area --></label>
+        <name>Sales_Area__c</name>
+        <relationshipLabel><!-- Sales Regions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Tier 1 Bonus Payout --></label>
+        <name>Tier_1_Bonus_Payout__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier 2 Bonus Payout --></label>
+        <name>Tier_2_Bonus_Payout__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier 3 Bonus Payout --></label>
+        <name>Tier_3_Bonus_Payout__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier 4 Bonus Payout --></label>
+        <name>Tier_4_Bonus_Payout__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier 5 Bonus Payout --></label>
+        <name>Tier_5_Bonus_Payout__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier 6 Bonus Payout --></label>
+        <name>Tier_6_Bonus_Payout__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier 7 Bonus Payout --></label>
+        <name>Tier_7_Bonus_Payout__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier 8 Bonus Payout --></label>
+        <name>Tier_8_Bonus_Payout__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier 9 Bonus Payout --></label>
+        <name>Tier_9_Bonus_Payout__c</name>
+    </fields>
+    <layouts>
+        <layout>Sales Region Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

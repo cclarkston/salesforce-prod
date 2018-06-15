@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>ACCOUNT.NAME</field>
+    </columns>
+    <columns>
+        <field>PHONE1</field>
+    </columns>
+    <columns>
+        <field>Account.Preliminary_Treatment_Fee_Quoted__c</field>
+    </columns>
+    <columns>
+        <field>Account.Preliminary_Treatment_Plan__c</field>
+    </columns>
+    <columns>
+        <field>Account.General_Notes__c</field>
+    </columns>
+    <columns>
+        <field>PC_EMAIL</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Account.Consult_Result__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>,30 Day Pipeline,60 Day Pipeline,90 Day Pipeline,2nd Consult</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Center__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Chicago</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>USERS.NAME</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Abiel Gonzaga,Abraham Stein,Audrey Dinges,Bret Barger,Bryce Burger,Carla Singh,Chris McCulley,Danielle Belva,David Greenwood,Delissa Ortega,Dina Costantini,Don DiPasquale,Dorian Lewis,Elizabeth Roy</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>USERS.NAME</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Abiel Gonzaga,Abraham Stein,Audrey Dinges,Bret Barger,Bryce Burger,Carla Singh,Chris McCulley,Danielle Belva,David Greenwood,Delissa Ortega,Dina Costantini,Don DiPasquale,Elizabeth Roy</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.LeadScore__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>green</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>USERS.NAME</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Abridged callbacks-Green</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>AccountList</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <endDate>2014-05-01</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2008-07-01</startDate>
+    </timeFrameFilter>
+</Report>

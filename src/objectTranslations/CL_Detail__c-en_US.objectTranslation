@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>CL Detail</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>CL Details</value>
+    </caseValues>
+    <fields>
+        <help><!-- Defaults to yesterday&apos;s date --></help>
+        <label><!-- As/Of Date --></label>
+        <name>As_Of_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Center Location --></label>
+        <name>Center_Location__c</name>
+        <relationshipLabel><!-- CL Details --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Center --></label>
+        <name>Center__c</name>
+    </fields>
+    <fields>
+        <help><!-- Does this field match the Center field?  It should. --></help>
+        <label><!-- Center name --></label>
+        <name>Center_name__c</name>
+        <picklistValues>
+            <masterLabel>Atlanta</masterLabel>
+            <translation><!-- Atlanta --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Austin</masterLabel>
+            <translation><!-- Austin --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chicago</masterLabel>
+            <translation><!-- Chicago --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chicago Deerfield/Northbrook</masterLabel>
+            <translation><!-- Chicago Deerfield/Northbrook --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chicago Naperville</masterLabel>
+            <translation><!-- Chicago Naperville --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cleveland</masterLabel>
+            <translation><!-- Cleveland --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cleveland Akron</masterLabel>
+            <translation><!-- Cleveland Akron --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dallas</masterLabel>
+            <translation><!-- Dallas --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dallas Fort Worth</masterLabel>
+            <translation><!-- Dallas Fort Worth --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denver</masterLabel>
+            <translation><!-- Denver --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denver Colorado Springs</masterLabel>
+            <translation><!-- Denver Colorado Springs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denver Glenwood Springs</masterLabel>
+            <translation><!-- Denver Glenwood Springs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Kansas City</masterLabel>
+            <translation><!-- Kansas City --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Las Vegas</masterLabel>
+            <translation><!-- Las Vegas --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Miami</masterLabel>
+            <translation><!-- Miami --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Miami Aventura</masterLabel>
+            <translation><!-- Miami Aventura --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phoenix</masterLabel>
+            <translation><!-- Phoenix --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phoenix Mesa</masterLabel>
+            <translation><!-- Phoenix Mesa --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Portland</masterLabel>
+            <translation><!-- Portland --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sacramento</masterLabel>
+            <translation><!-- Sacramento --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salt Lake City</masterLabel>
+            <translation><!-- Salt Lake City --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>San Antonio</masterLabel>
+            <translation><!-- San Antonio --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>San Francisco - Daly City</masterLabel>
+            <translation><!-- San Francisco - Daly City --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>San Francisco - Oakland</masterLabel>
+            <translation><!-- San Francisco - Oakland --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>San Jose</masterLabel>
+            <translation><!-- San Jose --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>St. Louis</masterLabel>
+            <translation><!-- St. Louis --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Toronto</masterLabel>
+            <translation><!-- Toronto --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Washington Chevy Chase</masterLabel>
+            <translation><!-- Washington Chevy Chase --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Washington Tysons Corner</masterLabel>
+            <translation><!-- Washington Tysons Corner --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Consults Available Next Week --></label>
+        <name>Consults_Available_Next_Week__c</name>
+    </fields>
+    <fields>
+        <help><!-- How many Consults cancelled that had been scheduled on this date? --></help>
+        <label><!-- Consults Cancelled --></label>
+        <name>Consults_Cancelled__c</name>
+    </fields>
+    <fields>
+        <label><!-- Consults Scheduled Next Week --></label>
+        <name>Consults_Scheduled_Next_Week__c</name>
+    </fields>
+    <fields>
+        <help><!-- How many Consults were scheduled on this day? --></help>
+        <label><!-- Consults Scheduled --></label>
+        <name>Consults_Scheduled__c</name>
+    </fields>
+    <fields>
+        <help><!-- How many Consults actually showed? --></help>
+        <label><!-- Consults Showed --></label>
+        <name>Consults_Showed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Next Available Consult --></label>
+        <name>Next_Available_Consult__c</name>
+    </fields>
+    <fields>
+        <label><!-- Revenue Collected --></label>
+        <name>Revenue_Collected__c</name>
+    </fields>
+    <layouts>
+        <layout>CL Detail Layout</layout>
+        <sections>
+            <label><!-- Center --></label>
+            <section>Center</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Revenue --></label>
+            <section>Revenue</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

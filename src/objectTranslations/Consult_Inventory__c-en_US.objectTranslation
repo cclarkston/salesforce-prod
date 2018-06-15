@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Consult Inventory</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Consult Inventory</value>
+    </caseValues>
+    <fields>
+        <label><!-- Active --></label>
+        <name>Active__c</name>
+    </fields>
+    <fields>
+        <label><!-- Add Ons --></label>
+        <name>Add_Ons__c</name>
+        <picklistValues>
+            <masterLabel>Alpha Beta</masterLabel>
+            <translation><!-- Alpha Beta --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Eye Treatment</masterLabel>
+            <translation><!-- Eye Treatment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Glycolic 30%</masterLabel>
+            <translation><!-- Glycolic 30% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hand Facial</masterLabel>
+            <translation><!-- Hand Facial --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Peppermint Lip Treatment</masterLabel>
+            <translation><!-- Peppermint Lip Treatment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Retinol + C Exfoliant</masterLabel>
+            <translation><!-- Retinol + C Exfoliant --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Admin Notes --></label>
+        <name>Admin_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Apt Date --></label>
+        <name>Apt_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Apt Datetime --></label>
+        <name>Apt_Datetime__c</name>
+    </fields>
+    <fields>
+        <label><!-- Apt Notes --></label>
+        <name>Apt_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Arrival Time --></label>
+        <name>Arrival_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Auto Holder --></label>
+        <name>Auto_Holder__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Auto Reminder --></label>
+        <name>Auto_Reminder__c</name>
+    </fields>
+    <fields>
+        <label><!-- Callback Consult PEC --></label>
+        <name>Callback_Consult_PEC__c</name>
+        <relationshipLabel><!-- Consult Inventory (Callback Consult PEC) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Callback Consult --></label>
+        <name>Callback_Consult__c</name>
+    </fields>
+    <fields>
+        <label><!-- Check In Code --></label>
+        <name>Check_In_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Color Code --></label>
+        <name>Color__c</name>
+        <picklistValues>
+            <masterLabel>Light Green</masterLabel>
+            <translation><!-- Light Green --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Light Purple</masterLabel>
+            <translation><!-- Light Purple --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Light Red</masterLabel>
+            <translation><!-- Light Red --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Confirmation Status --></label>
+        <name>Confirmation_Status__c</name>
+        <picklistValues>
+            <masterLabel>Confirmed</masterLabel>
+            <translation><!-- Confirmed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LVM</masterLabel>
+            <translation><!-- LVM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Confirmed</masterLabel>
+            <translation><!-- Not Confirmed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transfered</masterLabel>
+            <translation><!-- Transfered --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Consult Completed --></label>
+        <name>Consult_Completed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Consult PEC --></label>
+        <name>Consult_PEC__c</name>
+        <relationshipLabel><!-- Consult Inventory (Consult PEC) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Consult Room --></label>
+        <name>Consult_Room__c</name>
+        <relationshipLabel><!-- Consult Inventory --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Consult Show Status --></label>
+        <name>Consult_Show_Status__c</name>
+        <picklistValues>
+            <masterLabel>Arrived</masterLabel>
+            <translation><!-- Arrived --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Consult Completed</masterLabel>
+            <translation><!-- Consult Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Consult Started</masterLabel>
+            <translation><!-- Consult Started --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No Show</masterLabel>
+            <translation><!-- No Show --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Patient Left</masterLabel>
+            <translation><!-- Patient Left --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ready for Consult</masterLabel>
+            <translation><!-- Ready for Consult --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Consult Started --></label>
+        <name>Consult_Started__c</name>
+    </fields>
+    <fields>
+        <label><!-- DOW_int --></label>
+        <name>DOW_int__c</name>
+    </fields>
+    <fields>
+        <label><!-- Double Consult --></label>
+        <name>Double_Consult__c</name>
+        <relationshipLabel><!-- Consult Inventory --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- End Hour --></label>
+        <name>End_Hour__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Minute --></label>
+        <name>End_Minute__c</name>
+    </fields>
+    <fields>
+        <label><!-- External Agent --></label>
+        <name>External_Agent__c</name>
+    </fields>
+    <fields>
+        <label><!-- GC Offered --></label>
+        <name>GC_Offered__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Reschedule Time --></label>
+        <name>Last_Reschedule_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Rescheduled By --></label>
+        <name>Last_Rescheduled_By__c</name>
+        <relationshipLabel><!-- Consult Inventory (Last Rescheduled By) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Leadscore At Schedule Time --></label>
+        <name>Leadscore_At_Schedule_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Left Time --></label>
+        <name>Left_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- No Show Contacted Notes --></label>
+        <name>No_Show_Contacted_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- No Show Contacted --></label>
+        <name>No_Show_Contacted__c</name>
+    </fields>
+    <fields>
+        <label><!-- Patient Converted --></label>
+        <name>Patient_Converted__c</name>
+    </fields>
+    <fields>
+        <label><!-- Patient_Mobile --></label>
+        <name>Patient_Mobile__c</name>
+    </fields>
+    <fields>
+        <label><!-- Patient Name --></label>
+        <name>Patient_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Patient Phone --></label>
+        <name>Patient_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Patient Referral Office --></label>
+        <name>Patient_Referral_Office__c</name>
+    </fields>
+    <fields>
+        <label><!-- Patient Warranty ID --></label>
+        <name>Patient_Warranty_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Patient Work --></label>
+        <name>Patient_Work__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pre-Screen Type --></label>
+        <name>Pre_Screen_Type__c</name>
+        <picklistValues>
+            <masterLabel>Any</masterLabel>
+            <translation><!-- Any --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Green/Yellow</masterLabel>
+            <translation><!-- Green/Yellow --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Green/Yellow Only</masterLabel>
+            <translation><!-- Green/Yellow Only --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Red/Blue Only</masterLabel>
+            <translation><!-- Red/Blue Only --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Seminar</masterLabel>
+            <translation><!-- Seminar --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Ready Time --></label>
+        <name>Ready_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Scheduled Account --></label>
+        <name>Scheduled_Account__c</name>
+        <relationshipLabel><!-- Consult Inventory --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Scheduled Lead --></label>
+        <name>Scheduled_Lead__c</name>
+        <relationshipLabel><!-- Consult Inventory --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Scheduled Patient --></label>
+        <name>Scheduled_Patient__c</name>
+        <relationshipLabel><!-- Consult Inventory --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Scheduled Time --></label>
+        <name>Scheduled_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Scheduled by --></label>
+        <name>Scheduled_by__c</name>
+        <relationshipLabel><!-- Consult Inventory (Scheduled by) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Send Holder --></label>
+        <name>Send_Holder__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Send Reminder --></label>
+        <name>Send_Reminder__c</name>
+    </fields>
+    <fields>
+        <label><!-- Special Initiative --></label>
+        <name>Special_Initiative__c</name>
+        <picklistValues>
+            <masterLabel>Double Decker</masterLabel>
+            <translation><!-- Double Decker --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Firm Appt Date</masterLabel>
+            <translation><!-- Firm Appt Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Group Consult</masterLabel>
+            <translation><!-- Group Consult --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hard Stop</masterLabel>
+            <translation><!-- Hard Stop --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Orange Crush</masterLabel>
+            <translation><!-- Orange Crush --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Red Rally</masterLabel>
+            <translation><!-- Red Rally --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ruby Red</masterLabel>
+            <translation><!-- Ruby Red --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>V2</masterLabel>
+            <translation><!-- V2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wait List</masterLabel>
+            <translation><!-- Wait List --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>White Glove</masterLabel>
+            <translation><!-- White Glove --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Workshop</masterLabel>
+            <translation><!-- Workshop --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Start Hour Int --></label>
+        <name>Start_Hour_Int__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Hour --></label>
+        <name>Start_Hour__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Minute Int --></label>
+        <name>Start_Minute_Int__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Minute --></label>
+        <name>Start_Minute__c</name>
+    </fields>
+    <fields>
+        <label><!-- Started By Someone Else --></label>
+        <name>Started_By_Someone_Else__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status Exported --></label>
+        <name>Status_Exported__c</name>
+    </fields>
+    <fields>
+        <label><!-- Template Apt ID --></label>
+        <name>Template_Apt__c</name>
+        <relationshipLabel><!-- Consult Inventory --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Treatment --></label>
+        <name>Treatment__c</name>
+        <picklistValues>
+            <masterLabel>AO4</masterLabel>
+            <translation><!-- AO4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chemical Peels</masterLabel>
+            <translation><!-- Chemical Peels --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Complimentary Consult</masterLabel>
+            <translation><!-- Complimentary Consult --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Complimentary Injectables w/Consult</masterLabel>
+            <translation><!-- Complimentary Injectables w/Consult --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Complimentary Laser w/Consult</masterLabel>
+            <translation><!-- Complimentary Laser w/Consult --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Complimentary Skin Care w/Consult</masterLabel>
+            <translation><!-- Complimentary Skin Care w/Consult --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Deoxycholic Acid</masterLabel>
+            <translation><!-- Deoxycholic Acid --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dermal Filler</masterLabel>
+            <translation><!-- Dermal Filler --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dermaplane</masterLabel>
+            <translation><!-- Dermaplane --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IPL</masterLabel>
+            <translation><!-- IPL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LHR</masterLabel>
+            <translation><!-- LHR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medi Facial</masterLabel>
+            <translation><!-- Medi Facial --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Microblading</masterLabel>
+            <translation><!-- Microblading --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Microneedling</masterLabel>
+            <translation><!-- Microneedling --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Multiple</masterLabel>
+            <translation><!-- Multiple --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Neurotoxin</masterLabel>
+            <translation><!-- Neurotoxin --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Neurotoxin/Filler</masterLabel>
+            <translation><!-- Neurotoxin/Filler --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Numbing</masterLabel>
+            <translation><!-- Numbing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Single</masterLabel>
+            <translation><!-- Single --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sublative</masterLabel>
+            <translation><!-- Sublative --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sublime</masterLabel>
+            <translation><!-- Sublime --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Waxing</masterLabel>
+            <translation><!-- Waxing --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- User --></label>
+        <name>User__c</name>
+        <relationshipLabel><!-- Consult Inventory (User) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Walk Out Reason --></label>
+        <name>Walk_Out_Reason__c</name>
+        <picklistValues>
+            <masterLabel>Emergency</masterLabel>
+            <translation><!-- Emergency --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Long Wait</masterLabel>
+            <translation><!-- Long Wait --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No Reason</masterLabel>
+            <translation><!-- No Reason --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Patient Late for Consult</masterLabel>
+            <translation><!-- Patient Late for Consult --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Will Patient Show? --></label>
+        <name>Will_Patient_Show__c</name>
+        <picklistValues>
+            <masterLabel>High</masterLabel>
+            <translation><!-- High --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Low</masterLabel>
+            <translation><!-- Low --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Will Patient Start? --></label>
+        <name>Will_Patient_Start__c</name>
+        <picklistValues>
+            <masterLabel>High</masterLabel>
+            <translation><!-- High --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Low</masterLabel>
+            <translation><!-- Low --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- isConsultArrived --></label>
+        <name>isConsultArrived__c</name>
+    </fields>
+    <fields>
+        <label><!-- isConsultScheduled --></label>
+        <name>isConsultScheudled__c</name>
+    </fields>
+    <fields>
+        <label><!-- isValidCallBack --></label>
+        <name>isValidCallBack__c</name>
+    </fields>
+    <layouts>
+        <layout>Consult Inventory Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

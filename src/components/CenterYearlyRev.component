@@ -1,0 +1,5 @@
+<apex:component controller="ctrl_center_sales_stats" access="global">{!file_header}
+<apex:repeat value="{!csv_output}" var="output">
+    {!output.output_line}
+</apex:repeat>  
+</apex:component>

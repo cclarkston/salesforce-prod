@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>false</available>
+    <description>BCP Letter Email</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>BCP Letter</name>
+    <style>none</style>
+    <subject>Thank you for contacting ClearChoice Dental Implant Centers</subject>
+    <textOnly>Dear {!Lead.FirstName},
+
+I’d like to thank you for contacting ClearChoice Dental Implant Centers – America’s #1 Choice for dental implants.
+
+At ClearChoice, we believe knowledge is power, and by obtaining accurate information you can make an informed decision as to whether our dental implant solution is right for you. We hope that, like many others, you’ll choose to schedule a Free, No Risk consultation with our doctors.
+
+You will have the opportunity to:
+
+•		Tour our advanced facility and receive a complimentary panoramic X-Ray and 3D CAT scan (a $700 value).
+
+•		Meet with a doctor to discuss your dental concerns and learn your treatment options
+
+•		Determine the specific investment for your treatment plan and understand financing options as needed.
+
+
+Imagine, in just one day, getting the healthy permanent smile that allows you to live the life you’ve earned!
+
+This letter confirms that you have been pre-selected to be offered the ClearChoice Basic Credit Program.
+
+We hope to have the opportunity to meet you. Please call us anytime Monday through Friday at {!Lead.Center_Phone_Number__c} between the hours of 8:00am-5:00pm to schedule your free consultation with our doctors. You may also visit our website at www.clearchoice.com
+
+Sincerely,
+
+{!Lead.Call_Center_Agent__c}
+Dental Implant Consultant
+
+{!Lead.Center_Name__c} ClearChoice Dental Center
+ {!Lead.Center_Address__c}
+ {!Lead.Center_Phone_Number__c}
+
+
+ClearChoice Dental Implant Centers are locally owned and operated by licensed local dentists, and are part of a professional affiliation of implant practices operated by oral surgeons, prosthodontists and restorative dentists across the United States. † America&apos;s #1 Choice determined by an Independent Patient Survey 2011. *Qualified patients can have their procedure in one day after initial workup without additional bone graft surgery.  Results may vary in individual cases. +Limited services available at satellite offices. span&gt;</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

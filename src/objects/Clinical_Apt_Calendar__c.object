@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>to-dos: add link to patients plan of treatment apt,  add timestamp fields - patient arrived,started, doctor times, etc.  Possibly add link for assistant - might be a 1:m table though.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Clinical Apt Calendar</relationshipLabel>
+        <relationshipName>Clinical_Apt_Calendar</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Amount_Financed__c</fullName>
+        <externalId>false</externalId>
+        <formula>Patient_POT_Apt__r.Patient_POT__r.Opportunity__r.Amount_Financed__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Amount Financed</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Anticipated_Payments__c</fullName>
+        <externalId>false</externalId>
+        <formula>Patient_POT_Apt__r.Patient_POT__r.Opportunity__r.Anticipated_Payments__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Anticipated Payments</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Apt_Complete_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>Apt Complete Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Apt_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Apt Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Apt_Datetime__c</fullName>
+        <description>Copying the functionality from the Apt_Datetime field on the Consult_Inventory object.</description>
+        <externalId>false</externalId>
+        <formula>/* copying the functionality from the Apt_Datetime field on the Consult_Inventory object. */ 
+
+DATETIMEVALUE( TEXT(Apt_Date__c) &amp; &quot; &quot; &amp; TEXT(Start_Hour_Int__c) &amp; &quot;:&quot;&amp; if(len(Start_Minute__c)=1,&quot;0&quot; &amp; Start_Minute__c,Start_Minute__c) &amp; &quot;:00&quot;) + (7/24)</formula>
+        <label>Apt Datetime</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Apt_Month__c</fullName>
+        <externalId>false</externalId>
+        <formula>MONTH( Apt_Date__c )</formula>
+        <label>Apt Month</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Apt_Start_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>Apt Start Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Apt_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Apt Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Completed</fullName>
+                    <default>false</default>
+                    <label>Completed</label>
+                </value>
+                <value>
+                    <fullName>No Show</fullName>
+                    <default>false</default>
+                    <label>No Show</label>
+                </value>
+                <value>
+                    <fullName>Patient Left</fullName>
+                    <default>false</default>
+                    <label>Patient Left</label>
+                </value>
+                <value>
+                    <fullName>Patient Arrived</fullName>
+                    <default>false</default>
+                    <label>Patient Arrived</label>
+                </value>
+                <value>
+                    <fullName>Patient Ready</fullName>
+                    <default>false</default>
+                    <label>Patient Ready</label>
+                </value>
+                <value>
+                    <fullName>Appointment Started</fullName>
+                    <default>false</default>
+                    <label>Appointment Started</label>
+                </value>
+                <value>
+                    <fullName>Incomplete</fullName>
+                    <default>false</default>
+                    <label>Incomplete</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Arrival_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>Arrival Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>CR_Schedule_Block__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>CR Schedule Block</label>
+        <referenceTo>CR_Schedule_Block__c</referenceTo>
+        <relationshipLabel>Clinical Apt Calendar</relationshipLabel>
+        <relationshipName>Clinical_Apt_Calendar</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Clinical_Appointment_Arch_Count__c</fullName>
+        <description>This field rolls up the Arch Count from the Clinical Appointment Record, so that it can be SUM in Salesforce Reports.</description>
+        <externalId>false</externalId>
+        <formula>Patient_POT_Apt__r.Clinical_Appointment__r.Arch_Count__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Clinical Appointment Arch Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Clinical_Room__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Clinical Room</label>
+        <referenceTo>Clinical_Room__c</referenceTo>
+        <relationshipLabel>Clinical Apt Calendar</relationshipLabel>
+        <relationshipName>Clinical_Apt_Calendar</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Confirmation_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Confirmation Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Not Confirmed</fullName>
+                    <default>true</default>
+                    <label>Not Confirmed</label>
+                </value>
+                <value>
+                    <fullName>Confirmed</fullName>
+                    <default>false</default>
+                    <label>Confirmed</label>
+                </value>
+                <value>
+                    <fullName>Left Message</fullName>
+                    <default>false</default>
+                    <label>Left Message</label>
+                </value>
+                <value>
+                    <fullName>Can&apos;t Reach</fullName>
+                    <default>false</default>
+                    <label>Can&apos;t Reach</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>DOW__c</fullName>
+        <externalId>false</externalId>
+        <label>DOW</label>
+        <precision>1</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Doctor__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Doctor</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Clinical_Apt_Calendar</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>End_Hour_Int__c</fullName>
+        <externalId>false</externalId>
+        <formula>value(End_Hour__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>End Hour Int</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>End_Hour__c</fullName>
+        <externalId>false</externalId>
+        <label>End Hour</label>
+        <length>2</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>End_Minute_Int__c</fullName>
+        <externalId>false</externalId>
+        <formula>value(End_Minute__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>End Minute Int</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>End_Minute__c</fullName>
+        <externalId>false</externalId>
+        <label>End Minute</label>
+        <length>2</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Etime__c</fullName>
+        <externalId>false</externalId>
+        <formula>(value(End_Hour__c) * 60) + value(End_Minute__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Etime</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Financed__c</fullName>
+        <externalId>false</externalId>
+        <formula>Patient_POT_Apt__r.Patient_POT__r.Opportunity__r.Finance_Company_Fee__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Finance Fee</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Negotiated_Total_Amount__c</fullName>
+        <externalId>false</externalId>
+        <formula>Patient_POT_Apt__r.Patient_POT__r.Opportunity__r.Negotiated_Total_Amount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Negotiated Total Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Clinical Apt Calendar</relationshipLabel>
+        <relationshipName>Clinical_Apt_Calendar</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Outstanding_Payments_Minus_Anticipated__c</fullName>
+        <externalId>false</externalId>
+        <formula>Patient_POT_Apt__r.Patient_POT__r.Opportunity__r.Outstanding_Balance_incl_anticipated__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Outstanding Payments- Minus Anticipated</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Patient_Left_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>Patient Left Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Patient_POT_Apt__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Link to the POT apt that was scheduled</description>
+        <externalId>false</externalId>
+        <label>Patient POT Apt</label>
+        <referenceTo>Patient_POT_Apt__c</referenceTo>
+        <relationshipLabel>Clinical Apt Calendar</relationshipLabel>
+        <relationshipName>Clinical_Apt_Calendar</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Plan_of_Treatment__c</fullName>
+        <externalId>false</externalId>
+        <formula>Patient_POT_Apt__r.Patient_POT__r.Plan_of_Treatment__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Plan of Treatment</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Ready_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>Ready Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Start_Hour_Int__c</fullName>
+        <externalId>false</externalId>
+        <formula>value(Start_Hour__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Start Hour Int</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Start_Hour__c</fullName>
+        <externalId>false</externalId>
+        <label>Start Hour</label>
+        <length>2</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Start_Minute_Int__c</fullName>
+        <externalId>false</externalId>
+        <formula>value(Start_Minute__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Start Minute Int</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Start_Minute__c</fullName>
+        <externalId>false</externalId>
+        <label>Start Minute</label>
+        <length>2</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Status_Updates__c</fullName>
+        <externalId>false</externalId>
+        <label>Status Updates</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Stime__c</fullName>
+        <externalId>false</externalId>
+        <formula>(value(Start_Hour__c) * 60) + value(Start_Minute__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Stime</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Payments__c</fullName>
+        <externalId>false</externalId>
+        <formula>Patient_POT_Apt__r.Patient_POT__r.Opportunity__r.Total_Payments__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Payments</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>isDeleted__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>isDeleted</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Clinical Apt Calendar</label>
+    <nameField>
+        <displayFormat>CAC-{0000}</displayFormat>
+        <label>Clinical Apt Calendar Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Clinical Apt Calendar</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

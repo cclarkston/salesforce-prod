@@ -1,0 +1,139 @@
+<apex:page controller="ctrl_callbacks" readonly="true" sidebar="false" >
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<style type="text/css" media="print">
+  div.bPageHeader {
+    display:none;
+  }  
+  
+  p.form_holder {
+    display:none; 
+  }  
+</style>
+
+<style>
+table.accs_details tr.lgreen {
+    background-color:#C9E4E4;  
+    font-size:10pt; 
+  }
+
+  table.accs_details tr.lgreen td {
+      line-height:20px;
+    color:black;
+    border-top:1px solid #008080;
+    border-bottom:1px solid #008080; 
+    empty-cells:hide;       
+        text-align:left;    
+  } 
+
+  table.accs_details tr.lgreen td.right {
+    text-align:right;
+    padding-right:5px;    
+    empty-cells:hide;      
+  }  
+
+  table.accs_details tr.lgreen td.indent {
+    padding-left:25px;
+    empty-cells:hide; 
+         font-style:italic;    
+    font-weight:bold;         
+  }  
+  
+  table.accs_details tr.dgreen {
+    background-color:#147585;  
+    font-weight:bold;
+    font-size:12pt; 
+  }
+
+  table.accs_details tr.dgreen td {
+      line-height:20px;
+    color:white;
+    border-top:1px solid #008080;
+    border-bottom:1px solid #008080; 
+    empty-cells:hide;   
+    text-align:left;     
+  } 
+
+  table.accs_details tr.dgreen td.right {
+    text-align:right;
+    padding-right:5px;    
+    empty-cells:hide;      
+  }  
+
+  table.accs_details tr.dgreen td.indent {
+    padding-left:25px;
+    empty-cells:hide;      
+  } 
+</style>
+
+<script type="text/javascript"> 
+  function use_fancy_cursor(t) {
+    document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+    t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  }
+
+  function default_cursor(t) {
+    document.body.style.cursor = 'default';
+    t.style.cursor='default';
+  }  
+</script>
+
+<apex:form style="padding-top:0;display:inline;margin-top:0;" onsubmit="">
+  <apex:actionstatus id="status_load">
+    <apex:facet name="start">
+      <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;height: 100%;opacity:0.65;width:100%;"> 
+        <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+          <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+          <span class="waitingDescription">Loading...</span>
+        </div>
+      </div>
+    </apex:facet>
+  </apex:actionstatus>
+  
+  <apex:outputpanel id="message_holder" layout="block" style="padding-left:20px;font-weight:bold;color:red;font-size:12pt;">    
+  <apex:messages />
+  </apex:outputpanel>
+    
+  <span style="display:block;padding-bottom:2em;">
+    <span style="display:inline-block;padding-left:30px;margin-left:20px;border-bottom:1px solid #bcb371;color:#5789AE;font-size:14pt;font-family:arial;width:800px;font-weight:bold;">Top 10 Callbacks</span>   
+    <span style="display:inline-block;width:50px;">&nbsp;</span><apex:commandButton action="{!refresh_return_list}" rerender="main_holder" value="Refresh List"/>
+  </span>    
+
+  <apex:outputpanel id="main_holder" layout="block" style="padding-left:45px;">
+    <apex:variable var="rowclassname" value="accs" />
+    <table class="accs_details" width="1000px;">
+      <apex:repeat value="{!return_list}" var="consult">
+        <tr class="{!rowclassname}">
+        <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','lgreen','accs')}" />
+        <td style="padding-left:20px;padding-top:5px;padding-bottom:5px;">
+          <span style="font-weight:bold;width:50px;display:inline-block;">Name :</span> 
+            <span style="width:150px;display:inline-block;"><apex:outputLink value="/{!consult.consult_record.id}" target="_blank" title="Click to open consult in new window"><apex:outputField value="{!consult.consult_record.name}" /></apex:outputLink></span>
+            <span style="width:50px;display:inline-block;">&nbsp;</span>
+          <span style="font-weight:bold;width:50px;display:inline-block;">Owner :</span> 
+            <span style="width:150px;display:inline-block;"><apex:outputfield value="{!consult.consult_record.owner.name}"></apex:outputfield></span><span style="width:50px;display:inline-block;">&nbsp;</span>
+          <span style="width:150px;display:inline-block;"><apex:outputfield value="{!consult.consult_record.Consult_Result__c}" /></span><span style="width:50px;display:inline-block;">&nbsp;</span>
+          {!consult.queue_source}<br />
+          <span style="display:block;padding-top:2px;padding-bottom:2px;padding-left:5px;">
+            <!--<span style="display:inline-block;width:100px;font-weight:bold;">General Notes : </span> -->
+            <span style="font-style:italic;"><apex:outputfield value="{!consult.consult_record.General_Notes__c}" /></span>
+          </span>
+          <br />
+          <span style="font-weight:bold;width:100px;display:inline-block;">Last Task :</span> 
+          <span style="width:150px;display:inline-block;">{!consult.TaskDate}</span><span style="width:50px;display:inline-block;">&nbsp;</span>
+          <span style="width:150px;display:inline-block;">{!consult.TaskType}</span><span style="width:50px;display:inline-block;">&nbsp;</span>
+          <span style="width:150px;display:inline-block;">{!consult.TaskSubject}</span><br />
+          <span style="display:block;padding-top:2px;padding-bottom:2px;padding-left:5px;">
+            <!--<span style="display:inline-block;width:100px;font-weight:bold;">Description : </span> -->
+            <span style="font-style:italic;">{!consult.taskdescription}</span>
+          </span>
+        </td>  
+        </tr>
+      </apex:repeat>
+  </table>    
+
+  </apex:outputpanel>
+    
+    
+</apex:form>
+</apex:page>

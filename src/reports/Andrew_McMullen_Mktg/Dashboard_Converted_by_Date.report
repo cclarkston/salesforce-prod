@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_4987386</developerName>
+        <masterLabel>Consult Status</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>CampaignMember.Consult_Status__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>30 Day Pipeline</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>60 Day Pipeline</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>90 Day Pipeline</sourceValue>
+            </sourceValues>
+            <value>Pipeline</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Not a Candidate</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>No Money</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>No Longer Interested</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>2nd Consult</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Doctor Declined Case</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Medical Clearance</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Refered Out to Doctor</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Treatment Received Elsewhere</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Walked Out</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>, ,</sourceValue>
+            </sourceValues>
+            <value>Non-Sale</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Prostho Exam Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Prostho Exam Scheduled Call Back</sourceValue>
+            </sourceValues>
+            <value>Close</value>
+        </values>
+        <values>
+            <value>Likely Close</value>
+        </values>
+    </buckets>
+    <filter>
+        <criteriaItems>
+            <column>CAMPAIGN_NAME</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>contains</operator>
+            <value>pre</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CAMPAIGN_TYPE</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Web-Email Program</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CampaignMember.Consult_Date__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CampaignMember.Consult_Date__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>greaterThan</operator>
+            <value>N_MONTHS_AGO:6</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_4987386</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Month</dateGranularity>
+        <field>CampaignMember.Consult_Date__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Dashboard- Converted by Date</name>
+    <params>
+        <name>scopeid</name>
+        <value></value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CampaignWithCampaignMembers</reportType>
+    <scope>orgActive</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+</Report>

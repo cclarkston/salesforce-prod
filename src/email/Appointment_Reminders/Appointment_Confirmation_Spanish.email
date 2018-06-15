@@ -1,0 +1,67 @@
+<messaging:emailTemplate subject="RECUERDE su consulta con ClearChoice Centro de Implantes Dentales " recipientType="Lead" replyTo="callcenter@clearchoice.com" >
+<messaging:plainTextEmailBody >
+Hola {!Recipient.FirstName}, 
+
+Queremos recordarle de su cita gratuita con ClearChoice, el Centro de Implantes Dentales.
+
+{!Recipient.Well_Formatted_Date__c} at {!Recipient.Well_Formatted_Time__c}. 
+
+Hemos reservado una hora para que usted hable con el doctor y un asesor dental.
+
+Favor de copiar y pegar la dirección de la página de web para ver el mapa. {!recipient.Center__r.Map_Directions_URL__c}
+
+Nosotros solicitamos una confirmación verbal para poder garantizar su cita. Llame al {!recipient.Center__r.Call_Center_Marketing__c}. Por favor llámenos con 48 horas de anticipación en caso de que no pueda acudir a la cita. También, puede responder vía email. 
+
+Esperamos conocerle,
+{!Recipient.Call_Center_Agent__r.Name}
+Dental Implant Consultant
+
+{!Recipient.Center_Name__c} ClearChoice Dental Center
+{!Recipient.Center__r.Street_1__c} {!Recipient.Center__r.Street_2__c}
+{!Recipient.Center__r.City__c}, {!Recipient.Center__r.State__c} {!Recipient.Center__r.Zip_Code__c}
+{!Recipient.Center_Phone_Number__c}
+
+
+ClearChoice Dental Implant Centers are locally owned and operated by licensed local dentists, and are part of a professional affiliation of implant practices operated by oral surgeons, prosthodontists and restorative dentists across the United States.
+† America's #1 Choice determined by an Independent Patient Survey 2011. *Qualified patients can have their procedure in one day after initial workup without additional bone graft surgery.  Results may vary in individual cases. +Limited services available at satellite offices.
+</messaging:plainTextEmailBody>
+<messaging:htmlEmailBody >
+<img id="theImage" src="http://www.clearchoice.com/files/images/EmailTemplates/ClearChoiceLogo.png" width="387" height="114"/> 
+<br/>
+<hr color="DarkBlue"/>
+<div style="text-align:justify;">
+<p style="line-height:1.4;">
+
+Hola {!recipient.FirstName},
+<br/>
+<br/>
+Queremos recordarle de su cita gratuita con ClearChoice, el Centro de Implantes Dentales.
+<br/>
+<br/>
+<b><c:ConsultTime_Format LeadId="{!Recipient.Id}" DFormat="EEEE M/dd/yyyy"/> at <c:ConsultTime_Format LeadId="{!Recipient.Id}" DFormat="h:mm a"/>.</b>
+<br/>
+<br/>
+<a href="{!recipient.Center__r.Map_Directions_URL__c}">Haga clic aquí</a> para ver el mapa y direcciones para nuestra oficina.
+<br/>
+<br/>
+Hemos reservado una hora para que usted hable con el doctor y un asesor dental.
+<br/>
+<br/>
+Nosotros solicitamos una confirmación verbal para poder garantizar su cita. Llame al {!recipient.Center__r.Call_Center_Marketing__c}. Por favor llámenos con 48 horas de anticipación en caso de que no pueda acudir a la cita. También, puede responder vía email. 
+<br/>
+<br/> 
+Esperamos conocerle,
+<br/>
+<br/>
+{!Recipient.Call_Center_Agent__r.Name}<br/>
+Consultor de Implantes Dentales<br/>
+<br/>
+<br/>
+ClearChoice Centro de Implantes Dentales en {!recipient.Center__r.Name}<br/>
+{!recipient.Center__r.Street_1__c}<br/>
+{!recipient.Center__r.Street_2__c}<br/>
+{!recipient.Center__r.City__c}, {!recipient.Center__r.State__c} {!recipient.Center__r.Zip_Code__c}<br/>
+<br/></p></div>
+
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

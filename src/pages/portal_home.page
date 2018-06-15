@@ -1,0 +1,331 @@
+<apex:page controller="ctrl_portal_home" sidebar="false" readOnly="true">
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}"  />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+
+<style type="text/css" media="print">
+input.btn {
+  display:none;
+}
+
+input#edit_btn {
+  display:none;
+}
+
+  td.right_border {
+    border:0px;
+    right-border:0px;
+  }
+
+  img.skiplink {
+    display:none;
+  }
+
+  div.bodyDiv {
+    border:0px;
+  }
+
+  div.bPageHeader {
+    display:none;
+  }
+
+  div.bPageFooter {
+    display:none;
+  }
+
+  div.no_print {
+    display:none;
+  }
+</style>
+
+<style>
+  td.lower_indent {
+    padding-left:10px;
+  }
+
+  table.accs_details tr.lgreen {
+    background-color:#C9E4E4;
+    font-size:10pt;
+  }
+
+  table.accs_details tr.lgreen td {
+    color:black;
+    border-top:1px solid #008080;
+    border-bottom:1px solid #008080;
+    empty-cells:hide;
+        text-align:left;
+  }
+
+  table.accs_details tr.lgreen td.right {
+    text-align:right;
+    padding-right:5px;
+    empty-cells:hide;
+  }
+
+  table.accs_details tr.lgreen td.indent {
+    padding-left:25px;
+    empty-cells:hide;
+         font-style:italic;
+    font-weight:bold;
+  }
+
+  table.accs_details tr.dgreen {
+    background-color:#147585;
+    font-weight:bold;
+    font-size:12pt;
+  }
+
+  table.accs_details tr.dgreen td {
+    color:white;
+    border-top:1px solid #008080;
+    border-bottom:1px solid #008080;
+    empty-cells:hide;
+    text-align:left;
+  }
+
+  table.accs_details tr.dgreen td.right {
+    text-align:right;
+    padding-right:5px;
+    empty-cells:hide;
+  }
+
+  table.accs_details tr.dgreen td.indent {
+    padding-left:25px;
+    empty-cells:hide;
+  }
+
+    hr.style-fade {
+    border: 0;
+    height: 2px;
+    width:1000px;
+    display:block;
+  background-image: -webkit-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0));
+    background-image:    -moz-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0));
+    background-image:     -ms-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0));
+    background-image:      -o-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0));
+  }
+
+</style>
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+
+</script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+  </script>
+
+
+<apex:form style="background:#FFFFFF;">
+<apex:actionFunction oncomplete="default_cursor(this);" name="update_practice" action="{!change_practice}" reRender="referral_detail_holder" />
+<apex:actionfunction name="sort_by_name" action="{!name_sort}" rerender="referral_detail_holder" oncomplete="default_cursor(this);" />
+<apex:actionfunction name="sort_by_date" action="{!date_sort}" rerender="referral_detail_holder" oncomplete="default_cursor(this);" />
+<apex:actionfunction name="sort_by_cstatus" action="{!cstatus_sort}" rerender="referral_detail_holder" oncomplete="default_cursor(this);" />
+<apex:actionfunction name="sort_by_treatment" action="{!treatment_sort}" rerender="referral_detail_holder" oncomplete="default_cursor(this);" />
+<apex:actionfunction name="sort_by_track" action="{!track_sort}" rerender="referral_detail_holder" oncomplete="default_cursor(this);" />
+<apex:actionfunction name="sort_by_sold" action="{!sold_sort}" rerender="referral_detail_holder" oncomplete="default_cursor(this);" />
+<apex:actionfunction name="sort_by_collected" action="{!collected_sort}" rerender="referral_detail_holder" oncomplete="default_cursor(this);" />
+<apex:actionfunction name="sort_by_gp" action="{!gp_sort}" rerender="referral_detail_holder" oncomplete="default_cursor(this);" />
+
+<apex:outputpanel layout="block" id="main_holder" style="padding-left:15px;background:#FFFFFF;">
+
+<apex:outputpanel layout="block" id="referral_detail_holder">
+
+  <apex:outputpanel rendered="{!display_practice_view}">
+  <apex:outputpanel rendered="{!display_admin}" ><span style="font-weight:bold;font-size:11pt;">Displaying Info for :&nbsp;
+    <apex:selectList value="{!referral_partner_id}" multiselect="false" size="1" onchange="use_fancy_cursor(this);update_practice();" >
+      <apex:selectOptions value="{!practice_list}"></apex:selectoptions>
+    </apex:selectList></span><span style="display:inline-block;width:50px;">&nbsp;</span>
+    <apex:commandButton action="{!show_center_view}" value="Show Center View" reRender="referral_detail_holder" />
+  </apex:outputpanel>
+  <apex:outputpanel rendered="{!display_partner}" ><span style="font-weight:bold;font-size:11pt;color:blue;"><apex:outputtext value="{!referral_partner_name}" /></span></apex:outputpanel><br /><br />
+  <apex:outputpanel rendered="{!display_error}" >There was an error looking up your partner account id or center.  Please contact the practice privileges team for assistance</apex:outputpanel>
+  </apex:outputpanel>
+
+    <apex:outputpanel rendered="{!display_center_view}">
+
+  <apex:outputpanel rendered="{!display_admin}" ><span style="font-weight:bold;font-size:11pt;">Displaying Info for :&nbsp; </span>
+    <apex:selectList value="{!center_id}" multiselect="false" size="1" onchange="use_fancy_cursor(this);update_practice();" >
+      <apex:selectOptions value="{!center_list}"></apex:selectoptions>
+    </apex:selectList><span style="display:inline-block;width:50px;">&nbsp;</span>
+    <apex:commandButton action="{!show_practice_view}" value="Show Practice View" reRender="referral_detail_holder" />
+  </apex:outputpanel>
+  <apex:outputpanel rendered="{!if(display_admin,false,true)}" ><span style="font-weight:bold;font-size:11pt;color:blue;"><apex:outputtext value="{!center_name}" /></span></apex:outputpanel><br /><br />
+  <apex:outputpanel rendered="{!display_error}" >There was an error looking up your partner account id or center.  Please contact the practice privileges team for assistance</apex:outputpanel>
+  </apex:outputpanel>
+
+  <apex:messages style="color:red;font-weight:bold;" />
+  <apex:outputpanel layout="block" id="search_holder" style="border-top:1px solid black;margin-top:1em;border-bottom:1px solid black;margin-bottom:1em;">
+<table >
+  <tr>
+    <td width="350px;">
+      <span style="display:block;padding-bottom:7px;padding-top:10px;padding-left:10px;">
+        <span style="font-weight:bold;display:inline-block;width:125px;">Referral Name :</span><apex:inputtext value="{!name_filter}" /></span>
+      <span style="display:block;padding-bottom:7px;padding-top:10px;padding-left:10px;">
+        <span style="font-weight:bold;display:inline-block;width:125px;">Clinical Status :</span>
+          <apex:selectList value="{!clinical_status_filter}" multiselect="false" size="1">
+            <apex:selectOptions value="{!clinical_status_list}"></apex:selectoptions>
+          </apex:selectList> </span>
+    </td>
+    <td width="300px;">
+      <span style="display:block;padding-bottom:7px;padding-top:10px;padding-left:10px;">
+      <table><tr><td><span style="font-weight:bold;display:inline-block;width:100px;">Start Date :</span></td>
+        <td><apex:inputfield value="{!sdate_holder.Effective_Date__c}" /></td></tr></table></span>
+      <span style="display:block;padding-bottom:7px;padding-top:10px;padding-left:10px;">
+      <table><tr><td><span style="font-weight:bold;display:inline-block;width:100px;">End Date :</span></td>
+        <td><apex:inputfield value="{!edate_holder.Effective_Date__c}" /></td></tr></table></span>
+    </td>
+    <td width="250px;">
+      <span style="display:block;padding-bottom:7px;padding-top:10px;padding-left:10px;">
+        <span style="font-weight:bold;display:inline-block;width:125px;">Referral Track :</span>
+          <apex:selectList value="{!track_filter}" multiselect="false" size="1">
+            <apex:selectOptions value="{!referral_track_list}"></apex:selectoptions>
+          </apex:selectList> </span>
+      <span style="display:block;padding-bottom:7px;padding-top:10px;padding-left:10px;">
+      <span style="font-weight:bold;display:inline-block;width:125px;">Records Per Page :</span>
+        <apex:inputtext value="{!records_per_page}" style="width:40px;text-align:right;" /></span>
+    </td>
+    <td>
+      <span style="display:block;padding-bottom:7px;padding-top:10px;padding-left:10px;">
+      <apex:commandButton value="Search Referrals" action="{!run_filtered_search}" reRender="referral_detail_holder"  />
+      </span>
+    </td>
+  </tr>
+</table>
+</apex:outputpanel>
+
+  <apex:outputpanel rendered="{!if(display_error,false,true)}">
+    <apex:outputpanel id="summary_holder">
+      <span style="color:#5789AE;font-weight:bold;display:inline-block;width:95%;padding-left:20px;border-bottom:1px dotted black;font-size:11pt;margin-bottom:1em;">Referral Summary</span>
+      <table class="accs_details" width="800px;">
+        <tr class="control">
+          <td>&nbsp;</td>
+          <td># Patients</td>
+          <td>Anticipated GP Fee</td>
+          <td>Close Rate</td>
+          <td>Lead-Consult Rate</td>
+        </tr>
+        <tr class="dgreen">
+          <td class="indent">YTD</td>
+          <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+              <apex:param value="{!ytd_patients}" />
+              </apex:outputtext></td>
+          <td class="right"><apex:outputText value="{0,number,$ ##,##,##0.00}" >
+              <apex:param value="{!ytd_gpfee}" />
+              </apex:outputtext></td>
+          <td class="right"><apex:outputText value="{0,number,##,##,##0.00 %}" >
+              <apex:param value="{!ytd_close_rate}" />
+              </apex:outputtext></td>
+          <td class="right"><apex:outputText value="{0,number,##,##,##0.00 %}" >
+              <apex:param value="{!YTD_lead_consult_rate}" />
+              </apex:outputtext></td>
+        </tr>
+        <tr class="footer">
+          <td class="indent">Lifetime</td>
+          <td class="right"><apex:outputText value="{0,number,##,##,##0}" >
+              <apex:param value="{!lifetime_patients}" />
+              </apex:outputtext></td>
+          <td class="right"><apex:outputText value="{0,number,$ ##,##,##0.00}" >
+              <apex:param value="{!lifetime_gpfee}" />
+              </apex:outputtext></td>
+          <td class="right"><apex:outputText value="{0,number,##,##,##0.00 %}" >
+              <apex:param value="{!lifetime_close_rate}" />
+              </apex:outputtext></td>
+          <td class="right"><apex:outputText value="{0,number,##,##,##0.00 %}" >
+              <apex:param value="{!lifetime_lead_consult_rate}" />
+              </apex:outputtext></td>
+        </tr>
+      </table>
+    </apex:outputpanel>  <!--summary_holder --><br /><br />
+    <apex:outputpanel id="details_holder">
+      <span style="color:#5789AE;font-weight:bold;display:inline-block;width:95%;padding-left:20px;border-bottom:1px dotted black;font-size:11pt;margin-bottom:1em;">Referral Details
+      </span>
+      <apex:variable var="rowclassname" value="accs" />
+      <table class="accs_details" width="100%">
+        <tr class="control">
+          <td><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Name</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();use_fancy_cursor(this);sort_by_name();">Name</span></td>
+          <td><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Referral Date</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();use_fancy_cursor(this);sort_by_date();">Referral Date</span></td>
+          <td><apex:outputpanel rendered="{!display_center_view}">Practice</apex:outputpanel><apex:outputpanel rendered="{!display_practice_view}">Contacts</apex:outputpanel></td>
+          <td><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Clinical Status</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();use_fancy_cursor(this);sort_by_cstatus();">Clinical Status</span></td>
+          <td>Surgery Date</td>
+          <td>Delivery Date</td>
+          <td><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Treatment Plan</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();use_fancy_cursor(this);sort_by_treatment();">Treatment Plan</span></td>
+          <td><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Track</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();use_fancy_cursor(this);sort_by_track();">Track</span></td>
+          <td><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Sold Amount</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();use_fancy_cursor(this);sort_by_sold();">$ Sold</span></td>
+          <td><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by Collected Amount</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();use_fancy_cursor(this);sort_by_collected();">$ Collected</span></td>
+          <td><span onmouseover="tooltip.show('<p style=\'text-align:center;\'><span style=\'font-weight:bold;font-size:11pt;\'>Click to sort by GP Amount</span></p>', 225);" onmouseout="tooltip.hide();" onclick="tooltip.hide();use_fancy_cursor(this);sort_by_gp();">Anticipated<br />GP Fee</span></td>
+        </tr>
+        <apex:repeat value="{!paged_referrals}" var="referral">
+          <tr class="{!rowclassname}">
+          <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+            <td class="indent"><a href="/referral/{!referral.link_id}"><apex:outputtext value="{!referral.referral_name}" /></a></td>
+            <td class="lower_indent"><apex:outputtext value="{!referral.referral_date}" /></td>
+            <td class="right">
+              <apex:outputpanel rendered="{!display_practice_view}">
+                <span onmouseover="tooltip.show('<span style=color:yellow;display:inline-block;width:90px;>First Contact : </span>{!referral.first_contact}<br /><span style=color:yellow;display:inline-block;width:90px;>Last Contact : </span>{!referral.last_contact}<br />', 350);" onmouseout="tooltip.hide();"><apex:outputtext value="{!referral.num_contacts}" /></span>
+              </apex:outputpanel>
+              <apex:outputpanel rendered="{!display_center_view}">
+                <apex:outputtext value="{!referral.referral_practice_name}" />
+              </apex:outputpanel>
+            </td>
+            <td class="lower_indent"><apex:outputtext value="{!referral.clinical_status}" /></td>
+            <td class="lower_indent"><apex:outputtext value="{!referral.Surgery_date}" /></td>
+            <td class="lower_indent"><apex:outputtext value="{!referral.Final_date}" /></td>
+            <td class="lower_indent"><apex:outputtext value="{!referral.treatment_plan}" /></td>
+            <td class="lower_indent"><apex:outputtext value="{!referral.referral_track}" /></td>
+            <td class="right"><apex:outputText value="{0,number,$ ##,##,##0.00}" >
+              <apex:param value="{!referral.sold_amount}" />
+              </apex:outputtext></td>
+            <td class="right"><apex:outputText value="{0,number,$ ##,##,##0.00}" >
+              <apex:param value="{!referral.collected_amount}" />
+              </apex:outputtext></td>
+            <td class="right"><apex:outputText value="{0,number,$ ##,##,##0.00}" >
+              <apex:param value="{!referral.gp_amount}" />
+              </apex:outputtext></td>
+          </tr>
+        </apex:repeat>
+      </table><br />
+      <apex:outputpanel rendered="{!if(referral_list_size>0,true,false)}">
+      <span class="page_span">Page {!page} of {!num_pages}
+        <apex:commandButton value="Prev" action="{!prev}" rendered="{!if(display_prev==true,true,false)}" style="margin-left:20px;" rerender="referral_detail_holder" />
+        <apex:commandButton value="Next" action="{!next}" rendered="{!if(display_next==true,true,false)}" style="margin-left:20px;" rerender="referral_detail_holder" />
+      </span>
+      </apex:outputpanel>
+      <apex:outputpanel rendered="{!if(referral_list_size>0,false,true)}">
+        <span style="font-weight:normal;font-style:italic;">There are no referrals that match your search criteria.  Please adjust your search filters and try again.</span>
+      </apex:outputpanel>
+    </apex:outputpanel> <!-- details_holder -->
+  </apex:outputpanel>
+</apex:outputpanel> <!-- referral_detail_holder -->
+
+<apex:outputpanel id="mix_holder" style="padding-top:1em;">
+<table>
+  <tr>
+    <td><c:PieChart jsondata="{!JSON_practice_mix}" title="Treatment Plan Mix - {!referral_partner_name}" height="500" width="700" /></td>
+    <td><c:PieChart jsondata="{!JSON_national_mix}" title="Treatment Plan Mix - National" height="500" width="700" /></td>
+  </tr>
+</table>
+
+<!--<table>
+  <tr>
+    <td><analytics:reportChart reportId="{!treatment_id}"  /></td><!-- filter="[{column:'Account.Referral_Office__c',operator:'equals',value:'{!referral_partner_id}'}]"
+    <td style="width:50px;">&nbsp;</td>
+    <td> <analytics:reportChart reportId="{!treatment_all_id}" /></td>
+  </tr>
+</table>-->
+</apex:outputpanel> <!-- mix_holder -->
+
+</apex:outputpanel> <!--main_holder -->
+</apex:form>
+</apex:page>

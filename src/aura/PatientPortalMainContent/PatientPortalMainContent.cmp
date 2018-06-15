@@ -1,0 +1,68 @@
+<aura:component controller="PatientPortalMainContentController" implements="force:lightningQuickAction,forceCommunity:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="baseUrl" type="String" default=""></aura:attribute>
+    <aura:attribute name="preQUrl" type="String" default=""></aura:attribute>
+    <aura:attribute name="healthHistoryUrl" type="String" default=""></aura:attribute>
+    <aura:attribute name="accountSimpleRecord" type="Object"/>
+    <aura:attribute name="accountRecordError" type="String"/>    
+    <!-- Display Lightning Data Service errors, if any -->
+    <aura:if isTrue="{!not(empty(v.accountRecordError))}">
+        <div class="accountRecordError">
+            {!v.accountRecordError}
+        </div>
+    </aura:if>
+    <aura:attribute name="centerSimpleRecord" type="Object"/>
+    <aura:attribute name="centerRecordError" type="String"/>    
+    <!-- Display Lightning Data Service errors, if any -->
+    <aura:if isTrue="{!not(empty(v.centerRecordError))}">
+        <div class="centerRecordError">
+            {!v.centerRecordError}
+        </div>
+    </aura:if>
+    <div class="c-container">
+        <lightning:layout horizontalAlign="spread">
+            <lightning:layoutItem padding="around-small">
+                <lightning:icon iconName="standard:home" class="icon" alternativeText="Home Center"/>
+                <div class="slds-p-horizontal--small">
+                    <h1>Your Center</h1>
+                    <div class="details">
+                        <lightning:formattedText title="Center" value="{!v.accountSimpleRecord.Center__r.Name}" /><br />
+                        <lightning:formattedText title="Street1" value="{!v.centerSimpleRecord.Street_1__c}" /><br />
+                        <aura:if isTrue="{!not(empty(v.accountSimpleRecord.Street_2__c))}">
+                            <lightning:formattedText title="Street2" value="{!v.centerSimpleRecord.Street_2__c}" /><br />
+                        </aura:if>
+                        <lightning:formattedText title="City" value="{!v.centerSimpleRecord.City__c}" />,&nbsp;
+                        <lightning:formattedText title="State" value="{!v.centerSimpleRecord.State__c}" /><br />
+                        <lightning:formattedText title="zip" value="{!v.centerSimpleRecord.Zip_Code__c}" /><br />
+                        <lightning:formattedPhone title="phone" value="{!v.centerSimpleRecord.Local_Front_Desk__c}" /><br />
+                        <lightning:formattedUrl value="{!v.centerSimpleRecord.Map_Directions_URL__c}" target="_self" label="Directions" tooltop="Directions to your center" /><br />
+                        <lightning:formattedUrl value="{!v.centerSimpleRecord.Center_Webpage__c}" target="_self" label="Center Webpage" tooltop="Your center web page" />
+                	</div>
+                </div>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small">
+                <lightning:icon iconName="standard:contract_line_item" class="icon" alternativeText="Health History Form"/>
+                <div class="slds-p-horizontal--small">
+                    <h1>Health History</h1>
+                    Click <lightning:formattedUrl value="https://c.na87.visual.force.com/apex/check_in?accountId=0011W00001sF9fJQAS" target="_self" label="here" tooltop="Health History Form" /> to fill out your health history form
+                </div>
+                </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small">
+                <div>
+                    <lightning:icon iconName="standard:quotes" class="icon" alternativeText="Pre-Qualify Form"/>
+                    <div class="slds-p-horizontal--small">
+                        <h1>Pre-Qualify Form</h1>
+                        Click <lightning:formattedUrl value="https://c.na87.visual.force.com/apex/lending_app?accountId=0011W00001sF9fJQAS" target="_self" label="here" tooltop="Pre-Qualification Form" /> to fill out your pre-qualification form
+                    </div>
+                </div>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small">
+                <lightning:icon iconName="standard:quick_text" class="icon" alternativeText="Contact Us"/>
+                <div class="slds-p-horizontal--small">
+                    <h1>Contact Us</h1><br />
+                    Have questions?<br />Fill out our contact us form <lightning:formattedUrl value="/CCPatientPortal/s/contactsupport" target="_self" label="here" tooltop="Contact us form" />
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>

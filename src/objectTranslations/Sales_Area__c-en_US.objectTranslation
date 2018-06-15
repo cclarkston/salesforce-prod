@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Sales Area</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Sales Areas</value>
+    </caseValues>
+    <fields>
+        <label><!-- ABD --></label>
+        <name>ABD__c</name>
+        <relationshipLabel><!-- Sales Areas (ABD) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- ADM --></label>
+        <name>ADM__c</name>
+        <relationshipLabel><!-- Sales Areas (ADM) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- ADO --></label>
+        <name>ADO__c</name>
+        <relationshipLabel><!-- Sales Areas (ADO) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Area VP --></label>
+        <name>Area_VP__c</name>
+        <relationshipLabel><!-- Sales Areas (Area VP) --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Sales Area Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

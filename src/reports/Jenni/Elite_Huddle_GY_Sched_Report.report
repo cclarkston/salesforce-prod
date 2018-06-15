@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_2271679</developerName>
+        <masterLabel>Elite</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Lead$Contact_Agency_Agent__c</sourceColumnName>
+        <useOther>false</useOther>
+    </buckets>
+    <buckets>
+        <bucketType>number</bucketType>
+        <developerName>BucketField_4641818</developerName>
+        <masterLabel>In/Out Market (50 miles)</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Lead$Distance_To_Center__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <to>50</to>
+            </sourceValues>
+            <value>In Market</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>50</from>
+            </sourceValues>
+            <value>Out of Market</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_96083454</developerName>
+        <masterLabel>Pre Screen</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead$Pre_Screen__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Green</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Yellow</sourceValue>
+            </sourceValues>
+            <value>GY</value>
+        </values>
+        <values>
+            <value>RB</value>
+        </values>
+        <values>
+            <value>Not Checked</value>
+        </values>
+        <values>
+            <value>Website Down</value>
+        </values>
+        <values>
+            <value>PO Box</value>
+        </values>
+        <values>
+            <value>Insufficient Info</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>number</bucketType>
+        <developerName>BucketField_96778142</developerName>
+        <masterLabel>isScheduled</masterLabel>
+        <nullTreatment>z</nullTreatment>
+        <sourceColumnName>Lead.Consult_Inventory__r$isConsultScheudled__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <to>0</to>
+            </sourceValues>
+            <value>Not Scheduled</value>
+        </values>
+        <values>
+            <sourceValues>
+                <from>0</from>
+            </sourceValues>
+            <value>Scheduled</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>Lead$Name</field>
+    </columns>
+    <columns>
+        <field>Lead.Consult_Inventory__r$Name</field>
+    </columns>
+    <columns>
+        <field>Lead$External_ID__c</field>
+    </columns>
+    <columns>
+        <field>BucketField_2271679</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Lead$Inbound_Call__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Dental Inquiry</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Call_Result__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Consultation Scheduled,Not Scheduled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Last_Marketing_Source__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>CCWebsiteOS,CCWebsiteCC,CCWebsitePK</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Center_Name__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notContain</operator>
+            <value>Detroit,Tampa,New Jersey,Monterrey</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Sales_Alert__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notContain</operator>
+            <value>CONTACT-CM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>BucketField_96083454</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>GY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Contact_Agency_Agent__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>contains</operator>
+            <value>Annamarie Jonda,Barbara Hensley,Donna Pittman,Mary Lou Soccorsy,Roger Hafner,Delores Wilson,Shari Nelson,Antoinette Smoot,Kelly Civay,Leon Smith,Rebecca Arthur,Barbara Smith,Cindy Gilliland,DiAnn Tellez,Kiera Bester,Marissa Ratkovich,Mary Palmiro,Pamela Knapp,Shane Frum,Chad Shaffer,Douglas Wingfield</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Contact_Agency__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Infocision</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_96083454</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_4641818</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_96778142</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Elite Huddle GY Sched Report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Prospective_Patients_with_Consult_Inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead$CreatedDate</dateColumn>
+        <interval>INTERVAL_YESTERDAY</interval>
+    </timeFrameFilter>
+</Report>

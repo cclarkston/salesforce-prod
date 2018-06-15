@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>This sends an email that the request has been approved</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Approved</name>
+    <style>none</style>
+    <subject>Center Support Request Approved for:{!Center_Support_Request__c.Center_Information__c}</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

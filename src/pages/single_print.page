@@ -1,0 +1,165 @@
+<apex:page controller="ctrl_MailMerge" showHeader="false" sidebar="false" action="{!update_task_entries}">
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+
+<style type="text/css" media="print">
+a img {
+  display:none;
+}
+
+  div.bPageHeader {
+    display:none;
+  }  
+  
+  p.form_holder {
+    display:none; 
+  }  
+
+  div.print_off {
+    display:none; 
+  }
+
+  p.break {
+    page-break-after:always;
+  }
+</style>
+
+<style>
+
+
+  p.break {
+    page-break-after:always;
+  }
+
+  div.bcp_letter {
+    font-family:calibri;
+    font-size:11pt;
+    width:400px;    
+  }  
+  
+table.accs_details {
+    font-family:georgia,arial;
+  }
+  
+  table.accs_details th {
+    font-weight:bold;
+    font-size:12pt;
+ 
+    border-bottom:1px solid black; 
+  }
+     
+  table.accs_details tr.control {
+    font-weight:bold;
+    font-size:12pt;
+    text-align:center;    
+  }
+   
+  table.accs_details tr.control td {
+    border-bottom:1px solid black;
+    empty-cells:hide;  
+  }
+  
+  table.accs_details tr.subhead {
+    font-weight:bold;
+    font-size:12pt;
+  }
+  
+  table.accs_details tr.subhead td {
+    border-bottom:1px dotted black;
+    padding-top:1em;         
+    color:blue;   
+    padding-left:10px;   
+    empty-cells:hide;  
+  }
+
+  table.accs_details tr.accs {
+
+  }
+   
+  table.accs_details tr.accs td {
+    line-height:25px;   
+    font-size:10pt;
+    border-bottom:1px dashed #5789AE; 
+    empty-cells:hide;   
+  }
+  
+  table.accs_details tr.accs td.indent {
+    padding-left:25px;      
+    font-weight:bold; 
+    font-style:italic;
+    empty-cells:hide;      
+  }
+
+  table.accs_details tr.accs td.right {
+     text-align:right;
+     padding-right:5px;     
+     empty-cells:hide;    
+  }  
+
+  table.accs_details tr.accs_b {
+    background-color:#CECE9D;
+  }
+   
+  table.accs_details tr.accs_b td {
+    line-height:25px;
+    font-size:10pt;  
+    border-bottom:1px dashed #5789AE; 
+    empty-cells:hide;       
+  }
+  
+  table.accs_details tr.accs_b td.indent {
+    padding-left:25px;
+    font-weight:bold;
+    font-style:italic;      
+    empty-cells:hide;  
+  }
+  
+  table.accs_details tr.accs_b td.right {
+    text-align:right;
+    padding-right:5px;     
+    empty-cells:hide;       
+  }  
+  
+  table.accs_details tr.footer {
+    background-color:#A8A8A8;  
+    font-weight:bold;
+    font-size:12pt; 
+  }
+   
+  table.accs_details tr.footer td {
+    color:white;
+    border-top:2px solid black;
+    border-bottom:2px solid black; 
+    empty-cells:hide;         
+  }    
+
+  table.accs_details tr.footer td.right {
+    text-align:right;
+    padding-right:5px    
+    empty-cells:hide;      
+  }  
+
+  table.accs_details tr.footer td.indent {
+    padding-left:25px;
+    empty-cells:hide;      
+  }  
+
+  form.inline_form {
+    display:inline-block;
+    padding:0;
+    margins:0;    
+  }
+
+  span.page_span {
+    display:block;
+    text-align:right;
+    padding-right:20px; 
+    color:#5789AE;
+    font-size:10pt;     
+  }
+  
+</style>
+
+
+<script type="text/javascript" src="https://fast.fonts.net/jsapi/f0aca6be-70c2-40cc-90cc-3bb90eddd93f.js"></script>
+<apex:outputText value="{!single_print}" escape="false" />
+</apex:page>

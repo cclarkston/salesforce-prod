@@ -1,0 +1,3158 @@
+<apex:page controller="ctl_patient_check_in" sidebar="false" showHeader="false" standardStylesheets="true" docType="html-5.0" title="ClearChoice Check-in">
+    <link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:300,400,500,700" media="screen"/>
+    <script>var $j = jQuery.noConflict();</script>
+    <apex:includeScript value="{!URLFOR($Resource.JQuery)}"  />
+    <apex:includeScript value="/soap/ajax/28.0/connection.js"/>
+    <apex:includeScript value="/soap/ajax/37.0/apex.js"/>
+    <apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+
+    <style type="text/css" media="print">
+        input.btn {
+            display:none;
+        }
+
+        input#edit_btn {
+            display:none;
+        }
+
+        td.right_border {
+            border:0px;
+            right-border:0px;
+        }
+
+        img.skiplink {
+            display:none;
+        }
+
+        div.bodyDiv {
+            border:0px;
+        }
+
+        div.bPageHeader {
+            display:none;
+        }
+
+        div.bPageFooter {
+            display:none;
+        }
+
+        div.no_print {
+            display:none;
+        }
+    </style>
+
+    <style>
+        .main_holder {
+            margin: 0 auto;
+            padding-left:5%;
+            padding-right:5%;
+            width:800px;
+        }
+
+        hr.style-fade {
+            border: 0;
+            height: 2px;
+            width:100%;
+            display:block;
+            background-image: -webkit-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0));
+            background-image:    -moz-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0));
+            background-image:     -ms-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0));
+            background-image:      -o-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0));
+            margin-bottom: 10px;
+        }
+
+        span.form_line {
+            display:block;
+            padding-bottom:1em;
+            font-size:11pt;
+        }
+
+        span.field_header {
+            font-weight:bold;
+        }
+
+        span.field_spacer {
+            display:inline-block;
+            width:50px;
+        }
+
+        span.section_header {
+            /*padding-left:-20px;*/
+            display:block;
+            /*font-size:12pt;*/
+            font-weight:bold;
+            font-style:italic;
+            /*color:#5789AE;*/
+            /*padding-bottom:5px;*/
+        }
+    </style>
+
+    <style> /* Alon's custom styling */
+        body.fontific {
+            font-family: 'Open Sans',sans-serif;
+        }
+
+        div.spaced-container {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .page-header {
+            font-family: Raleway,'Open Sans', sans-serif;
+            font-size: 2.5em;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+            vertical-align: bottom;
+        }
+
+        .page-messages {
+            color: red;
+            font-size: large;
+            font-weight: bold;
+        }
+
+        .requiredInput {
+            display: inline;
+        }
+
+        .requiredBlock {
+            display: inline;
+        }
+
+        .nav-button-holder {
+            margin-top: 3em;
+            margin-bottom: 3em;
+            height: 5em;
+        }
+
+        .previous {
+            float: left;
+        }
+
+        .next {
+            float: right;
+        }
+
+        .important-message {
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration: underline;
+            font-size: large;
+            margin-top: 1.5em;
+            margin-bottom: .5em;
+        }
+
+        .attention {
+            color: blue;
+            font-size: large;
+            font-style: italic;
+            font-weight: bold;
+            padding-left: 1em;
+        }
+
+        .message-block, .intro-message {
+            font-size: large;
+            text-align: justify;
+            line-height: 1.5em;
+            margin-top: 1em;
+            margin-bottom: 1em;
+            padding-left: 1em;
+        }
+        .intro-message {
+            background-color: {!css_colors['instructions']};
+            margin: 3em 1em 0em 1em;
+            margin-right: 1em;
+            padding: .5em 0;
+            border-radius: 1em 1em 0em 0em;
+            text-align: center;
+        }
+        .xx-large {
+            font-size:  xx-large;
+        }
+        #signature {
+            width: 604px;
+            margin: 0px 96px;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .ui-body-c {
+            text-shadow: none;
+            background-image: linear-gradient(#fff, #fff);
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        input, textarea, select {
+            font-size: x-large;
+            padding-left: .5em;
+            border-style: solid;
+            border-width: 0px 0px 1px 0px;
+            margin-bottom: 3px;
+            border-color: lightgray;
+        }
+        select {
+            background-color: transparent;
+            text-align-last: center;
+            /*margin-bottom: 0;*/
+        }
+        input.requiredInput, .requiredInput input, .requiredInput textarea, select.requiredInput, .requiredInput select {
+            border-bottom: 4px solid;
+            border-color: {!css_colors['required']};
+            margin-bottom: 0;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            background-color: aliceblue;
+        }
+        input:focus, input:hover, textarea:focus, textarea:hover, select:focus, select:hover {
+            border-bottom-width: 4px;
+            margin-bottom: 0px;
+            border-color: cornflowerblue;
+        }
+        input.error, textarea.error, select.error, input.error:hover, input.error:focus {
+            border-color: red;
+            background-color: {!css_colors['warning']};
+        }
+        div.errorMsg {
+            display: none;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        input.btn, .capture-signature, .sign-again {
+            font-family: Raleway,'Open Sans', sans-serif;
+            font-size: x-large;
+            background-image: none;
+            color: white;
+            border: none;
+            margin: 5px;
+            height: 2em;
+            border-radius: 5px;
+            padding: 8px !important;
+        }
+        input.btn:focus, .capture-signature:focus, .sign-again:focus, input.btn:hover, .capture-signature:hover, .sign-again:hover {
+            outline: -webkit-focus-ring-color auto 5px;
+        }
+
+        .med-search input {
+            text-align: center;
+        }
+
+        .nav-button-holder input.btn, .check-in input.btn {
+            background-color: {!css_colors['nav']};
+            border-radius: 0px;
+            padding: 8px;
+        }
+        input.blue, button.blue {
+            background-color: {!css_colors['input']};
+        }
+        input.red, button.red, .finish {
+            background-color: {!css_colors['remove']} !important;
+        }
+
+        div.reset {
+            margin-top: 3em;
+            text-align: center;
+        }
+        a.reset, a.reset:hover {
+            font-family: Raleway,'Open Sans', sans-serif;
+            font-size: x-large;
+            font-weight: bold;
+            color: white;
+            margin: 6px;
+            height: 2em;
+            padding: 8px;
+            text-decoration: none;
+            background-color: indianred;
+        }
+        a.reset:hover, a.reset:focus {
+            outline: -webkit-focus-ring-color auto 5px;
+        }
+
+        div.check-in {
+            margin-top: 200px;
+        }
+        div.check-in input {
+            text-align: center;
+            margin: 1em;
+        }
+        div.check-in input[type=text] {
+            width: 207px;
+            border-bottom: 4px solid {!css_colors['required']};
+        }
+        div.check-in input[type=submit] {
+            width: 220px;
+        }
+        input[type=submit].check-in {
+            width: 233px;
+            margin-right: 8px;
+        }
+        input.firstname {
+            width: 7em;
+        }
+        input.lastname {
+            width: 10em;
+        }
+        input.fullname, input.city, input[type=tel], input[type=email] {
+            width: 13em;
+        }
+        input.street {
+            width: 29.4em;
+        }
+        select.gender {
+            width: 5em;
+        }
+        input[type=date] {
+            width: 9em;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        select.marital-status {
+            width: 6em;
+        }
+        textarea.street {
+            width: 29.7em;
+        }
+        select.states {
+            width: 10em;
+        }
+        input.zipcode {
+            width: 6em;
+            text-align: center;
+            padding-left: 0px;
+        }
+        input.small-number {
+            width: 4em;
+            text-align: center;
+            padding-left: 0px;
+        }
+        span.section_header {
+            width: 100%;
+            background-color: {!css_colors['header']};
+            color: white;
+            font-size: xx-large;
+            padding: 20px 0 15px 0px;
+            margin: 1.5em 0em 1em 0em;
+            border-radius: 0em 0em 0em .75em;
+            text-indent: 1em;
+        }
+        div.section_holder {
+            padding-left: 3em;
+            margin-top: 2em;
+        }
+        .field_caption {
+            font-size: medium;
+            color: gray;
+            padding-left: 2.5em;
+            margin-top: 2px;
+        }
+
+        fieldset {
+            float: right;
+        }
+        input[type=radio] {
+            height: 20px;
+        }
+
+        div.med-search {
+            display: inline-block;
+        }
+        div.med-search-button {
+            display: inline-block;
+            vertical-align: top;
+        }
+        /************ TABLES ************/
+        table {
+            border-collapse: collapse;
+            font-size: large;
+            font-weight: bold;
+            width: 100%;
+        }
+        table input.warning {
+            font-weight: normal;
+        }
+        table td {
+            height: 4em;
+            padding: 8px 16px 4px 5px;
+        }
+        .hover-table tr:hover {
+            background-color: gainsboro;
+        }
+        .hover-table thead tr:hover {
+            background-color:inherit;
+        }
+        td {
+            padding: 5px;
+        }
+        td select {
+            font-size: inherit;
+        }
+
+        .sub-question-header {
+            width: 75%;
+            margin: 1em auto 1em;
+            background-color: {!css_colors['header']};
+            font-size: x-large;
+            color: white;
+            text-align: center;
+            padding: 5px;
+            border-radius: 0 0 .5em .5em;
+        }
+        table.sub-question td {
+            padding: 6px 16px 6px 5px
+        }
+        table.sub-question td textarea {
+            margin-top: 4px;
+        }
+
+        table.sub-question td:first-child {
+            padding-left: 40px;
+            font-size: large;
+            font-weight: normal;
+        }
+        table.yes-no-questions label, table.sub-question label {
+            font-weight: normal;
+        }
+        table.yes-no-questions td:first-child {
+            width: 75%;
+        }
+        td.column-50 {
+            width: 50%;
+        }
+        td.column-75 {
+            width: 75%
+        }
+        td textarea, td input {
+            width: 100%;
+            border: none;
+            background-color: aliceblue;
+            font-size: large;
+            margin: inherit;
+            height: 100%
+        }
+        .height-weight {
+            display: inline-block;
+            text-align: center;
+            font-size: large;
+            padding-left: 3em;
+        }
+        .height-weight span {
+            padding: 0px;
+        }
+        #cardiologist input:first-child {
+            margin-right: .5em;
+        }
+        th {
+            background-color: {!css_colors['header']};
+            color: white;
+            font-size: x-large;
+            padding: 5px;
+        }
+        th.short-text-table-header {
+            width: 12em;
+        }
+        th.yes-no-table-header {
+            width: auto;
+            text-align: center;
+        }
+        th.textbox-table-header {
+            width: 16em;
+            text-align: center;
+        }
+        .slim-table {
+            background-color: aliceblue;
+        }
+        /*table.slim-table td {
+            padding-left: 17px !important;
+        }*/
+        table.slim-table th {
+            padding-left: 20px;
+        }
+        table.slim-table fieldset {
+            -webkit-padding-start: 0px;
+            -webkit-padding-end: 0px;
+        }
+        .two-text-inputs input {
+            width: 100%;
+            text-align: center;
+            height: 2em;
+        }
+
+        .table-spacer {
+            /*width: 1em;*/
+        }
+        .paranthetical {
+            font-size: medium;
+            font-weight: normal;
+            margin: 0;
+        }
+
+        #header td {
+            height: 0;
+            padding: 0;
+        }
+        #header td:last-child {
+            width: 100%;
+        }
+
+        #invisible {
+            margin: 0;
+            padding: 0;
+        }
+        #invisible td {
+            padding: 0em .5em 0em .5em;
+        }
+        .blank-condition {
+            height: 90px;
+        }
+
+        #past-medications input[type=text] {
+            height: 2em;
+        }
+        #past-medications td:first-child {
+            padding-left: 1.5em;
+        }
+
+        #diabetes select {
+            width: 10em;
+            padding: 0;
+        }
+
+        table.medication-table td {
+            padding: 4px 12px 0px 2px;
+        }
+        table.medication-table th {
+            font-size: large;
+            padding-left: 5px;
+        }
+        table.medication-table input, table.medication-table textarea, table.medication-table select {
+            padding: 5px;
+            margin: 0px;
+        }
+        table.medication-input select {
+            font-size: small;
+        }
+        table.medication-table textarea {
+            vertical-align: bottom;
+        }
+
+        table.medication-input th.onset {
+            width: 9em;
+        }
+
+        table.medication-output td {
+            padding: 0px 5px 0px 5px;
+            font-weight: normal;
+        }
+
+        table#current-medications td input {
+            height: auto;
+        }
+        table#current-medications td:first-child {
+            font-size: medium;
+        }
+        table#current-medications td:last-child {
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        table th.medication {
+            font-size: x-large;
+        }
+        th.dose {
+            width: 4em;
+        }
+
+        div.decline {
+            margin-left: 28.5em;
+        }
+        .decline input {
+            background-color: gray;
+        }
+
+        tr.warning, input.warning, select.warning {
+            background-color: {!css_colors['warning']};
+            font-weight: inherit;
+            color: inherit;
+        }
+        .warning::-webkit-input-placeholder {
+           color: white !important;
+        }
+
+        table.multiSelectPicklistTable tr:first-child td {
+            height: 0;
+            padding: 0;
+        }
+        #talent-release-address {
+            font-style: italic;
+            text-align: center;
+            font-size: medium;
+            margin: 1em;
+        }
+        /***** START YES NO BUTTONS *****/
+            fieldset {
+              font-family: "Lucida Grande", Tahoma, Verdana, sans-serif;
+              /*overflow: hidden;*/
+            }
+
+            .switch-title {
+              margin-bottom: 6px;
+            }
+
+            fieldset input {
+              display: none !important;
+            }
+
+            fieldset label {
+              float: left;
+            }
+
+            fieldset label {
+              display: inline-block;
+              width: 45px;
+              background-color: white;
+              color: rgba(0, 0, 0, 0.6);
+              font-size: 14px;
+              font-weight: normal;
+              text-align: center;
+              text-shadow: none;
+              padding: 6px 14px;
+              border: 1px solid rgba(0, 0, 0, 0.2);
+              /*-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+              box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);*/
+              -webkit-transition: all 0.1s ease-in-out;
+              -moz-transition:    all 0.1s ease-in-out;
+              -ms-transition:     all 0.1s ease-in-out;
+              -o-transition:      all 0.1s ease-in-out;
+              transition:         all 0.1s ease-in-out;
+            }
+
+            /*fieldset label:hover {
+                cursor: pointer;
+            }*/
+
+            fieldset input:checked + label {
+              text-transform: uppercase;
+              font-weight: bold;
+              background-color: {!css_colors['header']};
+              color: white;
+              /*-webkit-box-shadow: none;
+              box-shadow: none;*/
+            }
+
+            fieldset td {
+                padding: 0px !important;
+            }
+        /***** END YES NO BUTTONS *****/
+
+        .canvas {
+            border: 2px solid black;
+        }
+
+        #sig_holder {
+            visibility: hidden;
+            text-align: center;
+        }
+
+        .checkmark {
+            font-size: xx-large;
+        }
+        div#talent-release-patient-info span {
+            font-size: x-large;
+            color: gray;
+            text-indent: 2em;
+        }
+        .block-question-heading {
+            background-color: {!css_colors['header']};
+            color: white;
+            text-align: center;
+            font-size: x-large;
+            padding: .5em;
+        }
+        .waitcursor, input.waitcursor label {
+            cursor: wait;
+        }
+        .created-updated-dates {
+            font-size: x-large;
+            background-color: {!css_colors['dateheader']};
+            color: white;
+            padding: 5px 10px;
+            border-radius: 0 0 .5em .5em;
+            margin-bottom: 1em;
+        }
+        .float-pair {
+            text-align: center;
+        }
+        .left {
+            display: inline-block;
+        }
+        .right {
+            float: right;
+        }
+
+        .disabled {
+            background-color: lightgray !important;
+        }
+
+        .outer-page {
+            text-align: center;
+            margin: 4em;
+        }
+
+        .select-page {
+            display: flex;
+
+            display: inline-block;
+            font-size: 1.85em;
+        }
+    </style>
+
+    <style>
+        #current-physicians {
+            padding-left: 31px;
+            margin-top: 1em;
+        }
+        .current-physician {
+            margin-top: 1em;
+        }
+        .current-physician input {
+            margin-right: .5em;
+            font-size: medium;
+            /*width: 12em;*/
+        }
+        #current-physicians > .current-physician:first-child input {
+            border-bottom: 4px solid {!css_colors['required']};
+        }
+        .current-physician input:last-child {
+            margin-right: 0;
+        }
+        .current-physician .name {
+            width: 16em;
+        }
+        .current-physician .phone {
+            width: 12em;
+        }
+        .current-physician .specialty {
+            width: 12em;
+        }
+        #add-physician-button {
+            float: right;
+            font-size: large;
+            padding: .5em .75em;
+            margin: 1em;
+            margin-right: 3em;
+            background-color: cadetblue;
+            color: white;
+            border-radius: .5em;
+            cursor: pointer;
+        }
+        .remove-physician-button {
+            display: inline-block;
+            font-size: x-large;
+            font-weight: bold;
+            color: red;
+            cursor: pointer;
+        }
+        .doctor-notes {
+            box-sizing: border-box;
+            width: 100%;
+            padding: .5em;
+        }
+        .doctor-notes p {
+            font-size: x-large;
+        }
+        .doctor-notes textarea {
+            font-size: x-large;
+            background-color: gainsboro;
+            border-radius: 5px;
+            border: 3px solid {!css_colors['required']};
+        }
+        .saved-notification {
+            float: right;
+            font-size: x-large;
+            font-weight: bold;
+        }
+        .nav {
+            text-align: center;
+        }
+        .btn.save-button {
+            margin-top: 1em;
+            font-size: x-large;
+            color: black;
+            background: {!css_colors['warning']} !important;
+        }
+        .navigation-buttons {
+            font-size: 10px;
+            text-align: center;
+        }
+        .btn.nav-button {
+            font: 1.8em arial, sans-serif;
+            background: {!css_colors['header']};
+        }
+    </style>
+
+    <script>
+        function hide_saved() {
+            $j('.saved-notification').hide();
+        }
+
+        function use_fancy_cursor(element) {
+        //   document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+        //   t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+
+          document.body.classList.add("waitcursor");
+          if (element) {
+              element.disabled = true;
+              element.classList.add("disabled");
+              element.classList.add("waitcursor");
+          }
+          var labels = document.querySelectorAll("label");
+          for(var i = 0; i < labels.length; i++) {labels[i].classList.add("waitcursor");}
+        }
+
+        function default_cursor(element) {
+        //   document.body.style.cursor = 'default';
+        //   t.style.cursor='default';
+          document.body.classList.remove("waitcursor");
+          if (element) {
+              element.disabled = false;
+              element.classList.remove("disabled");
+              element.classList.remove("waitcursor");
+          }
+          var labels = document.querySelectorAll("label");
+          for(var i = 0; i < labels.length; i++) {labels[i].classList.remove("waitcursor");}
+        }
+    </script>
+
+<body class="fontific">
+    <apex:form >
+        <apex:actionFunction name="save_dental_notes"      action="{!save_progress}" oncomplete="display_saved('dental-saved'); fade_saved('dental-saved');" reRender="notes-dental-history"/>
+        <apex:actionFunction name="save_medical_notes"     action="{!save_progress}" oncomplete="display_saved('medical-saved'); fade_saved('medical-saved');" reRender="notes-medical-history"/>
+        <apex:actionFunction name="save_medical_2_notes"   action="{!save_progress}" oncomplete="display_saved('medical-2-saved'); fade_saved('medical-2-saved');" reRender="notes-medical-history-2"/>
+        <apex:actionFunction name="save_medications_notes" action="{!save_progress}" oncomplete="display_saved('medications-saved'); fade_saved('medications-saved');" reRender="notes-medications"/>
+        <apex:actionFunction oncomplete="default_cursor(this);" name="dhist_update" reRender="main_holder, debug" />
+        <!-- Disabled while DoseSpot is disabled -->
+        <apex:actionFunction oncomplete="default_cursor(this);" name="add_patient_to_DoseSpot" action="{!add_patient_to_DoseSpot}" />
+        <!-- Disabled while DoseSpot is disabled -->
+        <apex:actionFunction oncomplete="default_cursor(this);" name="add_medication" action="{!add_medication}" reRender="main_holder">
+            <apex:param name="position" value="" />
+        </apex:actionFunction>
+        <apex:actionFunction oncomplete="default_cursor(this);" name="remove_medication" action="{!remove_medication}" reRender="medication_list_holder">
+            <apex:param name="medication_id" value="" />
+        </apex:actionFunction>
+        <apex:actionFunction oncomplete="default_cursor(this);" name="update_medication" action="{!update_medication}">
+            <apex:param name="medication_id" value="" />
+            <apex:param name="field" value="" />
+            <apex:param name="value" value="" />
+        </apex:actionFunction>
+        <!-- Disabled while DoseSpot is disabled -->
+        <apex:actionFunction oncomplete="default_cursor(this);" name="add_allergy" action="{!add_allergy}" reRender="allergy_search_holder">
+            <apex:param name="position" value="" />
+        </apex:actionFunction>
+        <apex:actionFunction oncomplete="default_cursor(this);" name="remove_allergy" action="{!remove_allergy}" reRender="allergy_search_holder">
+            <apex:param name="allergy_id" value="" />
+        </apex:actionFunction>
+        <apex:actionFunction name="toggle_detailed_errors" action="{!toggle_detailed_errors}" />
+        <apex:actionFunction name="saveSignatureMedicalHistory" action="{!saveSignatureMedicalHistory}" reRender="main_holder, debug" oncomplete="if ({! !signed_medical_history}) {show_sign_block()}; document.body.scrollTop = 0; default_cursor(this);">
+          <apex:param id="strDataURI" name="strDataURI" value="" />
+          <apex:param id="my_id" name="my_id" value="" />
+          <apex:param id="signatureValid" name="signatureValid" value="" />
+        </apex:actionFunction>
+        <apex:actionFunction name="saveSignatureTalentRelease" action="{!saveSignatureTalentRelease}" reRender="main_holder, debug" oncomplete="if ({! !signed_talent_release}) {show_sign_block()}; document.body.scrollTop = 0; default_cursor(this);">
+          <apex:param id="strDataURITR" name="strDataURI" value="" />
+          <apex:param id="my_id_TR" name="my_id" value="" />
+          <apex:param id="signatureValid_TR" name="signatureValid" value="" />
+        </apex:actionFunction>
+
+
+        <apex:outputpanel id="main_holder" styleClass="main_holder" layout="block" >
+            <apex:outputPanel rendered="{! !accessed_publicly && display_name = 'registration'}">
+                <div class="created-updated-dates">
+                    <span class="float-pair left">
+                        <div>
+                            Created
+                        </div>
+                        <div>
+                            <apex:outputText value="{0,date,MM/dd/yyyy}"><apex:param value="{!phistory.CreatedDate}" /></apex:outputText>
+                        </div>
+                    </span>
+                    <span class="float-pair right">
+                        <div>
+                            Modified
+                        </div>
+                        <div>
+                            <apex:outputText value="{0,date,MM/dd/yyyy}"><apex:param value="{!phistory.LastModifiedDate}" /></apex:outputText>
+                        </div>
+                    </span>
+                </div>
+            </apex:outputPanel>
+
+            <table id="header">
+                <tr>
+                    <td><apex:image value="{!$Resource.CCLogo_2016}"/></td>
+                    <td class="page-header"><apex:outputtext value="{!page_header}" /></td>
+                </tr>
+            </table>
+            <hr class="style-fade" />
+                <div class="navigation-buttons">
+                    <apex:commandButton action="{!goToRegistration}" value="Registration" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" styleClass="nav-button" />
+                    <apex:commandButton action="{!goToDentalHistory}" value="Dental History" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" styleClass="nav-button" />
+                    <apex:commandButton action="{!goToMedicalHistory1}" value="Medical History 1" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" styleClass="nav-button" />
+                    <apex:commandButton action="{!goToMedicalHistory2}" value="Medical History 2" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" styleClass="nav-button" />
+                    <apex:commandButton action="{!goToCurrentMedications}" value="Current Medication" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" styleClass="nav-button" />
+                    <apex:commandButton action="{!goToTreatmentAuthorization}" value="Treatment Authorization" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" styleClass="nav-button" />
+                    <apex:commandButton action="{!goToTalentRelease}" value="Talent Release" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" styleClass="nav-button" />
+                </div><br />
+            <apex:messages styleClass="page-messages" />
+            <apex:outputpanel id="check_in_holder" rendered="{!display_name == "check_in"}" >
+                <div class="center check-in">
+                    <div><apex:inputText value="{!username}" html-placeholder="Your Last Name" styleClass="lastname" required="true" html-autofocus="true" /></div>
+                    <div><apex:inputText value="{!check_in_code}" html-placeholder="Check-in Code" required="true" /></div>
+                    <div><apex:commandButton onclick="use_fancy_cursor(this)" oncomplete="default_cursor(this)" action="{!new_check_in_code}" value="Begin Check-in" rerender="main_holder" /></div>
+                </div>
+            </apex:outputpanel>
+
+            <!--  check_in_holder -->
+
+            <apex:outputpanel id="registration_section_holder" rendered="{!display_name == "registration"}">
+                <div class="nav">
+                    <apex:commandButton action="{!goToRegistration}" value="Save" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" styleClass="save-button" />
+                </div>
+                <span class="section_header">Personal Information</span>
+                <div class="section_holder">
+                    <span class="form_line">
+                        <apex:inputfield value="{!phistory.First_Name__c}" html-placeholder="First Name" styleClass="firstname requiredInput {!registration_question_details['First_Name__c'].styleclass}" />
+                        &nbsp;
+                        <apex:inputfield value="{!phistory.Last_Name__c}" html-placeholder="Last Name" styleClass="lastname requiredInput {!registration_question_details['Last_Name__c'].styleclass}" />
+                        &nbsp;
+                        <apex:inputfield value="{!phistory.Gender__c}" styleClass="gender requiredInput {!registration_question_details['Gender__c'].styleclass}" />
+                    </span>
+                    <span class="form_line">
+                        <apex:inputfield value="{!phistory.Date_of_Birth__c}" id="dateOfBirth" html-placeholder="Date of Birth" type="date" html-min="1900-01-01" showDatePicker="false" styleClass="requiredInput {!registration_question_details['Date_of_Birth__c'].styleclass}" />
+                        <span id="age_holder"> ({!calculated_age} years old)</span>
+                        <div class="field_caption">Date of Birth</div>
+                    </span>
+                    <span class="form_line">
+                        <apex:inputfield value="{!phistory.Marital_Status__c}" styleClass="marital-status" />
+                        <div class="field_caption">Marital Status</div>
+                    </span>
+                </div>
+
+                <span class="section_header">Contact Information</span>
+                <div class="section_holder">
+                    <span class="form_line">
+                        <apex:inputfield value="{!phistory.Home_Street_Address__c}" html-placeholder="Street Address" styleClass="street requiredInput {!registration_question_details['Home_Street_Address__c'].styleclass}" />
+                    </span>
+                    <span class="form_line">
+                        <apex:inputfield value="{!phistory.Home_City__c}" html-placeholder="City" styleClass="city requiredInput {!registration_question_details['Home_City__c'].styleclass}" />
+                        &nbsp;
+                        <apex:inputField value="{!phistory.Home_State__c}" styleClass="requiredInput {!registration_question_details['Home_State__c'].styleclass}" />
+                        &nbsp;
+                        <apex:inputField value="{!phistory.Home_Postal_Code__c}" html-placeholder="Zip code" styleClass="zipcode       requiredInput {!registration_question_details['Home_Postal_Code__c'].styleclass}" rendered="{! !zip_code_is_bad}" />
+                        <apex:inputField value="{!phistory.Home_Postal_Code__c}" html-placeholder="Zip code" styleClass="zipcode error requiredInput {!registration_question_details['Home_Postal_Code__c'].styleclass}" rendered="{!  zip_code_is_bad}" html-autofocus="true" />
+                    </span>
+                    <br/>
+                    <br/>
+                    <span class="form_line">
+                        <apex:inputfield value="{!phistory.Home_Phone__c}" html-placeholder="Home Phone" type="tel" styleClass="requiredInput {!registration_question_details['Home_Phone__c'].styleclass}" />
+                    </span>
+                    <span class="form_line">
+                        <apex:inputfield value="{!phistory.Mobile_Phone__c}" html-placeholder="Mobile Phone" type="tel" />
+                    </span>
+                    <span class="form_line">
+                        <apex:inputfield value="{!phistory.Email_Address__c}" html-placeholder="Email Address" type="email" />
+                    </span>
+                    <span class="form_line">
+                        <apex:inputfield value="{!phistory.Referred_By__c}" html-placeholder="Who referred you?" styleClass="fullname" />
+                    </span>
+                </div>
+
+                <span class="section_header">Emergency Contact Info</span>
+                <div class="section_holder">
+                    <span class="form_line">
+                        <apex:inputfield value="{!phistory.Emergency_Contact_Name__c}" html-placeholder="Emergency Contact - Name" styleClass="fullname requiredInput {!registration_question_details['Emergency_Contact_Name__c'].styleclass}" />
+                    </span>
+                    <span class="form_line">
+                        <apex:inputfield value="{!phistory.Emergency_Contact_Phone__c}" html-placeholder="Phone" type="tel" styleClass="requiredInput {!registration_question_details['Emergency_Contact_Phone__c'].styleclass}" />
+                    </span>
+                    <br/>
+                    <span class="form_line">
+                        <apex:inputfield value="{!phistory.Emergency_Contact_Relationship__c}" html-placeholder="Relationship" styleClass="fullname requiredInput {!registration_question_details['Emergency_Contact_Relationship__c'].styleclass}" />
+                    </span>
+                </div>
+
+                <span class="section_header">Employer</span>
+                <div class="section_holder">
+                    <span class="form_line">
+                        <apex:inputfield value="{!phistory.Employer_Name__c}" html-placeholder="Name" styleClass="fullname" />
+                    </span>
+                    <span class="form_line">
+                        <apex:inputfield value="{!phistory.Work_Phone__c}" html-placeholder="Phone" type="tel" />
+                    </span>
+                    <span class="form_line">
+                        <apex:inputfield value="{!phistory.Work_City__c}" html-placeholder="City" styleClass="city" />
+                        &nbsp;
+                        <apex:selectList value="{!phistory.Work_State__c}" size="1">
+                            <apex:selectOption itemValue="none" itemLabel="Select State" />
+                            <apex:selectOptions value="{!states}" />
+                        </apex:selectList>
+                        &nbsp;
+                        <apex:inputfield value="{!phistory.Work_Zip__c}" html-placeholder="Zip code" styleClass="zipcode" />
+                    </span>
+                </div>
+
+                <div class="important-message">TO OUR PATIENTS:</div>
+                <p class="message-block">
+                    We do not bill insurance companies nor accept insurance. We will provide you with proof of dental services to
+                    submit to your private insurance carrier. When consenting to any treatment you would like to have done, a
+                    ClearChoice staff member will explain our different payment plan options. This office does not accept
+                    Medicare, Medicaid or any Federal Government sponsored or funded insurance plans. We ask that you pay or
+                    obtain approved financing of your treatment costs prior to beginning treatment.
+                </p>
+
+                <div class="nav-button-holder">
+                    &nbsp;
+                    <div class="next">
+                        <apex:commandButton action="{!goToRegistration}" value="Save" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" styleClass="save-button" />
+                        <apex:commandButton action="{!page_one_submit}" value="Next Page" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" />
+                    </div>
+                </div>
+            </apex:outputpanel>
+
+            <!--  registration_section_holder -->
+
+            <apex:outputpanel id="dental_history_holder" rendered="{!display_name == "dental_history"}">
+                <div class="nav">
+                    <apex:commandButton action="{!goToDentalHistory}" value="Save" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" styleClass="save-button" />
+                </div>
+                <!-- Disabled while DoseSpot is disabled -->
+                <!-- Must run this function at load of page two (rather than during page_one_submit to avoid issue with running DML operation and web callout in same transaction) -->
+                <script>add_patient_to_DoseSpot();</script>
+                <span class="section_header">General Dentist Info</span>
+                <div class="section_holder">
+                    <span class="form_line">
+                        <apex:inputfield value="{!phistory.General_Dentist__c}" html-placeholder="Name" styleClass="fullname" />
+                    </span>
+                    <span class="form_line">
+                        <apex:inputfield value="{!phistory.General_Dentist_Phone__c}" html-placeholder="Phone" type="tel" />
+                    </span>
+                    <span class="form_line">
+                        <apex:inputfield value="{!phistory.General_Dentist_Last_Visit__c}" type="date" html-min="1900-01-01" html-max="{!today_string}" showDatePicker="false" />
+                        <div class="field_caption">Date of your last visit</div>
+                    </span>
+                </div>
+
+                <span class="section_header">Dental Conditions</span>
+                <div class="section_holder">
+                    <span class="form_line">
+                        <table class="hover-table text-questions">
+                            <tr class="{!dental_history_question_details['Chief_Dental_Problems__c'].styleclass}">
+                                <td class="column-50">What are your chief dental problems or complaints?</td>
+                                <td><apex:inputfield value="{!phistory.Chief_Dental_Problems__c}" /></td>
+                            </tr>
+                            <tr class="{!dental_history_question_details['Dental_Improvements__c'].styleclass}">
+                                <td>If you could improve your current dental condition, what would you like to be done?</td>
+                                <td><apex:inputfield value="{!phistory.Dental_Improvements__c}" /></td>
+                            </tr>
+                        </table>
+                        <table class="hover-table yes-no-questions">
+                            <tr class="{!dental_history_question_details['Grind_Teeth__c'].styleclass}">
+                                <td class="column-75">Do you grind your teeth?</td>
+                                <td>
+                                    <div>
+                                        <apex:selectRadio value="{!phistory.Grind_Teeth__c}">
+                                            <apex:selectOptions value="{!yes_no_list}"/>
+                                        </apex:selectRadio>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="{!dental_history_question_details['Periodontal_Gum_Disease__c'].styleclass}">
+                                <td>Have you ever been treated for periodontal gum disease?</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Periodontal_Gum_Disease__c}">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                            </tr>
+                            <tr class="{!dental_history_question_details['Dry_Mouth__c'].styleclass}">
+                                <td>Do you have dry mouth?</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Dry_Mouth__c}">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                            </tr>
+                            <tr class="{!dental_history_question_details['Jaw_Surgery__c'].styleclass}">
+                                <td>Have you ever had surgery on your jaw?</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Jaw_Surgery__c}">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                            </tr>
+                            <tr class="{!dental_history_question_details['Jaw_Implants__c'].styleclass}">
+                                <td>Do you have any jaw joint implants?</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Jaw_Implants__c}">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                            </tr>
+                            <tr class="{!dental_history_question_details['Reaction_to_Dental_Injections__c'].styleclass}">
+                                <td>Have you ever had a reaction to dental injections?</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Reaction_to_Dental_Injections__c}">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                            </tr>
+                            <tr class="{!dental_history_question_details['Under_Dentist_Care__c'].styleclass}">
+                                <td>Are you currently under the care of a dentist for any dental problems?</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Under_Dentist_Care__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <apex:outputpanel rendered="{!phistory.Under_Dentist_Care__c == 'Yes'}">
+                            <table class="hover-table sub-question">
+                                <tr class="{!dental_history_question_details['Under_Dentist_Care_For__c'].styleclass}">
+                                    <td>For what problems are you being seen?</td>
+                                    <td class="column-50"><apex:inputfield value="{!phistory.Under_Dentist_Care_For__c}" /></td>
+                                </tr>
+                            </table>
+                        </apex:outputpanel>
+
+                        <table class="hover-table yes-no-questions">
+                            <tr class="{!dental_history_question_details['Wear_Dentures__c'].styleclass}">
+                                <td class="column-75">Do you wear dentures?</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Wear_Dentures__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <apex:outputpanel rendered="{!phistory.Wear_Dentures__c == 'Yes'}">
+                            <table class="hover-table sub-question">
+                                <tr class="{!dental_history_question_details['Enjoy_Wearing_Dentures__c'].styleclass}">
+                                    <td class="column-75">Do you enjoy wearing dentures?</td>
+                                    <td>
+                                        <apex:selectRadio value="{!phistory.Enjoy_Wearing_Dentures__c}">
+                                            <apex:selectOptions value="{!yes_no_list}"/>
+                                        </apex:selectRadio>
+                                    </td>
+                                </tr>
+                            </table>
+                        </apex:outputpanel>
+
+                        <table class="hover-table yes-no-questions">
+                            <tr class="{!dental_history_question_details['Have_Bridges_or_appliances__c'].styleclass}">
+                                <td class="column-75">Do you have any dental bridges or removable dental appliances?</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Have_bridges_or_appliances__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <apex:outputpanel rendered="{!phistory.Have_bridges_or_appliances__c == 'Yes'}">
+                            <table class="hover-table sub-question">
+                                <tr class="{!dental_history_question_details['What_Bridges_and_appliances__c'].styleclass}">
+                                    <td>What bridges or appliances do you have?</td>
+                                    <td class="column-50"><apex:inputfield value="{!phistory.What_Bridges_and_appliances__c}" /></td>
+                                </tr>
+                            </table>
+                        </apex:outputpanel>
+
+                        <table class="hover-table yes-no-questions">
+                            <tr class="{!dental_history_question_details['Swelling_Bleeding_Discoloration_Lumps__c'].styleclass}">
+                                <td class="column-75">Do you have any swelling, bleeding, discoloration, or lumps in your mouth?</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Swelling_Bleeding_Discoloration_Lumps__c}">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                            </tr>
+                            <tr class="{!dental_history_question_details['Wear_or_advised_dental_splint__c'].styleclass}">
+                                <td>Have you ever worn, or been told to wear a dental splint?</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Wear_or_advised_dental_splint__c}">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                            </tr>
+                            <tr class="{!dental_history_question_details['Sensitive_Teeth__c'].styleclass}">
+                                <td>Are your teeth sensitive or painful?</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Sensitive_Teeth__c}">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                            </tr>
+                            <tr class="{!dental_history_question_details['Pain_in_or_near_ears__c'].styleclass}">
+                                <td class="column-75">Do you have pain in or near your ears?</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Pain_in_or_near_ears__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <apex:outputpanel rendered="{!phistory.Pain_in_or_near_ears__c == 'Yes'}">
+                            <table class="hover-table sub-question">
+                                <tr class="{!dental_history_question_details['Pain_in_or_near_ears_description__c'].styleclass}">
+                                    <td>Please explain</td>
+                                    <td class="column-50"><apex:inputfield value="{!phistory.Pain_in_or_near_ears_description__c}" /></td>
+                                </tr>
+                            </table>
+                        </apex:outputpanel>
+
+                        <table class="hover-table yes-no-questions">
+                            <tr class="{!dental_history_question_details['Unusual_sounds_in_ears_or_jaw__c'].styleclass}">
+                                <td>Do you have unusual sounds in your ears or jaws when opening or closing your mouth?</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Unusual_sounds_in_ears_or_jaw__c}">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                            </tr>
+                        </table>
+                    </span>
+                </div>
+                <apex:outputPanel id="notes-dental-history">
+                    <div class="doctor-notes">
+                        <p class="intro-message">Staff Notes</p>
+                        <apex:inputField value="{!phistory.Notes_Dental_History__c}" onchange="save_dental_notes()" styleClass="doctor-notes"/>
+                    </div>
+                    <span id="dental-saved" class="saved-notification">✓ Saved</span>
+                    <script type="text/javascript">hide_saved();</script>
+                </apex:outputPanel>
+                <div class="nav-button-holder">
+                    &nbsp;
+                    <div class="next">
+                        <apex:commandButton action="{!goToDentalHistory}" value="Save" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" styleClass="save-button" />
+                        <apex:commandButton action="{!dental_history_submit}" value="Next Page" onclick="use_fancy_cursor(this)" rerender="main_holder" oncomplete="document.body.scrollTop = 0; default_cursor(this);" />
+                    </div>
+                    <div class="previous">
+                        <apex:commandButton action="{!back_to_registration}" value="Previous Page" onclick="use_fancy_cursor(this)" rerender="main_holder" oncomplete="document.body.scrollTop = 0; default_cursor(this);" />
+                    </div>
+                </div>
+            </apex:outputpanel>
+
+            <!--  dental_history_holder -->
+
+            <apex:outputpanel id="medical_history_holder" rendered="{!display_name == "medical_history"}">
+
+                <script>
+                    var current_physicians_div = $j('#current-physicians');
+                    var i = $j('.current-physician').size();
+
+                    var remove_button_html = '<div onclick="remove_input(this)" class="remove-physician-button">×</div>';
+
+                    function populate_physician_inputs_from_apex() {
+                        var physicians = '{!phistory.Current_Physicians_JSON__c}' ? JSON.parse('{!phistory.Current_Physicians_JSON__c}') : [];
+                        if (physicians.length) {$j(physicians).each(function(index, physician) {add_input(physician);})}
+                        else                   {add_input();}
+                        if ({!medical_history_submitted}) {add_warning_to_first_physician_blanks();}
+
+                        function add_warning_to_first_physician_blanks() {
+                            blank_inputs_first_line().addClass('warning');
+                        }
+                    }
+
+                    function add_input(physician) {
+                        i++;
+                        if (i == 1) {$j(physician_fields_html(physician) + '</div>').appendTo(current_physicians_div);}
+                        else        {$j(physician_fields_html(physician) + remove_button_html + '</div>').appendTo(current_physicians_div);}
+
+                        function physician_fields_html(physician) {
+                            return '<div class="current-physician">' +
+                                    '<input onchange="set_current_physicians_bulk_input()" value="' + ((physician && physician.name)      ? physician.name      : '') + '" type="text" name="physician-' + i + '" placeholder="Physician" class="name" />' +
+                                    '<input onchange="set_current_physicians_bulk_input()" value="' + ((physician && physician.phone)     ? physician.phone     : '') + '" type="tel" name="phone-' + i + '" placeholder="Phone" class="phone" />' +
+                                    '<input onchange="set_current_physicians_bulk_input()" value="' + ((physician && physician.specialty) ? physician.specialty : '') + '" type="text" name="specialty-' + i + '" placeholder="Specialty" class="specialty" />';
+                        }
+                    }
+
+                    function blank_inputs_first_line() {
+                        return $j('.current-physician').first().children('input').filter(function(){return this.value.trim() == '';});
+                    }
+                    function trim_inputs() {
+                        return $j('.current-physician').children('input').val(function(index, value) {return value.trim();});
+                    }
+
+                    function remove_input(element) {
+                        $j(element).parents('.current-physician').remove();
+                        i--;
+                        set_current_physicians_bulk_input();
+                    }
+
+                    function set_current_physicians_bulk_input() {
+                        trim_inputs();
+                        var physicians = current_physicians_from_inputs();
+                        $j('.current-physicians-info').val(JSON.stringify(physicians));
+
+                        function current_physicians_from_inputs() {
+                            var physicians = [];
+                            $j('.current-physician').each(function(index, physician_details) {
+                                var physician = {};
+                                $j.each($j(physician_details).children('input'), function(index, detail) {
+                                    if (detail.value) {
+                                        if      (detail.name.startsWith('physician')) {physician.name      = detail.value;}
+                                        else if (detail.name.startsWith('phone'))     {physician.phone     = detail.value;}
+                                        else if (detail.name.startsWith('specialty')) {physician.specialty = detail.value;}
+                                    }
+                                })
+                                if (!$j.isEmptyObject(physician)) {physicians.push(physician);}
+                            })
+                            return physicians;
+                        }
+                    }
+
+                    populate_physician_inputs_from_apex();
+                </script>
+                <div class="nav">
+                    <apex:commandButton action="{!goToMedicalHistory1}" value="Save" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" styleClass="save-button" />
+                </div>
+                <div class="section_holder">
+                        <p class="message-block">
+                        It is important that we know about your dental and medical history. Many conditions may have a direct impact on your
+                        dental treatment. We will review this questionnaire and discuss it with you in detail. Information provided is strictly
+                        confidential and will not be released without your permission.
+                    </p>
+                    <div class="height-weight">
+                        <apex:inputfield value="{!phistory.Height_ft__c}" styleClass="small-number requiredInput {!medical_history_question_details['Height_ft__c'].styleclass}" /> ft <apex:inputfield value="{!phistory.Height_inches__c}" styleClass="small-number requiredInput {!medical_history_question_details['Height_inches__c'].styleclass}" /> in
+                        <br/>
+                        <span class="field_caption ">Height</span>
+                    </div>
+                    <div class="height-weight">
+                        <apex:inputfield value="{!phistory.Weight__c}" styleClass="small-number requiredInput {!medical_history_question_details['Weight__c'].styleclass}" /> lbs
+                        <br/>
+                        <span class="field_caption">Weight</span>
+                    </div>
+
+                    <table class="hover-table yes-no-questions">
+                        <tr class="{!medical_history_question_details['In_Good_Health__c'].styleclass}">
+                            <td class="column-75">Are you in generally good health?</td>
+                            <td>
+                                <apex:selectRadio value="{!phistory.In_Good_Health__c}">
+                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                </apex:selectRadio>
+                            </td>
+                        </tr>
+                        <tr class="{!medical_history_question_details['Any_major_medial_issues__c'].styleclass}">
+                            <td class="column-75">Do you have any major medical problems?</td>
+                            <td>
+                                <apex:selectRadio value="{!phistory.Any_major_medial_issues__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                </apex:selectRadio>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <apex:outputpanel rendered="{!phistory.Any_major_medial_issues__c == 'Yes'}">
+                        <table class="hover-table sub-question">
+                            <tr class="{!medical_history_question_details['Explain_Major_Medical_Issues__c'].styleclass}">
+                                <td>Please explain</td>
+                                <td class="column-50"><apex:inputfield value="{!phistory.Explain_Major_Medical_Issues__c}"/></td>
+                            </tr>
+                        </table>
+                    </apex:outputpanel>
+
+                    <table class="hover-table yes-no-questions">
+                        <tr class="{!medical_history_question_details['Under_Physician_Care__c'].styleclass}">
+                            <td class="column-75">Are you currently under the care of a physician?</td>
+                            <td>
+                                <apex:selectRadio value="{!phistory.Under_Physician_Care__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                </apex:selectRadio>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <apex:outputpanel rendered="{!phistory.Under_Physician_Care__c == 'Yes'}">
+                        <table class="hover-table sub-question">
+                            <tr class="{!medical_history_question_details['Under_Physician_Care_for__c'].styleclass}">
+                                <td>Please explain</td>
+                                <td class="column-50"><apex:inputfield value="{!phistory.Under_Physician_Care_for__c}"/></td>
+                            </tr>
+                        </table>
+
+                        <!-- #current-physicians is filled via javascript when needed -->
+                        <div class="sub-question-header">Current Physician(s)</div>
+                        <div id="current-physicians"></div>
+                        <div id="add-physician-button" onclick="add_input()">Add Physician</div>
+
+                        <!-- Should NOT be rendered... display: none -->
+                        <apex:inputField value="{!phistory.Current_Physicians_JSON__c}" styleClass="current-physicians-info" style="display: none; font-size: small; width: 100%; margin-top: 10em"/>
+
+                    </apex:outputpanel>
+                </div>
+
+                <div class="section_holder">
+                    <table class="hover-table yes-no-questions">
+                        <tr class="{!medical_history_question_details['Problems_with_Anesthesia__c'].styleclass}">
+                            <td class="column-75">Have you ever had any problems with anesthesia?</td>
+                            <td>
+                                <apex:selectRadio value="{!phistory.Problems_with_Anesthesia__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                </apex:selectRadio>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <apex:outputpanel rendered="{!phistory.Problems_with_Anesthesia__c == 'Yes'}">
+                        <table class="hover-table sub-question">
+                            <tr class="{!medical_history_question_details['What_Problems_with_Anesthesia__c'].styleclass}">
+                                <td>Please explain</td>
+                                <td class="column-50"><apex:inputfield value="{!phistory.What_Problems_with_Anesthesia__c}"/></td>
+                            </tr>
+                        </table>
+                    </apex:outputpanel>
+
+                    <table class="hover-table yes-no-questions">
+                        <tr class="{!medical_history_question_details['Have_pacemaker_defibrillator_heart_stent__c'].styleclass}">
+                            <td class="column-75">Do you have a pacemaker / defibrillator / heart stent?</td>
+                            <td>
+                                <apex:selectRadio value="{!phistory.Have_pacemaker_defibrillator_heart_stent__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                </apex:selectRadio>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <apex:outputpanel rendered="{!phistory.Have_pacemaker_defibrillator_heart_stent__c == 'Yes'}">
+                        <table class="hover-table sub-question">
+                            <tr class="{!medical_history_question_details['Implantable_defibrillator_card__c'].styleclass}">
+                                <td class="column-75">Do you have the Implantable defibrillator card with you?</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Implantable_defibrillator_card__c}">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="hover-table sub-question">
+                            <tr class="{!medical_history_question_details['Implantable_defibrillator_make__c'].styleclass}">
+                                <td>Make/Model?</td>
+                                <td class="column-50"><apex:inputfield value="{!phistory.Implantable_defibrillator_make__c}"/></td>
+                            </tr>
+                        </table>
+                        <div id="cardiologist" class="section_holder">
+                            <apex:inputfield value="{!phistory.Cardiologist_Name__c}" html-placeholder="Cardiologist Name" styleClass="requiredInput fullname {!medical_history_question_details['Cardiologist_Name__c'].styleclass}"/>
+                            <apex:inputfield value="{!phistory.Cardiologist_Phone__c}" html-placeholder="Cardiologist Phone" type="tel" styleClass="requiredInput {!medical_history_question_details['Cardiologist_Phone__c'].styleclass}"/>
+                        </div>
+                    </apex:outputpanel>
+
+                    <table class="hover-table yes-no-questions">
+                        <tr class="{!medical_history_question_details['Health_changes_in_last_12_months__c'].styleclass}">
+                            <td class="column-75">Have there been any changes in your health within the past 12 months?</td>
+                            <td>
+                                <apex:selectRadio value="{!phistory.Health_changes_in_last_12_months__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                </apex:selectRadio>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <apex:outputpanel rendered="{!phistory.Health_changes_in_last_12_months__c == 'Yes'}">
+                        <table class="hover-table sub-question">
+                            <tr class="{!medical_history_question_details['Health_changes_in_last_12_months_Detail__c'].styleclass}">
+                                <td>Please explain</td>
+                                <td class="column-50"><apex:inputfield value="{!phistory.Health_changes_in_last_12_months_Detail__c}"/></td>
+                            </tr>
+                        </table>
+                    </apex:outputpanel>
+                </div>
+
+                <div class="spaced-container">
+                    <p class="intro-message">Please indicate if you have been prescribed any of these medications in the PAST and why.<br/>
+                        Do not include medications you are currently prescribed.<br/>
+                        Current medications will be addressed separately below.</p>
+
+                    <table id="past-medications" class="hover-table">
+                        <thead>
+                            <tr>
+                                <th class="short-text-table-header">Medication Name</th>
+                                <th class="yes-no-table-header">Prescribed</th>
+                                <th class="textbox-table-header">Explain</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="{!medical_history_question_details['Actonel__c'].styleclass} {!medical_history_question_details['Actonel_Why__c'].styleclass}">
+                                <td>Actonel</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Actonel__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                                <td>
+                                    <apex:outputpanel rendered="{!phistory.Actonel__c == 'Yes'}">
+                                        <apex:inputfield value="{!phistory.Actonel_Why__c}" styleClass="requiredInput"/>
+                                    </apex:outputpanel>
+                                </td>
+                            </tr>
+                            <tr class="{!medical_history_question_details['Aredia__c'].styleclass} {!medical_history_question_details['Aredia_Why__c'].styleclass}">
+                                <td>Aredia</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Aredia__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                                <td>
+                                    <apex:outputpanel rendered="{!phistory.Aredia__c == 'Yes'}">
+                                        <apex:inputfield value="{!phistory.Aredia_Why__c}" styleClass="requiredInput"/>
+                                    </apex:outputpanel>
+                                </td>
+                            </tr>
+                            <tr class="{!medical_history_question_details['Bonefos__c'].styleclass} {!medical_history_question_details['Bonefos_Why__c'].styleclass}">
+                                <td>Bonefos</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Bonefos__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                                <td>
+                                    <apex:outputpanel rendered="{!phistory.Bonefos__c == 'Yes'}">
+                                        <apex:inputfield value="{!phistory.Bonefos_Why__c}" styleClass="requiredInput"/>
+                                    </apex:outputpanel>
+                                </td>
+                            </tr>
+                            <tr class="{!medical_history_question_details['Boniva__c'].styleclass} {!medical_history_question_details['Boniva_Why__c'].styleclass}">
+                                <td>Boniva</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Boniva__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                                <td>
+                                    <apex:outputpanel rendered="{!phistory.Boniva__c == 'Yes'}">
+                                        <apex:inputfield value="{!phistory.Boniva_Why__c}" styleClass="requiredInput"/>
+                                    </apex:outputpanel>
+                                </td>
+                            </tr>
+                            <tr class="{!medical_history_question_details['Celebrex__c'].styleclass} {!medical_history_question_details['Celebrex_Why__c'].styleclass}">
+                                <td>Celebrex</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Celebrex__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                                <td>
+                                    <apex:outputpanel rendered="{!phistory.Celebrex__c == 'Yes'}">
+                                        <apex:inputfield value="{!phistory.Celebrex_Why__c}" styleClass="requiredInput"/>
+                                    </apex:outputpanel>
+                                </td>
+                            </tr>
+                            <tr class="{!medical_history_question_details['Chemotherapeutic_Agents__c'].styleclass} {!medical_history_question_details['Chemotherapeutic_Agents_Why__c'].styleclass}">
+                                <td>Chemotherapeutic Agents</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Chemotherapeutic_Agents__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                                <td>
+                                    <apex:outputpanel rendered="{!phistory.Chemotherapeutic_Agents__c == 'Yes'}">
+                                        <apex:inputfield value="{!phistory.Chemotherapeutic_Agents_Why__c}" styleClass="requiredInput"/>
+                                    </apex:outputpanel>
+                                </td>
+                            </tr>
+                            <tr class="{!medical_history_question_details['Didronel__c'].styleclass} {!medical_history_question_details['Didronel_Why__c'].styleclass}">
+                                <td>Didronel</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Didronel__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                                <td>
+                                    <apex:outputpanel rendered="{!phistory.Didronel__c == 'Yes'}">
+                                        <apex:inputfield value="{!phistory.Didronel_Why__c}" styleClass="requiredInput"/>
+                                    </apex:outputpanel>
+                                </td>
+                            </tr>
+                            <tr class="{!medical_history_question_details['Fosamax__c'].styleclass} {!medical_history_question_details['Fosamax_Why__c'].styleclass}">
+                                <td>Fosamax</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Fosamax__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                                <td>
+                                    <apex:outputpanel rendered="{!phistory.Fosamax__c == 'Yes'}">
+                                        <apex:inputfield value="{!phistory.Fosamax_Why__c}" styleClass="requiredInput"/>
+                                    </apex:outputpanel>
+                                </td>
+                            </tr>
+                            <tr class="{!medical_history_question_details['Methotrexate__c'].styleclass} {!medical_history_question_details['Methotrexate_Why__c'].styleclass}">
+                                <td>Methotrexate</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Methotrexate__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                                <td>
+                                    <apex:outputpanel rendered="{!phistory.Methotrexate__c == 'Yes'}">
+                                        <apex:inputfield value="{!phistory.Methotrexate_Why__c}" styleClass="requiredInput"/>
+                                    </apex:outputpanel>
+                                </td>
+                            </tr>
+                            <tr class="{!medical_history_question_details['Prednisone__c'].styleclass} {!medical_history_question_details['Prednisone_Why__c'].styleclass}">
+                                <td>Prednisone</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Prednisone__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                                <td>
+                                    <apex:outputpanel rendered="{!phistory.Prednisone__c == 'Yes'}">
+                                        <apex:inputfield value="{!phistory.Prednisone_Why__c}" styleClass="requiredInput"/>
+                                    </apex:outputpanel>
+                                </td>
+                            </tr>
+                            <tr class="{!medical_history_question_details['Reclast__c'].styleclass} {!medical_history_question_details['Reclast_Why__c'].styleclass}">
+                                <td>Reclast</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Reclast__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                                <td>
+                                    <apex:outputpanel rendered="{!phistory.Reclast__c == 'Yes'}">
+                                        <apex:inputfield value="{!phistory.Reclast_Why__c}" styleClass="requiredInput"/>
+                                    </apex:outputpanel>
+                                </td>
+                            </tr>
+                            <tr class="{!medical_history_question_details['Rheumatrex__c'].styleclass} {!medical_history_question_details['Rheumatrex_Why__c'].styleclass}">
+                                <td>Rheumatrex</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Rheumatrex__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                                <td>
+                                    <apex:outputpanel rendered="{!phistory.Rheumatrex__c == 'Yes'}">
+                                        <apex:inputfield value="{!phistory.Rheumatrex_Why__c}" styleClass="requiredInput"/>
+                                    </apex:outputpanel>
+                                </td>
+                            </tr>
+                            <tr class="{!medical_history_question_details['Skelid__c'].styleclass} {!medical_history_question_details['Skelid_Why__c'].styleclass}">
+                                <td>Skelid</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Skelid__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                                <td>
+                                    <apex:outputpanel rendered="{!phistory.Skelid__c == 'Yes'}">
+                                        <apex:inputfield value="{!phistory.Skelid_Why__c}" styleClass="requiredInput"/>
+                                    </apex:outputpanel>
+                                </td>
+                            </tr>
+                            <tr class="{!medical_history_question_details['Trexall__c'].styleclass} {!medical_history_question_details['Trexall_Why__c'].styleclass}">
+                                <td>Trexall</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Trexall__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                                <td>
+                                    <apex:outputpanel rendered="{!phistory.Trexall__c == 'Yes'}">
+                                        <apex:inputfield value="{!phistory.Trexall_Why__c}" styleClass="requiredInput"/>
+                                    </apex:outputpanel>
+                                </td>
+                            </tr>
+                            <tr class="{!medical_history_question_details['Vioxx__c'].styleclass} {!medical_history_question_details['Vioxx_Why__c'].styleclass}">
+                                <td>Vioxx</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Vioxx__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                                <td>
+                                    <apex:outputpanel rendered="{!phistory.Vioxx__c == 'Yes'}">
+                                        <apex:inputfield value="{!phistory.Vioxx_Why__c}" styleClass="requiredInput"/>
+                                    </apex:outputpanel>
+                                </td>
+                            </tr>
+                            <tr class="{!medical_history_question_details['Xgeva__c'].styleclass} {!medical_history_question_details['Xgeva_Why__c'].styleclass}">
+                                <td>Xgeva</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Xgeva__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                                <td>
+                                    <apex:outputpanel rendered="{!phistory.Xgeva__c == 'Yes'}">
+                                        <apex:inputfield value="{!phistory.Xgeva_Why__c}" styleClass="requiredInput"/>
+                                    </apex:outputpanel>
+                                </td>
+                            </tr>
+                            <tr class="{!medical_history_question_details['Zometa__c'].styleclass} {!medical_history_question_details['Zometa_Why__c'].styleclass}">
+                                <td>Zometa</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Zometa__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                                <td>
+                                    <apex:outputpanel rendered="{!phistory.Zometa__c == 'Yes'}">
+                                        <apex:inputfield value="{!phistory.Zometa_Why__c}" styleClass="requiredInput"/>
+                                    </apex:outputpanel>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="section_holder">
+                    <table class="hover-table yes-no-questions">
+                        <tr class="{!medical_history_question_details['Medications_by_IV__c'].styleclass}">
+                            <td class="column-75">Have you ever had any of the above medications administered by IV?</td>
+                            <td>
+                                <apex:selectRadio value="{!phistory.Medications_by_IV__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                </apex:selectRadio>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <apex:outputpanel rendered="{!phistory.Medications_by_IV__c == 'Yes'}">
+                        <table class="hover-table sub-question">
+                            <tr class="{!medical_history_question_details['Medications_by_IV_Doctor__c'].styleclass}">
+                                <td>Name of Doctor?</td>
+                                <td class="column-50"><apex:inputfield value="{!phistory.Medications_by_IV_Doctor__c}"/></td>
+                            </tr>
+                        </table>
+                    </apex:outputpanel>
+
+                    <table class="hover-table yes-no-questions">
+                        <tr class="{!medical_history_question_details['hospitalized_last_5__c'].styleclass}">
+                            <td class="column-75">Have you ever been hospitalized, had any surgical procedures, or have had any serious illnesses within the past 5 years?</td>
+                            <td>
+                                <apex:selectRadio value="{!phistory.hospitalized_last_5__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                </apex:selectRadio>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <apex:outputpanel rendered="{!phistory.hospitalized_last_5__c == 'Yes'}">
+                        <table class="hover-table sub-question">
+                            <tr class="{!medical_history_question_details['Why_Hospitalized_last_5__c'].styleclass}">
+                                <td>Please explain</td>
+                                <td class="column-50"><apex:inputfield value="{!phistory.Why_Hospitalized_last_5__c}"/></td>
+                            </tr>
+                        </table>
+                    </apex:outputpanel>
+
+                    <table class="hover-table yes-no-questions">
+                        <tr class="{!medical_history_question_details['Bad_medical_outcome__c'].styleclass}">
+                            <td class="column-75">Have you ever made a complaint or had a bad outcome from any previous medical/dental care?</td>
+                            <td>
+                                <apex:selectRadio value="{!phistory.Bad_medical_outcome__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                </apex:selectRadio>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <apex:outputpanel rendered="{!phistory.Bad_medical_outcome__c == 'Yes'}">
+                        <table class="hover-table sub-question">
+                            <tr class="{!medical_history_question_details['Bad_Outcome_Detail__c'].styleclass}">
+                                <td>Please explain</td>
+                                <td class="column-50"><apex:inputfield value="{!phistory.Bad_Outcome_Detail__c}"/></td>
+                            </tr>
+                        </table>
+                    </apex:outputpanel>
+
+                    <table class="hover-table yes-no-questions">
+                        <tr class="{!medical_history_question_details['Smoking__c'].styleclass}">
+                            <td class="column-75">Do you smoke?</td>
+                            <td>
+                                <apex:selectRadio value="{!phistory.Smoking__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                </apex:selectRadio>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <apex:outputpanel rendered="{!phistory.Smoking__c == 'Yes'}">
+                        <table class="hover-table sub-question">
+                            <tr class="{!medical_history_question_details['Smoking_Frequency__c'].styleclass}">
+                                <td>How much are you smoking daily?</td>
+                                <td class="column-50"><apex:inputfield value="{!phistory.Smoking_Frequency__c}" styleClass="requiredInput"/></td>
+                            </tr>
+                        </table>
+                    </apex:outputpanel>
+                </div>
+                <apex:outputPanel id="notes-medical-history">
+                    <div class="doctor-notes">
+                        <p class="intro-message">Staff Notes</p>
+                        <apex:inputField value="{!phistory.Notes_Medical_History__c}" onchange="save_medical_notes()" styleClass="doctor-notes"/>
+                    </div>
+                    <span id="medical-saved" class="saved-notification">✓ Saved</span>
+                    <script type="text/javascript">hide_saved();</script>
+                </apex:outputPanel>
+
+                <div class="nav-button-holder">
+                    &nbsp;
+                    <div class="next">
+                        <apex:commandButton action="{!goToMedicalHistory1}" value="Save" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" styleClass="save-button" />
+                        <apex:commandButton action="{!medical_history_one_submit}" value="Next Page" onclick="use_fancy_cursor(this)" rerender="main_holder" oncomplete="document.body.scrollTop = 0; default_cursor(this);" />
+                    </div>
+                    <div class="previous">
+                        <apex:commandButton action="{!back_to_dhistory}" value="Previous Page" onclick="use_fancy_cursor(this)" rerender="main_holder" oncomplete="document.body.scrollTop = 0; default_cursor(this);" />
+                    </div>
+                </div>
+            </apex:outputpanel>
+
+            <!---  medical_history_holder -->
+
+            <apex:outputpanel id="medical_history_2_holder" rendered="{!display_name == "medical_history_2"}">
+                <div class="nav">
+                    <apex:commandButton action="{!goToMedicalHistory2}" value="Save" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" styleClass="save-button" />
+                </div>
+                <div class="section_holder">
+                    <table class="hover-table yes-no-questions">
+                        <tr class="{!medical_history2_question_details['Advised_to_take_special_precautions__c'].styleclass}">
+                            <td class="column-75">Have you ever been advised by a medical doctor or dentist to have any special precautions taken when receiving any type of dental treatment?</td>
+                            <td>
+                                <apex:selectRadio value="{!phistory.Advised_to_take_special_precautions__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                </apex:selectRadio>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <apex:outputpanel rendered="{!phistory.Advised_to_take_special_precautions__c == 'Yes'}">
+                        <table class="hover-table sub-question">
+                            <tr class="{!medical_history2_question_details['Advised_precautions_detail__c'].styleclass}">
+                                <td>Please explain</td>
+                                <td class="column-50"><apex:inputfield value="{!phistory.Advised_precautions_detail__c}"/></td>
+                            </tr>
+                        </table>
+                    </apex:outputpanel>
+
+                    <apex:outputpanel rendered="{!phistory.Gender__c == 'Female'}" layout="block">
+                        <table class="hover-table yes-no-questions">
+                                <tr class="{!medical_history2_question_details['Are_you_pregnant__c'].styleclass}">
+                                    <td><span class="field_header">Are you pregnant, or is there any chance you may be pregnant?</span></td>
+                                    <td>
+                                        <apex:selectRadio value="{!phistory.Are_you_pregnant__c}" >
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                        </apex:selectRadio>
+                                    </td>
+                                </tr>
+                                <tr class="{!medical_history2_question_details['Menstrual_period_problems__c'].styleclass}">
+                                    <td><span class="field_header">Do you have problems associated with your menstrual period?</span></td>
+                                    <td>
+                                        <apex:selectRadio value="{!phistory.Menstrual_period_problems__c}" >
+                                            <apex:selectOptions value="{!yes_no_list}"/>
+                                        </apex:selectRadio>
+                                    </td>
+                                </tr>
+                                <tr class="{!medical_history2_question_details['Are_you_nursing__c'].styleclass}">
+                                    <td><span class="field_header">Are you nursing?</span></td>
+                                    <td>
+                                        <apex:selectRadio value="{!phistory.Are_you_nursing__c}" >
+                                            <apex:selectOptions value="{!yes_no_list}"/>
+                                        </apex:selectRadio>
+                                    </td>
+                                </tr>
+                                <tr class="{!medical_history2_question_details['Are_you_taking_birth_control_pills__c'].styleclass}">
+                                    <td><span class="field_header">Are you taking birth control pills?</span></td>
+                                    <td>
+                                        <apex:selectRadio value="{!phistory.Are_you_taking_birth_control_pills__c}" >
+                                            <apex:selectOptions value="{!yes_no_list}"/>
+                                        </apex:selectRadio>
+                                    </td>
+                                </tr>
+                            </table>
+                    </apex:outputpanel>
+                </div>
+
+                <div class="spaced-container">
+                    <div class="intro-message">Do you have, or have you had, any of the following conditions?</div>
+                    <table id="invisible">
+                        <tr>
+                            <td>
+                                <table class="hover-table yes-no-questions slim-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Condition</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="{!medical_history2_question_details['Anemia__c'].styleclass}">
+                                            <td>Anemia</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Anemia__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Anxiety__c'].styleclass}">
+                                            <td>Anxiety</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Anxiety__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Any_Immune_Disease__c'].styleclass}">
+                                            <td>Any Immune Diseases</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Any_Immune_Disease__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Arthritis__c'].styleclass}">
+                                            <td>Arthritis</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Arthritis__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Asthma__c'].styleclass}">
+                                            <td>Asthma</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Asthma__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Breathing_Problems__c'].styleclass}">
+                                            <td>Breathing Problems</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Breathing_Problems__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Cancer__c'].styleclass}">
+                                            <td>Cancer</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Cancer__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Chemotherapy__c'].styleclass}">
+                                            <td>Chemotherapy</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Chemotherapy__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Chest_Pain_on_Exertion__c'].styleclass}">
+                                            <td>Chest Pain on Exertion</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Chest_Pain_on_Exertion__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Chronic_Bronchitis__c'].styleclass}">
+                                            <td>Chronic Bronchitis</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Chronic_Bronchitis__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Chronic_Fatigue__c'].styleclass}">
+                                            <td>Chronic Fatigue</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Chronic_Fatigue__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Circulatory_Problems__c'].styleclass}">
+                                            <td>Circulatory Problems</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Circulatory_Problems__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Congenital_Heart__c'].styleclass}">
+                                            <td>Congenital Heart Condition <p class="paranthetical">(present from birth)</p></td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Congenital_Heart__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Damaged_Heart__c'].styleclass}">
+                                            <td>Damaged Heart</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Damaged_Heart__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Dental_Splint__c'].styleclass}">
+                                            <td>Dental Splint</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Dental_Splint__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Diabetes__c'].styleclass}">
+                                            <td>Diabetes</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Diabetes__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Drug_Treatment__c'].styleclass}">
+                                            <td>Drug Treatment</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Drug_Treatment__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Empyhsema__c'].styleclass}">
+                                            <td>Emphysema</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Empyhsema__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Epilepsy_Seizures__c'].styleclass}">
+                                            <td>Epilepsy / Seizures</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Epilepsy_Seizures__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Excessive_Bleeding__c'].styleclass}">
+                                            <td>Excessive Bleeding</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Excessive_Bleeding__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Fainting__c'].styleclass}">
+                                            <td>Fainting</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Fainting__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Gall_Bladder_Problems__c'].styleclass}">
+                                            <td>Gall Bladder Problems</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Gall_Bladder_Problems__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Healing_Problems__c'].styleclass}">
+                                            <td>Healing Problems</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Healing_Problems__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Heart_Attack__c'].styleclass}">
+                                            <td>Heart Attack</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Heart_Attack__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Heart_Murmur__c'].styleclass}">
+                                            <td>Heart Murmur</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Heart_Murmur__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Other_Heart_Problems__c'].styleclass}">
+                                            <td>Heart Problems <p class="paranthetical">(any other)</p></td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Other_Heart_Problems__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Heart_Stent__c'].styleclass}">
+                                            <td>Heart Stent</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Heart_Stent__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Hepatitis__c'].styleclass}">
+                                            <td>Hepatitis</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Hepatitis__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Herpes__c'].styleclass}">
+                                            <td>Herpes</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Herpes__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['High_or_Low_Blood_Pressure__c'].styleclass}">
+                                            <td>High or Low Blood Pressure</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.High_or_Low_Blood_Pressure__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['History_of_Alcohol__c'].styleclass}">
+                                            <td>History of Alcohol</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.History_of_Alcohol__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['History_of_Tremors__c'].styleclass}">
+                                            <td>History of Tremors</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.History_of_Tremors__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['History_of_Tumors__c'].styleclass}">
+                                            <td>History of Tumors</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.History_of_Tumors__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['HIV_AIDS__c'].styleclass}">
+                                            <td>HIV-AIDS</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.HIV_AIDS__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['High_Cholesterol__c'].styleclass}">
+                                            <td>High Cholesterol</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.High_Cholesterol__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Infective_Endocarditis__c'].styleclass}">
+                                            <td>Infective Endocarditis</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Infective_Endocarditis__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td class="table-spacer"></td>
+                            <td>
+                                <table class="hover-table yes-no-questions slim-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Condition</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="{!medical_history2_question_details['Jaundice__c'].styleclass}">
+                                            <td>Jaundice</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Jaundice__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Joint_Disease__c'].styleclass}">
+                                            <td>Joint Disease</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Joint_Disease__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Kidney_Disease__c'].styleclass}">
+                                            <td>Kidney Disease</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Kidney_Disease__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Liver_Disease__c'].styleclass}">
+                                            <td>Liver Disease</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Liver_Disease__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Low_Blood_Sugar__c'].styleclass}">
+                                            <td>Low Blood Sugar</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Low_Blood_Sugar__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Lupus__c'].styleclass}">
+                                            <td>Lupus</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Lupus__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Neurological_Problems__c'].styleclass}">
+                                            <td>Neurological Problems</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Neurological_Problems__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Organ_Transplant__c'].styleclass}">
+                                            <td>Organ Transplant</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Organ_Transplant__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Osteoarthritis__c'].styleclass}">
+                                            <td>Osteoarthritis</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Osteoarthritis__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Osteoporosis__c'].styleclass}">
+                                            <td>Osteoporosis</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Osteoporosis__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Painful_or_Replaced_Joint__c'].styleclass}">
+                                            <td>Painful or Replaced Joint(s)</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Painful_or_Replaced_Joint__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Panic_Attacks__c'].styleclass}">
+                                            <td>Panic Attacks</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Panic_Attacks__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Persistent_Cough__c'].styleclass}">
+                                            <td>Persistent Cough <p class="paranthetical">(producing blood)</p></td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Persistent_Cough__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Psychiatric_Care__c'].styleclass}">
+                                            <td>Psychiatric Care</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Psychiatric_Care__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Radiation_Treatment__c'].styleclass}">
+                                            <td>Radiation Treatment</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Radiation_Treatment__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Replaced_Heart_Valves__c'].styleclass}">
+                                            <td>Replaced Heart Valves</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Replaced_Heart_Valves__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Rheumatic_Fever__c'].styleclass}">
+                                            <td>Rheumatic Fever</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Rheumatic_Fever__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Rheumatoid_Arthritis__c'].styleclass}">
+                                            <td>Rheumatoid Arthritis</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Rheumatoid_Arthritis__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Shortness_of_Breath__c'].styleclass}">
+                                            <td>Shortness of Breath</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Shortness_of_Breath__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Sinus_Problems__c'].styleclass}">
+                                            <td>Sinus Problems</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Sinus_Problems__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Sleep_Apnea__c'].styleclass}">
+                                            <td>Sleep Apnea / CPAP</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Sleep_Apnea__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Stroke__c'].styleclass}">
+                                            <td>Stroke</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Stroke__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Teeth_Grinding__c'].styleclass}">
+                                            <td>Teeth Grinding</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Teeth_Grinding__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Thyroid_Problems__c'].styleclass}">
+                                            <td>Thyroid Problems</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Thyroid_Problems__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Tobacco_Use__c'].styleclass}">
+                                            <td>Tobacco Use <p class="paranthetical">(any form)</p></td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Tobacco_Use__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Tonsillitis__c'].styleclass}">
+                                            <td>Tonsillitis</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Tonsillitis__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Trauma_to_Head_Neck__c'].styleclass}">
+                                            <td>Trauma to Head/Neck</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Trauma_to_Head_Neck__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Tuberculosis__c'].styleclass}">
+                                            <td>Tuberculosis</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Tuberculosis__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Ulcers_Gastric_Reflux__c'].styleclass}">
+                                            <td>Ulcers / Gastric Reflux</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Ulcers_Gastric_Reflux__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Use_of_Alcohol__c'].styleclass}">
+                                            <td>Use of Alcohol</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Use_of_Alcohol__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Use_of_Drugs__c'].styleclass}">
+                                            <td>Use of Drugs</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Use_of_Drugs__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Valve_Problems__c'].styleclass}">
+                                            <td>Valve Problems</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Valve_Problems__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Vascular_Graft__c'].styleclass}">
+                                            <td>Vascular Graft</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Vascular_Graft__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Venereal_Disease__c'].styleclass}">
+                                            <td>Venereal Disease</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Venereal_Disease__c}">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="{!medical_history2_question_details['Any_Other_Conditions__c'].styleclass}">
+                                            <td>Any other condition(s)</td>
+                                            <td>
+                                                <apex:selectRadio value="{!phistory.Any_Other_Conditions__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                                </apex:selectRadio>
+                                            </td>
+                                        </tr>
+                                        <tr class="blank-condition">
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <apex:outputpanel rendered="{!phistory.Cancer__c == 'Yes'}">
+                    <div class="sub-question-header">Cancer</div>
+                    <table class="hover-table sub-question">
+                        <tr class="{!medical_history2_question_details['Cancer_Details__c'].styleclass}">
+                            <td>What type(s) of cancer?</td>
+                            <td class="column-50"><apex:inputfield value="{!phistory.Cancer_Details__c}"/></td>
+                        </tr>
+                    </table>
+                </apex:outputpanel>
+
+                <apex:outputpanel rendered="{!phistory.Diabetes__c == 'Yes'}">
+                    <div class="sub-question-header">Diabetes</div>
+                    <table id="diabetes" class="hover-table sub-question">
+                        <tr class="{!medical_history2_question_details['Diabete_Type__c'].styleclass}">
+                            <td class="column-50">What type of diabetes?</td>
+                            <td class="center"><apex:inputfield value="{!phistory.Diabete_Type__c}" styleClass="requiredInput"/></td>
+                        </tr>
+                        <tr class="{!medical_history2_question_details['Diabetes_Glycemic__c'].styleclass}">
+                            <td class="column-50">Glycemic Control?</td>
+                            <td class="center"><apex:inputfield value="{!phistory.Diabetes_Glycemic__c}" styleClass="requiredInput"/></td>
+                        </tr>
+                        <tr class="{!medical_history2_question_details['Diabetes_Control_Method__c'].styleclass}">
+                            <td>How do you try to control it?</td>
+                            <td class="column-75"><apex:inputfield value="{!phistory.Diabetes_Control_Method__c}" styleClass="requiredInput"/></td>
+                        </tr>
+                    </table>
+                </apex:outputpanel>
+
+                <apex:outputpanel rendered="{!phistory.Heart_Murmur__c == 'Yes' || phistory.Replaced_Heart_Valves__c == 'Yes' || phistory.Painful_or_Replaced_Joint__c == 'Yes'}">
+                    <div class="sub-question-header">Heart Murmur - Replaced Valve - Replaced Joint</div>
+                    <table class="hover-table yes-no-questions sub-question">
+                        <tr class="{!medical_history2_question_details['Recommended_Antiboiotic_coverage__c'].styleclass}">
+                            <td class="column-75">Does your physician recommend antibiotic coverage during dental treatment for your heart murmur/mitral valve disease or replaced joint?</td>
+                            <td>
+                                <apex:selectRadio value="{!phistory.Recommended_Antiboiotic_coverage__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                </apex:selectRadio>
+                            </td>
+                        </tr>
+                    </table>
+                </apex:outputpanel>
+
+                <apex:outputpanel rendered="{!phistory.Recommended_Antiboiotic_coverage__c == 'Yes'}">
+                    <table class="hover-table sub-question two-text-inputs">
+                        <tr>
+                            <td><apex:inputfield value="{!phistory.Recommended_Antiboiotic_coverage_Doctor__c}" html-placeholder="Physician Name" styleClass="{!medical_history2_question_details['Recommended_Antiboiotic_coverage_Doctor__c'].styleclass}"/></td>
+                            <td><apex:inputfield value="{!phistory.Recommended_Antiboiotic_coverage_Phone__c}" html-placeholder="Phone" type="tel" styleClass="{!medical_history2_question_details['Recommended_Antiboiotic_coverage_Phone__c'].styleclass}"/></td>
+                        </tr>
+                    </table>
+                </apex:outputpanel>
+
+                <apex:outputpanel rendered="{!phistory.Any_Other_Conditions__c == 'Yes'}">
+                    <div class="sub-question-header">Other Conditions</div>
+                    <table class="hover-table sub-question">
+                        <tr class="{!medical_history2_question_details['Other_Conditions_Not_Listed_Details__c'].styleclass}">
+                            <td>Please list your other condition(s).</td>
+                            <td class="column-50"><apex:inputfield value="{!phistory.Other_Conditions_Not_Listed_Details__c}"/></td>
+                        </tr>
+                    </table>
+                </apex:outputpanel>
+
+                <span class="section_header">Allergies</span>
+                    <div class="section_holder">
+                        <table class="hover-table yes-no-questions">
+                            <tr class="{!medical_history2_question_details['Allergy_Latex__c'].styleclass}">
+                                <td>Latex</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Allergy_Latex__c}">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                            </tr>
+                            <tr class="{!medical_history2_question_details['Allergy_Seasonal__c'].styleclass}">
+                                <td>Seasonal</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Allergy_Seasonal__c}">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                            </tr>
+                            <tr class="{!medical_history2_question_details['Allergy_Egg__c'].styleclass}">
+                                <td>Egg</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Allergy_Egg__c}">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                            </tr>
+                            <tr class="{!medical_history2_question_details['Allergy_Soy__c'].styleclass}">
+                                <td>Soy</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Allergy_Soy__c}">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                            </tr>
+                            <tr class="{!medical_history2_question_details['Allergy_Shellfish__c'].styleclass}">
+                                <td>Shellfish</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Allergy_Shellfish__c}">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                            </tr>
+                            <tr class="{!medical_history2_question_details['Allergy_Other__c'].styleclass}">
+                                <td>Other allergies (except to medications)</td>
+                                <td>
+                                    <apex:selectRadio value="{!phistory.Allergy_Other__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                        <apex:selectOptions value="{!yes_no_list}"/>
+                                    </apex:selectRadio>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <apex:outputpanel rendered="{!phistory.Allergy_Other__c == 'Yes'}">
+                            <table class="hover-table sub-question">
+                                <tr class="{!medical_history2_question_details['Allergy_Other_Detail__c'].styleclass}">
+                                    <td>What other allergies?</td>
+                                    <td class="column-50"><apex:inputfield value="{!phistory.Allergy_Other_Detail__c}"/></td>
+                                </tr>
+                            </table>
+                        </apex:outputpanel>
+                    </div>
+
+                <span class="section_header">Allergies to Medications</span>
+                <div class="section_holder">
+                    <table class="hover-table yes-no-questions">
+                        <tr class="{!medical_history2_question_details['Allergy_to_Medication__c'].styleclass}">
+                            <td class="column-75">Are you allergic to ANY medication?</td>
+                            <td>
+                                <apex:selectRadio value="{!phistory.Allergy_to_Medication__c}" onchange="use_fancy_cursor(this);dhist_update();">
+                                    <apex:selectOptions value="{!yes_no_list}"/>
+                                </apex:selectRadio>
+                            </td>
+                        </tr>
+                    </table>
+                    <apex:outputpanel id="allergy_search_holder" rendered="{!phistory.Allergy_to_Medication__c == 'Yes'}" >
+
+                        <!-- Disabled while DoseSpot is disabled -->
+                        <apex:outputpanel id="DoseSpot_allergy_search_holder" rendered="{!DoseSpot_is_accessible}">
+                            <div class="center">
+                                <div class="med-search">
+                                    <apex:input id="allergy_query" value="{!query}" html-placeholder="Medication Name" type="search" />
+                                    <div>(at least three letters)</div>
+                                    <apex:message for="allergy_query" />
+                                </div>
+                                <div class="med-search-button">
+                                    <apex:commandButton value="Search" styleClass="blue" onclick="use_fancy_cursor(this)" action="{!DoseSpot_allergy_search}" rerender="main_holder" oncomplete="default_cursor(this)"/>
+                                </div>
+                            </div>
+
+                            <apex:outputpanel id="allergy_search_results_holder" rendered="{!allergy_search_results.size > 0}">
+                                <table class="medication-table medication-input">
+                                    <thead>
+                                        <tr>
+                                            <th class="medication">Medication</th>
+                                            <th class="reaction-type">Reaction Type</th>
+                                            <th class="reaction-description">Reaction Description</th>
+                                            <th class="onset">Approximate Onset</th>
+                                            <th class="action"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <apex:repeat var="search_result" value="{!allergy_search_results}" >
+                                            <tr>
+                                                <td><apex:outputfield value="{!search_result.allergy.Name}" /></td>
+                                                <td><apex:inputfield id="reaction_type" value="{!search_result.allergy.Reaction_Type__c}" /><apex:message for="reaction_type" /></td>
+                                                <td><apex:inputfield id="reaction"      value="{!search_result.allergy.Reaction__c}" /><apex:message for="reaction" /></td>
+                                                <td><apex:inputfield id="onset_date"    value="{!search_result.allergy.Onset_Date_simple__c}" type="date" html-min="1900-01-01" html-max="{!today_string}" showDatePicker="false" /><apex:message for="onset_date" /></td>
+                                                <td><apex:commandButton value="Add" onclick="use_fancy_cursor(this); add_allergy('{!search_result.position}'); return false;" styleClass="blue" /></td>
+                                            </tr>
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+                            </apex:outputpanel>
+
+                            <!-- allergy_search_results_holder -->
+
+                            <apex:outputpanel id="no_allergy_search_results" rendered="{!AND(searched, allergy_search_results.size == 0)}" >
+                                <div class="message-block center">No medication starting with those letters was found. Please try the search again.</div>
+                            </apex:outputpanel>
+                            <!-- no_search_results -->
+                        </apex:outputpanel>
+
+                        <!-- DoseSpot_allergy_search_holder -->
+
+                        <apex:outputpanel id="DoseSpot_unavailable_allergy_addition_holder" rendered="{! !DoseSpot_is_accessible}">
+                            <p class="intro-message">Please add allergies to medications one-by-one.</p>
+                            <table class="medication-table one-row medication-input" id="no-dosespot-medication-entry">
+                                <thead>
+                                    <tr>
+                                        <th class="medication">Medication</th>
+                                        <th class="reaction-type">Reaction Type</th>
+                                        <th class="reaction-description">Reaction Description</th>
+                                        <th class="onset">Approximate Onset</th>
+                                        <th class="action"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><apex:inputField id="manually_added_name"          value="{!manually_added_allergy.Name}" /></td>
+                                        <td><apex:inputField id="manually_added_reaction_type" value="{!manually_added_allergy.Reaction_Type__c}" /></td>
+                                        <td><apex:inputField id="manually_added_reaction"      value="{!manually_added_allergy.Reaction__c}" /></td>
+                                        <td><apex:inputField id="manually_added_onset_date"    value="{!manually_added_allergy.Onset_Date_simple__c}" type="date" html-min="1900-01-01" html-max="{!today_string}" showDatePicker="false" /></td>
+                                        <td><apex:commandButton value="Add" onclick="use_fancy_cursor(this)" oncomplete="default_cursor(this)" action="{!add_allergy_no_DoseSpot}" reRender="allergy_search_holder" styleClass="blue" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </apex:outputpanel> <!-- DoseSpot unavailable allergy addition holder -->
+
+                        <apex:outputpanel id="allergies_holder" rendered="{!num_allergies > 0}" >
+                            <p class="intro-message">Below is our record of your medication allergies.</p>
+                            <table class="hover-table medication-table medication-output" id="current-medication-list">
+                                <thead>
+                                    <tr>
+                                        <th class="medication">Medication</th>
+                                        <th class="reaction-description">Reaction</th>
+                                        <th class="reaction-type">Type</th>
+                                        <th class="onset">Onset Date</th>
+                                        <th class="action"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <apex:repeat var="allergy" value="{!allergy_list}" >
+                                        <tr>
+                                            <td><apex:outputfield value="{!allergy.name}" /></td>
+                                            <td><apex:outputfield value="{!allergy.Reaction__c}" /></td>
+                                            <td><apex:outputText value="{!if(allergy.Reaction_Type__c == 'AdverseReaction', 'Adverse Reaction', allergy.Reaction_Type__c)}" /></td>
+                                            <td>
+                                                <apex:outputText value="{0, date, MM/dd/YYYY}" rendered="{!allergy.Onset_Date__c != unknown_datetime}"><apex:param value="{!allergy.Onset_Date__c}" /></apex:outputText>
+                                                <apex:outputText value="Unknown" rendered="{!allergy.Onset_Date__c == unknown_datetime}"/>
+                                            </td>
+                                            <td><apex:commandButton value="Remove" styleClass="red" onclick="use_fancy_cursor(this); remove_allergy('{!allergy.id}'); return false;" /></td>
+                                        </tr>
+                                    </apex:repeat>
+                                </tbody>
+                            </table>
+                        </apex:outputpanel>
+                        <!-- allergies_holder -->
+                    </apex:outputpanel>
+                    <!-- allergy_search_holder -->
+                </div>
+                <apex:outputPanel id="notes-medical-history-2">
+                    <div class="doctor-notes">
+                        <p class="intro-message">Staff Notes</p>
+                        <apex:inputField value="{!phistory.Notes_Medical_History_2__c}" onchange="save_medical_2_notes()" styleClass="doctor-notes"/>
+                    </div>
+                    <span id="medical-2-saved" class="saved-notification">✓ Saved</span>
+                    <script type="text/javascript">hide_saved();</script>
+                </apex:outputPanel>
+
+                <div class="nav-button-holder">
+                    &nbsp;
+                    <div class="next">
+                        <apex:commandButton action="{!goToMedicalHistory2}" value="Save" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" styleClass="save-button" />
+                        <apex:commandButton action="{!medical_history_two_submit}" value="Next Page" onclick="use_fancy_cursor(this)" rerender="main_holder" oncomplete="document.body.scrollTop = 0; default_cursor(this);" />
+                    </div>
+                    <div class="previous">
+                        <apex:commandButton action="{!back_to_mhistory}" value="Previous Page" onclick="use_fancy_cursor(this)" rerender="main_holder" oncomplete="document.body.scrollTop = 0; default_cursor(this);" />
+                    </div>
+                </div>
+            </apex:outputpanel>
+
+            <!---  medical_history_2_holder -->
+
+            <apex:outputpanel id="medication_list_holder" rendered="{!display_name == "medication_list"}" >
+                <div class="nav">
+                    <apex:commandButton action="{!goToCurrentMedications}" value="Save" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" styleClass="save-button" />
+                </div>
+                <div class="message-block">
+                    Many medications have a profound effect on the tissues of your mouth and lips. So that we may understand any
+                    interactions that you may experience, please list all the medications that you are currently taking, including nonprescription
+                    items.<br/>
+                    Should you have any changes, please notify us at
+                    your next appointment.
+                </div>
+
+                <!-- Below is disabled while DoseSpot is disabled -->
+                <apex:outputpanel id="DoseSpot_medication_search_holder" rendered="{!DoseSpot_is_accessible}">
+                    <apex:outputpanel id="medication_search_holder">
+                        <div class="center">
+                            <div class="med-search">
+                                <apex:message for="medication_query" />
+                                <apex:input id="medication_query" value="{!query}" html-placeholder="Medication Name" type="search" />
+                                <div>(at least three letters)</div>
+                            </div>
+                            <div class="med-search-button">
+                                <apex:commandButton value="Search" styleClass="blue" onclick="use_fancy_cursor(this)" oncomplete="default_cursor(this)" action="{!DoseSpot_medication_search}" rerender="medication_list_holder" />
+                            </div>
+                        </div>
+                    </apex:outputpanel>
+
+                    <!-- medication_search_holder -->
+
+                    <apex:outputpanel id="med_search_results_holder" rendered="{!medication_search_results.size > 0}">
+                        <table class="hover-table medication-table medication-output">
+                            <thead>
+                                <tr>
+                                    <th class="medication">Medication</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <apex:repeat var="search_result" value="{!medication_search_results}" >
+                                    <tr>
+                                        <td><apex:outputfield value="{!search_result.medication.Name}" /></td>
+                                        <td><apex:commandButton value="Add" onclick="use_fancy_cursor(this); add_medication('{!search_result.position}'); return false;" styleClass="blue" /></td>
+                                    </tr>
+                                </apex:repeat>
+                            </tbody>
+                        </table>
+                    </apex:outputpanel>
+
+                    <!-- med_search_results_holder -->
+
+                    <apex:outputpanel id="no_medication_search_results" rendered="{!AND(searched, medication_search_results.size == 0)}" >
+                        <div class="message-block center">No medication starting with those letters was found. Please try the search again.</div>
+                    </apex:outputpanel>
+                    <!-- no_search_results -->
+                </apex:outputpanel>
+
+                <apex:outputpanel id="DoseSpot_unavailable_medication_addition_holder" rendered="{! !DoseSpot_is_accessible}">
+                    <div class="center">
+                        <div class="med-search">
+                            <apex:inputField value="{!manually_added_medication.Name}" html-placeholder="Medication Name" type="text" />
+                            <apex:commandButton value="Add" onclick="use_fancy_cursor(this)" oncomplete="default_cursor(this)" action="{!add_medication_no_DoseSpot}" rerender="medication_list_holder" styleClass="blue" />
+                        </div>
+                    </div>
+                </apex:outputpanel> <!-- DoseSpot unavailable medication addition holder -->
+
+                <apex:outputpanel id="med_list_holder">
+                    <apex:outputpanel rendered="{!num_medications > 0}" >
+                        <div class="intro-message">Please add any available details for each medication before moving to the next page.</div>
+                        <table id="current-medications" class="hover-table medication-table medication-input">
+                            <thead>
+                                <tr>
+                                    <th class="medication">Medication</th>
+                                    <th class="frequency">Frequency</th>
+                                    <th class="dose">Dose</th>
+                                    <th class="reason">Reason</th>
+                                    <th class="doctor">Doctor</th>
+                                    <th class="action"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <apex:repeat var="med" value="{!medication_list}" >
+                                    <apex:outputPanel rendered="{!med.Source__c != 'SurescriptsHistory'}" layout="none">
+                                        <tr>
+                                            <td><apex:outputfield value="{!med.name}" /></td>
+                                            <td><apex:inputfield id="howoften"      value="{!med.How_Often__c}"     onchange="update_medication('{!med.id}', 'How_Often__c',    document.getElementById('{!$Component.howoften}').value);return false;" /></td>
+                                            <td><apex:inputfield id="amounttaken"   value="{!med.Amount_Taken__c}"  onchange="update_medication('{!med.id}', 'Amount_Taken__c', document.getElementById('{!$Component.amounttaken}').value);return false;" /></td>
+                                            <td><apex:inputfield id="forwhat"       value="{!med.For_What__c}"      onchange="update_medication('{!med.id}', 'For_What__c',     document.getElementById('{!$Component.forwhat}').value);return false;" /></td>
+                                            <td><apex:inputfield id="doctor"        value="{!med.Doctor__c}"        onchange="update_medication('{!med.id}', 'Doctor__c',       document.getElementById('{!$Component.doctor}').value); return false;" /></td>
+                                            <td><apex:commandButton value="Remove" styleClass="red" onclick="use_fancy_cursor(this); remove_medication('{!med.id}'); return false;" rendered="{!med.Source__c == 'SelfReported' || med.No_DoseSpot__c == true}" /></td>
+                                        </tr>
+                                    </apex:outputPanel>
+                                </apex:repeat>
+                            </tbody>
+                        </table>
+                    </apex:outputpanel>
+                </apex:outputpanel>
+
+                <!-- med_list_holder" -->
+
+                <apex:outputPanel id="notes-medications">
+                    <div class="doctor-notes">
+                        <p class="intro-message">Staff Notes</p>
+                        <apex:inputField value="{!phistory.Notes_Medications__c }" onchange="save_medications_notes()" styleClass="doctor-notes"/>
+                    </div>
+                    <span id="medications-saved" class="saved-notification">✓ Saved</span>
+                    <script type="text/javascript">hide_saved();</script>
+                </apex:outputPanel>
+
+                <div class="nav-button-holder">
+                    &nbsp;
+                    <div class="next">
+                        <apex:commandButton action="{!goToCurrentMedications}" value="Save" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" styleClass="save-button" />
+                        <apex:commandButton action="{!medication_submit}" value="Next Page" onclick="use_fancy_cursor(this)" rerender="main_holder, sig_button_holder" oncomplete="if ({! !signed_medical_history && accessed_publicly}) {show_sign_block()}; document.body.scrollTop = 0; default_cursor(this);" />
+                    </div>
+                    <div class="previous">
+                        <apex:commandButton action="{!back_to_mhistory_2}" value="Previous Page" onclick="use_fancy_cursor(this)" rerender="main_holder" oncomplete="hide_sign_block(); document.body.scrollTop = 0; default_cursor(this);" />
+                    </div>
+                </div>
+            </apex:outputpanel>
+
+            <!--  medication_list_holder  -->
+
+            <!-- SIGNATURE PAGES BELOW -->
+
+            <apex:outputpanel id="medical_history_3_holder" rendered="{!display_name == "medical_history_3"}">
+                <div class="nav">
+                    <apex:commandButton action="{!goToTreatmentAuthorization}" value="Save" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" styleClass="save-button" />
+                </div>
+                <p class="important-message"> TREATMENT AUTHORIZATION AND ACKNOWLEDGEMENT</p>
+                <p class="message-block">
+                    <apex:outputText value="{!treatment_authorization_text}" escape="false"/>
+                </p>
+                <div class="center">
+                    <apex:outputPanel rendered="{! !accessed_publicly && !signed_medical_history}">
+                        <p class="block-question-heading">Has the patient signed the equivalent paper form?</p>
+                        <apex:inputField value="{!phistory.Paper_Signature_Treatment_Authorization__c}" onchange="use_fancy_cursor(this);dhist_update();"/>
+                    </apex:outputPanel>
+                </div>
+                <div class="nav-button-holder">
+                    &nbsp;
+                    <div class="next">
+                        <apex:commandButton action="{!goToTreatmentAuthorization}" value="Save" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" styleClass="save-button" />
+                        <apex:commandButton action="{!medical_history_three_submit}" value="Next Page" onclick="use_fancy_cursor(this)" rerender="main_holder,sig_button_holder" oncomplete="if ({! !signed_talent_release && accessed_publicly}) {show_sign_block()}; document.body.scrollTop = 0; default_cursor(this);" rendered="{!signed_medical_history || phistory.Paper_Signature_Treatment_Authorization__c != null}"/>
+                    </div>
+                    <div class="previous">
+                        <apex:commandButton action="{!back_to_medication}" value="Previous Page" onclick="use_fancy_cursor(this)" rerender="main_holder" oncomplete="hide_sign_block(); document.body.scrollTop = 0; default_cursor(this);" />
+                    </div>
+                </div>
+                <apex:outputpanel rendered="{!signed_medical_history}" styleClass="signature">
+                    <table>
+                        <tr>
+                            <td><apex:image value="data:image;base64,{!signature_image_medical_history}" /></td>
+                            <td>{!signature_image_medical_history_date}</td>
+                        </tr>
+                    </table>
+                    <div class="center">
+                        <button class="sign-again red" onclick="show_sign_block(); reset_sig(); return false;">Sign Form Again</button>
+                    </div>
+                </apex:outputpanel>
+            </apex:outputpanel>
+
+            <apex:outputpanel id="talent_release_holder" rendered="{!display_name == "talent_release"}">
+                <div class="nav">
+                    <apex:commandButton action="{!goToTalentRelease}" value="Save" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" styleClass="save-button" />
+                </div>
+                <p class="important-message">AUTHORIZATION FOR RELEASE OF IDENTIFYING HEALTH INFORMATION FOR MARKETING AND CONFIDENTIALITY AGREEMENT</p>
+                <div class="section_holder" id="talent-release-patient-info">
+                    <span class="form_line">
+                        <apex:outputField value="{!phistory.First_Name__c}"/>&nbsp;<apex:outputField value="{!phistory.Last_Name__c}"/>
+                    </span>
+                    <span class="form_line">
+                        <apex:outputField value="{!phistory.Home_Street_Address__c}"/>
+                    </span>
+                    <span class="form_line">
+                        <apex:outputField value="{!phistory.Home_City__c}"/>,
+                        &nbsp;
+                        <apex:outputField value="{!phistory.Home_State__c}"/>
+                        &nbsp;
+                        <apex:outputField value="{!phistory.Home_Postal_Code__c}"/>
+                    </span>
+                    <span class="form_line">
+                        <apex:outputField value="{!phistory.Home_Phone__c}"/>
+                    </span>
+
+                </div>
+                <p class="message-block">
+                    <apex:outputText value="{!talent_release_text}" escape="false"/>
+                </p>
+
+                <apex:outputPanel rendered="{! accessed_publicly && !signed_talent_release}">
+                    <div class="decline">
+                        <apex:commandButton onclick="use_fancy_cursor(this)" action="{!toggle_declined_talent_release}" value="Decline" oncomplete="default_cursor(this); if({!declined_talent_release}) {hide_sign_block();} else {show_sign_block();}" rerender="main_holder" />
+                        <apex:outputPanel rendered="{!declined_talent_release}" styleClass="checkmark">✓</apex:outputPanel>
+                    </div>
+                </apex:outputPanel>
+                <div class="center">
+                    <apex:outputPanel rendered="{! !accessed_publicly && !signed_talent_release}" styleClass="center">
+                        <p class="block-question-heading">Has the patient signed the equivalent paper form?</p>
+                        <apex:inputField value="{!phistory.Paper_Signature_Talent_Release__c}" onchange="use_fancy_cursor(this);dhist_update();"/>
+                    </apex:outputPanel>
+                </div>
+                <div class="nav-button-holder">
+                    &nbsp;
+                    <div class="next">
+                        <apex:commandButton action="{!goToTalentRelease}" value="Save" onclick="use_fancy_cursor(this)" oncomplete="document.body.scrollTop = 0; default_cursor(this);" reRender="main_holder" styleClass="save-button" />
+                        <apex:commandButton action="{!talent_release_submit}" styleClass="finish" value="FINISH" rerender="main_holder,sig_button_holder" onclick="use_fancy_cursor(this)" oncomplete="hide_sign_block(); document.body.scrollTop = 0; default_cursor(this);" rendered="{!signed_talent_release || declined_talent_release || phistory.Paper_Signature_Talent_Release__c != null}"/>
+                    </div>
+                    <div class="previous">
+                        <apex:commandButton action="{!back_to_mhistory_3}" value="Previous Page" onclick="use_fancy_cursor(this)" rerender="main_holder" oncomplete="hide_sign_block(); document.body.scrollTop = 0; default_cursor(this);" />
+                    </div>
+                </div>
+                <apex:outputpanel rendered="{!signed_talent_release}" >
+                    <table>
+                        <tr>
+                            <td><apex:image value="data:image;base64,{!signature_image_talent_release}" /></td>
+                            <td>{!signature_image_talent_release_date}</td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <div class="center">
+                        <button class="sign-again red" onclick="show_sign_block();reset_sig();return false;">Sign Form Again</button><br/><br/>
+                    </div>
+                </apex:outputpanel>
+            </apex:outputpanel>
+
+            <!--  talent_release_holder -->
+
+            <apex:outputpanel id="thank_you_holder" rendered="{!display_name == "thank_you"}">
+                <div class="check-in">
+                    <p class="message-block center xx-large">Your information has been submitted.<br/>Thank you!</p>
+                </div>
+            </apex:outputpanel> <!--  thank_you_holder  -->
+
+            <div id="sig_holder">
+                <p id="signature" class="intro-message">Please sign here using the touchscreen.</p>
+                <canvas class="canvas" id="signatureCanvas" width="600" height="200" />
+                <apex:outputpanel id="sig_button_holder">
+                    <input class="btn red" type="button" value="Clear Signature" name="Clear Sig" onclick="reset_sig();" />
+                    <span class="field_spacer"></span>
+
+                    <apex:outputpanel rendered="{!display_name == "medical_history_3"}"><button class="capture-signature blue" onclick="saveSignature('{!parent_id}'); return false;">Capture Signature</button></apex:outputpanel>
+                    <!-- <apex:outputpanel rendered="{!display_name == "drug_monitoring"}"><button class="capture-signature blue"  onclick="saveSignatureDM('{!parent_id}'); return false;">Capture Signature</button></apex:outputpanel> -->
+                    <apex:outputpanel rendered="{!display_name == "talent_release"}"><button class="capture-signature blue"  onclick="saveSignatureTR('{!parent_id}'); return false;">Capture Signature</button></apex:outputpanel>
+                </apex:outputpanel>
+            </div>
+            <apex:outputPanel id="debug" rendered="{!$CurrentPage.parameters.Debug == 'true'}">
+                DEBUG: {!debug}
+            </apex:outputPanel>
+        </apex:outputpanel>
+      </apex:form>
+
+        <!--  main_holder -->
+
+      <script>
+        function hide_age() {
+            document.getElementById("age_holder").style.display = 'none';
+        }
+
+        function show_sign_block() {
+          initialize_canvas();
+          initialize_virtual_canvas();
+          document.getElementById("sig_holder").style.visibility = 'visible';
+          reset_sig();
+        }
+
+        function hide_sign_block() {
+          document.getElementById("sig_holder").style.visibility = 'hidden';
+        }
+
+        sforce.connection.sessionId = "{!$Api.Session_Id}";
+        var canvas;
+        var context;
+        var mouseButton = 0;
+        var lastX = lastY = null;
+        var accountId = '';
+        var first_offset = 0;
+        var drawingUtil;
+        var isDrawing = false;
+
+        function initialize_canvas() {
+            canvas = document.getElementById("signatureCanvas");
+            context = canvas.getContext("2d");
+            canvas.addEventListener("mousedrag",handleEvent,true);
+            canvas.addEventListener("mousemove",handleEvent,true);
+            canvas.addEventListener("mousedown",handleEvent,true);
+            window.addEventListener("mouseup",handleEvent,true);
+            canvas.addEventListener("touchstart",handleEvent,true);
+            canvas.addEventListener("touchmove",handleEvent,true);
+            window.addEventListener("touchend",handleEvent,true);
+            window.addEventListener("selectstart",handleEvent,true);
+        }
+
+        function initialize_virtual_canvas() {
+            virtualCanvas = document.createElement('canvas');
+            virtualCanvas.width = canvas.width;
+            virtualCanvas.height = canvas.height;
+            virtualContext = canvas.getContext("2d");
+        }
+
+        function saveSignature(my_id) {
+          var strDataURI = canvas.toDataURL();
+          var signatureValid = compareCanvas(strDataURI);
+          var cleanDataURI = strDataURI.replace(/^data:image\/(png|jpg);base64,/, "");
+          saveSignatureMedicalHistory(cleanDataURI, my_id, signatureValid);
+        }
+
+        function compareCanvas(canvasURL) {
+          var virtualCanvasURL = virtualCanvas.toDataURL();
+          return canvasURL != virtualCanvasURL;
+        }
+
+        function saveSignatureTR(my_id) {
+          var strDataURI = canvas.toDataURL();
+          var signatureValid = compareCanvas(strDataURI);
+          var cleanDataURI = strDataURI.replace(/^data:image\/(png|jpg);base64,/, "");
+          saveSignatureTalentRelease(cleanDataURI, my_id, signatureValid);
+        }
+
+        function saveSignatureDM(my_id) {
+          var strDataURI = canvas.toDataURL();
+          strDataURI = strDataURI.replace(/^data:image\/(png|jpg);base64,/, "");
+          ctl_patient_check_in.saveSignatureDrugMonitoring(strDataURI,my_id,processResult);
+        }
+
+        function processResult(result)  {
+          document.getElementById("sig_holder").style.visibility = 'hidden';
+          use_fancy_cursor();
+          dhist_update();
+        }
+
+        function handleResult(result,event) {
+            if(result.success) {
+               alert('Success ');
+            } else {
+                alert('Error: '+result.errorMessage);
+            }
+        }
+
+        function reset_sig() {
+          context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function handleEvent(event) {
+            if(event.type==="mousedown"||event.type==="touchstart") {
+                mouseButton = event.which || 1;
+                lastX = lastY = null;
+            }
+            if(event.type==="touchcancel" || event.type==="touchcancel" || event.type==="mouseup") {
+                mouseButton = 0;
+                lastX = lastY = null;
+            }
+            if((event.type==="touchmove" || event.type==="mousemove") && mouseButton) {
+                var newX, newY;
+                var canvasX = 0, canvasY = 0, obj = event.srcElement || event.target;
+                do {
+                    canvasX += obj.offsetLeft - obj.scrollLeft;
+                    canvasY += obj.offsetTop - obj.scrollTop;
+                } while(obj = obj.offsetParent);
+                if(event.targetTouches && event.targetTouches.length) {
+                    newX = event.targetTouches[0].clientX - (canvasX);
+                    newY = event.targetTouches[0].clientY - (canvasY);
+                } else {
+                    newX = event.offsetX;
+                    newY = event.offsetY;
+                }
+                if(!lastX && !lastY) {
+                    lastX = newX;
+                    lastY = newY;
+                    context.beginPath();
+                    context.moveTo(lastX,lastY);
+                    context.lineTo(lastX,lastY,lastX,lastY);
+                    context.stroke();
+                } else {
+                    context.beginPath();
+                    context.moveTo(lastX,lastY);
+                    context.lineTo(newX,newY);
+                    context.stroke();
+                    lastX = newX;
+                    lastY = newY;
+                }
+            }
+            if(event.type=="touchmove" || event.type==="mousedrag" || (event.type==="selectstart" && (event.srcElement||event.target)===canvas)) {
+                event.returnValue=false;
+                event.stopPropagation();
+                event.preventDefault();
+                return false;
+            }
+        }
+
+        function display_saved(id) {
+            document.getElementById(id).style.display = '';
+        }
+
+        function fade_saved(id) {
+            var delay = 1000;
+            var fade_speed = 2000;
+            setTimeout(function(){$j('#' + id).fadeOut(fade_speed);}, delay);
+        }
+
+    </script>
+
+  </body>
+</apex:page>

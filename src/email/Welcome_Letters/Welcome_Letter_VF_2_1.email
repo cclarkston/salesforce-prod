@@ -1,0 +1,135 @@
+<messaging:emailTemplate subject="ClearChoice Dental Implant Consultation Appointment" recipientType="Lead" replyto="reply-to@clearchoice.com" relatedToType="Lead" >
+  <messaging:plainTextEmailBody >Welcome to ClearChoice.
+    
+    Your oral health is an important issue and has tremendous effects in all aspects of your life. We're very excited that you’ve chosen ClearChoice and we look forward to helping you on your journey towards a better smile.
+    
+    Below are your consultation details as well as some additional resources to help prepare you for your consultation. 
+    
+    Sincerely, 
+    Your ClearChoice Team
+    
+    Your free consultation is scheduled for:
+    <c:ConsultTime_Format LeadId="{!Recipient.Id}" DFormat="EEEE M/dd/yyyy"/> at <c:ConsultTime_Format LeadId="{!Recipient.Id}" DFormat="h:mm a"/>.
+    
+    ClearChoice {!Recipient.Center_Name__c}
+    {!Recipient.Center__r.Street_1__c} {!Recipient.Center__r.Street_2__c}
+    {!Recipient.Center__r.City__c}, {!Recipient.Center__r.State__c} {!Recipient.Center__r.Zip_Code__c}
+    
+    If you need to modify or change your appointment please call  {!Recipient.Center_Phone_Number__c}
+    
+    To ensure you can receive our future emails, please add info@clearchoice.com to your address book.
+    
+    (c) 2015 ClearChoice Management Services (R), 
+    8350 E. Crescent Pkwy, Suite 100, Greenwood Village, CO 80111
+    All Rights Reserved</messaging:plainTextEmailBody>
+  <messaging:htmlEmailBody >
+      <html style="background-color:#f1f1f1">
+        <body style="background-color:#f1f1f1; font-family:Arial, Helvetica, sans-serif; ">
+        <table style="margin:0px; padding:0px; border:0px; margin-left:auto;  margin-right:auto; width:600px; text-align:center; " border="0" cellpadding="0" cellspacing="0">
+          <tbody>
+            <tr>
+              <td style="text-align:left; padding-bottom:10px"><img src="http://www.clearchoice.com/wp-content/uploads/2014/09/ClearChoice_Logo_w_Grey_Background.jpg" /></td>
+            </tr>
+            <tr>
+              <td style="text-align:left; padding-bottom:10px;"><table style="margin:0px; padding:0px; font-size: 14px; color:#235f8b; background-color:#fff; border: solid 1px #c4c4c4;" cellpadding="0" cellspacing="0">
+                  <tbody>
+                    <tr style="background-color:#ffffff;">
+                      <td style="width:30px;">&nbsp;</td>
+                      <td style="padding-top:30px; padding-bottom:30px;"><h2 style="font-size: 22px;">Welcome to ClearChoice.</h2>
+                        <p>Your oral health is an important issue and has tremendous effects in all aspects of your life. We're very excited that you've chosen ClearChoice and we look forward to helping you on your journey towards a better smile.</p>
+                        <p>Below are your consultation details as well as some additional resources to help prepare you for your consultation. </p>
+                        <p>Sincerely, <br />
+                          Your
+                          ClearChoice Team</p></td>
+                      <td style="width:30px;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td style="height:50px">&nbsp;</td>
+                      <td style="background-color:#1374b5; color:#ffffff;"><h2 style="margin: 0px; padding:0px; font-size: 14pt; padding-left:10px; padding-right:10px;">Consultation details.</h2></td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td><table style="margin:0px; padding:0px; width:100%; color:#235f8b; border:none;" cellpadding="0" cellspacing="0">
+                          <tbody>
+                            <tr>
+                              <td style="width:60px; padding-top:10px; padding-bottom:10px; border-bottom:solid 1px #c4c4c4;"><img src="http://www.clearchoice.com/wp-content/uploads/2014/09/icnCalendar2.jpg" alt="Date &amp; Time" width="26" height="60" style="display:block; margin-left:auto; margin-right:auto;" /></td>
+                              <td style="width:150px; border-bottom:solid 1px #c4c4c4;"><strong>Date &amp; Time</strong></td>
+                              <td style="font-size:10pt; color:#636363; border-bottom:solid 1px #c4c4c4;"><c:ConsultTime_Format LeadId="{!Recipient.Id}" DFormat="h:mm a"/> on <c:ConsultTime_Format LeadId="{!Recipient.Id}" DFormat="EEEE M/dd/yyyy"/></td>
+                            </tr>
+                            <tr>
+                              <td style="width:60px; padding-top:10px; padding-bottom:10px; border-bottom:solid 1px #c4c4c4;"><img src="http://www.clearchoice.com/wp-content/uploads/2014/09/icnClipBoard.jpg" alt="Date &amp; Time" width="22" height="60" style="display:block; margin-left:auto; margin-right:auto;" /></td>
+                              <td style="width:150px; border-bottom:solid 1px #c4c4c4;"><strong>Patient Forms</strong></td>
+                              <td style="font-size:10pt; color:#636363; border-bottom:solid 1px #c4c4c4;"><a href="http://www.clearchoice.com/wp-content/uploads/2014/09/Patient-Registration-Form.pdf" target="_blank" title="Magazine" style="color:#636363; text-decoration:underline;">Download patient forms to fill out ahead of time</a></td>
+                            </tr>
+                            <tr>
+                              <td style="padding-top:10px; padding-bottom:10px; border-bottom:solid 1px #c4c4c4;"><img src="http://www.clearchoice.com/wp-content/uploads/2014/09/icnMap2.jpg" alt="Location" width="17" height="60" style="display:block; margin-left:auto; margin-right:auto;" /></td>
+                              <td style=" border-bottom:solid 1px #c4c4c4;"><strong>Location</strong></td>
+                              <td style="font-size:10pt; color:#636363; border-bottom:solid 1px #c4c4c4;">ClearChoice {!Recipient.Center_Name__c} <br /> {!Recipient.Center__r.Street_1__c} {!Recipient.Center__r.Street_2__c} <br /> {!Recipient.Center__r.City__c}, {!Recipient.Center__r.State__c} {!Recipient.Center__r.Zip_Code__c} </td>
+                            </tr>
+                            <apex:outputPanel layout="none" rendered="{!ISBLANK(Recipient.Center__r.Center_Webpage__c) == false}">
+                              <tr>
+                                <td style="padding-top:10px; padding-bottom:10px; border-bottom:solid 1px #c4c4c4;"><img src="http://www.clearchoice.com/wp-content/uploads/2014/09/icnDoctors.jpg" alt="Doctors" width="20" height="60" style="display:block; margin-left:auto; margin-right:auto;" /></td>
+                                <td style=" border-bottom:solid 1px #c4c4c4;"><strong><a href="{!Recipient.Center__r.Center_Webpage__c}" target="_blank" title="Magazine" style="color:#235f8b; text-decoration:underline;">Doctors</a></strong></td>
+                                <td style="font-size:10pt; color:#636363; border-bottom:solid 1px #c4c4c4;"><a href="{!Recipient.Center__r.Center_Webpage__c}" target="_blank" title="Magazine" style="color:#636363; text-decoration:underline;">Learn about the {!Recipient.Center_Name__c} team of doctors</a></td>
+                              </tr>
+                            </apex:outputPanel>
+                            <apex:outputPanel layout="none" rendered="{!ISBLANK(Recipient.Center__r.Map_Directions_URL__c) == false}">
+                              <tr>
+                                <td style="padding-top:10px; padding-bottom:10px; border-bottom:solid 1px #c4c4c4;"><img src="http://www.clearchoice.com/wp-content/uploads/2014/09/icnDirections.jpg" alt="Directions" width="20" height="60" style="display:block; margin-left:auto; margin-right:auto;" /></td>
+                                <td style=" border-bottom:solid 1px #c4c4c4;"><strong><a href="{!Recipient.Center__r.Map_Directions_URL__c}" target="_blank" title="Magazine" style="color:#235f8b; text-decoration:underline;">Directions</a></strong></td>
+                                <td style="font-size:10pt; color:#636363; border-bottom:solid 1px #c4c4c4;"><a href="{!Recipient.Center__r.Map_Directions_URL__c}" target="_blank" title="Magazine" style="color:#636363; text-decoration:underline;">Download driving directions to the {!Recipient.Center_Name__c} Center</a></td>
+                              </tr>
+                            </apex:outputPanel>
+                          </tbody>
+                        </table></td>
+                    </tr>
+                  </tbody>
+                </table></td>
+            </tr>
+            <tr>
+              <td style="text-align:left; background-color:#f99c1c; color:#FFF;"><p style="margin:15px; font-size:14px; font-weight:bold;"><img src="http://www.clearchoice.com/wp-content/uploads/2014/09/icnInfo2.gif" alt="Information" width="23" height="23" style="float:left; padding-right:10px; margin-top: -3px;" />If you need to modify or change your appointment please call  {!Recipient.Center_Phone_Number__c}</p></td>
+            </tr>
+            <tr>
+              <td style="text-align:left; padding-top:10px; padding-bottom:10px;"><table style="margin:0px; padding:0px; background-color:#FFF; color:#235f8b; width:100%; border: solid 1px #c4c4c4;">
+                  <tbody>
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td><h2 style="font-size:12px; margin: 0px; padding: 0px; padding-top:10px; padding-bottom:10px;">More Ways To Connect With ClearChoice</h2></td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td style="background-color:#f1f1f1; padding:5px;"><a href="https://www.facebook.com/ClearChoice" title="Facebook" target="_blank" style="color:#235f8b; text-decoration:none; font-size:12px;"><img src="http://www.clearchoice.com/wp-content/uploads/2014/09/icn_Facebook2.png" style="margin-right:20px; border:none;" />Become A Friend On Facebook</a></td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td style="background-color:#f1f1f1; padding:5px;"><a href="https://twitter.com/ClearChoice" title="Twitter" target="_blank" style="color:#235f8b; text-decoration:none; font-size:12px;"><img src="http://www.clearchoice.com/wp-content/uploads/2014/09/icn_Twitter2.png" style="margin-right:20px; border:none" />Follow us @ClearChoice</a></td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td style="background-color:#f1f1f1; padding:5px;"><a href="http://www.youtube.com/user/ClearChoiceDental/videos" title="YouTube" target="_blank" style="color:#235f8b; text-decoration:none; font-size:12px;"><img src="http://www.clearchoice.com/wp-content/uploads/2014/09/icn_Youtube2.png" style="margin-right:20px; border:none" />See All Of Our Latest Patient Videos on YouTube</a></td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                  </tbody>
+                </table></td>
+            </tr>
+            <tr style="text-align:left; background-color:#FFF; color:#20608b; font-size:11px;">
+              <td style="padding:20px"><p>To ensure you can receive our future emails, please add <a href="mailto:info@clearchoice.com" title="info@clearchoice.com" style="color:#20608b">info@clearchoice.com</a> to your address book.</p>
+                <p style="margin-bottom:70px;">&copy; 2015 ClearChoice Management Services&reg;, <br />
+                  8350 E. Crescent Pkwy, Suite 300, Greenwood Village, CO 80111<br />
+                  All Rights Reserved  l <a href="http://www.clearchoice.com/Privacy-Policy" title="Privacy Policy" target="_blank" style="color:#20608b">Privacy Policy </a></p></td>
+            </tr>
+          </tbody>
+        </table>
+        </body>
+        </html>
+  </messaging:htmlEmailBody>
+</messaging:emailTemplate>

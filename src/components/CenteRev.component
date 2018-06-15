@@ -1,0 +1,417 @@
+<apex:component controller="ctl_center_rev_drivers" access="global">
+<style type="text/css" media="print">
+  div.bPageHeader {
+    display:none;
+  }  
+  
+  p.form_holder {
+    display:none; 
+  }
+  
+  a.dlink {
+    display:none;
+  }  
+</style>
+
+<style>
+<!--  div#main_holder {
+    background-color:#CECE9D;
+  }-->
+  
+  input:focus {
+    background:#D8F3FF;  
+  }  
+  
+  span.table_header2 {
+    padding-top:1em;
+    width:500px;
+    font-size:14pt;
+    color:#5789AE;
+    font-weight:bold;
+    display:block;
+    margin-bottom:1em;   
+    margin-left:20px;
+    padding-left:20px;
+    border-bottom:2px solid black;  
+  }
+  
+  span.table_header {
+    margin-top:1em;  
+    background-color:#16365C;
+    padding-top:2px;
+    width:95%;
+    font-size:14pt;
+    color:white;
+    font-weight:bold;
+    display:block;
+    margin-bottom:1em;   
+    padding-left:20px;
+  }
+    
+  h1.report_header {
+    text-align:center;
+    font-size:14pt;
+    font-weight:bold;
+    display:block;
+    padding-bottom:1em; 
+    padding-top:5px;
+    color:blue;    
+  }  
+ 
+  table.accs_details {
+    font-family:georgia,arial;
+    width:800px;    
+  }
+  
+  table.accs_details th {
+    font-weight:bold;
+    font-size:12pt;
+    border-bottom:1px solid black; 
+    word-wrap:break-word; 
+    vertical-align:top  
+    padding-left:5px;
+    padding-right:5px;
+    height:30px;  
+  }
+     
+  table.accs_details tr.control {
+    font-weight:bold;
+    font-size:12pt;
+    text-align:center;    
+    vertical-align:bottom;    
+  }
+   
+  table.accs_details tr.control td {
+    border-bottom:1px solid black;
+    empty-cells:hide;  
+    vertical-align:bottom;    
+  }
+  
+  table.accs_details tr.subhead {
+    font-weight:bold;
+    font-size:12pt;
+  }
+  
+  table.accs_details tr.subhead td {
+    border-bottom:1px dotted black;
+    padding-top:1em;         
+    color:blue;   
+    padding-left:10px;   
+    empty-cells:hide;  
+  }
+
+  table.accs_details tr.accs {
+
+  }
+   
+  table.accs_details tr.accs td {
+    line-height:25px;   
+    font-size:10pt;
+    border-bottom:1px dashed #5789AE; 
+    empty-cells:hide;   
+  }
+  
+  table.accs_details tr.accs td.indent {
+    padding-left:25px;      
+    font-weight:bold; 
+    font-style:italic;
+    empty-cells:hide;      
+  }
+
+  table.accs_details tr.accs td.right {
+     text-align:right;
+     padding-right:5px;     
+     empty-cells:hide;    
+  }  
+
+  table.accs_details tr.accs_b {
+    background-color:#CECE9D;
+  }
+   
+  table.accs_details tr.accs_b td {
+    line-height:25px;
+    font-size:10pt;  
+    border-bottom:1px dashed #5789AE; 
+    empty-cells:hide;       
+  }
+  
+  table.accs_details tr.accs_b td.indent {
+    padding-left:25px;
+    font-weight:bold;
+    font-style:italic;      
+    empty-cells:hide;  
+  }
+  
+  table.accs_details tr.accs_b td.right {
+    text-align:right;
+    padding-right:5px;     
+    empty-cells:hide;       
+  }  
+  
+  table.accs_details tr.footer {
+    background-color:#A8A8A8;  
+    font-weight:bold;
+    font-size:12pt; 
+  }
+   
+  table.accs_details tr.footer td {
+    color:white;
+    border-top:2px solid black;
+    border-bottom:2px solid black; 
+    empty-cells:hide;         
+  }    
+
+  table.accs_details tr.footer td.right {
+    text-align:right;
+    padding-right:5px    
+    empty-cells:hide;      
+  }  
+
+  table.accs_details tr.footer td.indent {
+    padding-left:25px;
+    empty-cells:hide;      
+  }  
+
+  form.inline_form {
+    display:inline-block;
+    padding:0;
+    margins:0;    
+  }
+
+  span.page_span {
+    display:block;
+    text-align:right;
+    padding-right:20px; 
+    color:#5789AE;
+    font-size:10pt;     
+  }
+</style>
+<a class="dlink" href="{!hyper_prefix}/apex/CenterRevDrivers_csv">Download Details</a>
+
+<span class="table_header">Key Driver Report<br /><i>Month-to-Date</i></span>
+    
+<div style="padding-left:5px;page-break:after;">
+<table class="accs_details" style="width:100%">
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>    
+    <td align="center" style="font-weight:bold;font-size:12pt;"># Days</td>
+    <td>&nbsp;</td>    
+    <td colspan="4" align="center" style="font-weight:bold;font-size:12pt;border-bottom:1px solid blue;">Consults</td>    
+    <td>&nbsp;</td>    
+    <td colspan="3" align="center" style="font-weight:bold;font-size:12pt;border-bottom:1px solid blue;">GYB Consults</td>    
+    <td>&nbsp;</td>    
+    <td colspan="3" align="center" style="font-weight:bold;font-size:12pt;border-bottom:1px solid blue;">Close Rate</td>        
+  </tr>   
+  <tr class="control">
+    <td width="30%">Center</td>
+    <td width="1%" style="border:0px;">&nbsp;</td>
+    <td width="6%">Worked</td>
+    <td width="1%" style="border:0px;">&nbsp;</td>    
+    <td width="6%">Actual</td>
+    <td width="6%">Budgeted</td>
+    <td width="6%">Var</td>    
+    <td width="6%">% Var</td>    
+    <td width="1%" style="border:0px;">&nbsp;</td>
+    <td width="6%">Prior Mo</td>    
+    <td width="6%">This Mo</td>       
+    <td width="6%">Var</td>    
+    <td width="1%" style="border:0px;">&nbsp;</td>        
+    <td width="6%">Actual</td>    
+    <td width="6%">Budget</td>
+    <td width="6%">Var</td></tr>   
+  <apex:variable var="rowclassname" value="accs" />    
+  <apex:repeat value="{!all_centers}" var="center">
+  <tr class="{!rowclassname}">
+    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+    <td class="indent">{!center.center_name}</td>
+    <td class="right" style="background-color:white;border:0px;">&nbsp;</td>      
+    <td class="right">0</td>      
+    <td class="right" style="background-color:white;border:0px;">&nbsp;</td>      
+    <td class="right"><apex:outputText value="{0,number,#,###,##0}" >
+      <apex:param value="{!center.consults_current_month}"  />   
+    </apex:outputtext></td>
+    <td class="right"><apex:outputText value="{0,number,#,###,##0}" >
+      <apex:param value="{!center.budgeted_consults_current_month}"  />   
+    </apex:outputtext></td>
+    <td class="right" style="{!if(center.budgeted_consults_current_month > center.consults_current_month,'color:red;','color:black;')}"><apex:outputText value="{0,number,#,###,##0}" >
+      <apex:param value="{!(center.consults_current_month - center.budgeted_consults_current_month)}"  />   
+    </apex:outputtext></td>      
+    <td class="right" style="{!if(center.budgeted_consults_current_month > center.consults_current_month,'color:red;','color:black;')}"><apex:outputText value="{0,number,##0.0} %" >
+      <apex:param value="{!if(center.budgeted_consults_current_month==0,0,(center.consults_current_month - center.budgeted_consults_current_month)/center.budgeted_consults_current_month * 100)}" />     
+    </apex:outputtext></td>        
+    <td class="right" style="background-color:white;border:0px;">&nbsp;</td>          
+    <td class="right"><apex:outputText value="{0,number,##0.0} %" >
+      <apex:param value="{!if(center.consults_last_month==0,0,center.gyb_consults_last_month/center.consults_last_month * 100)}" />     
+    </apex:outputtext></td>                 
+    <td class="right"><apex:outputText value="{0,number,##0.0} %" >
+      <apex:param value="{!if(center.consults_current_month==0,0,center.gyb_consults_current_month/center.consults_current_month * 100)}" />     
+    </apex:outputtext></td>         
+    <td class="right" style="{!if((if(center.consults_last_month==0,0,center.gyb_consults_last_month/center.consults_last_month * 100) - if(center.consults_current_month==0,0,center.gyb_consults_current_month/center.consults_current_month * 100)) < 0,'color:red;','color:black;')}"><apex:outputText value="{0,number,##0.0} %" >
+      <apex:param value="{!if(center.consults_last_month==0,0,center.gyb_consults_last_month/center.consults_last_month * 100) - if(center.consults_current_month==0,0,center.gyb_consults_current_month/center.consults_current_month * 100)}" />     
+    </apex:outputtext></td>                 
+    <td class="right" style="background-color:white;border:0px;">&nbsp;</td>        
+    <td class="right"><apex:outputText value="{0,number,##0.0} %" >
+      <apex:param value="{!if(center.consults_current_month==0,0,(center.starts_current_month - center.cancels_current_month)/center.consults_current_month * 100)}" />     
+    </apex:outputtext></td>            
+    <td class="right"><apex:outputText value="{0,number,##0.00} %" >
+        <apex:param value="{!center.budgeted_close_rate_current_month}"  />   
+      </apex:outputtext>
+    </td>
+    <td class="right" style="{!if(if(center.consults_current_month==0,0,(center.starts_current_month - center.cancels_current_month)/center.consults_current_month * 100) - center.budgeted_close_rate_current_month < 0,'color:red;','color:black;')}"><apex:outputText value="{0,number,##0.0} %" >
+      <apex:param value="{!if(center.consults_current_month==0,0,(center.starts_current_month - center.cancels_current_month)/center.consults_current_month * 100) - center.budgeted_close_rate_current_month}" />     
+    </apex:outputtext></td></tr>    
+</apex:repeat>  
+<tr class="footer">
+<td class="indent">Total ClearChoice</td>
+  <td class="right" style="background-color:white;border:0px;">&nbsp;</td>        
+  <td class="right">0</td>
+  <td class="right" style="background-color:white;border:0px;">&nbsp;</td>        
+  <td class="right"><apex:outputText value="{0,number,#,###,##0}" >
+    <apex:param value="{!center_totals.consults_current_month}"  />   
+  </apex:outputtext></td>    
+  <td class="right"><apex:outputText value="{0,number,#,###,##0}" >
+    <apex:param value="{!center_totals.budgeted_consults_current_month}"  />   
+  </apex:outputtext></td>
+  <td class="right" style="{!if(center_totals.budgeted_consults_current_month > center_totals.consults_current_month,'color:red;','color:black;')}"><apex:outputText value="{0,number,#,###,##0}" >
+    <apex:param value="{!(center_totals.consults_current_month - center_totals.budgeted_consults_current_month)}"  />   
+  </apex:outputtext></td>      
+  <td class="right" style="{!if(center_totals.budgeted_consults_current_month > center_totals.consults_current_month,'color:red;','color:black;')}"><apex:outputText value="{0,number,##0.0} %" >
+    <apex:param value="{!if(center_totals.budgeted_consults_current_month==0,0,(center_totals.consults_current_month - center_totals.budgeted_consults_current_month)/center_totals.budgeted_consults_current_month * 100)}" />     
+  </apex:outputtext></td>        
+  <td class="right" style="background-color:white;border:0px;">&nbsp;</td>    
+  <td class="right"><apex:outputText value="{0,number,##0.0} %" >
+    <apex:param value="{!if(center_totals.consults_last_month==0,0,center_totals.gyb_consults_last_month/center_totals.consults_last_month * 100)}" />     
+  </apex:outputtext></td>                 
+  <td class="right"><apex:outputText value="{0,number,##0.0} %" >
+    <apex:param value="{!if(center_totals.consults_current_month==0,0,center_totals.gyb_consults_current_month/center_totals.consults_current_month * 100)}" />     
+  </apex:outputtext></td>         
+  <td class="right" style="{!if((if(center_totals.consults_last_month==0,0,center_totals.gyb_consults_last_month/center_totals.consults_last_month * 100) - if(center_totals.consults_current_month==0,0,center_totals.gyb_consults_current_month/center_totals.consults_current_month * 100)) < 0,'color:red;','color:black;')}"><apex:outputText value="{0,number,##0.0} %" >
+    <apex:param value="{!if(center_totals.consults_last_month==0,0,center_totals.gyb_consults_last_month/center_totals.consults_last_month * 100) - if(center_totals.consults_current_month==0,0,center_totals.gyb_consults_current_month/center_totals.consults_current_month * 100)}" />     
+  </apex:outputtext></td>                 
+  <td class="right" style="background-color:white;border:0px;">&nbsp;</td>        
+  <td class="right"><apex:outputText value="{0,number,##0.0} %" >
+    <apex:param value="{!if(center_totals.consults_current_month==0,0,(center_totals.starts_current_month - center_totals.cancels_current_month)/center_totals.consults_current_month * 100)}" />     
+  </apex:outputtext></td>            
+  <td class="right"><apex:outputText value="{0,number,##0.00} %" >
+    <apex:param value="{!center_totals.budgeted_close_rate_current_month}"  />   
+  </apex:outputtext></td>
+  <td class="right" style="{!if(if(center_totals.consults_current_month==0,0,(center_totals.starts_current_month - center_totals.cancels_current_month)/center_totals.consults_current_month * 100) - center_totals.budgeted_close_rate_current_month < 0,'color:red;','color:black;')}"><apex:outputText value="{0,number,##0.0} %" >
+    <apex:param value="{!if(center_totals.consults_current_month==0,0,(center_totals.starts_current_month - center_totals.cancels_current_month)/center_totals.consults_current_month * 100) - center_totals.budgeted_close_rate_current_month}" />     
+  </apex:outputtext></td></tr>      
+</table></div>
+
+<span class="table_header">Key Driver Report<br /><i>{!last_month_name} {!last_year_int}</i></span>
+<div style="padding-left:5px;">
+<table class="accs_details" style="width:100%">
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>    
+    <td align="center" style="font-weight:bold;font-size:12pt;"># Days</td>
+    <td>&nbsp;</td>    
+    <td colspan="4" align="center" style="font-weight:bold;font-size:12pt;border-bottom:1px solid blue;">Consults</td>    
+    <td>&nbsp;</td>    
+    <td colspan="3" align="center" style="font-weight:bold;font-size:12pt;border-bottom:1px solid blue;">GYB Consults</td>    
+    <td>&nbsp;</td>    
+    <td colspan="3" align="center" style="font-weight:bold;font-size:12pt;border-bottom:1px solid blue;">Close Rate</td>        
+  </tr>   
+  <tr class="control">
+    <td width="30%">Center</td>
+    <td width="1%" style="border:0px;">&nbsp;</td>
+    <td width="6%">Worked</td>
+    <td width="1%" style="border:0px;">&nbsp;</td>    
+    <td width="6%">Actual</td>
+    <td width="6%">Budgeted</td>
+    <td width="6%">Var</td>    
+    <td width="6%">% Var</td>    
+    <td width="1%" style="border:0px;">&nbsp;</td>
+    <td width="6%">{!two_month_name}-{!two_year_int}</td>    
+    <td width="6%">{!last_month_name}-{!last_year_int}</td>    
+    <td width="6%">Var</td>    
+    <td width="1%" style="border:0px;">&nbsp;</td>        
+    <td width="6%">Actual</td>    
+    <td width="6%">Budget</td>
+    <td width="6%">Var</td></tr>   
+<apex:variable var="rowclassname" value="accs" />    
+<apex:repeat value="{!all_centers}" var="center">
+  <tr class="{!rowclassname}">
+    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+    <td class="indent">{!center.center_name}</td>
+    <td class="right" style="background-color:white;border:0px;">&nbsp;</td>      
+    <td class="right">0</td>      
+    <td class="right" style="background-color:white;border:0px;">&nbsp;</td>      
+    <td class="right"><apex:outputText value="{0,number,#,###,##0}" >
+      <apex:param value="{!center.consults_last_month}"  />   
+    </apex:outputtext></td>
+    <td class="right"><apex:outputText value="{0,number,#,###,##0}" >
+      <apex:param value="{!center.budgeted_consults_last_month}"  />   
+    </apex:outputtext></td>
+    <td class="right" style="{!if(center.budgeted_consults_last_month > center.consults_last_month,'color:red;','color:black;')}"><apex:outputText value="{0,number,#,###,##0}" >
+      <apex:param value="{!(center.consults_last_month - center.budgeted_consults_last_month)}"  />   
+    </apex:outputtext></td>      
+    <td class="right" style="{!if(center.budgeted_consults_last_month > center.consults_last_month,'color:red;','color:black;')}"><apex:outputText value="{0,number,##0.0} %" >
+      <apex:param value="{!if(center.budgeted_consults_last_month==0,0,(center.consults_last_month - center.budgeted_consults_last_month)/center.budgeted_consults_last_month * 100)}" />     
+    </apex:outputtext></td>        
+    <td class="right" style="background-color:white;border:0px;">&nbsp;</td>          
+    <td class="right"><apex:outputText value="{0,number,##0.0} %" >
+      <apex:param value="{!if(center.consults_two_month==0,0,center.gyb_consults_two_month/center.consults_two_month * 100)}" />     
+    </apex:outputtext></td>                 
+    <td class="right"><apex:outputText value="{0,number,##0.0} %" >
+      <apex:param value="{!if(center.consults_last_month==0,0,center.gyb_consults_last_month/center.consults_last_month * 100)}" />     
+    </apex:outputtext></td>         
+    <td class="right" style="{!if((if(center.consults_two_month==0,0,center.gyb_consults_two_month/center.consults_two_month * 100) - if(center.consults_last_month==0,0,center.gyb_consults_last_month/center.consults_last_month * 100)) < 0,'color:red;','color:black;')}"><apex:outputText value="{0,number,##0.0} %" >
+      <apex:param value="{!if(center.consults_two_month==0,0,center.gyb_consults_two_month/center.consults_two_month * 100) - if(center.consults_last_month==0,0,center.gyb_consults_last_month/center.consults_last_month * 100)}" />     
+    </apex:outputtext></td>                 
+    <td class="right" style="background-color:white;border:0px;">&nbsp;</td>        
+    <td class="right"><apex:outputText value="{0,number,##0.0} %" >
+      <apex:param value="{!if(center.consults_last_month==0,0,(center.starts_last_month - center.cancels_last_month)/center.consults_last_month * 100)}" />     
+    </apex:outputtext></td>            
+    <td class="right"><apex:outputText value="{0,number,##0.00} %" >
+        <apex:param value="{!center.budgeted_close_rate_last_month}"  />   
+      </apex:outputtext>
+    </td>
+    <td class="right" style="{!if(if(center.consults_last_month==0,0,(center.starts_last_month - center.cancels_last_month)/center.consults_last_month * 100) - center.budgeted_close_rate_last_month < 0,'color:red;','color:black;')}"><apex:outputText value="{0,number,##0.0} %" >
+      <apex:param value="{!if(center.consults_last_month==0,0,(center.starts_last_month - center.cancels_last_month)/center.consults_last_month * 100) - center.budgeted_close_rate_last_month}" />     
+    </apex:outputtext></td></tr>  
+</apex:repeat>        
+<tr class="footer">
+<td class="indent">Total ClearChoice</td>
+  <td class="right" style="background-color:white;border:0px;">&nbsp;</td>        
+  <td class="right">0</td>
+  <td class="right" style="background-color:white;border:0px;">&nbsp;</td>        
+  <td class="right"><apex:outputText value="{0,number,#,###,##0}" >
+    <apex:param value="{!center_totals.consults_last_month}"  />   
+  </apex:outputtext></td>    
+  <td class="right"><apex:outputText value="{0,number,#,###,##0}" >
+    <apex:param value="{!center_totals.budgeted_consults_last_month}"  />   
+  </apex:outputtext></td>
+  <td class="right" style="{!if(center_totals.budgeted_consults_last_month > center_totals.consults_last_month,'color:red;','color:black;')}"><apex:outputText value="{0,number,#,###,##0}" >
+    <apex:param value="{!(center_totals.consults_last_month - center_totals.budgeted_consults_last_month)}"  />   
+  </apex:outputtext></td>      
+  <td class="right" style="{!if(center_totals.budgeted_consults_last_month > center_totals.consults_last_month,'color:red;','color:black;')}"><apex:outputText value="{0,number,##0.0} %" >
+    <apex:param value="{!if(center_totals.budgeted_consults_last_month==0,0,(center_totals.consults_last_month - center_totals.budgeted_consults_last_month)/center_totals.budgeted_consults_last_month * 100)}" />     
+  </apex:outputtext></td>        
+  <td class="right" style="background-color:white;border:0px;">&nbsp;</td>    
+  <td class="right"><apex:outputText value="{0,number,##0.0} %" >
+    <apex:param value="{!if(center_totals.consults_two_month==0,0,center_totals.gyb_consults_two_month/center_totals.consults_two_month * 100)}" />     
+  </apex:outputtext></td>                 
+  <td class="right"><apex:outputText value="{0,number,##0.0} %" >
+    <apex:param value="{!if(center_totals.consults_last_month==0,0,center_totals.gyb_consults_last_month/center_totals.consults_last_month * 100)}" />     
+  </apex:outputtext></td>         
+  <td class="right" style="{!if((if(center_totals.consults_two_month==0,0,center_totals.gyb_consults_two_month/center_totals.consults_two_month * 100) - if(center_totals.consults_last_month==0,0,center_totals.gyb_consults_last_month/center_totals.consults_last_month * 100)) < 0,'color:red;','color:black;')}"><apex:outputText value="{0,number,##0.0} %" >
+    <apex:param value="{!if(center_totals.consults_two_month==0,0,center_totals.gyb_consults_two_month/center_totals.consults_two_month * 100) - if(center_totals.consults_last_month==0,0,center_totals.gyb_consults_last_month/center_totals.consults_last_month * 100)}" />     
+  </apex:outputtext></td>                 
+  <td class="right" style="background-color:white;border:0px;">&nbsp;</td>        
+  <td class="right"><apex:outputText value="{0,number,##0.0} %" >
+    <apex:param value="{!if(center_totals.consults_last_month==0,0,(center_totals.starts_last_month - center_totals.cancels_last_month)/center_totals.consults_last_month * 100)}" />     
+  </apex:outputtext></td>            
+  <td class="right"><apex:outputText value="{0,number,##0.00} %" >
+    <apex:param value="{!center_totals.budgeted_close_rate_last_month}"  />   
+  </apex:outputtext></td>
+  <td class="right" style="{!if(if(center_totals.consults_last_month==0,0,(center_totals.starts_last_month - center_totals.cancels_last_month)/center_totals.consults_last_month * 100) - center_totals.budgeted_close_rate_last_month < 0,'color:red;','color:black;')}"><apex:outputText value="{0,number,##0.0} %" >
+    <apex:param value="{!if(center_totals.consults_last_month==0,0,(center_totals.starts_last_month - center_totals.cancels_last_month)/center_totals.consults_last_month * 100) - center_totals.budgeted_close_rate_last_month}" />     
+  </apex:outputtext></td></tr>          
+</table></div>
+
+
+</apex:component>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>OWNER</field>
+    </columns>
+    <columns>
+        <field>Lead.Center_Location__c</field>
+    </columns>
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>LEAD_SOURCE</field>
+    </columns>
+    <columns>
+        <field>STATUS</field>
+    </columns>
+    <columns>
+        <field>RATING</field>
+    </columns>
+    <columns>
+        <field>PHONE</field>
+    </columns>
+    <columns>
+        <field>EMAIL</field>
+    </columns>
+    <columns>
+        <field>Lead.Email_Picklist__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Pre_Screen__c</field>
+    </columns>
+    <columns>
+        <field>Lead.DateTime_Consult_Scheduled__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Lead.Center_Location__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Atlanta,Austin,Charlotte,Chicago,Chicago Deerfield/Northbrook,Chicago Naperville,Chicago Schaumburg,Cleveland,Dallas,Dallas Fort Worth,Denver,Denver Colorado Springs,Houston,Houston Woodlands,Kansas City,Las Vegas,Miami,Miami Fort Lauderdale,Minneapolis,Phoenix,Phoenix Mesa,Portland,Sacramento,Salt Lake City,San Antonio,San Diego,San Francisco Daly City,San Francisco Oakland,San Jose,St. Louis,Tucson,Washington Rockville,Washington Tysons Corner,New Market Not Yet Open,Unknown</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Call_Result__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Consultation Scheduled,Same Day Rescheduled Consult</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>STATUS</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>No Show</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Pre_Screen__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Not Checked,Green,Yellow,Red,Blue (No Hit),Website Down-No Prescreen,PO Box,Insufficient Information</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>No Show Report Master</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadList</reportType>
+    <scope>org</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead.DateTime_Consult_Scheduled__c</dateColumn>
+        <endDate>2011-01-24</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2011-01-24</startDate>
+    </timeFrameFilter>
+</Report>

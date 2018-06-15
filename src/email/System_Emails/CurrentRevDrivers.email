@@ -1,0 +1,8 @@
+<messaging:emailTemplate subject="Center Revenue Drivers" recipientType="User" >
+<messaging:plainTextEmailBody >
+The Current Revenue Drivers report has been generated and attached to this email. Please Download the attachment if you would like to view the numbers for today.
+</messaging:plainTextEmailBody>
+  <messaging:attachment filename="CenterRevDrivers.html">        
+    <c:CenteRev />
+  </messaging:attachment>
+</messaging:emailTemplate>

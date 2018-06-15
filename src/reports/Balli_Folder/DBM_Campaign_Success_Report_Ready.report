@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Campaign$Name</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers$Name</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers.Activities$Owner</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers.Activities$Activity_Type__c</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers.Activities$Outcome__c</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers.Activities$Subject</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers*Lead$Pre_Screen__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Campaign$Name</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>contains</operator>
+            <value>DBM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Campaign.LeadCampaignMembers.Activities$Activity_Type__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Outbound Call</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Campaign.LeadCampaignMembers.Activities$CreatedDate</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>greaterThan</operator>
+            <value>12/15/2012 12:00 AM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Campaign.LeadCampaignMembers.Activities$CreatedDate</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>lessThan</operator>
+            <value>12/23/2012 12:00 AM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Campaign.LeadCampaignMembers.Activities$Owner</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Stacie Zimmerman,Barb Emerick,Rochelle Hart,Marcella Velasquez. Stephanie Palombi,Vanessa Soderstrom,Matthew Wade,Alexandra Chavez,Danny Herrera,Eowyn Suchan,Marianne Mills,Stan Morr,Travis Quest,Wendy Castellano,Sonja Villalobos</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>DBM Campaign Success- Inbound Group</name>
+    <params>
+        <name>scopeid</name>
+        <value></value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Activites_w_Patient_and_Campaign__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Campaign$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

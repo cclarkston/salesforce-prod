@@ -1,0 +1,5 @@
+<apex:component controller="formatted_consulttime" access="global">
+<apex:attribute name="LeadId" description="This is our lead id" type="Id" assignTo="{!thisleadid}"/>
+<apex:attribute name="html_on" description="Remove HTML Tags" type="String" assignTo="{!html_on}"/>
+{!seminar_directions}
+</apex:component>

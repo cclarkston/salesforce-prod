@@ -1,0 +1,14 @@
+<apex:page standardController="Implementation_Checklist__c" extensions="checklist_psa" showHeader="false" sidebar="false">
+<apex:form onsubmit="">
+  <apex:actionFunction name="psa_change" action="{!psa_updated}" rerender="main_holder" />   
+  <apex:outputpanel id="main_holder">
+    <apex:outputfield value="{!Implementation_Checklist__c.Dental_Practice__c}" rendered="false" />
+    <span style="padding-bottom:7px;display:block;">
+      <span style="font-weight:bold;width:200px;display:inline-block;">PSA Contract Completed ? </span><apex:inputfield value="{!dp.PSA_Contract_Completed__c}" onchange="psa_change()" />
+    </span>
+    <span style="padding-bottom:7px;display:block;">
+      <span style="font-weight:bold;width:200px;display:inline-block;">PSA Effective Date ? </span><apex:inputfield value="{!dp.PSA_Effective_Date__c}" onchange="psa_change()" />
+    </span>
+  </apex:outputpanel>
+</apex:form>
+</apex:page>

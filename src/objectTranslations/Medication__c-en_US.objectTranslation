@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Medication</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Medications</value>
+    </caseValues>
+    <fields>
+        <label><!-- Administered Suffix --></label>
+        <name>Administered_Suffix__c</name>
+        <picklistValues>
+            <masterLabel>AM</masterLabel>
+            <translation><!-- AM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PM</masterLabel>
+            <translation><!-- PM --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Amount Taken --></label>
+        <name>Amount_Taken__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Inactive --></label>
+        <name>Date_Inactive__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Last Filled --></label>
+        <name>Date_Last_Filled__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Reported --></label>
+        <name>Date_Reported__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Written --></label>
+        <name>Date_Written__c</name>
+    </fields>
+    <fields>
+        <label><!-- Days Supply --></label>
+        <name>Days_Supply__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dispense Units --></label>
+        <name>Dispense_Units__c</name>
+    </fields>
+    <fields>
+        <label><!-- Doctor --></label>
+        <name>Doctor__c</name>
+    </fields>
+    <fields>
+        <label><!-- Drug Classification --></label>
+        <name>Drug_Classification__c</name>
+    </fields>
+    <fields>
+        <label><!-- For What --></label>
+        <name>For_What__c</name>
+    </fields>
+    <fields>
+        <label><!-- Generic Drug Name --></label>
+        <name>Generic_Drug_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hour Administered --></label>
+        <name>Hour_Administered__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10</masterLabel>
+            <translation><!-- 10 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11</masterLabel>
+            <translation><!-- 11 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12</masterLabel>
+            <translation><!-- 12 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4</masterLabel>
+            <translation><!-- 4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5</masterLabel>
+            <translation><!-- 5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6</masterLabel>
+            <translation><!-- 6 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7</masterLabel>
+            <translation><!-- 7 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8</masterLabel>
+            <translation><!-- 8 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>9</masterLabel>
+            <translation><!-- 9 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- How Often --></label>
+        <name>How_Often__c</name>
+        <picklistValues>
+            <masterLabel>2x/day</masterLabel>
+            <translation><!-- 2x/day --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3x/day</masterLabel>
+            <translation><!-- 3x/day --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4x or more</masterLabel>
+            <translation><!-- 4x or more --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>As needed</masterLabel>
+            <translation><!-- As needed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Daily</masterLabel>
+            <translation><!-- Daily --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Weekly</masterLabel>
+            <translation><!-- Weekly --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Lexi-Drug Synonym ID --></label>
+        <name>Lexi_Drug_Syn_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lexi Generic Product ID --></label>
+        <name>Lexi_Generic_Product_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lexi Synonym Type ID --></label>
+        <name>Lexi_Synonym_Type_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lexicomp Drug ID --></label>
+        <name>Lexicomp_Drug_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Medication ID --></label>
+        <name>Medication_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Medication Status --></label>
+        <name>Medication_Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Deleted</masterLabel>
+            <translation><!-- Deleted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Discontinued</masterLabel>
+            <translation><!-- Discontinued --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inactive</masterLabel>
+            <translation><!-- Inactive --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unknown</masterLabel>
+            <translation><!-- Unknown --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Minute Administered --></label>
+        <name>Minute_Administered__c</name>
+    </fields>
+    <fields>
+        <label><!-- Monograph Path --></label>
+        <name>Monograph_Path__c</name>
+    </fields>
+    <fields>
+        <label><!-- NDC --></label>
+        <name>NDC__c</name>
+    </fields>
+    <fields>
+        <label><!-- No DoseSpot (added manually) --></label>
+        <name>No_DoseSpot__c</name>
+    </fields>
+    <fields>
+        <label><!-- No Substitution --></label>
+        <name>No_Substitution__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prescriber Notes --></label>
+        <name>Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Patient Health History --></label>
+        <name>Patient_Health_History__c</name>
+        <relationshipLabel><!-- Medications --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Patient --></label>
+        <name>Patient__c</name>
+        <relationshipLabel><!-- Medications --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Payer --></label>
+        <name>Payer__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pharmacy ID --></label>
+        <name>Pharmacy_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pharmacy Notes --></label>
+        <name>Pharmacy_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prescriber User ID --></label>
+        <name>Prescriber_User_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prescription Status --></label>
+        <name>Prescription_Status__c</name>
+        <picklistValues>
+            <masterLabel>Deleted</masterLabel>
+            <translation><!-- Deleted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Edited</masterLabel>
+            <translation><!-- Edited --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Entered</masterLabel>
+            <translation><!-- Entered --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EpcsError</masterLabel>
+            <translation><!-- EpcsError --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EpcsSigned</masterLabel>
+            <translation><!-- EpcsSigned --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Error</masterLabel>
+            <translation><!-- Error --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FaxSent</masterLabel>
+            <translation><!-- FaxSent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Printed</masterLabel>
+            <translation><!-- Printed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ReadyToSign</masterLabel>
+            <translation><!-- ReadyToSign --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Requested</masterLabel>
+            <translation><!-- Requested --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sending</masterLabel>
+            <translation><!-- Sending --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>eRxSent</masterLabel>
+            <translation><!-- eRxSent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Quantity --></label>
+        <name>Quantity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Refills --></label>
+        <name>Refills__c</name>
+    </fields>
+    <fields>
+        <label><!-- Route --></label>
+        <name>Route__c</name>
+    </fields>
+    <fields>
+        <label><!-- RxCUI --></label>
+        <name>RxCUI__c</name>
+    </fields>
+    <fields>
+        <label><!-- Schedule --></label>
+        <name>Schedule__c</name>
+    </fields>
+    <fields>
+        <label><!-- Source --></label>
+        <name>Source__c</name>
+        <picklistValues>
+            <masterLabel>Imported</masterLabel>
+            <translation><!-- Imported --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prescription</masterLabel>
+            <translation><!-- Prescription --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SelfReported</masterLabel>
+            <translation><!-- SelfReported --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SurescriptsHistory</masterLabel>
+            <translation><!-- SurescriptsHistory --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unknown</masterLabel>
+            <translation><!-- Unknown --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Status Notes --></label>
+        <name>Status_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Strength --></label>
+        <name>Strength__c</name>
+    </fields>
+    <fields>
+        <label><!-- Surgical Notes Form --></label>
+        <name>Surgical_Notes_Form__c</name>
+        <relationshipLabel><!-- Medications --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Medication Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,574 @@
+<apex:page controller="ctrl_consult_forms" sidebar="false" showHeader="false" docType="html-5.0">
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}"  />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+
+<script>var $j = jQuery.noConflict();</script>
+<apex:stylesheet value="{!URLFOR($Resource.JQueryMobile,'/jquerymobile/jquery.mobile-1.3.2.min.css')}"/>
+<apex:includeScript value="{!URLFOR($Resource.JQuery)}"  />
+<apex:includeScript value="{!URLFOR($Resource.JQueryMobile,'/jquerymobile/jquery.mobile-1.3.2.min.js')}"/>
+<apex:includeScript value="/soap/ajax/28.0/connection.js"/>
+
+
+
+<style type="text/css" media="print">  
+input.btn {
+  display:none;
+}
+
+input#edit_btn {
+  display:none;
+}
+ 
+  td.right_border {
+    border:0px; 
+    right-border:0px;
+  }
+
+  img.skiplink {
+    display:none;
+  }
+
+  div.bodyDiv {
+    border:0px;
+  }
+      
+  div.bPageHeader {
+    display:none;
+  }  
+  
+  div.bPageFooter {
+    display:none;
+  } 
+  
+  div.no_print {
+    display:none; 
+  }    
+</style>  
+
+<style>
+    hr.style-fade {
+    border: 0;
+    height: 2px;
+    width:1000px;
+    display:block; 
+  background-image: -webkit-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0)); 
+    background-image:    -moz-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0)); 
+    background-image:     -ms-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0)); 
+    background-image:      -o-linear-gradient(left, rgba(80,180,230,0), rgba(80,180,230,0.75), rgba(80,180,230,0)); 
+  }
+  
+  hr.style-one {
+    border: 0;
+    width:900px;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+  }
+  
+  span.form_line {
+    display:block;
+    padding-bottom:1em;    
+    font-size:11pt;
+  }
+  
+  span.field_header {
+    font-weight:bold;
+  }
+  
+  span.field_spacer {
+    display:inline-block;
+    width:50px;    
+  }
+  
+  p.section_holder {
+    padding-left:20px;    
+  }
+  
+  span.section_header {
+    padding-left:-20px;
+    display:block;
+    font-size:12pt;
+    font-weight:bold;
+    font-style:italic;
+    color:#5789AE;
+    padding-bottom:5px;
+  }
+  
+  .CSSTableGenerator {
+    margin:0px;padding:0px;
+    width:100%;
+    box-shadow: 10px 10px 5px #888888;
+    border:1px solid #000000;
+    
+    -moz-border-radius-bottomleft:0px;
+    -webkit-border-bottom-left-radius:0px;
+    border-bottom-left-radius:0px;
+    
+    -moz-border-radius-bottomright:0px;
+    -webkit-border-bottom-right-radius:0px;
+    border-bottom-right-radius:0px;
+    
+    -moz-border-radius-topright:0px;
+    -webkit-border-top-right-radius:0px;
+    border-top-right-radius:0px;
+    
+    -moz-border-radius-topleft:0px;
+    -webkit-border-top-left-radius:0px;
+    border-top-left-radius:0px;
+}.CSSTableGenerator table{
+    border-collapse: collapse;
+        border-spacing: 0;
+    width:100%;
+    height:100%;
+    margin:0px;padding:0px;
+}.CSSTableGenerator tr:last-child td:last-child {
+    -moz-border-radius-bottomright:0px;
+    -webkit-border-bottom-right-radius:0px;
+    border-bottom-right-radius:0px;
+}
+.CSSTableGenerator table tr:first-child td:first-child {
+    -moz-border-radius-topleft:0px;
+    -webkit-border-top-left-radius:0px;
+    border-top-left-radius:0px;
+}
+.CSSTableGenerator table tr:first-child td:last-child {
+    -moz-border-radius-topright:0px;
+    -webkit-border-top-right-radius:0px;
+    border-top-right-radius:0px;
+}.CSSTableGenerator tr:last-child td:first-child{
+    -moz-border-radius-bottomleft:0px;
+    -webkit-border-bottom-left-radius:0px;
+    border-bottom-left-radius:0px;
+}.CSSTableGenerator tr:hover td{
+    
+}
+.CSSTableGenerator tr:nth-child(odd){ background-color:#aad4ff; }
+.CSSTableGenerator tr:nth-child(even)    { background-color:#ffffff; }.CSSTableGenerator td{
+    vertical-align:middle;
+    
+    
+    border:1px solid #000000;
+    border-width:0px 1px 1px 0px;
+    text-align:left;
+    padding:7px;
+    font-size:12px;
+    font-family:Arial;
+    font-weight:bold;
+    color:#000000;
+}.CSSTableGenerator tr:last-child td{
+    border-width:0px 1px 0px 0px;
+}.CSSTableGenerator tr td:last-child{
+    border-width:0px 0px 1px 0px;
+}.CSSTableGenerator tr:last-child td:last-child{
+    border-width:0px 0px 0px 0px;
+}
+.CSSTableGenerator tr:first-child td{
+        background:-o-linear-gradient(bottom, #005fbf 5%, #003f7f 100%);    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #005fbf), color-stop(1, #003f7f) );
+    background:-moz-linear-gradient( center top, #005fbf 5%, #003f7f 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#005fbf", endColorstr="#003f7f");  background: -o-linear-gradient(top,#005fbf,003f7f);
+
+    background-color:#005fbf;
+    border:0px solid #000000;
+    text-align:center;
+    border-width:0px 0px 1px 1px;
+    font-size:14px;
+    font-family:Arial;
+    font-weight:bold;
+    color:#ffffff;
+}
+.CSSTableGenerator tr:first-child:hover td{
+    background:-o-linear-gradient(bottom, #005fbf 5%, #003f7f 100%);    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #005fbf), color-stop(1, #003f7f) );
+    background:-moz-linear-gradient( center top, #005fbf 5%, #003f7f 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#005fbf", endColorstr="#003f7f");  background: -o-linear-gradient(top,#005fbf,003f7f);
+
+    background-color:#005fbf;
+}
+.CSSTableGenerator tr:first-child td:first-child{
+    border-width:0px 0px 1px 0px;
+}
+.CSSTableGenerator tr:first-child td:last-child{
+    border-width:0px 0px 1px 1px;
+}
+
+</style>
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+
+</script>
+
+<apex:form >
+<apex:actionFunction oncomplete="default_cursor(this);" name="age_changed" action="{!refresh_call}" reRender="age_holder" />  
+<apex:actionFunction oncomplete="default_cursor(this);" name="dhist_update" action="{!refresh_call}" reRender="main_holder" />
+
+<apex:outputpanel id="main_holder" layout="block" style="padding-left:5%;padding-right:5%;">
+<table>
+  <tr><td><apex:image value="{!$Resource.CCLogo_Transparent}" /></td>
+  <td style="padding-left:40px;"><apex:outputtext value="{!page_header}" style="font-size:18pt; font-weight:bold;vertical-align:top;vertical-align:middle;" /></td>
+</tr></table><hr class="style-fade" /><br /><br />
+
+<apex:messages style="color:red;font-weight:bold;" />
+
+<apex:outputpanel id="portal_holder" rendered="{!if(display_name=="check_portal",true,false)}" style="padding-left:40px;">
+  <table style="max-width:600px;">
+    <!--<tr style="height:40px;">
+      <td><apex:commandbutton value="New Check In" action="{!new_check_in}" rerender="main_holder" /></td>
+      <td style="padding-left:40px;font-style:italic;font-size:12pt;">Start a new patient check in with a blank form.</td>
+    </tr>-->
+    <tr><td colspan="2">&nbsp;</td></tr>
+    <tr><td colspan="2">&nbsp;</td></tr>
+    <tr style="height:40px;">
+      <td style="vertical-align:top;"><apex:commandbutton value="Use Check In Code" action="{!new_check_in_code}" rerender="main_holder,sig_button_holder" /><br /><br /><apex:inputtext value="{!check_in_code}" style="width:120px;"/>   </td>
+      <td style="vertical-align:top;padding-left:40px;font-style:italic;font-size:12pt;">If you have a code from the Consult Calendar,  please enter it here and then click Use Check In Code.  A new patient check in form will be generated from the patient file.</td>
+    </tr>
+  </table>
+</apex:outputpanel> <!--  portal_holder -->
+
+<apex:outputpanel id="page1_holder" rendered="{!if(display_name=="page1",true,false)}" style="padding-left:40px;">
+  <span class="form_line" style="display:block;">
+    <span class="field_header">First Name : </span>&nbsp; <apex:inputfield value="{!cform.FirstName__c}" style="width:100px;" />
+    <span class="field_spacer">&nbsp;</span>
+    <span class="field_header">Last Name : </span>&nbsp; <apex:inputfield value="{!cform.LastName__c}" style="display:inline;width:100px;" />
+    <span class="field_spacer">&nbsp;</span>        
+    <span class="field_header">Gender : </span>&nbsp; <apex:inputfield value="{!cform.Gender__c}"  />
+  </span>
+  <span class="form_line">
+    <span class="field_header">Residential Street : </span>&nbsp; <apex:inputfield value="{!cform.PersonMailingStreet__c}" style="height:17px;width:300px;" />
+    <span class="field_spacer">&nbsp;</span>
+    <span class="field_header">Residential City : </span>&nbsp; <apex:inputfield value="{!cform.PersonMailingCity__c}" style="height:17px;width:150px;" />
+    <span class="field_spacer">&nbsp;</span>        
+  </span> 
+  <span class="form_line">  
+   <span class="field_header">Residential State : </span>&nbsp; <apex:inputfield value="{!cform.PersonMailingState__c}" style="width:100px;"  />
+    <span class="field_spacer">&nbsp;</span>        
+    <span class="field_header">Residential Zip : </span>&nbsp; <apex:inputfield value="{!cform.PersonMailingPostalCode__c}" style="width:75px;" />    
+    <span class="field_spacer">&nbsp;</span>
+    <span class="field_header">Home Phone : </span> <apex:inputfield value="{!cform.Phone__c}" />
+  </span>      
+  <span class="form_line">
+    <span class="field_header">Date of Birth : </span>&nbsp; <apex:inputfield value="{!cform.Date_of_Birth__c}" onchange="use_fancy_cursor(this);age_changed();" type="date" 
+                showDatePicker="false" style="width:150px;" />
+    <span class="field_spacer">&nbsp;</span>
+    <span class="field_header">Age : </span>&nbsp; <apex:outputpanel id="age_holder"><apex:outputtext value="{!calculated_age}"  /></apex:outputpanel>
+    <span class="field_spacer">&nbsp;</span>
+    <span class="field_header">Mobile Phone : </span> <apex:inputfield value="{!cform.PersonMobilePhone__c}" />
+  </span>
+  <span class="form_line">
+    <span class="field_header">Occupation : </span>&nbsp; <apex:inputfield value="{!cform.Occupation__c}" />
+    <span class="field_spacer">&nbsp;</span>
+    <span class="field_header">Employer : </span> <apex:inputfield value="{!cform.Employer__c}" />
+  </span>
+  <span class="form_line">
+    <span class="field_header">Business Phone : </span>&nbsp; <apex:inputfield value="{!cform.Business_Phone__c}" />
+    <span class="field_spacer">&nbsp;</span>
+    <span class="field_header">Email : </span> <apex:inputfield value="{!cform.Email__c}" />
+  </span><br />
+  
+  <span style="width:800px;display:inline-block;text-align:center;font-size:12pt;font-weight:bold;">Dental History</span><hr class="style-fade" /><br /><br />
+  <span class="form_line">
+    <table><tr><td><span class="field_header"><b>Do you have any <u>major medical problems</u></b>?</span></td><td style="width:25px;">&nbsp;</td>
+    <td><apex:selectRadio value="{!cform.Major_Medical_Problem__c}" style="width:125px;" onchange="dhist_update();" >
+      <apex:selectOptions value="{!yes_no_list}"/>
+    </apex:selectRadio></td></tr></table>
+    <apex:outputpanel rendered="{!if(cform.Major_Medical_Problem__c=='Yes',true,false)}" layout="inline"><br />
+      <span class="field_header">Please explain?</span>&nbsp; <apex:inputfield value="{!cform.Major_Medical_Problem_What__c}" style="width:400px;" />
+    </apex:outputpanel>
+  </span>  
+  <apex:outputpanel rendered="{!if(cform.Gender__c=='Female',true,false)}" >
+  <span class="form_line">
+    <table><tr><td><span class="field_header">Is there any chance you could be pregnant?</span></td><td style="width:25px;">&nbsp;</td>
+    <td><apex:selectRadio value="{!cform.Pregnant__c}" style="width:125px;"  >
+      <apex:selectOptions value="{!yes_no_list}"/>
+    </apex:selectRadio></td></tr></table>
+  </span> 
+  </apex:outputpanel>
+  <span class="form_line">
+    <table><tr><td><span class="field_header">Are you currently taking,  or have you ever taken, any Bisphosphonates or other medication for osteoporosis?</span></td><td style="width:25px;">&nbsp;</td>
+    <td><apex:selectRadio value="{!cform.Taking_Bisphosphonates__c}" style="width:125px;" onchange="dhist_update();" >
+      <apex:selectOptions value="{!yes_no_list}"/>
+    </apex:selectRadio></td></tr></table>
+    <apex:outputpanel rendered="{!if(cform.Taking_Bisphosphonates__c=='Yes',true,false)}" layout="inline"><br />
+      <span class="field_header">Please list current or past prescribed Bisphosphonate drug(s) - for example : Actonel, Bonvia, Fosamax, Skelid :</span>&nbsp;<br /> 
+      <apex:inputfield value="{!cform.Prescribed_Bisphosphonates__c}" style="width:600px;" />
+    </apex:outputpanel>
+  </span> 
+  <span class="form_line">
+    <table><tr><td><span class="field_header">Have you ever been treated for Periodontal Gum disease?</span></td><td style="width:25px;">&nbsp;</td>
+    <td><apex:selectRadio value="{!cform.Periodontal_Gum_Disease__c}" style="width:125px;"  >
+      <apex:selectOptions value="{!yes_no_list}"/>
+    </apex:selectRadio></td></tr></table>
+  </span>
+  <span class="form_line">
+    <table><tr><td><span class="field_header">Do you have a family dentist?</span></td><td style="width:25px;">&nbsp;</td>
+    <td><apex:selectRadio value="{!cform.Have_Family_Dentist__c}" style="width:125px;" onchange="dhist_update();"  >
+      <apex:selectOptions value="{!yes_no_list}"/>
+    </apex:selectRadio></td>
+    <td><apex:outputpanel rendered="{!if(cform.Have_Family_Dentist__c=='Yes',true,false)}" layout="inline">
+      <span class="field_header">Dentist Name :</span>&nbsp; <apex:inputfield value="{!cform.Dentist_Name__c}" style="width:300px;" />
+    </apex:outputpanel></td>
+    </tr></table>
+  </span>
+  <span class="form_line">
+    <span class="field_header">Last Dental Visit (aprox) : </span>&nbsp; <apex:inputfield value="{!cform.Last_Dentist_Visit__c}" type="date" 
+                showDatePicker="false" style="width:150px;" />      
+  </span> 
+  <span class="form_line">
+    <table><tr><td style="vertical-align:top;"><span class="field_header">What is your main dental concern today? : </span>&nbsp;</td>
+    <td> <apex:inputfield value="{!cform.Main_Dental_Concern__c}" style="width:300px;height:40px;vertical-align:top;" /></td></tr></table>
+  </span>
+  <span class="form_line">
+    <table><tr><td style="vertical-align:top;"><span class="field_header">How is your current dental condition affecting you? : </span>&nbsp;</td>
+    <td> <apex:inputfield value="{!cform.How_is_dental_condition_affecting_you__c}" style="width:300px;height:40px;vertical-align:top;" /></td></tr></table>
+  </span>
+  <span class="form_line">
+    <table><tr><td style="vertical-align:top;"><span class="field_header">How would treating your dental condition change your life? : </span>&nbsp;</td>
+    <td> <apex:inputfield value="{!cform.How_would_treatment_change_your_life__c}" style="width:300px;height:40px;vertical-align:top;" /></td></tr></table>
+  </span>  
+  <span class="form_line">
+    <table><tr><td style="vertical-align:top;"><span class="field_header">How soon would you like to start your dental treatment? : </span>&nbsp;</td>
+    <td> <apex:inputfield value="{!cform.How_soon_would_you_like_to_start__c}" style="width:300px;height:40px;" /></td></tr></table>
+  </span>    
+  <apex:outputpanel rendered="{!if(signed_consult_form,false,true)}"><apex:commandbutton action="{!page_one_submit}" value="Next Page" rerender="main_holder,sig_button_holder" oncomplete="show_sign_block();" /></apex:outputpanel>
+  <apex:outputpanel rendered="{!signed_consult_form}"><apex:commandbutton action="{!page_one_submit}" value="Next Page" rerender="main_holder,sig_button_holder" /></apex:outputpanel>
+  
+</apex:outputpanel> <!-- page1_holder -->
+
+<apex:outputpanel id="page2_holder" rendered="{!if(display_name=="page2",true,false)}" style="padding-left:40px;" layout="block">
+I, <apex:outputfield value="{!cform.FirstName__c}" /> <apex:outputfield value="{!cform.LastName__c}" />, give ClearChoice Dental Implant Center permission to leave information pertaining to :
+<ul style="padding-left:60px;">
+  <li>Appointment Information</li>
+  <li>Treatment Information</li>
+  <li>Health Care Financing Information</li>
+  <li>Referral Information</li>
+  <li>Test Results</li>
+</ul><br />
+Please consider carefully where we can leave voicemail meesages and who you want to have access to your medical information.<br /><br />
+Best Method of Communication:<br /><br />
+  <span class="form_line">
+      <table><tr><td>
+    <span class="field_header">Daytime phone number (7am - 5pm) : </span><apex:inputfield value="{!cform.BMOC_Daytime__c}" />
+    <span class="field_spacer">&nbsp;</span></td>
+    <td><span class="field_header">Voicemail?</span></td><td style="width:25px;">&nbsp;</td>
+    <td><apex:selectRadio value="{!cform.BMOC_Daytime_VM__c}" style="width:125px;" >
+      <apex:selectOptions value="{!yes_no_list}"/>
+    </apex:selectRadio></td></tr></table>
+  </span>
+  <span class="form_line">
+      <table><tr><td>
+    <span class="field_header">Evening phone number (after 5pm) : </span><apex:inputfield value="{!cform.BMOC_Evening__c}" />
+    <span class="field_spacer">&nbsp;</span></td>
+    <td><span class="field_header">Voicemail?</span></td><td style="width:25px;">&nbsp;</td>
+    <td><apex:selectRadio value="{!cform.BMOC_Evening_VM__c}" style="width:125px;" >
+      <apex:selectOptions value="{!yes_no_list}"/>
+    </apex:selectRadio></td></tr></table>
+  </span>
+  <span class="form_line">
+      <table><tr><td>
+    <span class="field_header">Weekend phone number (Sat or Sun) : </span><apex:inputfield value="{!cform.BMOC_Weekend__c}" />
+    <span class="field_spacer">&nbsp;</span></td>
+    <td><span class="field_header">Voicemail?</span></td><td style="width:25px;">&nbsp;</td>
+    <td><apex:selectRadio value="{!cform.BMOC_Weekend_VM__c}" style="width:125px;" >
+      <apex:selectOptions value="{!yes_no_list}"/>
+    </apex:selectRadio></td></tr></table>
+  </span>
+  <span class="form_line">
+    <span class="field_header">Email :</span>&nbsp; <apex:inputfield value="{!cform.Email__c}" style="width:300px;" />    
+  </span>
+  <br />
+  My medical care may be discussed with the person(s) listed below :<br /><br />
+  <span class="form_line">
+    <span class="field_header">Name :</span>&nbsp; <apex:inputfield value="{!cform.Discuss_Medical_Care_Name_1__c}" />  
+    <span class="field_spacer">&nbsp;</span>
+    <span class="field_header">Relationship :</span>&nbsp; <apex:inputfield value="{!cform.Discuss_Medical_Care_Relationship_1__c}" />
+  </span>
+  <span class="form_line">
+    <span class="field_header">Name :</span>&nbsp; <apex:inputfield value="{!cform.Discuss_Medical_Care_Name_2__c}" />  
+    <span class="field_spacer">&nbsp;</span>  
+    <span class="field_header">Relationship :</span>&nbsp; <apex:inputfield value="{!cform.Discuss_Medical_Care_Relationship_2__c}" />    
+  </span>
+  <span class="form_line">
+    <table><tr><td><span class="field_header">Is someone accompanying you?</span></td><td style="width:25px;">&nbsp;</td>
+    <td><apex:selectRadio value="{!accompanied}" style="width:125px;" onchange="dhist_update();" >
+      <apex:selectOptions value="{!yes_no_list}"/>
+    </apex:selectRadio></td></tr></table>
+    <apex:outputpanel rendered="{!if(accompanied=='Yes',true,false)}" layout="inline"><br />
+      <span class="field_header">Name :</span>&nbsp; <apex:inputfield value="{!cform.Accompanied_by_Name__c}" style="width:300px;" />
+      <span class="field_spacer">&nbsp;</span>
+      <span class="field_header">Relationship :</span>&nbsp; <apex:inputfield value="{!cform.Accompanied_By__c}" />
+    </apex:outputpanel>
+  </span>
+  <apex:outputpanel style="border:1px solid black;padding:10px;margin:5px;width:450px;" layout="block">
+    <u><b>Please check the box to indicate permission for work to be done.</b></u><br />  You must check at least one box<br />
+    <apex:outputtext value="{!work_done_error}" escape="false" />
+    <br />
+    <apex:inputfield value="{!cform.Approve_Consult__c}" /><span style="display:inline-block;width:20px;">&nbsp;</span>Consult <br />
+    <apex:inputfield value="{!cform.Approve_iCat__c}" /><span style="display:inline-block;width:20px;">&nbsp;</span>i-CAT <br />
+    <apex:inputfield value="{!cform.Approve_Panoramic__c}" /><span style="display:inline-block;width:20px;">&nbsp;</span>Panoramic x-ray <br />
+    <apex:inputfield value="{!cform.Approve_Nothing__c}" /><span style="display:inline-block;width:20px;">&nbsp;</span>None of the above <br />    
+  </apex:outputpanel>
+  
+  <apex:outputpanel rendered="{!signed_consult_form}" >
+  <table><tr><td>
+  <apex:image value="data:image;base64,{!signature_consult_form}" /></td><td style="padding-left:20px;">{!signature_consult_form_date}</td></tr></table><br />
+  <button onclick="show_sign_block();reset_sig();return false;">Resign Form</button><br /><br />
+
+  <apex:commandbutton action="{!page_two_submit}" value="Next Page" rerender="main_holder,sig_button_holder" oncomplete="hide_sign_block();" />  
+  <span style="display:inline-block;width:150px;">&nbsp;</span>  
+  <apex:commandbutton action="{!back_to_page_one}" value="Previous Page" rerender="main_holder" oncomplete="hide_sign_block();" />  
+  </apex:outputpanel>
+  
+  <apex:outputpanel rendered="{!if(signed_consult_form,false,true)}" >
+  <apex:commandbutton action="{!back_to_page_one}" value="Previous Page" rerender="main_holder" oncomplete="hide_sign_block();" />  
+
+  <span style="font-weight:bold;color:blue;font-style:italic;">Please sign in the area below,  to continue</span><br /><br />
+  </apex:outputpanel>
+  
+</apex:outputpanel> <!-- page2_holder -->
+
+<apex:outputpanel id="page3_holder" rendered="{!if(display_name=="page3",true,false)}" style="padding-left:40px;" layout="block">
+<p style="text-align:center;width:800px;"><span style="display:inline-block;font-size:12pt;border-bottom:1px solid black;">You have completed your check in paperwork.  If you need to make any changes to the info you provided,  then you can click "Previous Page" to return to a prior section.  Otherwise,  please return this device to the front desk at this time.</span></p><br />
+<p style="font-size:11pt;text-align:justify;width:800px;line-height:20px;">
+</p>
+  <apex:commandbutton action="{!back_to_page_two}" value="Previous Page" rerender="main_holder" oncomplete="hide_sign_block();" /><br /><br /><br />
+  <apex:commandbutton action="{!new_form_submit}" value="New Check In" rerender="main_holder,sig_button_holder"  />  
+
+</apex:outputpanel> <!-- page3_holder -->
+
+</apex:outputpanel>
+
+<div id="sig_holder" style="visibility:hidden;padding-left:5%;padding-right:5%;">
+<span class="field_header">Signature of Patient/Guardian</span><br />
+<canvas id="signatureCanvas" width="600" height="200" style="border: 1px solid black;"/> <br /><br />
+<apex:outputpanel id="sig_button_holder">
+<input type="button" value="Clear Signature" name="Clear Sig" onclick="reset_sig();" style="padding-left:5px;padding-right:5px;" />
+<span style="display:inline-block;width:150px;">&nbsp;</span>  
+<button onclick="saveSignature('{!parent_id}');return false;">Capture Signature</button>
+</apex:outputpanel>
+</div>
+
+
+<script>
+
+function show_sign_block() {
+//  document.getElementById("sig_holder").style.display = 'block';
+  document.getElementById("sig_holder").style.visibility = 'visible';
+  reset_sig();
+}
+
+function hide_sign_block() {
+  document.getElementById("sig_holder").style.visibility = 'hidden';
+}
+
+sforce.connection.sessionId = "{!$Api.Session_Id}";
+var canvas = document.getElementById("signatureCanvas");
+var context = canvas.getContext("2d");
+var mouseButton = 0;
+var lastX = lastY = null;
+var accountId = '';
+var first_offset = 0;
+var drawingUtil;
+var isDrawing = false;
+
+function saveSignature(my_id) {
+  var strDataURI = canvas.toDataURL();
+// alert(strDataURI);
+// alert(my_id);
+ strDataURI = strDataURI.replace(/^data:image\/(png|jpg);base64,/, "");
+ //alert(strDataURI);
+  ctrl_consult_forms.saveSignatureConsultForm(strDataURI,my_id,processResult);  
+}
+
+
+function processResult(result)  {
+//  alert(JSON.stringify(result));
+//  document.getElementById("sig_holder").style.display = 'block';  
+  document.getElementById("sig_holder").style.visibility = 'hidden';
+  dhist_update();
+}
+
+function handleResult(result,event) {
+    if(result.success) {
+       alert('Success ');
+    } else {
+        alert('Error: '+result.errorMessage);
+    }
+}
+
+function reset_sig() {
+  context.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function handleEvent(event) {
+    if(event.type==="mousedown"||event.type==="touchstart") {
+        mouseButton = event.which || 1;
+        lastX = lastY = null;
+    }
+    if(event.type==="touchcancel" || event.type==="touchcancel" || event.type==="mouseup") {
+        mouseButton = 0;
+        lastX = lastY = null;
+    }
+    if((event.type==="touchmove" || event.type==="mousemove") && mouseButton) {
+        var newX, newY;
+        var canvasX = 0, canvasY = 0, obj = event.srcElement || event.target;
+        do {
+            canvasX += obj.offsetLeft - obj.scrollLeft;
+            canvasY += obj.offsetTop - obj.scrollTop;
+            /*if(first_offset==0) {
+              alert(obj.offsetLeft);
+              alert(obj.offsetTop);
+              first_offset = 1;
+            }*/
+        } while(obj = obj.offsetParent);
+        if(event.targetTouches && event.targetTouches.length) {
+            newX = event.targetTouches[0].clientX - (canvasX);
+            newY = event.targetTouches[0].clientY - (canvasY);
+        } else {
+            newX = event.offsetX;
+            newY = event.offsetY;
+        }
+        if(!lastX && !lastY) {
+            lastX = newX;
+            lastY = newY;
+            context.beginPath();
+            context.moveTo(lastX,lastY);
+            context.lineTo(lastX,lastY,lastX,lastY);
+            context.stroke();
+        } else {
+            context.beginPath();
+            context.moveTo(lastX,lastY);
+            context.lineTo(newX,newY);
+            context.stroke();
+            lastX = newX;
+            lastY = newY;
+        }
+    }
+    if(event.type=="touchmove" || event.type==="mousedrag" || (event.type==="selectstart" && (event.srcElement||event.target)===canvas)) {
+        event.returnValue=false;
+        event.stopPropagation();
+        event.preventDefault();
+        return false;
+    }
+}
+
+canvas.addEventListener("mousedrag",handleEvent,true);
+canvas.addEventListener("mousemove",handleEvent,true);
+canvas.addEventListener("mousedown",handleEvent,true);
+window.addEventListener("mouseup",handleEvent,true);
+canvas.addEventListener("touchstart",handleEvent,true);
+canvas.addEventListener("touchmove",handleEvent,true);
+window.addEventListener("touchend",handleEvent,true);
+window.addEventListener("selectstart",handleEvent,true);
+</script>
+</apex:form>
+</apex:page>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Queue to hold external email jobs that need to be fired off by a scheduled event.  Doing this to handle the security issues that cropped up when trying to send template emails based on API requests from Infocision.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Email_Sent_Time__c</fullName>
+        <description>Time the automated process sent the email</description>
+        <externalId>false</externalId>
+        <label>Email Sent Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Email_Sent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Changed to true when the job has processed and fired the email off</description>
+        <externalId>false</externalId>
+        <label>Email Sent</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Seminar_Id__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Optional Seminar Id when a seminar letter is being sent out</description>
+        <externalId>false</externalId>
+        <label>Seminar Id</label>
+        <referenceTo>Campaign</referenceTo>
+        <relationshipLabel>Email Queue</relationshipLabel>
+        <relationshipName>Email_Queue</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Target_Id__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The ID of the lead record we will be sending the email to</description>
+        <externalId>false</externalId>
+        <label>Target Id</label>
+        <referenceTo>Lead</referenceTo>
+        <relationshipLabel>Email Queue</relationshipLabel>
+        <relationshipName>Email_Queue</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Template_Name__c</fullName>
+        <description>Name of the email template we will be sending out</description>
+        <externalId>false</externalId>
+        <label>Template Name</label>
+        <length>100</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Email Queue</label>
+    <nameField>
+        <displayFormat>EQ-{0}</displayFormat>
+        <label>Email Queue Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Email Queue</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <startsWith>Vowel</startsWith>
+    <visibility>Public</visibility>
+</CustomObject>

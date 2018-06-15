@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Medical Clearance</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Medical Clearances</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Medical Clearances --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Date Clearance Requested --></label>
+        <name>Date_Clearance_Requested__c</name>
+    </fields>
+    <fields>
+        <label><!-- Doctor Fax --></label>
+        <name>Doctor_Fax__c</name>
+    </fields>
+    <fields>
+        <label><!-- Doctor Name --></label>
+        <name>Doctor_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Doctor Phone --></label>
+        <name>Doctor_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Doctor Specialty --></label>
+        <name>Doctor_Specialty__c</name>
+        <picklistValues>
+            <masterLabel>Cardiologist</masterLabel>
+            <translation><!-- Cardiologist --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chiropractor</masterLabel>
+            <translation><!-- Chiropractor --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ENT Referral</masterLabel>
+            <translation><!-- ENT Referral --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Endocrinologist</masterLabel>
+            <translation><!-- Endocrinologist --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Family medicine</masterLabel>
+            <translation><!-- Family medicine --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Gastroenterologist</masterLabel>
+            <translation><!-- Gastroenterologist --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>General Practitioner</masterLabel>
+            <translation><!-- General Practitioner --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Geriatric medicine</masterLabel>
+            <translation><!-- Geriatric medicine --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hematologist</masterLabel>
+            <translation><!-- Hematologist --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Internal medicine</masterLabel>
+            <translation><!-- Internal medicine --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nephrologist</masterLabel>
+            <translation><!-- Nephrologist --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Neurologist</masterLabel>
+            <translation><!-- Neurologist --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Oncologist</masterLabel>
+            <translation><!-- Oncologist --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pain management</masterLabel>
+            <translation><!-- Pain management --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Psychiatrist</masterLabel>
+            <translation><!-- Psychiatrist --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Health Condition Other --></label>
+        <name>Health_Condition_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Health Condition --></label>
+        <name>Health_Condition__c</name>
+        <picklistValues>
+            <masterLabel>Anemic</masterLabel>
+            <translation><!-- Anemic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Anticoagulants</masterLabel>
+            <translation><!-- Anticoagulants --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Asthma</masterLabel>
+            <translation><!-- Asthma --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Atrial fibrillation</masterLabel>
+            <translation><!-- Atrial fibrillation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bisphosphonate</masterLabel>
+            <translation><!-- Bisphosphonate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Blood pressure</masterLabel>
+            <translation><!-- Blood pressure --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>COPD</masterLabel>
+            <translation><!-- COPD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cancer</masterLabel>
+            <translation><!-- Cancer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chronic Pain</masterLabel>
+            <translation><!-- Chronic Pain --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Diabetes</masterLabel>
+            <translation><!-- Diabetes --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Drug and alcohol treatment</masterLabel>
+            <translation><!-- Drug and alcohol treatment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Drug discontinuation</masterLabel>
+            <translation><!-- Drug discontinuation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EKG</masterLabel>
+            <translation><!-- EKG --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ENT Referral</masterLabel>
+            <translation><!-- ENT Referral --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Epilepsy</masterLabel>
+            <translation><!-- Epilepsy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Excessive bleeding</masterLabel>
+            <translation><!-- Excessive bleeding --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>HIV</masterLabel>
+            <translation><!-- HIV --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Heart</masterLabel>
+            <translation><!-- Heart --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Heart attack</masterLabel>
+            <translation><!-- Heart attack --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hepatitis</masterLabel>
+            <translation><!-- Hepatitis --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>High Blood Pressure</masterLabel>
+            <translation><!-- High Blood Pressure --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Kidney disease</masterLabel>
+            <translation><!-- Kidney disease --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mood disorder</masterLabel>
+            <translation><!-- Mood disorder --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Organ transplant</masterLabel>
+            <translation><!-- Organ transplant --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Physical Required</masterLabel>
+            <translation><!-- Physical Required --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Radiation</masterLabel>
+            <translation><!-- Radiation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Respiratory problems</masterLabel>
+            <translation><!-- Respiratory problems --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sleep Apnea</masterLabel>
+            <translation><!-- Sleep Apnea --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Standard</masterLabel>
+            <translation><!-- Standard --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Stent</masterLabel>
+            <translation><!-- Stent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Stroke</masterLabel>
+            <translation><!-- Stroke --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- IsActive --></label>
+        <name>IsActive__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+        <relationshipLabel><!-- Medical Clearances --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Patient POT --></label>
+        <name>Patient_POT__c</name>
+        <relationshipLabel><!-- Medical Clearances --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Request Note --></label>
+        <name>Request_Note__c</name>
+    </fields>
+    <fields>
+        <label><!-- Request Status --></label>
+        <name>Request_Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Declined</masterLabel>
+            <translation><!-- Declined --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending</masterLabel>
+            <translation><!-- Pending --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Requested Via --></label>
+        <name>Requested_Via__c</name>
+        <picklistValues>
+            <masterLabel>Email</masterLabel>
+            <translation><!-- Email --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fax</masterLabel>
+            <translation><!-- Fax --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mail</masterLabel>
+            <translation><!-- Mail --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Patient</masterLabel>
+            <translation><!-- Patient --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

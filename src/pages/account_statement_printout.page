@@ -1,0 +1,1103 @@
+<apex:page showheader="false" sidebar="false" standardStylesheets="false" controller="dp_clinical_pot" extensions="dp_ccare_custom_datepicker" docType="html-5.0">
+<head>
+
+<apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/forms.css')}"/> 
+<apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-hrxfont.css')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/fonts.css')}"/>
+
+<style type="text/css" media="print">
+  * {transition: none !important}
+
+  .no_print_section {
+    display:none;
+  }
+  
+  div.pbreak {page-break-after: always;padding-bottom:1em;}
+</style>
+ 
+ <style type="text/css">
+ html
+{
+	min-height: 100%;
+	min-width: 100%;
+	-ms-text-size-adjust: none;
+}
+
+body,div,dl,dt,dd,ul,ol,li,nav,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td,a
+{
+	margin: 0px;
+	padding: 0px;
+	border-width: 0px;
+	border-style: solid;
+	border-color: transparent;
+	-webkit-transform-origin: left top;
+	-ms-transform-origin: left top;
+	-o-transform-origin: left top;
+	transform-origin: left top;
+	background-repeat: no-repeat;
+}
+
+.transition
+{
+	-webkit-transition-property: background-image,background-position,background-color,border-color,border-radius,color,font-size,font-style,font-weight,letter-spacing,line-height,text-align,box-shadow,text-shadow,opacity;
+	transition-property: background-image,background-position,background-color,border-color,border-radius,color,font-size,font-style,font-weight,letter-spacing,line-height,text-align,box-shadow,text-shadow,opacity;
+}
+
+.transition *
+{
+	-webkit-transition: inherit;
+	transition: inherit;
+}
+
+table
+{
+	border-collapse: collapse;
+	border-spacing: 0px;
+}
+
+fieldset,img
+{
+	border: 0px;
+	border-style: solid;
+	-webkit-transform-origin: left top;
+	-ms-transform-origin: left top;
+	-o-transform-origin: left top;
+	transform-origin: left top;
+}
+
+address,caption,cite,code,dfn,em,strong,th,var,optgroup
+{
+	font-style: inherit;
+	font-weight: inherit;
+}
+
+del,ins
+{
+	text-decoration: none;
+}
+
+li
+{
+	list-style: none;
+}
+
+caption,th
+{
+	text-align: left;
+}
+
+h1,h2,h3,h4,h5,h6
+{
+	font-size: 100%;
+	font-weight: inherit;
+}
+
+input,button,textarea,select,optgroup,option
+{
+	font-family: inherit;
+	font-size: inherit;
+	font-style: inherit;
+	font-weight: inherit;
+}
+
+body
+{
+	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+	text-align: left;
+	font-size: 14px;
+	line-height: 17px;
+	word-wrap: break-word;
+	text-rendering: optimizeLegibility;/* kerning, primarily */
+	-moz-font-feature-settings: 'liga';
+	-ms-font-feature-settings: 'liga';
+	-webkit-font-feature-settings: 'liga';
+	font-feature-settings: 'liga';
+}
+
+a:link
+{
+	color: #0000FF;
+	text-decoration: underline;
+}
+
+a:visited
+{
+	color: #800080;
+	text-decoration: underline;
+}
+
+a:hover
+{
+	color: #0000FF;
+	text-decoration: underline;
+}
+
+a:active
+{
+	color: #EE0000;
+	text-decoration: underline;
+}
+
+a.nontext /* used to override default properties of 'a' tag */
+{
+	color: black;
+	text-decoration: none;
+	font-style: normal;
+	font-weight: normal;
+}
+
+.normal_text
+{
+	color: #000000;
+	direction: ltr;
+	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: normal;
+	letter-spacing: 0px;
+	line-height: 17px;
+	text-align: left;
+	text-decoration: none;
+	text-indent: 0px;
+	text-transform: none;
+	vertical-align: 0px;
+	padding: 0px;
+}
+
+.list0 li:before
+{
+	position: absolute;
+	right: 100%;
+	letter-spacing: 0px;
+	text-decoration: none;
+	font-weight: normal;
+	font-style: normal;
+}
+
+.rtl-list li:before
+{
+	right: auto;
+	left: 100%;
+}
+
+.nls-None > li:before,.nls-None .list3 > li:before,.nls-None .list6 > li:before
+{
+	margin-right: 6px;
+	content: 'â€¢';
+}
+
+.nls-None .list1 > li:before,.nls-None .list4 > li:before,.nls-None .list7 > li:before
+{
+	margin-right: 6px;
+	content: 'â—‹';
+}
+
+.nls-None,.nls-None .list1,.nls-None .list2,.nls-None .list3,.nls-None .list4,.nls-None .list5,.nls-None .list6,.nls-None .list7,.nls-None .list8
+{
+	padding-left: 34px;
+}
+
+.nls-None.rtl-list,.nls-None .list1.rtl-list,.nls-None .list2.rtl-list,.nls-None .list3.rtl-list,.nls-None .list4.rtl-list,.nls-None .list5.rtl-list,.nls-None .list6.rtl-list,.nls-None .list7.rtl-list,.nls-None .list8.rtl-list
+{
+	padding-left: 0px;
+	padding-right: 34px;
+}
+
+.nls-None .list2 > li:before,.nls-None .list5 > li:before,.nls-None .list8 > li:before
+{
+	margin-right: 6px;
+	content: '-';
+}
+
+.nls-None.rtl-list > li:before,.nls-None .list1.rtl-list > li:before,.nls-None .list2.rtl-list > li:before,.nls-None .list3.rtl-list > li:before,.nls-None .list4.rtl-list > li:before,.nls-None .list5.rtl-list > li:before,.nls-None .list6.rtl-list > li:before,.nls-None .list7.rtl-list > li:before,.nls-None .list8.rtl-list > li:before
+{
+	margin-right: 0px;
+	margin-left: 6px;
+}
+
+.TabbedPanelsTab
+{
+	white-space: nowrap;
+}
+
+.MenuBar .MenuBarView,.MenuBar .SubMenuView /* Resets for ul and li in menus */
+{
+	display: block;
+	list-style: none;
+}
+
+.MenuBar .SubMenu
+{
+	display: none;
+	position: absolute;
+}
+
+.NoWrap
+{
+	white-space: nowrap;
+	word-wrap: normal;
+}
+
+.rootelem /* the root of the artwork tree */
+{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.colelem /* a child element of a column */
+{
+	display: inline;
+	float: left;
+	clear: both;
+}
+
+.clearfix:after /* force a container to fit around floated items */
+{
+	content: "\0020";
+	visibility: hidden;
+	display: block;
+	height: 0px;
+	clear: both;
+}
+
+*:first-child+html .clearfix /* IE7 */
+{
+	zoom: 1;
+}
+
+.clip_frame /* used to clip the contents as in the case of an image frame */
+{
+	overflow: hidden;
+}
+
+.popup_anchor /* anchors an abspos popup */
+{
+	position: relative;
+	width: 0px;
+	height: 0px;
+}
+
+.popup_element
+{
+	z-index: 100000;
+}
+
+.svg
+{
+	display: block;
+	vertical-align: top;
+}
+
+span.wrap /* used to force wrap after floated array when nested inside a paragraph */
+{
+	content: '';
+	clear: left;
+	display: block;
+}
+
+span.actAsInlineDiv /* used to simulate a DIV with inline display when already nested inside a paragraph */
+{
+	display: inline-block;
+}
+
+.position_content,.excludeFromNormalFlow /* used when child content is larger than parent */
+{
+	float: left;
+}
+
+.preload_images /* used to preload images used in non-default states */
+{
+	position: absolute;
+	overflow: hidden;
+	left: -9999px;
+	top: -9999px;
+	height: 1px;
+	width: 1px;
+}
+
+.preload /* used to specifiy the dimension of preload item */
+{
+	height: 1px;
+	width: 1px;
+}
+
+.animateStates
+{
+	-webkit-transition: 0.3s ease-in-out;
+	-moz-transition: 0.3s ease-in-out;
+	-o-transition: 0.3s ease-in-out;
+	transition: 0.3s ease-in-out;
+}
+
+[data-whatinput="mouse"] *:focus,[data-whatinput="touch"] *:focus,input:focus,textarea:focus
+{
+	outline: none;
+}
+
+textarea
+{
+	resize: none;
+	overflow: auto;
+}
+
+.fld-prompt /* form placeholders cursor behavior */
+{
+	pointer-events: none;
+}
+
+.wrapped-input 
+{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background: transparent;
+	border: none;
+}
+
+.submit-btn /* form submit buttons on top of sibling elements */
+{
+	z-index: 50000;
+	cursor: pointer;
+}
+
+.anchor_item /* used to specify anchor properties */
+{
+	width: 22px;
+	height: 18px;
+}
+
+.MenuBar .SubMenuVisible,.MenuBarVertical .SubMenuVisible,.MenuBar .SubMenu .SubMenuVisible,.popup_element.Active,span.actAsPara,.actAsDiv,a.nonblock.nontext,img.block
+{
+	display: block;
+}
+
+.ose_ei
+{
+	visibility: hidden;
+	z-index: 0;
+}
+
+.widget_invisible,.js .invi,.js .mse_pre_init,.js .an_invi /* used to hide the widget before loaded */
+{
+	visibility: hidden;
+}
+
+.no_vert_scroll
+{
+	overflow-y: hidden;
+}
+
+.always_vert_scroll
+{
+	overflow-y: scroll;
+}
+
+.always_horz_scroll
+{
+	overflow-x: scroll;
+}
+
+.fullscreen
+{
+	overflow: hidden;
+	left: 0px;
+	top: 0px;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.fullwidth
+{
+	position: absolute;
+}
+
+.borderbox
+{
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.scroll_wrapper
+{
+	position: absolute;
+	overflow: auto;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.browser_width > *
+{
+	position: absolute;
+	left: 0px;
+	right: 0px;
+}
+
+.list0 li,.MenuBar .MenuItemContainer,.SlideShowContentPanel .fullscreen img
+{
+	position: relative;
+}
+
+.grpelem,.accordion_wrapper /* a child element of a group */
+{
+	display: inline;
+	float: left;
+}
+
+.fld-checkbox input[type=checkbox],.fld-radiobutton input[type=radio] /* Hide native checkbox */
+{
+	position: absolute;
+	overflow: hidden;
+	clip: rect(0px, 0px, 0px, 0px);
+	height: 1px;
+	width: 1px;
+	margin: -1px;
+	padding: 0px;
+	border: 0px;
+}
+
+.fld-checkbox input[type=checkbox] + label,.fld-radiobutton input[type=radio] + label
+{
+	display: inline-block;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	float: left;
+	width: 100%;
+	height: 100%;
+}
+
+.pointer_cursor,.fld-recaptcha-mode,.fld-recaptcha-refresh,.fld-recaptcha-help
+{
+	cursor: pointer;
+}
+
+p,h1,h2,h3,h4,h5,h6,ol,ul,span.actAsPara /* disable Android font boosting */
+{
+	max-height: 1000000px;
+}
+
+.superscript
+{
+	vertical-align: super;
+	font-size: 66%;
+	line-height: 0px;
+}
+
+.subscript
+{
+	vertical-align: sub;
+	font-size: 66%;
+	line-height: 0px;
+}
+
+.horizontalSlideShow /* disable left-right panning on horizondal slide shows */
+{
+	-ms-touch-action: pan-y;
+	touch-action: pan-y;
+}
+
+.verticalSlideShow /* disable up-down panning on vertical slide shows */
+{
+	-ms-touch-action: pan-x;
+	touch-action: pan-x;
+}
+
+.colelem100,.verticalspacer /* a child element of a column that is 100% width */
+{
+	clear: both;
+}
+
+.popup_element.Inactive,.js .disn,.hidden,.breakpoint
+{
+	display: none;
+}
+
+#muse_css_mq
+{
+	position: absolute;
+	display: none;
+	background-color: #FFFFFE;
+}
+
+.fluid_height_spacer
+{
+	position: static;
+	width: 0.01px;
+	float: left;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0)
+{
+	body
+	{
+		text-rendering: auto;
+	}
+}
+
+.version.index /* version checker */
+{
+	color: #0000E1;
+	background-color: #E7B069;
+}
+
+#muse_css_mq
+{
+	background-color: #FFFFFF;
+}
+
+#page
+{
+	z-index: 1;
+	width: 582px;
+	min-height: 694.575539142853px;
+	background-image: none;
+	border-width: 0px;
+	border-color: #000000;
+	background-color: #FFFFFF;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 16px;
+	padding-right: 23px;
+	padding-left: 7px;
+	padding-bottom: 16px;
+}
+
+.html  {
+	background-color: #FFFFFF;
+}
+
+body  {
+	position: relative;
+	min-width: 612px;
+}
+
+div.pbreak {page-break-after: always;padding-bottom:1em;}
+
+.output_page {
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header_section {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding-top: 2em;
+  font-size: 10px;
+}
+
+.header_left_col {
+  width:80%;  
+}
+
+.header_left_center_col {
+  padding-top: 2em;
+  padding-left: 3em;
+}
+
+.header_right_col {
+  padding-top:1em;
+}
+
+.header_section_padded {
+  padding-bottom:1em;
+  line-height: 10px;
+}
+
+.report_name_label {
+  background-color: #0D96D4;
+  width: 100%;
+  color: white;
+  justify-content: center;
+  display: flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.customer_info_section {
+    padding-top: 2em;
+    font-size: 8px;
+    line-height: 10px;
+    display: flex;
+    width: 100%;
+}
+
+.account_col {
+  width: 50%;
+  padding-left: 3em;
+}
+
+.next_apt_col {
+  width:50%;
+}
+
+.detail_section {
+  margin-top: 2em;
+  border-top: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  flex-wrap: wrap;
+  font-size: 8px;
+  line-height:22px;
+}
+
+.detail_header {
+  font-size:10px;
+  width:100%;
+  display:flex;
+}
+
+.detail_row {
+  width:100%;
+  display:flex;
+}
+
+.date_col {
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding-left: 10px;
+}
+
+.code_col {
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding-left:10px;
+}
+
+.description_col {
+  width: 38%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding-left:10px;
+}
+
+.cost_col {
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding-left:10px;
+}
+
+.tooth_col {
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding-left:10px;
+}
+
+.charges_col {
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding-left:10px;
+}
+
+.credits_col {
+  width: 12%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding-left:2%;
+}
+
+.footer_section {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  margin-top: 1em;
+  font-size: 10px;
+}
+
+.footer_border {
+  border-right: 1px solid black;
+}
+
+.rfilter_head {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    padding-top: 1em;
+    border-bottom: 2px solid black;
+    padding-bottom: 1em;
+}
+
+.filter_item {
+  padding-right:40px;
+}
+
+.cc-cc-datepicker {
+  min-height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 22px;
+  border: 2px solid #ccc;
+  padding-left: 5px;
+  margin-left: 10px;
+  padding-top: 1px;
+  min-width:200px;
+}
+
+.cc-cal-dateout {
+  display:flex;
+  align-items: center;
+  padding-left: 2px;
+  padding-right: 2px; 
+  height:100%; 
+  width:100%;
+}
+
+.modal_cal_container {
+    position: absolute;
+    margin-left: -1px;
+    z-index: 7300;
+    background: white;
+    padding: 8px;
+    border: 1px solid #ccc;
+    min-width:190px;
+  }
+  
+  .calendar {
+    font-size:8pt;
+    width:100%;
+  }
+  
+  .calendar td {
+    padding-left:6px;
+    padding-right:6px;
+    padding-top:2px;
+    padding-bottom:2px;
+    text-align:center;
+  }
+  
+  .calendar td.selected {
+    background: rgb(175, 211, 221);
+    border:1px solid #999999;
+  }
+  
+  .calendar .cheader {
+    background:#eee;
+    border-bottom:1px solid #ccc;
+  }
+
+  .mcal_nav_box {
+    border: 1px solid #cccccc;
+    background: #eee;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+  }
+  
+  .mcal_nav_box i {
+    font-size: 5pt;
+    color: #555555;
+  }
+  
+  td.unselected:hover {
+    background: #eee;
+    box-shadow: 0px 1px 1px #aaa;
+  }
+  
+  .modal_cal_container {
+    position: relative;
+    left:0px;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    top: 5px;
+    z-index: 7300;
+    background: white;
+    padding: 8px;
+    border: 1px solid #ccc;
+    min-width:190px;
+    line-height:15px;
+    box-shadow: 2px 2px 5px #9fcff3;
+  }
+  
+  .calendar_name {
+    display: flex;
+    flex-direction: row;
+    height: 18px;
+    margin-bottom: 5px;
+  }
+  
+  .month_name {
+    font-size:10pt;
+    display:flex;
+    flex-grow:1;
+  }
+  
+  .year_name {
+    font-size:10pt;
+  }
+  
+  .cc-cc-datepicker {
+    display:block;
+    line-height: 25px;
+  }
+</style>
+
+</head>
+<body>
+<apex:form >
+  <apex:actionFunction name="rdate_change" status="ajaxstatus" rerender="report_holder" />
+  <apex:actionFunction name="zero_toggle" status="ajaxstatus" rerender="report_holder,report_filters_holder" action="{!toggle_zero_balance_override}" />
+  <apex:actionFunction name="cost_toggle" status="ajaxstatus" rerender="report_holder,report_filters_holder" action="{!toggle_display_cost_override}" />
+  
+  <!-- Start -- custom cal nav  -->
+  <apex:actionFunction name="to_today" action="{!calendar_select_today}" rerender="report_holder,report_filters_holder" status="ajaxstatus" >
+    <apex:param name="dtype" value="" />
+  </apex:actionFunction>
+  <apex:actionFunction name="p_calendar_day" action="{!prev_calendar_day}" rerender="report_holder,report_filters_holder" status="ajaxstatus">
+    <apex:param name="dtype" value="" />
+  </apex:actionFunction>
+  <apex:actionFunction name="n_calendar_day" action="{!next_calendar_day}" rerender="report_holder,report_filters_holder" status="ajaxstatus">
+    <apex:param name="dtype" value="" />
+  </apex:actionFunction>
+  <apex:actionFunction name="calendar_drop" action="{!display_calendar_navigation}" rerender="report_holder,report_filters_holder" status="ajaxstatus" >
+    <apex:param name="dtype" value="" />
+  </apex:actionFunction>
+  <apex:actionFunction name="n_calendar_month" action="{!next_calendar_month}" rerender="report_filters_holder" status="ajaxstatus">
+    <apex:param name="dtype" value="" />
+  </apex:actionFunction>  
+  <apex:actionFunction name="p_calendar_month" action="{!prev_calendar_month}" rerender="report_filters_holder" status="ajaxstatus" >
+    <apex:param name="dtype" value="" />
+  </apex:actionFunction>
+  <apex:actionFunction name="close_nav_calendar" action="{!close_calendar_navigation}" rerender="report_filters_holder" status="ajaxstatus">
+    <apex:param name="dtype" value="" />
+  </apex:actionFunction>
+  <apex:actionFunction name="change_cdate_start" action="{!select_calendar_day}" rerender="report_filters_holder" status="ajaxstatus" >
+    <apex:param name="cyear" value="" />
+    <apex:param name="cmonth" value="" />
+    <apex:param name="cday" value="" />
+    <apex:param name="dtype" value="start" />
+  </apex:actionFunction>
+  <apex:actionFunction name="change_cdate_end" action="{!select_calendar_day}" rerender="report_filters_holder" status="ajaxstatus" >
+    <apex:param name="cyear" value="" />
+    <apex:param name="cmonth" value="" />
+    <apex:param name="cday" value="" />
+    <apex:param name="dtype" value="end" /> 
+  </apex:actionFunction>
+  <apex:actionFunction name="modal_cal_month_view" action="{!display_calendar_month_navigation}" rerender="report_filters_holder" status="ajaxstatus" >
+    <apex:param name="dtype" value="" />
+  </apex:actionFunction>
+  <apex:actionFunction name="modal_cal_year_view" action="{!display_calendar_year_navigation}" rerender="report_filters_holder" status="ajaxstatus">
+    <apex:param name="dtype" value="" />
+  </apex:actionFunction>  
+  <apex:actionFunction name="modal_nav_change_month" action="{!select_calendar_month}" rerender="report_filters_holder" status="ajaxstatus" >
+    <apex:param name="mnum" value="" />
+    <apex:param name="dtype" value="" />
+  </apex:actionFunction>
+  <apex:actionFunction name="modal_nav_change_year" action="{!select_calendar_year}" rerender="report_filters_holder" status="ajaxstatus" >
+    <apex:param name="myear" value="" />
+    <apex:param name="dtype" value="" />
+  </apex:actionFunction>
+  
+   
+  <!-- End -- custom cal nav  -->
+
+  <apex:outputpanel layout="block" id="report_filters_holder" styleclass="no_print_section">
+    <apex:outputpanel styleclass="rfilter_head">
+      From : 
+      <apex:outputpanel layout="block" styleClass="cc-cc-datepicker" >        
+        <div class="cc-cal-dateout">
+          <div style="flex-grow:1;"><apex:outputtext value="{0,date,M/dd/yyyy}" ><apex:param value="{!report_sdate}" /></apex:outputtext></div>
+          <div onclick="to_today('start');"><i class="hrxicon-today " style="font-size:14px; padding-right:5px;"></i></div>
+          <div onclick="p_calendar_day('start');"><i class="ccf-left-arrow" style="font-size: 14px; padding-right: 5px;" ></i></div>
+          <div onclick="n_calendar_day('start');"><i class="ccf-right-arrow" style="font-size: 14px; padding-right: 5px;" ></i></div>
+          <div onclick="calendar_drop('start');"><i class="ccf-calendar" style="font-size: 14px; padding-right: 5px;" ></i></div>
+        </div>
+        <apex:outputpanel layout="block" rendered="{!display_calendar_view_start}" styleclass="modal_cal_container">
+          <div class="calendar_name">
+            <div class="month_name" > 
+              <div class="mcal_nav_box" style="margin-right:5px;" onclick="p_calendar_month('start');" >
+                <i class="ccf-left-arrow"  ></i>
+              </div>                   
+              <span onclick="modal_cal_month_view('start');" >{!cmonth_start.monthname}</span>
+              <div class="mcal_nav_box" style="margin-left:5px;"  onclick="n_calendar_month('start');" >
+                <i class="ccf-right-arrow"  ></i>
+              </div>
+            </div>            
+            <div class="year_name" onclick="modal_cal_year_view('start');">{!cmonth_start.yearnum}</div>                 
+            <div class="mcal_nav_box" style="margin-left:5px;">
+              <i class="ccf-cancel" onclick="close_nav_calendar('start');" ></i>
+            </div>
+          </div>
+          <apex:outputPanel layout="block" styleclass="cal_table_holder" rendered="{!if(modal_calendar_view_start=='calendar','true','false')}">
+            <table class="calendar">
+              <tr class="cheader">
+                <td>Sun</td>
+                <td>Mon</td>
+                <td>Tue</td>
+                <td>Wed</td>
+                <td>Thu</td>
+                <td>Fri</td>
+                <td>Sat</td>
+              </tr>
+              <apex:repeat value="{!cmonth_start.weeks}" var="week">
+                <tr>
+                  <apex:repeat value="{!week.days}" var="day">
+                    <td class="{!if(day.display_date,day.css_style,'')}" onclick="{!if(day.display_date,'change_cdate_start(' + text(cmonth_start.YearNum) + ',' + text(cmonth_start.MonthNum) + ',' + text(day.date_num) + ');','return false;')}">
+                      <apex:outputText rendered="{!day.display_date}" escape="false;" value="{!day.date_num}" />
+                    </td>
+                  </apex:repeat>
+                </tr>
+              </apex:repeat>
+            </table>
+          </apex:outputPanel>
+          <apex:outputPanel layout="block" styleclass="cal_table_holder" rendered="{!if(modal_calendar_view_start=='month','true','false')}">
+            <table class="calendar"  style="font-size:10pt;">
+              <apex:variable var="mnum" value="1" />
+              <apex:repeat value="{!month_list}" var="mrow">
+                <tr class="mname">
+                  <apex:repeat value="{!mrow}" var="mname"> 
+                    <td class="{!if(mname==cmonth_start.ShortMonthName,'selected','unselected')}"><span onclick="modal_nav_change_month({!mnum},'start');">{!mname}</span></td>
+                    <apex:variable var="mnum" value="{!(value(mnum)+1)}" />
+                  </apex:repeat>
+                </tr>
+              </apex:repeat>
+            </table>
+          </apex:outputPanel>
+          <apex:outputPanel layout="block" styleclass="cal_table_holder" rendered="{!if(modal_calendar_view_start=='year','true','false')}">
+            <table class="calendar" style="font-size:10pt;">
+              <apex:repeat value="{!year_list}" var="yrow">
+                <tr class="year">
+                  <apex:repeat value="{!yrow}" var="yvalue">
+                    <td class="{!if(yvalue==cmonth_start.yearnum,'selected','unselected')}"><span onclick="modal_nav_change_year({!yvalue},'start');">{!yvalue}</span></td>
+                  </apex:repeat>
+                </tr>
+              </apex:repeat>
+            </table>                 
+          </apex:outputPanel>
+        </apex:outputpanel>
+      </apex:outputpanel>
+    
+      To :
+      <apex:outputpanel layout="block" styleClass="cc-cc-datepicker" >        
+        <div class="cc-cal-dateout">
+          <div style="flex-grow:1;"><apex:outputtext value="{0,date,M/dd/yyyy}" ><apex:param value="{!report_edate}" /></apex:outputtext></div>
+          <div onclick="to_today('end');"><i class="hrxicon-today " style="font-size:14px; padding-right:5px;"></i></div>
+          <div onclick="p_calendar_day('end');"><i class="ccf-left-arrow" style="font-size: 14px; padding-right: 5px;" ></i></div>
+          <div onclick="n_calendar_day('end');"><i class="ccf-right-arrow" style="font-size: 14px; padding-right: 5px;" ></i></div>
+          <div onclick="calendar_drop('end');"><i class="ccf-calendar" style="font-size: 14px; padding-right: 5px;" ></i></div>
+        </div>
+        <apex:outputpanel layout="block" rendered="{!display_calendar_view_end}" styleclass="modal_cal_container">
+          <div class="calendar_name">
+            <div class="month_name" > 
+              <div class="mcal_nav_box" style="margin-right:5px;" onclick="p_calendar_month('end');" >
+                <i class="ccf-left-arrow"  ></i>
+              </div>                   
+              <span onclick="modal_cal_month_view('end');" >{!cmonth_end.monthname}</span>
+              <div class="mcal_nav_box" style="margin-left:5px;"  onclick="n_calendar_month('end');" >
+                <i class="ccf-right-arrow"  ></i>
+              </div>
+            </div>            
+            <div class="year_name" onclick="modal_cal_year_view('end');">{!cmonth_end.yearnum}</div>                 
+            <div class="mcal_nav_box" style="margin-left:5px;">
+              <i class="ccf-cancel" onclick="close_nav_calendar('end');" ></i>
+            </div>
+          </div>
+          <apex:outputPanel layout="block" styleclass="cal_table_holder" rendered="{!if(modal_calendar_view_end=='calendar','true','false')}">
+            <table class="calendar">
+              <tr class="cheader">
+                <td>Sun</td>
+                <td>Mon</td>
+                <td>Tue</td>
+                <td>Wed</td>
+                <td>Thu</td>
+                <td>Fri</td>
+                <td>Sat</td>
+              </tr>
+              <apex:repeat value="{!cmonth_end.weeks}" var="week">
+                <tr>
+                  <apex:repeat value="{!week.days}" var="day">
+                    <td class="{!if(day.display_date,day.css_style,'')}" onclick="{!if(day.display_date,'change_cdate_end(' + text(cmonth_end.YearNum) + ',' + text(cmonth_end.MonthNum) + ',' + text(day.date_num) + ');','return false;')}">
+                      <apex:outputText rendered="{!day.display_date}" escape="false;" value="{!day.date_num}" />
+                    </td>
+                  </apex:repeat>
+                </tr>
+              </apex:repeat>
+            </table>
+          </apex:outputPanel>
+          <apex:outputPanel layout="block" styleclass="cal_table_holder" rendered="{!if(modal_calendar_view_end=='month','true','false')}">
+            <table class="calendar"  style="font-size:10pt;">
+              <apex:variable var="mnum" value="1" />
+              <apex:repeat value="{!month_list}" var="mrow">
+                <tr class="mname">
+                  <apex:repeat value="{!mrow}" var="mname"> 
+                    <td class="{!if(mname==cmonth_end.ShortMonthName,'selected','unselected')}"><span onclick="modal_nav_change_month({!mnum},'end');">{!mname}</span></td>
+                    <apex:variable var="mnum" value="{!(value(mnum)+1)}" />
+                  </apex:repeat>
+                </tr>
+              </apex:repeat>
+            </table>
+          </apex:outputPanel>
+          <apex:outputPanel layout="block" styleclass="cal_table_holder" rendered="{!if(modal_calendar_view_end=='year','true','false')}">
+            <table class="calendar" style="font-size:10pt;">
+              <apex:repeat value="{!year_list}" var="yrow">
+                <tr class="year">
+                  <apex:repeat value="{!yrow}" var="yvalue">
+                    <td class="{!if(yvalue==cmonth_end.yearnum,'selected','unselected')}"><span onclick="modal_nav_change_year({!yvalue},'end');">{!yvalue}</span></td>
+                  </apex:repeat>
+                </tr>
+              </apex:repeat>
+            </table>                 
+          </apex:outputPanel>
+        </apex:outputpanel>        
+      </apex:outputpanel>
+      <span class="cc-form-confirmTrash-button {!if(zero_balance_override,'cc-form-confirmClone-button-confirm','cc-form-confirmTrash-button-confirm')}" onclick="zero_toggle();"><apex:outputtext value="{!if(zero_balance_override,'Display Balance','Zero Balance')}" /></span>
+      <apex:outputpanel rendered="{!current_center.Allow_ADA_Cost_Display__c}">
+        <span class="cc-form-confirmTrash-button {!if(display_cost_info,'cc-form-confirmTrash-button-confirm','cc-form-confirmClone-button-confirm')}" onclick="cost_toggle();"><apex:outputtext value="{!if(display_cost_info,'Hide Cost','Display Cost')}" /></span>
+      </apex:outputpanel>
+    </apex:outputpanel>
+  </apex:outputpanel>  
+  
+  <apex:outputpanel layout="block" id="report_holder">
+    <apex:actionStatus id="ajaxstatus">
+      <apex:facet name="start">
+        <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 10110; background-color: #f2f2f2;">
+          &nbsp;
+        </div>
+        <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 10111; margin: 20% 50%">
+          <!--<apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,'Images/5Wits.gif')}"/>-->
+          <!--<img src="http://upload.wikimedia.org/wikipedia/commons/e/ed/Cursor_Windows_Vista.gif" />-->
+          <img src="{!URLFOR($Resource.Dental_Practice_Resources,'Images/Circle-out.gif')}" />
+          <!--<img src="{!URLFOR($Resource.Dental_Practice_Resources,'Images/5Wits.gif')}" />-->
+        </div>
+      </apex:facet>
+    </apex:actionStatus>
+    <apex:messages /> 
+    <!-- {!report_sdate} - {!report_edate}<br /><br /> -->
+    <apex:outputpanel layout="block" styleclass="output_page">
+      <apex:outputtext value="{!account_statement_output}" escape="false" />
+    </apex:outputpanel>
+  </apex:outputpanel>
+</apex:form>
+</body>
+</apex:page>

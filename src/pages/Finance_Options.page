@@ -1,0 +1,245 @@
+<apex:page controller="ctrl_finance_options" showheader="true" sidebar="true" action="{!check_for_app}">
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<style type="text/css" media="print">
+  div.bPageHeader {
+    display:none;
+  }
+
+  p.form_holder {
+    display:none;
+  }
+</style>
+
+<style>
+    h2.maintitle  {
+      width:500px;
+      font-size:12pt;
+      font-family:georgia;
+      margin-left:5px;
+      padding-left:10px;
+      border-bottom:3px solid black;
+      margin-bottom:1em;
+      padding-bottom:1px;
+      display:block;
+      padding-top:10px;
+      color:#5789AE;
+    }
+
+    span.section_header {
+      display:inline-block;
+      font-size:10pt;
+      width:150px;
+      padding-left:20px;
+      padding-right:10px;
+      font-weight:bold;
+    }
+
+    span.long_section_header {
+      display:inline-block;
+      font-size:10pt;
+      width:300px;
+      padding-left:20px;
+      padding-right:10px;
+      font-weight:bold;
+    }
+
+    span.display_value {
+      font-size:10pt;
+    }
+
+    span.section_line {
+      display:block;
+      padding-bottom:10px;
+    }
+
+    span.sp_italics {
+      font-style:italic;
+      font-weight:bold;
+    }
+
+    a.form_link {
+      font-weight:bold;
+      color:blue;
+    }
+
+   span.blank  {
+     font-style:italic;
+     font-weight:bold;
+   }
+   input.right_input {
+     text-align:right;
+     width:90px;
+   }
+   span.right_output {
+     text-align:right;
+     width:90px;
+   }
+
+   table.accs_details td {
+     font-size:10pt;
+   }
+
+  table.accs_details td.right {
+     text-align:right;
+     padding-right:5px;
+     empty-cells:hide;
+  }
+</style>
+
+<script>
+  var key_timeout;
+  var wait_in_progress = false;
+
+  function update_now() {
+    wait_in_progress = false;
+    update_loan();
+  }
+
+  function update_key(f) {
+    if(isNaN(f)) {
+      alert("You must enter a numeric value for the payment amounts");
+      if(wait_in_progress)
+        clearTimeout(key_timeout);
+      wait_in_progress = false;
+    }
+    else {
+      if(wait_in_progress)
+        clearTimeout(key_timeout);
+      wait_in_progress = true;
+      key_timeout = setTimeout("update_now()",600);
+    }
+  }
+
+</script>
+
+<apex:form >
+ <apex:actionFunction name="update_loan" action="{!loan_update}" reRender="main_holder">
+ </apex:actionFunction>
+ <apex:actionFunction name="update_loan_pdate" action="{!first_payment_update}" reRender="print_holder" />
+ <apex:actionFunction name="update_loan_pdate_alt" action="{!first_payment_update_alt}" reRender="print_holder" />
+ <apex:actionFunction name="update_loan_accept" action="{!accept_update}" rerender="print_holder" />
+
+<h2 class="maintitle">Financing Options Worksheet</h2>
+<p style="padding-left:15px;">
+  <span class="section_line">
+    <span class="section_header">State :</span>
+      <span class="display_value">{!state}</span></span>
+  <span class="section_line">
+    <span class="section_header">Center Name :</span>
+      <span class="display_value">{!center_name}</span></span>
+  <span class="section_line">
+    <span class="section_header">Patient Name :</span>
+      <span class="display_value">{!patient_name}</span></span>
+  <span class="section_line">
+    <span class="section_header">Date :</span>
+      <span class="display_value">{!loan_date}</span></span>
+  <span class="section_line">
+    <span class="section_header">City :</span>
+      <span class="display_value">{!city}</span></span>
+  <br /></p>
+
+  <apex:outputpanel id="input_holder" layout="block" style="padding-left:15px;" rendered="{!if(finance_errors,false,true)}">
+  <span class="section_line">
+    <span class="long_section_header">Total Treatment Value :</span>
+      <apex:inputField styleclass="right_input" value="{!finance_app.Treatment_Value__c}"  onkeyup="update_key(this.value);" /></span>
+  <span class="section_line">
+    <span class="long_section_header">Down Payment in Cash :</span>
+      <apex:inputField styleclass="right_input" value="{!finance_app.Cash_Down_Payment__c}"  onkeyup="update_key(this.value);"  /></span>
+  <span class="section_line">
+    <span class="long_section_header">Down Payment in Springstone Financing :</span>
+      <apex:inputField styleclass="right_input" value="{!finance_app.SpringStone_Financed__c}"  onkeyup="update_key(this.value);"  /></span>
+  <span class="section_line">
+    <span class="long_section_header">Down Payment in CareCredit Financing :</span>
+      <apex:inputField styleclass="right_input" value="{!finance_app.CareCredit_Finance__c}"  onkeyup="update_key(this.value);"  /></span>
+  <span class="section_line">  
+    <span class="long_section_header">Down Payment in Alphaeon Financing :</span>
+      <apex:inputField styleclass="right_input" value="{!finance_app.Alphaeon_Financed__c}"  onkeyup="update_key(this.value);"  /></span>
+  <apex:messages />
+
+  <apex:outputPanel id="main_holder" layout="block" >
+  <span class="section_line">
+    <span class="long_section_header">Amount Financed :</span>
+      <span style="display:inline-block;margin-right:2px;text-align:right;width:90px;font-size:12pt;font-weight:bold;{!if(finance_amount_errors,"color:red;","color:#5789AE;")}" ><apex:outputField value="{!finance_app.Amount_Financed__c}" /></span></span>
+
+    <apex:outputPanel id="foptions_holder" rendered="{!if(finance_amount_errors,false,true)}" style="padding-top:1em;" layout="block" >
+    <span class="section_line"><span class="long_section_header">Finance Options Available :</span></span>
+    <table class="accs_details" >
+    <tr class="control">
+      <td style="width:300px;"></td>
+      <td style="width:150px;"># Payments</td>
+      <td style="width:150px;">Per Payment Amount</td>
+      <td style="width:150px;">Interest Rate</td>
+    </tr>
+    <tr>
+      <td><span class="long_section_header">Traditional Promissory Note :</span></td>
+      <td class="right">4</td>
+      <td class="right">{!traditional_payment}</td>
+      <td class="right">0.0 %</td>
+    </tr>
+    <tr><td colspan="4">&nbsp;</td></tr>
+    <tr>
+      <td><span class="long_section_header">Extended Promissory Note :</span></td>
+      <td class="right">{!finance_app.number_of_payments__c}</td>
+      <td class="right">{!finance_app.per_payment_amount__c}</td>
+      <td class="right">{!finance_app.interest_rate__c}%</td>
+    </tr>
+    <tr><td colspan="4">&nbsp;</td></tr>
+    <tr>
+      <td><span class="long_section_header">Finance Charge</span></td>
+      <td class="right">{!finance_app.finance_charge__c}</td>
+      <td colspan="2">&nbsp;</td>
+    </tr>
+    <tr><td colspan="4">&nbsp;</td></tr>
+    <tr>
+      <td><span class="long_section_header">Date of First Payment</span></td>
+      <td><apex:selectList value="{!payment_date}" size="1" onchange="update_loan_pdate_alt();" >
+        <apex:selectOptions value="{!paymentlist}"/>
+      </apex:selectList></td>
+      <td colspan="2">&nbsp;</td>
+    </tr>
+
+    </table><br />
+
+    <span class="section_line">
+      <span class="long_section_header">Did Patient Accept Financing :</span>
+        <apex:inputField value="{!finance_app.Did_Patient_Accept__c}" onchange="update_loan_accept();" /></span><br />
+    <apex:outputpanel id="print_holder">
+    <span class="section_line">
+      <span class="long_section_header">Does Patient Want an Itemization? :</span>
+        <apex:inputField value="{!finance_app.Itemization_Requested__c}" onchange="update_loan_pdate_alt();" /></span><br />
+
+    <apex:outputPanel rendered="{!display_status}">
+    <span class="section_line">
+      <span class="long_section_header">Loan Status? :</span>
+        <apex:inputField value="{!finance_app.Loan_Status__c}" onchange="update_loan_pdate_alt();" /></span><br />
+    </apex:outputPanel>
+
+    <apex:outputPanel rendered="{!display_payment_options}">
+    <span class="section_line">
+      <span class="long_section_header">Payment Type? :</span>
+        <apex:selectList value="{!payment_type}" size="1">
+        <apex:selectOptions value="{!paymenttypeslist}"/>
+      </apex:selectList><span style="display:inline-block;width:40px;">&nbsp;</span>
+      <apex:commandButton rerender="print_holder" value="Generate Payment" action="{!generate_payments}" />
+      <apex:outputtext style="padding-left:20px;" value="{!payment_error_msg}" rendered="{!payment_errors}" escape="false" />
+      </span><br />
+    </apex:outputPanel>
+
+      <apex:commandButton rendered="{!if(print_error,false,true)}" value="Print Loan Form" onClick="window.open('/apex/loan_form{!pass_parameters}');"/>
+      <apex:outputtext value="{!print_error_msg}" rendered="{!print_error}" escape="false" />
+    </apex:outputpanel>
+    </apex:outputPanel>
+
+    <apex:outputPanel id="ferrors_holder" rendered="{!finance_amount_errors}" layout="block" >
+      <apex:outputText value="{!finance_amount_error_msg}" escape="false" />
+    </apex:outputPanel>
+  </apex:outputPanel>
+  </apex:outputPanel>
+  <apex:outputPanel id="error_holder" rendered="{!finance_errors}">
+    <apex:outputtext value="{!finance_error_msg}" rendered="{!finance_errors}" escape="false" />
+  </apex:outputpanel>
+
+</apex:form>
+</apex:page>

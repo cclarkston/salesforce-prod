@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Clinical_Apt_History__c$Account__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_History__c$Patient_POT_Apt__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_History__c$Action__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_History__c$Clinical_Apt_Calendar__c.Apt_Status__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_History__c$Clinical_Apt_Calendar__c.CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_History__c$Clinical_Apt_Calendar__c.Apt_Date__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_History__c$Clinical_Apt_Calendar__c.Start_Hour__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_History__c$Clinical_Apt_Calendar__c.Start_Minute__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Clinical_Apt_History__c$Account__c.Center__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Philadelphia Fort Washington</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Philadelphia- Scheduling History</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Clinical_Apt_History__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Clinical_Apt_History__c$Clinical_Apt_Calendar__c.CreatedDate</dateColumn>
+        <endDate>2016-12-15</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2016-12-15</startDate>
+    </timeFrameFilter>
+</Report>

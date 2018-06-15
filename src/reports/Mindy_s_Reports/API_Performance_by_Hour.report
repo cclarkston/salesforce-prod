@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_91872153</developerName>
+        <masterLabel>Call Result</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Lead.Call_Result__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Consultation Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Same Day Rescheduled Consult</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Seminar Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Off Site Seminar Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Cancelled Appointment</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Same Day Cancellation Appointment</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Out Bound Follow-up</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Fielded Lead</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Pending Reschedule</sourceValue>
+            </sourceValues>
+            <value>Consultation Scheduled</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Not Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Shelved Call</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Renurture</sourceValue>
+            </sourceValues>
+            <value>Not Scheduled</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>Lead.Call_Center_Agent_Owner__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Contact_Agency_Agent__c</field>
+    </columns>
+    <columns>
+        <field>BucketField_91872153</field>
+    </columns>
+    <columns>
+        <field>Lead.Sales_Alert__c</field>
+    </columns>
+    <columns>
+        <field>Lead.ALERT__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Why_not_Schedule__c</field>
+    </columns>
+    <columns>
+        <field>PHONE</field>
+    </columns>
+    <columns>
+        <field>Lead.Pre_Screen_Time__c</field>
+    </columns>
+    <columns>
+        <field>Lead.External_ID__c</field>
+    </columns>
+    <filter>
+        <booleanFilter>1 AND 2 AND 3 AND (4 or 5)</booleanFilter>
+        <criteriaItems>
+            <column>Lead.Call_Center_Agent_Team__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>contains</operator>
+            <value>IMC</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Pre_Screen__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Green,Yellow</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Marketing_Source__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>CCWebsiteOS,CCWebsitePK,CCWebsiteCC</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Distance_To_Center__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Distance_To_Center__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>lessOrEqual</operator>
+            <value>50</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>API Performance by Hour</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadList</reportType>
+    <scope>org</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Lead.Pre_Screen_Time__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <interval>INTERVAL_TODAY</interval>
+    </timeFrameFilter>
+</Report>

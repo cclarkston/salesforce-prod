@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_29863002</developerName>
+        <masterLabel>LeadScore</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Consult_Inventory__c$Leadscore_At_Schedule_Time__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Green</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Yellow</sourceValue>
+            </sourceValues>
+            <value>GY</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_66691573</developerName>
+        <masterLabel>Source</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Consult_Inventory__c$Scheduled_Lead__c.Call_Center_Agent_Team__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Online Sched</sourceValue>
+            </sourceValues>
+            <value>Online Sched</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Imp - IMC API</sourceValue>
+            </sourceValues>
+            <value>IMC</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Imp - JM</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Imp - BP</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Imp - SV</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Imp - MV</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Imp - MW</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Imp - SM</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Outbound</sourceValue>
+            </sourceValues>
+            <value>CCMS</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_296583</developerName>
+        <masterLabel>Team</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Consult_Inventory__c$Scheduled_Lead__c.Call_Center_Agent__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Pat Greenwood</sourceValue>
+            </sourceValues>
+            <value>Online Sched</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Kelley Village</sourceValue>
+            </sourceValues>
+            <value>IMC</value>
+        </values>
+    </buckets>
+    <filter>
+        <criteriaItems>
+            <column>Consult_Inventory__c$isConsultScheudled__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Consult_Inventory__c$Consult_Room__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>unconfirmed</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_296583</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Consult_Inventory__c$Apt_Date__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_29863002</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Monday 2/12 Scheds-Entity</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Consult_Inventory_with_Lead__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Consult_Inventory__c$Apt_Date__c</dateColumn>
+        <endDate>2018-02-12</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2018-02-12</startDate>
+    </timeFrameFilter>
+</Report>

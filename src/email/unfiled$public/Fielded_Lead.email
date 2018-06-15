@@ -1,0 +1,16 @@
+<table width="550" cellpadding="5" height="400" border="0" cellspacing="5" >
+<tr height="400" valign="top" >
+<td locked="0" style=" font-family:arial; bLabel:main; color:#000000; font-size:12pt; bEditID:r3st1; background-color:#FFFFFF;" aEditID="c1r1" tEditID="c1r1" >
+<![CDATA[This lead was answered by a field agent and is being transferred to you to contact. 
+<P>{!Lead.CreatedDate}&nbsp; {!Lead.FirstName} {!Lead.LastName}</P>
+<P>&nbsp;</P>
+<P>&nbsp;{!Lead.Home_Phone__c}&nbsp;&nbsp;{!Lead.Mobile_Phone__c}&nbsp; {!Lead.</P>
+<P>&nbsp;</P>
+<P>&nbsp;{!Lead.Email__c}</P>
+<P>&nbsp;</P>
+<P>&nbsp;Field Agent Notes&nbsp; {!Lead.Field_Agent_Notes__c}</P>
+<P>&nbsp;</P>
+<P>{!Lead.CreatedBy}</P>
+<P>&nbsp;</P>]]></td>
+</tr>
+</table>

@@ -1,0 +1,48 @@
+<apex:page showHeader="true" sidebar="true" title="csr-compliance">
+<link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:300,400,500,700" media="screen" />
+
+<style>
+.wrapper {
+  margin: 5em;
+}
+.container {
+  border-left: 4px solid;
+  color: #005eb8;
+  padding: 30px;
+  width: 45em;
+}
+.title {
+  font-family: Raleway,'Open Sans', sans-serif;
+  font-size: 3em;
+}
+.content {
+  font-style: italic;
+  font-size: 2em;
+  padding: 10px 0px 30px;
+}
+a.btn.custom-button {
+  color: white;
+  background: #005eb8;
+  border-radius: 0;
+  border-style: none;
+  font-size: 1em;
+  margin-right: 20px;
+  padding: 14px;
+  text-decoration: none;
+}
+</style>
+
+<div class="wrapper">
+  <div class="container">
+    <h2 class="title">NOTIFICATION:</h2>
+    <div class="content">
+      To protect patient privacy under HIPPA, please do not identify patient names,
+      photos or information that could be used to identify a person.
+    </div>
+    <div class="submit-button">
+      <apex:outputLink value="{!URLFOR($Action.Center_Support_Request__c.New)}" styleClass="btn custom-button">I UNDERSTAND</apex:outputLink>
+      <apex:outputLink value="/a3S?fcf=00B400000072WVa" styleClass="btn custom-button">GO BACK</apex:outputLink>
+    </div>
+  </div>
+</div>
+</apex:page>

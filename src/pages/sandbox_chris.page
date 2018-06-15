@@ -1,0 +1,12 @@
+<apex:page controller="sandbox_workaround" sidebar="false" >
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+
+<apex:form >
+<apex:outputpanel id="num_holder">
+# leads : {!num_left}
+</apex:outputpanel><br /><br />
+
+<apex:commandButton rerender="num_holder" action="{!process_leads}" value="Run PIQ" />
+</apex:form>
+</apex:page>

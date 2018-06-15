@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>A record for each doctor attending an event</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Application_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>Application Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Attendance_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>Attendance Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Doctor_Email__c</fullName>
+        <externalId>false</externalId>
+        <formula>Practice_Doctor__r.Email__c</formula>
+        <label>Doctor Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Doctor_Phone__c</fullName>
+        <externalId>false</externalId>
+        <formula>Practice_Doctor__r.Phone__c</formula>
+        <label>Doctor Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Doctors_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Practice_Doctor__r.First_Name__c + &apos; &apos; + Practice_Doctor__r.Last_Name__c</formula>
+        <label>Doctors Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Event_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Event Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Registered</fullName>
+                    <default>false</default>
+                    <label>Registered</label>
+                </value>
+                <value>
+                    <fullName>Attended</fullName>
+                    <default>false</default>
+                    <label>Attended</label>
+                </value>
+                <value>
+                    <fullName>Application Completed</fullName>
+                    <default>false</default>
+                    <label>Application Completed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Guest_Names__c</fullName>
+        <externalId>false</externalId>
+        <label>Guest Names</label>
+        <length>250</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_Guests__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Number of Guests</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PP_Workshop__c</fullName>
+        <externalId>false</externalId>
+        <label>PP Workshop</label>
+        <referenceTo>PP_Workshop__c</referenceTo>
+        <relationshipLabel>PP Workshop Members</relationshipLabel>
+        <relationshipName>PP_Workshop_Members</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Practice_Doctor__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Practice Doctor</label>
+        <referenceTo>Practice_Doctor__c</referenceTo>
+        <relationshipLabel>PP Workshop Members</relationshipLabel>
+        <relationshipName>PP_Workshop_Members</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>PP Workshop Member</label>
+    <nameField>
+        <displayFormat>PM-{00000}</displayFormat>
+        <label>PP Workshop Member Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>PP Workshop Members</pluralLabel>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>Doctors_Name__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Doctor_Phone__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Doctor_Email__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Event_Status__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>PP_Workshop__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Practice_Doctor__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Doctors_Name__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Doctor_Phone__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Doctor_Email__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Event_Status__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>PP_Workshop__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Practice_Doctor__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>Practice_Doctor__c</searchFilterFields>
+        <searchFilterFields>PP_Workshop__c</searchFilterFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+    <webLinks>
+        <fullName>Email_GotPatients</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Email GotPatients</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/apex.js&quot;)} 
+sforce.apex.execute(&quot;ctrl_workshop_badge&quot;,&quot;email_application_single&quot;,{DoctorID:&quot;{!PP_Workshop_Member__c.Practice_DoctorId__c}&quot;}); 
+window.alert(&quot;GotPatients Email has been sent.&quot;);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Email_Reminder</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Email Reminder</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/10.0/apex.js&quot;)} 
+sforce.apex.execute(&quot;ctrl_workshop_badge&quot;,&quot;workshop_reminder_single&quot;,{WorkShopMemberID:&quot;{! PP_Workshop_Member__c.Id }&quot;}); 
+window.alert(&quot;Reminder Email has been sent.&quot;);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Print_Name_Tag</fullName>
+        <availability>online</availability>
+        <description>Print out a name tag for this member</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Print Name Tag</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>https://c.na2.visual.force.com/apex/event_tags?pmid={!PP_Workshop_Member__c.Id}</url>
+    </webLinks>
+</CustomObject>

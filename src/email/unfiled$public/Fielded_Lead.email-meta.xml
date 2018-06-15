@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>This lead is answered by field agents and transferred to Consultants.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>ClearChoice_Letterhead</letterhead>
+    <name>Fielded Lead</name>
+    <style>freeForm</style>
+    <subject>Fielded Leads</subject>
+    <textOnly>{!Lead.CreatedDate}  {!Lead.FirstName} {!Lead.LastName}
+ 
+ {!Lead.Home_Phone__c}  {!Lead.Mobile_Phone__c}  {!Lead.
+ 
+ {!Lead.Email__c}
+This lead was answered by a field agent and is being transferred to you to contact.
+ 
+{!Lead.Field_Agent_Notes__c}
+ 
+{!Lead.CreatedBy}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

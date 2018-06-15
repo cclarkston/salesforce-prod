@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Current_Consult_Treatment_Plan__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Current Consult Treatment Plan</label>
+        <referenceTo>Treatment_Plan__c</referenceTo>
+        <relationshipLabel>Treatment Change Requests</relationshipLabel>
+        <relationshipName>Treatment_Change_Requests</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Current_Initial_Cost__c</fullName>
+        <externalId>false</externalId>
+        <label>Current Initial Cost</label>
+        <precision>8</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Current_Treatment_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Current Treatment Amount</label>
+        <precision>8</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Current_Treatment_Option__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Current Treatment Option</label>
+        <referenceTo>Treatment_Option__c</referenceTo>
+        <relationshipLabel>Treatment Change Requests</relationshipLabel>
+        <relationshipName>Treatment_Change_Requests</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>New_Consult_Treatment_Plan__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>New Consult Treatment Plan</label>
+        <referenceTo>Treatment_Plan__c</referenceTo>
+        <relationshipLabel>Treatment Change Requests (New Consult Treatment Plan)</relationshipLabel>
+        <relationshipName>Treatment_Change_Requests1</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>New_Initial_Cost__c</fullName>
+        <externalId>false</externalId>
+        <label>New Initial Cost</label>
+        <precision>8</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>New_Treatment_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>New Treatment Amount</label>
+        <precision>8</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>New_Treatment_Option__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>New Treatment Option</label>
+        <referenceTo>Treatment_Option__c</referenceTo>
+        <relationshipLabel>Treatment Change Requests (New Treatment Option)</relationshipLabel>
+        <relationshipName>Treatment_Change_Requests1</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Parent_Treatment_Plan__c</fullName>
+        <externalId>false</externalId>
+        <label>Parent Treatment Plan</label>
+        <referenceTo>Treatment_Plan__c</referenceTo>
+        <relationshipLabel>Treatment Change Requests (Parent Treatment Plan)</relationshipLabel>
+        <relationshipName>Treatment_Change_Requests2</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Reason_Notes__c</fullName>
+        <externalId>false</externalId>
+        <label>Reason Notes</label>
+        <length>3000</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Reason_for_Change__c</fullName>
+        <externalId>false</externalId>
+        <label>Reason for Change</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Financial ability changed</fullName>
+                    <default>false</default>
+                    <label>Financial ability changed</label>
+                </value>
+                <value>
+                    <fullName>Dental Necessity Changed</fullName>
+                    <default>false</default>
+                    <label>Dental Necessity Changed</label>
+                </value>
+                <value>
+                    <fullName>Other - fill in notes</fullName>
+                    <default>false</default>
+                    <label>Other - fill in notes</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Treatment_Stage__c</fullName>
+        <externalId>false</externalId>
+        <label>Treatment Stage</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Prior to Prosth Exam</fullName>
+                    <default>false</default>
+                    <label>Prior to Prosth Exam</label>
+                </value>
+                <value>
+                    <fullName>At Prosth Exam</fullName>
+                    <default>false</default>
+                    <label>At Prosth Exam</label>
+                </value>
+                <value>
+                    <fullName>Post Prosth / prior to surgery</fullName>
+                    <default>false</default>
+                    <label>Post Prosth / prior to surgery</label>
+                </value>
+                <value>
+                    <fullName>post surgery</fullName>
+                    <default>false</default>
+                    <label>post surgery</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Upgrade_Doctor__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Upgrade Doctor</label>
+        <referenceTo>ClearChoice_Doctor__c</referenceTo>
+        <relationshipLabel>Treatment Change Requests</relationshipLabel>
+        <relationshipName>Treatment_Change_Requests</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Treatment Change Request</label>
+    <nameField>
+        <displayFormat>TCR-{0000}</displayFormat>
+        <label>Treatment Change Request Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Treatment Change Requests</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Lead_Insight</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Lead_Insights</value>
+    </caseValues>
+    <fields>
+        <label><!-- Insight Answer --></label>
+        <name>Insight_Answer__c</name>
+    </fields>
+    <fields>
+        <label><!-- Insight Question --></label>
+        <name>Insight_Question__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead --></label>
+        <name>Lead__c</name>
+        <relationshipLabel><!-- Lead_Insights --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

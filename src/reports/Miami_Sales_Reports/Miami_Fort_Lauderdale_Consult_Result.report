@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Account$Consult_Completed_Date__c</field>
+    </columns>
+    <columns>
+        <field>Account$Name</field>
+    </columns>
+    <columns>
+        <field>Account$Pre_Screen__c</field>
+    </columns>
+    <columns>
+        <field>Account$Pre_Screen_Formula__c</field>
+    </columns>
+    <columns>
+        <field>Account.Treatment_Plans__r$Treatment_Option__c</field>
+    </columns>
+    <columns>
+        <field>Account.Treatment_Plans__r$Treatment_Option__c.Treatment_Type__c</field>
+    </columns>
+    <columns>
+        <field>Account.Treatment_Plans__r$Treatment_Option__c.Treatment_Grade__c</field>
+    </columns>
+    <columns>
+        <field>Account$Consult_Result__c</field>
+    </columns>
+    <columns>
+        <field>Account$Consult_Result_Start_Did_Not_Star__c</field>
+    </columns>
+    <columns>
+        <field>Account$Consult_Result_Status__c</field>
+    </columns>
+    <columns>
+        <field>Account$Owner</field>
+    </columns>
+    <description>Consult results for the last 60 days.</description>
+    <filter>
+        <criteriaItems>
+            <column>Account$Center_Location__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Miami Fort Lauderdale</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Miami Fort Lauderdale Consult Result</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Accounts_with_Treatment_Plans__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Account$Consult_Completed_Date__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Account$Consult_Completed_Date__c</dateColumn>
+        <interval>INTERVAL_LASTTHISMONTH</interval>
+    </timeFrameFilter>
+</Report>

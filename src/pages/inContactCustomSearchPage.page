@@ -1,0 +1,32 @@
+<apex:page controller="inContactCustomSearchController">
+<apex:includeScript value="/support/console/22.0/integration.js"/>
+<apex:form >
+<table width="100%">
+   <tr>
+     <td rowspan="2" width="5%">     
+     </td>
+     <td>
+      <apex:outputLabel style="font-size:11px" >inContact </apex:outputLabel>
+     </td>
+   </tr>
+   <tr>
+       <td>
+           <apex:outputLabel style="font-size:16px" >Custom Search </apex:outputLabel>
+       </td>
+   </tr>
+     </table>
+<apex:repeat value="{!entityCollection}" var="entity">
+<apex:pageBlock title="{!entity.entityVal}">
+    <apex:pageBlockTable value="{!entity.entityNameId}" var="str">
+    
+         <apex:column headervalue="{!entity.entityVal} Name">  
+           
+            <apex:outputLink value="{!str.Id}">{!str.Name}</apex:outputLink>
+            </apex:column>
+            
+    </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:repeat>
+</apex:form>
+ 
+</apex:page>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Doctor Mastery User Snapshot</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Doctor Mastery User Snapshots</value>
+    </caseValues>
+    <fields>
+        <label><!-- Battlegroup Stars --></label>
+        <name>Battlegroup_Stars__c</name>
+    </fields>
+    <fields>
+        <help><!-- ClearChoice Continuing Education Credits --></help>
+        <label><!-- CCE Credits --></label>
+        <name>CCE_Credits__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearChoice Doctor --></label>
+        <name>ClearChoice_Doctor__c</name>
+        <relationshipLabel><!-- Doctor Mastery User Snapshots --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Doctor Mastery Center Snapshot --></label>
+        <name>Doctor_Mastery_Center_Snapshot__c</name>
+        <relationshipLabel><!-- Doctor Mastery User Snapshots --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Month --></label>
+        <name>Month__c</name>
+    </fields>
+    <fields>
+        <label><!-- Onboarding Complete --></label>
+        <name>Onboarding_Complete__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pacesetter --></label>
+        <name>Pacesetter__c</name>
+    </fields>
+    <fields>
+        <label><!-- Practice Leadership Completed --></label>
+        <name>Practice_Leadership_Completed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Practice Mastery 2 Completed --></label>
+        <name>Practice_Mastery_2_Completed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Practice Mastery Completed --></label>
+        <name>Practice_Mastery_Completed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rainmaker Training --></label>
+        <name>Rainmaker_Training__c</name>
+    </fields>
+    <fields>
+        <label><!-- Scorecard Completed --></label>
+        <name>Scorecard_Completed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tenure Years --></label>
+        <name>Tenure_Years__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Arches Delivered --></label>
+        <name>Total_Arches_Delivered__c</name>
+    </fields>
+    <fields>
+        <label><!-- Year --></label>
+        <name>Year__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

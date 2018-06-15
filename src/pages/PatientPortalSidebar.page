@@ -1,0 +1,932 @@
+<apex:page >
+    <!--Sidebar Page-->
+    <div class="sidebar-page-container">
+        <!--Tabs Box-->
+        <div class="auto-container tabs-box">
+            <div class="row clearfix">
+                
+                <!--Sidebar-->      
+                <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                    <aside class="sidebar">
+                        
+                        <!--Sidebar Widget / Styled Nav-->
+                        <div class="widget sidebar-widget styled-nav">
+                            <nav class="nav-outer">
+                                <!--Tab Buttons-->
+                                <ul class="tab-buttons">
+                                    <li class="tab-btn active-btn" data-tab="#tab-one">Outdoor Checkup</li>
+                                    <li class="tab-btn" data-tab="#tab-two">latest technology</li>
+                                    <li class="tab-btn" data-tab="#tab-three">Operation Theater Service</li>
+                                    <li class="tab-btn" data-tab="#tab-four">Emergency Care</li>
+                                    <li class="tab-btn" data-tab="#tab-five">Blood Test</li>
+                                    <li class="tab-btn" data-tab="#tab-six">Pharmacy Support</li>
+                                    <li class="tab-btn" data-tab="#tab-seven">24/7 Special Service</li>
+                                    <li class="tab-btn" data-tab="#tab-eight">Exclusive Blood Bank</li>
+                                </ul>
+                            </nav>
+                        </div>
+                        
+                        
+                        <!--Sidebar Widget / Downloads-->
+                        <div class="widget sidebar-widget downloads">
+                            <h3>Our Brochure</h3>
+                            <div class="text">Our 2016 hospital prospectus brochure for easy to read guide all of the services offered.</div>
+                            <ul>
+                                <li><a href="#">Download PDF</a></li>
+                            </ul>
+                        </div>
+                        
+                        <!--Sidebar Widget / Contact Widget-->
+                        <div class="widget sidebar-widget contact-widget">
+                            <h3>Have any Questions?<br />Call Us:</h3>
+                            <div class="phone-numbers">
+                                (+880) 1723801729
+                            </div>
+                            <h3>For Details</h3>
+                        </div>
+                        
+                    </aside>
+                </div><!--End Sidebar-->
+                
+                <!--Content Side-->      
+                <div class="content-side col-lg-9 col-md-8 col-sm-12 col-xs-12">
+                    <!--Single Service-->
+                    <section class="services-single">
+                        <!--Tabs Content-->
+                        <div class="tabs-content">
+                            
+                            <!--Tab / Active Tab-->
+                            <div class="tab active-tab" id="tab-one">
+                                
+                                <!--Main Image-->
+                                <figure class="main-image"><apex:image url="{!URLFOR($Resource.PatientPortalAssets,'images/resource/service-image-1.jpg')}"  width="860" height="390"/></figure>
+                                
+                                <h2 class="service-title">Outdoor Checkup</h2>
+                                <!--Default Text Block-->
+                                <div class="default-text-block">
+                                    <p>Lorem ipsum dolor sit amet, tale porro no mei, nam ut assum aliquip fastidii. At sea utamur saperet, et quo tempor feugiat molestie. Cum modus tritani ut, quod nostrum ad eum, ad his putent latine. Et iudicabit theophrastus signiferumque vis. Ne stet pericula vituperata sit.</p>
+                                    <p> Ex mel illum inani nemore, adolescens efficiendi te pri. Et nec natum inciderint, eos ex gubergren sententiae efficiendi, saepe singulis iudicabit eu qui. Vel aliquip nominati laboramus an. Nemore tincidunt ea mel, eos cu alii insolens signiferumque. Te nec dolor clita partem, mea ne iuvaret aliquid.</p>
+                                </div>
+                                
+                                <blockquote class="style-one">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, necessitatibus iure. Commodi iste, aliquam sunt. Suscipit, quisquam doloremque! Facilis assumenda autem, provident consectetur nemo explicabo.</blockquote>
+                                
+                                <!--Default Two Column-->
+                                <div class="default-two-column">
+                                    <div class="row clearfix">
+                                        <div class="text-column col-md-6 col-sm-6 col-xs-12">
+                                            <h3>Our Key Feature of Service</h3>
+                                            <!--Accordion Box / Style Two-->
+                                            <div class="accordion-box no-padd-right style-two">
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block">
+                                                    <div class="accord-btn"><h4>medical Reaserch</h4></div>
+                                                    <div class="accord-content">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block active-block">
+                                                    <div class="accord-btn active"><h4>medical Prospecting</h4></div>
+                                                    <div class="accord-content collapsed">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block">
+                                                    <div class="accord-btn"><h4>medical Goals</h4></div>
+                                                    <div class="accord-content">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="skills-column col-md-6 col-sm-6 col-xs-12">
+                                            <h3>Our Expereince</h3>
+                                            <!--Progress Levels-->
+                                            <div class="progress-levels medium">
+                                                        
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="100ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">Surgery</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="80"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="200ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">Medicine</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="90"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="300ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">lab</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="72"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="400ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">ckheckup</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="88"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                        
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                
+                            </div><!--End Tab-->
+                            
+                            <!--Tab-->
+                            <div class="tab" id="tab-two">
+                                
+                                <!--Main Image-->
+                                <figure class="main-image"><apex:image url="{!URLFOR($Resource.PatientPortalAssets,'images/resource/service-image-2.jpg')}"  width="860" height="390"/></figure>
+                                
+                                <h2 class="service-title">latest technology</h2>
+                                <!--Default Text Block-->
+                                <div class="default-text-block">
+                                    <p>Lorem ipsum dolor sit amet, tale porro no mei, nam ut assum aliquip fastidii. At sea utamur saperet, et quo tempor feugiat molestie. Cum modus tritani ut, quod nostrum ad eum, ad his putent latine. Et iudicabit theophrastus signiferumque vis. Ne stet pericula vituperata sit.</p>
+                                    <p> Ex mel illum inani nemore, adolescens efficiendi te pri. Et nec natum inciderint, eos ex gubergren sententiae efficiendi, saepe singulis iudicabit eu qui. Vel aliquip nominati laboramus an. Nemore tincidunt ea mel, eos cu alii insolens signiferumque. Te nec dolor clita partem, mea ne iuvaret aliquid.</p>
+                                </div>
+                                
+                                <blockquote class="style-one">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, necessitatibus iure. Commodi iste, aliquam sunt. Suscipit, quisquam doloremque! Facilis assumenda autem, provident consectetur nemo explicabo.</blockquote>
+                                
+                                <!--Default Two Column-->
+                                <div class="default-two-column">
+                                    <div class="row clearfix">
+                                        <div class="text-column col-md-6 col-sm-6 col-xs-12">
+                                            <h3>Our Key Feature of Service</h3>
+                                            <!--Accordion Box / Style Two-->
+                                            <div class="accordion-box no-padd-right style-two">
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block">
+                                                    <div class="accord-btn"><h4>medical Reaserch</h4></div>
+                                                    <div class="accord-content">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block active-block">
+                                                    <div class="accord-btn active"><h4>medical Prospecting</h4></div>
+                                                    <div class="accord-content collapsed">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block">
+                                                    <div class="accord-btn"><h4>medical Goals</h4></div>
+                                                    <div class="accord-content">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="skills-column col-md-6 col-sm-6 col-xs-12">
+                                            <h3>Our Expereince</h3>
+                                            <!--Progress Levels-->
+                                            <div class="progress-levels medium">
+                                                        
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="100ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">Surgery</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="80"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="200ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">Medicine</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="90"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="300ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">lab</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="72"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="400ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">ckheckup</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="88"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                        
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                
+                            </div><!--End Tab-->
+                            
+                            <!--Tab-->
+                            <div class="tab" id="tab-three">
+                                
+                                <!--Main Image-->
+                                <figure class="main-image"><apex:image url="{!URLFOR($Resource.PatientPortalAssets,'images/resource/service-image-3.jpg')}"  width="860" height="390"/></figure>
+                                
+                                <h2 class="service-title">Operation Theater Service</h2>
+                                <!--Default Text Block-->
+                                <div class="default-text-block">
+                                    <p>Lorem ipsum dolor sit amet, tale porro no mei, nam ut assum aliquip fastidii. At sea utamur saperet, et quo tempor feugiat molestie. Cum modus tritani ut, quod nostrum ad eum, ad his putent latine. Et iudicabit theophrastus signiferumque vis. Ne stet pericula vituperata sit.</p>
+                                    <p> Ex mel illum inani nemore, adolescens efficiendi te pri. Et nec natum inciderint, eos ex gubergren sententiae efficiendi, saepe singulis iudicabit eu qui. Vel aliquip nominati laboramus an. Nemore tincidunt ea mel, eos cu alii insolens signiferumque. Te nec dolor clita partem, mea ne iuvaret aliquid.</p>
+                                </div>
+                                
+                                <blockquote class="style-one">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, necessitatibus iure. Commodi iste, aliquam sunt. Suscipit, quisquam doloremque! Facilis assumenda autem, provident consectetur nemo explicabo.</blockquote>
+                                
+                                <!--Default Two Column-->
+                                <div class="default-two-column">
+                                    <div class="row clearfix">
+                                        <div class="text-column col-md-6 col-sm-6 col-xs-12">
+                                            <h3>Our Key Feature of Service</h3>
+                                            <!--Accordion Box / Style Two-->
+                                            <div class="accordion-box no-padd-right style-two">
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block">
+                                                    <div class="accord-btn"><h4>medical Reaserch</h4></div>
+                                                    <div class="accord-content">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block active-block">
+                                                    <div class="accord-btn active"><h4>medical Prospecting</h4></div>
+                                                    <div class="accord-content collapsed">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block">
+                                                    <div class="accord-btn"><h4>medical Goals</h4></div>
+                                                    <div class="accord-content">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="skills-column col-md-6 col-sm-6 col-xs-12">
+                                            <h3>Our Expereince</h3>
+                                            <!--Progress Levels-->
+                                            <div class="progress-levels medium">
+                                                        
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="100ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">Surgery</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="80"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="200ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">Medicine</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="90"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="300ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">lab</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="72"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="400ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">ckheckup</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="88"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                        
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                
+                            </div><!--End Tab-->
+                            
+                            <!--Tab-->
+                            <div class="tab" id="tab-four">
+                                
+                                <!--Main Image-->
+                                <figure class="main-image"><apex:image url="{!URLFOR($Resource.PatientPortalAssets,'images/resource/service-image-4.jpg')}"  width="860" height="390"/></figure>
+                                
+                                <h2 class="service-title">Emergency Care</h2>
+                                <!--Default Text Block-->
+                                <div class="default-text-block">
+                                    <p>Lorem ipsum dolor sit amet, tale porro no mei, nam ut assum aliquip fastidii. At sea utamur saperet, et quo tempor feugiat molestie. Cum modus tritani ut, quod nostrum ad eum, ad his putent latine. Et iudicabit theophrastus signiferumque vis. Ne stet pericula vituperata sit.</p>
+                                    <p> Ex mel illum inani nemore, adolescens efficiendi te pri. Et nec natum inciderint, eos ex gubergren sententiae efficiendi, saepe singulis iudicabit eu qui. Vel aliquip nominati laboramus an. Nemore tincidunt ea mel, eos cu alii insolens signiferumque. Te nec dolor clita partem, mea ne iuvaret aliquid.</p>
+                                </div>
+                                
+                                <blockquote class="style-one">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, necessitatibus iure. Commodi iste, aliquam sunt. Suscipit, quisquam doloremque! Facilis assumenda autem, provident consectetur nemo explicabo.</blockquote>
+                                
+                                <!--Default Two Column-->
+                                <div class="default-two-column">
+                                    <div class="row clearfix">
+                                        <div class="text-column col-md-6 col-sm-6 col-xs-12">
+                                            <h3>Our Key Feature of Service</h3>
+                                            <!--Accordion Box / Style Two-->
+                                            <div class="accordion-box no-padd-right style-two">
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block">
+                                                    <div class="accord-btn"><h4>medical Reaserch</h4></div>
+                                                    <div class="accord-content">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block active-block">
+                                                    <div class="accord-btn active"><h4>medical Prospecting</h4></div>
+                                                    <div class="accord-content collapsed">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block">
+                                                    <div class="accord-btn"><h4>medical Goals</h4></div>
+                                                    <div class="accord-content">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="skills-column col-md-6 col-sm-6 col-xs-12">
+                                            <h3>Our Expereince</h3>
+                                            <!--Progress Levels-->
+                                            <div class="progress-levels medium">
+                                                        
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="100ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">Surgery</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="80"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="200ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">Medicine</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="90"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="300ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">lab</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="72"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="400ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">ckheckup</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="88"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                        
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                
+                            </div><!--End Tab-->
+                            
+                            <!--Tab-->
+                            <div class="tab" id="tab-five">
+                                
+                                <!--Main Image-->
+                                <figure class="main-image"><apex:image url="{!URLFOR($Resource.PatientPortalAssets,'images/resource/service-image-5.jpg')}"  width="860" height="390"/></figure>
+                                
+                                <h2 class="service-title">Blood Test</h2>
+                                <!--Default Text Block-->
+                                <div class="default-text-block">
+                                    <p>Lorem ipsum dolor sit amet, tale porro no mei, nam ut assum aliquip fastidii. At sea utamur saperet, et quo tempor feugiat molestie. Cum modus tritani ut, quod nostrum ad eum, ad his putent latine. Et iudicabit theophrastus signiferumque vis. Ne stet pericula vituperata sit.</p>
+                                    <p> Ex mel illum inani nemore, adolescens efficiendi te pri. Et nec natum inciderint, eos ex gubergren sententiae efficiendi, saepe singulis iudicabit eu qui. Vel aliquip nominati laboramus an. Nemore tincidunt ea mel, eos cu alii insolens signiferumque. Te nec dolor clita partem, mea ne iuvaret aliquid.</p>
+                                </div>
+                                
+                                <blockquote class="style-one">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, necessitatibus iure. Commodi iste, aliquam sunt. Suscipit, quisquam doloremque! Facilis assumenda autem, provident consectetur nemo explicabo.</blockquote>
+                                
+                                <!--Default Two Column-->
+                                <div class="default-two-column">
+                                    <div class="row clearfix">
+                                        <div class="text-column col-md-6 col-sm-6 col-xs-12">
+                                            <h3>Our Key Feature of Service</h3>
+                                            <!--Accordion Box / Style Two-->
+                                            <div class="accordion-box no-padd-right style-two">
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block">
+                                                    <div class="accord-btn"><h4>medical Reaserch</h4></div>
+                                                    <div class="accord-content">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block active-block">
+                                                    <div class="accord-btn active"><h4>medical Prospecting</h4></div>
+                                                    <div class="accord-content collapsed">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block">
+                                                    <div class="accord-btn"><h4>medical Goals</h4></div>
+                                                    <div class="accord-content">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="skills-column col-md-6 col-sm-6 col-xs-12">
+                                            <h3>Our Expereince</h3>
+                                            <!--Progress Levels-->
+                                            <div class="progress-levels medium">
+                                                        
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="100ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">Surgery</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="80"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="200ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">Medicine</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="90"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="300ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">lab</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="72"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="400ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">ckheckup</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="88"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                        
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                
+                            </div><!--End Tab-->
+                            
+                            <!--Tab-->
+                            <div class="tab" id="tab-six">
+                                
+                                <!--Main Image-->
+                                <figure class="main-image"><apex:image url="{!URLFOR($Resource.PatientPortalAssets,'images/resource/service-image-6.jpg')}"  width="860" height="390"/></figure>
+                                
+                                <h2 class="service-title">Pharmacy Support</h2>
+                                <!--Default Text Block-->
+                                <div class="default-text-block">
+                                    <p>Lorem ipsum dolor sit amet, tale porro no mei, nam ut assum aliquip fastidii. At sea utamur saperet, et quo tempor feugiat molestie. Cum modus tritani ut, quod nostrum ad eum, ad his putent latine. Et iudicabit theophrastus signiferumque vis. Ne stet pericula vituperata sit.</p>
+                                    <p> Ex mel illum inani nemore, adolescens efficiendi te pri. Et nec natum inciderint, eos ex gubergren sententiae efficiendi, saepe singulis iudicabit eu qui. Vel aliquip nominati laboramus an. Nemore tincidunt ea mel, eos cu alii insolens signiferumque. Te nec dolor clita partem, mea ne iuvaret aliquid.</p>
+                                </div>
+                                
+                                <blockquote class="style-one">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, necessitatibus iure. Commodi iste, aliquam sunt. Suscipit, quisquam doloremque! Facilis assumenda autem, provident consectetur nemo explicabo.</blockquote>
+                                
+                                <!--Default Two Column-->
+                                <div class="default-two-column">
+                                    <div class="row clearfix">
+                                        <div class="text-column col-md-6 col-sm-6 col-xs-12">
+                                            <h3>Our Key Feature of Service</h3>
+                                            <!--Accordion Box / Style Two-->
+                                            <div class="accordion-box no-padd-right style-two">
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block">
+                                                    <div class="accord-btn"><h4>medical Reaserch</h4></div>
+                                                    <div class="accord-content">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block active-block">
+                                                    <div class="accord-btn active"><h4>medical Prospecting</h4></div>
+                                                    <div class="accord-content collapsed">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block">
+                                                    <div class="accord-btn"><h4>medical Goals</h4></div>
+                                                    <div class="accord-content">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="skills-column col-md-6 col-sm-6 col-xs-12">
+                                            <h3>Our Expereince</h3>
+                                            <!--Progress Levels-->
+                                            <div class="progress-levels medium">
+                                                        
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="100ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">Surgery</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="80"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="200ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">Medicine</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="90"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="300ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">lab</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="72"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="400ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">ckheckup</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="88"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                        
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                
+                            </div><!--End Tab-->
+                            
+                            <!--Tab-->
+                            <div class="tab" id="tab-seven">
+                                
+                                <!--Main Image-->
+                                <figure class="main-image"><apex:image url="{!URLFOR($Resource.PatientPortalAssets,'images/resource/service-image-6.jpg')}"  width="860" height="390"/></figure>
+                                
+                                <h2 class="service-title">24/7 Special Service</h2>
+                                <!--Default Text Block-->
+                                <div class="default-text-block">
+                                    <p>Lorem ipsum dolor sit amet, tale porro no mei, nam ut assum aliquip fastidii. At sea utamur saperet, et quo tempor feugiat molestie. Cum modus tritani ut, quod nostrum ad eum, ad his putent latine. Et iudicabit theophrastus signiferumque vis. Ne stet pericula vituperata sit.</p>
+                                    <p> Ex mel illum inani nemore, adolescens efficiendi te pri. Et nec natum inciderint, eos ex gubergren sententiae efficiendi, saepe singulis iudicabit eu qui. Vel aliquip nominati laboramus an. Nemore tincidunt ea mel, eos cu alii insolens signiferumque. Te nec dolor clita partem, mea ne iuvaret aliquid.</p>
+                                </div>
+                                
+                                <blockquote class="style-one">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, necessitatibus iure. Commodi iste, aliquam sunt. Suscipit, quisquam doloremque! Facilis assumenda autem, provident consectetur nemo explicabo.</blockquote>
+                                
+                                <!--Default Two Column-->
+                                <div class="default-two-column">
+                                    <div class="row clearfix">
+                                        <div class="text-column col-md-6 col-sm-6 col-xs-12">
+                                            <h3>Our Key Feature of Service</h3>
+                                            <!--Accordion Box / Style Two-->
+                                            <div class="accordion-box no-padd-right style-two">
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block">
+                                                    <div class="accord-btn"><h4>medical Reaserch</h4></div>
+                                                    <div class="accord-content">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block active-block">
+                                                    <div class="accord-btn active"><h4>medical Prospecting</h4></div>
+                                                    <div class="accord-content collapsed">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block">
+                                                    <div class="accord-btn"><h4>medical Goals</h4></div>
+                                                    <div class="accord-content">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="skills-column col-md-6 col-sm-6 col-xs-12">
+                                            <h3>Our Expereince</h3>
+                                            <!--Progress Levels-->
+                                            <div class="progress-levels medium">
+                                                        
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="100ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">Surgery</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="80"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="200ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">Medicine</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="90"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="300ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">lab</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="72"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="400ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">ckheckup</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="88"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                        
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                
+                            </div><!--End Tab-->
+                            
+                            <!--Tab-->
+                            <div class="tab" id="tab-eight">
+                                
+                                <!--Main Image-->
+                                <figure class="main-image"><apex:image url="{!URLFOR($Resource.PatientPortalAssets,'images/resource/service-image-4.jpg')}"  width="860" height="390"/></figure>
+                                
+                                <h2 class="service-title">Exclusive Blood Bank</h2>
+                                <!--Default Text Block-->
+                                <div class="default-text-block">
+                                    <p>Lorem ipsum dolor sit amet, tale porro no mei, nam ut assum aliquip fastidii. At sea utamur saperet, et quo tempor feugiat molestie. Cum modus tritani ut, quod nostrum ad eum, ad his putent latine. Et iudicabit theophrastus signiferumque vis. Ne stet pericula vituperata sit.</p>
+                                    <p> Ex mel illum inani nemore, adolescens efficiendi te pri. Et nec natum inciderint, eos ex gubergren sententiae efficiendi, saepe singulis iudicabit eu qui. Vel aliquip nominati laboramus an. Nemore tincidunt ea mel, eos cu alii insolens signiferumque. Te nec dolor clita partem, mea ne iuvaret aliquid.</p>
+                                </div>
+                                
+                                <blockquote class="style-one">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, necessitatibus iure. Commodi iste, aliquam sunt. Suscipit, quisquam doloremque! Facilis assumenda autem, provident consectetur nemo explicabo.</blockquote>
+                                
+                                <!--Default Two Column-->
+                                <div class="default-two-column">
+                                    <div class="row clearfix">
+                                        <div class="text-column col-md-6 col-sm-6 col-xs-12">
+                                            <h3>Our Key Feature of Service</h3>
+                                            <!--Accordion Box / Style Two-->
+                                            <div class="accordion-box no-padd-right style-two">
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block">
+                                                    <div class="accord-btn"><h4>medical Reaserch</h4></div>
+                                                    <div class="accord-content">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block active-block">
+                                                    <div class="accord-btn active"><h4>medical Prospecting</h4></div>
+                                                    <div class="accord-content collapsed">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Accordion -->
+                                                <div class="accordion accordion-block">
+                                                    <div class="accord-btn"><h4>medical Goals</h4></div>
+                                                    <div class="accord-content">
+                                                        <p>We also ensure that the whole team is included in process and that no one is left out during the turnaround. The most crucial part is ensuring some degree of financial stability.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="skills-column col-md-6 col-sm-6 col-xs-12">
+                                            <h3>Our Expereince</h3>
+                                            <!--Progress Levels-->
+                                            <div class="progress-levels medium">
+                                                        
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="100ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">Surgery</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="80"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="200ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">Medicine</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="90"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="300ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">lab</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="72"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!--Skill Box-->
+                                                <div class="progress-box wow fadeIn" data-wow-delay="400ms" data-wow-duration="1500ms">
+                                                    <div class="box-title">ckheckup</div>
+                                                    <div class="percent"></div>
+                                                    <div class="inner">
+                                                        <div class="bar">
+                                                            <div class="bar-innner"><div class="bar-fill" data-percent="88"></div></div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                        
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                
+                            </div><!--End Tab-->
+                            
+                        </div>
+                    </section>
+                
+                </div><!--End Content Side-->   
+                
+                      
+                
+            </div>
+        </div>
+    </div>
+</apex:page>

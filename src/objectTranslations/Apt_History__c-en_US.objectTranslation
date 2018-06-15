@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Apt History</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Apt Histories</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Apt Histories --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Action Reason --></label>
+        <name>Action_Reason__c</name>
+        <picklistValues>
+            <masterLabel>Aged Effort</masterLabel>
+            <translation><!-- Aged Effort --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Center Request</masterLabel>
+            <translation><!-- Center Request --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Conflict with Schedule</masterLabel>
+            <translation><!-- Conflict with Schedule --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Emergency/Sick</masterLabel>
+            <translation><!-- Emergency/Sick --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GLO</masterLabel>
+            <translation><!-- GLO --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Late</masterLabel>
+            <translation><!-- Late --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Move Up in Schedule</masterLabel>
+            <translation><!-- Move Up in Schedule --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Schedule Management</masterLabel>
+            <translation><!-- Schedule Management --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transporatation Issues</masterLabel>
+            <translation><!-- Transporatation Issues --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Weather</masterLabel>
+            <translation><!-- Weather --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Action --></label>
+        <name>Action__c</name>
+    </fields>
+    <fields>
+        <label><!-- Apts in next seven --></label>
+        <name>Apts_in_next_seven__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cancel Reason --></label>
+        <name>Cancel_Reason__c</name>
+        <picklistValues>
+            <masterLabel>Center Request</masterLabel>
+            <translation><!-- Center Request --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Center Request - Weather</masterLabel>
+            <translation><!-- Center Request - Weather --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Change Center</masterLabel>
+            <translation><!-- Change Center --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Conflict with Schedule</masterLabel>
+            <translation><!-- Conflict with Schedule --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Consult Sched Too Full</masterLabel>
+            <translation><!-- Consult Sched Too Full --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Duplicate Record/Schedule</masterLabel>
+            <translation><!-- Duplicate Record/Schedule --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Email/VM/Text - No Reason</masterLabel>
+            <translation><!-- Email/VM/Text - No Reason --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Emergency</masterLabel>
+            <translation><!-- Emergency --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Family Conference</masterLabel>
+            <translation><!-- Family Conference --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Interested- Bad Review</masterLabel>
+            <translation><!-- Not Interested- Bad Review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Interested- Cost</masterLabel>
+            <translation><!-- Not Interested- Cost --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Interested- Distance</masterLabel>
+            <translation><!-- Not Interested- Distance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Interested- Insurance</masterLabel>
+            <translation><!-- Not Interested- Insurance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Interested- Went Elsewhere</masterLabel>
+            <translation><!-- Not Interested- Went Elsewhere --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not a Candidate</masterLabel>
+            <translation><!-- Not a Candidate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Schedule Management</masterLabel>
+            <translation><!-- Schedule Management --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sick</masterLabel>
+            <translation><!-- Sick --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Test Schedule</masterLabel>
+            <translation><!-- Test Schedule --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transportation Issues</masterLabel>
+            <translation><!-- Transportation Issues --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Weather</masterLabel>
+            <translation><!-- Weather --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Consult Inventory --></label>
+        <name>Consult_Inventory__c</name>
+        <relationshipLabel><!-- Apt Histories --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Delete Reason --></label>
+        <name>Delete_Reason__c</name>
+        <picklistValues>
+            <masterLabel>Center Request</masterLabel>
+            <translation><!-- Center Request --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Doctor Request</masterLabel>
+            <translation><!-- Doctor Request --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GLO</masterLabel>
+            <translation><!-- GLO --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PEC Sick/Schedule</masterLabel>
+            <translation><!-- PEC Sick/Schedule --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Schedule Management</masterLabel>
+            <translation><!-- Schedule Management --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Traveler/master Schedule Update</masterLabel>
+            <translation><!-- Traveler/master Schedule Update --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Weather Closures</masterLabel>
+            <translation><!-- Weather Closures --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Double Consult --></label>
+        <name>Double_Consult__c</name>
+        <relationshipLabel><!-- Apt Histories (Double Consult) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- External Agent --></label>
+        <name>External_Agent__c</name>
+    </fields>
+    <fields>
+        <label><!-- Flyover_Appointments --></label>
+        <name>Flyover_Appointments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead --></label>
+        <name>Lead__c</name>
+        <relationshipLabel><!-- Apt Histories --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Notes --></label>
+        <name>Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Private Practice Patient --></label>
+        <name>Private_Practice_Patient__c</name>
+        <relationshipLabel><!-- Apt Histories --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Rescheduled From --></label>
+        <name>Rescheduled_From__c</name>
+        <relationshipLabel><!-- Apt Histories (Rescheduled From) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- isCancelled --></label>
+        <name>isCancelled__c</name>
+    </fields>
+    <fields>
+        <label><!-- isInitialSchedule --></label>
+        <name>isInitialSchedule__c</name>
+    </fields>
+    <startsWith>Vowel</startsWith>
+</CustomObjectTranslation>

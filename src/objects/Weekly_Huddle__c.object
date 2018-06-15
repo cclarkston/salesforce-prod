@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Close_Rate_Goal__c</fullName>
+        <description>Indicates the target close rate the PEC will try for this week.</description>
+        <externalId>false</externalId>
+        <label>Close Rate Goal</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Completed_Time__c</fullName>
+        <description>Time snapshot for when the user submitted the weekly huddle.</description>
+        <externalId>false</externalId>
+        <label>Completed Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_Callbacks__c</fullName>
+        <description>Target number of callbacks the user is aiming for this week</description>
+        <externalId>false</externalId>
+        <label>Number of Callbacks</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Pulse_Check__c</fullName>
+        <description>How is the user feeling this week</description>
+        <externalId>false</externalId>
+        <label>Pulse Check</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1</fullName>
+                    <default>false</default>
+                    <label>1</label>
+                </value>
+                <value>
+                    <fullName>2</fullName>
+                    <default>false</default>
+                    <label>2</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+                <value>
+                    <fullName>4</fullName>
+                    <default>false</default>
+                    <label>4</label>
+                </value>
+                <value>
+                    <fullName>5</fullName>
+                    <default>false</default>
+                    <label>5</label>
+                </value>
+                <value>
+                    <fullName>6</fullName>
+                    <default>false</default>
+                    <label>6</label>
+                </value>
+                <value>
+                    <fullName>7</fullName>
+                    <default>false</default>
+                    <label>7</label>
+                </value>
+                <value>
+                    <fullName>8</fullName>
+                    <default>false</default>
+                    <label>8</label>
+                </value>
+                <value>
+                    <fullName>9</fullName>
+                    <default>false</default>
+                    <label>9</label>
+                </value>
+                <value>
+                    <fullName>10</fullName>
+                    <default>false</default>
+                    <label>10</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Rainmaker_How_Score__c</fullName>
+        <description>Target score the user will shoot for this week in the pec scorecards.</description>
+        <externalId>false</externalId>
+        <label>Rainmaker How Score</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Rainmaker_Skill_Category__c</fullName>
+        <description>Top Level category that the pec will focus on this week</description>
+        <externalId>false</externalId>
+        <label>Rainmaker Skill Category</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Framing</fullName>
+                    <default>false</default>
+                    <label>Framing</label>
+                </value>
+                <value>
+                    <fullName>Needs Dialogue</fullName>
+                    <default>false</default>
+                    <label>Needs Dialogue</label>
+                </value>
+                <value>
+                    <fullName>Doctor Download</fullName>
+                    <default>false</default>
+                    <label>Doctor Download</label>
+                </value>
+                <value>
+                    <fullName>Solutions Dialogue</fullName>
+                    <default>false</default>
+                    <label>Solutions Dialogue</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Rainmaker_Sub_Skill_Category__c</fullName>
+        <description>Sub Skill the pec will focus on this week</description>
+        <externalId>false</externalId>
+        <label>Rainmaker Sub Skill Category</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Rainmaker_Skill_Category__c</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Framing the consultation</fullName>
+                    <default>false</default>
+                    <label>Framing the consultation</label>
+                </value>
+                <value>
+                    <fullName>Framing Needs Dialogue</fullName>
+                    <default>false</default>
+                    <label>Framing Needs Dialogue</label>
+                </value>
+                <value>
+                    <fullName>Asking Vision Questions</fullName>
+                    <default>false</default>
+                    <label>Asking Vision Questions</label>
+                </value>
+                <value>
+                    <fullName>Transition from history to future</fullName>
+                    <default>false</default>
+                    <label>Transition from history to future</label>
+                </value>
+                <value>
+                    <fullName>Asking challenge questions</fullName>
+                    <default>false</default>
+                    <label>Asking challenge questions</label>
+                </value>
+                <value>
+                    <fullName>Asking objective questions</fullName>
+                    <default>false</default>
+                    <label>Asking objective questions</label>
+                </value>
+                <value>
+                    <fullName>Double Clicking</fullName>
+                    <default>false</default>
+                    <label>Double Clicking</label>
+                </value>
+                <value>
+                    <fullName>The Wrap Up</fullName>
+                    <default>false</default>
+                    <label>The Wrap Up</label>
+                </value>
+                <value>
+                    <fullName>Using the &quot;I&quot; message</fullName>
+                    <default>false</default>
+                    <label>Using the &quot;I&quot; message</label>
+                </value>
+                <value>
+                    <fullName>Reassurance</fullName>
+                    <default>false</default>
+                    <label>Reassurance</label>
+                </value>
+                <value>
+                    <fullName>Focus on: Empathy, Connectedness, or Authenticity</fullName>
+                    <default>false</default>
+                    <label>Focus on: Empathy, Connectedness, or Authenticity</label>
+                </value>
+                <value>
+                    <fullName>Empathetic Listening</fullName>
+                    <default>false</default>
+                    <label>Empathetic Listening</label>
+                </value>
+                <value>
+                    <fullName>Summarizing consult&apos;s vision, objectives, challenges</fullName>
+                    <default>false</default>
+                    <label>Summarizing consult&apos;s vision, objectives, challenges</label>
+                </value>
+                <value>
+                    <fullName>Role Play recommendation with the Doctor</fullName>
+                    <default>false</default>
+                    <label>Role Play recommendation with the Doctor</label>
+                </value>
+                <value>
+                    <fullName>Bridge Vision to Doctor&apos;s recommendation</fullName>
+                    <default>false</default>
+                    <label>Bridge Vision to Doctor&apos;s recommendation</label>
+                </value>
+                <value>
+                    <fullName>Framing Investment</fullName>
+                    <default>false</default>
+                    <label>Framing Investment</label>
+                </value>
+                <value>
+                    <fullName>Resolving Objections</fullName>
+                    <default>false</default>
+                    <label>Resolving Objections</label>
+                </value>
+                <value>
+                    <fullName>Framing the financial worksheet</fullName>
+                    <default>false</default>
+                    <label>Framing the financial worksheet</label>
+                </value>
+                <value>
+                    <fullName>Framing the financial questions</fullName>
+                    <default>false</default>
+                    <label>Framing the financial questions</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Framing</controllingFieldValue>
+                <valueName>Framing the consultation</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Needs Dialogue</controllingFieldValue>
+                <valueName>Framing Needs Dialogue</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Needs Dialogue</controllingFieldValue>
+                <valueName>Asking Vision Questions</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Needs Dialogue</controllingFieldValue>
+                <valueName>Transition from history to future</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Needs Dialogue</controllingFieldValue>
+                <valueName>Asking challenge questions</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Needs Dialogue</controllingFieldValue>
+                <valueName>Asking objective questions</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Needs Dialogue</controllingFieldValue>
+                <valueName>Double Clicking</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Needs Dialogue</controllingFieldValue>
+                <valueName>The Wrap Up</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Needs Dialogue</controllingFieldValue>
+                <valueName>Using the &quot;I&quot; message</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Needs Dialogue</controllingFieldValue>
+                <valueName>Reassurance</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Needs Dialogue</controllingFieldValue>
+                <valueName>Focus on: Empathy, Connectedness, or Authenticity</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Needs Dialogue</controllingFieldValue>
+                <valueName>Empathetic Listening</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Doctor Download</controllingFieldValue>
+                <valueName>Summarizing consult&apos;s vision, objectives, challenges</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Doctor Download</controllingFieldValue>
+                <valueName>Role Play recommendation with the Doctor</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Solutions Dialogue</controllingFieldValue>
+                <valueName>Bridge Vision to Doctor&apos;s recommendation</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Solutions Dialogue</controllingFieldValue>
+                <valueName>Framing Investment</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Solutions Dialogue</controllingFieldValue>
+                <valueName>Resolving Objections</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Solutions Dialogue</controllingFieldValue>
+                <valueName>Framing the financial worksheet</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Solutions Dialogue</controllingFieldValue>
+                <valueName>Framing the financial questions</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Rainmaker_What_Score__c</fullName>
+        <description>Target score the user will shoot for this week in the pec scorecards.</description>
+        <externalId>false</externalId>
+        <label>Rainmaker What Score</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ScoreCard_Completed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>ScoreCard Completed</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Week_Start__c</fullName>
+        <description>Monday of the week the scorecard is for</description>
+        <externalId>false</externalId>
+        <label>Week Start</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <label>Weekly_Huddle</label>
+    <nameField>
+        <displayFormat>WH-{0000}</displayFormat>
+        <label>Weekly_Huddle Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Weekly_Huddles</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

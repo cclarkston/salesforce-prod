@@ -1,0 +1,176 @@
+<apex:page controller="rpt_unconverted_contacts" sidebar="false" readOnly="true">
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<style type="text/css" media="print">
+  div.bPageHeader {
+    display:none;
+  }  
+  
+  p.form_holder {
+    display:none; 
+  }
+  
+  a.dlink {
+    display:none;
+  }  
+</style>
+
+
+<style>
+  tr.control td {
+    color:#5789AE;
+  }  
+  
+  table.accs_details td.indent {
+    padding-left:25px;      
+    font-weight:bold; 
+    font-style:italic;
+    empty-cells:hide;                
+  }
+  
+  table.accs_details td.vaca {
+    font-style:italic;   
+    text-align:center;             
+  }   
+</style>
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+<apex:form style="padding-top:0;display:inline;margin-top:0;" >
+ <apex:actionRegion >
+ <div id="header" style="border-bottom:3px solid black;padding-top:0;margin-top:0;">
+<table style="width:100%;padding-top:0;">
+<tr>
+  <td width="400px;"><br />
+  <table><tr><td><span style="font-weight:bold;width:100px;display:inline-block;">Start Date : </span></td><td><apex:inputField value="{!sholder.Apt_Date__c}" /></td></tr>
+  <tr><td><span style="font-weight:bold;width:100px;display:inline-block;">End Date : </span></td><td><apex:inputField value="{!eholder.Apt_Date__c}" /></td></tr></table>
+  </td>
+  <td width="300px;" style="border-right:2px solid black;"><br />
+  <apex:commandButton value="Run Report" action="{!rerun_report}" reRender="main_holder" status="update_status" onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);"   />
+  </td>
+  <td><h1 class="report_header">Unconverted Consults</h1></td>  
+</tr>
+</table>
+</div>
+</apex:actionRegion>
+
+<apex:outputPanel id="main_holder" rendered="true" layout="block" style="padding-top:2em;">
+<apex:actionStatus startStyle="font-weight:bold;color:red;" stoptext="" id="update_status">
+  <apex:facet name="start">Running Report...Please Wait</apex:facet>        
+</apex:actionStatus><br />      
+<apex:outputText escape="false" style="color:red;font-style:italic;font-weight:bold;" value="{!error_messages}" /><br />
+<h2>Data for&nbsp;<apex:outputfield value="{!sholder.Apt_Date__c}" /> - &nbsp;<apex:outputfield value="{!eholder.Apt_Date__c}" /></h2><br /><br />
+
+<span style="display:block;width:800px;padding-left:20px;margin-bottom:0px;font-weight:bold;font-size:14pt;color:red;">Unconverted Consults - Including Patient Left</span>
+<span style="display:block;font-style:italic;padding-left:20px;padding-right:20px;padding-bottom:15px;font-weight:bold;width:800px;">This is a list of patients who were marked as having arrived at the office during the report interval,  
+but who have not been converted yet.  Items on this list would count as consults showed on the CC dashboard,  but would not be included in the consultation summary report</span>
+<table class="accs_details" style="width:800px">
+<tr class="control" style="font-size:10pt;vertical-align:bottom;">
+  <td width="25%">Name</td>    
+  <td width="10%">Apt Date</td>   
+  <td width="20%">Consult Status</td>   
+  <td width="20%">Center</td>                 
+  <td width="25%">Consult PEC</td>    
+</tr>
+
+<apex:variable var="rowclassname" value="accs" />
+<apex:repeat value="{!unconverted_consults_full}" var="consult" >
+  <tr class="{!rowclassname}">
+    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />    
+    <td class="indent"><apex:outputField value="{!consult.Scheduled_Lead__c}"  /></td>   
+    <td style="padding-left:5px;"><apex:outputField value="{!consult.Apt_Date__c}"  /></td>   
+    <td style="padding-left:5px;"><Apex:outputField value="{!consult.Consult_Show_Status__c}" /></td>      
+    <td style="padding-left:5px;"><Apex:outputField value="{!consult.consult_room__r.Center_Information__c}" /></td>    
+    <td style="padding-left:5px;"><apex:outputField value="{!consult.Consult_PEC__c}" /></td>
+  </tr>
+</apex:repeat>
+</table><br /><hr /><br />
+
+<span style="display:block;width:800px;padding-left:20px;font-weight:bold;font-size:14pt;color:red;padding-top:10px;">2nd Consults</span>
+<span style="display:block;font-style:italic;padding-left:20px;padding-right:20px;padding-bottom:15px;font-weight:bold;width:800px;">This is a list of patients who were seen for a second or subsequent time.  Patients on this list would count in the consults showed section of the cc dashboard,  but no the consultation summary report</span>
+<table class="accs_details" style="width:800px">
+<tr class="control" style="font-size:10pt;vertical-align:bottom;">
+  <td width="25%">Name</td>    
+  <td width="10%">Apt Date</td>   
+  <td width="20%">Consult Status</td>   
+  <td width="20%">Center</td>                 
+  <td width="25%">Consult PEC</td>    
+</tr>
+
+<apex:variable var="rowclassname" value="accs" />
+<apex:repeat value="{!second_consults}" var="consult" >
+  <tr class="{!rowclassname}">
+    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />    
+    <td class="indent"><apex:outputField value="{!consult.Scheduled_Account__c}"  /></td>   
+    <td style="padding-left:5px;"><apex:outputField value="{!consult.Apt_Date__c}"  /></td>   
+    <td style="padding-left:5px;"><Apex:outputField value="{!consult.Consult_Show_Status__c}" /></td>      
+    <td style="padding-left:5px;"><Apex:outputField value="{!consult.consult_room__r.Center_Information__c}" /></td>    
+    <td style="padding-left:5px;"><apex:outputField value="{!consult.Consult_PEC__c}" /></td>
+  </tr>
+</apex:repeat>
+</table><br /><hr /><br />
+
+<span style="display:block;width:800px;padding-left:20px;font-weight:bold;font-size:14pt;color:red;padding-top:10px;">Converted Leads not seen during this time period</span>
+<span style="display:block;font-style:italic;padding-left:20px;padding-right:20px;padding-bottom:15px;font-weight:bold;width:800px;">This is a list of patients who were converted during the report interval,  but who were either not on the consultation schedule or not marked as having arrived for their consultation.  These patients would count on the consultation summary,  but they would not count in the consultation showed section of the CC dashboard</span>
+<table class="accs_details" style="width:800px">
+<tr class="control" style="font-size:10pt;vertical-align:bottom;">
+  <td width="25%">Name</td>    
+  <td width="20%">Converted Date</td>   
+  <td width="20%">Converted By</td>   
+  <td width="20%">Center</td>                 
+  <td width="15%">Last Consult</td>    
+</tr>
+
+<apex:variable var="rowclassname" value="accs" />
+<apex:repeat value="{!conversion_exceptions}" var="consult" >
+  <tr class="{!rowclassname}">
+    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />    
+    <td class="indent"><apex:outputField value="{!consult.name}"  /></td>   
+    <td style="padding-left:5px;"><apex:outputField value="{!consult.convertedaccount.createddate}" /></td>   
+    <td style="padding-left:5px;"><apex:outputField value="{!consult.convertedaccount.owner.name}" /></td>      
+    <td style="padding-left:5px;"><apex:outputField value="{!consult.center__r.name}" /></td>    
+    <td style="padding-left:5px;"><apex:repeat value="{!consult.consult_Inventory__r}" var="apts" ><apex:outputField value="{!apts.Apt_Date__c}"/></apex:repeat>&nbsp;</td>
+</tr>
+</apex:repeat>
+</table><br/><hr /><br />
+
+<span style="display:block;width:800px;padding-left:20px;font-weight:bold;font-size:14pt;color:red;padding-top:10px;">Post Converted Leads seen during this time period</span>
+<span style="display:block;font-style:italic;padding-left:20px;padding-right:20px;padding-bottom:15px;font-weight:bold;width:800px;">This is a list of patients who were seen during the report interval,  but who were converted outside of the report interval.  These patients would count on the consults showed section of the cc dashboard,  but would not be included in the consultation summary section</span>
+<table class="accs_details" style="width:800px">
+<tr class="control" style="font-size:10pt;vertical-align:bottom;">
+  <td width="25%">Name</td>    
+  <td width="20%">Converted Date</td>   
+  <td width="20%">Converted By</td>   
+  <td width="20%">Center</td>                 
+  <td width="15%">Last Consult</td>    
+</tr>
+
+<apex:variable var="rowclassname" value="accs" />
+<apex:repeat value="{!postconversion_exceptions}" var="consult" >
+  <tr class="{!rowclassname}">
+    <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />    
+    <td class="indent"><apex:outputField value="{!consult.name}"  /></td>   
+    <td style="padding-left:5px;"><apex:outputField value="{!consult.convertedaccount.createddate}" /></td>   
+    <td style="padding-left:5px;"><apex:outputField value="{!consult.convertedaccount.owner.name}" /></td>      
+    <td style="padding-left:5px;"><apex:outputField value="{!consult.center__r.name}" /></td>    
+    <td style="padding-left:5px;"><apex:repeat value="{!consult.consult_Inventory__r}" var="apts" ><apex:outputField value="{!apts.Apt_Date__c}"/></apex:repeat>&nbsp;</td>
+</tr>
+</apex:repeat>
+</table><br /><br />
+
+<apex:outputLink target="__blank" value="{!csv_link}" style="display:block;padding-top:1em;color:blue;font-weight:bold;">Download CSV File</apex:outputLink>
+
+</apex:outputPanel>
+</apex:form>
+</apex:page>

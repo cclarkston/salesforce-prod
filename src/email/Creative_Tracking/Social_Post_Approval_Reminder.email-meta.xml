@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Reminds Legal of pending approval request one week after submission (since this is a test, it only wait one hour)</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Social Post Approval Reminder</name>
+    <style>none</style>
+    <subject>Reminder: Review {!Social_Post__c.Social_Post_Name__c}</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

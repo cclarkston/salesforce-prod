@@ -1,0 +1,123 @@
+<messaging:emailTemplate subject="ClearChoice Dental Implant Consultation Appointment" recipientType="Lead" replyto="reply-to@clearchoice.com" relatedToType="Lead" >
+  <messaging:plainTextEmailBody > Welcome to ClearChoice.
+    
+    Your oral health is an important issue and has tremendous effects in all aspects of your life. We're very excited that you’ve chosen ClearChoice and we look forward to helping you on your journey towards a better smile.
+    
+    Below are your consultation details as well as some additional resources to help prepare you for your consultation. 
+    
+    Sincerely, 
+    Your ClearChoice Team
+    
+    Your free consultation is scheduled for:
+    <c:ConsultTime_Format LeadId="{!Recipient.Id}" DFormat="EEEE M/dd/yyyy"/>
+    at
+    <c:ConsultTime_Format LeadId="{!Recipient.Id}" DFormat="h:mm a"/>
+    .
+    
+    ClearChoice {!Recipient.Center_Name__c}
+    {!Recipient.Center__r.Street_1__c} {!Recipient.Center__r.Street_2__c}
+    {!Recipient.Center__r.City__c}, {!Recipient.Center__r.State__c} {!Recipient.Center__r.Zip_Code__c}
+    
+    If you need to modify or change your appointment please call  {!Recipient.Center_Phone_Number__c}
+    
+    To ensure you can receive our future emails, please add info@clearchoice.com to your address book.
+    
+    (c) 2013 ClearChoice Management Services (R), 
+    8350 E. Crescent Pkwy, Suite 100, Greenwood Village, CO 80111
+    All Rights Reserved </messaging:plainTextEmailBody>
+  <messaging:htmlEmailBody >
+    <table style="margin:0px; padding:0px; font-family:Arial, Helvetica, sans-serif; font-size: 12pt; color:#235f8b" cellpadding="0" cellspacing="0">
+      <tbody>
+        <tr style="background-color:#2c86c3; background-image:url(http://www.clearchoice.com/files/images/EmailTemplates/Welcome_Letter_VF/bgUp1.jpg); background-repeat:repeat-x; background-position:left bottom;">
+          <td style="height:65px; width:50px; display:block;">&nbsp;</td>
+          <td style="vertical-align:top"><p style="text-align:center; padding:0px; margin:0px;"><a href="http://www.clearchoice.com" title="ClearChoice" target="_blank"><img src="http://www.clearchoice.com/files/images/EmailTemplates/Welcome_Letter_VF/logo_ClearChoice.jpg" alt="ClearChoice" width="166" height="49" style="display:block; border:none;" /></a></p></td>
+          <td style="width:50px; display:block;">&nbsp;</td>
+        </tr>
+        <tr style="background-color:#ffffff;">
+          <td>&nbsp;</td>
+          <td style="padding-top:30px; padding-bottom:30px;"><h2 style="font-size: 28pt; letter-spacing: -1pt;">Welcome to ClearChoice.</h2>
+            <p>Your oral health is an important issue and has tremendous effects in all aspects of your life. We're very excited that you’ve chosen ClearChoice and we look forward to helping you on your journey towards a better smile.</p>
+            <p>Below are your consultation details as well as some additional resources to help prepare you for your consultation. </p>
+            <p>Sincerely, <br />
+              Your
+              ClearChoice Team</p></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr style="background-color:#fba52c; color:#ffffff;">
+          <td style="height:50px">&nbsp;</td>
+          <td><h2 style="margin: 0px; padding:0px; font-size: 28pt; letter-spacing: -1pt;">Consultation details.</h2></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr style="background-image:url(http://www.clearchoice.com/files/images/EmailTemplates/Welcome_Letter_VF/bgDrop1.jpg); background-repeat:repeat-x;">
+          <td colspan="3" style=" padding-top:9px; background-image:url(http://www.clearchoice.com/files/images/EmailTemplates/Welcome_Letter_VF/bgTick.jpg); background-repeat:no-repeat; background-position:left top;"><table style="margin:0px; padding:0px; width:100%; color:#235f8b" cellpadding="0" cellspacing="0">
+              <tr>
+                <td style="border-bottom:solid 1px #d8d6d6; width:100px; padding-left:50px; padding-top:10px; padding-bottom:10px;"><img src="http://www.clearchoice.com/files/images/EmailTemplates/Welcome_Letter_VF/icnCalendar.jpg" alt="Date &amp; Time" width="63" height="59" style="display:block; margin-left:auto; margin-right:auto;" /></td>
+                <td style="border-bottom:solid 1px #d8d6d6; width:150px;"><strong>Date &amp; Time</strong></td>
+                <td style="border-bottom:solid 1px #d8d6d6; font-size:10pt;"><c:ConsultTime_Format LeadId="{!Recipient.Id}" DFormat="h:mm a"/>
+                  on
+                  <c:ConsultTime_Format LeadId="{!Recipient.Id}" DFormat="EEEE M/dd/yyyy"/></td>
+              </tr>
+              <tr>
+                <td style="border-bottom:solid 1px #d8d6d6; padding-left:50px; padding-top:10px; padding-bottom:10px;"><img src="http://www.clearchoice.com/files/images/EmailTemplates/Welcome_Letter_VF/icnMap.jpg" alt="Location" width="60" height="62" style="display:block; margin-left:auto; margin-right:auto;" /></td>
+                <td style="border-bottom:solid 1px #d8d6d6;"><strong>Location</strong></td>
+                <td style="border-bottom:solid 1px #d8d6d6; font-size:10pt;">ClearChoice {!Recipient.Center_Name__c} <br />
+                  {!Recipient.Center__r.Street_1__c} {!Recipient.Center__r.Street_2__c} <br />
+                  {!Recipient.Center__r.City__c}, {!Recipient.Center__r.State__c} {!Recipient.Center__r.Zip_Code__c} </td>
+              </tr>
+            </table></td>
+        </tr>
+        <tr style="background-color:#f1f1f1; background-image:url(images/bgPattern1.jpg);">
+          <td>&nbsp;</td>
+          <td style="color:#6f6f6f; font-size:10pt;"><p style=" margin-top:15px; margin-bottom:15px;"><img src="http://www.clearchoice.com/files/images/EmailTemplates/Welcome_Letter_VF/icnInfo.gif" alt="Information" width="23" height="23" style="float:left; padding-right:10px; margin-top: -3px;" />If you need to modify or change your appointment please call  {!Recipient.Center_Phone_Number__c}</p></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr style="background-color:#235f8b; background-image:url(images/bgDrop2.jpg); background-repeat:repeat-x; color:#ffffff;">
+          <td>&nbsp;</td>
+          <td><h2 style="text-align:center; font-size:20pt; margin: 0px; padding: 0px; padding-top:20px; padding-bottom:15px; letter-spacing: -1pt;">Additional Resources</h2></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr style="background-color:#235f8b; color:#ffffff;">
+          <td>&nbsp;</td>
+          <td><table style="margin:0px; padding:0px; width:100%;font-size: 9pt;font-family:Arial, Helvetica, sans-serif; background-color:#235f8b; margin-top:15px; margin-bottom:15px;" cellpadding="0" cellspacing="0">
+              <tr>
+                <td style="width:25%; padding-right:10px; padding-bottom:5px;"><h3 style="text-align: center; margin: 0px;padding: 0px; color:#ffffff;">Connect With Us</h3></td>
+                <td style="padding-left:10px; padding-right:10px; padding-bottom:5px;"><h3 style="text-align:center;margin: 0px;padding: 0px; color:#ffffff;">Dental Implant Info</h3></td>
+                <td style="width:25%; padding-left:10px; padding-bottom:5px;"><h3 style="text-align:center;margin: 0px;padding: 0px; color:#ffffff;">ClearChoice Info</h3></td>
+              </tr>
+              <tr>
+                <td style="padding-right:10px;"><hr style="border:none;  border-bottom:solid 1px #ffffff; height:1px; margin:0px; padding:0px;" /></td>
+                <td style=" padding-left:10px; padding-right:10px;"><hr style="border:none; border-bottom:solid 1px #ffffff; height:1px; margin:0px;padding:0px;" /></td>
+                <td style="padding-left:10px;"><hr style="border:none;  border-bottom:solid 1px #ffffff; height:1px; margin:0px; padding:0px;" /></td>
+              </tr>
+              <tr>
+                <td style="padding-right:10px;"><ul style="list-style:none; margin:0px; padding:0px; text-align:center;">
+                    <li style="padding-top:10px;"><a href="https://www.facebook.com/ClearChoice" title="Facebook" target="_blank" style="color:#ffffff">Facebook</a></li>
+                    <li style="padding-top:10px;"><a href="https://twitter.com/ClearChoice" title="Twitter" target="_blank" style="color:#ffffff">Twitter</a></li>
+                    <li style="padding-top:10px;"><a href="http://www.youtube.com/user/ClearChoiceDental/videos" title="YouTube" target="_blank" style="color:#ffffff">YouTube</a></li>
+                  </ul></td>
+                <td style=" padding-left:10px; padding-right:10px;"><ul style="list-style:none; margin:0px; padding:0px; text-align:center;">
+                    <li style="padding-top:10px;"><a href="http://blog.clearchoice.com/dental-implants-and-your-life" title="Dental Implants And Your Life" target="_blank" style="color:#ffffff">Dental Implants And Your Life</a></li>
+                    <li style="padding-top:10px;"><a href="http://blog.clearchoice.com/dental-implants-and-your-health" title="Dental Implants And Your Health" target="_blank" style="color:#ffffff">Dental Implants And Your Health</a></li>
+                    <li style="padding-top:10px;"><a href="http://blog.clearchoice.com/dental-implant-technology" title="Dental Implant Technology" target="_blank" style="color:#ffffff">Dental Implant Technology</a></li>
+                  </ul></td>
+                <td style="padding-left:10px;"><ul style="list-style:none; margin:0px; padding:0px; text-align:center;">
+                    <li style="padding-top:10px;"><a href="http://www.clearchoice.com/Contact-Us" title="Contact Us" target="_blank" style="color:#ffffff">Contact Us</a></li>
+                    <li style="padding-top:10px;"><a href="http://www.clearchoice.com/" title="ClearChoice.com" target="_blank" style="color:#ffffff">ClearChoice.com</a></li>
+                    <li style="padding-top:10px;"><a href="http://blog.clearchoice.com/" title="ClearChoice Blog" target="_blank" style="color:#ffffff">ClearChoice Blog</a></li>
+                  </ul></td>
+              </tr>
+            </table></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr style="background-color:#2c86c3; color:#ffffff; font-size:9pt">
+          <td>&nbsp;</td>
+          <td><p style="margin-top:30px;">To ensure you can receive our future emails, please add <a href="mailto:info@clearchoice.com" title="info@clearchoice.com" style="color:#89d3ff">info@clearchoice.com</a> to your address book.</p>
+            <p style="margin-bottom:70px;">© 2013 ClearChoice Management Services®, <br />
+              8350 E. Crescent Pkwy, Suite 100, Greenwood Village, CO 80111<br />
+              All Rights Reserved  l <a href="http://www.clearchoice.com/Privacy-Policy" title="Privacy Policy" target="_blank" style="color:#89d3ff">Privacy Policy </a></p></td>
+          <td>&nbsp;</td>
+        </tr>
+      </tbody>
+    </table>
+  </messaging:htmlEmailBody>
+</messaging:emailTemplate>

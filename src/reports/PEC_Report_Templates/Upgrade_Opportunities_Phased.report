@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>FK_$Opportunity.Prosth_Exam_Paid_Date__c</field>
+    </columns>
+    <columns>
+        <field>Treatment_Plan__c.Treatment_Option__c</field>
+    </columns>
+    <columns>
+        <field>FK_NAME</field>
+    </columns>
+    <columns>
+        <field>FK_PC_EMAIL</field>
+    </columns>
+    <description>These are Prostho Exams that received phased treatment.</description>
+    <filter>
+        <booleanFilter>1 OR 2 OR 3</booleanFilter>
+        <criteriaItems>
+            <column>Treatment_Plan__c.Treatment_Option__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Upper and Lower Phased Treatment</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Treatment_Plan__c.Treatment_Option__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Upper Phased Treatment</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Treatment_Plan__c.Treatment_Option__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Lower Phased Treatment</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Upgrade Opportunities (Phased)</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Treatment_Plan__c@Treatment_Plan__c.Opportunity__c</reportType>
+    <scope>user</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Treatment_Plan__c.Treatment_Option__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

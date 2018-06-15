@@ -1,0 +1,21 @@
+<apex:page standardController="Lead">
+
+    <apex:remoteObjects jsNamespace="RemoteObjectModel">
+        <apex:remoteObjectModel name="Lead" jsShorthand="lead" fields="Distance_To_Center__c"></apex:remoteObjectModel>
+    </apex:remoteObjects>
+
+    <apex:form >
+        <apex:messages />
+        <apex:inputField value="{!lead.Distance_To_Center__c}"/>
+        <apex:commandButton action="{!save}" value="Save"/>
+        <!-- <apex:pageBlock title="Update Distance To Center" mode="edit">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton action="{!save}" value="Save"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="1">
+                <apex:inputField value="{!lead.Distance_To_Center__c}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock> -->
+    </apex:form>
+
+</apex:page>

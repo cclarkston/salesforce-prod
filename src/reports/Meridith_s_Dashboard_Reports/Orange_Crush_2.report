@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Lead$Center_Location__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Name</field>
+    </columns>
+    <columns>
+        <field>Lead$Pre_Screen__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Lead_Type__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Consult_Inventory__r$Consult_Completed__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Consult_Inventory__r$Consult_Show_Status__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Lead$Pre_Screen__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Not Checked,Red,Blue (No Hit),Website Down-No Prescreen,PO Box,Insufficient Information</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$LeadScore__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Yellow</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Call_Result__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Consultation Scheduled,Same Day Rescheduled Consult</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Orange Crush 2</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Prospective_Patients_with_Consult_Inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead.Consult_Inventory__r$Apt_Date__c</dateColumn>
+        <interval>INTERVAL_YESTERDAY</interval>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_58429453</developerName>
+        <masterLabel>Campaign Name</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>CAMPAIGN_NAME</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Web Lead- Online Schedule</sourceValue>
+            </sourceValues>
+            <value>Online Schedule</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Web Lead-Click to Call</sourceValue>
+            </sourceValues>
+            <value>Click to Call</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Web Lead-Promise Keeper</sourceValue>
+            </sourceValues>
+            <value>Promise Keeper</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>WTL_1_11/11_11/17/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_11/18_11/24/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_11/25_12/1/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_11/4_11/10/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_10/14_10/20/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_10/21_10/27/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_10/28_11/3/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_10/7_10/13/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_12/16_12/22/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_12/23_12/29/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_12/2_12/8/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_12/9_12/15/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_12/30_1/5/2013</sourceValue>
+            </sourceValues>
+            <value>WTL</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_30267014</developerName>
+        <masterLabel>Campaign Type</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>CAMPAIGN_NAME</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Web Lead- Online Schedule</sourceValue>
+            </sourceValues>
+            <value>Online Schedule</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Web Lead-Click to Call</sourceValue>
+            </sourceValues>
+            <value>Click to Call</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Web Lead-Promise Keeper</sourceValue>
+            </sourceValues>
+            <value>Promise Keeper</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>WTL_1_10/14_10/20/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_10/21_10/27/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_10/28_11/3/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_10/7_10/13/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_11/11_11/17/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_11/18_11/24/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_11/25_12/1/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_11/4_11/10/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_12/16_12/22/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_12/23_12/29/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_12/2_12/8/2012</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>WTL_1_12/9_12/15/2012</sourceValue>
+            </sourceValues>
+            <value>WTL_1</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_72928033</developerName>
+        <masterLabel>Pre Screen</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Lead.Pre_Screen__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Green</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Yellow</sourceValue>
+            </sourceValues>
+            <value>GY</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Red</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Blue (No Hit)</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Insufficient Information</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>PO Box</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Website Down-No Prescreen</sourceValue>
+            </sourceValues>
+            <value>RB</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Not Checked</sourceValue>
+            </sourceValues>
+            <value>Not Checked</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_61261800</developerName>
+        <masterLabel>Promise Keeper</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>CAMPAIGN_NAME</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Web Lead-Promise Keeper</sourceValue>
+            </sourceValues>
+            <value>Promise Keeper</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Web Lead-Click to Call</sourceValue>
+            </sourceValues>
+            <value>Click to Call</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Web Lead- Online Schedule</sourceValue>
+            </sourceValues>
+            <value>Online Schedule</value>
+        </values>
+    </buckets>
+    <filter>
+        <criteriaItems>
+            <column>Campaign.Phone_Number__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>contains</operator>
+            <value>ccwebsite</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>MEMBER_CREATED_DATE</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>YESTERDAY</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_58429453</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Lead.Call_Result__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_72928033</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Web Lead Schedule Overview- Huddle</name>
+    <params>
+        <name>scopeid</name>
+        <value></value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CampaignLeadLifetime</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+</Report>

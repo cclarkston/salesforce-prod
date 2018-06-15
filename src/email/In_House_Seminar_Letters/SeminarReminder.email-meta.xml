@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email Reminder to confirm appointment.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>ClearChoice_Letterhead</letterhead>
+    <name>Seminar Reminder</name>
+    <style>freeForm</style>
+    <subject>REMEMBER your Consultation Appointment with ClearChoice Dental</subject>
+    <textOnly>Hello {!Lead.FirstName},
+ 
+Just a quick reminder about your reservation to attend the FREE patient seminar at ClearChoice Dental Implant Center on {!Lead.Well_Formatted_Date__c} at {!Lead.Well_Formatted_Time__c}.
+ 
+We have reserved a seat for you at the seminar to hear our doctors and team. You will also receive a free 3D CAT scan.  
+ 
+We do request a call at {!Lead.Center_Phone_Number__c} to verbally confirm that you will be at this seminar.  If something has come up and you can&apos;t make it, please notify us know within 48 hours so that we can offer the time to another patient.  You may also respond to this email.
+ 
+ 
+Best regards,
+ 
+{!Lead.OwnerFullName}
+Dental Implant Consultant
+
+ClearChoice Dental Implant Center
+{!Lead.Center_Address__c}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,5 @@
+<apex:page controller="rpt_unconverted_contacts" cache="false" contentType="text/csv#{!file_name}" language="en-US"  readonly="true">{!file_header}
+<apex:repeat value="{!csv_output}" var="output_list">
+    {!output_list.output_line}
+</apex:repeat>  
+</apex:page>

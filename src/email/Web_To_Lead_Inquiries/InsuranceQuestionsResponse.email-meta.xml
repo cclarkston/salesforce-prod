@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sent to Web to Lead inquiries requesting information on payment by insurance.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>ClearChoice_Letterhead</letterhead>
+    <name>Insurance Questions Response</name>
+    <style>freeForm</style>
+    <subject>Response to Insurance Inquiry</subject>
+    <textOnly>Hello {!Lead.FirstName},
+
+
+ClearChoice Dental Implant Center is not a contracted provider with any dental insurance company.  ClearChoice collects the fee for service in full or sets up monthly payments.  Our company is happy to help you submit a dental insurance claim for services rendered.  Usually the patient gets the yearly maximum benefit allowed by his/her plan.  
+Sincerely, 
+ 
+
+{!Lead.OwnerFullName}
+Dental implant Consultant
+ClearChoice Dental Implant Center</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

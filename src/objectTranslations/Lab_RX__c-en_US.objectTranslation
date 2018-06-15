@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Lab RX</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Lab RXs</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Lab RXs --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Acryllic Shade --></label>
+        <name>Acryllic_Shade__c</name>
+    </fields>
+    <fields>
+        <label><!-- BR Lower Anterior --></label>
+        <name>BR_Lower_Anterior__c</name>
+    </fields>
+    <fields>
+        <label><!-- BR Upper anterior --></label>
+        <name>BR_Upper_anterior__c</name>
+    </fields>
+    <fields>
+        <label><!-- BR lower left --></label>
+        <name>BR_lower_left__c</name>
+    </fields>
+    <fields>
+        <label><!-- BR lower right --></label>
+        <name>BR_lower_right__c</name>
+    </fields>
+    <fields>
+        <label><!-- BR upper left --></label>
+        <name>BR_upper_left__c</name>
+    </fields>
+    <fields>
+        <label><!-- BR upper right --></label>
+        <name>BR_upper_right__c</name>
+    </fields>
+    <fields>
+        <label><!-- Clinical Apt Calendar --></label>
+        <name>Clinical_Apt_Calendar__c</name>
+        <relationshipLabel><!-- Lab RXs --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Comments --></label>
+        <name>Comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- DA04 --></label>
+        <name>DA04__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description notes --></label>
+        <name>Description_notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Display Name --></label>
+        <name>Display_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Due Date --></label>
+        <name>Due_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form type --></label>
+        <name>Form_type__c</name>
+        <picklistValues>
+            <masterLabel>General</masterLabel>
+            <translation><!-- General --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Surgical</masterLabel>
+            <translation><!-- Surgical --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- LA04 --></label>
+        <name>LA04__c</name>
+    </fields>
+    <fields>
+        <label><!-- MdCD --></label>
+        <name>MdCD__c</name>
+    </fields>
+    <fields>
+        <label><!-- MdRPD --></label>
+        <name>MdRPD__c</name>
+    </fields>
+    <fields>
+        <label><!-- Midline Notes --></label>
+        <name>Midline_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Midline maintain existing --></label>
+        <name>Midline_maintain_existing__c</name>
+    </fields>
+    <fields>
+        <label><!-- Midline move left --></label>
+        <name>Midline_move_left__c</name>
+    </fields>
+    <fields>
+        <label><!-- Midline move right --></label>
+        <name>Midline_move_right__c</name>
+    </fields>
+    <fields>
+        <label><!-- Midline set off opposing --></label>
+        <name>Midline_set_off_opposing__c</name>
+    </fields>
+    <fields>
+        <label><!-- MxCD --></label>
+        <name>MxCD__c</name>
+    </fields>
+    <fields>
+        <label><!-- Next Apt Date --></label>
+        <name>Next_Apt_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Next POT Apt --></label>
+        <name>Next_POT_Apt__c</name>
+        <relationshipLabel><!-- Lab RXs --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Occlusal Plan Maintain Existing --></label>
+        <name>Occlusal_Plan_Maintain_Existing__c</name>
+    </fields>
+    <fields>
+        <label><!-- Occlusal Plane Other --></label>
+        <name>Occlusal_Plane_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Occlusal Plane --></label>
+        <name>Occlusal_Plane__c</name>
+        <picklistValues>
+            <masterLabel>Maintain Existing</masterLabel>
+            <translation><!-- Maintain Existing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+        <relationshipLabel><!-- Lab RXs --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Overlap Freeway Space --></label>
+        <name>Overlap_Freeway_Space__c</name>
+    </fields>
+    <fields>
+        <label><!-- Overlap Horizontal --></label>
+        <name>Overlap_Horizontal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Overlap Vertical --></label>
+        <name>Overlap_Vertical__c</name>
+    </fields>
+    <fields>
+        <label><!-- Patient POT --></label>
+        <name>Patient_POT__c</name>
+        <relationshipLabel><!-- Lab RXs --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Provider --></label>
+        <name>Provider__c</name>
+        <relationshipLabel><!-- Lab RXs (Provider) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Provisional RPD teeth --></label>
+        <name>Provisional_RPD_teeth__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference Appointment --></label>
+        <name>Reference_Appointment__c</name>
+        <relationshipLabel><!-- Lab RXs (Reference Appointment) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Review Time --></label>
+        <name>Review_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reviewed By --></label>
+        <name>Reviewed_By__c</name>
+        <relationshipLabel><!-- Lab RXs (Reviewed By) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- SingleMultiple --></label>
+        <name>SingleMultiple__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tooth Mould --></label>
+        <name>Tooth_Mould__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tooth Shade Other --></label>
+        <name>Tooth_Shade_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tooth Shade --></label>
+        <name>Tooth_Shade__c</name>
+        <picklistValues>
+            <masterLabel>A1</masterLabel>
+            <translation><!-- A1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>A2</masterLabel>
+            <translation><!-- A2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>A3</masterLabel>
+            <translation><!-- A3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>A3.5</masterLabel>
+            <translation><!-- A3.5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>A4</masterLabel>
+            <translation><!-- A4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B1</masterLabel>
+            <translation><!-- B1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B2</masterLabel>
+            <translation><!-- B2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B3</masterLabel>
+            <translation><!-- B3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B4</masterLabel>
+            <translation><!-- B4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BL2</masterLabel>
+            <translation><!-- BL2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BL3</masterLabel>
+            <translation><!-- BL3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>C1</masterLabel>
+            <translation><!-- C1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>C2</masterLabel>
+            <translation><!-- C2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>C3</masterLabel>
+            <translation><!-- C3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>C4</masterLabel>
+            <translation><!-- C4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D1</masterLabel>
+            <translation><!-- D1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D2</masterLabel>
+            <translation><!-- D2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D3</masterLabel>
+            <translation><!-- D3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D4</masterLabel>
+            <translation><!-- D4 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- UA04 --></label>
+        <name>UA04__c</name>
+    </fields>
+    <fields>
+        <label><!-- Vertical Close --></label>
+        <name>Vertical_Close__c</name>
+    </fields>
+    <fields>
+        <label><!-- Vertical Maintain Existing --></label>
+        <name>Vertical_Maintain_Existing__c</name>
+    </fields>
+    <fields>
+        <label><!-- Vertical Open --></label>
+        <name>Vertical_Open__c</name>
+    </fields>
+    <fields>
+        <label><!-- Whitening Tray Note --></label>
+        <name>Whitening_Tray_Note__c</name>
+    </fields>
+    <fields>
+        <label><!-- Whitening Trays --></label>
+        <name>Whitening_Trays__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- isactive --></label>
+        <name>isactive__c</name>
+    </fields>
+    <fields>
+        <label><!-- mxRPD --></label>
+        <name>mxRPD__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

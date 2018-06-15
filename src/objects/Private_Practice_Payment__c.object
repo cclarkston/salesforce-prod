@@ -1,0 +1,1142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Contains payment record information tied to private practice payments. This is being done to remove payment info from Windent.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Non-Comission Payments</relationshipLabel>
+        <relationshipName>Non_Comission_Payments</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Backdated_Payment__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This is flagged as true anytime a payment date is moved to a point in time &lt; today.</description>
+        <externalId>false</externalId>
+        <label>Backdated Payment</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CC_Sales_Order__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>CC Sales Order</label>
+        <referenceTo>Sales_Order__c</referenceTo>
+        <relationshipLabel>Non-Comission Payments</relationshipLabel>
+        <relationshipName>Non_Comission_Payments</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Center_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASESAFEID(BLANKVALUE(
+BLANKVALUE(Private_Practice_Patient__r.Center__c, Opportunity__r.Account.Center__c),
+Account__r.Center__c))</formula>
+        <label>Center ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Center_Location__c</fullName>
+        <description>Used to control the doctor picklist.  Set by trigger.</description>
+        <externalId>false</externalId>
+        <label>Center Location</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Atlanta</fullName>
+                    <default>false</default>
+                    <label>Atlanta</label>
+                </value>
+                <value>
+                    <fullName>Atlanta Alpharetta</fullName>
+                    <default>false</default>
+                    <label>Atlanta Alpharetta</label>
+                </value>
+                <value>
+                    <fullName>Austin</fullName>
+                    <default>false</default>
+                    <label>Austin</label>
+                </value>
+                <value>
+                    <fullName>Boston Woburn</fullName>
+                    <default>false</default>
+                    <label>Boston Woburn</label>
+                </value>
+                <value>
+                    <fullName>Charlotte</fullName>
+                    <default>false</default>
+                    <label>Charlotte</label>
+                </value>
+                <value>
+                    <fullName>Chicago</fullName>
+                    <default>false</default>
+                    <label>Chicago</label>
+                </value>
+                <value>
+                    <fullName>Chicago Downers Grove</fullName>
+                    <default>false</default>
+                    <label>Chicago Downers Grove</label>
+                </value>
+                <value>
+                    <fullName>Chicago Schaumburg</fullName>
+                    <default>false</default>
+                    <label>Chicago Schaumburg</label>
+                </value>
+                <value>
+                    <fullName>Cleveland</fullName>
+                    <default>false</default>
+                    <label>Cleveland</label>
+                </value>
+                <value>
+                    <fullName>Columbia</fullName>
+                    <default>false</default>
+                    <label>Columbia</label>
+                </value>
+                <value>
+                    <fullName>Dallas</fullName>
+                    <default>false</default>
+                    <label>Dallas</label>
+                </value>
+                <value>
+                    <fullName>Dallas Arlington</fullName>
+                    <default>false</default>
+                    <label>Dallas Arlington</label>
+                </value>
+                <value>
+                    <fullName>Dallas Fort Worth</fullName>
+                    <default>false</default>
+                    <label>Dallas Fort Worth</label>
+                </value>
+                <value>
+                    <fullName>Denver</fullName>
+                    <default>false</default>
+                    <label>Denver</label>
+                </value>
+                <value>
+                    <fullName>Detroit Southfield</fullName>
+                    <default>false</default>
+                    <label>Detroit Southfield</label>
+                </value>
+                <value>
+                    <fullName>Houston</fullName>
+                    <default>false</default>
+                    <label>Houston</label>
+                </value>
+                <value>
+                    <fullName>Houston Woodlands</fullName>
+                    <default>false</default>
+                    <label>Houston Woodlands</label>
+                </value>
+                <value>
+                    <fullName>Kansas City</fullName>
+                    <default>false</default>
+                    <label>Kansas City</label>
+                </value>
+                <value>
+                    <fullName>Las Vegas</fullName>
+                    <default>false</default>
+                    <label>Las Vegas</label>
+                </value>
+                <value>
+                    <fullName>Miami Fort Lauderdale</fullName>
+                    <default>false</default>
+                    <label>Miami Fort Lauderdale</label>
+                </value>
+                <value>
+                    <fullName>Minneapolis</fullName>
+                    <default>false</default>
+                    <label>Minneapolis</label>
+                </value>
+                <value>
+                    <fullName>New Jersey Roseland</fullName>
+                    <default>false</default>
+                    <label>New Jersey Roseland</label>
+                </value>
+                <value>
+                    <fullName>New Market Not Yet Open</fullName>
+                    <default>false</default>
+                    <label>New Market Not Yet Open</label>
+                </value>
+                <value>
+                    <fullName>Orlando Maitland</fullName>
+                    <default>false</default>
+                    <label>Orlando Maitland</label>
+                </value>
+                <value>
+                    <fullName>Philadelphia Fort Washington</fullName>
+                    <default>false</default>
+                    <label>Philadelphia Fort Washington</label>
+                </value>
+                <value>
+                    <fullName>Phoenix</fullName>
+                    <default>false</default>
+                    <label>Phoenix</label>
+                </value>
+                <value>
+                    <fullName>Portland</fullName>
+                    <default>false</default>
+                    <label>Portland</label>
+                </value>
+                <value>
+                    <fullName>Sacramento</fullName>
+                    <default>false</default>
+                    <label>Sacramento</label>
+                </value>
+                <value>
+                    <fullName>Salt Lake City</fullName>
+                    <default>false</default>
+                    <label>Salt Lake City</label>
+                </value>
+                <value>
+                    <fullName>San Antonio</fullName>
+                    <default>false</default>
+                    <label>San Antonio</label>
+                </value>
+                <value>
+                    <fullName>San Diego</fullName>
+                    <default>false</default>
+                    <label>San Diego</label>
+                </value>
+                <value>
+                    <fullName>San Francisco Daly City</fullName>
+                    <default>false</default>
+                    <label>San Francisco Daly City</label>
+                </value>
+                <value>
+                    <fullName>San Jose</fullName>
+                    <default>false</default>
+                    <label>San Jose</label>
+                </value>
+                <value>
+                    <fullName>Seattle</fullName>
+                    <default>false</default>
+                    <label>Seattle</label>
+                </value>
+                <value>
+                    <fullName>St. Louis</fullName>
+                    <default>false</default>
+                    <label>St. Louis</label>
+                </value>
+                <value>
+                    <fullName>Tampa</fullName>
+                    <default>false</default>
+                    <label>Tampa</label>
+                </value>
+                <value>
+                    <fullName>Unknown</fullName>
+                    <default>false</default>
+                    <label>Unknown</label>
+                </value>
+                <value>
+                    <fullName>Walnut Creek</fullName>
+                    <default>false</default>
+                    <label>Walnut Creek</label>
+                </value>
+                <value>
+                    <fullName>Washington Rockville</fullName>
+                    <default>false</default>
+                    <label>Washington Rockville</label>
+                </value>
+                <value>
+                    <fullName>Washington Tysons Corner</fullName>
+                    <default>false</default>
+                    <label>Washington Tysons Corner</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Collected_Date__c</fullName>
+        <description>Date a payment was last marked in a collected state - this update gets handled by a trigger of field update (trigger at the moment). Used for a formula field</description>
+        <externalId>false</externalId>
+        <label>Collected Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Comission_Doctor__c</fullName>
+        <description>Doctor who will get credit for the private practice payment</description>
+        <externalId>false</externalId>
+        <label>Comission Doctor</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Center_Location__c</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>No Comission</fullName>
+                    <default>false</default>
+                    <label>No Comission</label>
+                </value>
+                <value>
+                    <fullName>Caesar Butura</fullName>
+                    <default>false</default>
+                    <label>Caesar Butura</label>
+                </value>
+                <value>
+                    <fullName>Ole Jensen</fullName>
+                    <default>false</default>
+                    <label>Ole Jensen</label>
+                </value>
+                <value>
+                    <fullName>Dan Gailndo</fullName>
+                    <default>false</default>
+                    <label>Dan Gailndo</label>
+                </value>
+                <value>
+                    <fullName>Seung Paik</fullName>
+                    <default>false</default>
+                    <label>Seung Paik</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Portland</controllingFieldValue>
+                <controllingFieldValue>Sacramento</controllingFieldValue>
+                <controllingFieldValue>Salt Lake City</controllingFieldValue>
+                <controllingFieldValue>San Antonio</controllingFieldValue>
+                <controllingFieldValue>San Diego</controllingFieldValue>
+                <controllingFieldValue>San Francisco Daly City</controllingFieldValue>
+                <controllingFieldValue>San Jose</controllingFieldValue>
+                <controllingFieldValue>Seattle</controllingFieldValue>
+                <controllingFieldValue>St. Louis</controllingFieldValue>
+                <controllingFieldValue>Unknown</controllingFieldValue>
+                <controllingFieldValue>Dallas</controllingFieldValue>
+                <controllingFieldValue>Walnut Creek</controllingFieldValue>
+                <controllingFieldValue>Dallas Arlington</controllingFieldValue>
+                <controllingFieldValue>Washington Rockville</controllingFieldValue>
+                <controllingFieldValue>Dallas Fort Worth</controllingFieldValue>
+                <controllingFieldValue>Washington Tysons Corner</controllingFieldValue>
+                <controllingFieldValue>Denver</controllingFieldValue>
+                <controllingFieldValue>Houston</controllingFieldValue>
+                <controllingFieldValue>Houston Woodlands</controllingFieldValue>
+                <controllingFieldValue>Kansas City</controllingFieldValue>
+                <controllingFieldValue>Las Vegas</controllingFieldValue>
+                <controllingFieldValue>Miami Fort Lauderdale</controllingFieldValue>
+                <controllingFieldValue>Minneapolis</controllingFieldValue>
+                <controllingFieldValue>Atlanta</controllingFieldValue>
+                <controllingFieldValue>Austin</controllingFieldValue>
+                <controllingFieldValue>Charlotte</controllingFieldValue>
+                <controllingFieldValue>Chicago</controllingFieldValue>
+                <controllingFieldValue>Chicago Schaumburg</controllingFieldValue>
+                <controllingFieldValue>Cleveland</controllingFieldValue>
+                <controllingFieldValue>Columbia</controllingFieldValue>
+                <controllingFieldValue>New Market Not Yet Open</controllingFieldValue>
+                <controllingFieldValue>Phoenix</controllingFieldValue>
+                <valueName>No Comission</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Denver</controllingFieldValue>
+                <valueName>Ole Jensen</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Columbia</controllingFieldValue>
+                <valueName>Seung Paik</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Phoenix</controllingFieldValue>
+                <valueName>Caesar Butura</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Phoenix</controllingFieldValue>
+                <valueName>Dan Gailndo</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Confirmation_ID__c</fullName>
+        <description>This field will hold the Check # or Transaction ID/Authorization number for a credit card payment where appropriate.</description>
+        <externalId>false</externalId>
+        <label>Confirmation ID</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Coupon_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Coupon Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Allergan</fullName>
+                    <default>false</default>
+                    <label>Allergan</label>
+                </value>
+                <value>
+                    <fullName>$25 Off</fullName>
+                    <default>false</default>
+                    <label>$25 Off</label>
+                </value>
+                <value>
+                    <fullName>Give $25</fullName>
+                    <default>false</default>
+                    <label>Give $25</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Dental_Product_Amount__c</fullName>
+        <description>Portion of the payment allocated to the sale of products related to our dental business</description>
+        <externalId>false</externalId>
+        <label>Dental Product Amount</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Esthetics_Product_Amount__c</fullName>
+        <description>Portion of the payment allocated to the sale of products related to our esthetics business</description>
+        <externalId>false</externalId>
+        <label>Esthetics Product Amount</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Esthetics_Service_Amount__c</fullName>
+        <description>Portion of the payment allocated to the sale of services related to our esthetics business</description>
+        <externalId>false</externalId>
+        <label>Esthetics Service Amount</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Finance_Fee__c</fullName>
+        <description>Amount charged by finance company</description>
+        <externalId>false</externalId>
+        <label>Finance Fee</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Finance_Net_Collections_minus_GP__c</fullName>
+        <externalId>false</externalId>
+        <formula>if( Payment_Status_Formula__c = &apos;Collected&apos;, Net_Collection_Amount__c * -1, 
+if(Payment_Status_Formula__c = &apos;Refunded&apos;, Net_Collection_Amount__c, 0) 
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Finance Net Collections minus GP</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Insurance_Payment__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Insurance Payment</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Slipped__c</fullName>
+        <description>f Original Anticipated Payment Date &lt; Payment Date, Not Cancelled, Not Collected and Not Refunded then it has slipped.</description>
+        <externalId>false</externalId>
+        <formula>if( 
+(Original_Anticipated_Payment_Date__c &lt; Payment_Date__c) 
+&amp;&amp; 
+(Payment_Status_Formula__c = &apos;Anticipated&apos; || Payment_Status_Formula__c = &apos;HCF&apos;) 
+,&quot;Yes&quot;, &quot;No&quot;)</formula>
+        <label>Is Slipped</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NS_Payment_Method__c</fullName>
+        <description>Converts Salesforce payment types to NetSuite payment type terminology</description>
+        <externalId>false</externalId>
+        <formula>CASE(Payment_Type__c,
+&quot;Visa&quot;, &quot;Credit Card VS, MC, DS&quot;,
+&quot;Springstone&quot;, &quot;STONE&quot;,
+&quot;Cash&quot;, &quot;CASH&quot;,
+&quot;CareCredit&quot;, &quot;CARE&quot;,
+&quot;ACH&quot;, &quot;ACH&quot;,
+&quot;Check&quot;, &quot;CK&quot;,
+&quot;American Express&quot;, &quot;Credit Card VS, MC, DS&quot;,
+&quot;Master Card&quot;, &quot;Credit Card VS, MC, DS&quot;,
+&quot;Credit Card&quot;, &quot;Credit Card VS, MC, DS&quot;,
+&quot;Alphaeon&quot;, &quot;Alphaeon&quot;,
+&quot;Discover&quot;, &quot;Credit Card VS, MC, DS&quot;,
+&quot;Patient Preferred Financing&quot;, &quot;PPF&quot;,
+&quot;Wire&quot;, &quot;WIRE&quot;,
+&quot;Coupon&quot;, &quot;Coupon&quot;,
+&quot;Promotion&quot;,&quot;Promotion&quot;,
+&quot;Unrecognized payment type&quot;
+)</formula>
+        <label>NS Payment Method</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Net_Collection_Amount__c</fullName>
+        <externalId>false</externalId>
+        <formula>Payment_Amount__c - Finance_Fee__c - Writeoff_Amount__c - Tax_Amount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Net Collection Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Non-Comission Payments</relationshipLabel>
+        <relationshipName>Non_Comission_Payments</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Original_Anticipated_Payment_Date__c</fullName>
+        <description>Stores the value of payment date that was originally set (see field updates for the method)</description>
+        <externalId>false</externalId>
+        <label>Original Anticipated Payment Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Original_Payment_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>Original_Anticipated_Payment_Date__c</formula>
+        <label>Original Payment Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Parent_Owner__c</fullName>
+        <externalId>false</externalId>
+        <formula>/*BLANKVALUE( Opportunity__r.OwnerId ,  Private_Practice_Patient__r.OwnerId )*/
+BLANKVALUE(BLANKVALUE( Opportunity__r.OwnerId , Private_Practice_Patient__r.OwnerId ),Account__r.OwnerId)</formula>
+        <label>Parent Owner</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Past_Due__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(Payment_Date__c &lt; today() 
+&amp;&amp; (Payment_Status_Formula__c = &apos;Anticipated&apos; || Payment_Status_Formula__c = &apos;HCF&apos;), &quot;Yes&quot;, &quot;No&quot;)</formula>
+        <label>Past Due</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payment_Amount__c</fullName>
+        <description>Amount that will be collected</description>
+        <externalId>false</externalId>
+        <label>Payment Amount</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Date__c</fullName>
+        <description>Date the payment will be collected</description>
+        <externalId>false</externalId>
+        <label>Payment Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Status_Formula__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE(Payment_Status__c, 
+&quot;Anticipated&quot;,&quot;Anticipated&quot;, 
+&quot;Anticipated PPF&quot;,&quot;Anticipated&quot;, 
+&quot;Anticipated Promise Note&quot;,&quot;Anticipated&quot;, 
+&quot;Collected&quot;,&quot;Collected&quot;, 
+&quot;Collected Promise Note&quot;,&quot;Collected&quot;, 
+&quot;Collected PPF&quot;,&quot;Collected&quot;, 
+&quot;Anticipated Payment Cancelled&quot;,&quot;Cancelled&quot;, 
+&quot;Anticipated Payment Cancelled Write Off&quot;,&quot;Cancelled&quot;, 
+&quot;Anticipated PPF Cancelled&quot;,&quot;Cancelled&quot;, 
+&quot;Refund&quot;,&quot;Refunded&quot;, 
+&quot;HCF In Process&quot;,&quot;HCF&quot;, 
+&quot;NSF&quot;,&quot;Refunded&quot;, 
+&quot;&quot;)</formula>
+        <label>Payment Status (Formula)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payment_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Anticipated</fullName>
+                    <default>false</default>
+                    <label>Anticipated</label>
+                </value>
+                <value>
+                    <fullName>Collected</fullName>
+                    <default>false</default>
+                    <label>Collected</label>
+                </value>
+                <value>
+                    <fullName>Refund</fullName>
+                    <default>false</default>
+                    <label>Refund</label>
+                </value>
+                <value>
+                    <fullName>NSF</fullName>
+                    <default>false</default>
+                    <label>NSF</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Payment_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Cash</fullName>
+                    <default>false</default>
+                    <label>Cash</label>
+                </value>
+                <value>
+                    <fullName>Check</fullName>
+                    <default>false</default>
+                    <label>Check</label>
+                </value>
+                <value>
+                    <fullName>CareCredit</fullName>
+                    <default>false</default>
+                    <label>CareCredit</label>
+                </value>
+                <value>
+                    <fullName>Springstone</fullName>
+                    <default>false</default>
+                    <label>Springstone</label>
+                </value>
+                <value>
+                    <fullName>Alphaeon</fullName>
+                    <default>false</default>
+                    <label>Alphaeon</label>
+                </value>
+                <value>
+                    <fullName>TBD (Anticipated Payment)</fullName>
+                    <default>false</default>
+                    <label>TBD (Anticipated Payment)</label>
+                </value>
+                <value>
+                    <fullName>ACH</fullName>
+                    <default>false</default>
+                    <label>ACH</label>
+                </value>
+                <value>
+                    <fullName>Wire</fullName>
+                    <default>false</default>
+                    <label>Wire</label>
+                </value>
+                <value>
+                    <fullName>Patient Preferred Financing</fullName>
+                    <default>false</default>
+                    <label>Patient Preferred Financing</label>
+                </value>
+                <value>
+                    <fullName>American Express</fullName>
+                    <default>false</default>
+                    <label>American Express</label>
+                </value>
+                <value>
+                    <fullName>Visa</fullName>
+                    <default>false</default>
+                    <label>Visa</label>
+                </value>
+                <value>
+                    <fullName>Discover</fullName>
+                    <default>false</default>
+                    <label>Discover</label>
+                </value>
+                <value>
+                    <fullName>Master Card</fullName>
+                    <default>false</default>
+                    <label>Master Card</label>
+                </value>
+                <value>
+                    <fullName>Citi</fullName>
+                    <default>false</default>
+                    <label>Citi</label>
+                </value>
+                <value>
+                    <fullName>Coupon</fullName>
+                    <default>false</default>
+                    <label>Coupon</label>
+                </value>
+                <value>
+                    <fullName>Promotion</fullName>
+                    <default>false</default>
+                    <label>Promotion</label>
+                </value>
+                <value>
+                    <fullName>BD</fullName>
+                    <default>false</default>
+                    <label>BD</label>
+                </value>
+                <value>
+                    <fullName>Credit</fullName>
+                    <default>false</default>
+                    <label>Credit</label>
+                </value>
+                <value>
+                    <fullName>Aspire</fullName>
+                    <default>false</default>
+                    <label>Aspire</label>
+                </value>
+                <value>
+                    <fullName>Lending Club</fullName>
+                    <default>false</default>
+                    <label>Lending Club</label>
+                </value>
+                <value>
+                    <fullName>Series Credit</fullName>
+                    <default>false</default>
+                    <label>Series Credit</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Private_Practice_Patient__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Link to the private practice patient who is making the payment</description>
+        <externalId>false</externalId>
+        <label>Private Practice Patient</label>
+        <referenceTo>Private_Practice_Patient__c</referenceTo>
+        <relationshipName>Private_Practice_Payments</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Service_Date__c</fullName>
+        <description>Date the payment should be applied. Will default to payment date if left blank</description>
+        <externalId>false</externalId>
+        <label>Service Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Slipped_Payment_Other__c</fullName>
+        <description>Detailed description of the issue for a slipped payment record</description>
+        <externalId>false</externalId>
+        <label>Slipped Payment - Other</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Slipped_Payment_Reason__c</fullName>
+        <description>Reason for the payment date being adjusted</description>
+        <externalId>false</externalId>
+        <label>Slipped Payment Reason</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Waiting on 401k</fullName>
+                    <default>false</default>
+                    <label>Waiting on 401k</label>
+                </value>
+                <value>
+                    <fullName>Waiting on investments</fullName>
+                    <default>false</default>
+                    <label>Waiting on investments</label>
+                </value>
+                <value>
+                    <fullName>Loss of income</fullName>
+                    <default>false</default>
+                    <label>Loss of income</label>
+                </value>
+                <value>
+                    <fullName>Family Emergency</fullName>
+                    <default>false</default>
+                    <label>Family Emergency</label>
+                </value>
+                <value>
+                    <fullName>Health Issues</fullName>
+                    <default>false</default>
+                    <label>Health Issues</label>
+                </value>
+                <value>
+                    <fullName>Medical Clearance needed (so couldn&apos;t collect HCF)</fullName>
+                    <default>false</default>
+                    <label>Medical Clearance needed (so couldn&apos;t collect HCF)</label>
+                </value>
+                <value>
+                    <fullName>Medical Clearance needed and patient wouldn&apos;t pay yet</fullName>
+                    <default>false</default>
+                    <label>Medical Clearance needed and patient wouldn&apos;t pay yet</label>
+                </value>
+                <value>
+                    <fullName>Medical Clearance needed and doctor directed to not collect</fullName>
+                    <default>false</default>
+                    <label>Medical Clearance needed and doctor directed to not collect</label>
+                </value>
+                <value>
+                    <fullName>CTX results will not allow surgery for several months</fullName>
+                    <default>false</default>
+                    <label>CTX results will not allow surgery for several months</label>
+                </value>
+                <value>
+                    <fullName>Home Refinancing</fullName>
+                    <default>false</default>
+                    <label>Home Refinancing</label>
+                </value>
+                <value>
+                    <fullName>Vacation</fullName>
+                    <default>false</default>
+                    <label>Vacation</label>
+                </value>
+                <value>
+                    <fullName>Business Trip</fullName>
+                    <default>false</default>
+                    <label>Business Trip</label>
+                </value>
+                <value>
+                    <fullName>HCF In Process</fullName>
+                    <default>false</default>
+                    <label>HCF In Process</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Tax_Amount__c</fullName>
+        <defaultValue>0.00</defaultValue>
+        <externalId>false</externalId>
+        <label>Tax Amount</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Windent_Patient_Id__c</fullName>
+        <externalId>false</externalId>
+        <formula>if( ISBLANK( Private_Practice_Patient__c ),  Opportunity__r.Unique_Windent_ID__c  ,  Private_Practice_Patient__r.Unique_Windent_ID__c )</formula>
+        <label>Windent Patient Id</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Writeoff_Amount__c</fullName>
+        <description>Amount of the payment being written off</description>
+        <externalId>false</externalId>
+        <label>Writeoff Amount</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <label>Non-Comission Payment</label>
+    <nameField>
+        <displayFormat>PPP-{0000}</displayFormat>
+        <label>Private Practice Payment Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Non-Comission Payments</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Backdated_Check</fullName>
+        <active>true</active>
+        <description>Rule to prevent someone from backdating a payment date. RBD/RSM/and Refund Team should be exempt</description>
+        <errorConditionFormula>PRIORVALUE( Payment_Date__c ) &gt; Payment_Date__c 
+&amp;&amp; (Month(Today()) &gt; Month(Payment_Date__c) || Year(Today()) &gt; Year(Payment_Date__c)) 
+&amp;&amp; $UserRole.Name != &apos;Refund Team&apos; 
+&amp;&amp; $Profile.Name != &apos;RBD&apos; 
+&amp;&amp; $Profile.Name != &apos;System Administrator&apos;</errorConditionFormula>
+        <errorDisplayField>Payment_Date__c</errorDisplayField>
+        <errorMessage>You can not select a payment date from a prior period. Please contact your RSM/RBD/or the refund team for help.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Collected_Credit_Card</fullName>
+        <active>true</active>
+        <description>This rule is in place to make sure the pec chooses the actual credit card type, when marking any credit card payment as collected</description>
+        <errorConditionFormula>ISPICKVAL(Payment_Type__c, &apos;Credit Card&apos;) &amp;&amp; ISPICKVAL(Payment_Status__c,&apos;Collected&apos;)</errorConditionFormula>
+        <errorDisplayField>Payment_Type__c</errorDisplayField>
+        <errorMessage>You must change the payment type to the actual card type when marking this payment as collected</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Collected_Status_Lock</fullName>
+        <active>true</active>
+        <description>Block changing collected status on a record outside of the day it is selected</description>
+        <errorConditionFormula>PRIORVALUE( Payment_Status_Formula__c ) = &apos;Collected&apos; 
+&amp;&amp; PRIORVALUE( Payment_Status_Formula__c ) != Payment_Status_Formula__c 
+&amp;&amp; Today() &gt; Collected_Date__c</errorConditionFormula>
+        <errorDisplayField>Payment_Status__c</errorDisplayField>
+        <errorMessage>This payment has been locked into a collected state. You can not change it at this point. Please contact your RBD, RSM, or the refund team if you need assistance.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>FFee_Required_Check</fullName>
+        <active>true</active>
+        <description>Checks to see if we need to require the finance fee here</description>
+        <errorConditionFormula>(
+ISPICKVAL(Payment_Type__c, &apos;Chase Health&apos;) || ISPICKVAL(Payment_Type__c, &apos;CareCredit&apos;)   || ISPICKVAL(Payment_Type__c, &apos;Lending Club&apos;) ||
+ISPICKVAL(Payment_Type__c, &apos;Alphaeon&apos;) ||
+ISPICKVAL(Payment_Type__c, &apos;Springstone&apos;)
+)
+&amp;&amp; 
+(ISNULL(Finance_Fee__c) || Finance_Fee__c &lt;=0)
+&amp;&amp;
+ISPICKVAL(Payment_Status__c,&apos;Collected&apos;)</errorConditionFormula>
+        <errorDisplayField>Finance_Fee__c</errorDisplayField>
+        <errorMessage>You must enter a finance fee when collecting money from Chase Health, CareCredit, Lending Club, Alphaeon, or SpringStone.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>FFee_range</fullName>
+        <active>true</active>
+        <description>Checks to see if the finance fee for CareCredit or Lending Club is an acceptable value (helps protect against mistyping)</description>
+        <errorConditionFormula>(
+Finance_Fee__c &gt; 0
+&amp;&amp;
+Payment_Amount__c &gt; 0
+&amp;&amp; 
+(
+ISPICKVAL(Payment_Type__c, &apos;CareCredit&apos;) || ISPICKVAL(Payment_Type__c, &apos;Lending Club&apos;) || ISPICKVAL(Payment_Type__c, &apos;Alphaeon&apos;)
+)
+&amp;&amp;
+(Finance_Fee__c/Payment_Amount__c &lt; 0.018 || Finance_Fee__c/Payment_Amount__c &gt; 0.20)
+)
+||
+(Finance_Fee__c &gt; 0 &amp;&amp; Payment_Amount__c = 0)</errorConditionFormula>
+        <errorDisplayField>Finance_Fee__c</errorDisplayField>
+        <errorMessage>Typo? Expecting Finance Fee to be 1.9% - 20% of payment amount. Please contact IT if you believe there&apos;s a problem.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Payment_Confirmation_ID</fullName>
+        <active>true</active>
+        <description>Rule to require confirmation id is filled out when marking a credit card or check payment as collected</description>
+        <errorConditionFormula>(
+ISPICKVAL(Payment_Type__c , &apos;Check&apos;) || 
+ISPICKVAL(Payment_Type__c , &apos;Credit Card&apos;) || 
+ISPICKVAL(Payment_Type__c , &apos;American Express&apos;) || 
+ISPICKVAL(Payment_Type__c , &apos;Citi&apos;) || 
+ISPICKVAL(Payment_Type__c , &apos;Discover&apos;) || 
+ISPICKVAL(Payment_Type__c , &apos;Visa&apos;) ||
+(ISPICKVAL(Payment_Type__c , &apos;Coupon&apos;) &amp;&amp; ISPICKVAL(Coupon_Type__c, &apos;Allergan&apos;))
+) &amp;&amp; 
+ISPICKVAL(Payment_Status__c , &apos;Collected&apos;) &amp;&amp; ISBLANK(Confirmation_ID__c)</errorConditionFormula>
+        <errorDisplayField>Confirmation_ID__c</errorDisplayField>
+        <errorMessage>You must enter a value for the Confirmation ID field. If this is a check payment, then please use the check #. For credit cards, please enter the transaction id.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Payment_Slip_Reason</fullName>
+        <active>false</active>
+        <description>Rule to require that payment slip reason is filled out if the payment date doesn&apos;t match the original payment date</description>
+        <errorConditionFormula>ISPICKVAL( Slipped_Payment_Reason__c , &quot;&quot;) &amp;&amp; DATEVALUE(CreatedDate) &lt; today() &amp;&amp; Payment_Date__c &gt; Original_Anticipated_Payment_Date__c &amp;&amp; (ISCHANGED(Payment_Date__c) || ischanged(Slipped_Payment_Reason__c))</errorConditionFormula>
+        <errorDisplayField>Slipped_Payment_Reason__c</errorDisplayField>
+        <errorMessage>You must enter a slipped payment reason when changing the payment date</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Payment_Slipped_Other</fullName>
+        <active>false</active>
+        <description>Ensures a reason is filled out in the other section when someone selects this option from the slipped payment picklist</description>
+        <errorConditionFormula>Ispickval( Slipped_Payment_Reason__c , &quot;Other&quot;) &amp;&amp; LEN( Slipped_Payment_Other__c ) &lt; 4</errorConditionFormula>
+        <errorDisplayField>Slipped_Payment_Other__c</errorDisplayField>
+        <errorMessage>You must enter something valid for the Slipped Payment Other reason</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Refund_Status_Check</fullName>
+        <active>true</active>
+        <description>Rule should only allow refund to be set up by a system admin or someone in the Refund Team Role</description>
+        <errorConditionFormula>Payment_Status_Formula__c = &apos;Refunded&apos; &amp;&amp; $Profile.Name != &apos;System Administrator&apos; &amp;&amp; $UserRole.Name != &apos;Refund Team&apos;</errorConditionFormula>
+        <errorDisplayField>Payment_Status__c</errorDisplayField>
+        <errorMessage>Refunds can only be handled by the refund team.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Relationship_Check</fullName>
+        <active>true</active>
+        <description>Rule to make sure the payment is tied to a prosth exam, private practice patient, or account. Anything not tied to one of those is going to throw an error</description>
+        <errorConditionFormula>ISBLANK( Account__c ) &amp;&amp; ISBLANK( Private_Practice_Patient__c ) &amp;&amp; ISBLANK( Opportunity__c )</errorConditionFormula>
+        <errorMessage>Payment must be tied to either a prosth exam record, private practice patient, or a consult record.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Specified_Coupon_Amount_Discrepancy</fullName>
+        <active>true</active>
+        <description>Stops coupons with dedicated values from being assigned a different value. For example, you can&apos;t set a $25 coupon to be worth $30.</description>
+        <errorConditionFormula>ISPICKVAL(Payment_Type__c, &quot;Coupon&quot;)
+&amp;&amp;
+(ISPICKVAL(Coupon_Type__c, &quot;$25 Off&quot;) || ISPICKVAL(Coupon_Type__c, &quot;Give $25&quot;))
+&amp;&amp;
+(Payment_Amount__c &lt;&gt; 25)</errorConditionFormula>
+        <errorDisplayField>Payment_Amount__c</errorDisplayField>
+        <errorMessage>You can not change the payment amount of a coupon with a specified value.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

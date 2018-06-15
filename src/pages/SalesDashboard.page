@@ -1,0 +1,14 @@
+<apex:page controller="ctrl_SalesDashboard" showheader="false" sidebar="false">
+<a href='https://na2.salesforce.com/00O40000002xkJ9'>Total Starts:</a> {!TotalStarts}<br/>
+<a href='https://na2.salesforce.com/00O40000002xiNJ'>Net Starts</a> (excluding cancelled): {!NetStarts}<br/>
+<!-- CallBacks (excluding cancelled): {!CallBacks}<br/>-->
+<a href='https://na2.salesforce.com/00O40000002xkOn'>Same Day Starts:</a> {!sameDayStarts}<br/>
+<a href='https://na2.salesforce.com/00O40000002xiNY'>Net GYN Starts:</a> {!NetGYNStarts}<br/>
+Total GYN Consults: {!TotalGYNConsults}<br/>
+Gross Close Rate: {!GrossCloseRate}<br/>
+Same Day Close Rate: {!SameDateCloseRate}<br/>
+GYN Close Rate: {!GYNCloseRate}
+
+
+
+</apex:page>

@@ -1,0 +1,352 @@
+<apex:page controller="ctrl_salesranking" readonly="true" sidebar="false" showHeader="false" standardStylesheets="false">
+
+    <!-- Alon's version -->
+    <style>
+        * {
+            font-family: sans-serif;
+        }
+        table {
+            margin-bottom: 1em;
+        }
+        table.main {
+            width: 400px;
+            border-collapse: collapse;
+        }
+        table.main td {
+            padding: 5px;
+            font-size: medium;
+        }
+        table.main td:first-child {
+            font-weight: bold;
+        }
+        table.striped tbody tr:nth-child(odd){
+            background-color: aliceblue;
+        }
+        table.hover tbody tr:hover {
+            background-color: lightgray;
+        }
+        td {
+            text-align: left;
+        }
+        td:first-child {
+            text-align: left;
+            text-indent: .5em;
+        }
+        td a {
+            text-decoration: underline;
+        }
+        thead tr {
+        }
+        table.collections thead tr {
+            background-color: steelblue;
+        }
+        table.revenue thead tr {
+            background-color: cadetblue;
+        }
+        table.totals thead tr {
+            background-color: darkcyan;
+        }
+        table.cramped tbody td {
+            font-size: large;
+        }
+        table.cramped tbody td:first-child {
+            font-size: medium;
+        }
+        thead td {
+            color: white;
+            text-align: left;
+            font-weight: bold;
+            font-size: x-large !important;
+        }
+        thead.title td {
+            text-align: center;
+        }
+        .half {
+            display: inline-block;
+            vertical-align: top;
+            padding-left: 1em;
+            padding-right: 1em;
+        }
+        tfoot td:first-child {
+            font-size: medium;
+            text-align: center;
+            background-color: white;
+        }
+
+        body {
+            /*background-color: lightgray;*/
+        }
+
+        .content {
+            /*display: inline-block;
+            width: 960px;
+            height: 1080px;
+            margin: 0 25%;*/
+            background-color: white;
+            text-align: center;
+        }
+        #header {
+            margin-bottom: 2em;
+        }
+        .row {
+            margin-bottom: 2em;
+        }
+        h1 {
+            display: block;
+            font-size: xx-large;
+            color: black;
+            margin-top: .5em;
+            margin-bottom: .5em;
+        }
+        h2 {
+            display: inline-block;
+            font-size: x-large;
+            color: gray;
+            margin-top: .5em;
+            margin-bottom: .5em;
+        }
+
+        select {
+            font-size: x-large;
+            color: darkslategray;
+            border-color: lightgray;
+            background-color: transparent;
+            text-align-last: center;
+            vertical-align: middle;
+            padding-left: .5em;
+            border-style: solid;
+            border-width: 0px 0px 2px 0px;
+        }
+
+        .waitingSearchDiv {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-color: white;
+            opacity: 0.50;
+        }
+    </style>
+
+    <apex:form >
+        <apex:actionFunction name="interval_change" action="{!change_report_interval}" rerender="main_holder, message_holder" status="status_load"/>
+        <apex:actionFunction name="set" action="{!change_report_interval}" rerender="main_holder, message_holder" status="status_load"/>
+
+        <apex:actionstatus id="status_load">
+            <apex:facet name="start">
+                <div class="waitingSearchDiv" id="el_loading" style="">
+                    <div class="waitingHolder" >
+                        <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                        <span class="waitingDescription">Loading...</span>
+                    </div>
+                </div>
+            </apex:facet>
+        </apex:actionstatus>
+
+        <apex:outputPanel id="message_holder" layout="block" style="padding-left:20px;font-weight:bold;color:red;font-size:12pt;">
+            <apex:messages />
+        </apex:outputPanel>
+
+
+        <div class="content">
+            <div id="header">
+                <h1>Sales Rankings</h1>
+                <!-- <h2>Report Interval:</h2> -->
+                <apex:selectList value="{!report_interval}" multiselect="false" size="1" onchange="interval_change();">
+                    <apex:selectOptions value="{!IntervalOptions}"></apex:selectoptions>
+                </apex:selectList>
+            </div>
+
+            <apex:outputPanel id="main_holder">
+                <apex:actionPoller reRender="main_holder" interval="300" status="status_load"/>
+                <h2>Collections per Consult (CPC)</h2>
+                <div id="collections-per-consult" class="row">
+                    <div class="half">
+                        <apex:outputPanel id="center_collections">
+                            <table class="main hover striped collections">
+                                <thead>
+                                    <tr>
+                                        <td>Center</td>
+                                        <apex:outputPanel rendered="{!$CurrentPage.parameters.Detailed == 'true'}">
+                                            <td>Starts</td>
+                                            <td>Consults</td>
+                                        </apex:outputPanel>
+                                        <td>CPC</td>
+                                        <td>TCR</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <apex:repeat value="{!center_collections_per_consult}" var="center_collections" >
+                                        <tr>
+                                            <td>{!center_collections.display_name}</td>
+                                            <apex:outputPanel rendered="{!$CurrentPage.parameters.Detailed == 'true'}">
+                                                <td>{!center_collections.starts}</td>
+                                                <td>{!center_collections.consults}</td>
+                                            </apex:outputPanel>
+                                            <td>
+                                                <apex:outputText value="{0,number,$##,##,##0}" >
+                                                    <apex:param value="{!center_collections.collections_per_consult}" />
+                                                </apex:outputtext>
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{0,number,##,##,##0.00%}" >
+                                                    <apex:param value="{!center_collections.close_rate}" />
+                                                </apex:outputtext>
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </tbody>
+                                <!-- <tfoot>
+                                    <tr>
+                                        <td colspan="3">
+                                            <apex:commandlink rendered="{!center_limit}" value="Show all centers" action="{!display_all_center}" rerender="center_collections" status="status_load" />
+                                        </td>
+                                    </tr>
+                                </tfoot> -->
+                            </table>
+                        </apex:outputPanel>
+                    </div>
+                    <div class="half">
+                        <apex:outputPanel id="pec_collections">
+                            <table class="main hover striped collections">
+                                <thead>
+                                    <tr>
+                                        <td>PEC</td>
+                                        <apex:outputPanel rendered="{!$CurrentPage.parameters.Detailed == 'true'}">
+                                            <td>Starts</td>
+                                            <td>Consults</td>
+                                        </apex:outputPanel>
+                                        <td>CPC</td>
+                                        <td>TCR</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <apex:repeat value="{!pec_collections_per_consult}" var="pec_collections" >
+                                        <tr>
+                                            <td>{!pec_collections.display_name}</td>
+                                            <apex:outputPanel rendered="{!$CurrentPage.parameters.Detailed == 'true'}">
+                                                <td>{!pec_collections.starts}</td>
+                                                <td>{!pec_collections.consults}</td>
+                                            </apex:outputPanel>
+                                            <td>
+                                                <apex:outputText value="{0,number,$##,##,##0}" >
+                                                    <apex:param value="{!pec_collections.collections_per_consult}" />
+                                                </apex:outputtext>
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{0,number,##,##,##0.00%}" >
+                                                    <apex:param value="{!pec_collections.close_rate}" />
+                                                </apex:outputtext>
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </tbody>
+                                <!-- <tfoot>
+                                    <tr>
+                                        <td colspan="3">
+                                            <apex:commandlink rendered="{!pec_limit}" value="Show all PECs" action="{!display_all_pec}" rerender="pec_collections" status="status_load" />
+                                        </td>
+                                    </tr>
+                                </tfoot> -->
+                            </table>
+                        </apex:outputPanel>
+                    </div>
+                </div>
+
+                <h2>Average Revenue per Start (ARPS)</h2>
+                <div id="revenue-per-start" class="row">
+                    <div class="half">
+                        <apex:outputPanel id="center_revenue">
+                            <table class="main hover striped revenue">
+                                <thead>
+                                    <tr>
+                                        <td>Center</td>
+                                        <apex:outputPanel rendered="{!$CurrentPage.parameters.Detailed == 'true'}">
+                                            <td>Starts</td>
+                                            <td>Consults</td>
+                                        </apex:outputPanel>
+                                        <td>ARPS</td>
+                                        <td>TCR</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <apex:repeat value="{!center_revenue_per_start}" var="center_revenue" >
+                                        <tr>
+                                            <td>{!center_revenue.display_name}</td>
+                                            <apex:outputPanel rendered="{!$CurrentPage.parameters.Detailed == 'true'}">
+                                                <td>{!center_revenue.starts}</td>
+                                                <td>{!center_revenue.consults}</td>
+                                            </apex:outputPanel>
+                                            <td>
+                                                <apex:outputText value="{0,number,$##,##,##0}" >
+                                                    <apex:param value="{!center_revenue.revenue_per_start}" />
+                                                </apex:outputtext>
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{0,number,##,##,##0.00%}" >
+                                                    <apex:param value="{!center_revenue.close_rate}" />
+                                                </apex:outputtext>
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </tbody>
+                                <!-- <tfoot>
+                                    <tr>
+                                        <td colspan="3">
+                                            <apex:commandlink rendered="{!center_limit}" value="Show all centers" action="{!display_all_center}" rerender="center_revenue" status="status_load" />
+                                        </td>
+                                    </tr>
+                                </tfoot> -->
+                            </table>
+                        </apex:outputPanel>
+                    </div>
+                    <div class="half">
+                        <apex:outputPanel id="pec_revenue">
+                            <table class="main hover striped revenue">
+                                <thead>
+                                    <tr>
+                                        <td>PEC</td>
+                                        <apex:outputPanel rendered="{!$CurrentPage.parameters.Detailed == 'true'}">
+                                            <td>Starts</td>
+                                            <td>Consults</td>
+                                        </apex:outputPanel>
+                                        <td>ARPS</td>
+                                        <td>TCR</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <apex:repeat value="{!pec_revenue_per_start}" var="pec_revenue" >
+                                        <tr>
+                                            <td>{!pec_revenue.display_name}</td>
+                                            <apex:outputPanel rendered="{!$CurrentPage.parameters.Detailed == 'true'}">
+                                                <td>{!pec_revenue.starts}</td>
+                                                <td>{!pec_revenue.consults}</td>
+                                            </apex:outputPanel>
+                                            <td>
+                                                <apex:outputText value="{0,number,$##,##,##0}" >
+                                                    <apex:param value="{!pec_revenue.revenue_per_start}" />
+                                                </apex:outputtext>
+                                            </td>
+                                            <td>
+                                                <apex:outputText value="{0,number,##,##,##0.00%}" >
+                                                    <apex:param value="{!pec_revenue.close_rate}" />
+                                                </apex:outputtext>
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </tbody>
+                                <!-- <tfoot>
+                                    <tr>
+                                        <td colspan="3">
+                                            <apex:commandlink rendered="{!pec_limit}" value="Show all PECs" action="{!display_all_pec}" rerender="pec_revenue" status="status_load" />
+                                        </td>
+                                    </tr>
+                                </tfoot> -->
+                            </table>
+                        </apex:outputPanel>
+                    </div>
+                </div>
+            </apex:outputPanel>
+        </div>
+    </apex:form>
+
+</apex:page>

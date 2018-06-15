@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Lead$Call_Center_Agent_Team__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Activities$Owner</field>
+    </columns>
+    <columns>
+        <field>Lead$Name</field>
+    </columns>
+    <columns>
+        <field>Lead$Phone</field>
+    </columns>
+    <columns>
+        <field>Lead.Activities$Activity_Type__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Activities$Outcome__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Activities$Subject</field>
+    </columns>
+    <columns>
+        <field>Lead$Date_Booked__c</field>
+    </columns>
+    <columns>
+        <field>Lead$DateTime_Consult_Scheduled__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Lead.Activities$Activity_Type__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Inbound Call,Outbound Call</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Activities$Subject</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>IB Consult Scheduled - Success</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Call_Center_Agent_Team__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Imp - IMC API</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Activities$Outcome__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Consult Scheduled,Consult Rescheduled</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Saturday Effort 7-25-2015</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Custom_Activities_with_PP__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Lead$DateTime_Consult_Scheduled__c</sortColumn>
+    <sortOrder>Desc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Lead.Activities$CreatedDate</dateColumn>
+        <endDate>2015-07-25</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2015-07-25</startDate>
+    </timeFrameFilter>
+</Report>

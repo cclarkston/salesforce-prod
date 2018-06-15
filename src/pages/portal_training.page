@@ -1,0 +1,83 @@
+<apex:page sidebar="false" >
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}"  />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+
+<style>
+  span.main_header {
+    display:block;
+    padding-bottom:1em;
+    color:black;
+    font-size:16pt;
+    padding-left:10px;
+  }
+  
+  span.sub_header {
+    display:block;
+    padding-left:15px;
+    margin-left:20px;
+    margin-bottom:1em;  
+    color:#5789AE;
+    font-size:14pt;
+    font-weight:bold;
+    border-bottom:1px dotted black;
+    width:600px;
+    padding-top:1em;
+  }
+  
+  p.help_holder {
+    padding-left:30px;
+    font-size:12pt;    
+    padding-bottom:1em;
+  }
+  
+  p.help_holder a {
+    font-weight:bold; 
+    color:blue;
+  }
+ 
+</style>
+ 
+
+<span class="main_header">Help and Training</span>
+
+
+<span class="sub_header">New Referrals</span>  
+<p class="help_holder">
+  Watch the training video - <a target="__blank" href="https://sites.google.com/a/clearchoice.com/pec-onboarding/PDAddingReferral.swf?attredirects=0&attachauth=ANoY7crtUv0iAVDbacFzxJPE--B0Cx2UToInvWGnis7kxOOHpaTFYCwWph8GEDcDdzFSp3DGJFRUUydWAE3d3nhTHCpw7byeN5dK7fE0s5acM9gmUmaiGmziEamCrNbNlQljpUGJ40Hr0NnrAL7_n83IauB_0KmUg5TBuVYYHBdX3vXls6ax3bXhqe2Y4rr7fhTjbIrGHsK7eXk7I72hfy98qzZY_UYwL5Y_ds96-z04YFlhJ_n9lFo%3D">Sending a New Referral</a><br /><br />
+  Read the documentation <a href="/referral/servlet/servlet.FileDownload?file=01540000001dvmD" target="tdoc_referral">with images</a> or <a href="/referral/servlet/servlet.FileDownload?file=01540000001dvm8" target="tdoc_referral">without images</a><br />
+</p>
+<span class="sub_header">Communicating via Chatter (Latest Activity)</span>
+<p class="help_holder">
+  Watch the training video - <a target="__blank" href="https://sites.google.com/a/clearchoice.com/pec-onboarding/SFChatterDemo.swf?attredirects=0&attachauth=ANoY7cpSfZOoI1yN2H6NV60ft_bKnDIl45r-cf9ZVOxHJsG_LeZ0lGEvOltoruI1FFANxcrqfyQSZlOpsslNHfW0b4mPd6mADQ8_vSUli9MdYZn4cLIrw77ar1N_RuZ5vCYt776yvOd3Cr9-PHKBTNeu6fznfF939vinJ2fxK7HxyszdqvgDqFm1GN2Qe_8o76I2MvQObEP1ca4LPzNoYvkoPXTUC5vmHUZLUcn5_HbnsfpcG7epcwg%3D">Communicating via Feed</a><br /><br />
+  Read the documentation - <a href="/referral/servlet/servlet.FileDownload?file=01540000001dvm3" target="tdoc_feed">Using the Feed</a><br />
+</p>
+<span class="sub_header">For Additional Assistance</span>
+<p class="help_holder">
+  For all other problems or questions,  please contact us<br /><br />
+  <table style="padding-left:50px;font-size:11pt;">
+    <tr style="height:50px;vertical-align:top;">
+      <td style="width:150px;font-weight:bold;">Nathaly Ambos</td>
+      <td style="width:250px;">Program Manager<br/> Practice Development</td>
+      <td>303-729-5054</td>
+    </tr>
+    <tr style="height:50px;vertical-align:top;">
+      <td style="width:150px;font-weight:bold;">Darrin Horton</td>
+      <td style="width:250px;">Territory Manager<br/> Practice Development</td>
+      <td>503-476-4657</td>
+    </tr>    
+    <tr style="height:50px;vertical-align:top;">
+      <td style="width:150px;font-weight:bold;">Jim Smit</td>
+      <td style="width:250px;">Regional Business Director<br/> Practice Development</td>
+      <td>512-350-5990</td>
+    </tr>
+    <tr style="height:50px;vertical-align:top;">
+      <td style="width:150px;font-weight:bold;">Mark Mraz</td>
+      <td style="width:250px;">Territory Manager<br/>Practice Development</td>
+      <td>330-717-7770</td>
+    </tr>    
+  </table>
+</p>
+</apex:page>

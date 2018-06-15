@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Campaign$Name</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers$Name</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers$Phone</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers$MobilePhone</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers.Activities$Activity_Type__c</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers.Activities$Subject</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers*Lead$Center_Location__c</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers.Activities$Owner</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Campaign.LeadCampaignMembers.Activities$Activity_Type__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Sales Call</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>PEC No Show Activity</name>
+    <params>
+        <name>scopeid</name>
+        <value>70140000000SRwB</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Activites_w_Patient_and_Campaign__c</reportType>
+    <scope>one</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Campaign.LeadCampaignMembers.Activities$CreatedDate</dateColumn>
+        <endDate>2013-03-31</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2012-10-01</startDate>
+    </timeFrameFilter>
+</Report>

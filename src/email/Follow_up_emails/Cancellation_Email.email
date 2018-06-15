@@ -1,0 +1,52 @@
+<messaging:emailTemplate subject="Please Call to Reschedule" recipientType="Lead" replyto="reply-to@clearchoice.com">
+<messaging:plainTextEmailBody >
+Dear {!Recipient.FirstName}, 
+
+We are unable to keep your appointment on: 
+
+{!Recipient.Well_Formatted_Date__c} at {!Recipient.Well_Formatted_Time__c} 
+
+We would like to take this opportunity to reschedule your FREE Consultation and 3D CAT scan. We will set aside an hour of time for you to speak with our doctor and team. 
+
+Please contact our office at {!Recipient.Center_Phone_Number__c} or respond to this email to reschedule your free consultation. 
+
+Sincerely,
+
+{!Recipient.Call_Center_Agent__r.Name}
+Dental Implant Consultant
+
+{!Recipient.Center_Name__c} ClearChoice Dental Center
+{!Recipient.Center__r.Street_1__c} {!Recipient.Center__r.Street_2__c}
+{!Recipient.Center__r.City__c}, {!Recipient.Center__r.State__c} {!Recipient.Center__r.Zip_Code__c}
+{!Recipient.Center_Phone_Number__c}
+
+
+ClearChoice Dental Implant Centers are locally owned and operated by licensed local dentists, and are part of a professional affiliation of implant practices operated by oral surgeons, prosthodontists and restorative dentists across the United States.
+† America's #1 Choice determined by an Independent Patient Survey 2011. *Qualified patients can have their procedure in one day after initial workup without additional bone graft surgery.  Results may vary in individual cases. +Limited services available at satellite offices.
+</messaging:plainTextEmailBody>
+<messaging:htmlEmailBody >
+<img id="theImage" src="http://www.clearchoice.com/files/images/EmailTemplates/ClearChoiceLogo.png" width="387" height="114"/> 
+<br/>
+<hr color="DarkBlue"/>
+<div style="text-align:justify;">
+<p style="line-height:1.4;">
+Dear {!Recipient.FirstName},<br /><br />
+We are <b>unable</b> to keep your appointment on: 
+<br />
+<span style="display:block;font-weight:bold;text-align:center;padding-top:5px;padding-bottom:5px;"><c:ConsultTime_Format LeadId="{!Recipient.Id}" DFormat="EEEE M/dd/yyyy"/> at <c:ConsultTime_Format LeadId="{!Recipient.Id}" DFormat="h:mm a"/></span>
+<br />
+We would like to take this opportunity to reschedule your FREE Consultation and 3D CAT scan. We will set aside an hour of time for you to speak with our doctor and team. 
+<br /><br />
+Please contact our office at {!Recipient.Center_Phone_Number__c} or respond to this email to reschedule your free consultation. 
+</p><br />
+Sincerely,<br /><br />
+{!Recipient.Call_Center_Agent__r.Name}<br />
+Dental Implant Consultant<br /><br />
+{!Recipient.Center_Name__c} ClearChoice Dental Center<br />
+{!Recipient.Center__r.Street_1__c} {!Recipient.Center__r.Street_2__c}<br />
+{!Recipient.Center__r.City__c}, {!Recipient.Center__r.State__c} {!Recipient.Center__r.Zip_Code__c}<br /> 
+{!Recipient.Center_Phone_Number__c}<br /><br />
+
+</div>
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

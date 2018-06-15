@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>PHONE</field>
+    </columns>
+    <columns>
+        <field>STREET</field>
+    </columns>
+    <columns>
+        <field>Lead.Pre_Screen_Status__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Pre_Screen_Time__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Pre_Screen__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Call_Center_Agent__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Call_Center_Agent_Team__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Lead.Pre_Screen_Status__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Green,Yellow,Red,Blue,Not Checked</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>STREET_LINE1</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>contains</operator>
+            <value>Po Box</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Call_Center_Agent_Team__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Imp - IMC Mansfield,Imp - IMC NewCastle</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>PO Box- Prescreen</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadList</reportType>
+    <scope>org</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead.Pre_Screen_Time__c</dateColumn>
+        <endDate>2012-10-04</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2012-10-04</startDate>
+    </timeFrameFilter>
+</Report>

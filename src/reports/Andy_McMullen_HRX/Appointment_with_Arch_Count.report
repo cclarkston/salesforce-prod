@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Clinical_Appointment__c$Center_Information__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Appointment__c$Name</field>
+    </columns>
+    <columns>
+        <field>Clinical_Appointment__c$Arch_Count__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Clinical_Appointment__c$Appointment_Filter__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Surgical</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Clinical_Appointment__c$Name</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>ARCH</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Clinical_Appointment__c$Arch_Count__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Appointment with Arch Count</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Clinical_Appointments__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Clinical_Appointment__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Weather</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Weather</value>
+    </caseValues>
+    <fields>
+        <label><!-- Avg Humidity --></label>
+        <name>Avg_Humidity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Avg Wind --></label>
+        <name>Avg_Wind__c</name>
+    </fields>
+    <fields>
+        <label><!-- Calendar Date --></label>
+        <name>Calendar_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Center Information --></label>
+        <name>Center_Information__c</name>
+        <relationshipLabel><!-- Weather --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Conditions --></label>
+        <name>Conditions__c</name>
+    </fields>
+    <fields>
+        <label><!-- Data Type --></label>
+        <name>Data_Type__c</name>
+        <picklistValues>
+            <masterLabel>Current</masterLabel>
+            <translation><!-- Current --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Forecast</masterLabel>
+            <translation><!-- Forecast --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Past</masterLabel>
+            <translation><!-- Past --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Icon URL --></label>
+        <name>Icon_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Icon --></label>
+        <name>Icon__c</name>
+    </fields>
+    <fields>
+        <label><!-- JSON Data --></label>
+        <name>JSON_Data__c</name>
+    </fields>
+    <fields>
+        <label><!-- Max Humidity --></label>
+        <name>Max_Humidity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Max Wind --></label>
+        <name>Max_Wind__c</name>
+    </fields>
+    <fields>
+        <label><!-- Min Humidity --></label>
+        <name>Min_Humidity__c</name>
+    </fields>
+    <fields>
+        <label><!-- POP --></label>
+        <name>POP__c</name>
+    </fields>
+    <fields>
+        <label><!-- QPF Allday --></label>
+        <name>QPF_Allday__c</name>
+    </fields>
+    <fields>
+        <label><!-- QPF Day --></label>
+        <name>QPF_Day__c</name>
+    </fields>
+    <fields>
+        <label><!-- QPF Night --></label>
+        <name>QPF_Night__c</name>
+    </fields>
+    <fields>
+        <label><!-- Skyicon --></label>
+        <name>Skyicon__c</name>
+    </fields>
+    <fields>
+        <label><!-- Snow AllDay --></label>
+        <name>Snow_AllDay__c</name>
+    </fields>
+    <fields>
+        <label><!-- Snow Day --></label>
+        <name>Snow_Day__c</name>
+    </fields>
+    <fields>
+        <label><!-- Snow Night --></label>
+        <name>Snow_night__c</name>
+    </fields>
+    <fields>
+        <label><!-- Temp High --></label>
+        <name>Temp_High__c</name>
+    </fields>
+    <fields>
+        <label><!-- Temp Low --></label>
+        <name>Temp_Low__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

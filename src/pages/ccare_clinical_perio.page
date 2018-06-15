@@ -1,0 +1,2992 @@
+<apex:page showheader="false" sidebar="false" standardStylesheets="false" controller="dp_clinical_chart" docType="html-5.0">
+<head>
+  <meta charset="UTF-8" />
+  <title>HopeRx</title>
+    <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/dp_css_main.css')}"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css' />
+
+<!--  <apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />-->
+<!--  <apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>-->
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/mmenu_nav.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/dp_css_main.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/fonts.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-buttons.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-perio.css')}"/> 
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-clinical-calendar.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-clinical.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/style.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-patient.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/forms.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-hrxfont.css')}"/>
+
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/generic-print.css')}" html-media="print"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-printPerio.css')}"/>
+
+  <audio id="inputAlertSound" src="{!URLFOR($Resource.Dental_Practice_Resources, 'audio/inputAlertSound.mp3')}"  preload="auto"></audio>
+
+</head>
+
+<style type="text/css" media="print">
+  * {transition: none !important;}
+
+  .no-print {
+    display:none !important;
+  }
+  
+  .print-only {
+    display:flex !important;
+  }
+</style>
+
+<style>
+.print-only {
+  display:none;
+}
+
+.cc-sub-nav-cell [class^="ccf-"], [class*=" ccf-"] {
+  line-height:1.2;
+}
+
+.cc-back-container {
+  display: flex;
+  flex-direction: row;
+}
+
+  .no-print {
+    display:visible;
+  }
+
+  .print-only {
+    display:none;
+  }
+
+.patient_label {
+color:#0000FF;
+font-weight:bold;
+}
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .cc-perio-legend-box {
+    width: 20px;
+    height: 20px;
+}
+
+  .pad-main-wrapper {
+    margin-top:145px;
+  }
+ 
+  a.nav_anchor {
+    color:black;
+    font-weight:300;
+    font-size: 12pt;
+    letter-spacing: 1px;
+  }
+
+  a.nav_anchor:hover {
+    color:white;
+    text-decoration:none;
+  }
+
+  span.dateFormat {
+    display:none;
+  }
+
+  .cc-field-label {
+    display:inline-block;
+    padding-right:5px;
+    font-weight:bold;
+  }
+
+  .cc-field-input {
+    border:none;
+    outline:0;
+    font-szie:12pt;
+  }
+
+  .cc-email-attachment-item {
+    display:inline-block;
+    padding-right:20px;
+  }
+
+  .cc-email-attachment-remove {
+    padding-left:10px;
+    display:inline-block;
+  }
+
+  .cc-section-header-right-button-container a:hover {
+    color:white;
+    text-decoration:none;
+  }
+</style>
+
+<script type="text/javascript">
+  var key_timeout;
+  var search_in_progress = false;
+
+  function qsearch_key(e,flength) {
+    if(search_in_progress)
+      clearTimeout(key_timeout);
+    var allow_search = false;
+    $j('.psearch').each( function(i) {
+        if(this.value.length>=2)
+          allow_search = true;
+      }    
+    );  
+    if(allow_search) {
+      search_in_progress = true;
+      key_timeout = setTimeout("search_patients()",1200);
+    }     
+  }
+
+function patient_search_done() {
+    $j(".psearch_name").focus();
+    var current_value = $j(".psearch_name").val();
+    $j(".psearch_name").val('');
+    $j(".psearch_name").val(current_value);
+  }
+
+  function work_with_teeth() {
+    alert(default_teeth_array.length);
+    try {
+      var arrayLength = default_teeth_array.length;
+      for (var i = 0; i < 2; i++) {
+        alert('Nuber : ' + default_teeth_array[i].number + '\rType : ' + default_teeth_array[i].typeOf + '\rMeasurements : ' + default_teeth_array[i].measure + '\rEndo : ' + default_teeth_array[i].endo + '\rDecay : ' + default_teeth_array[i].decay);
+      }
+    } catch(err) {
+      alert(err.message);
+      console.log(err.message);
+    }
+  }
+
+  function toggle_form_button(obj) {
+    if($j(obj).attr('class')=="cc-form-notation-button") {
+      $j(obj).removeClass('cc-form-notation-button');
+      $j(obj).addClass('cc-form-notation-button-selected');
+    }
+    else {
+      $j(obj).removeClass('cc-form-notation-button-selected');
+      $j(obj).addClass('cc-form-notation-button');
+    }
+  }
+
+  function reset_form_buttons(myStringArray) {
+    var arrayLength = myStringArray.length;
+    for (var i = 0; i < arrayLength; i++) {
+      var bid = myStringArray[i]
+      //Do something
+      $j('#' + bid).removeClass('cc-form-notation-button-selected');
+      $j('#' + bid).addClass('cc-form-notation-button');
+    }
+  }
+
+  function reset_mobility_notes(mnote_id,dvalue) {
+    $j('#' + mnote_id).css( "display", dvalue);
+  }
+
+  // function print_a_form(divName) {
+  //   var printContents = document.getElementById(divName).innerHTML;
+  //   var originalContents = document.body.innerHTML;
+  //
+  //   document.body.innerHTML = printContents;
+  //   window.print();
+  //
+  //   document.body.innerHTML = originalContents;
+  //   start_perio_form();
+  // }
+
+  function shade_change(svalue,sh_id) {
+    var target_id = 'shade_' + sh_id;
+    var new_val = 'none';
+    if(svalue=='Other')
+      new_val = 'flex';
+    try {
+      $j('#' + target_id).css("display",new_val);
+    } catch(err) {
+      alert(err.message);
+      console.log(err.message);
+    }
+  }
+
+  function print_a_form() {
+    // var printContents = document.getElementById(divName).innerHTML;
+    // var originalContents = document.body.innerHTML;
+	//
+    // document.body.innerHTML = printContents;
+    // window.print();
+	//
+    // document.body.innerHTML = originalContents;
+    // init_apt_sort();
+	window.print();
+  }
+  
+  function resize_textarea() {
+    $j("textarea").each(function(){
+      this.style.height = 'auto';
+      this.style.height = this.scrollHeight+'px';
+    });
+    var active_chart = $j('#cc-perio-container-active');
+    console.log('Div : ' + active_chart.height());
+    active_chart.height('auto');
+    //$j("#cc-perio-container-active").style.height = 'auto';
+    //$j("#cc-perio-container-active").style.height = this.scrollHeight+'px';
+  }
+</script>
+
+<body>
+<apex:form onsubmit="return true;">
+<apex:outputpanel styleclass="cc-wrapper" layout="block">
+<apex:actionFunction name="body_refresh" rerender="calendar_nav,main_holder" status="ajaxstatus" oncomplete="start_perio_form();" />
+<apex:actionFunction name="nav_bar_refresh" rerender="nav_content" />
+<apex:actionFunction name="nav_to" action="{!navigate_to}" rerender="none" status="ajaxstatus">
+  <apex:param name="navid" value=""  />
+</apex:actionFunction>
+<apex:actionFunction name="center_switch" action="{!change_center}" rerender="nav_content,calendar_nav,main_holder" status="ajaxstatus" >
+  <apex:param name="cid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="opatient_search" action="{!open_patient_search}" rerender="main_holder" status="ajaxstatus" />
+<apex:actionFunction name="cpatient_search" action="{!close_patient_search}" rerender="main_holder" status="ajaxstatus" />
+<apex:outputpanel id="function_holder">
+  <apex:actionFunction name="search_patients" rendered="{!allow_quick_search}" action="{!search_consult_records}" rerender="main_holder" status="ajaxstatus" oncomplete="patient_search_done();" />
+  <apex:actionFunction name="search_patients" rendered="{!if(allow_quick_search,false,true)}" rerender="none" />
+</apex:outputpanel>
+<apex:actionFunction name="direct_search_patients" action="{!search_consult_records}" rerender="main_holder" status="ajaxstatus"/>
+<apex:actionFunction name="more_patients" action="{!more_patient_records}" rerender="main_holder" status="ajaxstatus" oncomplete="patient_search_done();" />
+<apex:actionFunction name="view_patient" action="{!select_search_patient}" rerender="none"  status="ajaxstatus" >
+  <apex:param name="sptid" value=""  />
+</apex:actionFunction>
+<apex:actionFunction name="new_chart" action="{!create_new_perio_chart}" rerender="main_holder" status="ajaxstatus" oncomplete="start_perio_form();"/>
+<apex:actionFunction name="edit_chart" rerender="main_holder" status="ajaxstatus" oncomplete="start_perio_form();"/>
+<apex:actionFunction name="reset_chart" action="{!reset_perio_chart}" rerender="main_holder" status="ajaxstatus" oncomplete="start_perio_form();"/>
+<apex:actionFunction name="confirm_reset_chart" action="{!confirm_chart_reset}" rerender="main_holder" status="ajaxstatus" oncomplete="start_perio_form();"/>
+<apex:actionFunction name="cconfirmation_modal" action="{!close_confirmation_modal}" rerender="main_holder" status="ajaxstatus" oncomplete="start_perio_form();"/>
+<apex:actionFunction name="perio_save" reRender="" action="{!update_perio_chart}" status="ajaxstatus"  >
+  <apex:param name="pthru" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="new_prosth_form" action="{!display_new_prosth_exam_form}" rerender="main_holder" status="ajaxstatus" oncomplete="start_perio_form();"  >
+  <apex:param name="pcid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="save_prosth_form" action="{!save_prosth_exam_form}" rerender="main_holder" status="ajaxstatus" oncomplete="start_perio_form();"  >
+  <apex:param name="pfid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="reset_prosth_form" action="{!reset_prosth_exam_form}" rerender="main_holder" status="ajaxstatus" oncomplete="start_perio_form();"  >
+  <apex:param name="pcid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="delete_prosth_form" action="{!delete_prosth_exam_form}" rerender="main_holder" status="ajaxstatus" oncomplete="start_perio_form();"  >
+  <apex:param name="pcid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="change_pexam_boolean" action="{!change_prosth_exam_boolean}" rerender="pexam_form_holder" status="ajaxstatus" oncomplete=""  >
+  <apex:param name="pfid" value="" />
+  <apex:param name="fieldname" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="change_pexam_text" action="{!change_prosth_exam_text}" rerender="pexam_form_holder" status="ajaxstatus" oncomplete=""  >
+  <apex:param name="pfid" value="" />
+  <apex:param name="fieldname" value="" />
+  <apex:param name="fieldvalue" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="refresh_prosth_form" action="{!save_prosth_exam_form}" rerender="pexam_form_holder" status="ajaxstatus" >
+  <apex:param name="pfid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="nav_to_recent" action="{!navigate_to_recent_patient}" rerender="none" >
+  <apex:param name="recentid" value=""  />
+</apex:actionFunction>
+
+<c:HopeRx_print_header CenterRecord="{!current_center}"  />
+
+<apex:outputpanel layout="block" styleclass="cc-nav-wrapper no-print">
+  <apex:outputpanel styleclass="cc-nav-container">
+    <apex:outputpanel styleclass="cc-top-nav-container" id="nav_content" layout="block">
+      <div class="cc-top-nav-left">
+        <apex:outputpanel id="back_holder" styleclass="cc-back-container" layout="block" >
+          <apex:outputpanel ><a href="javascript:window.history.go(-1);" class="nav_color">&lt; Back</a></apex:outputpanel>
+        </apex:outputpanel>
+        <span class="spacer">&nbsp;</span>
+        <div class="cc-link-dropdown-container">
+          <span class="dropdown drop-hover">
+          <a class="dropdown-toggle nav_color " data-toggle="dropdown"><apex:outputtext value="Recent Patients"  style="padding-right:5px;" styleClass="c-pointer"  /><span class="caret"></span></a>
+            <ul class="dropdown-menu overflow-menu" >
+              <apex:repeat var="rpatient" value="{!common_header.recent_records}">
+                <li class="dropdown-lineitem">
+                  <a href="javascript:nav_to_recent('{!rpatient.id}');" style="color:#189BEB"><apex:outputtext value="{!rpatient.name}" /></a>
+                </li>
+              </apex:repeat>
+            </ul>
+          </span>
+        </div>
+      </div>
+      <div class="cc-top-nav-center">
+        <div class="cc-link-dropdown-container">
+          <span class="dropdown drop-hover">
+          <a class="dropdown-toggle nav_color " data-toggle="dropdown"><apex:outputtext value="{!current_center.name}"  style="padding-right:5px;" styleClass="c-pointer"  /><span class="caret"></span></a>
+            <ul class="dropdown-menu overflow-menu" >
+              <apex:repeat var="center" value="{!center_list}">
+                <li class="dropdown-lineitem">
+                  <a href="javascript:center_switch('{!center.id}');" style="color:#189BEB"><apex:outputtext value="{!center.name}" /></a>
+                </li>
+              </apex:repeat>
+            </ul>
+          </span>
+        </div>
+      </div>
+      <div class="cc-top-nav-right">
+        <span class="dropdown drop-hover">
+          <a class="dropdown-toggle nav_color" data-toggle="dropdown"><apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}" width="25" height="25" styleClass="c-pointer"
+            onmouseover="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_black.png')}';"
+            onmouseout="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}';"
+            onclick="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}';"
+             /></a>
+          <ul class="dropdown-menu gear-menu dropdown-menu-right">
+            <apex:repeat var="gitem" value="{!gear_menu}" >
+                <li class="dropdown-lineitem" style="display:inline-block;">
+                  <a href="{!gitem.page_url}" style="color:#189BEB;" target="{!gitem.nav_page.hyperlink_target__c}"  
+                      onmouseover="this.firstChild.src='{!URLFOR($Resource.Dental_Practice_Resources,gitem.nav_page.Image_Name_Hover__c)}';this.style.color='black';" 
+                      onmouseout="this.firstChild.src='{!URLFOR($Resource.Dental_Practice_Resources,gitem.nav_page.Image_Name__c)}';this.style.color='#189BEB';">
+                    <apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,gitem.nav_page.Image_Name__c)}" width="{!if(gitem.nav_page.name=='Salesforce','30','20')}" height="20" style="display:inline;{!if(gitem.nav_page.name=='Salesforce','position:relative;left:-7px;margin-right:-6px;','margin-right:5px;')}" />&nbsp;&nbsp;{!gitem.nav_page.name}
+                  </a>
+                </li>
+            </apex:repeat>
+          </ul>
+          </span>
+      </div>
+    </apex:outputpanel>
+    <div class="cc-sub-nav-container" >
+      <apex:repeat var="mitem" value="{!common_header.clinical_header_items}">
+        <apex:outputpanel layout="block" styleclass="cc-sub-nav-cell {!if(mitem.name=='Charts','cc-color-topNav-selected','')}" onclick="nav_to('{!mitem.id}')">
+          <button class="cc-sub-nav-top-button cc-color-{!mitem.css_class__c} cc-hover-tooltips-dark-anchor-nav">
+            <i class="{!if(mitem.image_name__c=='home','hrxicon','ccf')}-{!mitem.image_name__c} cc-color-font-white"></i>
+            <div>{!mitem.name}</div>
+          </button>
+          <div class="cc-button-text">
+            {!mitem.name}
+          </div>
+          <apex:outputpanel rendered="{!if(mitem.name=='Notifications',true,false)}" layout="block"  styleclass="cc-calBadge-badge" style="right:60%;">{!dosespot_notification_count}</apex:outputpanel>
+          <div class="cc-button_bg cc-color-{!mitem.css_class__c}">
+            <!-- <apex:outputpanel rendered="{!if(mitem.name=='Notifications',true,false)}" layout="block"  styleclass="cc-calBadge-badge">{!dosespot_notification_count}</apex:outputpanel>-->
+          </div>
+        </apex:outputpanel>
+      </apex:repeat>
+    </div>
+
+    <apex:outputpanel layout="block" styleclass="cc-clinical-calendar-nav" id="calendar_nav">
+      <apex:outputpanel layout="block" styleclass="cc-perio-chart-select-container">
+        <!--<select class="cc-perio-chart-select-date">
+          <option selected="">
+             Previous charts
+          </option>
+          <option class="cc-perio-UID-link-0">
+            06/14/15
+          </option>
+        </select>-->
+      </apex:outputpanel>
+
+      <apex:outputpanel layout="block" styleclass="cc_cc_cal_options-container">
+        <apex:outputpanel layout="block" styleclass="cc-toolbar-button-icon-container">
+          <apex:outputpanel layout="block" styleclass="cc-toolbar-button-patient" onclick="opatient_search();">
+            <i class=" ccf-patient"></i>
+            <apex:outputpanel styleclass="patient_label" rendered="{!patient_record_selected}" >{!patient.name}</apex:outputpanel>
+            <apex:outputpanel rendered="{!if(patient_record_selected,false,true)}" >No Patient Selected</apex:outputpanel>
+          </apex:outputpanel>
+          <apex:outputpanel layout="block" styleclass="cc-toolbar-button-icon-tooltip" style="left: 0px; width: 150px; text-align: center; display: none; opacity: 0;">
+            <apex:outputpanel layout="block">Change patient</apex:outputpanel>
+          </apex:outputpanel>
+        </apex:outputpanel>
+        <!-- end options button -->
+        <!-- start options button -->
+        <apex:outputpanel layout="block" rendered="{!allow_new_chart}" styleclass="cc-toolbar-button-icon-container" onclick="this.innerHTML='';new_chart();">
+          <div class="cc-toolbar-button-icon" id="cc-perio-add-chart-button">
+            <i class=" ccf-add-light"></i>
+          </div>
+          <apex:outputpanel layout="block" styleclass="cc-toolbar-button-icon-tooltip" >
+            <apex:outputpanel layout="block">New chart</apex:outputpanel>
+          </apex:outputpanel>
+        </apex:outputpanel>
+        <apex:outputpanel layout="block" rendered="{!if(allow_new_chart,false,true)}" styleclass="cc-toolbar-button-icon-container" onclick="edit_chart();">
+          <div class="cc-toolbar-button-icon" id="cc-perio-add-chart-button">
+            <i class=" ccf-add-light"></i>
+          </div>
+          <apex:outputpanel layout="block" styleclass="cc-toolbar-button-icon-tooltip" >
+            <apex:outputpanel layout="block">Edit chart</apex:outputpanel>
+          </apex:outputpanel>
+        </apex:outputpanel>
+        <!-- end options button -->
+      </apex:outputpanel>
+    </apex:outputpanel>
+
+  </apex:outputpanel>
+</apex:outputpanel>
+
+
+
+<apex:outputpanel layout="block" styleclass="cc-perio-wrapper" id="main_holder">
+  <script>
+    var default_teeth_array = [{!default_teeth_state}];
+  </script>
+
+  <div id="cc-perio-wrapper" style="padding-top:1em;">
+    <apex:outputpanel id="error_holder" ><apex:messages style="color:red;font-style:italics;padding-top:3px;" /></apex:outputpanel>
+    <apex:actionStatus id="ajaxstatus">
+      <apex:facet name="start">
+        <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 15200; background-color: #f2f2f2;">
+          &nbsp;
+        </div>
+        <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 15201; margin: 20% 50%">
+          <img src="{!URLFOR($Resource.Dental_Practice_Resources,'Images/Circle-out.gif')}" />
+        </div>
+      </apex:facet>
+    </apex:actionStatus>
+
+    <apex:outputpanel layout="block" rendered="{!if(patient_record_selected,false,true)}" >
+      Perio Charts can not be displayed until you have selected a patient.<br />  Please click on the change patient icon if you need to select one
+    </apex:outputpanel>
+
+    <apex:outputpanel layout="block" rendered="{!if(patient_record_selected && chart_count==0,true,false)}" style="padding-top:2em;" >
+      There are currently no perio charts for this patient.<br />  Please click the plus sign to start a new perio chart.
+    </apex:outputpanel>
+
+    <apex:outputpanel layout="block" rendered="{!if(patient_record_selected && chart_count>0,true,false)}" style="padding-top:1em;">
+    <apex:outputpanel layout="block" styleclass="cc-cc-notificationContainer" rendered="{!if(display_medical_warnings && notification_size>0,true,false)}" id="warning_holder">
+      <div class="cc-cc-notificationContent-show" id="cc-cc-errorContent-id" style="height:100%;width:100%;">
+        <apex:outputpanel layout="block" styleclass="cc-cc-notificationHeader" style="flex-flow: row wrap;flex-basis: 100%;justify-content: flex-start;">
+          <!--start repeat through all patient notifications here-->
+          <apex:repeat var="notification" value="{!patient_notification_list}" >
+            <apex:outputpanel layout="block" style="flex-grow:1;flex-basis:33%;max-width:33%;padding-bottom:5px;font-weight:bold;color:{!notification.notification_color}"><i class="{!notification.image_class}"></i>&nbsp;{!notification.notification_text}</apex:outputpanel>
+          </apex:repeat>
+          <!--end repeat through all patient notifications here-->
+<!--          <apex:outputpanel layout="block"><i class="ccf-pill cc-font-light-16"></i> Patient has an allergy to Penicillin</apex:outputpanel>
+          <apex:outputpanel layout="block"><i class="ccf-error cc-font-light-16"></i> Patient has not filled out medical clearance</apex:outputpanel>-->
+        </apex:outputpanel>
+        <apex:outputpanel layout="block"><apex:commandlink rerender="main_holder" styleclass="cc-cc-notificationContent-link-close" action="{!close_medical_warnings}" value="close" status="ajaxstatus"  /></apex:outputpanel>
+      </div>
+    </apex:outputpanel>
+      <!--start - work thorugh all charts for this patient-->
+      <apex:repeat var="chart" value="{!patient_charts}">
+      <div class="cc-perio-container cc-perio-UID-0" id="{!if(chart.perio_editable,'cc-perio-container-active',chart.pchart.id)}" >
+        <!-- start section header -->
+        <apex:outputpanel layout="block" styleclass="cc-section-header cc-font-light-16">
+          <apex:outputpanel layout="block" styleclass="cc_cc-notes-section-header-left">
+            <apex:outputtext value="{!chart.chart_date}" />&nbsp;-&nbsp;{!patient.name}&nbsp;completed by&nbsp;<apex:outputfield value="{!chart.pchart.createdby.name}" />
+          </apex:outputpanel>
+          <apex:outputpanel layout="block" styleclass="cc_cc-notes-section-header-right">
+            <apex:outputpanel layout="block" rendered="{!chart.perio_editable}" styleclass="cc-section-header-right-button-container cc-section-button-white cc-hover-tooltips-dark  cc-perio-measure-leftSide-buttonContainer-legend">
+              <i class="ccf-compass"></i>
+              <apex:outputpanel layout="block" styleclass="cc-tooltip cc-center" style="top:5%; left:50%; width:180px">View legend</apex:outputpanel>
+            </apex:outputpanel>
+            <!-- <apex:outputpanel layout="block" rendered="{!chart.perio_editable}" styleclass="cc-section-header-right-button-container cc-section-button-white cc-hover-tooltips-dark  cc-perio-measure-leftSide-buttonContainer-prosth" onclick="new_prosth_form('{!chart.pchart.id}');">
+              <i class="ccf-prosth"></i>
+              <apex:outputpanel layout="block" styleclass="cc-tooltip cc-center" style="top:5%; left:50%; width:180px">Add prosth exam info</apex:outputpanel>
+            </apex:outputpanel>
+            <apex:outputpanel layout="block" rendered="{!chart.perio_editable}" styleclass="cc-section-header-right-button-container cc-section-button-white cc-hover-tooltips-dark cc-patient-cancel-addChart" onclick="json_teeth();confirm_reset_chart();">
+              <i class="ccf-cancel-thin"></i>
+              <apex:outputpanel layout="block" styleclass="cc-tooltip cc-center">Reset chart</apex:outputpanel>
+            </apex:outputpanel> -->
+            <apex:outputpanel layout="block" rendered="{!chart.perio_editable}" styleclass="cc-section-header-right-button-container cc-section-button-white cc-hover-tooltips-dark cc-perio-saveChart-button-container" onclick="json_teeth();">
+              <i class="ccf-save"></i>
+              <apex:outputpanel layout="block" styleclass="cc-tooltip cc-center">Save chart</apex:outputpanel>
+            </apex:outputpanel>
+            <div class="cc-section-header-add cc-hover-tooltips-dark" onclick="print_a_form();">
+              <i class="ccf-print"></i>
+              <apex:outputpanel layout="block" styleclass="cc-center cc-tooltip">Print Chart</apex:outputpanel>
+            </div>
+          </apex:outputpanel>
+        </apex:outputpanel>
+        <!-- end section header -->
+        <!-- start upper container -->
+        <apex:outputpanel layout="block" styleclass="cc-perio-teeth-row-container-upper">
+          <apex:outputpanel layout="block" styleclass="cc-perio-teeth-bl-container cc-perio-teeth-bl-container-left">
+            <apex:outputpanel layout="block" styleclass="cc-perio-buccal-top-left buccal-top {!if(chart.perio_editable,' buccal-top-selected ','')}">
+              <a class="">B</a>
+            </apex:outputpanel>
+            <apex:outputpanel layout="block" styleclass="lingual-top cc-perio-lingual-top-left">
+              <a>L</a>
+            </apex:outputpanel>
+          </apex:outputpanel>
+          <!--work through upper teeth-->
+          <apex:repeat var="tooth" value="{!chart.upper_teeth}">
+          <apex:outputpanel layout="block" styleclass="cc-perio-teeth-cell-container cc-perio-t{!tooth.tooth.Tooth_Integer__c} {!if(tooth.tooth.Tooth_Integer__c==1 && chart.perio_editable,'cc-perio-selected','')}">
+            <apex:outputpanel layout="block" styleclass="cc-perio-teeth-cell-tooth">
+              <apex:outputpanel layout="block" styleclass="cc-perio-teeth-cell-img-container">
+                <img class="cc-perio-thumbToothImg-{!tooth.tooth.Tooth_Integer__c} cc-perio-thumbToothImg-upper" src="{!URLFOR($Resource.Dental_Practice_Resources, tooth.tooth_image)}" />
+              </apex:outputpanel>
+            </apex:outputpanel>
+            <apex:outputpanel layout="block" styleclass="cc-perio-teeth-cell-number-upper cc-perio-thumbToothLabel-{!tooth.tooth.Tooth_Integer__c}">
+              <apex:outputpanel layout="block" styleclass="{!tooth.tooth_label_css}">{!tooth.tooth.Tooth_Integer__c}</apex:outputpanel>
+            </apex:outputpanel>
+            <apex:outputpanel layout="block" styleclass="cc-perio-thumbMeasure-top-buccal">
+              <apex:outputpanel layout="block" styleclass="cc-perio-thumbMeasureFocus">
+                <apex:outputpanel layout="block" styleclass="{!tooth.measurement_1_css}">{!tooth.measurement_1}</apex:outputpanel>
+                <apex:outputpanel layout="block" styleclass="{!tooth.measurement_2_css}">{!tooth.measurement_2}</apex:outputpanel>
+                <apex:outputpanel layout="block" styleclass="{!tooth.measurement_3_css}">{!tooth.measurement_3}</apex:outputpanel>
+              </apex:outputpanel>
+            </apex:outputpanel>
+            <apex:outputpanel layout="block" styleclass="cc-perio-thumbMeasure-top-lingual">
+              <apex:outputpanel layout="block" styleclass="cc-perio-thumbMeasureFocus">
+                <apex:outputpanel layout="block" styleclass="{!tooth.measurement_4_css}">{!tooth.measurement_4}</apex:outputpanel>
+                <apex:outputpanel layout="block" styleclass="{!tooth.measurement_5_css}">{!tooth.measurement_5}</apex:outputpanel>
+                <apex:outputpanel layout="block" styleclass="{!tooth.measurement_6_css}">{!tooth.measurement_6}</apex:outputpanel>
+              </apex:outputpanel>
+            </apex:outputpanel>
+          </apex:outputpanel>
+          </apex:repeat>
+          <!--end work through upper teeth-->
+          <apex:outputpanel layout="block" styleclass="cc-perio-teeth-bl-container cc-perio-teeth-bl-container-right">
+            <apex:outputpanel layout="block" styleclass="cc-perio-buccal-top-right buccal-top {!if(chart.perio_editable,' buccal-top-selected ','')}">
+              <a class="">B</a>
+            </apex:outputpanel>
+            <apex:outputpanel layout="block" styleclass="lingual-top cc-perio-lingual-top-right">
+              <a>L</a>
+            </apex:outputpanel>
+          </apex:outputpanel>
+        <!-- end upper container -->
+        </apex:outputpanel>
+        <apex:outputpanel layout="block" styleclass="cc-perio-row-divider">
+          <apex:outputpanel layout="block">&nbsp;</apex:outputpanel>
+        </apex:outputpanel>
+        <!-- start lower container -->
+        <apex:outputpanel layout="block" styleclass="cc-perio-teeth-row-container-lower">
+          <apex:outputpanel layout="block" styleclass="cc-perio-teeth-bl-container cc-perio-teeth-bl-container-left">
+            <apex:outputpanel layout="block" styleclass="buccal-bottom cc-perio-buccal-bottom-left">
+              <a class="">B</a>
+            </apex:outputpanel>
+            <apex:outputpanel layout="block" styleclass="lingual-bottom cc-perio-lingual-bottom-left">
+              <a>L</a>
+            </apex:outputpanel>
+          </apex:outputpanel>
+          <!-- start work through lower teeth  -->
+          <apex:repeat var="tooth" value="{!chart.lower_teeth}" >
+          <apex:outputpanel layout="block" styleclass="cc-perio-teeth-cell-container cc-perio-t{!tooth.tooth.name}">
+            <apex:outputpanel layout="block" styleclass="cc-perio-teeth-cell-number-lower cc-perio-thumbToothLabel-{!tooth.tooth.name} ">
+              <apex:outputpanel layout="block" styleclass="{!tooth.tooth_label_css}">{!tooth.tooth.name}</apex:outputpanel>
+            </apex:outputpanel>
+            <apex:outputpanel layout="block" styleclass="cc-perio-teeth-cell-tooth">
+              <apex:outputpanel layout="block" styleclass="cc-perio-teeth-cell-img-container">
+                <img class="cc-perio-thumbToothImg-{!tooth.tooth.name} cc-perio-thumbToothImg-lower" src="{!URLFOR($Resource.Dental_Practice_Resources, tooth.tooth_image)}" />
+              </apex:outputpanel>
+            </apex:outputpanel>
+            <apex:outputpanel layout="block" styleclass="cc-perio-thumbMeasure-bottom-buccal">
+              <apex:outputpanel layout="block" styleclass="cc-perio-thumbMeasureFocus">
+                <apex:outputpanel layout="block" styleclass="{!tooth.measurement_3_css}">{!tooth.measurement_3}</apex:outputpanel>
+                <apex:outputpanel layout="block" styleclass="{!tooth.measurement_2_css}">{!tooth.measurement_2}</apex:outputpanel>
+                <apex:outputpanel layout="block" styleclass="{!tooth.measurement_1_css}">{!tooth.measurement_1}</apex:outputpanel>
+              </apex:outputpanel>
+            </apex:outputpanel>
+            <apex:outputpanel layout="block" styleclass="cc-perio-thumbMeasure-bottom-lingual">
+              <apex:outputpanel layout="block" styleclass="cc-perio-thumbMeasureFocus">
+                <apex:outputpanel layout="block" styleclass="{!tooth.measurement_6_css}">{!tooth.measurement_6}</apex:outputpanel>
+                <apex:outputpanel layout="block" styleclass="{!tooth.measurement_5_css}">{!tooth.measurement_5}</apex:outputpanel>
+                <apex:outputpanel layout="block" styleclass="{!tooth.measurement_4_css}">{!tooth.measurement_4}</apex:outputpanel>
+              </apex:outputpanel>
+            </apex:outputpanel>
+          </apex:outputpanel>
+          </apex:repeat>
+          <!--end work through lower teeth-->
+          <apex:outputpanel layout="block" styleclass="cc-perio-teeth-bl-container cc-perio-teeth-bl-container-right">
+            <apex:outputpanel layout="block" styleclass="buccal-bottom cc-perio-buccal-bottom-right">
+              <a class="">B</a>
+            </apex:outputpanel>
+            <apex:outputpanel layout="block" styleclass="lingual-bottom cc-perio-lingual-bottom-right">
+              <a>L</a>
+            </apex:outputpanel>
+          </apex:outputpanel>
+        </apex:outputpanel>
+        <!-- end lower container -->
+        <!-- start user input container -->
+        <apex:outputpanel layout="block" styleclass="cc-perio-measure-container" rendered="{!if(chart.perio_editable,false,true)}">
+          <b>Comments</b> : &nbsp; <apex:outputfield value="{!chart.pchart.Comments__c}"  />
+        </apex:outputpanel>
+        <apex:outputpanel layout="block" styleclass="cc-perio-measure-container" rendered="{!chart.perio_editable}">
+          <apex:outputpanel layout="block" styleclass="cc-perio-measure-leftSide">
+            <!-- start notes container -->
+            <apex:outputpanel layout="block" styleclass="cc-perio-notes-container">
+              <apex:outputpanel layout="block" styleclass="cc-perio-comments-header-container">
+                <apex:outputpanel layout="block" styleclass="cc-perio-comments-header">
+                  Comments:
+                </apex:outputpanel>
+              </apex:outputpanel>
+              <apex:outputpanel layout="block">
+                <apex:inputField styleclass="cc-perio-comments" value="{!chart.pchart.Comments__c}" onfocus="resize_textarea();" onblur="resize_textarea();" />
+              </apex:outputpanel>
+            </apex:outputpanel>
+            <!-- end notes container -->
+          </apex:outputpanel>
+          <apex:outputpanel layout="block" styleclass="cc-perio-measure" style="width: 33%;">
+            <apex:outputpanel layout="block" styleclass="cc-perio-measure-header-container">
+              <apex:outputpanel layout="block" styleclass="cc-perio-measure-header">
+                <apex:outputpanel style="font-weight:normal; font-size:14pt; color:#666666;padding-right:15px;">Tooth
+                  <apex:outputpanel styleclass="cc-perio-toothNumInputLabel">
+                    1
+                  </apex:outputpanel>
+                  <apex:outputpanel styleclass="cc-perio-hPosition">
+                    buccal
+                  </apex:outputpanel>
+                  <apex:outputpanel styleclass="cc-perio-vPosition">
+                    top
+                  </apex:outputpanel>
+                </apex:outputpanel>
+              </apex:outputpanel>
+            </apex:outputpanel>
+            <apex:outputpanel layout="block" style="padding-top: 10px; visibility: visible;" styleclass="center cc-perio-measure-input-container cc-perio-inputs">
+              <input class="cc-perio-measure-input cc-perio-first" maxlength="1" autocomplete="off" />
+              <input class="cc-perio-measure-input cc-perio-second" maxlength="1" autocomplete="off" />
+              <input class="cc-perio-measure-input cc-perio-third" maxlength="1" autocomplete="off" />
+            </apex:outputpanel>
+          </apex:outputpanel>
+          <apex:outputpanel layout="block" styleclass="cc-perio-attr">
+            <apex:outputpanel layout="block" styleclass="cc-perio-legend-header">Attributes</apex:outputpanel>
+            <apex:outputpanel layout="block" styleclass="cc-perio-legend-attributes-list">
+              <apex:outputpanel layout="block" styleclass="cc-perio-attribute-list-container">
+                <div class="cc-perio-attribute-list-cell " attribute="Natural">
+                  <apex:outputpanel layout="block" styleclass="cc-perio-attribute-letter">N</apex:outputpanel>
+                  <apex:outputpanel layout="block" styleclass="cc-perio-thumb-attribute-label">atural</apex:outputpanel>
+                </div>
+                <div class="cc-perio-attribute-list-cell" attribute="Implant">
+                  <apex:outputpanel layout="block" styleclass="cc-perio-attribute-letter">I</apex:outputpanel>
+                  <apex:outputpanel layout="block" styleclass="cc-perio-thumb-attribute-label">mplant</apex:outputpanel>
+                </div>
+                <div class="cc-perio-attribute-list-cell" attribute="Missing">
+                  <apex:outputpanel layout="block" styleclass="cc-perio-attribute-letter">M</apex:outputpanel>
+                  <apex:outputpanel layout="block" styleclass="cc-perio-thumb-attribute-label">issing</apex:outputpanel>
+                </div>
+                <div class="cc-perio-attribute-list-cell" attribute="Pontic">
+                  <apex:outputpanel layout="block" styleclass="cc-perio-attribute-letter">P</apex:outputpanel>
+                  <apex:outputpanel layout="block" styleclass="cc-perio-thumb-attribute-label">ontic</apex:outputpanel>
+                </div>
+                <div class="cc-perio-attribute-list-cell" attribute="Crown">
+                  <apex:outputpanel layout="block" styleclass="cc-perio-attribute-letter">C</apex:outputpanel>
+                  <apex:outputpanel layout="block" styleclass="cc-perio-thumb-attribute-label">rown</apex:outputpanel>
+                </div>
+              </apex:outputpanel>
+              <apex:outputpanel layout="block" styleclass="cc-perio-attribute-list-container">
+                <div class="cc-perio-attribute-list-cell" attribute="Decay">
+                  <apex:outputpanel layout="block" styleclass="cc-perio-attribute-letter">D</apex:outputpanel> <!-- cc-perio-thumbToothDecay marks active -->
+                  <apex:outputpanel layout="block" styleclass="cc-perio-thumb-attribute-label">ecay</apex:outputpanel>
+                </div>
+                <div class="cc-perio-attribute-list-cell cc-perio-attr-Endodontic " attribute="Endodontic">
+                  <apex:outputpanel layout="block" styleclass="cc-perio-attribute-letter">E</apex:outputpanel>
+                  <apex:outputpanel layout="block" styleclass="cc-perio-thumb-attribute-label">ndodontic</apex:outputpanel>
+                </div>
+              </apex:outputpanel>
+            </apex:outputpanel>
+          </apex:outputpanel>
+      </apex:outputpanel>
+      <!-- end user input container -->
+
+      <apex:outputpanel layout="block" styleclass="cc-perio-bottomContainer" >
+        <!-- start legend container -->
+        <div class="cc-perio-legend-container" state="closed" style="display: none;">
+          <apex:outputpanel layout="block" styleclass="cc-form-header-container">
+            <apex:outputpanel layout="block" styleclass="cc-form-header">Legend</apex:outputpanel>
+          </apex:outputpanel>
+          <div class="cc-perio-legend">
+            <div class="cc-perio-legend-contents">
+              <div class="cc-perio-legend-colors">
+                <div class="cc-perio-legend-color-cell">
+                  <div style="" class="cc-perio-legend-box tooth-legend-1">
+                  </div>
+                  <div class="cc-perio-legend-text">
+                    1-3
+                  </div>
+                </div>
+                <div class="cc-perio-legend-color-cell">
+                  <div style="" class="cc-perio-legend-box tooth-legend-3">
+                  </div>
+                  <div class="cc-perio-legend-text">
+                    4-5
+                  </div>
+                </div>
+                <div class="cc-perio-legend-color-cell">
+                  <div style="" class="cc-perio-legend-box tooth-legend-5">
+                  </div>
+                  <div class="cc-perio-legend-text">
+                    6+
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="cc-perio-legend-bl">
+                  <div class="cc-perio-legend-bl-label">
+                    <div class="bl-ex">
+                      <a class="">B</a>
+                    </div>
+                    <div style="margin-left:2px; display:flex; align-items:center">
+                      uccal
+                    </div>
+                  </div>
+                  <div class="cc-perio-legend-bl-label">
+                    <div class="bl-ex">
+                      <a class="">L</a>
+                    </div>
+                    <div style="margin-left:2px; display:flex; align-items:center">
+                      ingual
+                    </div>
+                  </div>
+                  <div class="cc-perio-legend-bl-label">
+                    <div class="thumbToothDecay cc-perio-thumbToothDecay">
+                      D
+                    </div>
+                    <div style="margin-left:2px; display:flex; align-items:center">
+                      ecay
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end legend container -->
+        <!-- start prosth exam form container -->
+
+      </apex:outputpanel>
+
+
+
+
+
+
+
+
+      </div>
+      </apex:repeat>
+      <!--end work through all charts for this patient-->
+
+
+      <!--<span onclick="start_perio_form();">Start Form</span><br /><br />
+      <span onclick="json_teeth();">Save Data</span><br /><br />
+      <span onclick="test_parse();">test parse</span><br /><br />-->
+    </apex:outputpanel>
+
+
+  </div>
+
+  <!-- START PATIENT SEARCH MODAL------------------>
+  <apex:outputpanel layout="block" rendered="{!display_patient_search_modal}">
+  <apex:outputpanel layout="block" styleclass="cc-patient-patient-search-wrapper" style="z-index: 10100; opacity: 1;">
+    <apex:outputpanel layout="block" styleclass="cc-patient-patient-search-container" style="box-shadow: rgba(0, 0, 0, 0.74902) 0px 0px 70px -15px;">
+      <apex:outputpanel layout="block" styleclass="cc-patient-patient-search-close">
+        <div id="cc-patient-patient-search-close-button" onclick="cpatient_search();">
+          <i class="ccf-cancel-thin cc-color-font-black cc-cursor-hover"></i>
+        </div>
+      </apex:outputpanel>
+      <apex:outputpanel layout="block" style="padding-bottom:10px;">
+      <apex:outputpanel layout="block" styleclass="cc-patient-patient-search-info" style="display: flex;justify-content: space-between; flex-wrap: wrap;">
+        <apex:outputpanel layout="block" styleclass="cc-patientProfile-row" style="width:50%;">
+          <apex:outputpanel layout="block" styleclass="cc-patientProfile-label">Last Name:</apex:outputpanel>
+          <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+            <apex:input styleclass="cc-patientProfile-input psearch_name psearch" value="{!search_name}" onkeydown="if(event.keyCode==13){this.blur();}" onkeyup="qsearch_key(event,this.value.length);" />
+            <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder"> </apex:outputpanel>
+            <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off"> </apex:outputpanel>
+          </apex:outputpanel>
+        </apex:outputpanel>
+        <apex:outputpanel layout="block" styleclass="cc-patientProfile-row" style="width:50%;">
+          <apex:outputpanel layout="block" styleclass="cc-patientProfile-label">First Name:</apex:outputpanel>
+          <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+            <apex:input styleclass="cc-patientProfile-input psearch" value="{!search_first}" onkeydown="if(event.keyCode==13){this.blur();}" onkeyup="qsearch_key(event,this.value.length);" />
+            <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder"> </apex:outputpanel>
+            <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off"> </apex:outputpanel>
+          </apex:outputpanel>
+        </apex:outputpanel>
+        <apex:outputpanel layout="block" styleclass="cc-patientProfile-row" style="width:50%;">
+          <apex:outputpanel layout="block" styleclass="cc-patientProfile-label">Phone:</apex:outputpanel>
+          <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+            <apex:input styleclass="cc-patientProfile-input psearch" value="{!search_phone}" onkeydown="if(event.keyCode==13){this.blur();}" onkeyup="qsearch_key(event,this.value.length);"/>
+            <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder"> </apex:outputpanel>
+            <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off"> </apex:outputpanel>
+          </apex:outputpanel>
+        </apex:outputpanel>
+        <apex:outputpanel layout="block" styleclass="cc-patientProfile-row" style="width:50%;">
+          <apex:outputpanel layout="block" styleclass="cc-patientProfile-label">Email:</apex:outputpanel>
+          <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+            <apex:input styleclass="cc-patientProfile-input psearch" value="{!search_email}" onkeydown="if(event.keyCode==13){this.blur();}" onkeyup="qsearch_key(event,this.value.length);" />
+            <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder"> </apex:outputpanel>
+            <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off"> </apex:outputpanel>
+          </apex:outputpanel>
+        </apex:outputpanel>
+        <apex:outputpanel layout="block" styleclass="cc-patientProfile-row" style="width:50%;margin-top:18px;align-self: flex-start;">
+          <apex:outputpanel layout="block" styleclass="cc-patientProfile-label">Unique ID:</apex:outputpanel>
+          <apex:outputpanel layout="block" styleclass="cc-patientProfile-input-container">
+            <apex:input styleclass="cc-patientProfile-input psearch" value="{!search_unique}" onkeydown="if(event.keyCode==13){this.blur();}" onkeyup="qsearch_key(event,this.value.length);" />
+            <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder"> </apex:outputpanel>
+            <apex:outputpanel layout="block" styleclass="cc-inputBottomBorder-off"> </apex:outputpanel>
+          </apex:outputpanel>
+        </apex:outputpanel>        
+        <apex:outputpanel rendered="{!if(allow_quick_search,false,true)}" layout="block" styleclass="cc-patientProfile-row" style="width:50%;align-items:flex-end;">
+            <div class="cc-form-confirmTrash-button cc-form-confirmReschedule-button-confirm" onclick="direct_search_patients();">Search</div>
+            <!-- <span class="spacer">&nbsp;</span>
+            <apex:commandLink status="ajaxstatus" action="{!toggle_quick_search}" reRender="function_holder,main_holder" value="Enable Quick Search" styleclass="lblue" style="align-self:center;"/> -->            
+          </apex:outputpanel>
+      </apex:outputpanel>
+      </apex:outputpanel>
+      <apex:outputpanel layout="block" styleclass="cc-patient-schedule-search-results" rendered="{!if(search_result_size>0,true,false)}">
+        <div class="cc-patient-schedule-search-results-row-container" id="cc-patient-patient-search-results-row-container" style="opacity: 1;">
+          <apex:outputpanel layout="block" styleclass="cc-patient-schedule-search-results-row-label">Search Results</apex:outputpanel>
+          <apex:outputpanel layout="block" styleclass="cc-patient-patient-search-results-row-options">
+            <apex:repeat var="patient" value="{!consult_search_results}" >
+              <apex:outputpanel layout="block" styleclass="cc-patient-patient-search-results-row-result" style="margin-top:10px;margin-bottom:20px;" onclick="view_patient('{!patient.id}');">
+                <apex:outputpanel layout="block" styleclass="cc-patient-patient-search-results-row-result-name">{!patient.name}</apex:outputpanel>
+                <apex:outputpanel layout="block" styleclass="">{!patient.phone}</apex:outputpanel>
+                <apex:outputpanel layout="block" styleclass="">{!patient.billingstreet}</apex:outputpanel>
+                <apex:outputpanel layout="block" styleclass=""><apex:outputtext value="{!if(patient.Email__c=='',patient.personemail,patient.Email__c)}" /></apex:outputpanel>
+                <apex:outputpanel layout="block" styleclass="">{!patient.Warranty_ID__c}</apex:outputpanel>
+              </apex:outputpanel>
+            </apex:repeat>
+          </apex:outputpanel>
+          <apex:outputpanel layout="block" rendered="{!display_more_search_records}" style="display:flex;">
+            <div class="cc-form-notation-button" onclick="more_patients();">More Matches</div>
+          </apex:outputpanel>
+        </div>
+      </apex:outputpanel><!--end search results-->
+    </apex:outputpanel>
+  </apex:outputpanel>
+  </apex:outputpanel><!---END PATIENT SEARCH MODAL----->
+
+  <!---START Removal Confirmation Modal------->
+  <apex:outputpanel layout="block" rendered="{!confirmation_modal_display}">
+  <apex:outputpanel layout="block" styleclass="cc-patient-patient-search-wrapper" style="z-index: 1100; opacity: 1;">
+    <apex:outputpanel layout="block" styleclass="cc-patient-patient-search-container" style="box-shadow: rgba(0, 0, 0, 0.74902) 0px 0px 70px -15px;">
+      <apex:outputpanel layout="block" styleclass="cc-patient-patient-search-close">
+        <div id="cc-patient-patient-search-close-button" onclick="cconfirmation_modal();">
+          <i class="ccf-cancel-thin cc-color-font-black cc-cursor-hover"></i>
+        </div>
+      </apex:outputpanel>
+      <apex:outputpanel layout="block" styleclass="cc-patient-patient-search-info" style="width: 100%; text-align: center; padding-top: 10px;">
+        <apex:outputtext value="{!modal_out}" escape="false" /><br /><br /><br />
+
+        <apex:outputpanel layout="block" rendered="{!if(confirmation_modal_type=='chart_reset',true,false)}" >
+          <span class="confirm-btn" onclick="reset_chart();">Confirm</span><span class="spacer">&nbsp;</span>
+          <span class="cancel-btn" onclick="cconfirmation_modal();">Cancel</span>
+        </apex:outputpanel>
+      </apex:outputpanel>
+    </apex:outputpanel>
+  </apex:outputpanel>
+  </apex:outputpanel>
+  <!--End Confirmation Modal------------------>
+
+</apex:outputpanel> <!--end cc-perio-wrapper-->
+</apex:outputpanel>
+
+</apex:form>
+
+<script>
+var $j = jQuery.noConflict();
+// $j is now an alias to the jQuery function; creating the new alias is optional.
+
+
+var globalStaticResourcePath = '{!URLFOR($Resource.Dental_Practice_Resources)}';
+
+<!--$j(document).ready(function() {-->
+var cc_perio_inputs;
+  var cc_perio_inputPosition;
+
+  var cc_perio_vPosition; //lingual or buccal
+  var cc_perio_hPosition; //top or bottom
+
+  var cc_perio_listenOn = true; //whether the input event listener should be on, timeout can interfere
+  var cc_perio_input1HasValue;
+  var cc_perio_input2HasValue;
+  var cc_perio_input3HasValue;
+
+  //current tooth num
+  var cc_perio_toothNum = 1;
+  var cc_perio_teeth = []; //an array containing tooth arrays
+
+
+  /*$j('.cc-perio-chart-select-date').on('change', function (e) {
+      var date = $j(this).val();
+      var id; //not a true id, a classname, but unique
+      if (date == '01/19/15') {
+        id = '0';
+      }
+      else if (date == '03/12/15') {
+        id='1';
+      }
+      else if (date == '06/14/15') {
+        id='2';
+      }
+      $j('html, body').animate({
+          scrollTop: $j('.cc-perio-UID-'+id).offset().top - 165
+      }, 'slow');
+  });*/
+
+
+  function cc_perio_getToothNum() {
+    //console.log("getToothNum()");
+    return cc_perio_toothNum;
+  }
+
+  /*$j('#cc-perio-wrapper').on('click', '.cc-patient-cancel-addChart',function() {
+    var parent = $j(this).closest('.cc-perio-container');
+
+    parent.slideUp();
+  });*/
+
+
+  /*function cc_perio_deactivateOldChart() {
+    var active = $j('#cc-perio-container-active');
+    active.find('.cc-perio-selected').removeClass('cc-perio-selected');
+    active.find('.buccal-top-selected').removeClass('buccal-top-selected').addClass('buccal-top');
+    active.find('.lingual-top-selected').removeClass('lingual-top-selected').addClass('lingual-top');
+    active.find('.lingual-bottom-selected').removeClass('lingual-bottom-selected').addClass('lingual-bottom');
+    active.find('.buccal-bottom-selected').removeClass('buccal-bottom-selected').addClass('buccal-bottom');
+    var note = active.find('.cc-perio-comments').val();
+    active.find('.cc-patient-cancel-addChart').remove();
+    active.find('.cc-perio-saveChart-button-container').remove();
+    active.find('.cc-perio-measure-leftSide-buttonContainer-prosth').remove();
+    active.find('.cc-perio-measure-leftSide-buttonContainer-legend').remove();
+    var noteContainer = active.find('.cc-perio-notes-container');
+    noteContainer.empty();
+    noteContainer.css('width', '50%');
+    noteContainer.prepend('Comments: '+note);
+
+    // for (i=1; i<=32; i++) {
+    //   var id = '#cc-perio-container-active .cc-perio-t'+i;
+    //   $j(id).off();
+    // }
+    active.find('.cc-perio-measure-container').hide();
+    active.attr('id', '');//remove as active
+  }*/
+
+  var perioUID_i=0;
+
+  /*function cc_perio_initNewChart() {
+    var chart = $j('#cc-perio-container-template').clone();
+    chart.attr('id', 'cc-perio-container-active');
+    chart.addClass('cc-perio-UID-'+(perioUID_i++)); //get from server, for scrolling
+    chart.prependTo('#cc-perio-wrapper');
+    chart.find('.cc-perio-legend-container').hide();
+    chart.find('.cc-form-container').hide();
+    chart.slideDown();
+    chart.find('.cc-perio-first').focus();
+    cc_perio_initTeeth();
+    cc_perio_initListeners();
+    cc_perio_initVandHPosition();
+    cc_perio_toothMoved(cc_perio_getToothAt(1), 'buccal', 'top');
+    cc_perio_updateMeasurementLabel(1, 'buccal', 'top');
+  }*/
+
+/*  $j('#cc-perio-add-chart-button').on('click', function() {
+    cc_perio_deactivateOldChart();
+    cc_perio_initNewChart();
+  })*/
+
+
+
+/**
+* @param {string} hpos - either buccal or lingual
+* @param {string} vpos - either upper or lower
+*/
+function cc_perio_setHandVPosition(hpos, vpos) {
+  console.error("setVandHPosition() vpos: "+vpos+' hpos:'+hpos);
+
+  var curV = cc_perio_getVPosition();
+  var curH = cc_perio_getHPosition();
+
+  if (curV != vpos) { //go to first tooth, buccal on different row
+    cc_perio_blDifferentRow(hpos, vpos);
+  }
+  else {
+    cc_perio_moveHandVPosition(hpos, vpos);
+  }
+
+}
+
+/**
+* Updates the label above the measurement inputs to show the current tooth number and position
+*/
+function cc_perio_updateMeasurementLabel(toothN, hpos, vpos) {
+  var toothNumLabel = $j('#cc-perio-container-active .cc-perio-toothNumInputLabel');
+  var hLabel = $j('#cc-perio-container-active .cc-perio-hPosition');
+  var vLabel = $j('#cc-perio-container-active .cc-perio-vPosition');
+
+  toothNumLabel.text(toothN);
+  hLabel.text(hpos);
+  vLabel.text(vpos);
+
+}
+
+//called if a user clicks b or l on a different row
+function cc_perio_blDifferentRow(hpos, vpos) {
+  var num;
+  if (vpos == "bottom") {
+    num = 17;
+  }
+  else if (vpos == "top") {
+    num=1;
+  }
+  cc_perio_toothMoved(cc_perio_getToothAt(num), hpos, vpos);
+
+}
+
+
+
+  window.onload = function() {
+    // console.log('onLoad');
+
+    cc_perio_inputs = "#cc-perio-container-active .cc-perio-inputs";
+    //cc_perio_initNewChart();
+        start_perio_form();
+        resize_textarea();
+
+  };
+
+
+
+function cc_perio_initVandHPosition() {
+  cc_perio_moveHandVPosition('buccal', 'top');
+}
+
+/**
+* inits teeth with natural and no attributes
+* called when creating a new perio chart
+**/
+function cc_perio_initTeeth() {
+  // console.log('initTeeth()');
+  for (i=1; i<33; i++) {
+    var cc_perio_aTooth = new cc_perio_createTooth(i, "Natural", [null, null, null, null, null, null], false, false);
+    cc_perio_teeth.push(cc_perio_aTooth);
+  }
+}
+
+function cc_perio_createTooth (number, typeOf, measure, endo, decay) {
+  //console.log("createTooth");
+  this.number = number;
+  this.typeOf = typeOf;
+  this.measure = measure;
+  this.endo = Boolean(endo);
+  this.decay = Boolean(decay);
+
+  this.toString = function() {
+    return "aTooth \nnumber: "+this.number+"\ntypeOf: "+this.typeOf+"\nmeasure: "+this.measure[0]+","+this.measure[1]+","+this.measure[2]+","+this.measure[3]+","+this.measure[4]+","+this.measure[5]+'\nendo: '+this.endo+"\ndecay: "+this.decay;
+  };
+}
+
+
+
+
+//returns the associated path for the image with a tooth number
+function cc_perio_getImagesAt(toothN) {
+  //console.log(getToothAt(toothN));
+  var aTooth = cc_perio_getToothAt(toothN);
+  var num = aTooth.number;
+  var type = aTooth.typeOf;
+  var direction = cc_perio_getDirection(aTooth.number);
+  var endo = aTooth.endo;
+
+  var src;
+  if (type == 'Natural' && endo === false) {
+    src = globalStaticResourcePath + 'img/'+toothN+'.png';
+  }
+  else if (type == 'Crown' && endo === true) {
+    src = globalStaticResourcePath + 'img/'+toothN+'-Crown-Endodontic.png';
+  }
+  else if (type == 'Natural' && endo === true) {
+    src = globalStaticResourcePath + 'img/'+toothN+'-Endodontic.png';
+  }
+  else if (type == 'Crown' && endo === false) {
+    src = globalStaticResourcePath + 'img/'+toothN+'-Crown.png';
+  }
+  else {
+    src = globalStaticResourcePath + 'img/'+typeOf+'-'+direction+'.png';
+  }
+  return src;
+
+}
+
+/** sets the input name
+* @param {string} typeOf - the input
+**/
+function cc_perio_typeOfChanged(typeOf) {
+  //console.log("typeOfChanged(): "+typeOf);
+  var aTooth = cc_perio_getCurrentTooth();
+  aTooth.typeOf=typeOf;
+  cc_perio_updateToothTypeOf(typeOf);
+  cc_perio_currentToothTypeOfSelected(typeOf);
+  cc_perio_resetCurrentToothShadow();
+  cc_perio_currentToothTypeOfSelected(typeOf);
+}
+
+  //sets the label for the thumb to decay
+  function cc_perio_updateDecayLabel(toggle) {
+    // console.error('updateThumbToothNumLabel()');
+    var label = $j('#cc-perio-container-active .cc-perio-thumbToothLabel-'+cc_perio_getToothNum());
+    var ctl = $j('#cc-perio-container-active .cc-perio-focused-label-current');
+    if (toggle) { //was off turn on
+      ctl.attr('class','cc-perio-focusedToothDecay');
+      label.attr('class','cc-perio-thumbToothDecay');
+    }
+    else {
+      ctl.attr('class','cc-perio-focusedToothLabel');
+      label.attr('class','cc-perio-thumbToothLabel');
+    }
+  }
+
+
+
+/**
+* @param {number} position - input 1, 2, or 3
+* @param {number} value - the measurement
+* This function updates the teeth array with new values
+**/
+function cc_perio_setInputNumberValue(position, value) {
+  //console.log('setInputNumberValue() | position: '+position+' value: '+value);
+  var aTooth = cc_perio_getToothAt(cc_perio_getToothNum());
+  var index = (position-1);
+  var hpos = cc_perio_getHPosition();
+  if (hpos == "buccal") {
+    //console.log('setInputNumberValue() | buccal');
+    aTooth.measure[index]=value;
+    cc_perio_setToothAt(cc_perio_getToothNum(), aTooth);
+  }
+  else if (hpos == "lingual") {
+    //console.log('setInputNumberValue() | lingual');
+    aTooth.measure[index+3]=value;
+    cc_perio_setToothAt(cc_perio_getToothNum(), aTooth);
+  }
+  else {
+    alert ("an error has occurred in setInputNumberValue()");
+    //console.log(aTooth.toString());
+  }
+  //console.log(aTooth.toString());
+}
+
+/**
+* This function returns a tooth object
+* @param {number} num - a tooth number between 1-32
+**/
+function cc_perio_getToothAt(num) {
+  //console.log("cc_perio_getToothAt()");
+  if (num >=1 && num <=32) {
+    return cc_perio_teeth[num-1];
+  }
+  else {
+    alert ("sorry, an error has occurred at cc_perio_getToothAt("+num+").");
+  }
+}
+
+// start listeners
+
+$j('#cc-perio-wrapper').on('mouseover', '#cc-perio-container-active .cc-perio-measure-leftSide-buttonContainer-legend', function() {
+  $j(this).find('.cc-tooltip').removeClass('cc-gone');
+});
+
+
+
+$j('#cc-perio-wrapper').on('click', '#cc-perio-container-active .cc-perio-measure-leftSide-buttonContainer-prosth', function() {
+  var prosth = $j('#cc-perio-container-active .cc-form-container');
+  if (prosth.attr('state') == 'open') {
+    prosth.slideUp();
+    prosth.attr('state', 'closed');
+  }
+  else {
+    prosth.slideDown();
+    prosth.attr('state', 'open');
+    $j('html, body').animate({
+        scrollTop: $j('#cc-perio-container-active .cc-form-container').offset().top - 165
+    }, 'slow');
+  }
+
+});
+
+$j('#cc-perio-wrapper').on('mouseleave', '#cc-perio-container-active .cc-perio-measure-leftSide-buttonContainer-legend', function() {
+  $j(this).find('.cc-tooltip').addClass('cc-gone');
+});
+
+$j('#cc-perio-wrapper').on('mouseover', '#cc-perio-container-active .cc-perio-measure-leftSide-buttonContainer-prosth', function() {
+  $j(this).find('.cc-tooltip').removeClass('cc-gone');
+});
+
+$j('#cc-perio-wrapper').on('mouseleave', '#cc-perio-container-active .cc-perio-measure-leftSide-buttonContainer-prosth', function() {
+  $j(this).find('.cc-tooltip').addClass('cc-gone');
+});
+
+
+
+
+
+
+var textAreaFocus;
+
+
+
+function cc_perio_isTextAreaFocus() {
+  return textAreaFocus;
+}
+
+//watches for an arrow key
+document.addEventListener("keydown", function(e){
+  // console.log('document.addEventListener-keydown');
+  if (!cc_perio_isTextAreaFocus()) {
+    var key = e.which || e.keyCode;
+    switch (e.keyCode) {
+      case 37: //left
+          cc_perio_arrowMoveToTooth('left');
+          break;
+      case 13:
+          // cc_perio_closeAlert();
+          break;
+      case 38: //up arrow
+          cc_perio_arrowMoveToTooth('up');
+          break;
+      case 39: //right arrow
+          cc_perio_arrowMoveToTooth('right');
+          break;
+      case 40://down
+          cc_perio_arrowMoveToTooth('down');
+          break;
+      case 73:
+          // cc_perio_updateToothFromHotKey('Implant', null, null);
+          cc_perio_attributeClicked('Implant');
+          break;
+      case 78:
+          cc_perio_attributeClicked('Natural');
+          break;
+      case 77:
+          // updateInput('m');
+          cc_perio_attributeClicked('Missing');
+          break;
+      case 80:
+          // updateInput('p');
+          cc_perio_attributeClicked('Pontic');
+          break;
+      case 67:
+          // updateInput('c');
+          cc_perio_attributeClicked('Crown');
+          break;
+      case 69:
+          // updateInput('e');
+          cc_perio_attributeClicked('Endodontic');
+          break;
+      case 68:
+          // updateInput('d');
+          cc_perio_attributeClicked('Decay');
+          break;
+      case 13:
+        e.preventDefault();
+        break;
+    }
+  }
+});
+
+
+function cc_perio_isHotKeyCodeValid(key) {
+  switch (key) {
+    case 37: //left
+        return true;
+    case 9:
+        return true;
+    case 13:
+        return true;
+    case 38: //up arrow
+        return true;
+    case 39: //right arrow
+        return true;
+    case 40://down
+        return true;
+    case 73:
+        return true;
+    case 78:
+        return true;
+    case 77:
+        return true;
+    case 80:
+        return true;
+    case 67:
+        // updateInput('c');
+        return true;
+    case 69:
+        // updateInput('e');
+        return true;
+    case 68:
+        // updateInput('d');
+        return true;
+  }
+  return false;
+}
+
+
+
+function cc_perio_initListeners() {
+  // console.log("cc_perio_initListeners()");
+  for (i=1; i<=32; i++) {
+    cc_perio_addToothListener(i);
+  }
+}
+
+//end listeners
+
+  //returns the previous tooth num
+  function cc_perio_prevToothNum() {
+    if (cc_perio_toothNum == 1) {
+      return 32;
+    }
+    else return cc_perio_getToothNum()-1;
+  }
+
+  //returns the next tooth num
+  function cc_perio_nextToothNum() {
+    if (cc_perio_toothNum == 32) {
+      return 1;
+    }
+    else return cc_perio_getToothNum()+1;
+  }
+
+
+
+
+var cc_perio_addToothListener = function(num) {
+  var id = '#cc-perio-container-active .cc-perio-t'+num;
+  $j(id).on('click', function() {
+    cc_perio_clickedTooth(id);
+  });
+};
+
+//called on mouse clicks
+function cc_perio_clickedTooth(id) {
+  console.log('cc_perio_clickedTooth | id: '+id);
+  var vpos = cc_perio_getVPosition(); //previous vpos
+  cc_perio_setToothNum(cc_perio_getToothNumFromId(id));
+  var aTooth = cc_perio_getToothAt(cc_perio_getToothNum());
+  //we don't know v or h pos so reset to buccal if changing rows
+  vpos = cc_perio_calcVPos(id);
+  if (vpos != cc_perio_getVPosition()) {
+    cc_perio_toothMoved(aTooth, 'buccal', vpos);
+  }
+  else {
+    cc_perio_toothMoved(aTooth, cc_perio_getHPosition(), vpos);
+  }
+
+}
+
+//functions shared by clicking or arrow navigation
+//switchBL is a flag saying whether the tooth was moved cause it was at the end of the row and user inputted
+function cc_perio_toothMoved(aTooth, hpos, vpos) {
+  console.log("toothMoved: "+aTooth.toString()+'\nhpos: '+hpos+'\nvpos: '+vpos);
+  cc_perio_setToothNum(aTooth.number);
+  cc_perio_moveHandVPosition(hpos,vpos);
+  cc_perio_refreshInputs(aTooth.typeOf);
+  cc_perio_updateInputs(aTooth, cc_perio_getHPosition());
+  cc_perio_setSelectedThumb(aTooth.number); //changes background to blue on selected tooth
+  cc_perio_checkOldVal(aTooth);
+  cc_perio_selectedInputFocusUpdate(); //determines if there are any open inputs, and if so, puts the focus there
+  // cc_perio_resetCurrentToothShadow();
+  cc_perio_updateAttributeLabels(aTooth); //sets all the labels for attributes to on/off
+  cc_perio_updateMeasurementLabel(aTooth.number, hpos, vpos);
+}
+
+/**
+* goes through the tooth's attributes and then toggles the attribute labels
+* called by cc_perio_toothMoved when user clicks or keys to tooth
+* @param {tooth Object} aTooth - the tooth object from the teeth array which will trigger labels to be changed
+**/
+var cc_perio_updateAttributeLabels = function(aTooth) {
+  // console.log('cc_perio_updateAttributeLabels()' +aTooth.toString());
+  var typeOf = aTooth.typeOf;
+  var endo = aTooth.endo;
+  var decay = aTooth.decay;
+
+  var endoId = $j('#Endodontic');
+  var decayId = $j('#Decay');
+
+  if(endo) {
+    endoId.addClass('cc-perio-typeOfSelected');
+  }
+  else {
+    endoId.removeClass('cc-perio-typeOfSelected');
+  }
+
+  if(decay) {
+    decayId.addClass('cc-perio-typeOfSelected');
+  }
+  else {
+    decayId.removeClass('cc-perio-typeOfSelected');
+  }
+
+  cc_perio_toggleAttributeCellSelected(typeOf);
+
+};
+
+// ?????
+function cc_perio_endoDecayChanged(aTooth) {
+  cc_perio_updateDecayLabel(false);
+  cc_perio_currentToothDecayLabel(false);
+  cc_perio_currentToothEndoLabel(false);
+}
+
+
+
+
+
+
+
+// //when a user moves to a tooth, it sets
+// function cc_perio_currentToothTypeOfSelected(typeOf) {
+//   //console.log("currentToothTypeOfSelected:");
+//   var typeOfSelected = $j('.cc-perio-typeOfSelected');
+//   var typeOfId = $j('#'+typeOf);
+//
+//   if (typeOfSelected !== null) {
+//     typeOfSelected.attr('class',''); //reset any currently selected tooth
+//   }
+//   else {
+//     alert ("currentToothTypeOfSelected(typeOf): unable to find a class with typeOfSelected");
+//   }
+//   if (typeOfId !== null) {
+//     // set the new selected tooth
+//     typeOfId.attr('class', 'cc-perio-typeOfSelected');
+//   }
+//   else {
+//     alert ("currentToothTypeOfSelected(typeOf): unable to find #typeOf: "+typeOf);
+//   }
+// }
+
+
+function cc_perio_setInput1HasValue(bool) {
+  cc_perio_input1HasValue = bool;
+}
+
+function cc_perio_getInput1HasValue() {
+  return cc_perio_input1HasValue;
+}
+
+function cc_perio_setInput2HasValue(bool) {
+  cc_perio_input2HasValue = bool;
+}
+
+function cc_perio_getInput2HasValue() {
+  return cc_perio_input2HasValue;
+}
+
+function cc_perio_setInput3HasValue(bool) {
+  cc_perio_input3HasValue = bool;
+}
+
+function cc_perio_getInput3HasValue() {
+  return cc_perio_input3HasValue;
+}
+
+function cc_perio_isKeyCodeNum(key) {
+  if (key >= 48 && key <=57 ) {
+    return true;
+  }
+  return false;
+}
+
+
+//if the user enters a value while the inputs have a value - checkOldVal
+//1. need to make sure any new entered value erases previous input
+//2. update tooth info
+//3. clears the stats
+//4. can be triggered by mouse, keyboard, or input focus javascript
+function cc_perio_checkOldVal(aTooth) {
+  //console.log("checkOldVal()");
+
+  var m1 = aTooth.measure[0];
+  var m2 = aTooth.measure[1];
+  var m3 = aTooth.measure[2];
+
+  if (m1 !== null && m1 !== '') {
+    cc_perio_setInput1HasValue(true);
+    //console.log("checkOldVal():1 true");
+  }
+  else {
+    cc_perio_setInput1HasValue(false);
+    //console.log("checkOldVal():1 false");
+  }
+  if (m2 !== null && m2 !== '') {
+    cc_perio_setInput2HasValue(true);
+    //console.log("checkOldVal():2 true");
+  }
+  else {
+    cc_perio_setInput2HasValue(false);
+    //console.log("checkOldVal():2 false");
+  }
+  if (m3 !== null && m3 !== '') {
+    cc_perio_setInput3HasValue(true);
+    //console.log("checkOldVal():3 true");
+  }
+  else {
+    cc_perio_setInput3HasValue(false);
+    //console.log("checkOldVal():3 false");
+  }
+}
+
+
+
+//param next, prev, or current
+//returns the toothNum
+function cc_perio_getFocusedNumPosition(position) {
+  if (position == 'next') {
+    return cc_perio_nextToothNum();
+  }
+  else if (position == 'prev') {
+    return cc_perio_prevToothNum();
+  }
+  else if (position == 'current') {
+    return cc_perio_getToothNum();
+  }
+}
+
+
+
+
+
+
+function cc_perio_getPrevTooth() {
+  var num = cc_perio_getToothNum();
+  if (num == 1) {
+    num = 32;
+  }
+  else {
+    num += -1;
+  }
+  return cc_perio_getToothAt(num);
+}
+
+function cc_perio_getNextTooth() {
+  var num = cc_perio_getToothNum();
+  if (num == 32) {
+    num = 1;
+  }
+  else {
+    num += 1;
+  }
+  return cc_perio_getToothAt(num);
+}
+
+function cc_perio_getCurrentTooth() {
+  return cc_perio_getToothAt(cc_perio_getToothNum());
+}
+
+
+
+
+
+function cc_perio_setCurrentTooth(aTooth) {
+  return cc_perio_setToothAt(cc_perio_getToothNum(), aTooth);
+}
+
+
+
+function cc_perio_decayChanged(aTooth, decay) {
+  if (aTooth.decay) {
+    aTooth.decay = !decay; //was already set to true, so now we remove toothDecay
+    cc_perio_updateDecayLabel(!decay);
+    cc_perio_currentToothDecayLabel(!decay);
+  }
+  else {
+    aTooth.decay = decay;
+    cc_perio_updateDecayLabel(decay);
+    cc_perio_currentToothDecayLabel(decay);
+  }
+}
+
+
+
+
+function cc_perio_updateFocusedToothValues(measure, eid) {
+  //console.log("updateFocusedToothValues():"+measure+' '+eid);
+  if (eid === null) {
+    // console.error('cc_perio_updateFocusedToothValues() - null value passed');
+  }
+  else {
+    if (measure !== null) {
+      eid.innerHTML=measure;
+    }
+    else {
+      eid.innerHTML='';
+    }
+  }
+}
+
+
+
+
+//updates the label of the tooth number under each tooth and above measurements
+
+
+
+
+
+function cc_perio_setSelectedThumb(num) {
+  // console.log("cc_perio_setSelectedThumb()");
+  var selected = $j('#cc-perio-container-active .cc-perio-selected');
+  var cell = $j('#cc-perio-container-active .cc-perio-t'+num);
+  if (selected !== null && cell !== null) {
+      selected.removeClass('cc-perio-selected');
+      cell.addClass('cc-perio-selected');
+  }
+  else {
+    alert('Error! invalid moveToTooth | num: ' + num + ' toothNum: '+toothNum);
+  }
+}
+
+//sets the inputs with tooth value passed
+function cc_perio_updateInputs(aTooth, hposition) {
+  // console.log('cc_perio_updateInputs()');
+  if (hposition == "buccal") {
+    $j('#cc-perio-container-active .cc-perio-first').value=aTooth.measure[0];
+    $j('#cc-perio-container-active .cc-perio-second').value=aTooth.measure[1];
+    $j('#cc-perio-container-active .cc-perio-third').value=aTooth.measure[2];
+  }
+  else if (hposition == "lingual") {
+    $j('#cc-perio-container-active .cc-perio-first').value=aTooth.measure[3];
+    $j('#cc-perio-container-active .cc-perio-second').value=aTooth.measure[4];
+    $j('#cc-perio-container-active .cc-perio-third').value=aTooth.measure[5];
+  }
+
+}
+
+function cc_perio_refreshInputs(typeOf) {
+  // console.error("cc_perio_refreshInputs() typeOf: "+typeOf);
+  //if missing hide inputs
+  if(typeOf=='Missing' || typeOf =='Pontic') {
+    cc_perio_hideInputs();
+  }
+  else {
+    cc_perio_showInputs();
+    cc_perio_clearInputs();
+    cc_perio_selectedInputFocusUpdate();
+  }
+}
+
+
+function cc_perio_hideInputs() {
+  console.log("hideInputs");
+  var parent = $j("#cc-perio-container-active");
+  console.log('class: '+parent.attr('class'));
+  var inputs = parent.find('.cc-perio-inputs');
+  inputs.css('visibility','hidden');
+
+}
+
+function cc_perio_showInputs() {
+  // console.error("showInputs");
+  $j("#cc-perio-container-active .cc-perio-inputs").css('visibility','visible');
+
+  var parent = $j("#cc-perio-container-active");
+  var inputs = parent.find('.cc-perio-inputs');
+  inputs.css('visibility','visible');
+}
+
+/**
+*
+**/
+function cc_perio_moveHandVPosition(hpos, vpos) {
+  console.log("cc_perio_moveHandVPosition()");
+  cc_perio_setVPosition(vpos);
+  cc_perio_setHPosition(hpos);
+  // cc_perio_setHPositionLabel(hpos); //change the Tooth # [lingual | buccal] pocket depth
+  cc_perio_updateBLLinks(vpos, hpos); //change link colors to selected or normal
+  // cc_perio_selectedInputFocusUpdate();
+  cc_perio_updatePocketDepthInputs(vpos);
+}
+
+/**
+* if a user is on the bottom jaw, the tooth inputs will reverse
+*/
+function cc_perio_updatePocketDepthInputs(vpos) {
+  var container = $j('.cc-perio-inputs');
+  var first = container.find('.cc-perio-first');
+  var last = container.find('.cc-perio-third');
+  if (vpos == 'bottom') {
+    console.log('switch to bottom');
+    if (container.children(':first').hasClass('cc-perio-first')) {
+      // console.log('need to reverse');
+      container.append(first[0]);
+      container.prepend(last[0]);
+    }
+
+  }
+  else if (vpos == 'top') {
+    // console.log('switch to top');
+    if (container.children(':first').hasClass('cc-perio-first')) {
+      // console.log('normal');
+    }
+    else {
+        console.log('need to reverse');
+        container.prepend(first[0]);
+        container.append(last[0]);
+
+    }
+  }
+}
+
+$j('.cc-toolbar-button-icon, .cc-toolbar-button-patient').hover(function() {
+  var parent = $j(this).closest('.cc-toolbar-button-icon-container');
+  var tooltip = parent.find('.cc-toolbar-button-icon-tooltip');
+  tooltip.css('display', 'block');
+  tooltip.animate({opacity: '1'}, 150);
+}, function() {
+  var parent = $j(this).closest('.cc-toolbar-button-icon-container');
+  var tooltip = parent.find('.cc-toolbar-button-icon-tooltip');
+  tooltip.css('opacity', '0');
+  tooltip.css('display', 'none');
+});
+
+//called on a clicked tooth or a key stroke
+//determines if there are any open inputs, and if so, puts the focus there
+//otherwise puts focus on first input
+function cc_perio_selectedInputFocusUpdate() {
+  // console.error("selectedInputFocusUpdate() ");
+  if (!cc_perio_getInput1HasValue()) {
+    $j('#cc-perio-container-active .cc-perio-first').focus();
+    //console.log("selectedInputFocusUpdate() 1");
+  }
+  else if (!cc_perio_getInput2HasValue()) {
+    $j('#cc-perio-container-active .cc-perio-second').focus();
+    //console.log("selectedInputFocusUpdate() 2");
+  }
+  else if (!cc_perio_getInput3HasValue()) {
+    $j('#cc-perio-container-active .cc-perio-third').focus();
+    //console.log("selectedInputFocusUpdate() 3");
+  }
+  else {
+    $j('#cc-perio-container-active .cc-perio-first').focus();
+  }
+}
+
+
+
+//changes links from selected to normal & vice-versa
+function cc_perio_updateBLLinks(vposition, hposition) {
+  var elems;
+  var el;
+  if (vposition == 'top' && hposition == 'lingual') {
+    cc_perio_resetVandHPosition();
+    elems = $j('#cc-perio-container-active .lingual-top');
+
+    elems.addClass('lingual-top-selected');
+  }
+  else if (vposition == 'top' && hposition == 'buccal') {
+    cc_perio_resetVandHPosition();
+    elems = $j('#cc-perio-container-active .buccal-top');
+    elems.addClass('buccal-top-selected');
+
+  }
+  else if (vposition == 'bottom' && hposition == 'buccal') {
+    cc_perio_resetVandHPosition();
+    elems = $j('.buccal-bottom');
+    elems.addClass('buccal-bottom-selected');
+  }
+  else if (vposition == 'bottom' && hposition == 'lingual') {
+    cc_perio_resetVandHPosition();
+    elems = $j('.lingual-bottom');
+    elems.addClass('lingual-bottom-selected');
+  }
+}
+
+
+function cc_perio_resetVandHPosition() {
+  var bt = $j('#cc-perio-container-active .buccal-top-selected');
+  var bb = $j('#cc-perio-container-active .buccal-bottom-selected');
+  var lt = $j('#cc-perio-container-active .lingual-top-selected');
+  var lb = $j('#cc-perio-container-active .lingual-bottom-selected');
+
+  bt.removeClass('buccal-top-selected').addClass('buccal-top');
+  bb.removeClass('buccal-bottom-selected').addClass('buccal-bottom');
+  lt.removeClass('lingual-top-selected').addClass('lingual-top');
+  lb.removeClass('lingual-bottom-selected').addClass('lingual-bottom');
+
+}
+
+
+
+function cc_perio_calcVPos(id) {
+  var num = parseInt(id.match(/\d+/));
+  //console.log("calcVPos() id: "+id+' num: '+num);
+  if (num > 16) {
+    return "bottom";
+  }
+  else return "top";
+}
+
+function cc_perio_setToothNum(num) {
+  //console.log("cc_perio_setToothNum: "+num);
+  cc_perio_toothNum = num;
+}
+
+
+
+function cc_perio_getToothNumFromId(id) {
+  // console.log('cc_perio_getToothNumFromId: '+id);
+  var re = /\d+/g;
+  return parseInt(id.match(re)[0]);
+}
+
+  function cc_perio_setVPosition (v) {
+    //console.log("setVPosition(): "+v);
+    cc_perio_vPosition = v;
+  }
+
+  function cc_perio_setHPosition (h) {
+    //console.log("setHPosition(): "+h);
+    cc_perio_hPosition = h;
+  }
+
+  function cc_perio_getVPosition () {
+    // console.log("cc_perio_getVPosition(): "+cc_perio_vPosition);
+    return cc_perio_vPosition;
+  }
+
+  function cc_perio_getHPosition () {
+    // console.log("getHPosition(): "+cc_perio_hPosition);
+    return cc_perio_hPosition;
+  }
+
+  //if a tooth is missing
+  function cc_perio_clearInputs() {
+    $j('#cc-perio-container-active .cc-perio-first').val('');
+    $j('#cc-perio-container-active .cc-perio-second').val('');
+    $j('#cc-perio-container-active .cc-perio-third').val('');
+  }
+
+  /**
+  * stores the input value keydown, so that keyup can restore the value to previous
+  * @param {string} position, the 1st, second, or 3rd input (1,2, or 3)
+  * @param {string} value, the id.value entered
+  **/
+  function cc_perio_setPrevInput(position, value) {
+    console.log("setPrevInput| position: "+position+ ' value: '+value);
+    prevInputVal=value;
+    prevInputPosition=position;
+  }
+
+/**
+* a letter or character has polluted the inputs with a non-numerical char, resets it to old value
+* @param {number} position - input 1, 2, or 3
+**/
+function cc_perio_restoreInputValue(position) {
+  console.log("restoreInputValue | position: "+position);
+  var input;
+  if (position === 1) {
+    input = $j('#cc-perio-container-active .cc-perio-first');
+  }
+  else if (position === 2) {
+    input = $j('#cc-perio-container-active .cc-perio-second');
+  }
+  else if (position === 3) {
+    input = $j('#cc-perio-container-active .cc-perio-third');
+  }
+  else {
+    alert("restoreInputValue error");
+  }
+  var restVal = getPrevInputVal();
+  if (!isNaN(restVal)) {
+    input.value = restVal;
+  }
+  else {
+    input.val('');
+  }
+}
+
+/**
+* Called when number has been entered in the input
+* manages changing of colors, focused teeth, entering number
+* @param {number} val the measurement
+* @param {number} position - input 1,2, or 3 digit
+**/
+function cc_perio_setToothInputValue(val, position) {
+  var toothN = cc_perio_getToothNum();
+  console.error('setToothInputValue()'+'\nposition: '+position+'\nval: '+val+'\ntoothN: '+toothN);
+  cc_perio_setInputNumberValue(position, val); //determines if index = 0 or 3 by buccal or lingual position
+  cc_perio_refreshInputFocus(position); //moves input focus to next, at position 3 clears them and arrowMovesToTooh right
+  cc_perio_updateThumbToothColors(position, toothN);
+  cc_perio_insertMeasure(toothN, position, val);
+}
+
+/**
+* This function updates the thumbs with the color matching the measurement
+* @param {number} position - the 1st, 2nd, or 3rd input
+* @param {number} toothNum - the tooth number to update measurement colors
+**/
+function cc_perio_updateThumbToothColors(position, toothNum) {
+  console.error('updateThumbToothColors | position: '+position+' '+' toothNum:'+toothNum);
+
+  var classN;
+  var aTooth = cc_perio_getToothAt(toothNum);
+
+  var index = position-1;
+  var hpos = cc_perio_getHPosition();
+
+  if (hpos == 'lingual') {
+    index += 3;
+    position +=3;
+//    if(num>16) {
+  //    if(position==4)
+    //    position = 6;
+      //else if(position==6)
+        //position = 4;
+      //}
+  }
+  else if (hpos == 'buccal') {
+    //do nothing position is good;
+    //reverse 1&3 if toothnum>16
+    //if(toothNum>16) {
+      //if(position==1)
+        //position=3;
+      //else if(position==3)
+        //position=1;
+    //}
+  }
+  else {
+    alert("sorry an error has occurred in updateThumbToothColors()");
+  }
+
+  classN = '.cc-perio-thumb'+toothNum+'-'+position;
+  var measure = aTooth.measure[index];
+  var elem = $j('#cc-perio-container-active '+classN);
+  console.log("classN: "+classN+" measure: "+measure);
+  elem.removeClass("cc-perio-thumb-measure-blank");
+  elem.parent().removeClass("thumb-measure-blank");
+
+  cc_perio_clearPositionColor(toothNum, position);
+
+  if (position === '' || measure === null) {
+    elem.addClass("cc-perio-thumb-measure-blank");
+	elem.parent().addClass("thumb-measure-blank");
+  }
+  else if (measure >= 1 && measure <= 3) {
+    elem.addClass("cc-perio-thumb-measure-1");
+  }
+  else if (measure > 3 && measure < 6) {
+    elem.addClass("cc-perio-thumb-measure-3");
+  }
+  else if (measure > 5 ) {
+    elem.addClass("cc-perio-thumb-measure-5");
+  }
+}
+
+/**
+* Clears the element's color in the position, restoring it to blank
+**/
+function cc_perio_clearPositionColor(toothNum, position) {
+  var elem = $j('#cc-perio-container-active .cc-perio-thumb'+toothNum+'-'+position);
+
+  elem.removeClass("cc-perio-thumb-measure-1");
+
+  elem.removeClass("cc-perio-thumb-measure-3");
+
+  elem.removeClass("cc-perio-thumb-measure-5");
+
+  elem.addClass("cc-perio-thumb-measure-blank");
+  elem.parent().addClass("thumb-measure-blank");
+}
+/**
+* Clears the element's color in the position, restoring it to blank
+**/
+function cc_perio_clearPositionMeasurement(toothNum, position) {
+  var elem = $j('#cc-perio-container-active .cc-perio-thumb'+toothNum+'-'+position);
+
+  elem.empty();
+}
+
+/**
+* Clears the ui measurements for a tooth, for example, if Missing is assigned to a tooth and in the teeth array
+*/
+function cc_perio_clearMeasurements(toothN) {
+  var elem;
+  for (i=1; i<=6; i++) {
+      elem = $j('#cc-perio-container-active .cc-perio-thumb'+toothN+'-'+i);
+      elem.empty();
+  }
+
+  var aTooth = cc_perio_getToothAt(toothN);
+  aTooth.measure[0]=null;
+  aTooth.measure[1]=null;
+  aTooth.measure[2]=null;
+  aTooth.measure[3]=null;
+  aTooth.measure[4]=null;
+  aTooth.measure[5]=null;
+  cc_perio_setToothAt(toothN, aTooth);
+}
+
+
+
+
+/**
+* This function inserts the measurement into the colored circle
+* @param {number} num - the tooth number
+* @param {number} position - the input number (1,2, 3)
+* @param {number} value - the measurement value
+**/
+function cc_perio_insertMeasure(num, position, value) {
+  console.error('cc_perio_insertMeasure()\nnum: '+num+'\nposition: '+position+'\nvalue: '+value);
+    var hpos = cc_perio_getHPosition();
+    if (hpos == 'lingual') {
+      position +=3;
+      //if(num>16) {
+        //if(position==4)
+          //position = 6;
+        //else if(position==6)
+          //position = 4;
+      //}
+    }
+    else if (hpos == 'buccal') {
+      //do nothing position is good;
+      //if(num>16) {
+        //if(position==1)
+          //position = 3;
+        //else if(position==3)
+          //position = 1;
+      //}
+    }
+    else {
+      alert("sorry an error has occurred in updateThumbToothColors()");
+    }
+
+  var circle = $j('#cc-perio-container-active .cc-perio-thumb'+num+'-'+position);
+  circle.text(value);
+}
+
+/**
+*  This function moves the focus from one input to the next, for example, from input 3 the user returns to input 1, moves to the next tooth, and clears values
+* @param {number} position - the current input entry
+**/
+function cc_perio_refreshInputFocus(position) {
+  var toothNum = cc_perio_getToothNum();
+  //console.log("refreshInputFocus()");
+  if (position == 1 ) {
+    //console.log("refreshInputFocus position == 1");
+    $j('#cc-perio-container-active .cc-perio-second').focus();
+  }
+  else if (position == 2) {
+    $j('#cc-perio-container-active .cc-perio-third').focus();
+  }
+  else if (position == 3) {
+
+    cc_perio_listenOn = false;
+    cc_perio_hideInputs();
+    setTimeout(function(){
+
+      cc_perio_clearInputs();
+      $j('#cc-perio-container-active .cc-perio-first').focus();
+      //if next tooth is missing, then move 2 teeth
+
+      //8-30-2016 - rewrite by CM - Ron's solution would only skip a single tooth,  so it failed when multiple missing teeth occured in sequence
+      //set up a loop here that keeps moving through teeth until it finds a valid target
+      var valid_tooth = false;
+      var num_attempts = 0;
+
+      while(!valid_tooth && num_attempts < 64) {
+        cc_perio_arrowMoveToTooth('right');
+        if (cc_perio_getToothAt(cc_perio_getToothNum()).typeOf == 'Missing' || cc_perio_getToothAt(cc_perio_getToothNum()).typeOf == 'Pontic') {
+          valid_tooth = false;
+        } else
+          valid_tooth = true;
+        num_attempts++;
+        console.log('CM - tooth num = ' + cc_perio_getToothNum() + '\nType : ' + cc_perio_getToothAt(cc_perio_getToothNum()).typeOf + '\nAttempt : ' + num_attempts + '\nValid : ' + valid_tooth);
+      }
+
+      /*if (toothNum < 32) {
+        if (cc_perio_getToothAt(cc_perio_getToothNum()+1).typeOf == 'Missing' ||
+           cc_perio_getToothAt(cc_perio_getToothNum()+1).typeOf == 'Pontic') {
+          cc_perio_arrowMoveToTooth('right');
+        }
+      }
+      else {
+        if (cc_perio_getToothAt(1).typeOf == 'Missing' ||
+           cc_perio_getToothAt(1).typeOf == 'Pontic') {
+          cc_perio_arrowMoveToTooth('right');
+        }
+      }*/
+
+      //cc_perio_arrowMoveToTooth('right');
+      cc_perio_listenOn=true;
+      cc_perio_showInputs();
+    },150);
+
+  }
+}
+
+
+
+
+function cc_perio_arrowMoveToTooth(direction) {
+
+  var hpos = cc_perio_getHPosition();
+  var vpos = cc_perio_getVPosition();
+  var toothN = cc_perio_getToothNum();
+  var aTooth;
+
+  // console.error('hpos: '+hpos+' vpos: '+vpos+' direction: '+direction+' toothN: '+toothN);
+
+  var goToToothNum;
+  var goToHpos = hpos;
+  var goToVpos = vpos;
+
+  if (toothN == 16 && direction == 'right' && hpos == 'buccal') {
+    goToToothNum = 1;
+    goToHpos = 'lingual';
+    goToVpos = 'top';
+  }
+  else if (toothN == 16 && direction == 'right' && hpos == 'lingual') {
+    goToToothNum = 17;
+    goToHpos = 'buccal';
+    goToVpos = 'bottom';
+  }
+  else if (toothN == 17 && direction == 'left' && hpos == 'buccal') {
+    goToToothNum = 16;
+    goToHpos = 'lingual';
+    goToVpos = 'top';
+  }
+  else if (toothN == 17 && direction == 'left' && hpos == 'lingual') {
+    goToToothNum = 32;
+    goToHpos = 'buccal';
+    goToVpos = 'bottom';
+  }
+  else if (toothN === 1 && direction == 'left' && hpos == 'buccal') {
+    goToToothNum = 32;
+    goToHpos = 'lingual';
+    goToVpos = 'bottom';
+  }
+  else if (toothN === 1 && direction == 'left' && hpos == 'lingual') {
+    goToToothNum = 16;
+    goToHpos = 'buccal';
+    goToVpos = 'top';
+  }
+  else if (toothN === 32 && direction == "right" && hpos == 'buccal') {
+    goToToothNum = 17;
+    goToHpos = 'lingual';
+    goToVpos = 'bottom';
+  }
+  else if (toothN === 32 && direction == "right" && hpos == 'lingual') {
+    goToToothNum = 1;
+    goToHpos = 'buccal';
+    goToVpos = 'top';
+  }
+  else if (vpos == 'top' && direction == 'up' && hpos == 'buccal') {
+
+    goToToothNum = 16 + cc_perio_getToothNum();
+    goToHpos = 'lingual';
+    goToVpos = 'bottom';
+  }
+  else if (vpos == 'top' && direction == 'up' && hpos == 'lingual') {
+    goToToothNum = cc_perio_getToothNum();
+    goToHpos = 'buccal';
+    goToVpos = vpos;
+  }
+  else if (vpos == 'top' && direction == 'down' && hpos == 'buccal') {
+    goToToothNum = cc_perio_getToothNum();
+    goToHpos = 'lingual';
+    goToVpos = vpos;
+  }
+  else if (vpos == 'top' && direction == 'down' && hpos == 'lingual') {
+    goToToothNum = cc_perio_getToothNum()+16;
+    goToHpos = 'buccal';
+    goToVpos = 'bottom';
+  }
+  else if (vpos == 'bottom' && direction == 'up' && hpos == 'lingual') {
+    goToToothNum = cc_perio_getToothNum();
+    goToHpos = 'buccal';
+    goToVpos = 'bottom';
+  }
+  else if (vpos == 'bottom' && direction == 'up' && hpos == 'buccal') {
+    goToToothNum = cc_perio_getToothNum()-16;
+    goToHpos = 'lingual';
+    goToVpos = 'top';
+  }
+  else if (vpos == 'bottom' && direction == 'down' && hpos == 'lingual') {
+    goToToothNum = cc_perio_getToothNum()-16;
+    goToHpos = 'buccal';
+    goToVpos = 'top';
+  }
+  else if (vpos == 'bottom' && direction == 'down' && hpos == 'buccal') {
+    goToToothNum = cc_perio_getToothNum();
+    goToHpos = 'lingual';
+    goToVpos = 'bottom';
+  }
+  else if (direction == 'right') {
+    goToToothNum = cc_perio_getToothNum()+1;
+    //console.log('arrowMoveToTooth() | right\n'+goToToothNum);
+  }
+  else if (direction == 'left') {
+    goToToothNum = cc_perio_getToothNum()-1;
+    //console.log('arrowMoveToTooth() | left');
+  }
+
+  aTooth = cc_perio_getToothAt(goToToothNum);
+
+  cc_perio_toothMoved(aTooth, goToHpos, goToVpos);
+}
+
+
+
+/**
+* This function assigns a value to an input, overridding the previous value
+* ex: if '4' exists in input and user enters '5', in order to override '45', the value is set to '5'
+*/
+function cc_perio_newInputValue(num, position) {
+  console.log("newInputValue()\nposition: "+position+'\nnum: '+num);
+  var input;
+  if (position === 1) {
+    input = $j('#cc-perio-container-active .cc-perio-first');
+  }
+  else if (position === 2) {
+    input = $j('#cc-perio-container-active .cc-perio-second');
+  }
+  else if (position === 3) {
+    input = $j('#cc-perio-container-active .cc-perio-third');
+  }
+  else {
+    alert("newInputValue error");
+  }
+  input.val(num);
+}
+
+/**
+* Called when a user hits a key and the focus is on one of the three inputs
+* verifies if input is a digit, and if so, sets the value
+* otherwise, it ignores the input
+* @param {string} key - the keycode entered
+* @param {string} input class, i.e. .cc-perio-first
+* @param {number} input 1, 2, or 3
+**/
+function cc_perio_keyUpManager(key, input, position) {
+  if(key>=96 && key<=105)
+    key = key - 48;
+  var val = String.fromCharCode(key);
+  var num = parseInt(val);
+  console.error('cc_perio_keyUpManager():\n'+'val: '+val+'\nnum: '+num+'\nkey: '+key+'\ninput: '+input+'\nposition: '+position);
+
+  if(isLetter(key)) { //is a letter check for hotkeys
+    // console.log('keyUpManager() - is letter');
+    if (validateHotKeyInput(val)) { //do nothing, hotkey function takes care of it
+      console.log('keyUpManager - validateHotKeyInput()');
+    }
+    else {
+      //console.log('keyUpManager() - not hotkey');
+      // keyAlertOn(input);
+      alert ('Sorry '+val+' is not a valid input character');
+    }
+    cc_perio_restoreInputValue(position);
+  }
+  else if(!isNaN(num)) {
+    console.log('keyUpManager()\nvalid number: '+num);
+    cc_perio_newInputValue(num,position);
+    cc_perio_setToothInputValue(num, position);
+  }
+  else if (cc_perio_isHotKeyCodeValid(key)) {
+    //do nothing goToNextInputField handles it
+  }
+  else {
+    console.log('keyupManager() - invalid');
+    cc_perio_restoreInputValue(position);
+    keyAlertOn(input);
+  }
+}
+
+/**
+* a user can type a hotkey while the focus is in an input field.
+* anything other than 0-9 is removed, and the previous numerical value (if there is one) is restored
+**/
+  $j('#cc-perio-wrapper').on('keyup', '#cc-perio-container-active .cc-perio-first', function(e) {
+    //console.log('$j(\'#cc-perio-container-active .cc-perio-first\').on(\'keyup\'');
+    cc_perio_keyUpManager(e.keyCode, $j('#cc-perio-container-active .cc-perio-first'), 1);
+    //alert('Test 2 : ' + $j('#cc-perio-container-active .cc-perio-first').value);
+  });
+
+  $j('#cc-perio-wrapper').on('keydown', '#cc-perio-container-active .cc-perio-first', function(e) {
+    //console.log('on: keydowninput1 set previous value');
+    if (e.keyCode == 13) {e.preventDefault();}
+    cc_perio_setPrevInput(1, $j('#cc-perio-container-active .cc-perio-first').value);
+    //alert('Test : ' + $j('#cc-perio-container-active .cc-perio-first').value);
+  });
+
+  //keydown for hotkeys and overwritting previous values
+  $j('#cc-perio-wrapper').on('keyup', '#cc-perio-container-active .cc-perio-second', function(e) {
+     //console.log('on: keyupinput2');
+    cc_perio_keyUpManager(e.keyCode, $j('#cc-perio-container-active .cc-perio-second'), 2);
+  });
+
+  $j('#cc-perio-wrapper').on('keydown', '#cc-perio-container-active .cc-perio-second', function(e) {
+    // console.log('on: keydowninput2');
+    if (e.keyCode == 13) {e.preventDefault();}
+    cc_perio_setPrevInput(2, $j('#cc-perio-container-active .cc-perio-second').value);
+  });
+
+  //keydown for hotkeys and overwritting previous values
+  $j('#cc-perio-wrapper').on('keyup', '#cc-perio-container-active .cc-perio-third', function(e) {
+    //console.log('on: keyupinput3');
+    cc_perio_keyUpManager(e.keyCode, $j('#cc-perio-container-active .cc-perio-third'), 3);
+  });
+
+  $j('#cc-perio-wrapper').on('keydown', '#cc-perio-container-active .cc-perio-third', function(e) {
+    //console.log('addEventListener: keydowninput3');
+    if (e.keyCode == 13) {e.preventDefault();}
+    cc_perio_setPrevInput(3, $j('#cc-perio-container-active .cc-perio-third').value);
+    if (e.keyCode == 9) {
+      e.preventDefault();
+      $j('#cc-perio-container-active .cc-perio-first').focus();
+    }
+  });
+
+
+
+
+  //sets a tooth in the teeth array between 1-32 with a tooth Object
+  function cc_perio_setToothAt(num, aTooth) {
+    console.log("setToothAt | num: "+num+' aTooth: '+aTooth.toString());
+    if (num >=1 && num <=32) {
+      cc_perio_teeth[num-1]=aTooth;
+      return true;
+    }
+    else {
+      alert ("sorry, an error has occurred at setToothAt("+num+"). "+aTooth.toString());
+      return false;
+    }
+  }
+
+var fooArray=['bar'];
+var bar = fooArray[0];
+
+/**
+* @param {string} id - the id of the attribute element cell clicked without the hash tag (ex: Endodontic, not #Endodontic)
+* calls functions like cc_perio_setAttributeValue as needed to handle an Implant click if the Decay attribute is set, etc.
+**/
+var cc_perio_attributeClicked = function(attr) {
+
+  // console.error('cc_perio_attributeClicked() | attr: '+attr);
+
+  var toothN = cc_perio_getToothNum();
+  var aTooth = cc_perio_getToothAt(toothN);
+
+  aTooth = cc_perio_setAttributeValue(aTooth, attr); //manages which attributes can go with which typeOf
+  cc_perio_setToothAt(cc_perio_getToothNum(), aTooth); //changes the value of the tooth in the array
+  cc_perio_updateAttributeLabels(aTooth);
+  cc_perio_selectedInputFocusUpdate();//sets the focus of the inputs to the first empty one ??????
+  cc_perio_updateToothImage(aTooth);
+  cc_perio_updateDecayImage(toothN, aTooth.decay); //makes the tooth number a black circle to indicate decay
+  cc_perio_updateMeasurements(toothN);
+  cc_perio_refreshInputs(aTooth.typeOf); //checks if tooth is missing and if so removes inputs
+};
+
+/**
+* checks if the tooth is a typeOf that would require wiping the measurements (like Missing or Pontic)
+* @param toothN {number} - the tooth number where changes were made
+*/
+function cc_perio_updateMeasurements(toothN) {
+  var tooth = cc_perio_getToothAt(toothN);
+  var clear = false;
+  var type = tooth.typeOf;
+
+  if (type == 'Missing' || type == 'Pontic') {
+    clear = true;
+  }
+
+  if (clear) {
+    cc_perio_clearMeasurements(toothN);
+    for (i=1; i<=6; i++) {
+      cc_perio_clearPositionColor(toothN, i);
+    }
+  }
+}
+
+//makes the tooth number a black circle to indicate decay
+var cc_perio_updateDecayImage = function(toothN, toggle) {
+  // console.error('cc_perio_updateDecayImage()');
+  var elem = $j('#cc-perio-container-active .cc-perio-thumbToothLabel-'+toothN).find('.cc-perio-teeth-number-label');
+  var classN = 'cc-perio-thumbToothDecay';
+
+  if(toggle) {
+    elem.addClass(classN);
+  }
+  else {
+    elem.removeClass(classN);
+  }
+};
+
+//sets the value of the tooth's attributes
+//@param aTooth - the tooth to change
+//@param id - the attribute to change of the tooth, endo, decay, Natural, etc
+var cc_perio_setAttributeValue = function(aTooth, id) {
+  // console.error('cc_perio_setAttributeValue()'+'\naTooth.toString: \n\n'+aTooth.toString()+'\n\nid: '+id);
+  var typeOf = aTooth.typeOf;
+
+  if (id == 'Endodontic') {
+    if (typeOf != "Implant") {
+      if (aTooth.endo) {
+        aTooth.endo=false;
+      }
+      else {
+        aTooth.endo=true;
+      }
+    }
+    else {
+      alert("Sorry, Endodontic cannot be applied to "+typeOf);
+    }
+
+    console.log('cc_perio_setAttributeValue()'+'\naTooth.toString: '+aTooth.toString()+'\nid: '+id);
+    return aTooth;
+  }
+  else if (id == 'Decay') {
+    if (typeOf != 'Missing' && typeOf != 'Pontic' && typeOf != 'Implant') {
+      if (aTooth.decay) {
+        aTooth.decay=false;
+      }
+      else {
+        aTooth.decay=true;
+      }
+      console.log('cc_perio_setAttributeValue()'+'\naTooth.toString: '+aTooth.toString()+'\nid: '+id);
+    }
+    else {
+      alert('Sorry Decay cannot be applied to '+typeOf);
+    }
+    return aTooth;
+  }
+  else if (id == 'Implant' && typeOf != 'Implant') { //reset any endo or decay values
+    if (aTooth.decay) {
+      aTooth.decay=false;
+    }
+    if (aTooth.endo) {
+      aTooth.endo=false;
+    }
+    aTooth.typeOf = id;
+    return aTooth;
+  }
+  else if (id == 'Implant' && typeOf == 'Implant') { //reset to Natural
+    aTooth.typeOf = 'Natural';
+    return aTooth;
+  }
+  else if (id == 'Missing' && typeOf != 'Missing') { //reset any endo or decay values
+    if (aTooth.decay) {
+      aTooth.decay=false;
+    }
+    if (aTooth.endo) {
+      aTooth.endo=false;
+    }
+    aTooth.typeOf = id;
+    return aTooth;
+  }
+  else if (id == 'Missing' && typeOf == 'Missing') { //reset to Natural
+    aTooth.typeOf = 'Natural';
+    return aTooth;
+  }
+  else if (id == 'Natural') { //reset any endo or decay values
+    aTooth.typeOf = id;
+    return aTooth;
+  }
+  else if (id == 'Crown' && typeOf != 'Crown') {
+    //modified by cm on 8/1/2017 - request from seattle to allow decay with crown combo
+   // if (aTooth.decay) {
+     // aTooth.decay=false;
+    //}
+    aTooth.typeOf = id;
+    return aTooth;
+  }
+  else if (id == 'Crown' && typeOf == 'Crown') {
+    aTooth.typeOf = 'Natural';
+    return aTooth;
+  }
+  else if (id == 'Pontic' && typeOf != 'Pontic') {
+    if (aTooth.decay) {
+      aTooth.decay=false;
+    }
+    aTooth.typeOf = id;
+    return aTooth;
+  }
+  else if (id == 'Pontic' && typeOf == 'Pontic') {
+    aTooth.typeOf = 'Natural';
+    return aTooth;
+  }
+  else {
+    return null;
+  }
+
+};
+
+/**
+* Clears out the Natural, Implant, Missing, Pontic, Crown attributes but NOT the Decay or Endodontic attributes
+**/
+function cc_perio_clearTypeOfAttributes() {
+  $j('#cc-perio-container-active[attribute="Natural"]').removeClass('cc-perio-typeOfSelected');
+  $j('#cc-perio-container-active[attribute="Missing"]').removeClass('cc-perio-typeOfSelected');
+  $j('#cc-perio-container-active[attribute="Pontic"]').removeClass('cc-perio-typeOfSelected');
+  $j('#cc-perio-container-active[attribute="Crown"]').removeClass('cc-perio-typeOfSelected');
+  $j('#cc-perio-container-active[attribute="Decay"]').removeClass('cc-perio-typeOfSelected');
+  $j('#cc-perio-container-active[attribute="Endodontic"]').removeClass('cc-perio-typeOfSelected');
+}
+
+/**
+* @param {string} id - the id without the # hash tag
+* toggles the class to selected or not when clicked on
+* removes the selected tag from other attributes if they cannot have multiple values, i.e. Missing and Implant can't both be true.
+**/
+function cc_perio_toggleAttributeCellSelected(id) {
+
+  // console.error('cc_perio_toggleAttributeCellSelected()\nid: '+id);
+  if (id !== null) {
+      //clear out other values before assinging new one for Natural, Implant, Missing, Pontic, Crown
+      cc_perio_clearTypeOfAttributes();
+      var typeOf = cc_perio_getToothAt(cc_perio_getToothNum()).typeOf;
+      if (typeOf != id)
+      {
+          $j('#cc-perio-container-active[attribute="'+typeOf+'"]').toggleClass('cc-perio-typeOfSelected');
+      }
+      $j('#cc-perio-container-active[attribute="'+typeOf+'"]').toggleClass('cc-perio-typeOfSelected');
+  }
+  else {
+    alert ("unable to find id, null value passed");
+  }
+}
+
+
+  //only one hotkey at time, so 1 of three values is not null
+  //if all three are null will reset endo and decay to null
+  // function cc_perio_updateToothFromHotKey(typeOf, endo, decay) {
+  //   console.log('cc_perio_updateToothFromHotKey | typeOf: '+typeOf+' endo: '+endo+' decay: '+decay);
+  //   var aTooth = cc_perio_getToothAt(cc_perio_getToothNum());
+  //   if (typeOf !== null) {
+  //     cc_perio_typeOfChanged(typeOf);
+  //   }
+  //   if (endo !== null && aTooth.typeOf != "Implant") {
+  //     cc_perio_endoChanged(aTooth, endo);
+  //   }
+  //   else if (decay !==null && aTooth.typeOf != "Implant") {
+  //     cc_perio_decayChanged(aTooth, decay);
+  //   }
+  //   if (decay === null && endo === null && typeOf === null){ //reset tooth
+  //     cc_perio_endoDecayChanged(aTooth);
+  //   }
+  //     cc_perio_setToothAt(cc_perio_getToothNum(), aTooth); //updates the tooth array with the newest info
+  //     cc_perio_selectedInputFocusUpdate();//sets the focus of the inputs to the first empty one
+  //     cc_perio_updateToothImage(aTooth);
+  // }
+
+  //manages updating the focused tooth and the thumb tooth images
+  function cc_perio_updateToothImage(aTooth) {
+    console.error("updateToothImage");
+    cc_perio_updateThumbImage(aTooth);
+
+  }
+
+
+  //called to see if a tooth is lingual or facial
+  //returns an 'l' or 'f'
+  function cc_perio_getDirection(toothN) {
+    if (toothN > 16 && toothN < 33) { //need to move the measurements
+      return 'l';//lingual
+    }
+    else if (toothN > 0 && toothN < 17) {
+      return 'f';//facial
+    }
+  }
+
+  function cc_perio_updateThumbImage(aTooth) {
+    // console.error("updateThumbImage(): aTooth: "+aTooth.toString());
+
+    var name='#cc-perio-container-active .cc-perio-thumbToothImg-'+aTooth.number;
+    var node = $j(name);
+    var typeOf = aTooth.typeOf;
+    var endo = aTooth.endo;
+    var decay = aTooth.decay;
+    var img;
+    var direction = cc_perio_getDirection(aTooth.number);
+
+    //console.log('num: '+ aTooth.number +' direction: '+direction);
+    if (node === null) {
+      alert("sorry an error has occured in updateThumbImage()");
+      //console.log("updateThumbImage() | node: "+node);
+      return false;
+    }
+
+    if (typeOf == 'Implant') {
+      img = globalStaticResourcePath + '/img-perio/Implant-'+direction+'.png';
+      //console.log('img-perio: '+img +" node: "+node);
+      node.className="cc-perio-implant";
+    }
+    else if (typeOf == 'Natural' && endo === false) {
+      img = globalStaticResourcePath + '/img-perio/'+cc_perio_getToothNum()+'.png';
+
+      node.className="cc-perio-natural";
+    }
+    else if (typeOf == 'Natural' && endo === true) {
+      img = globalStaticResourcePath +'/img-perio/'+cc_perio_getToothNum()+'-Endodontic.png';
+
+      node.className="cc-perio-natural";
+    }
+    else if (typeOf == 'Missing') {
+      node.className="cc-perio-missing";
+      img=globalStaticResourcePath +"/img-perio/Missing-l.png";
+    }
+    else if (typeOf == 'Pontic') {
+      img = globalStaticResourcePath +'/img-perio/Pontic-'+direction+'.png';
+
+      node.className="cc-perio-pontic";
+    }
+    else if (typeOf == 'Crown' && endo === false) {
+      img = globalStaticResourcePath +'/img-perio/'+cc_perio_getToothNum()+'-Crown.png';
+
+      node.className="cc-perio-crown";
+    }
+    else if (typeOf == 'Crown' && endo === true) {
+      img = globalStaticResourcePath +'/img-perio/'+cc_perio_getToothNum()+'-Crown-Endodontic.png';
+
+      node.className="cc-perio-crown";
+    }
+    else {
+      return false;
+    }
+    node.attr('src', img);
+  }
+
+
+
+
+
+
+
+// $j('.cc-perio-legend-attributes-list').on('click', function(e) {
+//   if (e.target.parentElement.id === null || e.target.parentElement.id === '') {
+//     cc_perio_updateToothFromHotKey(e.target.id, null, null);
+//   }
+//   else {
+//     cc_perio_updateToothFromHotKey(e.target.parentElement.id, null, null);
+//   }
+// });
+
+  function cc_perio_updateToothTypeOf() {
+    console.log('updateToothTypeOf');
+
+    var aTooth = cc_perio_getToothAt(cc_perio_getToothNum());
+    var typeOf = aTooth.typeOf;
+
+    if (typeOf == 'Implant') {
+      cc_perio_showInputs();
+
+      cc_perio_updateToothFromHotKey(null, null, null); //reset endo and decay
+    }
+    else if (typeOf == 'Missing') {
+      console.error('\n\nMissing');
+      cc_perio_hideInputs();
+      cc_perio_clearInputs();
+
+      cc_perio_clearColorThumbs();
+      cc_perio_clearFocusedCircles('current');
+
+    }
+    else if (typeOf == 'Natural') {
+      cc_perio_showInputs();
+
+    }
+    else if (typeOf == 'Pontic') {
+      cc_perio_showInputs();
+
+    }
+    else if (typeOf == 'Crown') {
+      cc_perio_showInputs();
+
+    }
+
+  }
+//}); //close document ready
+
+ function cc_perio_iTeeth() {
+    try {
+      cc_perio_teeth = [];
+      for (i=0; i<32; i++) {
+//        alert('Nuber : ' + default_teeth_array[i].tnumber + '\rType : ' + default_teeth_array[i].typeOf + '\rMeasurements : ' + default_teeth_array[i].measure + '\rEndo : ' + default_teeth_array[i].endo + '\rDecay : ' + default_teeth_array[i].decay);
+        var cc_perio_aTooth = new cc_perio_createTooth(default_teeth_array[i].tnumber, default_teeth_array[i].typeOf, default_teeth_array[i].measure, default_teeth_array[i].endo, default_teeth_array[i].decay);
+        console.log("toothInitialized: "+cc_perio_aTooth.toString());
+        cc_perio_teeth.push(cc_perio_aTooth);
+      }
+    } catch(err) {
+      alert(err.message);
+      console.log(err.message);
+    }
+  }
+
+  function json_teeth() {
+    try {
+      var sdata = JSON.stringify(cc_perio_teeth);
+      //alert(sdata);
+      perio_save(sdata);
+    } catch(err) {
+      alert(err.message);
+      console.log(err.message);
+    }
+  }
+
+  function focus_next_input() {
+    try {
+      $j('.cc-perio-first').focus();
+    } catch(err) {
+      alert(err.message);
+      console.log(err.message);
+    }
+  }
+
+  function start_perio_form() {
+
+  console.log('starting perio form');
+  console.log('Length cc-perio-first : ' + $j('#cc-perio-container-active .cc-perio-first').length);
+  if($j('#cc-perio-container-active').length) {
+    cc_perio_iTeeth();
+    cc_perio_initListeners();
+    cc_perio_initVandHPosition();
+    cc_perio_toothMoved(cc_perio_getToothAt(1), 'buccal', 'top');
+    cc_perio_updateMeasurementLabel(1, 'buccal', 'top');
+    $j('#cc-perio-wrapper').on('keyup', '#cc-perio-container-active .cc-perio-first', function(e) {
+    console.log('$j(\'#cc-perio-container-active .cc-perio-first\').on(\'keyup\'');
+    cc_perio_keyUpManager(e.keyCode, $j('#cc-perio-container-active .cc-perio-first'), 1);
+  });
+
+  $j('#cc-perio-wrapper').on('keydown', '#cc-perio-container-active .cc-perio-first', function(e) {
+    // console.log('on: keydowninput1 set previous value');
+    console.log('Keycode: ' + e.keycode);
+    if (e.keyCode == 13) {e.preventDefault(); console.log('Enter Key');}
+    cc_perio_setPrevInput(1, $j('#cc-perio-container-active .cc-perio-first').value);
+  });
+
+  //keydown for hotkeys and overwritting previous values
+  $j('#cc-perio-wrapper').on('keyup', '#cc-perio-container-active .cc-perio-second', function(e) {
+    // console.log('on: keyupinput2');
+    cc_perio_keyUpManager(e.keyCode, $j('#cc-perio-container-active .cc-perio-second'), 2);
+  });
+
+  $j('#cc-perio-wrapper').on('keydown', '#cc-perio-container-active .cc-perio-second', function(e) {
+    // console.log('on: keydowninput2');
+    console.log('Keycode: ' + e.keycode);
+    if (e.keyCode == 13) {e.preventDefault(); console.log('Enter Key');}
+    cc_perio_setPrevInput(2, $j('#cc-perio-container-active .cc-perio-second').value);
+  });
+
+  //keydown for hotkeys and overwritting previous values
+  $j('#cc-perio-wrapper').on('keyup', '#cc-perio-container-active .cc-perio-third', function(e) {
+    //console.log('on: keyupinput3');
+    cc_perio_keyUpManager(e.keyCode, $j('#cc-perio-container-active .cc-perio-third'), 3);
+  });
+
+  $j('#cc-perio-wrapper').on('keydown', '#cc-perio-container-active .cc-perio-third', function(e) {
+    //console.log('addEventListener: keydowninput3');
+    console.log('Keycode: ' + e.keycode);
+    if (e.keyCode == 13) {e.preventDefault(); console.log('Enter Key');}
+    cc_perio_setPrevInput(3, $j('#cc-perio-container-active .cc-perio-third').value);
+    if (e.keyCode == 9) {
+      e.preventDefault();
+      $j('#cc-perio-container-active .cc-perio-first').focus();
+    }
+  });
+
+  $j('#cc-perio-wrapper').on('keyup', '#cc-perio-container-active .cc-perio-comments',function() {
+    console.log('comments');
+    var elem = $j(this);
+    var currentHeight = elem.prop('scrollHeight');
+    var parent = elem.closest('.cc-perio-notes-container');
+
+
+    if (currentHeight < 66) {
+      elem.css('height', ('1px'));
+      elem.css('height', (elem.prop('scrollHeight')+'px'));
+      parent.css('height', ('1px'));
+      parent.css('height', (elem.prop('scrollHeight')+'px'));
+    }
+    else if (currentHeight > 66) {
+      elem.css('height', ('1px'));
+      elem.css('height', (elem.prop('scrollHeight')+'px'));
+    }
+  });
+
+  $j('#cc-perio-wrapper').on('keyup', '#cc-perio-container-active .cc-form-textarea',function() {
+    console.log('comments');
+    var elem = $j(this);
+    var currentHeight = elem.prop('scrollHeight');
+    var parent = elem.closest('.cc-form-container');
+    var spacer = $j('#cc-perio-wrapper').find('.cc-perio-whiteSpacer');
+    var height = spacer.height();
+    console.log('init heigh: '+height);
+
+    if (currentHeight > 66) {
+
+
+      $j('html, body').animate({
+          scrollTop: $j(document).height()-$j(window).height()
+      }, 'fast');
+
+
+
+      elem.css('height', (elem.prop('scrollHeight')+'px'));
+    }
+  });
+
+  $j('#cc-perio-wrapper').on('focus', '#cc-perio-container-active .cc-perio-comments', function(e) {
+  textAreaFocus = true;
+
+});
+
+$j('#cc-perio-wrapper').on('blur', '#cc-perio-container-active .cc-perio-comments', function(e) {
+  textAreaFocus = false;
+
+});
+
+$j('#cc-perio-wrapper').on('focus', '#cc-perio-container-active .cc-form-container', function(e) {
+  textAreaFocus = true;
+
+});
+
+$j('#cc-perio-wrapper').on('blur', '#cc-perio-container-active .cc-form-container', function(e) {
+  textAreaFocus = false;
+
+});
+
+$j('#cc-perio-wrapper').on('click', '#cc-perio-container-active .cc-perio-measure-leftSide-buttonContainer-legend', function() {
+  var legend = $j('#cc-perio-container-active .cc-perio-legend-container');
+  if (legend.attr('state') == 'open') {
+    legend.slideUp();
+    legend.attr('state', 'closed');
+        focus_next_input();
+  }
+  else {
+    legend.slideDown();
+    legend.attr('state', 'open');
+    focus_next_input();
+  }
+
+});
+
+//usees the id without the hash tag
+$j('#cc-perio-wrapper').on('click', "#cc-perio-container-active .cc-perio-attribute-list-cell[attribute='Endodontic']", function() {
+  cc_perio_attributeClicked('Endodontic');
+});
+
+/**
+ * uses the id without the hash tag when calling cc_perio_attributeClicked
+**/
+$j('#cc-perio-wrapper').on('click', "#cc-perio-container-active .cc-perio-attribute-list-cell[attribute='Decay']", function() {
+  cc_perio_attributeClicked('Decay');
+});
+
+/**
+ * uses the id without the hash tag when calling cc_perio_attributeClicked
+**/
+$j('#cc-perio-wrapper').on('click', "#cc-perio-container-active .cc-perio-attribute-list-cell[attribute='Implant']", function() {
+  cc_perio_attributeClicked('Implant');
+});
+
+/**
+ * uses the id without the hash tag when calling cc_perio_attributeClicked
+**/
+$j('#cc-perio-wrapper').on('click', "#cc-perio-container-active .cc-perio-attribute-list-cell[attribute='Pontic']", function() {
+  cc_perio_attributeClicked('Pontic');
+});
+
+/**
+ * uses the id without the hash tag when calling cc_perio_attributeClicked
+**/
+$j('#cc-perio-wrapper').on('click', "#cc-perio-container-active .cc-perio-attribute-list-cell[attribute='Crown']", function() {
+  cc_perio_attributeClicked('Crown');
+});
+
+/**
+ * uses the id without the hash tag when calling cc_perio_attributeClicked
+**/
+$j('#cc-perio-wrapper').on('click', "#cc-perio-container-active .cc-perio-attribute-list-cell[attribute='Missing']", function() {
+  cc_perio_attributeClicked('Missing');
+});
+
+/**
+ * uses the id without the hash tag when calling cc_perio_attributeClicked
+**/
+$j('#cc-perio-wrapper').on('click', "#cc-perio-container-active .cc-perio-attribute-list-cell[attribute='Natural']", function() {
+  cc_perio_attributeClicked('Natural');
+});
+
+$j('#cc-perio-wrapper').on('click', '#cc-perio-container-active .cc-perio-buccal-top-right', function() {
+    console.log("buccal top right");
+    cc_perio_setHandVPosition('buccal','top');
+    focus_next_input();
+});
+
+$j('#cc-perio-wrapper').on('click', '#cc-perio-container-active .cc-perio-buccal-top-left', function() {
+    console.error("buccal top left");
+    cc_perio_setHandVPosition('buccal','top');
+        focus_next_input();
+});
+
+$j('#cc-perio-wrapper').on('click', '#cc-perio-container-active .cc-perio-lingual-top-right', function() {
+    console.log("lingual top right");
+    cc_perio_setHandVPosition('lingual','top');
+        focus_next_input();
+});
+
+$j('#cc-perio-wrapper').on('click', '#cc-perio-container-active .cc-perio-lingual-top-left', function() {
+    console.log("lingual top left");
+    cc_perio_setHandVPosition('lingual','top');
+        focus_next_input();
+});
+
+$j('#cc-perio-wrapper').on('click', '#cc-perio-container-active .cc-perio-buccal-bottom-right', function() {
+    console.log("buccal bottom right");
+    cc_perio_setHandVPosition('buccal','bottom');
+        focus_next_input();
+});
+
+$j('#cc-perio-wrapper').on('click', '#cc-perio-container-active .cc-perio-buccal-bottom-left', function() {
+    console.log("buccal bottom left");
+    cc_perio_setHandVPosition('buccal','bottom');
+        focus_next_input();
+});
+
+$j('#cc-perio-wrapper').on('click', '#cc-perio-container-active .cc-perio-lingual-bottom-right', function() {
+    console.log("lingual bottom right");
+    cc_perio_setHandVPosition('lingual','bottom');
+        focus_next_input();
+});
+
+$j('#cc-perio-wrapper').on('click', '#cc-perio-container-active .cc-perio-lingual-bottom-left', function() {
+    console.log("lingual bottom left");
+    cc_perio_setHandVPosition('lingual','bottom');
+        focus_next_input();
+});
+
+  } else {
+    //alert('no active chart');
+  }
+  }
+
+
+  function refresh_top_nav() {
+    nav_bar_refresh();
+    setTimeout("refresh_top_nav()",600000);
+  }
+
+  window.onload = function() {
+    setTimeout("refresh_top_nav();",600000);
+    //{!if(start_perio,'start_perio_form();','')}
+  }
+
+  $j(function(){
+    /*
+     * this swallows backspace keys on any non-input element.
+     * stops backspace -> back
+     */
+     
+     var enter_rx = /TEXTAREA/i;
+
+    $j(document).bind("keydown", function(e){
+        //alert('Alert Pressed : ' + e.which);
+        if(e.which== 116) {
+          e.preventDefault();
+        }
+        if(e.which==13) {
+          if(!enter_rx.test(e.target.tagName) || e.target.disabled || e.target.readOnly ){
+                e.preventDefault();
+            }
+        }
+    });
+});
+
+	$j('.cc-perio-thumb-measure-blank').parent().addClass('thumb-measure-blank');
+</script>
+<!--  <apex:includeScript value="{!URLFOR($Resource.Dental_Practice_Resources,'js/cc-perio.js')}"/>-->
+  <apex:includeScript value="{!URLFOR($Resource.Dental_Practice_Resources,'js/cc-perio-app.js')}"/>
+  <apex:includeScript value="{!URLFOR($Resource.Dental_Practice_Resources,'js/cc-perio-userInput.js')}"/>
+</body>
+</apex:page>

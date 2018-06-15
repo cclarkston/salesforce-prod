@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Account__c.Center_Location__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Apt_Date__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Start_Hour__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Start_Minute__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Account__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Patient_POT_Apt__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Id</field>
+    </columns>
+    <format>Tabular</format>
+    <name>HopeRx Upcoming Appointments</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Clinical_Apt_Calendar_Only__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Clinical_Apt_Calendar__c$Account__c.Center_Location__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Clinical_Apt_Calendar__c$Apt_Date__c</dateColumn>
+        <endDate>2018-05-29</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2018-05-29</startDate>
+    </timeFrameFilter>
+</Report>

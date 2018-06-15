@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This object is intended to enable PEC Management limited control over patient payment dead extensions. By setting up a token, they communicate to the Data team that the related opportunity records should be kept in the system.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Description__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(Prostho_Exam__c),
+&quot;&quot;,
+Prostho_Exam__r.Exam_Center_formula__c &amp; &quot;: &quot; &amp; Prostho_Exam__r.Name &amp; &quot; &quot; &amp; TEXT(Extend_Pending_Cancel__c)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Description</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Extend_Pending_Cancel__c</fullName>
+        <externalId>false</externalId>
+        <label>Extend Pending Cancel</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Is_Active__c</fullName>
+        <description>If there&apos;s a Prostho Exam and the Pending Cancel date is in the future, it&apos;s an active token.</description>
+        <externalId>false</externalId>
+        <formula>AND(
+   NOT(ISNULL(Prostho_Exam__c))
+   ,
+   Extend_Pending_Cancel__c &gt; TODAY()
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Active</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Notes__c</fullName>
+        <externalId>false</externalId>
+        <label>Notes</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Prostho_Exam__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Prostho Exam</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Audit Tokens</relationshipLabel>
+        <relationshipName>Audit_Tokens</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Sales_Region__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Sales Region</label>
+        <referenceTo>Sales_Region__c</referenceTo>
+        <relationshipLabel>Audit Tokens</relationshipLabel>
+        <relationshipName>Audit_Tokens</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Audit Token</label>
+    <listViews>
+        <fullName>My_Tokens</fullName>
+        <columns>NAME</columns>
+        <columns>OWNER.LAST_NAME</columns>
+        <columns>Sales_Region__c</columns>
+        <columns>Description__c</columns>
+        <columns>Notes__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <filterScope>Mine</filterScope>
+        <label>My Tokens</label>
+    </listViews>
+    <listViews>
+        <fullName>View_All_Tokens</fullName>
+        <columns>Is_Active__c</columns>
+        <columns>NAME</columns>
+        <columns>Extend_Pending_Cancel__c</columns>
+        <columns>Sales_Region__c</columns>
+        <columns>OWNER.ALIAS</columns>
+        <columns>Description__c</columns>
+        <columns>Notes__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <label>View All Tokens</label>
+    </listViews>
+    <nameField>
+        <label>Audit Tokens Name</label>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Audit Tokens</pluralLabel>
+    <searchLayouts>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>New</excludedStandardButtons>
+    </searchLayouts>
+    <sharingModel>Private</sharingModel>
+    <startsWith>Vowel</startsWith>
+    <visibility>Public</visibility>
+    <webLinks>
+        <fullName>Reset_Token</fullName>
+        <availability>online</availability>
+        <description>Clears Prostho Exam &amp; Extend Pending Cancel date and adds a note advising who cleared the token and when it was cleared.</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Reset Token</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/29.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/29.0/apex.js&quot;)}
+
+var result = sforce.apex.execute(&quot;AuditTokenServices&quot;,&quot;clear_token&quot;,{token_ID: &quot;{!Audit_Token__c.Id}&quot;, user_first_name: &quot;{!$User.FirstName}&quot;, user_last_name: &quot;{!$User.LastName}&quot;});
+
+alert(result);
+window.location.reload();</url>
+    </webLinks>
+</CustomObject>

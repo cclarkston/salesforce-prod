@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Patient POT Apt Procedure</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Patient POT Apt Procedures</value>
+    </caseValues>
+    <fields>
+        <label><!-- ADA Code --></label>
+        <name>ADA_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Allow Tooth Selection --></label>
+        <name>Allow_Tooth_Selection__c</name>
+    </fields>
+    <fields>
+        <label><!-- Clinical Procedure --></label>
+        <name>Clinical_Procedure__c</name>
+        <relationshipLabel><!-- Patient POT Apt Procedures --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Cost --></label>
+        <name>Cost__c</name>
+    </fields>
+    <fields>
+        <label><!-- Insurance Fee --></label>
+        <name>Insurance_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- IsActive --></label>
+        <name>IsActive__c</name>
+    </fields>
+    <fields>
+        <label><!-- Patient POT Apt --></label>
+        <name>Patient_POT_Apt__c</name>
+        <relationshipLabel><!-- Patient POT Apt Procedures --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Procedure Description --></label>
+        <name>Procedure_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sort Order --></label>
+        <name>Sort_Order__c</name>
+    </fields>
+    <fields>
+        <label><!-- Target Teeth --></label>
+        <name>Target_Teeth__c</name>
+    </fields>
+    <fields>
+        <label><!-- Time Required --></label>
+        <name>Time_Required__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

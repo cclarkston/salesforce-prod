@@ -1,0 +1,87 @@
+<apex:page controller="ctrl_center_sales_stats" sidebar="false" readOnly="true">
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<style type="text/css" media="print">
+  div.bPageHeader {
+    display:none;
+  }  
+  
+  p.form_holder {
+    display:none; 
+  }
+  
+  a.dlink {
+    display:none;
+  }  
+</style>
+
+
+<style>
+  tr.accs td.year {
+      padding-left:20px;   
+    font-weight:bold; 
+  }
+  
+  tr.accs_b td.year  {   
+    padding-left:20px;   
+    font-weight:bold;    
+  }   
+
+  tr.control td {  
+    vertical-align:bottom;
+  }    
+  
+  tr.control td.center  {
+    text-align:left; 
+    padding-left:10px;  
+    color:blue;       
+  }  
+  
+  table.accs_details td.indent {
+    padding-left:25px;      
+    font-weight:bold; 
+    font-style:italic;
+    empty-cells:hide;                
+  }
+  
+  table.accs_details td.vaca {
+    font-style:italic;   
+    text-align:center;             
+  }   
+</style>
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+<apex:variable var="rowclassname" value="accs" />
+<apex:repeat value="{!collections_by_year}" var="center">
+<table class="accs_details" style="width:100%">
+  <tr class="control"> 
+  <td class="center">{!center.my_center.name}</td>     
+  <apex:repeat value="{!month_names}" var="month">  
+    <td width="7%">{!month}</td>    
+  </apex:repeat>    
+  </tr>  
+  <apex:repeat value="{!center.year_revenue}" var="ydata" >   
+  <tr class="{!rowclassname}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />  
+    <td class="year">{!ydata.fiscal_year}</td>  
+    <apex:repeat value="{!ydata.month_numbers}" var="mdata" >    
+    <td class="right"><apex:outputText value="{0,number,$ ##,##,##0.00}"><apex:param value="{!mdata}" /></apex:outputtext></td>    
+    </apex:repeat>          
+  </tr>      
+  </apex:repeat>    
+</table><br /><br />   
+</apex:repeat>
+<apex:outputLink target="__blank" value="/apex/center_collections_by_year_csv" style="display:block;padding-top:1em;color:blue;font-weight:bold;">Download CSV File</apex:outputLink>
+</apex:page>

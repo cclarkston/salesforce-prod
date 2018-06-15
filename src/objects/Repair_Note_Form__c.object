@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Abutment_Screw_Fracture_Location__c</fullName>
+        <externalId>false</externalId>
+        <label>Abutment Screw Fracture Location</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Abutment_Screw_Loosening_Location__c</fullName>
+        <externalId>false</externalId>
+        <label>Abutment Screw Loosening Location</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Abutment_Screw_Tightening_Location__c</fullName>
+        <externalId>false</externalId>
+        <label>Abutment Screw Tightening Location</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Repair Note Forms</relationshipLabel>
+        <relationshipName>Repair_Note_Forms</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Age_of_Prosthesis_Months__c</fullName>
+        <externalId>false</externalId>
+        <label>Age of Prosthesis Months</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Age_of_Prosthesis_Years__c</fullName>
+        <externalId>false</externalId>
+        <label>Age of Prosthesis Years</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bar_Fracture_Location__c</fullName>
+        <externalId>false</externalId>
+        <label>Bar Fracture Location</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Clinical_Apt_Calendar__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Clinical Apt Calendar</label>
+        <referenceTo>Clinical_Apt_Calendar__c</referenceTo>
+        <relationshipLabel>Repair Note Forms</relationshipLabel>
+        <relationshipName>Repair_Note_Forms</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Clinical_Note_Instance__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Clinical Note Instance</label>
+        <referenceTo>Clinical_Note_Instance__c</referenceTo>
+        <relationshipLabel>Repair Note Forms</relationshipLabel>
+        <relationshipName>Repair_Note_Forms</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Denture_Base_Fracture_Location__c</fullName>
+        <externalId>false</externalId>
+        <label>Denture Base Fracture Location</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IsActive__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>IsActive</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Opposing_Arch__c</fullName>
+        <externalId>false</externalId>
+        <label>Opposing Arch</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Natural Dentition</fullName>
+                    <default>false</default>
+                    <label>Natural Dentition</label>
+                </value>
+                <value>
+                    <fullName>Full arch implant prosthesis</fullName>
+                    <default>false</default>
+                    <label>Full arch implant prosthesis</label>
+                </value>
+                <value>
+                    <fullName>Complete Denture</fullName>
+                    <default>false</default>
+                    <label>Complete Denture</label>
+                </value>
+                <value>
+                    <fullName>Partial Denture</fullName>
+                    <default>false</default>
+                    <label>Partial Denture</label>
+                </value>
+                <value>
+                    <fullName>Crown/Bridge</fullName>
+                    <default>false</default>
+                    <label>Crown/Bridge</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Prosthesis_Stage__c</fullName>
+        <externalId>false</externalId>
+        <label>Prosthesis Stage</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Interim</fullName>
+                    <default>false</default>
+                    <label>Interim</label>
+                </value>
+                <value>
+                    <fullName>Final-Bar Acrylic</fullName>
+                    <default>false</default>
+                    <label>Final-Bar Acrylic</label>
+                </value>
+                <value>
+                    <fullName>Trial-PMMA</fullName>
+                    <default>false</default>
+                    <label>Trial-PMMA</label>
+                </value>
+                <value>
+                    <fullName>Final-Zirconia</fullName>
+                    <default>false</default>
+                    <label>Final-Zirconia</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Prosthesis_Type_Other__c</fullName>
+        <externalId>false</externalId>
+        <label>Prosthesis Type Other</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Prosthesis_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Prosthesis Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>CD</fullName>
+                    <default>false</default>
+                    <label>CD</label>
+                </value>
+                <value>
+                    <fullName>RPD</fullName>
+                    <default>false</default>
+                    <label>RPD</label>
+                </value>
+                <value>
+                    <fullName>Maxillary Arch</fullName>
+                    <default>false</default>
+                    <label>Maxillary Arch</label>
+                </value>
+                <value>
+                    <fullName>Mandibular Arch</fullName>
+                    <default>false</default>
+                    <label>Mandibular Arch</label>
+                </value>
+                <value>
+                    <fullName>S/M</fullName>
+                    <default>false</default>
+                    <label>S/M</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Prosthetic_Screw_Fracture_Location__c</fullName>
+        <externalId>false</externalId>
+        <label>Prosthetic Screw Fracture Location</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Prosthetic_Screw_Tightening_Location__c</fullName>
+        <externalId>false</externalId>
+        <label>Prosthetic Screw Tightening Location</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Repair_Apt_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Repair Apt Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Rework</fullName>
+                    <default>false</default>
+                    <label>Rework</label>
+                </value>
+                <value>
+                    <fullName>Repair</fullName>
+                    <default>false</default>
+                    <label>Repair</label>
+                </value>
+                <value>
+                    <fullName>Redeliver</fullName>
+                    <default>false</default>
+                    <label>Redeliver</label>
+                </value>
+                <value>
+                    <fullName>Unknown</fullName>
+                    <default>false</default>
+                    <label>Unknown</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Repair_Reason_Other__c</fullName>
+        <externalId>false</externalId>
+        <label>Repair Reason Other</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Repair_Reason__c</fullName>
+        <externalId>false</externalId>
+        <label>Repair Reason</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Wear: Normal</fullName>
+                    <default>false</default>
+                    <label>Wear: Normal</label>
+                </value>
+                <value>
+                    <fullName>Wear: Bruxism</fullName>
+                    <default>false</default>
+                    <label>Wear: Bruxism</label>
+                </value>
+                <value>
+                    <fullName>Trauma</fullName>
+                    <default>false</default>
+                    <label>Trauma</label>
+                </value>
+                <value>
+                    <fullName>Material Overload</fullName>
+                    <default>false</default>
+                    <label>Material Overload</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Repair_Work_Type_Other__c</fullName>
+        <externalId>false</externalId>
+        <label>Repair Work Type Other</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Repair_Work_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Repair Work Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Denture Base Fracture</fullName>
+                    <default>false</default>
+                    <label>Denture Base Fracture</label>
+                </value>
+                <value>
+                    <fullName>Tooth Fracture</fullName>
+                    <default>false</default>
+                    <label>Tooth Fracture</label>
+                </value>
+                <value>
+                    <fullName>Tooth Debonding</fullName>
+                    <default>false</default>
+                    <label>Tooth Debonding</label>
+                </value>
+                <value>
+                    <fullName>Bar Fracture</fullName>
+                    <default>false</default>
+                    <label>Bar Fracture</label>
+                </value>
+                <value>
+                    <fullName>Prosthetic screw fracture</fullName>
+                    <default>false</default>
+                    <label>Prosthetic screw fracture</label>
+                </value>
+                <value>
+                    <fullName>Abutment screw fracture</fullName>
+                    <default>false</default>
+                    <label>Abutment screw fracture</label>
+                </value>
+                <value>
+                    <fullName>Abutment screw loosening</fullName>
+                    <default>false</default>
+                    <label>Abutment screw loosening</label>
+                </value>
+                <value>
+                    <fullName>Abutment Fracture</fullName>
+                    <default>false</default>
+                    <label>Abutment Fracture</label>
+                </value>
+                <value>
+                    <fullName>Zirconia Coping Failure</fullName>
+                    <default>false</default>
+                    <label>Zirconia Coping Failure</label>
+                </value>
+                <value>
+                    <fullName>Zirconia Chip / Fracture</fullName>
+                    <default>false</default>
+                    <label>Zirconia Chip / Fracture</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Requested_By__c</fullName>
+        <externalId>false</externalId>
+        <label>Requested By</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Prosthodontist</fullName>
+                    <default>false</default>
+                    <label>Prosthodontist</label>
+                </value>
+                <value>
+                    <fullName>Patient</fullName>
+                    <default>false</default>
+                    <label>Patient</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Rework_Completed_Other__c</fullName>
+        <externalId>false</externalId>
+        <label>Rework Completed Other</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Rework_Completed__c</fullName>
+        <externalId>false</externalId>
+        <label>Rework Completed</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Add Acrylic</fullName>
+                    <default>false</default>
+                    <label>Add Acrylic</label>
+                </value>
+                <value>
+                    <fullName>Reduce Acrylic</fullName>
+                    <default>false</default>
+                    <label>Reduce Acrylic</label>
+                </value>
+                <value>
+                    <fullName>Occlusal Adjustment</fullName>
+                    <default>false</default>
+                    <label>Occlusal Adjustment</label>
+                </value>
+                <value>
+                    <fullName>Retread</fullName>
+                    <default>false</default>
+                    <label>Retread</label>
+                </value>
+                <value>
+                    <fullName>Prosthetic screw tightening</fullName>
+                    <default>false</default>
+                    <label>Prosthetic screw tightening</label>
+                </value>
+                <value>
+                    <fullName>Abutment screw tightening</fullName>
+                    <default>false</default>
+                    <label>Abutment screw tightening</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Rework_Reason_Other__c</fullName>
+        <externalId>false</externalId>
+        <label>Rework Reason Other</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Rework_Reason__c</fullName>
+        <externalId>false</externalId>
+        <label>Rework Reason</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Bite Modification</fullName>
+                    <default>false</default>
+                    <label>Bite Modification</label>
+                </value>
+                <value>
+                    <fullName>Esthetic Correction</fullName>
+                    <default>false</default>
+                    <label>Esthetic Correction</label>
+                </value>
+                <value>
+                    <fullName>Excess Wear</fullName>
+                    <default>false</default>
+                    <label>Excess Wear</label>
+                </value>
+                <value>
+                    <fullName>Inadequate Cantilever Support</fullName>
+                    <default>false</default>
+                    <label>Inadequate Cantilever Support</label>
+                </value>
+                <value>
+                    <fullName>Inadequate Framework Support</fullName>
+                    <default>false</default>
+                    <label>Inadequate Framework Support</label>
+                </value>
+                <value>
+                    <fullName>Structural Modification</fullName>
+                    <default>false</default>
+                    <label>Structural Modification</label>
+                </value>
+                <value>
+                    <fullName>Screw Loosening</fullName>
+                    <default>false</default>
+                    <label>Screw Loosening</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Time_in_Lab_Minutes__c</fullName>
+        <externalId>false</externalId>
+        <label>Time in Lab Minutes</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Time_in_Lab__c</fullName>
+        <externalId>false</externalId>
+        <label>Time in Lab Hours</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Tooth_Debonding_Location__c</fullName>
+        <externalId>false</externalId>
+        <label>Tooth Debonding Location</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Tooth_Fracture_Location__c</fullName>
+        <externalId>false</externalId>
+        <label>Tooth Fracture Location</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Repair Note Form</label>
+    <nameField>
+        <displayFormat>RNFN-{0000}</displayFormat>
+        <label>Repair Note Form Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Repair Note Forms</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

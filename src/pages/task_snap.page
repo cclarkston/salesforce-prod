@@ -1,0 +1,60 @@
+<apex:page standardController="task" extensions="ctrl_snap_taskext" sidebar="false" showHeader="false">         
+<style>       
+    h2.maintitle  {
+      width:95%;
+      font-size:12pt;
+      font-family:georgia;  
+      margin-left:5px;      
+      padding-left:10px;
+      border-bottom:3px solid black;
+      margin-bottom:1em;
+      padding-bottom:1px;   
+      display:block; 
+      padding-top:10px; 
+      color:#5789AE;   
+    }     
+</style>
+   <apex:messages />
+  <apex:form >  
+  <apex:outputpanel rendered="{!display_snap}" >                  
+    <h2 class="maintitle">SNAP Insights</h2>
+
+    <apex:outputText value="{!task.accountid}" rendered="false"/>
+    <table style="width:100%;">  
+      <tr><td style="vertical-align:top;width:50%;padding-left:30px;">      
+      <span style="display:block;padding-bottom:.5em;">    
+        <span style="font-weight:bold;display:inline-block;">What did you do with your image?</span><br />
+        <apex:inputfield value="{!ac.What_did_you_do_with_your_image__c}" />     
+      </span>
+      <span style="display:block;padding-bottom:.5em;">    
+        <span style="font-weight:bold;display:inline-block;">If the patient did something else with the image,  please elaborate</span><br />
+        <apex:inputfield value="{!ac.Other_use_of_the_image__c}" />       
+      </span>  
+      <span style="display:block;padding-bottom:.5em;">    
+        <span style="font-weight:bold;display:inline-block;">When do you plan to move forward?</span><br />
+        <apex:inputfield value="{!ac.When_do_you_plan_to_move_forward__c}" />   
+      </span> 
+      </td>
+      <td style="vertical-align:top;width:50%;" >               
+      <span style="display:block;padding-bottom:.5em;">    
+        <span style="font-weight:bold;display:inline-block;">If you shared it with someone,  who was it?</span><br />
+        <apex:inputfield value="{!ac.If_you_shared_it_with_someone_who__c}" />          
+      </span>        
+      <span style="display:block;padding-bottom:.5em;">    
+        <span style="font-weight:bold;display:inline-block;">Who else was the it shared with if other?</span><br />
+        <apex:inputfield value="{!ac.Other_Who_did_you_share_your_image_with__c}" />      
+      </span>  
+      <span style="display:block;padding-bottom:.5em;">    
+        <span style="font-weight:bold;display:inline-block;">If the consult never plans to move forward,  why?</span><br />
+        <apex:inputfield value="{!ac.Why_are_they_never_moving_forward__c}" />       
+      </span>   
+  
+      </td></tr>
+    </table>                                      
+  <apex:commandButton action="{!save}" value="Save" />    
+  </apex:outputpanel>  
+  </apex:form>
+
+
+
+</apex:page>

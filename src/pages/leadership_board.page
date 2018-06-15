@@ -1,0 +1,26 @@
+<apex:page controller="ctrl_leadership_board" readonly="true" sidebar="false" showHeader="false">
+<style>
+
+td.large_num {
+  font-size:48pt;
+  font-weight:bold;
+  text-align:center;
+  vertical-align:center;
+}
+</style>
+
+<table width="100%" height="500px;">
+<tr><td class="large_num">
+True Close Rate %<br /><br />
+<apex:outputText value="{0,number,##0.0}" >
+   <apex:param value="{!if(ConsultStarts==0,0,(Starts + StartsCancelled)/ConsultStarts * 100)}" />     
+</apex:outputtext>
+</td>
+<td class="large_num">
+Net Collected $<br /><br />
+<apex:outputText value="{0,number,##,##,##0}" >
+    <apex:param value="{!Collected + Refunded}" />   
+    </apex:outputtext>
+</td></tr></table>
+
+</apex:page>

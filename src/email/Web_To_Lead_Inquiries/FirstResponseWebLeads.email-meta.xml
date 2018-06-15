@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>false</available>
+    <description>Email sent to Web to Lead Inquiries that could not be contacted by phone.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>ClearChoice_Letterhead</letterhead>
+    <name>First Response Web Leads</name>
+    <style>freeForm</style>
+    <subject>Thank you for contacting ClearChoice Dental Implant Center</subject>
+    <textOnly>August 22, 2008
+ 
+ 
+Hello «LEAD_FIRSTNAME»,
+ 
+Thank you for requesting a consultation at the ClearChoice Dental Implant Center.  A new paradigm is emerging in medicine…. the ClearChoice experience!  We can help you achieve your personal best, reclaim your confidence, youthful outlook and sex appeal!  And it can happen in just ONE DAY*! Is it a miracle?  No, it’s just 21st Century dentistry.  
+ 
+The doctors on the ClearChoice team are among the most experienced in the country.  Over the past 40 years, our national panel of doctors have placed over 100,000 dental implants.  You can be confident that you can trust us to perform your procedure right the first time.  
+ 
+Please call us today at 1-888-654-4675 and we will be happy to discuss your dental needs and set up a FREE consultation and panoramic x-ray for you.  
+ 
+Remember our dental conditions will only worsen and become more expensive the longer treatment is delayed.  
+ 
+Sincerely, 
+ 
+ 
+«LEADOWNER_FULLNAME»
+Dental Implant Consultant 
+ 
+*Nobel Biocare™ Immediate Function™ for qualified patients and after initial workup.  Individual results may vary.</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

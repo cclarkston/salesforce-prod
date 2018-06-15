@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Clinical Apt Histories</relationshipLabel>
+        <relationshipName>Clinical_Apt_Histories</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Action_Reason__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Cancel_Reason__c) + 
+TEXT(Reschedule_Reason__c) + 
+TEXT( Delete_Reason__c)</formula>
+        <label>Action Reason</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Action__c</fullName>
+        <externalId>false</externalId>
+        <label>Action</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Cancel_Reason__c</fullName>
+        <externalId>false</externalId>
+        <label>Cancel Reason</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Center Request</fullName>
+                    <default>false</default>
+                    <label>Center Request</label>
+                </value>
+                <value>
+                    <fullName>Conflict with Schedule</fullName>
+                    <default>false</default>
+                    <label>Conflict with Schedule</label>
+                </value>
+                <value>
+                    <fullName>Emergency/Sick</fullName>
+                    <default>false</default>
+                    <label>Emergency/Sick</label>
+                </value>
+                <value>
+                    <fullName>Family Conference</fullName>
+                    <default>false</default>
+                    <label>Family Conference</label>
+                </value>
+                <value>
+                    <fullName>Not Interested- Cost</fullName>
+                    <default>false</default>
+                    <label>Not Interested- Cost</label>
+                </value>
+                <value>
+                    <fullName>Not Interested- Distance</fullName>
+                    <default>false</default>
+                    <label>Not Interested- Distance</label>
+                </value>
+                <value>
+                    <fullName>Not Interested- Insurance</fullName>
+                    <default>false</default>
+                    <label>Not Interested- Insurance</label>
+                </value>
+                <value>
+                    <fullName>Not Interested- Bad Review</fullName>
+                    <default>false</default>
+                    <label>Not Interested- Bad Review</label>
+                </value>
+                <value>
+                    <fullName>Patient Request</fullName>
+                    <default>false</default>
+                    <label>Patient Request</label>
+                </value>
+                <value>
+                    <fullName>Reassign Doctor</fullName>
+                    <default>false</default>
+                    <label>Reassign Doctor</label>
+                </value>
+                <value>
+                    <fullName>Schedule Management</fullName>
+                    <default>false</default>
+                    <label>Schedule Management</label>
+                </value>
+                <value>
+                    <fullName>Transportation Issues</fullName>
+                    <default>false</default>
+                    <label>Transportation Issues</label>
+                </value>
+                <value>
+                    <fullName>Weather</fullName>
+                    <default>false</default>
+                    <label>Weather</label>
+                </value>
+                <value>
+                    <fullName>GLO</fullName>
+                    <default>false</default>
+                    <label>GLO</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Clinical_Apt_Calendar__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Clinical Apt Calendar</label>
+        <referenceTo>Clinical_Apt_Calendar__c</referenceTo>
+        <relationshipLabel>Clinical Apt Histories</relationshipLabel>
+        <relationshipName>Clinical_Apt_Histories</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Delete_Reason__c</fullName>
+        <externalId>false</externalId>
+        <label>Delete Reason</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Doctor Request</fullName>
+                    <default>false</default>
+                    <label>Doctor Request</label>
+                </value>
+                <value>
+                    <fullName>PEC Sick/Schedule</fullName>
+                    <default>false</default>
+                    <label>PEC Sick/Schedule</label>
+                </value>
+                <value>
+                    <fullName>Weather Closures</fullName>
+                    <default>false</default>
+                    <label>Weather Closures</label>
+                </value>
+                <value>
+                    <fullName>Center Request</fullName>
+                    <default>false</default>
+                    <label>Center Request</label>
+                </value>
+                <value>
+                    <fullName>Traveler/master Schedule Update</fullName>
+                    <default>false</default>
+                    <label>Traveler/master Schedule Update</label>
+                </value>
+                <value>
+                    <fullName>Schedule Management</fullName>
+                    <default>false</default>
+                    <label>Schedule Management</label>
+                </value>
+                <value>
+                    <fullName>GLO</fullName>
+                    <default>false</default>
+                    <label>GLO</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Incomplete_Reason__c</fullName>
+        <externalId>false</externalId>
+        <label>Incomplete Reason</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Emergency</fullName>
+                    <default>false</default>
+                    <label>Emergency</label>
+                </value>
+                <value>
+                    <fullName>Insufficient Healing</fullName>
+                    <default>false</default>
+                    <label>Insufficient Healing</label>
+                </value>
+                <value>
+                    <fullName>Medical Reason</fullName>
+                    <default>false</default>
+                    <label>Medical Reason</label>
+                </value>
+                <value>
+                    <fullName>Mini-Prosth</fullName>
+                    <default>false</default>
+                    <label>Mini-Prosth</label>
+                </value>
+                <value>
+                    <fullName>Non-candidate</fullName>
+                    <default>false</default>
+                    <label>Non-candidate</label>
+                </value>
+                <value>
+                    <fullName>Patient Conflict</fullName>
+                    <default>false</default>
+                    <label>Patient Conflict</label>
+                </value>
+                <value>
+                    <fullName>Staged Appointment</fullName>
+                    <default>false</default>
+                    <label>Staged Appointment</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Notes__c</fullName>
+        <externalId>false</externalId>
+        <label>Notes</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Patient_POT_Apt__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Patient POT Apt</label>
+        <referenceTo>Patient_POT_Apt__c</referenceTo>
+        <relationshipLabel>Clinical Apt Histories</relationshipLabel>
+        <relationshipName>Clinical_Apt_Histories</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Reschedule_Reason__c</fullName>
+        <externalId>false</externalId>
+        <label>Reschedule Reason</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Conflict with Schedule</fullName>
+                    <default>false</default>
+                    <label>Conflict with Schedule</label>
+                </value>
+                <value>
+                    <fullName>Emergency/Sick</fullName>
+                    <default>false</default>
+                    <label>Emergency/Sick</label>
+                </value>
+                <value>
+                    <fullName>Late</fullName>
+                    <default>false</default>
+                    <label>Late</label>
+                </value>
+                <value>
+                    <fullName>Schedule Management</fullName>
+                    <default>false</default>
+                    <label>Schedule Management</label>
+                </value>
+                <value>
+                    <fullName>Transporatation Issues</fullName>
+                    <default>false</default>
+                    <label>Transporatation Issues</label>
+                </value>
+                <value>
+                    <fullName>Weather</fullName>
+                    <default>false</default>
+                    <label>Weather</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Rescheduled_From__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Rescheduled From</label>
+        <referenceTo>Clinical_Apt_Calendar__c</referenceTo>
+        <relationshipLabel>Clinical Apt Histories (Rescheduled From)</relationshipLabel>
+        <relationshipName>Clinical_Apt_Histories1</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Clinical Apt History</label>
+    <nameField>
+        <displayFormat>AH-{0000}</displayFormat>
+        <label>Clinical Apt History Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Clinical Apt Histories</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

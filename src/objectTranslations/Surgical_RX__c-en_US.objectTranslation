@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Surgical RX</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Surgical RXs</value>
+    </caseValues>
+    <fields>
+        <label><!-- ASA --></label>
+        <name>ASA__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Surgical RXs --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- BMI --></label>
+        <name>BMI__c</name>
+    </fields>
+    <fields>
+        <label><!-- BP Diastolic --></label>
+        <name>BP_Diastolic__c</name>
+    </fields>
+    <fields>
+        <label><!-- BP Systolic --></label>
+        <name>BP_Systolic__c</name>
+    </fields>
+    <fields>
+        <label><!-- Center Information --></label>
+        <name>Center_Information__c</name>
+        <relationshipLabel><!-- Surgical RXs --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Comments --></label>
+        <name>Comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- DR for --></label>
+        <name>DR_for__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dr to --></label>
+        <name>Dr_to__c</name>
+    </fields>
+    <fields>
+        <label><!-- Extraction Notes --></label>
+        <name>Extraction_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Extraction teeth --></label>
+        <name>Extraction_teeth__c</name>
+    </fields>
+    <fields>
+        <label><!-- Grafting as needed --></label>
+        <name>Grafting_as_needed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Height Feet --></label>
+        <name>Height_Feet__c</name>
+    </fields>
+    <fields>
+        <label><!-- Height Inches --></label>
+        <name>Height_Inches__c</name>
+    </fields>
+    <fields>
+        <label><!-- Implant Placement --></label>
+        <name>Implant_Placement__c</name>
+    </fields>
+    <fields>
+        <label><!-- Include Lower Arch --></label>
+        <name>Include_Lower_Arch__c</name>
+    </fields>
+    <fields>
+        <label><!-- Include SM --></label>
+        <name>Include_SM__c</name>
+    </fields>
+    <fields>
+        <label><!-- Include Upper Arch --></label>
+        <name>Include_Upper_Arch__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lower Immediate Load Notes --></label>
+        <name>Lower_Immediate_Load_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lower Immediate Load --></label>
+        <name>Lower_Immediate_Load__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Lower Immediate Placement --></label>
+        <name>Lower_Immediate_Placement__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- MAX max right post bone reduction --></label>
+        <name>MAX_max_right_post_bone_reduction__c</name>
+    </fields>
+    <fields>
+        <label><!-- Man Implant System Other --></label>
+        <name>Man_Implant_System_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Man implant system --></label>
+        <name>Man_implant_system__c</name>
+        <picklistValues>
+            <masterLabel>Neodent</masterLabel>
+            <translation><!-- Neodent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nobel Biocare</masterLabel>
+            <translation><!-- Nobel Biocare --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Straumann</masterLabel>
+            <translation><!-- Straumann --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Man implant teeth --></label>
+        <name>Man_implant_teeth__c</name>
+    </fields>
+    <fields>
+        <label><!-- Man max ant bone reduction --></label>
+        <name>Man_max_ant_bone_reduction__c</name>
+    </fields>
+    <fields>
+        <label><!-- Man max left post bone reduction --></label>
+        <name>Man_max_left_post_bone_reduction__c</name>
+    </fields>
+    <fields>
+        <label><!-- Man max right post bone reduction --></label>
+        <name>Man_max_right_post_bone_reduction__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mand Grafting note --></label>
+        <name>Mand_Grafting_note__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mand grafting --></label>
+        <name>Mand_grafting__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Max Grafting Note --></label>
+        <name>Max_Grafting_Note__c</name>
+    </fields>
+    <fields>
+        <label><!-- Max Grafting --></label>
+        <name>Max_Grafting__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Max Implant System Other --></label>
+        <name>Max_Implant_System_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Max Implant System --></label>
+        <name>Max_Implant_System__c</name>
+        <picklistValues>
+            <masterLabel>Neodent</masterLabel>
+            <translation><!-- Neodent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nobel Biocare</masterLabel>
+            <translation><!-- Nobel Biocare --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Straumann</masterLabel>
+            <translation><!-- Straumann --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Max Implant teeth --></label>
+        <name>Max_Implant_teeth__c</name>
+    </fields>
+    <fields>
+        <label><!-- Max max ant bone reduction --></label>
+        <name>Max_max_ant_bone_reduction__c</name>
+    </fields>
+    <fields>
+        <label><!-- Max max left post bone reduction --></label>
+        <name>Max_max_left_post_bone_reduction__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+        <relationshipLabel><!-- Surgical RXs --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Patient POT --></label>
+        <name>Patient_POT__c</name>
+        <relationshipLabel><!-- Surgical RXs --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Pulse Ox --></label>
+        <name>Pulse_Ox__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pulse --></label>
+        <name>Pulse__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reason --></label>
+        <name>Reason__c</name>
+    </fields>
+    <fields>
+        <label><!-- Review Time --></label>
+        <name>Review_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reviewed By --></label>
+        <name>Reviewed_By__c</name>
+        <relationshipLabel><!-- Surgical RXs --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- SM Immediate Load Notes --></label>
+        <name>SM_Immediate_Load_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- SM Immediate Load --></label>
+        <name>SM_Immediate_Load__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- SM Immediate Placement --></label>
+        <name>SM_Immediate_Placement__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- SM Implant System Other --></label>
+        <name>SM_Implant_System_Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- SM Implant System Type --></label>
+        <name>SM_Implant_System_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- SM Implant System --></label>
+        <name>SM_Implant_System__c</name>
+        <picklistValues>
+            <masterLabel>Neodent</masterLabel>
+            <translation><!-- Neodent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nobel Biocare</masterLabel>
+            <translation><!-- Nobel Biocare --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Straumann</masterLabel>
+            <translation><!-- Straumann --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- SM Sinus Grafting Left --></label>
+        <name>SM_Sinus_Grafting_Left__c</name>
+    </fields>
+    <fields>
+        <label><!-- SM Sinus Grafting Right --></label>
+        <name>SM_Sinus_Grafting_Right__c</name>
+    </fields>
+    <fields>
+        <label><!-- SM Sinus Grafting --></label>
+        <name>SM_Sinus_Grafting__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Single Multi Grafting Note --></label>
+        <name>Single_Multi_Grafting_Note__c</name>
+    </fields>
+    <fields>
+        <label><!-- Single Multi Grafting --></label>
+        <name>Single_Multi_Grafting__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Upper Arch Sinus Grafting Left --></label>
+        <name>Upper_Arch_Sinus_Grafting_Left__c</name>
+    </fields>
+    <fields>
+        <label><!-- Upper Arch Sinus Grafting Right --></label>
+        <name>Upper_Arch_Sinus_Grafting_Right__c</name>
+    </fields>
+    <fields>
+        <label><!-- Upper Immediate Load --></label>
+        <name>Upper_Immediate_Load__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Upper Immediate Notes --></label>
+        <name>Upper_Immediate_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Upper Immediate Placement --></label>
+        <name>Upper_Immediate_Placement__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Upper arch sinus grafting --></label>
+        <name>Upper_arch_sinus_grafting__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Weight --></label>
+        <name>Weight__c</name>
+    </fields>
+    <fields>
+        <label><!-- isactive --></label>
+        <name>isactive__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

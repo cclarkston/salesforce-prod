@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_51918841</developerName>
+        <masterLabel>Call Result by Sched</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Lead.Call_Result__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Consultation Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Same Day Rescheduled Consult</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Seminar Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Off Site Seminar Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Cancelled Appointment</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Same Day Cancellation Appointment</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Pending Reschedule</sourceValue>
+            </sourceValues>
+            <value>Sched</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Not Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Shelved Call</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Renurture</sourceValue>
+            </sourceValues>
+            <value>Not Sched</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Fielded Lead</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Out Bound Follow-up</sourceValue>
+            </sourceValues>
+            <value>Not Contacted</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_18634649</developerName>
+        <masterLabel>PS</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Lead.Pre_Screen__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Green</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Yellow</sourceValue>
+            </sourceValues>
+            <value>GY</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>PO Box</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Blue (No Hit)</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Red</sourceValue>
+            </sourceValues>
+            <value>RB and PO</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Insufficient Information</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Website Down-No Prescreen</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Not Checked</sourceValue>
+            </sourceValues>
+            <value>Not Checked</value>
+        </values>
+    </buckets>
+    <filter>
+        <criteriaItems>
+            <column>OWNER</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Pat Greenwood</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Call_Center_Agent__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Pat greenwood</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Inbound_Call__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Dental Inquiry</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Sales_Alert__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>ONLINE INCOMPLETE,ONLINE NO CALL,ONLINE CALL NOW</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_51918841</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Lead.Marketing_Source__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_18634649</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Online Snap Shot- ATM</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadList</reportType>
+    <scope>org</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <interval>INTERVAL_THISMONTH</interval>
+    </timeFrameFilter>
+</Report>

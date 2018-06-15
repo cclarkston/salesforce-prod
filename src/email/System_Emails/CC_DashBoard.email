@@ -1,0 +1,12 @@
+<messaging:emailTemplate subject="CC Dashboard Report" recipientType="User" >
+<messaging:plainTextEmailBody >
+CC Dashboard report is attached
+</messaging:plainTextEmailBody> 
+  <messaging:attachment filename="CCDashboard_Alt_Format.csv" >        
+    <c:CC_Dashboard_Alt_CSV />  
+  </messaging:attachment>
+  
+  <messaging:attachment filename="CCSchedule.csv" >        
+    <c:CC_Schedule />  
+  </messaging:attachment>
+</messaging:emailTemplate>

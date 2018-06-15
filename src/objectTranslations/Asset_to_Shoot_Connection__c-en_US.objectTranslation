@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Asset-to-Shoot Connection</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Asset-to-Shoot Connections</value>
+    </caseValues>
+    <fields>
+        <label><!-- Parent Asset --></label>
+        <name>Creative_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Shoot Description --></label>
+        <name>Creative_Shoot_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Creative Shoot --></label>
+        <name>Creative_Shoot__c</name>
+        <relationshipLabel><!-- Asset-to-Shoot Connections --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Creative --></label>
+        <name>Creative__c</name>
+        <relationshipLabel><!-- Asset-to-Shoot Connections --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Asset-to-Shoot Connections Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Vowel</startsWith>
+</CustomObjectTranslation>

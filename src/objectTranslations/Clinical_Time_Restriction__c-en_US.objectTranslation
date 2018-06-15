@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Clinical Time Restriction</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Clinical Time Restrictions</value>
+    </caseValues>
+    <fields>
+        <label><!-- Block Date --></label>
+        <name>Block_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Block Note --></label>
+        <name>Block_Note__c</name>
+    </fields>
+    <fields>
+        <label><!-- Block Reason --></label>
+        <name>Block_Reason__c</name>
+        <picklistValues>
+            <masterLabel>Clean Up</masterLabel>
+            <translation><!-- Clean Up --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Clinical Conflict</masterLabel>
+            <translation><!-- Clinical Conflict --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Emergency</masterLabel>
+            <translation><!-- Emergency --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lunch</masterLabel>
+            <translation><!-- Lunch --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Maintenance</masterLabel>
+            <translation><!-- Maintenance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Patient Hold</masterLabel>
+            <translation><!-- Patient Hold --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Personal Conflict</masterLabel>
+            <translation><!-- Personal Conflict --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Private Practice Patient</masterLabel>
+            <translation><!-- Private Practice Patient --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Private Practice Patient IV</masterLabel>
+            <translation><!-- Private Practice Patient IV --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Private Practice Patient LA</masterLabel>
+            <translation><!-- Private Practice Patient LA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sick</masterLabel>
+            <translation><!-- Sick --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Staffing</masterLabel>
+            <translation><!-- Staffing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Training</masterLabel>
+            <translation><!-- Training --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Vacation</masterLabel>
+            <translation><!-- Vacation --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Block Type --></label>
+        <name>Block_Type__c</name>
+        <picklistValues>
+            <masterLabel>Doctor</masterLabel>
+            <translation><!-- Doctor --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Room</masterLabel>
+            <translation><!-- Room --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Center Information --></label>
+        <name>Center_Information__c</name>
+        <relationshipLabel><!-- Clinical Time Restrictions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Clinical Room --></label>
+        <name>Clinical_Room__c</name>
+        <relationshipLabel><!-- Clinical Time Restrictions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- End Hour Int --></label>
+        <name>End_Hour_Int__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Hour --></label>
+        <name>End_Hour__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Minute Int --></label>
+        <name>End_Minute_Int__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Minute --></label>
+        <name>End_Minute__c</name>
+    </fields>
+    <fields>
+        <label><!-- Etime --></label>
+        <name>Etime__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Hour Int --></label>
+        <name>Start_Hour_Int__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Hour --></label>
+        <name>Start_Hour__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Minute Int --></label>
+        <name>Start_Minute_Int__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Minute --></label>
+        <name>Start_Minute__c</name>
+    </fields>
+    <fields>
+        <label><!-- Stime --></label>
+        <name>Stime__c</name>
+    </fields>
+    <fields>
+        <label><!-- User --></label>
+        <name>User__c</name>
+        <relationshipLabel><!-- Clinical Time Restrictions --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

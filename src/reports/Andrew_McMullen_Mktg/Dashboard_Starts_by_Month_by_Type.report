@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>text</bucketType>
+        <developerName>BucketField_67711059</developerName>
+        <masterLabel>Creative Name</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Campaign.Creative_Name__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>TargetCom Post-Consult</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Voltage Post-Consult</sourceValue>
+            </sourceValues>
+            <value>Post Consult</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>TargetCom Pre-Consult</sourceValue>
+            </sourceValues>
+            <value>Pre Consult</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>TargetCom Meet and Greet</sourceValue>
+            </sourceValues>
+            <value>Meet and Greet</value>
+        </values>
+    </buckets>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Account.Preliminary_Treatment_Fee_Quoted__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>CAMPAIGN.TYPE</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Web-Email Program</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>OPP.CLOSE_DATE</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>lessThan</operator>
+            <value>TOMORROW</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>OPP.STAGE_NAME</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Cancelled Not Rescheduled</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_67711059</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Month</dateGranularity>
+        <field>OPP.CLOSE_DATE</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Dashboard- Starts by Month by Type</name>
+    <params>
+        <name>scopeid</name>
+        <value></value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CampaignInfluence</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+</Report>

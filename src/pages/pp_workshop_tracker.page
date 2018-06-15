@@ -1,0 +1,232 @@
+<apex:page controller="ctrl_event_attendance" sidebar="true">
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+
+<style>
+  span.blank {
+    font-style:italic;
+    font-weight:bold;    
+  }  
+  tr.control a {
+    text-decoration:none;
+  }
+</style>
+
+<script type="text/javascript"> 
+  var key_timeout;
+  var search_in_progress = false;
+  var scan_search_in_progress = false;
+  
+  function ticket_scan() {  
+    if(search_in_progress)
+      clearTimeout(key_timeout);
+    search_in_progress = true;  
+    key_timeout = setTimeout("scan_now()",300);      
+  }
+  
+  function scan_now() {
+    search_in_progress = false;
+    ticket_scanned();
+  }
+   
+  function search_now() {
+    search_in_progress = false;  
+    search_events(); 
+  } 
+  
+  function search_names_now() {
+    search_in_progress = false;  
+    search_names(); 
+  } 
+  
+  function search_key2() {    
+    if(search_in_progress)
+      clearTimeout(key_timeout);
+    search_in_progress = true;  
+    key_timeout = setTimeout("search_names_now()",600);
+  }   
+    
+  function search_key() {    
+    if(search_in_progress)
+      clearTimeout(key_timeout);
+    search_in_progress = true;  
+    key_timeout = setTimeout("search_now()",600);
+  }   
+  
+  function use_fancy_cursor(t) {
+    document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+    t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  }
+
+  function default_cursor(t) {
+    document.body.style.cursor = 'default';
+    t.style.cursor='default';
+  }  
+  
+  function ticket_focus() {
+    var elements = document.getElementsByTagName('input'); 
+    for(var i=0; i<elements.length; i++) { 
+      var input = elements[i];   
+      var input_title = input.id;  
+      if(input_title.indexOf('ticket_scan') != -1) {  
+        input.focus();          
+      }
+    } 
+  }
+  
+  function handle_scan_enter(e){         
+    if(window.event){                    
+      key = window.event.keyCode;     //IE               
+    } 
+    else {                    
+      key = e.which;     //firefox               
+    }               
+    if(key == 13 || key==9) { //return 
+      event.preventDefault();           
+      return false;               
+    } else{                    
+      return true;               
+    }          
+  }     
+     
+  function handle_enter(e){         
+    if(window.event){                    
+      key = window.event.keyCode;     //IE               
+    } 
+    else {                    
+      key = e.which;     //firefox               
+    }               
+    if(key == 13) { //return             
+      return false;               
+    } else{                    
+      return true;               
+    }          
+  }       
+  </script>
+
+<apex:form style="padding-top:0;display:inline;margin-top:0;" onsubmit="" >
+ <apex:actionstatus id="status_load">
+        <apex:facet name="start">
+            <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;
+                   height: 100%;opacity:0.65;width:100%;"> 
+                <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+                    <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                    <span class="waitingDescription">Loading...</span>
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionstatus>
+  <apex:actionFunction name="search_events" action="{!event_search}" reRender="esearch_holder" status="status_load">
+  </apex:actionFunction>
+  <apex:actionFunction name="search_names" action="{!name_search}" reRender="name_results_holder" status="status_load">
+  </apex:actionFunction>
+  <apex:actionFunction oncomplete="default_cursor(this);ticket_focus();" name="click_on_event" action="{!select_event}" rerender="main_holder" status="status_load">
+    <apex:param name="eid" value="" />
+  </apex:actionFunction>  
+   <apex:actionFunction name="ticket_scanned" action="{!handle_ticket_scan}" reRender="escan_holder" oncomplete="ticket_focus();" status="status_load">
+  </apex:actionFunction>
+   <apex:actionFunction oncomplete="default_cursor(this);ticket_focus();" name="click_on_member" action="{!select_member}" rerender="main_holder" status="status_load">
+    <apex:param name="mid" value="" />
+  </apex:actionFunction>  
+   <apex:actionFunction oncomplete="default_cursor(this);ticket_focus();" name="reset_member" action="{!reset_member}" rerender="main_holder" status="status_load">
+    <apex:param name="mid" value="" />
+  </apex:actionFunction>    
+<span style="display:block;border-bottom:2px solid black; color:#5789AE; font-size:14pt; font-weight:bold; padding-left:20px; padding-right:20px; width:600px; padding-top:5px;">PP Workshop Tracker</span> 
+<apex:outputPanel id="main_holder" rendered="true" layout="block" style="padding-top:2em;">   
+
+  <apex:outputpanel rendered="{!if(display_event_search,true,false)}" layout="block"  >
+  <span class="blank">Select a Workshop to scan for</span><br /><br />
+  <span style="display:block;padding-bottom:.5em;">  
+  <span style="font-weight:bold;width:150px;">Event Search : </span>
+    <apex:inputText value="{!event_filter}" id="search_filter" onkeyup="search_key();"  onkeypress="return handle_enter(event);" /></span>
+
+  <apex:outputpanel id="esearch_holder" rendered="{!if(event_search_error,false,true)}" layout="block" style="padding-left:10px;padding-top:1em;">    
+    <table class="accs_details" style="width:700px;">   
+      <tr class="control">  
+        <td width="20%">Event Name</td> 
+        <td width="45%">Location</td> 
+        <td width="20%">Event Date</td>  
+        <td width="15%">Market</td>
+      </tr>
+    </table>  
+    <div style="overflow:auto;width:750px;height:300px;">    
+      <table style="width:700px;" class="accs_details">  
+      <apex:variable var="rowclassname" value="accs" />
+      <apex:repeat value="{!event_search_results}" var="event">
+        <tr class="{!rowclassname}">
+        <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />  
+          <td width="20%" class="indent"><span style="color:blue;" onclick="click_on_event('{!event.id}');"><apex:outputfield value="{!event.name}" /></span></td> 
+          <td width="45%" style="padding-left:5px;"><apex:outputfield value="{!event.Location_Address__c}" /></td> 
+          <td width="20%" style="padding-left:5px;"><apex:outputfield value="{!event.Event_Date__c}" /></td>  
+          <td width="15%" style="padding-left:5px;"><apex:outputfield value="{!event.market__r.name}" /></td>
+        </tr>     
+      </apex:repeat>        
+      </table>
+    </div>     
+    <apex:outputPanel id="esearch_err_holder" rendered="{!event_search_error}" layout="block" style="padding-left:10px;">  
+       <apex:outputtext escape="false" value="{!event_search_message}" />
+    </apex:outputpanel>      
+  </apex:outputpanel>  
+  </apex:outputpanel>
+
+
+  <apex:outputPanel rendered="{!if(display_event_scan,true,false)}" layout="block" id="escan_holder">
+  <span class="blank">Scanning for :</span><br />
+  <p style="padding-left:10px;line-height:1.5;">
+  <span style="font-weight:bold;color:blue;font-size:12pt;">{!pp_event.name}</span><br />
+  <apex:outputfield value="{!pp_event.Location_Address__c}" /><br />
+  <apex:outputfield value="{!pp_event.Event_Date__c}" /><br />
+  <b>Market - </b>{!pp_event.market__r.name}<br />
+  <apex:commandButton value="Change Workshop" action="{!change_event}"  status="status_load"/>
+  </p><br /><br />
+  
+  <span style="display:block;padding-bottom:.5em;">  
+  <span style="font-weight:bold;width:150px;">Ticket Scan : </span>
+    <apex:inputText value="{!ticket_scan}" id="ticket_scan" onkeyup="ticket_scan();"  onkeydown="return handle_scan_enter(event);"  size="30"/></span>
+  <span style="display:block;padding-bottom:.5em;">  <apex:outputtext escape="false" value="{!event_scan_results}" /> &nbsp;</span><br /><br />
+
+  <span style="display:block;padding-bottom:.5em;">  
+  <span style="font-weight:bold;width:150px;">Name Lookup : </span>
+    <apex:inputText value="{!name_filter}" id="name_filter" onkeyup="search_key2();"  onkeypress="return handle_enter(event);" /></span>
+    <span style="display:block;padding-bottom:.5em;"><apex:outputtext escape="false" value="{!name_search_message}" /></span>
+
+  <apex:outputpanel id="name_results_holder" layout="block" style="padding-left:10px;padding-top:1em;">    
+    <table class="accs_details" style="width:700px;">   
+      <tr class="control">  
+        <td width="40%">Name</td> 
+        <td width="20%">Status</td> 
+        <td width="25%">Attendance Time</td>  
+        <td width="15%">&nbsp;</td>
+      </tr>
+    </table>  
+    <div style="overflow:auto;width:750px;height:300px;">    
+      <table style="width:700px;" class="accs_details">  
+      <apex:variable var="rowclassname" value="accs" />
+      <apex:repeat value="{!member_search_results}" var="members">
+        <tr class="{!rowclassname}">
+        <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />  
+          <td width="40%" class="indent"><apex:outputfield value="{!members.practice_doctor__r.First_Last__c}" /></td> 
+          <td width="20%" style="padding-left:5px;"><apex:outputfield value="{!members.Event_Status__c}" /></td> 
+          <td width="25%" style="padding-left:5px;"><apex:outputfield value="{!members.Attendance_Time__c}" /></td>  
+          <td width="15%" style="padding-left:5px;"><apex:commandbutton value="Attending" onclick="click_on_member('{!members.id}');return false;" rendered="{!if(members.Event_Status__c=='Registered',true,false)}"/>
+            <apex:commandbutton value="Reset" onclick="reset_member('{!members.id}');return false;" rendered="{!if(members.Event_Status__c=='Attended',true,false)}"/>
+          </td>
+        </tr>     
+      </apex:repeat>        
+      </table>
+    </div>     
+
+
+  </apex:outputpanel>  
+       
+  
+  
+  </apex:outputPanel>
+
+
+</apex:outputpanel>
+</apex:form>
+</apex:page>

@@ -1,0 +1,81 @@
+<messaging:emailTemplate subject="Thank you for contacting ClearChoice Dental Implant Centers" recipientType="Lead" relatedToType="Lead" replyto="reply-to@clearchoice.com">
+<messaging:plainTextEmailBody >
+  {!Recipient.Center__r.Street_1__c}
+  {!Recipient.Center__r.City__c} {!Recipient.Center__r.State__c} {!Recipient.Center__r.Zip_Code__c}
+  
+  
+  {!Recipient.Firstname} {!Recipient.LastName}
+  
+  {!Recipient.Street}
+  {!Recipient.City} {!Recipient.State} {!Recipient.PostalCode}
+  
+  Dear {!Recipient.FirstName} {!Recipient.LastName},
+  
+  You've taken an important first step to putting an end to chronic dental health problems  
+  
+  Thank you for contacting ClearChoice Dental Implant Centers. The precise technology used at ClearChoice gives you one permanent solution with implants that look, feel and function like natural teeth. You might soon say goodbye to solutions like bridges, crowns and partials. All in just one day!
+  
+  Understandably, this is an important decision—one that you should make with all of the information you need. ClearChoice is here to make that easy…
+  
+  During your consultation you can:
+  
+    Tour our advanced facility and receive a complimentary panoramic X-Ray and 3D CAT scan (a $700 value).
+    Meet with a doctor to talk about your dental concerns and learn more about your treatment options.
+    Determine the specific investment for your treatment plan and understand financing options as needed.
+    
+  And the good news is you have been pre-selected for a basic credit offer, making you eligible for an unsecured loan amount of at least $1,000 to be applied toward services provided by ClearChoice {!Recipient.Center_Name__c}. Now you have options when it comes to taking care of the cost of investing in the smile of a lifetime.
+    
+  Every life changing event starts with that first step, and you’ve already begun by making the first call. Why not schedule a no-risk consultation today so you can finally be on your way to the smile you deserve?
+    
+  Sincerely,
+  
+  {!Recipient.Call_Center_Agent__r.name}
+  Dental Implant Consultant
+  
+  ClearChoice Dental Implant Centers are locally owned and operated by licensed local dentists, and are part of a professional affiliation of implant
+  practices operated by oral surgeons, prosthodontists and restorative dentists across the United States.
+  
+  Qualified Patients can have their procedure in one day after initial workup without additional bone graft surgery. Results May Vary in Individual Cases.
+  
+  PRESCREEN AND OPT-OUT NOTICE:
+
+  This "prescreen" offer of credit is based on information in your credit report indicating that you meet certain criteria. This offer is not guaranteed if you do not meet our criteria, including providing acceptable property as collateral. If you do not want to receive prescreened offers of credit from this and other companies, call TransUnion Opt-Out at 1-888-5OPTOUT (1-888-567-8688); or visit the website at www.optoutprescreen.com; or write to TransUnion Name Removal Option, P.O. Box 505, Woodlyn, PA 19094-0505.
+
+  
+  ©2014 ClearChoice Dental Implant Centers
+</messaging:plainTextEmailBody>
+<messaging:htmlEmailBody >
+  <div class="bcp_letter" style="width:720px;font-family:Times New Roman;font-size:12pt;">
+  <table style="width:720px;"><tr><td style="text-align:left;vertical-align:top;">
+  <img  src="https://c.na2.content.force.com/servlet/servlet.ImageServer?id=01540000001aO6B&oid=00D400000007ZMu"  /><br /><br />
+  <p style="padding-left:55px;padding-bottom:10px;"><span class="cali_reg" style="font-size:10pt;">
+  {!Recipient.center__r.street_1__c}<br />{!Recipient.center__r.city__c} {!Recipient.center__r.state__c} {!Recipient.center__r.Zip_Code__c}</span></p><br /><span style="display:block;line-height:5px;">&nbsp;</span>
+  <p style="padding-left:55px;"><span class="cali_reg" style="font-size:12pt;">{!Recipient.FirstName} {!Recipient.LastName}<br />
+  {!Recipient.street}<br />{!Recipient.City} {!Recipient.State} {!Recipient.PostalCode}</span></p>
+  </td><td style="text-align:right;vertical-align:top;width:370px;" >
+  <div style="text-align-right;"><p style="width:370px;font-family:georgia, Arial,'Gotham','Gotham',sans-serif; font-size:16pt; color:#196D86;text-align:left;padding:0;margin:0;"><span class="cali_bold" style="font-size:16pt;">You've taken an important first<br />step to putting an end to chronic<br />dental health problems</span></p></div>
+  <div style="align:right;width:300px;margin-left:auto;margin-right:20px;padding-top:0;margin-top:0;position:relative;top:-3px;"><p style="text-align:left;"><span class="cali_reg" style="font-size:12pt;"><b>And you've been pre-selected for<br /> a basic credit offer from ClearChoice<br />{!Recipient.center_name__c}</b>. Please keep reading<br /> for details on what to do next.</span></p></div>
+  </td></tr></table>
+  <div style="padding-left:30px;padding-top:35px;width:715px;"><span class="cali_reg" style="font-size:13pt;line-height.8em;">Dear {!Recipient.Name},<br /><br />
+  <span style="padding-left:20px;">Thank you for contacting ClearChoice Dental Implant Centers. The precise technology used at ClearChoice gives you one permanent solution with implants that look, feel and function like natural teeth. You might soon say goodbye to solutions like bridges, crowns and partials. All in just one day!</span><br /><span style="display:block;line-height:9px;">&nbsp;</span>
+  <span style="padding-left:20px;">Understandably, this is an important decision—one that you should make with all of the information you need. ClearChoice is here to make that easy…</span><br />
+  <p style="text-align:center;padding-bottom:5px;padding-top:5px;margin-top:0px;margin-bottom:0px;"><b>You're invited to schedule a free, no-risk consultation<br />Call {!Recipient.center__r.Call_Center_Marketing__c}</b></p>
+  <span style="padding-left:20px;">During your consultation you can:</span>
+  <ul style="padding-left:20px;padding-top:5px;margin-top:0;"><li>Tour our advanced facility and receive a complimentary 3D CAT scan.</li><span style="display:block;line-height:9px;">&nbsp;</span>
+  <li>Meet with a doctor to talk about your dental concerns and learn more about treatment options.</li><span style="display:block;line-height:9px;">&nbsp;</span>
+  <li>Determine the specific investment for your treatment plan and understand financing options as needed.</li></ul>
+  <span style="padding-left:20px;">And the good news is you have been pre-selected for a basic credit offer, making you eligible for an unsecured loan amount of at least $1,000 to be applied toward services provided by ClearChoice {!Recipient.center_name__c}. Now you have options when it comes to taking care of the cost of investing in the smile of a lifetime.</span><br /><span style="display:block;line-height:9px;">&nbsp;</span>
+  <span style="padding-left:20px;">Every life changing event starts with that first step, and you've already begun by making the first call. Why not schedule a no-risk consultation today so you can finally be on your way to the smile you deserve?</span><br /><span style="display:block;line-height:9px;">&nbsp;</span>
+  Sincerely,<br />{!Recipient.Call_Center_Agent__r.name}<br />Dental Implant Consultant<br /><span style="display:block;line-height:15px;">&nbsp;</span>
+  </span>
+  </div></div><p class="break">&nbsp;</p>
+  <div class="bcp_letter" style="width:720px;font-family:Times New Roman;font-size:12pt;">
+  <div style="padding-left:55px;padding-top:38px;width:690px;"><span class="trade_gothic" style="line-height:12px; font-size:9pt; font-weight:normal; font-stretch:condensed; color:#221E1F">
+  ClearChoice Dental Implant Centers are locally owned and operated by licensed local dentists, and are part of a professional affiliation of implant 
+  practices operated by oral surgeons, prosthodontists and restorative dentists across the United States.<br /><br />
+  Qualified Patients can have their procedure in one day after initial workup without additional bone graft surgery. Results May Vary in Individual Cases.<br /><br />
+  ©2014 ClearChoice Dental Implant Centers</span><br /><br />
+  <p style="text-align:center;font-family:georgia, Arial,'Gotham','Gotham',sans-serif; font-size:14pt; color:#1919A3;padding:0;margin:0;"><span class="cali_bold" style="font-size:12pt;"><u>PRESCREEN AND OPT-OUT NOTICE</u>:</span></p>
+  <p style="font-family:georgia, Arial,'Gotham','Gotham',sans-serif; font-size:9pt; color:#1919A3;text-align:left;padding:0;margin:0;"><span class="cali_bold" style="font-size:10pt;">This "prescreen" offer of credit is based on information in your credit report indicating that you meet certain criteria.  This offer is not guaranteed if you do not meet our criteria,  including providing acceptable property as collateral.  If you do not want to receive prescreened offers of credit from this and other companies,  call TransUnion Opt-Out at 1-888-5OPTOUT (<span style="color:#5789AE;">1-888-567-8688</span>); or visit the website at <span style="color:#5789AE;">www.optoutprescreen.com</span>; or write to TransUnion Name Removal Option, P.O. Box 505, Woodlyn, PA 19094-0505.</span></p>
+  </div></div></messaging:htmlEmailBody>
+</messaging:emailTemplate>

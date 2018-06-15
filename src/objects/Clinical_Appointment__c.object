@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Appointment_Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Appointment Description</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Appointment_Filter__c</fullName>
+        <externalId>false</externalId>
+        <label>Appointment Filter</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Prosth</fullName>
+                    <default>false</default>
+                    <label>Prosth</label>
+                </value>
+                <value>
+                    <fullName>Surgical</fullName>
+                    <default>false</default>
+                    <label>Surgical</label>
+                </value>
+                <value>
+                    <fullName>Misc</fullName>
+                    <default>false</default>
+                    <label>Misc</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Arch_Count__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Arch Count</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Border_Color__c</fullName>
+        <defaultValue>&apos;000000&apos;</defaultValue>
+        <externalId>false</externalId>
+        <label>Border Color</label>
+        <length>8</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Calendar_Color__c</fullName>
+        <defaultValue>&apos;fcfbd4&apos;</defaultValue>
+        <externalId>false</externalId>
+        <label>Calendar Color</label>
+        <length>8</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Center_Information__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Center Information</label>
+        <referenceTo>Center_Information__c</referenceTo>
+        <relationshipLabel>Clinical Appointments</relationshipLabel>
+        <relationshipName>Clinical_Appointments</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Clinical_Notes_Form__c</fullName>
+        <externalId>false</externalId>
+        <label>Clinical Notes Form</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>None</fullName>
+                    <default>false</default>
+                    <label>None</label>
+                </value>
+                <value>
+                    <fullName>Surgical Notes Form</fullName>
+                    <default>false</default>
+                    <label>Surgical Notes Form</label>
+                </value>
+                <value>
+                    <fullName>Conversion Notes Form</fullName>
+                    <default>false</default>
+                    <label>Conversion Notes Form</label>
+                </value>
+                <value>
+                    <fullName>Interim Delivery Notes Form</fullName>
+                    <default>false</default>
+                    <label>Interim Delivery Notes Form</label>
+                </value>
+                <value>
+                    <fullName>Post Op Notes Form</fullName>
+                    <default>false</default>
+                    <label>Post Op Notes Form</label>
+                </value>
+                <value>
+                    <fullName>Jig Notes Form</fullName>
+                    <default>false</default>
+                    <label>Jig Notes Form</label>
+                </value>
+                <value>
+                    <fullName>Final Notes Form</fullName>
+                    <default>false</default>
+                    <label>Final Notes Form</label>
+                </value>
+                <value>
+                    <fullName>Try In Notes Form</fullName>
+                    <default>false</default>
+                    <label>Try In Notes Form</label>
+                </value>
+                <value>
+                    <fullName>Prosth Exam Form</fullName>
+                    <default>false</default>
+                    <label>Prosth Exam Form</label>
+                </value>
+                <value>
+                    <fullName>Redo Surgery Form</fullName>
+                    <default>false</default>
+                    <label>Redo Surgery Form</label>
+                </value>
+                <value>
+                    <fullName>General Repair Notes</fullName>
+                    <default>false</default>
+                    <label>General Repair Notes</label>
+                </value>
+                <value>
+                    <fullName>Rework Repair Notes</fullName>
+                    <default>false</default>
+                    <label>Rework Repair Notes</label>
+                </value>
+                <value>
+                    <fullName>Redeliver Notes</fullName>
+                    <default>false</default>
+                    <label>Redeliver Notes</label>
+                </value>
+                <value>
+                    <fullName>Repair Work Notes</fullName>
+                    <default>false</default>
+                    <label>Repair Work Notes</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Doctor_Time_Color__c</fullName>
+        <defaultValue>&apos;e8e57b&apos;</defaultValue>
+        <externalId>false</externalId>
+        <label>Doctor Time Color</label>
+        <length>8</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Highlight_Text_Color__c</fullName>
+        <defaultValue>&apos;0a66e0&apos;</defaultValue>
+        <externalId>false</externalId>
+        <label>Highlight Text Color</label>
+        <length>8</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lab_Days_Before__c</fullName>
+        <externalId>false</externalId>
+        <label>Lab Days Before</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lab_Time__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Lab Time</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Padding_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>Padding Time</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Text_Color__c</fullName>
+        <defaultValue>&apos;000000&apos;</defaultValue>
+        <externalId>false</externalId>
+        <label>Text Color</label>
+        <length>8</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>isFinal_Delivery__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>isFinal Delivery</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isProsth_Exam__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>isProsth Exam</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isRepair__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>isRepair</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isSurgery__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>isSurgery</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isactive__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>isactive</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Clinical Appointment</label>
+    <nameField>
+        <label>Clinical Appointment Name</label>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Clinical Appointments</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

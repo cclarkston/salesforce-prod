@@ -1,0 +1,443 @@
+<apex:page controller="ctrl_finance_options" showheader="false" sidebar="false" action="{!form_printed}">     
+<style type="text/css" media="print">   
+  p.break {
+    page-break-after:always;
+  }
+</style>
+
+<style>
+  p.break {
+    page-break-after:always;
+  }
+  
+  span.loan_header {
+    display:block;
+    text-align:center;
+    font-weight:bold;
+    font-size:20pt;
+    font-family:Times New Roman,georgia,verdana,arial;  
+    padding-bottom:1em;
+  }
+  
+  span.normal_item {
+    font-size:20pt;
+    font-family:Times New Roman,georgia,verdana,arial;    
+    margin-left:10px;    
+    display:inline-block;    
+  }
+  
+  span.underline_section {   
+    border-bottom:1px solid black;
+    display:inline-block;
+    margin-left:5px;
+    font-size:20pt;
+    font-family:Times New Roman,georgia,verdana,arial;        
+  }    
+  span.underline_pre {
+    display:inline-block;
+    width:10px;
+  } 
+  span.section_holder {   
+    display:block;
+    padding-bottom:2em;   
+  }    
+  span.checkbox {  
+    display:inline-block;  
+    border:1px solid black;   
+    width:42px;     
+    margin-right:20px;margin-left:45px;     
+  }
+  span.large_header {
+    display:block;
+    text-align:center;
+    font-weight:normal;
+    font-size:52pt;
+    font-family:Times New Roman,georgia,verdana,arial;  
+    font-style:italic;     
+    padding-bottom:0px;   
+    margin-bottom:0px;
+  }     
+  span.small_header {    
+    padding-top:0px;
+    margin-top:0px;
+    display:block;
+    text-align:center;
+    font-weight:normal;
+    font-size:16pt;
+    font-family:Times New Roman,georgia,verdana,arial;
+    position:relative;   
+    top:-5px;    
+  }    
+  span.center_block {
+    display:block;
+    text-align:center;   
+    font-size:18pt;
+    font-family:Times New Roman,georgia,verdana,arial;
+  }  
+  span.spaced_block  {
+    display:block;  
+    text-align:center;   
+    font-size:18pt;
+    font-family:Times New Roman,georgia,verdana,arial;    
+    letter-spacing: 0.2em;     
+  }    
+  span.normal_block {  
+    display:block;
+    text-align:left;   
+    font-size:18pt;
+    font-family:Times New Roman,georgia,verdana,arial;    
+    padding-left:10px;   
+    padding-right:10px;
+  }  
+  span.paragraph_spacer {  
+    display:inline-block;  
+    width:40px; 
+  }
+</style>
+
+
+  <apex:outputpanel id="main_holder" rendered="{!if(finance_errors,false,true)}" layout="block" style="width:1075px;margin-left:60px;margin-right:60px;">
+  <span class="loan_header">DENTAL IMPLANT FINANCE LLC LOAN</span>    
+  <span class="loan_header">TRUTH IN LENDING DISCLOSURE STATEMENT</span>    
+  <span class="section_holder"><span class="normal_item">Borrower's Name:</span><span class="underline_section" style="width:400px;"><span class="underline_pre"></span>{!patient_name}</span><span style="width:30px;display:inline-block;">&nbsp;</span>
+    <span class="normal_item">Loan No.:</span><span class="underline_section" style="width:270px;"><span class="underline_pre"></span>{!finance_app.name}</span><br />  
+    <span class="normal_item" style="padding-left:240px">(please print)</span></span>
+  <span class="section_holder">  
+    <span class="normal_item">Lender's Name: Dental Implant Finance, LLC</span></span>
+  <span class="section_holder">  
+    <span class="normal_item">Lender's Address:</span><span class="underline_section" style="width:825px;font-size:20pt;"><span class="underline_pre"></span>8350 E. Crescent  Pkwy, Suite 100, Greenwood Village, CO 80111</span></span>        
+  
+  <apex:outputPanel id="big_box" layout="block" style="border:6px solid black;">
+  <br /><br />
+
+  <span class="section_holder"><span class="normal_item">  
+  <table style="border-collapse: collapse; border-spacing: 0px;border:1px solid black;"  border="1" cellpadding="0">
+  <tr>
+    <td width="239px;padding-left:10px;border:1px solid black;"><span class="normal_item"><b>ANNUAL PERCENTAGE RATE</b><br />The cost of your<br />credit as a yearly <br />rate.<br /><span style="display:inline-block;width:222px;text-align:right;padding-right:5px;font-weight:bold;">{!finance_app.interest_rate__c} %</span></span></td>  
+    <td width="239px;padding-left:10px;"><span class="normal_item"><b>FINANCE<br />CHARGE</b><br />The dollar amount<br /> the credit will cost<br /> you.<br /><br /><b>$&nbsp;<apex:outputText value="{0,number,##,##,##0.00}" ><apex:param value="{!finance_app.Finance_Charge__c}" /></apex:outputtext></b></span></td>     
+    <td width="255px;padding-left:10px;"><span class="normal_item">Amount<br />Financed<br />The amount of credit<br />provided to you or on<br /> your behalf.<br /><br /><b>$&nbsp;<apex:outputText value="{0,number,##,##,##0.00}" ><apex:param value="{!finance_app.Amount_Financed__c}" /></apex:outputtext></b></span></td>    
+    <td width="285px;padding-left:10px;"><span class="normal_item">Total of<br />Payments<br /><span style="line-height:94%">The amount you will<br />have paid after you<br /> have made all payments<br />as scheduled.</span><br /><br /><b>$&nbsp;<apex:outputText value="{0,number,##,##,##0.00}" ><apex:param value="{!(finance_app.Amount_Financed__c + finance_app.Finance_Charge__c)}" /></apex:outputtext></b></span></td></tr>
+  </table></span>
+  </span>    
+  
+  <span class="section_holder"> 
+    <span class="normal_item"><b>Your payment schedule will be :</b></span>   
+  </span>  
+  
+  <span class="section_holder"><span class="normal_item">  
+  <table style="border-collapse: collapse; border-spacing: 0px;border:1px solid black;"  border="1" cellpadding="0">
+  <tr>
+    <td width="260px;padding-left:10px;"><span class="normal_item">Number of Payments</span></td>  
+    <td width="260px;padding-left:10px;"><span class="normal_item">Amount of Payments</span></td>     
+    <td width="498px;padding-left:10px;"><span class="normal_item">When Payments are Due</span></td>    
+  </tr>
+  <tr>    
+    <td style="text-align:right;padding-right:10px;">{!finance_app.number_of_payments__c}</td> 
+    <td style="text-align:right;padding-right:10px;">$ <apex:outputText value="{0,number,##,##,##0.00}" ><apex:param value="{!finance_app.Per_Payment_Amount__c}" /></apex:outputtext></td>     
+    <td><span class="normal_item">Monthly beginning {!first_payment_due}</span></td>
+  </tr>   
+  <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>    
+  </table></span>
+  </span> 
+  
+  <span class="section_holder"> 
+  <span class="normal_item"><span style="font-weight:bold;padding-right:5px;display:inline-block;">Prepayment:</span>If you pay off all or part of the loan early, you will not have to pay a penalty.</span>
+  </span>    
+  
+  <span class="section_holder"> 
+  <span class="normal_item">See your loan documents for any additional information about nonpayment, default, any required repayment in full before the scheduled date, and prepayment refunds and penalties.</span>
+  </span>   
+  </apex:outputPanel>      
+  <apex:outputPanel id="small_box" layout="block" style="border:6px solid black;border-top:0"><span class="normal_item">&nbsp;</span></apex:outputpanel>
+  <br />
+  <span class="section_holder"> 
+  <span class="normal_item"><b>Itemization of the Amount Financed of $ <apex:outputText value="{0,number,##,##,##0.00}" ><apex:param value="{!finance_app.Amount_Financed__c}" /></apex:outputtext></b></span>
+  </span>   
+  
+  <span class="section_holder"> 
+  <span class="normal_item">$ <apex:outputText value="{0,number,##,##,##0.00}" ><apex:param value="{!finance_app.Amount_Financed__c}" /></apex:outputtext> Amount paid to {!legal_center_name} on your behalf.</span>
+  </span>   
+  
+  <span class="section_holder"> 
+  <span class="normal_item">I hearby acknowledge that I have received a copy of this Truth in Lending Disclosure Statement before signing the Promissory Note.</span>
+  </span>   
+    
+  <span class="section_holder"> 
+    <span class="normal_item">      
+      <span style="border-bottom:1px solid black;display:inline-block;width:470px;">&nbsp;</span>   
+      <span style="display:inline-block;width:150px;">&nbsp;</span> 
+      <span style="border-bottom:1px solid black;display:inline-block;width:325px;"><span class="underline_pre" style="padding-left:20px;">&nbsp;</span>{!today_date}</span>   
+    <br /> 
+    <span style="display:inline-block;width:635px;">Borrower's Signature</span>Date       
+    </span>    
+  </span>      
+  <p class="break">&nbsp;</p>   <br /><br /><br />
+  <span class="section_holder" style="text-align:right;">
+    <span class="normal_item" style="font-weight:bold;">Loan No. <span class="underline_section" style="width:150px;text-align:left;"><span class="underline_pre"></span>{!finance_app.name}</span></span>  
+  </span>
+  
+  <span class="section_holder" style="text-align:center;">
+    <span class="normal_item" style="font-weight:bold;">PROMISSORY NOTE</span>
+  </span><br /><br /><br />
+
+  <span class="section_holder">   
+    <span class="normal_item"> 
+      <span class="underline_section" style="width:300px;"><span class="underline_pre"></span>{!today_date}</span>      
+      <span style="display:inline-block;width:50px;">&nbsp;</span>  
+      <span class="underline_section" style="width:400px;"><span class="underline_pre"></span>{!center_city}</span>,
+      <span style="display:inline-block;width:5px;">&nbsp;</span>  
+      <span class="underline_section" style="width:200px;"><span class="underline_pre"></span>{!center_state}</span> <br />   
+      <span style="padding-left:100px;">[Date]</span>  
+      <span style="padding-left:370px;">[City]</span>   
+      <span style="padding-left:240px;">[State]</span>
+    </span>    
+  </span> <br /><br />
+  
+  <span class="section_holder">
+    <span class="normal_item">WHEREAS Borrower has made a down payment on the cost of a certain customized dental treatment plan issued by {!legal_center_name}, d.b.a. Clear Choice Dental Implant Center  (the “Dental Practice”) and wishes to finance the balance of the cost;  and</span>
+  </span>  
+ 
+  <span class="section_holder">
+    <span class="normal_item">WHEREAS Lender has agreed to make a loan to Borrower and to allow Borrower to repay the loan in monthly installments under the terms of this Promissory Note,</span>
+  </span>
+
+  <span class="section_holder">
+    <span class="normal_item">The Borrower (“I,” “me” or “my”) and Lender agree as follows:</span>
+  </span><br /><br />
+  
+  <span class="section_holder">  
+    <span class="normal_item">  
+      <b><span class="paragraph_spacer">1.</span>BORROWER’S PROMISE TO PAY</b><br />
+      <span class="paragraph_spacer">&nbsp;</span>In return for a loan that I have received, I promise to pay U.S. $ <apex:outputText value="{0,number,##,##,##0.00}" ><apex:param value="{!finance_app.Amount_Financed__c}" /></apex:outputtext> (this amount is called “Principal”), plus interest, to the order of the Lender.  The Lender is Dental Implant Finance, LLC.  I will make all payments under this Note in the form of certified funds, by credit card, or, if available, by automatic debit.<br />
+      <span class="paragraph_spacer">&nbsp;</span>I understand that the Lender may transfer this Note.  The Lender or anyone who takes this Note by transfer and who is entitled to receive payments under this Note is called the “Note Holder.”  I agree that Lender may pay the loan proceeds directly to the Dental Practice.
+    </span>    
+  </span>   
+  
+  <span class="section_holder">  
+    <span class="normal_item">  
+      <b><span class="paragraph_spacer">2.</span>INTEREST</b><br />
+      <span class="paragraph_spacer">&nbsp;</span>Interest will be charged on unpaid principal until the full amount of Principal has been paid.  I will pay interest at a yearly rate of 4.9%.<br />
+      <span class="paragraph_spacer">&nbsp;</span>The interest rate required by this Section 2 is the rate I will pay both before and after any default described in Section 6(B) of this Note.
+    </span>    
+  </span>     
+
+  <span class="section_holder">  
+    <span class="normal_item">  
+      <b><span class="paragraph_spacer">3.</span>PAYMENTS</b><br />  
+      <span class="paragraph_spacer">&nbsp;</span><b>(A)&nbsp;&nbsp;Time and Place of Payments</b><br />
+      <span class="paragraph_spacer">&nbsp;</span>I will pay principal and interest by making a payment every month.<br />
+      <span class="paragraph_spacer">&nbsp;</span>I will make my monthly payment on the {!loan_date_daywsuffix} day of each month beginning on {!first_payment_due}.  I will make these payments every month until I have paid all of the principal and interest and any other charges described below that I may owe under this Note.  Each monthly payment will be applied as of its scheduled due date. If, on {!last_payment_due}, I still owe amounts under this Note, I will pay those amounts in full on that date, which is called the “Maturity Date.”<br />   
+      <span class="paragraph_spacer">&nbsp;</span>I will make my monthly payments via<br />      
+      <span class="paragraph_spacer" style="width:100px;"></span>❑   Credit Card<span style="display:inline-block;width:50px;">&nbsp;</span>❑ ACH  (select one)<br /><br /><br />                     
+      <span class="paragraph_spacer">&nbsp;</span><b>(B)&nbsp;&nbsp;Amount of Monthly Payments</b><br />
+      <span class="paragraph_spacer">&nbsp;</span>My monthly payment will be in the amount of U.S. $ <apex:outputText value="{0,number,##,##,##0.00}" ><apex:param value="{!finance_app.Per_Payment_Amount__c}" /></apex:outputtext>.<br />  
+    </span>    
+  </span>    
+  
+  <span class="section_holder">  
+    <span class="normal_item">  
+      <b><span class="paragraph_spacer">4.</span>BORROWER’S RIGHT TO PREPAY</b><br />
+      <span class="paragraph_spacer">&nbsp;</span>I have the right to make payments of Principal at any time before they are due.  A payment of Principal only is known as a “Prepayment.”  When I make a Prepayment, I will tell the Note Holder in writing that I am doing so.  I may not designate a payment as a Prepayment if I have not made all the monthly payments due under the Note.<br />
+      <span class="paragraph_spacer">&nbsp;</span>I may make a full Prepayment or partial Prepayments without paying a Prepayment charge.  The Note Holder will use my Prepayments to reduce the amount of Principal that I owe under this Note.  If I make a partial Prepayment, there will be no changes in the due date or in the amount of my monthly payment unless the Note Holder agrees in writing to those changes.<br />
+    </span>    
+  </span> 
+
+  <span class="section_holder">  
+    <span class="normal_item">  
+      <b><span class="paragraph_spacer">5.</span>LOAN CHARGES</b><br />
+      <span class="paragraph_spacer">&nbsp;</span>If a law, which applies to this loan and which sets maximum loan charges, is finally interpreted so that the interest or other loan charges collected or to be collected in connection with this loan exceed the permitted limits, then:  (a) any such loan charge shall be reduced by the amount necessary to reduce the charge to the permitted limit; and (b) any sums already collected from me which exceeded permitted limits will be refunded to me.  The Note Holder may choose to make this refund by reducing the Principal I owe under this Note or by making a direct payment to me.  If a refund reduces Principal, the reduction will be treated as a partial Prepayment.<br />
+    </span>    
+  </span> 
+
+  <span class="section_holder">  
+    <span class="normal_item">  
+      <b><span class="paragraph_spacer">6.</span>BORROWER’S FAILURE TO PAY AS REQUIRED</b><br />  
+      <span class="paragraph_spacer">&nbsp;</span><b>(A)&nbsp;&nbsp;Default</b><br />
+      <span class="paragraph_spacer">&nbsp;</span>If I do not pay the full amount of each monthly payment on the date it is due, I will be in default.<br />     
+      <span class="paragraph_spacer">&nbsp;</span><b>(B)&nbsp;&nbsp;Notice of Default</b><br />
+      <span class="paragraph_spacer">&nbsp;</span>If I am in default, the Note Holder may send me a written notice telling me that if I do not pay the overdue amount by a certain date, the Note Holder may require me to pay immediately the full amount of Principal which has not been paid and all the interest that I owe on that amount or may elect other remedies.<br />     
+      <span class="paragraph_spacer">&nbsp;</span><b>(C)&nbsp;&nbsp;No Waiver By Note Holder</b><br />
+      <span class="paragraph_spacer">&nbsp;</span>Even if, at a time when I am in default, the Note Holder does not require me to pay immediately in full as described above, the Note Holder will still have the right to do so if I am in default at a later time.<br />     
+      <span class="paragraph_spacer">&nbsp;</span><b>(D)&nbsp;&nbsp;Payment of Note Holder’s Costs and Expenses</b><br />
+      <span class="paragraph_spacer">&nbsp;</span>If the Note Holder has required me to pay immediately in full as described above, the Note Holder will have the right to be paid back by me for all of its costs and expenses in enforcing this Note to the extent not prohibited by applicable law.  Those expenses include, for example, reasonable attorneys’ fees.<br />     
+    </span>    
+  </span>  
+
+  <span class="section_holder">  
+    <span class="normal_item">  
+      <b><span class="paragraph_spacer">7.</span>GIVING OF NOTICES</b><br />
+      <span class="paragraph_spacer">&nbsp;</span>Unless applicable law requires a different method, any notice that must be given to me under this Note will be given by delivering it or by mailing it by first class mail to me at my address below or at a different address if I give the Note Holder a notice of my different address.<br />
+      <span class="paragraph_spacer">&nbsp;</span>Any notice that must be given to the Note Holder under this Note will be given by delivering it or by mailing it by first class mail to the Note Holder at the address stated in Section 3(A) above or at a different address if I am given a notice of that different address.<br />
+    </span>    
+  </span> 
+
+  <span class="section_holder">  
+    <span class="normal_item">  
+      <b><span class="paragraph_spacer">8.</span>OBLIGATIONS OF PERSONS UNDER THIS NOTE</b><br />
+      <span class="paragraph_spacer">&nbsp;</span>If more than one person signs this Note, each person is fully and personally obligated to keep all of the promises made in this Note, including the promise to pay the full amount owed.  Any person who is a guarantor, surety or endorser of this Note is also obligated to do these things.  Any person who takes over these obligations, including the obligations of a guarantor, surety or endorser of this Note, is also obligated to keep all of the promises made in this Note.  The Note Holder may enforce its rights under this Note against each person individually or against all of us together.  This means that any one of us may be required to pay all of the amounts owed under this Note.<br />
+    </span>    
+  </span> 
+
+  <span class="section_holder">  
+    <span class="normal_item">  
+      <b><span class="paragraph_spacer">9.</span>WAIVERS</b><br />
+      <span class="paragraph_spacer">&nbsp;</span>I and any other person who has obligations under this Note waive the rights of Presentment and Notice of Dishonor. “Presentment” means the right to require the Note Holder to demand payment of amounts due.  “Notice of Dishonor” means the right to require the Note Holder to give notice to other persons that amounts due have not been paid.<br />
+    </span>    
+  </span> 
+
+  <span class="section_holder">
+    <span class="normal_item">WITNESS THE HAND(S) AND SEAL(S) OF THE UNDERSIGNED.</span>
+  </span>    
+  
+  <span class="section_holder" style="text-align:right;">    
+    <span class="normal_item">  
+      <span class="underline_section" style="width:600px;">&nbsp;</span><span style="display:inline-block;width:50px;">(Seal)</span><br />  
+      <span style="display:inline-block;width:650px;text-align:left;">Borrower</span><br /><br />
+      <span class="underline_section" style="width:600px;">&nbsp;</span><span style="display:inline-block;width:50px;">&nbsp;</span><br />  
+      <span style="display:inline-block;width:650px;text-align:left;">Street Address</span><br /><br /> 
+      <span class="underline_section" style="width:600px;">&nbsp;</span><span style="display:inline-block;width:50px;">&nbsp;</span><br />  
+      <span style="display:inline-block;width:650px;text-align:left;">City, State and Zip Code</span><br /><br />
+    </span>
+  </span><br /><br />
+  
+  <span class="section_holder" style="text-align:right;">    
+    <span class="normal_item">  
+      <span class="underline_section" style="width:600px;">&nbsp;</span><span style="display:inline-block;width:50px;">(Seal)</span><br />  
+      <span style="display:inline-block;width:650px;text-align:left;">Borrower</span><br /><br />
+      <span class="underline_section" style="width:600px;">&nbsp;</span><span style="display:inline-block;width:50px;">&nbsp;</span><br />  
+      <span style="display:inline-block;width:650px;text-align:left;">Street Address</span><br /><br /> 
+      <span class="underline_section" style="width:600px;">&nbsp;</span><span style="display:inline-block;width:50px;">&nbsp;</span><br />  
+      <span style="display:inline-block;width:650px;text-align:left;">City, State and Zip Code</span><br /><br />
+    </span>
+  </span><br /><br />
+
+  <apex:outputpanel rendered="{!finance_app.Itemization_Requested__c}">
+  <p class="break">&nbsp;</p>    
+  
+  <span class="section_holder"> 
+  <span class="normal_item"><span style="display:inline-block;width:50px;">&nbsp;</span><b>$<apex:outputText value="{0,number,##,##,##0.00}" ><apex:param value="{!finance_app.Treatment_Value__c}" /></apex:outputtext> treatment plan;  
+     $<apex:outputText value="{0,number,##,##,##0.00}" ><apex:param value="{!(finance_app.SpringStone_Financed__c + finance_app.CareCredit_Finance__c + finance_app.Cash_Down_Payment__c)}" /></apex:outputtext> down payment;    
+     $<apex:outputText value="{0,number,##,##,##0.00}" ><apex:param value="{!finance_app.Amount_Financed__c}" /></apex:outputtext> financed with Dental Implant Finance, LLC 
+     </b></span>
+  </span>   
+
+  <span class="section_holder">  
+    <span class="normal_item"><span style="display:inline-block;width:50px;">&nbsp;</span>Itemization of the Amount Financed of $ <apex:outputText value="{0,number,##,##,##0.00}" ><apex:param value="{!finance_app.Amount_Financed__c}" /></apex:outputtext> </span>  
+  </span>    
+  
+  <span class="section_holder">  
+    <span class="normal_item"><span style="display:inline-block;width:50px;">&nbsp;</span>$<apex:outputText value="{0,number,##,##,##0.00}" ><apex:param value="{!finance_app.Amount_Financed__c}" /></apex:outputtext> Amount paid to {!legal_center_name} on your behalf</span>  
+  </span>     
+  </apex:outputpanel>
+        
+  <p class="break">&nbsp;</p>        
+  <span class="large_header">ClearChoice</span>           
+  <span class="small_header"><span style="font-style:italic;">America's </span> #1 <span style="font-style:italic;">Choice</span> For Dental Implants</span><br /><br /><br /><br />
+  <span class="spaced_block">AUTHORIZATION AGREEMENT FOR PREAUTHORIZED ELECTRONIC FUND TRANSFERS /ACH DEBITS)</span><br /><br />       
+      
+  <span class="normal_block">In order to make payments on that certain loan made by Dental Implant Finance, LLC to me/us, I (we) hereby authorize  Dental Implant Finance, LLC to initiate debits entries to my (our)</span>    
+  <span class="normal_block" style="padding-top:1em;padding-left:90px;">❑   Checking Account<span style="display:inline-block;width:50px;">&nbsp;</span>❑ Savings Account  (select one) </span><br /><br />  
+  <span class="normal_block">indicated below at the depository financial institution named below (hereinafter called the ”Depository”) and to debit the same to such account.  The debits will be made in the amount of  $ {!finance_app.per_payment_amount__c} on the {!loan_date_daywsuffix} day of each month starting {!first_payment_due} until the loan is paid in full.</span><br />
+  <span class="normal_block">Depository Name:<span class="underline_section" style="width:375px;">&nbsp;</span><span style="display:inline-block;width:40px;">&nbsp;</span>Branch:<span class="underline_section" style="width:375px;">&nbsp;</span></span><br />
+  <span class="normal_block">City:<span class="underline_section" style="width:450px;">&nbsp;</span>    
+    <span style="display:inline-block;width:20px;">&nbsp;</span> 
+    State:<span class="underline_section" style="width:225px;">&nbsp;</span>   
+    <span style="display:inline-block;width:20px;">&nbsp;</span>      
+    Zip:<span class="underline_section" style="width:155px;">&nbsp;</span></span><br />
+  <span class="normal_block">Routing Number:<span class="underline_section" style="width:330px;">&nbsp;</span><span style="display:inline-block;width:30px;">&nbsp;</span>Account Number:<span class="underline_section" style="width:340px;">&nbsp;</span></span><br /><br />  
+  <span class="normal_block">This authorization is to remain in full force and effect until Dental Implant Finance , LLC has received written notification from  me (or either of us) of its termination in such time and in such manner as to afford Dental Implant Finance, LLC and the Depository a reasonable opportunity to act on it.  Written  notification to Dental Implant Finance, LLC shall be sent to : 8350 E. Crescent  Pkwy, Suite 100, Greenwood Village, CO 80111 Attn: Elle Simms, or such other address as Dental Implant Finance, LLC may subsequently provide to you.</span><br />
+  <span class="normal_block">By signing below, I (We) authorize the automatic debits described above and hereby acknowledge receipt of a copy of this Authorization.</span><br /><br /><br />
+  <span class="normal_block">Name:<span class="underline_section" style="width:450px;">&nbsp;</span>
+    <span style="display:inline-block;width:40px;">&nbsp;</span>      
+    Loan Number:<span class="underline_section" style="width:270px;"><span class="underline_pre"></span>{!finance_app.name}</span><br />
+    <span style="padding-left:100px;">(Please Print)</span></span><br /><br />
+  <span class="normal_block">Signature:<span class="underline_section" style="width:450px;">&nbsp;</span>     
+    <span style="display:inline-block;width:40px;">&nbsp;</span>      
+    Date:<span class="underline_section" style="width:270px;">&nbsp;</span></span><br /><br /><br /><br />
+    
+  <span class="normal_block">Name:<span class="underline_section" style="width:450px;">&nbsp;</span>
+    <span style="display:inline-block;width:40px;">&nbsp;</span>      
+    Loan Number:<span class="underline_section" style="width:270px;"><span class="underline_pre"></span>{!finance_app.name}</span><br />
+    <span style="padding-left:100px;">(Please Print)</span></span><br /><br />
+  <span class="normal_block">Signature:<span class="underline_section" style="width:450px;">&nbsp;</span>     
+    <span style="display:inline-block;width:40px;">&nbsp;</span>      
+    Date:<span class="underline_section" style="width:270px;">&nbsp;</span></span>
+
+  <p class="break">&nbsp;</p><br />  
+  <span class="section_holder">
+  <span class="normal_item"><b>Dental Implant Finance, LLC</b></span></span><br /><br /><br /><br />
+  
+  <span class="large_header" style="font-weight:bold;font-size:30pt;">AUTOMATIC BILLING AUTHORIZATION FORM</span><br /><br /><br /><br />
+  
+  <span class="section_holder">
+    <span class="normal_item">Company Name:<span class="underline_section" style="width:450px;"><span class="underline_pre">&nbsp;</span>Dental Implant Finance, LLC</span>   
+      <span style="display:inline-block;width:50px;">&nbsp;</span>  
+       Loan Number:<span class="underline_section" style="width:180px;"><span class="underline_pre">&nbsp;</span>{!finance_app.name}</span>   
+    </span>
+  </span><br /><br /><br />
+
+  
+  <apex:outputPanel layout="block" style="border:1px solid black;">
+  <br /><br />
+  <span class="section_holder" style="text-align:center;">
+  <span class="normal_item" ><b>FROM CREDIT CARD:</b></span></span>
+
+  <span class="section_holder">
+  <span class="normal_item"><span class="paragraph_spacer">&nbsp;</span>I authorize you to charge my monthly payments for the transaction identified above directly to the credit card(s) listed below:</span></span><br /><br />
+  
+  <span class="section_holder">
+  <span class="normal_item">
+  <table><tr>
+    <td style="width:475px;"><span style="font-weight:bold;font-size:16pt;">PRIMARY CREDIT CARD ACCOUNT</span><br /><br />
+      <span class="underline_section" style="width:450px;">&nbsp;</span><br />
+      <span style="font-size:14pt;padding-left:5px;">Name on credit card (exactly as printed)</span><br /><br />
+      <span class="underline_section" style="width:450px;">&nbsp;</span><br />
+      <span style="font-size:14pt;padding-left:5px;">Billing Address for credit card (Street, Apt. #)</span><br /><br />
+      <span class="underline_section" style="width:450px;">&nbsp;</span><br />
+      <span style="font-size:14pt;padding-left:5px;">City, State, Zip</span><br /><br /> 
+      <span class="underline_section" style="width:450px;">&nbsp;</span><br />
+      <span style="font-size:14pt;padding-left:5px;">Credit Card number<span style="display:inline-block;width:125px;"></span>Expiration Date</span>
+    </td>
+    <td style="width:50px;">&nbsp;</td>  
+    <td style="width:475px;"><span style="font-weight:bold;font-size:16pt;">SECONDARY CREDIT CARD ACCOUNT</span><br /><br />
+      <span class="underline_section" style="width:450px;">&nbsp;</span><br />
+      <span style="font-size:14pt;padding-left:5px;">Name on credit card (exactly as printed)</span><br /><br />
+      <span class="underline_section" style="width:450px;">&nbsp;</span><br />
+      <span style="font-size:14pt;padding-left:5px;">Billing Address for credit card (Street, Apt. #)</span><br /><br />
+      <span class="underline_section" style="width:450px;">&nbsp;</span><br />
+      <span style="font-size:14pt;padding-left:5px;">City, State, Zip</span><br /><br />
+      <span class="underline_section" style="width:450px;">&nbsp;</span><br />
+      <span style="font-size:14pt;padding-left:5px;">Credit Card number<span style="display:inline-block;width:125px;"></span>Expiration Date</span></td>
+  </tr></table><br /><br />   
+  
+  <span class="paragraph_spacer">&nbsp;</span>❑<span style="font-size:16pt;padding-left:5px;">Bill all charges to the above card(s).  These charges will be made in the fixed amount of $ <apex:outputText value="{0,number,##,##,##0.00}" ><apex:param value="{!finance_app.Per_Payment_Amount__c}" /></apex:outputtext> on the {!loan_date_daywsuffix} day of<br /><span style="padding-left:70px;">&nbsp;</span>each month beginning on {!first_payment_due} until the loan is paid in full.</span><br />
+  <span class="paragraph_spacer">&nbsp;</span>❑<span style="font-size:16pt;padding-left:5px;">Bill all charges to the above card(s).  Since the payment amount may vary, I will receive written notification of the<br /><span style="padding-left:70px;">&nbsp;</span>amount and date of the net charge at least 10 days prior to each scheduled transaction date.</span><br /><br /><br />
+  
+  <span style="font-size:16pt;">I agree that this authorization is valid until I provide you with written cancellation.  I also acknowledge receiving a copy of this authorization.</span><br /><br /><br /><br />
+  <table><tr>
+    <td style="width:475px;"><span class="underline_section" style="width:450px;">&nbsp;</span><br />
+      <span style="font-size:14pt;padding-left:5px;">Signature<span style="display:inline-block;width:250px;"></span>Date</span>
+    </td>
+    <td style="width:50px;">&nbsp;</td>  
+    <td style="width:475px;"><span class="underline_section" style="width:450px;">&nbsp;</span><br />
+      <span style="font-size:14pt;padding-left:5px;">Signature<span style="display:inline-block;width:250px;"></span>Date</span></td>
+  </tr></table>
+  
+  </span></span>
+
+
+  </apex:outputpanel>
+  
+  </apex:outputpanel>         
+
+  <apex:outputPanel id="error_holder" rendered="{!finance_errors}">   
+    <apex:outputtext value="{!finance_error_msg}" rendered="{!finance_errors}" escape="false" />             
+  </apex:outputpanel>  
+
+
+
+
+
+
+
+</apex:page>

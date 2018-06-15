@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>ClearChoice Center Part</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>ClearChoice Center Parts</value>
+    </caseValues>
+    <fields>
+        <label><!-- Center --></label>
+        <name>Center__c</name>
+        <relationshipLabel><!-- ClearChoice Center Parts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Cost --></label>
+        <name>Cost__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Injectable? --></label>
+        <name>Injectable__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Active --></label>
+        <name>Is_Active__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter the cost, per unit purchased, from the invoice of the newly received shipment. --></help>
+        <label><!-- New Shipment - Cost (per unit) --></label>
+        <name>New_Shipment_Cost__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter the quantity of product received in the new shipment (NOT the new total after adding this to inventory). --></help>
+        <label><!-- New Shipment - Quantity --></label>
+        <name>New_Shipment_Quantity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Master Part --></label>
+        <name>Part__c</name>
+        <relationshipLabel><!-- ClearChoice Center Parts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Price --></label>
+        <name>Price__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quantity --></label>
+        <name>Quantity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+    </fields>
+    <layouts>
+        <layout>ClearChoice Center Part Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Receive Inventory --></label>
+            <section>Receive Inventory</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- If you provide the cost for an item received in a new shipment, you must also add provide the quantity received. --></errorMessage>
+        <name>New_Cost_requires_New_Quantity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The new cost provided seems like it may be a mistake. If the per-unit cost for this item really has changed by more than 30% of the previous cost, please contact IT to make the inventory change for you. --></errorMessage>
+        <name>New_Cost_too_different</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If you provide the quantity received in a new shipment, you must also provide the cost (per unit) for the item received. --></errorMessage>
+        <name>New_Quantity_requires_New_Cost</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The number entered must be greater than zero. --></errorMessage>
+        <name>New_quantity_must_be_greater_than_zero</name>
+    </validationRules>
+</CustomObjectTranslation>

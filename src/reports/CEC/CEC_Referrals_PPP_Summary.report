@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Consult_Inventory__c$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Scheduled_Patient__c.Full_Name__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Scheduled_Time__c</field>
+    </columns>
+    <description>CEC Private Practice Patient Referral report summarized by referring staff</description>
+    <filter>
+        <criteriaItems>
+            <column>Consult_Inventory__c$Scheduled_Time__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Consult_Inventory__c$Consult_Room__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>GLO Room 1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Consult_Inventory__c$Scheduled_Patient__c.Referred_By__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Consult_Inventory__c$Scheduled_Patient__c.Referred_By__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>CEC Referrals (PPP Summary)</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Consult_Inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Consult_Inventory__c$Apt_Datetime__c</dateColumn>
+        <interval>INTERVAL_THISMONTH</interval>
+    </timeFrameFilter>
+</Report>

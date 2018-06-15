@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Refund_Request__c.Refund_Status__c</field>
+    </columns>
+    <columns>
+        <field>Refund_Request__c.Opportunity__c</field>
+    </columns>
+    <columns>
+        <field>CUST_CREATED_NAME</field>
+    </columns>
+    <columns>
+        <field>CUST_CREATED_DATE</field>
+    </columns>
+    <columns>
+        <field>Refund_Request__c.Request_Type__c</field>
+    </columns>
+    <columns>
+        <field>Refund_Request__c.Request_Status__c</field>
+    </columns>
+    <columns>
+        <field>Refund_Request__c.Reason_for_request__c</field>
+    </columns>
+    <columns>
+        <field>Refund_Request__c.Amount_of_Refund__c</field>
+    </columns>
+    <description>shows all open refund requests</description>
+    <format>Tabular</format>
+    <name>Open Refund Request</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Refund_Request__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

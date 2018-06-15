@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AnalyticSnapshot xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Captures the Consult details where Consult Completed Date = Today, for Center Dashboard reporting.
+
+Created by OpFocus, Summer 2009</description>
+    <mappings>
+        <sourceField>Account.Center_Location__c</sourceField>
+        <sourceType>tabular</sourceType>
+        <targetField>CC_Snapshot__c.Center_Location__c</targetField>
+    </mappings>
+    <mappings>
+        <sourceField>USERS.NAME</sourceField>
+        <sourceType>tabular</sourceType>
+        <targetField>CC_Snapshot__c.Consult_Owner__c</targetField>
+    </mappings>
+    <mappings>
+        <sourceField>ACCOUNT.NAME</sourceField>
+        <sourceType>tabular</sourceType>
+        <targetField>CC_Snapshot__c.Consult_Name__c</targetField>
+    </mappings>
+    <mappings>
+        <sourceField>Account.Consult_Completed__c</sourceField>
+        <sourceType>tabular</sourceType>
+        <targetField>CC_Snapshot__c.Consult_Completed__c</targetField>
+    </mappings>
+    <mappings>
+        <sourceField>Account.Consult_Completed_Date__c</sourceField>
+        <sourceType>tabular</sourceType>
+        <targetField>CC_Snapshot__c.Consult_Completed_Date__c</targetField>
+    </mappings>
+    <mappings>
+        <sourceField>Account.Consult_Result__c</sourceField>
+        <sourceType>tabular</sourceType>
+        <targetField>CC_Snapshot__c.Consult_Result__c</targetField>
+    </mappings>
+    <mappings>
+        <sourceField>ACCOUNT_ID</sourceField>
+        <sourceType>tabular</sourceType>
+        <targetField>CC_Snapshot__c.Consult__c</targetField>
+    </mappings>
+    <mappings>
+        <sourceField>Account.Is_Traveler__c</sourceField>
+        <sourceType>tabular</sourceType>
+        <targetField>CC_Snapshot__c.Traveler__c</targetField>
+    </mappings>
+    <mappings>
+        <sourceField>User.Traveler_Until__c</sourceField>
+        <sourceType>tabular</sourceType>
+        <targetField>CC_Snapshot__c.Consult_Owner_Traveler_Until__c</targetField>
+    </mappings>
+    <mappings>
+        <sourceField>User.User_Role__c</sourceField>
+        <sourceType>tabular</sourceType>
+        <targetField>CC_Snapshot__c.Consult_Owner_Role__c</targetField>
+    </mappings>
+    <name>Consult Completion Snapshot</name>
+    <runningUser>mmcguckin@clearchoice.com</runningUser>
+    <sourceReport>Reports_Supporting_Excel/Consults_Completed_Today_w_Exclusions</sourceReport>
+    <targetObject>CC_Snapshot__c</targetObject>
+</AnalyticSnapshot>

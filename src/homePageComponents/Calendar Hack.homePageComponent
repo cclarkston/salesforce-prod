@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HomePageComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <body>&lt;SCRIPT type=text/javascript src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js&quot;&gt;&lt;/SCRIPT&gt;
+&lt;SPAN id=hideMyParent&gt;Test&lt;/SPAN&gt;
+&lt;SCRIPT type=text/javascript&gt; $(document).ready(function() {
+var startYear=1910;
+var endYear=2015;
+var optionsString=&apos;&apos;; if(startYear&lt;endYear){ for(i=startYear;i&lt;endYear+1;i++){ optionsString += &quot;&lt;option value=\&quot;&quot;+i+&quot;\&quot;&gt;&quot;+i+&quot;&lt;/option&gt;&quot;; } $(&apos;#calYearPicker&apos;).html(optionsString); } $(&apos;#sidebarDiv #hideMyParent&apos;).parent().parent().hide(); });&lt;/SCRIPT&gt;</body>
+    <pageComponentType>htmlArea</pageComponentType>
+    <width>narrow</width>
+</HomePageComponent>

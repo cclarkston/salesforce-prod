@@ -1,0 +1,165 @@
+<apex:page standardController="Campaign" cache="false" standardStylesheets="true" showHeader="false" sidebar="false" extensions="campaign_statistics">
+    <div class="bPageBlock brandSecondaryBrd bDetailBlock secondaryPalette">
+        <table class="detailList" border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td class="labelCol">Total Prospective Patient</td>
+                    <td class="dataCol col02 inlineEditLock" id="cpn17_ilecell"><div id="cpn17_ileinner">
+                    <apex:outputText value="{!Campaign.NumberOfLeads}" />
+                    </div></td>
+                    <td class="labelCol">Num Total Prostho Exam</td>
+                    <td class="dataCol inlineEditLock" id="cpn21_ilecell"><div id="cpn21_ileinner">
+                    <apex:outputText value="{!Campaign.NumberOfOpportunities}" />
+                    </div></td>
+                </tr>
+                <tr>
+                    <td class="labelCol">Total Contacts</td>
+                    <td class="dataCol col02 inlineEditLock" id="cpn19_ilecell"><div id="cpn19_ileinner">
+                    <apex:outputText value="{!Campaign.NumberOfContacts}" />
+                    </div></td>
+                    <td class="labelCol">Total Value Prostho Exam</td>
+                    <td class="dataCol inlineEditLock" id="cpn23_ilecell" ><div id="cpn23_ileinner">
+                    <apex:outputText value="${0,number, #,###,##0}" >
+                        <apex:param value="{!Campaign.AmountAllOpportunities}" />
+                    </apex:outputText>
+                    </div></td>
+                </tr>
+                <tr>
+                    <td class="labelCol">Total Guests</td>
+                    <td class="dataCol col02 inlineEditLock" id="00N40000002G5H9_ilecell"><div id="00N40000002G5H9_ileinner">
+                    <apex:outputText value="{!Campaign.Total_Guests__c}" />
+                    </div></td>
+                    <td class="labelCol">Num Won Prostho Exam</td>
+                    <td class="dataCol inlineEditLock" id="cpn22_ilecell" ><div id="cpn22_ileinner">                    
+                    <apex:outputText value="{!Campaign.NumberOfWonOpportunities}" />
+                    </div></td>
+                </tr>
+                <tr>
+                    <td class="labelCol">Total Registered</td>
+                    <td class="dataCol col02 inlineEditLock" id="00N40000002G4s4_ilecell"><div id="00N40000002G4s4_ileinner">                    
+                    <apex:outputText value="{!Campaign.Total_Registered__c}" />
+                    </div></td>
+                    <td class="labelCol">Total Value Won Prostho Exam</td>
+                    <td class="dataCol inlineEditLock" id="cpn24_ilecell" ><div id="cpn24_ileinner">
+                    <apex:outputText value="${0,number, #,###,##0}" >
+                        <apex:param value="{!Campaign.AmountWonOpportunities}" />
+                    </apex:outputText>
+                    </div></td>
+                </tr>
+                <tr>
+                    <td class="labelCol">Total Confirmed Guests</td>
+                    <td class="dataCol col02 inlineEditLock" id="00N40000002G5H9_ilecell"><div id="00N40000002G5H9_ileinner">
+                    <apex:outputText value="{!Campaign.Total_Confirmed_Guests__c}" />
+                    </div></td>
+                    <td class="labelCol">Total Registered Distinct</td>
+                    <td class="dataCol inlineEditLock" id="cpn24_ilecell" ><div id="cpn24_ileinner">
+                    <apex:outputText value="${0,number, #,###,##0}" >
+                        <apex:param value="{!Campaign.Total_Registered_Distinct__c}" />
+                    </apex:outputText>
+                    </div></td>
+                </tr>
+                <tr>
+                    <td class="labelCol">Total Confirmed</td>
+                    <td class="dataCol col02 inlineEditLock" id="00N40000002G5Ee_ilecell"><div id="00N40000002G5Ee_ileinner">
+                    <apex:outputText value="{!Campaign.Total_Confirmed__c}" />
+                    </div></td>
+                    <td class="labelCol">Total Expected Revenue in Hierarchy</td>
+                    <td class="dataCol inlineEditLock" id="cpn24_ilecell" ><div id="cpn24_ileinner">
+                    <apex:outputText value="${0,number, #,###,##0}" >
+                        <apex:param value="{!Campaign.HierarchyExpectedRevenue}" />
+                    </apex:outputText>
+                    </div></td>
+                </tr>
+                <tr>
+                    <td class="labelCol">Total Confirmed Members and Guests</td>
+                    <td class="dataCol col02 inlineEditLock" id="00N40000002G5H9_ilecell"><div id="00N40000002G5H9_ileinner">
+                    <apex:outputText value="{!Campaign.Total_Confirmed_Members_and_Guests__c}" />
+                    </div></td>
+                    <td class="labelCol">Total Payments</td>
+                    <td class="dataCol inlineEditLock" id="cpn24_ilecell" ><div id="cpn24_ileinner">
+                    <apex:outputText value="${0,number, #,###,##0}" >
+                        <apex:param value="{!TotalPayments}" />
+                    </apex:outputText>
+                    </div></td>
+                </tr>
+                <tr>
+                    <td class="labelCol">Total Attended</td>
+                    <td class="dataCol col02 inlineEditLock" id="00N40000002G5EZ_ilecell" ><div id="00N40000002G5EZ_ileinner">
+                    <apex:outputText value="{!Campaign.Total_Attended__c}" />
+                    </div></td>
+                    <td class="labelCol">Total Refund Payments</td>
+                    <td class="dataCol inlineEditLock" id="cpn24_ilecell" ><div id="cpn24_ileinner">
+                    <apex:outputText value="${0,number, #,###,##0}" >
+                        <apex:param value="{!RefundPayments}" />
+                    </apex:outputText>
+                    </div></td>
+                </tr>
+                <tr>
+                    <td class="labelCol">Total Walk-Ins</td>
+                    <td class="dataCol col02 inlineEditLock" id="00N40000002G5H9_ilecell"><div id="00N40000002G5H9_ileinner">
+                    <apex:outputText value="{!Campaign.Total_Walk_Ins__c}" />
+                    </div></td>
+                    <td class="labelCol">Expected Revenue</td>
+                    <td class="dataCol inlineEditLock" id="cpn24_ilecell" ><div id="cpn24_ileinner">
+                    <apex:outputText value="${0,number, #,###,##0}" >
+                        <apex:param value="{!AnticipatedPayments}" />
+                    </apex:outputText>
+                    </div></td>
+                </tr>                
+                <tr>
+                    <td class="labelCol">Total No-Show Seminar</td>
+                    <td class="dataCol col02 inlineEditLock" id="00N40000002G4sE_ilecell" ><div id="00N40000002G4sE_ileinner">
+                    
+                    <apex:outputText value="{!Campaign.Total_No_Show_Seminar__c}" />
+                    </div></td>
+                    <td class="labelCol">Outstanding Balance (minus anticipated)</td>
+                    <td class="dataCol inlineEditLock" id="cpn24_ilecell" ><div id="cpn24_ileinner">
+                    <apex:outputText value="${0,number, #,###,##0}" >
+                        <apex:param value="{!OutstandingBalance}" />
+                    </apex:outputText>
+                    </div></td>              
+                </tr>
+                <tr>
+                    <td class="labelCol">Total Scheduled Consult</td>
+                    <td class="dataCol col02 inlineEditLock" id="00N40000002G4sJ_ilecell" ><div id="00N40000002G4sJ_ileinner">
+                    <apex:outputText value="{!Campaign.Total_Scheduled_Consult__c}" />
+                    </div></td>
+                    <td class="labelCol empty">&nbsp;</td>
+                    <td class="dataCol empty">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="labelCol">Total Attended Consult</td>
+                    <td class="dataCol col02 inlineEditLock" id="00N40000002G4sO_ilecell"><div id="00N40000002G4sO_ileinner">
+                    <apex:outputText value="{!Campaign.Total_Attended_Consult__c}" />
+                    </div></td>
+                    <td class="labelCol empty">&nbsp;</td>
+                    <td class="dataCol empty">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="labelCol">Total No Show (Consult)</td>
+                    <td class="dataCol col02 inlineEditLock" id="00N40000002G4sT_ilecell"><div id="00N40000002G4sT_ileinner">
+                    <apex:outputText value="{!Campaign.Total_No_Show_Consult__c}" />
+                    </div></td>
+                    <td class="labelCol empty">&nbsp;</td>
+                    <td class="dataCol empty">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="labelCol">Total Started</td>
+                    <td class="dataCol col02 inlineEditLock" id="00N40000002G5H9_ilecell"><div id="00N40000002G5H9_ileinner">
+                    <apex:outputText value="{!Campaign.Total_Started__c}" />
+                    </div></td>
+                    <td class="labelCol empty">&nbsp;</td>
+                    <td class="dataCol empty">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="labelCol">Total Starts Lost</td>
+                    <td class="dataCol col02 inlineEditLock" id="00N40000002G5J0_ilecell"><div id="00N40000002G5J0_ileinner">
+                    <apex:outputText value="{!Campaign.Total_Starts_Lost__c}" />
+                    </div></td>
+                    <td class="labelCol empty">&nbsp;</td>
+                    <td class="dataCol empty">&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</apex:page>

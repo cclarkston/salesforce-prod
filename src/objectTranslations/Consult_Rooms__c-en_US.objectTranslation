@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Consult Room</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Consult Rooms</value>
+    </caseValues>
+    <fields>
+        <label><!-- API Visible --></label>
+        <name>API_Visible__c</name>
+    </fields>
+    <fields>
+        <label><!-- Active --></label>
+        <name>Active__c</name>
+    </fields>
+    <fields>
+        <label><!-- Center Information --></label>
+        <name>Center_Information__c</name>
+        <relationshipLabel><!-- Consult Rooms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Days Built Out --></label>
+        <name>Days_Built_Out__c</name>
+    </fields>
+    <fields>
+        <label><!-- Infocision SF Visible --></label>
+        <name>Infocision_SF_Visible__c</name>
+    </fields>
+    <fields>
+        <label><!-- Room Type --></label>
+        <name>Room_Type__c</name>
+        <picklistValues>
+            <masterLabel>Manual</masterLabel>
+            <translation><!-- Manual --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Normal</masterLabel>
+            <translation><!-- Normal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>OverFlow</masterLabel>
+            <translation><!-- OverFlow --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unconfirmed</masterLabel>
+            <translation><!-- Unconfirmed --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Schedule Template --></label>
+        <name>Schedule_Template__c</name>
+        <relationshipLabel><!-- Consult Rooms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Sort Order --></label>
+        <name>Sort_Order__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

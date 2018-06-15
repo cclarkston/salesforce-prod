@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Secondary WTL template</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>WTL2</name>
+    <style>none</style>
+    <subject>New Web to Lead : {!Lead.Name} ({!Lead.Center_Location__c})</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

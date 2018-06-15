@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>GetFeedback Responses</relationshipLabel>
+        <relationshipName>GetFeedback_Responses</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>How_did_you_learn_about_us__c</fullName>
+        <description>How did you first learn about ClearChoice Dental Implant Centers?</description>
+        <externalId>false</externalId>
+        <label>How did you learn about us</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Television Advertisement</fullName>
+                    <default>false</default>
+                    <label>Television Advertisement</label>
+                </value>
+                <value>
+                    <fullName>Newspaper or Printed Advertisement</fullName>
+                    <default>false</default>
+                    <label>Newspaper or Printed Advertisement</label>
+                </value>
+                <value>
+                    <fullName>Research on the Internet</fullName>
+                    <default>false</default>
+                    <label>Research on the Internet</label>
+                </value>
+                <value>
+                    <fullName>Friend or family</fullName>
+                    <default>false</default>
+                    <label>Friend or family</label>
+                </value>
+                <value>
+                    <fullName>General Dentist</fullName>
+                    <default>false</default>
+                    <label>General Dentist</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>How_informed_after_consult__c</fullName>
+        <description>How informed do you feel after your free consultation?</description>
+        <externalId>false</externalId>
+        <label>How_informed_after_consult</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Fully informed</fullName>
+                    <default>false</default>
+                    <label>Fully informed</label>
+                </value>
+                <value>
+                    <fullName>Adequately informed</fullName>
+                    <default>false</default>
+                    <label>Adequately informed</label>
+                </value>
+                <value>
+                    <fullName>A little informed</fullName>
+                    <default>false</default>
+                    <label>A little informed</label>
+                </value>
+                <value>
+                    <fullName>My visit was not informative</fullName>
+                    <default>false</default>
+                    <label>My visit was not informative</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>How_likely_to_move_forward__c</fullName>
+        <description>How likely are you to move forward with dental implants?</description>
+        <externalId>false</externalId>
+        <label>How likely to move forward</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>I&apos;ve scheduled my procedure!</fullName>
+                    <default>false</default>
+                    <label>I&apos;ve scheduled my procedure!</label>
+                </value>
+                <value>
+                    <fullName>Highly likely</fullName>
+                    <default>false</default>
+                    <label>Highly likely</label>
+                </value>
+                <value>
+                    <fullName>Somewhat likely</fullName>
+                    <default>false</default>
+                    <label>Somewhat likely</label>
+                </value>
+                <value>
+                    <fullName>Not likely</fullName>
+                    <default>false</default>
+                    <label>Not likely</label>
+                </value>
+                <value>
+                    <fullName>I need more information before I can make decision</fullName>
+                    <default>false</default>
+                    <label>I need more information before I can make decision</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Is_staff_welcoming__c</fullName>
+        <description>Would you describe your ClearChoice staff as welcoming?</description>
+        <externalId>false</externalId>
+        <label>Is_staff_welcoming</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Very welcoming</fullName>
+                    <default>false</default>
+                    <label>Very welcoming</label>
+                </value>
+                <value>
+                    <fullName>Adequately welcoming</fullName>
+                    <default>false</default>
+                    <label>Adequately welcoming</label>
+                </value>
+                <value>
+                    <fullName>Neither professional or welcoming</fullName>
+                    <default>false</default>
+                    <label>Neither professional or welcoming</label>
+                </value>
+                <value>
+                    <fullName>Unwelcoming</fullName>
+                    <default>false</default>
+                    <label>Unwelcoming</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Lead__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Prospective Patient</label>
+        <referenceTo>Lead</referenceTo>
+        <relationshipLabel>GetFeedback Responses</relationshipLabel>
+        <relationshipName>GetFeedback_Responses</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>NPS_Detractor_Comment__c</fullName>
+        <description>When NPS question received a low answer (&lt;= 7), we ask for a comment.</description>
+        <externalId>false</externalId>
+        <label>NPS Detractor Comment</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NPS__c</fullName>
+        <description>Net Promoter Score - How likely are you to recommend ClearChoice to a friend, family member, or colleague?</description>
+        <externalId>false</externalId>
+        <label>NPS</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Topic_for_more_info__c</fullName>
+        <description>If you did not schedule your procedure today, we would like the opportunity to provide you with more information to help address your concern, please select a topic you would like to learn more about:</description>
+        <externalId>false</externalId>
+        <label>Topic for more info</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>I have scheduled my next appointment and am excited about designing my smile</fullName>
+                    <default>false</default>
+                    <label>I have scheduled my next appointment and am excited about designing my smile</label>
+                </value>
+                <value>
+                    <fullName>I am looking into financing and payment options, but plan to move forward</fullName>
+                    <default>false</default>
+                    <label>I am looking into financing and payment options, but plan to move forward</label>
+                </value>
+                <value>
+                    <fullName>Financing and paying for dental implants</fullName>
+                    <default>false</default>
+                    <label>Financing and paying for dental implants</label>
+                </value>
+                <value>
+                    <fullName>Information for family and friends</fullName>
+                    <default>false</default>
+                    <label>Information for family and friends</label>
+                </value>
+                <value>
+                    <fullName>Meet a Clearchoice patient</fullName>
+                    <default>false</default>
+                    <label>Meet a Clearchoice patient</label>
+                </value>
+                <value>
+                    <fullName>Learn more about the health benefits of dental</fullName>
+                    <default>false</default>
+                    <label>Learn more about the health benefits of dental</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>GetFeedback Response</label>
+    <nameField>
+        <label>GetFeedback Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>GetFeedback Responses</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

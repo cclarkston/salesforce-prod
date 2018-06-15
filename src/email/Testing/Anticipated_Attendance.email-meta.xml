@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>false</available>
+    <description>Letter indicating anticipated attendance at a seminar.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>ClearChoice_Letterhead</letterhead>
+    <name>Anticipated Attendance</name>
+    <style>freeForm</style>
+    <subject>We are excited to see you at the ClearChoice Seminar</subject>
+    <textOnly>We are excited to see you at the Seminar!
+ 
+{!CampaignMember.FirstName} {!CampaignMember.LastName} 
+{!CampaignMember.Street}
+{!CampaignMember.City}, {!CampaignMember.State} {!CampaignMember.PostalCode}
+ 
+ 
+Hello {!CampaignMember.FirstName},
+ 
+We have reserved a seat for you at the ClearChoice patient seminar on {!CampaignMember.Campaign_Date_Time__c} at the {!CampaignMember.Campaign_Location_Name__c}. 
+ 
+ 
+You can look forward to:
+ 
+
+Learning how implants can provide a clear solution to your dental needs 
+Answers to questions that address your dental condition 
+Hear a past patient’s experience with ClearChoice 
+Meeting the doctors and patients 
+Refreshments!! 
+ 
+ 
+We provide a clear advantage through our unique All in One Center.  We have enclosed a map to the {!CampaignMember.Campaign_Location_Name__c}.  Please feel free to call {!CampaignMember.Campaign_Center_Phone_Number__c} if you need further directions. 
+ 
+ 
+Sincerely,
+{!CampaignMember.Campaign_Center_Address__c}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Opportunity$Pending_Cancel__c</field>
+    </columns>
+    <columns>
+        <field>Opportunity$Current_Prosth_Owner__c</field>
+    </columns>
+    <columns>
+        <field>Opportunity$Name</field>
+    </columns>
+    <columns>
+        <field>Opportunity.Audit_Tokens__r$Name</field>
+    </columns>
+    <columns>
+        <field>Opportunity.Audit_Tokens__r$Extend_Pending_Cancel__c</field>
+    </columns>
+    <columns>
+        <field>Opportunity$Audit_Notes__c</field>
+    </columns>
+    <description>Amanda&apos;s Copy of the Pending Cancels for RBDs Report</description>
+    <filter>
+        <criteriaItems>
+            <column>Opportunity$Cancel_Date__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value></value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Opportunity$Center_Sales_Region__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Amanda&apos;s Pending Cancels for RBDs</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Opportunity_with_Amnesty_Token__c</reportType>
+    <roleHierarchyFilter>CEO</roleHierarchyFilter>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Opportunity$Current_Prosth_Owner__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Opportunity$Pending_Cancel__c</dateColumn>
+        <endDate>2019-12-31</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2017-05-22</startDate>
+    </timeFrameFilter>
+</Report>

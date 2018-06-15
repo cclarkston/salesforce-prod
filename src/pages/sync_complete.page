@@ -1,0 +1,41 @@
+<apex:page id="success" tabStyle="NetSuite_Estimate__c" showHeader="false">    
+    <style>
+		h1 {
+			color: #205d8b;
+			font-size: 18px;
+			font-weight: bold;
+			margin: 0 0 5px 0;
+			padding: 10px 0 0 0;
+		}
+		
+		img.loader {
+			padding-top: 5px;
+			margin: 0em;
+			align: middle;
+		}
+		
+		div.background {
+			border-style: none;
+			padding-left: 20px;
+			margin: 40px 20px;
+		}
+	</style>
+	
+	<script type="text/javascript">
+		window.close();
+	</script>
+
+	<apex:form >
+		<apex:outputPanel id="content" layout="block">
+			<apex:pageBlock >
+				<div class="background" >
+					<h1>
+						<apex:outputText value="Completed"/>
+					</h1>
+					<br /><br /><br />
+              	</div>
+             </apex:pageBlock>
+		</apex:outputPanel>
+	</apex:form>
+
+</apex:page>

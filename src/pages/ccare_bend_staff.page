@@ -1,0 +1,874 @@
+<apex:page controller="dp_admin_staff" sidebar="false" showHeader="false" docType="html-5.0">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!--  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css' />
+  <apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+  <apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/mmenu_nav.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/dp_css_main.css')}"/>
+
+  <style>
+    .cell_image {
+      vertical-align:middle;  
+    }
+  
+    .form-label {
+      font-weight:bold;
+      width:75px;
+    }
+  
+    table.bend_table {
+      width:100%;      
+    }
+    
+    tr.bend_header {
+
+    }
+    
+    .gray_under {
+       display:inline-block;
+       border-bottom:1px solid #bfbfbf;
+       padding-left:5px;
+       padding-right:5px;
+     <!--text-decoration: underline;
+      -moz-text-decoration-color: #bfbfbf; /* Code for Firefox */
+      text-decoration-color: #bfbfbf;-->
+    }
+    
+    tr.bend_header td {
+
+    }
+    
+    tr.odd {
+    
+    }
+    
+    tr.odd td {
+      padding-left:5px;
+      border-bottom:1px dotted #bfbfbf;
+    }
+    
+    tr.even {
+        
+    }
+    
+    tr.even td {
+      padding-left:5px;
+      background:#f5f5f5;
+      border-bottom:1px dotted #bfbfbf;
+    }
+    
+    div.column_holder {
+      float:left;
+      padding-right:20px;   
+    }
+    
+    table.hours_column {
+      border-collapse: separate;
+      border-spacing: .1px;
+    }
+    
+    table.hours_column td {
+      border-bottom:1px dashed #bfbfbf;
+      border-left:1px dashed #bfbfbf;
+      border-right:1px dashed #bfbfbf;
+      padding-left:2px;
+      padding-right:2px;
+      min-width:200px;
+      height:20px;
+      line-height:20px;
+    }
+    
+    table.hours_column td.time_label {
+      text-align:right;
+      padding-right:5px;
+      background:#f5f5f5;
+    }
+    
+    table.hours_column td.col_header {
+      border:0;
+      background-color: #58595b;  
+      height:35px;  
+      line-height: 35px;
+      color:white;
+      font-weight:300;
+      font-size:14pt;
+      text-align:center;
+    }
+    
+    table.hours_column td.working_slot {
+       background:#fffef2;
+       padding-left:10px;
+       border-right:1px solid #e6d400;
+       border-left:1px solid #e6d400;
+       border-bottom:1px solid #fffef2;
+    }
+    
+    table.hours_column td.working_head {
+       background:#fffef2;
+       padding-left:10px;
+       border-top:1px solid #e6d400;
+       border-right:1px solid #e6d400;
+       border-left:1px solid #e6d400;
+       border-bottom:1px solid #fffef2;
+    }
+    
+    table.hours_column td.working_close {
+       background:#fffef2;
+       padding-left:10px;
+       border:0;
+       border-right:1px solid #e6d400;
+       border-left:1px solid #e6d400;
+       border-bottom:1px solid #e6d400;
+    }
+    
+    table.hours_column td.lunch_slot {
+       background:#F6E5F9;
+       padding-left:10px;
+       border:0;
+       border-right:1px solid #be45d4;
+       border-left:1px solid #be45d4;
+       border-bottom:1px solid #F6E5F9;
+    }
+    
+    table.hours_column td.lunch_head {
+       background:#F6E5F9;
+       padding-left:10px;
+       border:0;
+       border-top:1px solid #be45d4;
+       border-right:1px solid #be45d4;
+       border-left:1px solid #be45d4;
+       border-bottom:1px solid #F6E5F9;
+    }
+    
+    table.hours_column td.lunch_close {
+      background:#F6E5F9;
+      padding-left:10px;
+      border:0;
+      border-bottom:1px solid #be45d4;
+      border-right:1px solid #be45d4;
+      border-left:1px solid #be45d4;
+    }
+    
+    table.hours_column td.no_bottom {
+      border-bottom:0px;
+    }
+    
+  </style>
+  
+  <script type="text/javascript">    
+    var key_timeout;
+    var search_in_progress = false;
+   
+   function search_now() {
+      search_in_progress = false;  
+      search_users(); 
+   }
+    
+    function qsearch_key() {    
+      if(search_in_progress)
+        clearTimeout(key_timeout);
+      search_in_progress = true;  
+      key_timeout = setTimeout("body_refresh()",600);
+    }   
+  </script>
+  
+  
+</head>
+<body>
+<apex:form >
+<apex:actionFunction name="body_refresh" rerender="main_holder" />
+
+<div id="nav-fixed">
+<div id="nav-header" style="border:0px;">
+<apex:actionRegion >
+<apex:actionFunction name="nav_to" action="{!navigate_to}" rerender="none" status="ajaxstatus" >
+  <apex:param name="navid" value=""  />
+</apex:actionFunction>
+<apex:actionFunction name="new_license" action="{!new_license_form}" rerender="main_holder" status="ajaxstatus" />
+<apex:actionFunction name="new_education" action="{!new_education_form}" rerender="main_holder" status="ajaxstatus" />
+<apex:actionFunction name="center_switch" action="{!change_center}" rerender="nav_content,main_holder" status="ajaxstatus" >
+  <apex:param name="cid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="active_switch" action="{!change_active_view}" rerender="main_holder" status="ajaxstatus" >
+  <apex:param name="afilter" value="" />
+</apex:actionFunction>
+<!--Screens were removed and merged into the information screen-->
+<apex:actionFunction name="appointment_info" action="{!display_appointment_info}" rerender="nav_content,main_holder" status="ajaxstatus" >
+  <apex:param name="staffid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="general_info" action="{!display_general_info}" rerender="nav_content,main_holder" status="ajaxstatus" >
+  <apex:param name="staffid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="calendar_info" action="{!display_calendar}" rerender="nav_content,main_holder" status="ajaxstatus" >
+  <apex:param name="staffid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="hour_info" action="{!display_hours}" rerender="nav_content,main_holder" status="ajaxstatus" >
+  <apex:param name="sdow" value="" />
+  <apex:param name="shour" value="" />
+  <apex:param name="sminute" value="" />
+</apex:actionFunction>
+
+<apex:actionFunction name="open_license_form" action="{!new_license_form}" rerender="main_holder" status="ajaxstatus" />
+
+
+<apex:actionStatus id="ajaxstatus">
+    <apex:facet name="start">
+      <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1110; background-color: #f2f2f2;">
+        &nbsp;
+      </div>
+      <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1111; margin: 20% 50%">
+        <!--<apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,'Images/5Wits.gif')}"/>-->
+        <!--<img src="http://upload.wikimedia.org/wikipedia/commons/e/ed/Cursor_Windows_Vista.gif" />-->
+        <img src="{!URLFOR($Resource.Dental_Practice_Resources,'Images/Circle-out.gif')}" />
+        <!--<img src="{!URLFOR($Resource.Dental_Practice_Resources,'Images/5Wits.gif')}" />-->
+      </div>
+    </apex:facet>
+  </apex:actionStatus>
+  
+
+<apex:outputpanel id="nav_content" style="width:100%">
+<div class="nav-col-quarter">
+    <apex:outputpanel id="back_holder">
+      <apex:outputpanel rendered="{!if(selected_view=='staff_display',true,false)}"><a href="javascript:window.history.go(-1);" class="nav_color">&lt; Back</a></apex:outputpanel>
+      <apex:outputpanel rendered="{!if(selected_view=='staff_display',false,true)}"><apex:commandLink styleClass="nav_color" action="{!display_staff_info}" status="ajaxstatus" reRender="nav_content,main_holder">&lt; Back</apex:commandLink></apex:outputpanel>
+    </apex:outputpanel>
+  <div class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:black;">
+      <span class="color-box" style="background:{!current_page.nav_color__c};">&nbsp;</span>
+      <apex:outputtext value="{!current_page.name}" />
+    </a>    
+    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">    
+      <apex:repeat var="menu_line" value="{!navigation_menu}" >
+        <!--is menu line a header?-->
+        <apex:outputpanel rendered="{!if(menu_line.menu_type=='Header',true,false)}"> 
+          <li role="presentation" class="dropdown-header"><apex:outputtext value="{!menu_line.menu_name}" /></li>
+        </apex:outputpanel>
+        <!--is menu line a page?-->
+        <apex:outputpanel rendered="{!if(menu_line.menu_type=='Page',true,false)}">
+          <li role="presentation" class="dropdown-lineitem">
+            <a role="menuitem" tabindex="-1" href="javascript:nav_to('{!menu_line.menu_id}');" style="color:#189BEB">
+              <span class="color-box" style="background:{!menu_line.menu_nav_color};">&nbsp;</span><apex:outputtext value="{!menu_line.menu_name}" />
+            </a>
+          </li>
+        </apex:outputpanel>
+        <!--is it a call for a spacer-->
+        <apex:outputpanel rendered="{!if(menu_line.menu_type=='Spacer',true,false)}"><br /></apex:outputpanel>
+      </apex:repeat>      
+    </ul>
+  </div>
+</div>
+
+<div class="nav-col-half">
+  <span class="dropdown drop-hover">
+      <a class="dropdown-toggle nav_color " data-toggle="dropdown"><apex:outputtext value="{!current_center.name}"  style="padding-right:5px;" styleClass="c-pointer"  /><span class="caret"></span></a>
+        <ul class="dropdown-menu overflow-menu" >
+          <apex:repeat var="center" value="{!center_list}">
+            <li class="dropdown-lineitem">
+              <a href="javascript:center_switch('{!center.id}');" style="color:#189BEB"><apex:outputtext value="{!center.name}" /></a>
+            </li>
+          </apex:repeat>
+        </ul>
+    </span>
+    <!--Quick Search Bar-->
+    <apex:outputpanel rendered="{!display_qsearch}"><apex:inputText value="{!quick_search_field}" styleClass="qsearch" onkeyup="qsearch_key();" /><a class="qsearch-btn" >Search</a></apex:outputpanel>
+    <apex:outputpanel rendered="{!display_add_button}">
+    <!--License and Education are being merged into information screen now - no quick link button.  They will have seperate links on the page
+      <apex:outputpanel rendered="{!if(selected_view=='license_display',true,false)}"><span class="add-box" onclick="new_license();">+</span></apex:outputpanel>
+      <apex:outputpanel rendered="{!if(selected_view=='education_display',true,false)}"><span class="add-box" onclick="new_education();">+</span></apex:outputpanel>-->
+    </apex:outputpanel>
+</div>
+
+<div class="nav-col-quarter ag-left">
+  <span class="dropdown drop-hover">
+      <a class="dropdown-toggle nav_color" data-toggle="dropdown"><apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}" width="25" height="25" styleClass="c-pointer"
+        onmouseover="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_black.png')}';"
+        onmouseout="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}';"
+        onclick="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}';"
+         /></a>
+      <ul class="dropdown-menu gear-menu dropdown-menu-right">
+        <apex:repeat var="gitem" value="{!gear_menu}" >
+            <li class="dropdown-lineitem" style="display:inline-block;">
+              <a href="{!gitem.Page_URL__c}" style="color:#189BEB;" target="{!gitem.hyperlink_target__c}" 
+                  onmouseover="this.firstChild.src='{!URLFOR($Resource.Dental_Practice_Resources,gitem.Image_Name_Hover__c)}';this.style.color='black';" 
+                  onmouseout="this.firstChild.src='{!URLFOR($Resource.Dental_Practice_Resources,gitem.Image_Name__c)}';this.style.color='#189BEB';">
+                <apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,gitem.Image_Name__c)}" width="{!if(gitem.name=='Salesforce','30','20')}" height="20" style="display:inline;{!if(gitem.name=='Salesforce','position:relative;left:-7px;margin-right:-6px;','margin-right:5px;')}" />&nbsp;&nbsp;{!gitem.name}
+              </a>
+            </li>
+        </apex:repeat>
+      </ul>        
+    </span>
+</div>
+
+
+</apex:outputPanel>
+</apex:actionRegion>  
+</div>
+</div>
+
+<!--styleClass="mholder"-->
+<apex:outputPanel id="main_holder" styleClass="mm_container" layout="block">
+  <apex:outputpanel layout="block" styleClass="ptop_header">
+  <!--display active/inactive bar here-->
+  <table style="width:100%;">
+  <tr>
+    <td class="back_cell">
+      <!-- License and Education are being merged into the information screen - no quicklinks will be displayed up here now
+      <apex:outputpanel rendered="{!if(selected_view=='license_display',true,false)}">+&nbsp; <apex:commandLink status="ajaxstatus" value="New Medical License" styleclass="lblue" action="{!new_license_form}" rerender="main_holder" /></apex:outputpanel>
+      <apex:outputpanel rendered="{!if(selected_view=='education_display',true,false)}">+&nbsp; <apex:commandLink value="New Education Record" status="ajaxstatus" styleclass="lblue" action="{!new_education_form}" rerender="main_holder" /></apex:outputpanel>-->
+      <apex:outputpanel rendered="{!if(Selected_view=='hours_display',true,false)}">  
+        <apex:commandLink styleclass="lblue" action="{!display_calendar}" rerender="main_holder" status="ajaxstatus">
+          <apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,'Images/calendar-blue.png')}" height="20" width="20" />
+          <apex:param name="staffid" value="{!selected_staff_member.id}" /> Calendar View
+        </apex:commandLink>
+      </apex:outputpanel>
+    </td>
+    <td class="center_cell"><apex:outputtext value="{!body_header}" /></td>
+    <td class="active_cell">
+      <apex:outputpanel rendered="{!display_active_nav}">
+      <span class="{!if(active_filter=='All','selected_active','unselected_active')}" onclick="active_switch('All');">All({!all_count})</span>
+      <span class="{!if(active_filter=='Active','selected_active','unselected_active')}" onclick="active_switch('Active');">Active({!active_count})</span>
+      <span class="{!if(active_filter=='Inactive','selected_active','unselected_active')}" onclick="active_switch('Inactive');" >Inactive({!inactive_count})</span>
+      </apex:outputpanel>&nbsp;
+    </td>
+  </tr>
+  </table>
+  </apex:outputpanel>
+  <apex:messages style="color:red;font-style:italics;" />
+  <br />
+
+  <apex:outputpanel rendered="{!if(selected_view=='staff_display',true,false)}" styleClass="mm_group" layout="block">    
+  <!--display the staff at this center-->
+  <!--Doctors first-->
+<!--  <apex:outputPanel layout="block" styleClass="section-box">Doctors</apex:outputPanel>  -->
+    <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+      <apex:outputPanel layout="block" styleClass="mm_header-label">Doctors</apex:outputPanel>
+    </apex:outputPanel>  
+    <div class="section_details">
+    <apex:repeat var="doc" value="{!doctor_list}">
+     <table style="width:100%">
+       <tr>
+         <td><apex:outputtext value="{!doc.name}" /></td>
+         <td style="min-width:300px;padding-right:50px;" align="right">
+           <span class="detail_nav_link" onclick="calendar_info('{!doc.id}');">Hours</span>
+           <span class="detail_nav_link" onclick="appointment_info('{!doc.id}');">Appointments</span>
+           <span class="detail_nav_link" onclick="general_info('{!doc.id}');">Information</span>
+         </td>
+       </tr>
+     </table>
+    </apex:repeat>
+    </div>
+  <br /><br />
+  <!--Assistants-->
+<!--  <apex:outputPanel layout="block" styleClass="section-box">Assistants</apex:outputPanel>  -->
+<apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+      <apex:outputPanel layout="block" styleClass="mm_header-label">Assistants</apex:outputPanel>
+    </apex:outputPanel>  
+    <p class="section_details">
+    <apex:repeat var="asst" value="{!assistant_list}">
+      {!asst.name}<br />
+    </apex:repeat>    
+    </p>
+    <br />
+  </apex:outputpanel>
+  
+  
+  <apex:outputPanel rendered="{!if(selected_view=='info_display',true,false)}" id="information_holder" styleClass="mm_group" layout="block">
+    <!--displays the medical license info for a specified staff member-->
+    <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+      <apex:outputPanel layout="block" styleClass="mm_header-label">License</apex:outputPanel>
+    </apex:outputPanel>      
+    
+    <!--add license button-->
+    <apex:outputpanel rendered="{!if(display_license_form==true,false,true)}" style="padding-left:10px;">  
+      <apex:commandlink action="{!new_license_form}" rerender="main_holder" styleclass="lblue" value="+ Add License" status="ajaxstatus" >
+<!--        <span class="light-add-box">&#43;</span>&nbsp; Add License-->
+      </apex:commandlink><br /><br />
+    </apex:outputpanel>
+    <apex:outputpanel rendered="{!if(license_size==0,true,false)}" style="padding-left:15px;">There is currently no medical license info for {!selected_staff_member.name}.</apex:outputpanel>
+    
+    <apex:outputpanel rendered="{!if(license_size>0 || display_license_form,true,false)}" style="padding-left:15px;" layout="block">
+    <table class="bend_table"> 
+      <tr class="bend_header">
+        <th><span class="gray_under">License #</span></th>
+        <th><span class="gray_under">License Type</span></th>
+        <th><span class="gray_under">Issuing State</span></th>
+        <th><span class="gray_under">Issue Date</span></th>
+        <th><span class="gray_under">Exp Date</span></th>
+        <td><span class="gray_under">Status</span></td>
+      </tr>
+      <tr>
+        <td><apex:inputfield value="{!new_license.License_Number__c}" styleclass="input_standard" onfocus="if(this.value=='Enter Number') {this.value='';}" rendered="{!display_license_form}" />  </td>
+        <td><apex:inputfield value="{!new_license.License_Type__c}" styleclass="input_standard" rendered="{!display_license_form}" /> </td>
+        <td><apex:inputfield value="{!new_license.State_Licensed_In__c}" styleclass="input_standard" rendered="{!display_license_form}" /></td>
+        <td><apex:inputfield value="{!new_license.License_Issue_Date__c}" styleclass="input_standard" type="date" showDatePicker="false" style="width:150px;" rendered="{!display_license_form}" /></td>
+        <td><apex:inputfield value="{!new_license.License_Expiration_Date__c}" styleclass="input_standard" type="date" showDatePicker="false" style="width:150px;" rendered="{!display_license_form}" /></td>
+        <td><apex:outputpanel rendered="{!display_license_form}"><apex:commandLink status="ajaxstatus" action="{!save_new_license}" reRender="main_holder" value="Save" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+          <apex:commandLink status="ajaxstatus" action="{!hide_license_form}" reRender="main_holder" value="Cancel" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+          <apex:commandLink status="ajaxstatus" action="{!reset_license_form}" reRender="main_holder" value="Reset" styleclass="lblue" /></apex:outputpanel></td>
+      </tr>
+    <apex:variable var="rowclassname" value="odd" />
+    <apex:repeat var="mlicense" value="{!license_list}">
+     <!--Display all license records for this staff member-->
+     <tr class="{!rowclassname}">
+     <apex:variable var="rowclassname" value="{!if(rowclassname=='odd','even','odd')}" />
+       <td>
+         <apex:commandlink value="{!mlicense.License_Number__c}" rerender="main_holder" status="ajaxstatus" action="{!edit_medical_license}" styleclass="lblue"  rendered="{!if(current_edit==mlicense.id,false,true)}">
+           <apex:param name="current_edit" value="{!mlicense.id}" assignTo="{!current_edit}" />
+         </apex:commandlink>
+         <apex:inputfield value="{!new_license.License_Number__c}" rendered="{!if(current_edit==mlicense.id,true,false)}"/>
+       </td>
+       <td>
+         <apex:outputfield value="{!mlicense.License_Type__c}" rendered="{!if(current_edit==mlicense.id,false,true)}" />
+         <apex:inputfield value="{!new_license.License_Type__c}" rendered="{!if(current_edit==mlicense.id,true,false)}" />
+       </td>
+       <td>
+         <apex:outputfield value="{!mlicense.State_Licensed_In__c}" rendered="{!if(current_edit==mlicense.id,false,true)}" />
+         <apex:inputfield value="{!new_license.State_Licensed_In__c}" rendered="{!if(current_edit==mlicense.id,true,false)}" />
+       </td>
+       <td>
+         <apex:outputfield value="{!mlicense.License_Issue_Date__c}" rendered="{!if(current_edit==mlicense.id,false,true)}" />
+         <apex:inputfield value="{!new_license.License_Issue_Date__c}" styleclass="input_standard" type="date" showDatePicker="false" style="width:150px;" rendered="{!if(current_edit==mlicense.id,true,false)}" />
+       </td>
+       <td>
+         <apex:outputfield value="{!mlicense.License_Expiration_Date__c}" rendered="{!if(current_edit==mlicense.id,false,true)}" />
+         <apex:inputfield value="{!new_license.License_Expiration_Date__c}" styleclass="input_standard" type="date" showDatePicker="false" style="width:150px;" rendered="{!if(current_edit==mlicense.id,true,false)}" />
+       </td>
+       <td>
+         <apex:commandlink value="{!if(mlicense.isactive__c,'Active','Inactive')}" status="ajaxstatus" rerender="main_holder" action="{!confim_activation_license}" styleclass="lblue" rendered="{!if(current_edit==mlicense.id,false,true)}" >
+           <apex:param name="activation_id" value="{!mlicense.id}" assignTo="{!activation_id}" />
+         </apex:commandlink>
+         <apex:outputpanel rendered="{!if(current_edit==mlicense.id,true,false)}" ><apex:commandLink action="{!save_new_license}" reRender="main_holder" value="Save" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+           <apex:commandLink action="{!hide_license_form}" status="ajaxstatus" reRender="main_holder" value="Cancel" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+           <apex:commandLink action="{!edit_medical_license}" status="ajaxstatus" reRender="main_holder" value="Reset" styleclass="lblue" /></apex:outputpanel>
+       </td>
+       
+      </tr>
+    </apex:repeat>
+    </table><br /><br />
+    </apex:outputpanel>
+
+    <!--displays the medical license info for a specified staff member-->
+    <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+      <apex:outputPanel layout="block" styleClass="mm_header-label">Education</apex:outputPanel>
+    </apex:outputPanel>  
+    <!--form to input a new education record-->
+<!--    <apex:outputpanel id="education_form_holder" rendered="{!display_education_form}"> 
+      <apex:inputfield value="{!new_education.School__c}" styleclass="input_standard" onfocus="if(this.value=='Enter School') {this.value='';}" /><span class="spacer">&nbsp;</span>
+      Graduation Year : &nbsp;<apex:inputfield value="{!new_education.Graduation_Year__c}" styleclass="input_standard" type="number" /><span class="spacer">&nbsp;</span>   
+
+      <br /><br />
+    </apex:outputpanel>-->
+    
+    <apex:outputpanel rendered="{!if(display_education_form==true,false,true)}" style="padding-left:10px;">  
+      <apex:commandlink action="{!new_education_form}" status="ajaxstatus" rerender="main_holder" styleclass="lblue" value="+ Add Education">
+<!--        <span class="light-add-box">&#43;</span>&nbsp; Add Education-->
+      </apex:commandlink><br /><br />
+    </apex:outputpanel>
+    
+        
+    <apex:outputpanel rendered="{!if(education_size==0,true,false)}" style="padding-left:15px;">There is currently no educational info for {!selected_staff_member.name}.</apex:outputpanel>
+    <apex:outputpanel rendered="{!if(education_size>0 || display_education_form,true,false)}" style="padding-left:15px;" layout="block">
+    <table class="bend_table"> 
+      <tr class="bend_header">
+        <th><span class="gray_under">School</span></th>
+        <th><span class="gray_under">Degree</span></th>
+        <th><span class="gray_under">Graduation Year</span></th>
+        <td><span class="gray_under">Status</span></td>
+      </tr>
+      <tr>
+        <td><apex:inputfield value="{!new_education.School__c}" styleclass="input_standard" onfocus="if(this.value=='Enter School') {this.value='';}" rendered="{!display_education_form}"/> </td>
+        <td><apex:inputfield value="{!new_education.Degree__c}" styleclass="input_standard" rendered="{!display_education_form}" /></td>
+        <td><apex:inputfield value="{!new_education.Graduation_Year__c}" styleclass="input_standard" type="number" rendered="{!display_education_form}"/></td>
+        <td><apex:outputpanel rendered="{!display_education_form}">      <apex:commandLink status="ajaxstatus" action="{!save_new_education}" reRender="main_holder" value="Save" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink status="ajaxstatus" action="{!hide_education_form}" reRender="main_holder" value="Cancel" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink status="ajaxstatus" action="{!reset_education_form}" reRender="main_holder" value="Reset" styleclass="lblue" /></apex:outputpanel></td>
+      </tr>
+    <apex:variable var="rowclassname" value="odd" />    
+    <apex:repeat var="ed" value="{!education_list}">
+     <tr class="{!rowclassname}">
+     <apex:variable var="rowclassname" value="{!if(rowclassname=='odd','even','odd')}" />
+       <td>
+         <apex:commandlink status="ajaxstatus" value="{!ed.School__c}" rerender="main_holder" action="{!edit_education}" styleclass="lblue"  rendered="{!if(current_edit==ed.id,false,true)}">
+           <apex:param name="current_edit" value="{!ed.id}" assignTo="{!current_edit}" />
+         </apex:commandlink>
+         <apex:inputfield value="{!new_education.School__c}" styleclass="input_standard" onfocus="if(this.value=='Enter School') {this.value='';}" rendered="{!if(current_edit==ed.id,true,false)}" />
+       </td>
+         <apex:outputtext value="{!ed.Degree__c}" rendered="{!if(current_edit==ed.id,false,true)}" />
+         <apex:inputtext value="{!ed.Degree__c}" rendered="{!if(current_edit==ed.id,true,false)}" />
+       <td>
+       </td>
+       <td>
+         <apex:outputtext value="{!ed.Graduation_Year__c}" rendered="{!if(current_edit==ed.id,false,true)}" />
+         <apex:inputfield value="{!new_education.Graduation_Year__c}" styleclass="input_standard" type="number" rendered="{!if(current_edit==ed.id,true,false)}"/>
+       </td>
+       <td>
+         <apex:commandlink status="ajaxstatus" value="{!if(ed.isactive__c,'Active','Inactive')}" rerender="main_holder" action="{!confirm_activation_education}" styleclass="lblue" rendered="{!if(current_edit==ed.id,false,true)}">
+             <apex:param name="activation_id" value="{!ed.id}" assignTo="{!activation_id}" />
+         </apex:commandlink>
+         <apex:outputpanel rendered="{!if(current_edit==ed.id,true,false)}">
+         <apex:commandLink status="ajaxstatus" action="{!save_new_education}" reRender="main_holder" value="Save" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+         <apex:commandLink status="ajaxstatus" action="{!hide_education_form}" reRender="main_holder" value="Cancel" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+         <apex:commandLink status="ajaxstatus" action="{!edit_education}" reRender="main_holder" value="Reset" styleclass="lblue" /></apex:outputpanel>
+       </td>
+      
+      </tr>    
+    </apex:repeat>
+    </table><br /><br />
+    </apex:outputpanel>
+    
+    <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+      <apex:outputPanel layout="block" styleClass="mm_header-label">Info</apex:outputPanel>
+    </apex:outputPanel>  
+    
+    <apex:outputpanel style="padding-left:15px;" layout="block">
+      <span class="form-line">
+        <span class="form-label">SSN # :</span>
+        <apex:outputfield value="{!selected_staff_member.SSN__c}" rendered="{!if(display_info_form,false,true)}" />
+        <apex:inputfield value="{!selected_staff_member.SSN__c}" rendered="{!display_info_form}" styleclass="input_standard" />
+      </span>
+      <span class="form-line">
+        <span class="form-label">DOB :</span>
+        <apex:outputfield value="{!selected_staff_member.DOB__c}" rendered="{!if(display_info_form,false,true)}" />
+        <apex:inputfield value="{!selected_staff_member.DOB__c}" rendered="{!display_info_form}" styleclass="input_standard" type="date" showDatePicker="false" style="width:150px;" />
+      </span>
+      <span class="form-line">
+        <span class="form-label">NPI :</span>
+        <apex:outputfield value="{!selected_staff_member.National_Provider_Identifier__c}" rendered="{!if(display_info_form,false,true)}" />
+        <apex:inputfield value="{!selected_staff_member.National_Provider_Identifier__c}" rendered="{!display_info_form}" styleclass="input_standard" />
+      </span>
+      <span class="form-line">
+        <span class="form-label">Suffix :</span>
+        <apex:outputfield value="{!selected_staff_member.Doctor_Suffix__c}" rendered="{!if(display_info_form,false,true)}" />
+        <apex:inputfield value="{!selected_staff_member.Doctor_Suffix__c}" rendered="{!display_info_form}" styleclass="input_standard" />
+      </span>        
+      <apex:commandLink status="ajaxstatus" action="{!edit_general_info}" reRender="main_holder" value="Edit" styleclass="lblue" rendered="{!if(display_info_form,false,true)}" />
+      <apex:outputpanel rendered="{!display_info_form}">
+        <apex:commandLink status="ajaxstatus" action="{!save_general_info}" reRender="main_holder" value="Save" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+        <apex:commandLink status="ajaxstatus" action="{!hide_info_form}" reRender="main_holder" value="Cancel" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+        <apex:commandLink status="ajaxstatus" action="{!reset_info_form}" reRender="main_holder" value="Reset" styleclass="lblue" /> 
+      </apex:outputpanel>
+    </apex:outputpanel>
+    
+  </apex:outputPanel> <!-- END General Info Display-->
+  
+  <!----------------------  START Appointment Display ------------------------>
+  <apex:outputPanel rendered="{!if(selected_view=='appointment_display',true,false)}" id="appointment_holder" styleClass="mm_group" layout="block">
+       <!--category filter bar--------->
+    <apex:commandLink status="ajaxstatus" action="{!change_category_filter}" reRender="main_holder" value="All ({!all_apt_count})" styleclass="{!if(appointment_filter=='All','selected_category','unselected_category')}" >
+      <apex:param name="cfilter" value="All" />
+    </apex:commandlink><span class="spacer">&nbsp;</span>
+    <apex:commandLink status="ajaxstatus" action="{!change_category_filter}" reRender="main_holder" value="Prosth ({!prosth_count})" styleclass="{!if(appointment_filter=='Prosth','selected_category','unselected_category')}" >
+      <apex:param name="cfilter" value="Prosth" />
+    </apex:commandlink><span class="spacer">&nbsp;</span>
+    <apex:commandLink status="ajaxstatus" action="{!change_category_filter}" reRender="main_holder" value="Surgical ({!surgical_count})" styleclass="{!if(appointment_filter=='Surgical','selected_category','unselected_category')}" >
+      <apex:param name="cfilter" value="Surgical" />
+    </apex:commandlink><span class="spacer">&nbsp;</span>
+    <apex:commandLink status="ajaxstatus" action="{!change_category_filter}" reRender="main_holder" value="Misc ({!misc_count})" styleclass="{!if(appointment_filter=='Misc','selected_category','unselected_category')}" >
+      <apex:param name="cfilter" value="Misc" />
+    </apex:commandlink><span class="spacer">&nbsp;</span>
+  
+    <!--displays list of apts the staff member is authorized to perform-->
+    <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+      <apex:outputPanel layout="block" styleClass="mm_header-label">Authorized Appointments</apex:outputPanel>
+    </apex:outputPanel> 
+    <apex:outputpanel style="padding-left:15px;" layout="block">
+      <apex:commandlink status="ajaxstatus" value="Remove All" rerender="main_holder" action="{!block_all_apts}" styleclass="lblue" /><br />
+      <apex:repeat var="apt" value="{!allowed_apts}">        
+        <span class="hidden_parent">{!apt.clinical_appointment__r.name}<span class="spacer">&nbsp;</span><span class="spacer">&nbsp;</span>
+          <span class="hidden_hover"><apex:commandlink status="ajaxstatus" value="Remove" rerender="main_holder" action="{!block_apt}" styleclass="lblue">
+             <apex:param name="activation_id" value="{!apt.id}" assignTo="{!activation_id}" />
+           </apex:commandlink></span>
+        </span><br />
+      </apex:repeat>
+    <br /><br />      
+    </apex:outputpanel>
+
+    <!--display list of apts the staff member is not authorized to perform------------>
+    <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+      <apex:outputPanel layout="block" styleClass="mm_header-label">Non-Authorized Appointments</apex:outputPanel>
+    </apex:outputPanel>
+    <apex:outputpanel style="padding-left:15px;" layout="block">             
+      <apex:commandlink value="Authorize All" status="ajaxstatus" rerender="main_holder" action="{!authorize_all_apts}" styleclass="lblue" /><br />
+      <apex:repeat var="apt" value="{!disallowed_apts}">
+        <span class="hidden_parent">{!apt.name}<span class="spacer">&nbsp;</span><span class="spacer">&nbsp;</span>
+          <span class="hidden_hover"><apex:commandlink value="Authorize" status="ajaxstatus" rerender="main_holder" action="{!authorize_apt}" styleclass="lblue">
+             <apex:param name="activation_id" value="{!apt.id}" assignTo="{!activation_id}" />
+           </apex:commandlink></span>
+        </span><br />
+      </apex:repeat>         
+    </apex:outputpanel>
+  </apex:outputPanel>
+  
+  <!---------  END Appointment Display  ------------------------------------------------>
+ 
+ 
+  <!---------  Start Calendar Display --------------------------------------------------->
+  <apex:outputPanel rendered="{!if(selected_view=='calendar_display',true,false)}" id="calendar_holder" styleClass="mm_group" layout="block">
+  <!--display the calendar--->
+  <!--work through our calendar columns-->
+  <apex:repeat var="col" value="{!calendar_info}">
+    <apex:outputPanel styleClass="column_holder" layout="block">
+    <table class="hours_column">    
+    <!--work through the cells in the column--->
+    <apex:repeat var="cell" value="{!col.all_cells}">
+      <tr>
+        <td class="{!cell.cell_css}" onclick="hour_info({!cell.dow},{!cell.hour},{!cell.minute});">
+          <apex:image rendered="{!cell.image_display}" url="{!URLFOR($Resource.Dental_Practice_Resources,cell.image_name)}" width="15" height="15" styleClass="cell_image" />
+          {!cell.cell_text}&nbsp;
+        </td>
+      </tr>
+    </apex:repeat>
+    </table>
+    </apex:outputPanel>
+  </apex:repeat>
+  </apex:outputPanel>
+  <!---------  End Calendar Display  ---------------------------------------------------->
+  
+  <!---Start Hour Display --------------------------------------------------------------->
+  <apex:outputPanel rendered="{!if(selected_view=='hours_display',true,false)}" id="hours_holder" styleClass="mm_group" layout="block">
+  <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+    <apex:outputPanel layout="block" styleClass="mm_header-label">Monday</apex:outputPanel>
+  </apex:outputPanel> 
+
+  <apex:outputpanel style="padding-left:15px;" layout="block">
+    <apex:outputpanel layout="block" styleClass="f-right">
+      <apex:commandLink value="apply to all days" status="ajaxstatus" reRender="main_holder" action="{!copy_hours}" styleclass="lblue" >
+        <apex:param name="sdow" value="1" />
+      </apex:commandLink>
+    </apex:outputpanel>
+    <span class="form-line">
+      <span class="form-label">Start :</span>
+      <apex:outputfield value="{!mon_hours.Start_Time__c}" rendered="{!if(display_mon_form,false,true)}" />
+      <apex:inputfield value="{!edit_hours.Start_Time__c}" rendered="{!display_mon_form}" styleclass="input_standard" />
+    </span>
+    <span class="form-line">
+      <span class="form-label">Lunch :</span>
+      <apex:outputfield value="{!mon_hours.Lunch_Start__c}" rendered="{!if(display_mon_form,false,true)}" />
+      <apex:inputfield value="{!edit_hours.Lunch_Start__c}" rendered="{!display_mon_form}" styleclass="input_standard" />
+      &nbsp;to&nbsp;
+      <apex:outputfield value="{!mon_hours.Lunch_End__c}" rendered="{!if(display_mon_form,false,true)}" />
+      <apex:inputfield value="{!edit_hours.Lunch_End__c}" rendered="{!display_mon_form}" styleclass="input_standard" />      
+    </span>
+    <span class="form-line">
+      <span class="form-label">End :</span>
+      <apex:outputfield value="{!mon_hours.End_Time__c}" rendered="{!if(display_mon_form,false,true)}" />
+      <apex:inputfield value="{!edit_hours.End_Time__c}" rendered="{!display_mon_form}" styleclass="input_standard" />
+    </span>
+    <apex:commandLink action="{!edit_hours_info}" status="ajaxstatus" reRender="main_holder" value="Edit" styleclass="lblue" rendered="{!if(display_mon_form,false,true)}" >
+      <apex:param name="sdow" value="1" />
+    </apex:commandLink>
+    <apex:outputpanel rendered="{!display_mon_form}">
+      <apex:commandLink action="{!save_hours_form}" status="ajaxstatus" reRender="main_holder" value="Save" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!hide_hours_forms}" status="ajaxstatus" reRender="main_holder" value="Cancel" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!reset_hours_form}" status="ajaxstatus" reRender="main_holder" value="Reset" styleclass="lblue" />
+    </apex:outputpanel>
+  </apex:outputpanel><br /><br />
+  
+  <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+    <apex:outputPanel layout="block" styleClass="mm_header-label">Tuesday</apex:outputPanel>
+  </apex:outputPanel> 
+
+  <apex:outputpanel style="padding-left:15px;" layout="block">
+    <apex:outputpanel layout="block" styleClass="f-right">
+      <apex:commandLink value="apply to all days" status="ajaxstatus" reRender="main_holder" action="{!copy_hours}" styleclass="lblue" >
+        <apex:param name="sdow" value="2" />
+      </apex:commandLink>
+    </apex:outputpanel>
+    <span class="form-line">
+      <span class="form-label">Start :</span>
+      <apex:outputfield value="{!tue_hours.Start_Time__c}" rendered="{!if(display_tue_form,false,true)}" />
+      <apex:inputfield value="{!edit_hours.Start_Time__c}" rendered="{!display_tue_form}" styleclass="input_standard" />
+    </span>
+    <span class="form-line">
+      <span class="form-label">Lunch :</span>
+      <apex:outputfield value="{!tue_hours.Lunch_Start__c}" rendered="{!if(display_tue_form,false,true)}" />
+      <apex:inputfield value="{!edit_hours.Lunch_Start__c}" rendered="{!display_tue_form}" styleclass="input_standard" />
+      &nbsp;to&nbsp;
+      <apex:outputfield value="{!tue_hours.Lunch_End__c}" rendered="{!if(display_tue_form,false,true)}" />
+      <apex:inputfield value="{!edit_hours.Lunch_End__c}" rendered="{!display_tue_form}" styleclass="input_standard" />      
+    </span>
+    <span class="form-line">
+      <span class="form-label">End :</span>
+      <apex:outputfield value="{!tue_hours.End_Time__c}" rendered="{!if(display_tue_form,false,true)}" />
+      <apex:inputfield value="{!edit_hours.End_Time__c}" rendered="{!display_tue_form}" styleclass="input_standard" />
+    </span>
+    <apex:commandLink action="{!edit_hours_info}" status="ajaxstatus" reRender="main_holder" value="Edit" styleclass="lblue" rendered="{!if(display_tue_form,false,true)}" >
+      <apex:param name="sdow" value="2" />
+    </apex:commandLink>
+    <apex:outputpanel rendered="{!display_tue_form}">
+      <apex:commandLink action="{!save_hours_form}" status="ajaxstatus" reRender="main_holder" value="Save" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!hide_hours_forms}" status="ajaxstatus" reRender="main_holder" value="Cancel" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!reset_hours_form}" status="ajaxstatus" reRender="main_holder" value="Reset" styleclass="lblue" />
+    </apex:outputpanel>
+  </apex:outputpanel><br /><br />
+  
+  <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+    <apex:outputPanel layout="block" styleClass="mm_header-label">Wednesday</apex:outputPanel>
+  </apex:outputPanel> 
+
+  <apex:outputpanel style="padding-left:15px;" layout="block">
+    <apex:outputpanel layout="block" styleClass="f-right">
+      <apex:commandLink value="apply to all days" status="ajaxstatus" reRender="main_holder" action="{!copy_hours}" styleclass="lblue" >
+        <apex:param name="sdow" value="3" />
+      </apex:commandLink>
+    </apex:outputpanel>
+    <span class="form-line">
+      <span class="form-label">Start :</span>
+      <apex:outputfield value="{!wed_hours.Start_Time__c}" rendered="{!if(display_wed_form,false,true)}" />
+      <apex:inputfield value="{!edit_hours.Start_Time__c}" rendered="{!display_wed_form}" styleclass="input_standard" />
+    </span>
+    <span class="form-line">
+      <span class="form-label">Lunch :</span>
+      <apex:outputfield value="{!wed_hours.Lunch_Start__c}" rendered="{!if(display_wed_form,false,true)}" />
+      <apex:inputfield value="{!edit_hours.Lunch_Start__c}" rendered="{!display_wed_form}" styleclass="input_standard" />
+      &nbsp;to&nbsp;
+      <apex:outputfield value="{!wed_hours.Lunch_End__c}" rendered="{!if(display_wed_form,false,true)}" />
+      <apex:inputfield value="{!edit_hours.Lunch_End__c}" rendered="{!display_wed_form}" styleclass="input_standard" />      
+    </span>
+    <span class="form-line">
+      <span class="form-label">End :</span>
+      <apex:outputfield value="{!wed_hours.End_Time__c}" rendered="{!if(display_wed_form,false,true)}" />
+      <apex:inputfield value="{!edit_hours.End_Time__c}" rendered="{!display_wed_form}" styleclass="input_standard" />
+    </span>
+    <apex:commandLink action="{!edit_hours_info}" status="ajaxstatus" reRender="main_holder" value="Edit" styleclass="lblue" rendered="{!if(display_wed_form,false,true)}" >
+      <apex:param name="sdow" value="3" />
+    </apex:commandLink>
+    <apex:outputpanel rendered="{!display_wed_form}">
+      <apex:commandLink action="{!save_hours_form}" status="ajaxstatus" reRender="main_holder" value="Save" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!hide_hours_forms}" status="ajaxstatus" reRender="main_holder" value="Cancel" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!reset_hours_form}" status="ajaxstatus" reRender="main_holder" value="Reset" styleclass="lblue" />
+    </apex:outputpanel>
+  </apex:outputpanel><br /><br />
+  
+  <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+    <apex:outputPanel layout="block" styleClass="mm_header-label">Thursday</apex:outputPanel>
+  </apex:outputPanel> 
+
+  <apex:outputpanel style="padding-left:15px;" layout="block">
+    <apex:outputpanel layout="block" styleClass="f-right">
+      <apex:commandLink value="apply to all days" status="ajaxstatus" reRender="main_holder" action="{!copy_hours}" styleclass="lblue" >
+        <apex:param name="sdow" value="4" />
+      </apex:commandLink>
+    </apex:outputpanel>
+    <span class="form-line">
+      <span class="form-label">Start :</span>
+      <apex:outputfield value="{!thu_hours.Start_Time__c}" rendered="{!if(display_thu_form,false,true)}" />
+      <apex:inputfield value="{!edit_hours.Start_Time__c}" rendered="{!display_thu_form}" styleclass="input_standard" />
+    </span>
+    <span class="form-line">
+      <span class="form-label">Lunch :</span>
+      <apex:outputfield value="{!thu_hours.Lunch_Start__c}" rendered="{!if(display_thu_form,false,true)}" />
+      <apex:inputfield value="{!edit_hours.Lunch_Start__c}" rendered="{!display_thu_form}" styleclass="input_standard" />
+      &nbsp;to&nbsp;
+      <apex:outputfield value="{!thu_hours.Lunch_End__c}" rendered="{!if(display_thu_form,false,true)}" />
+      <apex:inputfield value="{!edit_hours.Lunch_End__c}" rendered="{!display_thu_form}" styleclass="input_standard" />      
+    </span>
+    <span class="form-line">
+      <span class="form-label">End :</span>
+      <apex:outputfield value="{!thu_hours.End_Time__c}" rendered="{!if(display_thu_form,false,true)}" />
+      <apex:inputfield value="{!edit_hours.End_Time__c}" rendered="{!display_thu_form}" styleclass="input_standard" />
+    </span>
+    <apex:commandLink action="{!edit_hours_info}" status="ajaxstatus" reRender="main_holder" value="Edit" styleclass="lblue" rendered="{!if(display_thu_form,false,true)}" >
+      <apex:param name="sdow" value="4" />
+    </apex:commandLink>
+    <apex:outputpanel rendered="{!display_thu_form}">
+      <apex:commandLink action="{!save_hours_form}" status="ajaxstatus" reRender="main_holder" value="Save" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!hide_hours_forms}" status="ajaxstatus" reRender="main_holder" value="Cancel" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!reset_hours_form}" status="ajaxstatus" reRender="main_holder" value="Reset" styleclass="lblue" />
+    </apex:outputpanel>
+  </apex:outputpanel><br /><br />
+  
+  <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+    <apex:outputPanel layout="block" styleClass="mm_header-label">Friday</apex:outputPanel>
+  </apex:outputPanel> 
+
+  <apex:outputpanel style="padding-left:15px;" layout="block">
+    <apex:outputpanel layout="block" styleClass="f-right">
+      <apex:commandLink value="apply to all days" status="ajaxstatus" reRender="main_holder" action="{!copy_hours}" styleclass="lblue" >
+        <apex:param name="sdow" value="5" />
+      </apex:commandLink>
+    </apex:outputpanel>  
+    <span class="form-line">
+      <span class="form-label">Start :</span>
+      <apex:outputfield value="{!fri_hours.Start_Time__c}" rendered="{!if(display_fri_form,false,true)}" />
+      <apex:inputfield value="{!edit_hours.Start_Time__c}" rendered="{!display_fri_form}" styleclass="input_standard" />
+    </span>
+    <span class="form-line">
+      <span class="form-label">Lunch :</span>
+      <apex:outputfield value="{!fri_hours.Lunch_Start__c}" rendered="{!if(display_fri_form,false,true)}" />
+      <apex:inputfield value="{!edit_hours.Lunch_Start__c}" rendered="{!display_fri_form}" styleclass="input_standard" />
+      &nbsp;to&nbsp;
+      <apex:outputfield value="{!fri_hours.Lunch_End__c}" rendered="{!if(display_fri_form,false,true)}" />
+      <apex:inputfield value="{!edit_hours.Lunch_End__c}" rendered="{!display_fri_form}" styleclass="input_standard" />      
+    </span>
+    <span class="form-line">
+      <span class="form-label">End :</span>
+      <apex:outputfield value="{!fri_hours.End_Time__c}" rendered="{!if(display_fri_form,false,true)}" />
+      <apex:inputfield value="{!edit_hours.End_Time__c}" rendered="{!display_fri_form}" styleclass="input_standard" />
+    </span>
+    <apex:commandLink action="{!edit_hours_info}" status="ajaxstatus" reRender="main_holder" value="Edit" styleclass="lblue" rendered="{!if(display_fri_form,false,true)}" >
+      <apex:param name="sdow" value="5" />
+    </apex:commandLink>
+    <apex:outputpanel rendered="{!display_fri_form}">
+      <apex:commandLink action="{!save_hours_form}" status="ajaxstatus" reRender="main_holder" value="Save" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!hide_hours_forms}" status="ajaxstatus" reRender="main_holder" value="Cancel" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!reset_hours_form}" status="ajaxstatus" reRender="main_holder" value="Reset" styleclass="lblue" />
+    </apex:outputpanel>
+  </apex:outputpanel><br /><br />
+    
+  </apex:outputPanel>
+  <!-- End Hour Display ----------------------------------------------------------------->
+  
+<!-------------------------- Start Modal Holder -------------------------------------------------------------------->  
+  <apex:outputPanel id="modal_holder" style="z-index:3000;" >
+  <apex:actionRegion >
+  <apex:actionFunction oncomplete="default_cursor(this);" action="{!close_modal}" name="close_pop" rerender="modal_holder" />  
+  <apex:actionFunction oncomplete="default_cursor(this);" action="{!update_activation_license}" name="update_license" rerender="main_holder" />  
+  <apex:actionFunction oncomplete="default_cursor(this);" action="{!update_activation_education}" name="update_education" rerender="main_holder" />   
+<!--  <apex:actionFunction oncomplete="default_cursor(this);" name="search_refresh" rerender="part_results" />
+  <apex:actionFunction oncomplete="default_cursor(this);" name="add_part" action="{!add_so_part}" reRender="main_holder">   
+    <apex:param name="pid" value="" />
+  </apex:actionFunction>-->
+
+
+   <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!modal_display}"/>
+    <apex:outputPanel styleClass="modalPopup_outer" layout="block" rendered="{!modal_display}" id="outerpop">
+    <span class="modalPopup_outerheader" onclick="close_pop();">Close X</span> 
+    
+    <!-- rendered="{!if(modal_display && modal_type=='new_payment',true,false)}"  -->
+    <apex:outputPanel styleClass="modal_normal"  id="new_payment_form" style="border:0px;" >   
+      <apex:outputpanel rendered="{!if(active_type=='license',true,false)}">
+      <apex:outputtext value="{!modal_out}" escape="false" /><br /><br /><br />
+      <span class="confirm-btn" onclick="update_license();">Confirm</span><span class="spacer">&nbsp;</span>
+      <span class="cancel-btn" onclick="close_pop();">Cancel</span>
+      </apex:outputpanel>
+      
+      <apex:outputpanel rendered="{!if(selected_view=='education',true,false)}">
+      <apex:outputtext value="{!modal_out}" escape="false" /><br /><br /><br />
+      <span class="confirm-btn" onclick="update_education();">Confirm</span><span class="spacer">&nbsp;</span>
+      <span class="cancel-btn" onclick="close_pop();">Cancel</span>
+      </apex:outputpanel>      
+    </apex:outputPanel>
+    
+    
+    
+    
+
+   
+    
+ </apex:outputpanel>
+ </apex:actionRegion>    
+</apex:outputPanel> 
+<!----end modal holder----->
+
+</apex:outputPanel>
+
+</apex:form>
+</body>
+</apex:page>

@@ -1,0 +1,285 @@
+<apex:page cache="false" standardStylesheets="false" showHeader="false" sidebar="false" >
+  <script src="http://www.clearchoice.com/PrecisSanDiego201208/jslibrary/1344400715000/sfdc/JiffyStubs.js"></script>
+  
+  <p><img align="left" height="81" src="http://clearchoice-media.precis5.com/a41b3bb3e6b050b6c9067c67f663b915" width="250" alt="" /><img align="middle" height="67" src="http://clearchoice-media.precis5.com/d54ce9de9df77c579775a7b6b1a4bdc0" width="246" alt="" /></p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <h1 style="text-align: center;">&nbsp;Join us in Sandy or Holladay, UT for a free seminar to learn about the benefits of dental implants on August 22nd or 23rd.<br />
+    &nbsp;</h1>
+  <p><span style="color: #000000;"><em><span style="font-size: 14px; "><img align="left" height="137" src="http://clearchoice-media.precis5.com/e71e5cd119bbc5797164fb0cd7fd94a4" width="133" alt="" /></span><span style="font-size: 14px; ">Understanding your treatment options for missing teeth is important and could change your life. Dental implants are a solution that can last a lifetime and help you get your smile back. Attend our free seminar and learn about the procedure, the long term health benefits, and how to discover if you are a candidate for dental implants.</span></em></span></p>
+  <h3>Meet patients like you, talk to our expert team, and learn how to change your life with <a href="http://www.clearchoice.com" target="_blank" title="Learn">dental implants</a>*</h3>
+  <hr />
+  <h4 style="text-align: right;"><span style="font-size: 12px; ">&ldquo;I am so grateful that I went to the ClearChoice seminar. In less than an hour, I learned exactly what ClearChoice could do for me!&rdquo; - David</span></h4>
+  <h3><br />
+    <br />
+    &nbsp;We are offering three seminars in your area on August 22nd or 23rd. <br />
+    Select your seminar and sign up below.<br />
+    &nbsp;</h3>
+  <script language="javascript" type="text/javascript">// <![CDATA[
+function checkRadio (frmName, rbGroupName) { 
+     var radios = document[frmName].elements[rbGroupName]; 
+     for (var i=0; i <radios.length; i++) { 
+        if (radios[i].checked) { 
+         return true; 
+        } 
+     } 
+     return false; 
+}  
+
+function ValidateForm()  {  
+    var msg = '';
+    var num_errors = 0;
+    if (!checkRadio("sfForm","Campaign_ID"))  {
+      msg += "    Please select which seminar you would like to attend.\r\n";
+      num_errors++;
+    }
+    if (document.forms['sfForm'].Campaign_ID[0].checked)
+    {
+        document.forms['sfForm'].retURL.value = "http://www.clearchoice.com/salt-lake-city/SaltLake-seminar-signup-confirm-HiddenValley.html";
+    }
+    else if (document.forms['sfForm'].Campaign_ID[1].checked)
+    {
+        document.forms['sfForm'].retURL.value = "http://www.clearchoice.com/salt-lake-city/SaltLake-seminar-signup-confirm-SouthTowneExposition.html";
+    }
+      else if (document.forms['sfForm'].Campaign_ID[2].checked)
+    {
+        document.forms['sfForm'].retURL.value = "http://www.clearchoice.com/salt-lake-city/SaltLake-seminar-signup-confirm-TheCottonwoodClub.html";
+    } else {
+        msg+="    Please select a Seminar.\r\n";
+        num_errors++;
+    }
+    
+    if (document.forms['sfForm'].first_name.value == "") {
+        msg += "    First Name is required.\r\n";
+                    num_errors++;
+        document.forms['sfForm'].first_name.focus();
+    }
+    
+    if (document.forms['sfForm'].last_name.value == "")  {
+        msg+= "    Last Name is required.\r\n";
+                    num_errors++;
+        document.forms['sfForm'].last_name.focus();
+    }
+    
+    EmailAddy = document.forms['sfForm'].email.value;
+    if (EmailAddy.length == 0)  {
+        msg += "    Email is required.\r\n";
+        num_errors++;
+        document.forms['sfForm'].email.focus();
+    }
+    
+    if (EmailAddy.indexOf("@") != -1)  {
+        if (EmailAddy.substr(EmailAddy.indexOf("@")).substr(EmailAddy.substr(EmailAddy.indexOf("@"))).indexOf(".") == -1)  {
+            msg+="    Your e-mail address is not formatted correctly. Please check your e-mail address for proper format.\r\n";
+            num_errors++;
+            document.forms['sfForm'].email.focus();
+        }
+    }
+    else  {
+        msg+="    Your email address is not formatted correctly. Please check your email address for proper format.\r\n";
+        num_errors++;
+        document.forms['sfForm'].email.focus();
+    }
+    
+    if (document.forms['sfForm'].phone.value == "")  {
+        msg+="    Phone is required.\r\n";
+        num_errors++;
+        document.forms['sfForm'].phone.focus();
+    }
+    
+    if (document.forms['sfForm'].street.value == "")  {
+        msg+="    Address is required.\r\n";
+        num_errors++;
+        document.forms['sfForm'].street.focus();
+    }
+    
+    if (document.forms['sfForm'].city.value == "")  {
+        msg+="    City is required.\r\n";
+        num_errors++;
+        document.forms['sfForm'].city.focus();
+    }
+    
+    if (document.forms['sfForm'].state.value == "") {
+        msg+="    State is required.\r\n";
+        num_errors++;
+        document.forms['sfForm'].state.focus();
+    }
+    
+    if (document.forms['sfForm'].zip.value == "")  {
+        msg+="    Zip is required.\r\n";
+        num_errors++;
+        document.forms['sfForm'].zip.focus();
+    }
+    
+        var guest_count = document.getElementById('00N40000002G5Oe').value;
+        if(isNaN(guest_count)) {
+          msg+='    Please enter a number for the guest count\r\n';
+            num_errors++;
+        } else if(guest_count=='') 
+          document.getElementById('00N40000002G5Oe').value = 0;   
+        if(num_errors>0) {
+          if(num_errors==1)
+            msg = 'Please fix the following issues and click register to continue :\r\n' + msg;
+          else
+            msg = 'Please fix the following issues and click register to continue :\r\n' + msg;
+        alert(msg);
+      return false;
+    }
+    else    
+      document.forms['sfForm'].submit();
+    }
+// ]]></script>
+  <form action="https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" id="sfForm" method="POST" name="sfForm">
+    <h3>
+      <input name="oid" type="hidden" value="00D400000007ZMu" />
+      <input name="retURL" type="hidden" />
+      <input id="member_status" name="member_status" type="hidden" value="Registered" />
+    </h3>
+    <h3>
+      <input id="00N40000002FcbK" maxlength="160" name="00N40000002FcbK" size="20" type="hidden" value="SLC-M-SLTrib.com-8-2012" />
+    </h3>
+    <table cellpadding="0" cellspacing="0" width="100%">
+      <tbody>
+        <tr>
+          <td><table cellpadding="3" cellspacing="0" width="100%">
+              <tbody>
+                <tr>
+                  <td colspan="3" style="background-color: #112b3d; color: #ffffff; font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold; height: 20px;"><h3>&nbsp;Register Now</h3></td>
+                </tr>
+                <tr>
+                  <td align="left" colspan="2" style="font-size: 12px; font-family: Arial, Helvetica, sans-serif; font-weight: bold;" valign="top"><h3>Select a seminar:</h3></td>
+                  <td rowspan="4" style="vertical-align: top;"><table cellpadding="3" cellspacing="0" width="100%">
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="font-size: 12px; font-family: Arial, Helvetica, sans-serif; font-weight: bold;"><h3>Please complete the following form to register for one of our free seminars:</h3></td>
+                        </tr>
+                        <tr>
+                          <td style="font-size: 11px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; width: 10%; text-align: right;"><h3>First Name:&nbsp;</h3></td>
+                          <td style="width: 50%;"><h3>
+                              <input autocomplete="OFF" id="first_name" maxlength="40" name="first_name" size="20" type="text" />
+                            </h3></td>
+                        </tr>
+                        <tr>
+                          <td style="font-size: 11px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; text-align: right;"><h3>Last Name:&nbsp;</h3></td>
+                          <td><h3>
+                              <input autocomplete="OFF" id="last_name" maxlength="80" name="last_name" size="20" type="text" />
+                            </h3></td>
+                        </tr>
+                        <tr>
+                          <td style="font-size: 11px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; text-align: right;"><h3>Email:&nbsp;</h3></td>
+                          <td><h3>
+                              <input autocomplete="OFF" id="email" maxlength="80" name="email" size="20" type="text" />
+                            </h3></td>
+                        </tr>
+                        <tr>
+                          <td style="font-size: 11px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; text-align: right;"><h3>Phone:&nbsp;</h3></td>
+                          <td><h3>
+                              <input autocomplete="OFF" id="phone" maxlength="40" name="phone" size="20" type="text" />
+                            </h3></td>
+                        </tr>
+                        <tr>
+                          <td style="font-size: 11px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; text-align: right;"><h3>Address:&nbsp;</h3></td>
+                          <td><textarea name="street"></textarea></td>
+                        </tr>
+                        <tr>
+                          <td style="font-size: 11px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; text-align: right;"><h3>City:&nbsp;</h3></td>
+                          <td><h3>
+                              <input autocomplete="OFF" id="city" maxlength="40" name="city" size="20" type="text" />
+                            </h3></td>
+                        </tr>
+                        <tr>
+                          <td style="font-size: 11px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; text-align: right;"><h3>State:&nbsp;</h3></td>
+                          <td><h3>
+                              <input autocomplete="OFF" id="state" maxlength="20" name="state" size="20" type="text" />
+                            </h3></td>
+                        </tr>
+                        <tr>
+                          <td style="font-size: 11px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; text-align: right;"><h3>Zip:&nbsp;</h3></td>
+                          <td><h3>
+                              <input autocomplete="OFF" id="zip" maxlength="20" name="zip" size="20" type="text" />
+                            </h3></td>
+                        </tr>
+                        <tr>
+                          <td align="right" valign="top">&nbsp;</td>
+                          <td valign="top">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="font-size: 11px; font-family: Arial, Helvetica, sans-serif;"><h3><strong>Please enter the name(s) of any guests that will be attending:</strong></h3>
+                            <h3>(if you do not know, please enter the number of guests that will be attending)</h3></td>
+                        </tr>
+                        <tr>
+                          <td style="font-size: 11px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; text-align: right;"><h3># Guests:&nbsp;</h3></td>
+                          <td><h3>
+                              <input id="00N40000002G5Oe" maxlength="2" name="00N40000002G5Oe" size="3" type="text" value="0" />
+                            </h3></td>
+                        </tr>
+                        <tr>
+                          <td style="font-size: 11px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; text-align: right;"><h3>Guest Names:&nbsp;</h3></td>
+                          <td><textarea name="description"></textarea></td>
+                        </tr>
+                        <tr>
+                          <td>&nbsp;</td>
+                          <td><h3>
+                              <input onClick="javascript:ValidateForm();" type="button" value="Register Now" />
+                            </h3></td>
+                        </tr>
+                      </tbody>
+                    </table></td>
+                </tr>
+                <tr>
+                  <td style="width: 10px; vertical-align: top;"><h3>
+                      <input id="Campaign_ID" name="Campaign_ID" type="radio" value="70140000000RykJ" />
+                    </h3></td>
+                  <td align="left" style="font-size: 11px; font-family: Arial, Helvetica, sans-serif; font-weight: bold;" valign="top"><h3><img alt="Hidden Valley Country Club" height="167" src="http://clearchoice-media.precis5.com/acf06cdd9c744f969958e1f085554c8b" title="Dental Implant Seminar at Hidden Valley Country Club" width="250" /></h3>
+                    <h3>Wed., August 22nd at 10:00am</h3>
+                    <h3>Hidden Valley Country Club</h3>
+                    <h3>11820 South Highland Dr.&nbsp;</h3>
+                    <h3>Sandy, UT 84092</h3>
+                    <h3><a href="http://clearchoice-media.precis5.com/e94fe9ac8dc10dd8b9a239e6abee2848" target="_blank" title="Dental Implant Seminar at Hidden Valley Country Club">Download map and directions</a></h3></td>
+                </tr>
+                <tr>
+                  <td style="width: 10px; vertical-align: top;"><h3>
+                      <input id="Campaign_ID" name="Campaign_ID" type="radio" value="70140000000RPqL" />
+                    </h3></td>
+                  <td align="left" style="font-size: 11px; font-family: Arial, Helvetica, sans-serif; font-weight: bold;" valign="top"><h3>&nbsp;<img alt="South Towne Exposition Center" height="166" src="http://clearchoice-media.precis5.com/b0ab42fcb7133122b38521d13da7120b" style="font-size: 11px; " title="Dental Implant Seminar at South Towne Exposition Center" width="250" /></h3>
+                    <h3>Wed., August 22nd at 6:30pm</h3>
+                    <h3>South Towne Exposition Center</h3>
+                    <h3>9575 South State Street</h3>
+                    <h3>Sandy, UT 84070</h3>
+                    <h3><a href="http://clearchoice-media.precis5.com/ac8cd1808dc30460a81cab1b0e6652fa" target="_blank" title="Dental Implant Seminar at South Towne Exposition Center">Download map and directions</a></h3></td>
+                </tr>
+                <tr>
+                  <td style="width: 10px; vertical-align: top;"><h3>
+                      <input id="Campaign_ID" name="Campaign_ID" type="radio" value="70140000000RykO" />
+                    </h3></td>
+                  <td align="left" style="font-size: 11px; font-family: Arial, Helvetica, sans-serif; font-weight: bold;" valign="top"><h3><img alt="ClearChoice Dental Implant Seminar The Cottonwood Club" height="187" src="http://clearchoice-media.precis5.com/333cb763facc6ce398ff83845f224d62" title="Dental Implant Seminar at The Cottonwood Club" width="250" /></h3>
+                    <h3>Thurs., August 23rd at 2:00pm</h3>
+                    <h3>The Cottonwood Club</h3>
+                    <h3>1780 E. Lakewood Dr. &nbsp;</h3>
+                    <h3>Holladay, UT 84117</h3>
+                    <h3><a href="http://clearchoice-media.precis5.com/2996962656838a97af4c5f926fe6f1b0" target="_blank" title="Dental Implant Seminar at The Cottonwood Club">Download map and directions</a></h3></td>
+                </tr>
+                <tr>
+                  <td style="width: 10px; vertical-align: top;"><h3>&nbsp;</h3></td>
+                  <td align="left" style="font-size: 11px; font-family: Arial, Helvetica, sans-serif; font-weight: bold;" valign="top"><h3>&nbsp;</h3></td>
+                </tr>
+              </tbody>
+            </table></td>
+          <td>&nbsp;</td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+  <hr />
+  <h2 style="text-align: center;">Watch Actual patients sharing their experiences&nbsp;</h2>
+  <h3 style="text-align: center;">
+    <iframe allowtransparency="true" class="wistia_embed" frameborder="0" height="270" name="wistia_embed" scrolling="no" src="http://fast.wistia.com/embed/iframe/48a305c073?version=v1&videoWidth=480&videoHeight=270&controlsVisibleOnLoad=true" width="480"></iframe>
+  </h3>
+  <h2 style="text-align: center;">Call to make your reservation or schedule a free consultation now</h2>
+  <h2 style="color: #333333; font-family: 'lucida grande', tahoma, verdana, arial, sans-serif; text-align: center;">801-253-1999</h2>
+  <h4 style="text-align: center;">&nbsp;</h4>
+  <h3 style="text-align: center;">This is a terrific opportunity to better understand the advances that make ClearChoice Dental Implant Centers&nbsp;the &quot;Clear Choice&quot; for you!</h3>
+  <p>&nbsp;</p>
+  <p style="text-align: center;"><span style="font-family: arial, helvetica, sans-serif; font-size: small;">*America&rsquo;s #1 Choice determined by an Independent Patient Survey 2011<br />
+    </span><span style="text-align: left; color: #221e1f; white-space: pre-wrap;">*Qualified patients can have their procedure in one day after initial workup without additional bone graft surgery. &nbsp;Results may vary in individual cases.&nbsp;</span><span>&nbsp;</span></p>
+</apex:page>

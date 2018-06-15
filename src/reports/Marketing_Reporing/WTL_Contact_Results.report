@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Campaign$Name</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers*Lead$Call_Center_Agent_Owner__c</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers$Phone</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers$Name</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers*CampaignMember$Lead_Created_Date__c</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers.Activities$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers.Activities$Activity_Hour__c</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers.Activities$Attempt__c</field>
+    </columns>
+    <description>how quickly do we get back to web leads</description>
+    <filter>
+        <criteriaItems>
+            <column>Campaign$Type</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Web Lead,Web-Display,Web-SEM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Campaign.LeadCampaignMembers.Activities$Attempt__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Campaign.LeadCampaignMembers*Lead$Call_Center_Agent_Team__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>confirmation</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Campaign$Name</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value>web lead-promise keeper,web lead- online schedule</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>WTL Contact Results</name>
+    <params>
+        <name>scopeid</name>
+        <value></value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Activites_w_Patient_and_Campaign__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Campaign$Name</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Campaign.LeadCampaignMembers$CreatedDate</dateColumn>
+        <interval>INTERVAL_CURRENT</interval>
+    </timeFrameFilter>
+</Report>

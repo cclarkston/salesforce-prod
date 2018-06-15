@@ -1,0 +1,27 @@
+{!Lead.Email}"{!Lead.Title}","{!Lead.FirstName}","{!Lead.LastName}","{!Lead.Gender__c}",
+"{!Lead.Street}","{!Lead.City}","{!Lead.State}","{!Lead.PostalCode}",
+"{!Lead.Phone}","{!Lead.Work__c}","{!Lead.MobilePhone}","{!Lead.Email}","{!Lead.Email_Picklist__c}"
+
+
+<script type="text/javascript">
+
+var currentTime = new Date()
+var month = currentTime.getMonth() + 1
+var day = currentTime.getDate()
+var year = currentTime.getFullYear()
+
+var hours = currentTime.getHours()
+var minutes = currentTime.getMinutes()
+var seconds = currentTime.getSeconds()
+
+var strFileName = year + "" + month + "" + day + " " + hours + "" + minutes + "" + seconds + " WindentData.txt"
+
+var answer = confirm ("Proceed with exporting data to Windent?")
+if (answer)
+     window.document.execCommand('SaveAs', null, strFileName)
+     //window.alert( strFileName )
+
+else
+     //window.alert( 'The file has not been saved.' )
+
+</script>

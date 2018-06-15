@@ -1,0 +1,501 @@
+<apex:page controller="dp_admin_pot" sidebar="false" showHeader="false" docType="html-5.0">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!--  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css' />
+  <apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+  <apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/mmenu_nav.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/dp_css_main.css')}"/>
+    <script type="text/javascript" src="{!URLFOR($Resource.Scriptaculous, 'lib/prototype.js')}"></script>
+  <script type="text/javascript" src="{!URLFOR($Resource.Scriptaculous, 'src/scriptaculous.js')}"></script>
+
+  <style>    
+    .hidden_parent:hover > td > .hidden_hover {
+      visibility:visible;
+    }    
+    
+    .hidden_parent:hover > span > .hidden_hover {
+      visibility:visible;
+    }    
+    
+    .sortable:hover {
+<!--      background:#b9f9d9;-->
+      font-weight:normal;
+    }
+    
+    ul.full_row {
+      width:100%;
+      list-style-type: none;
+    } 
+        
+    .gray_header {
+       display:inline-block;
+       border-bottom:1px solid #bfbfbf;
+       padding-left:5px;
+       padding-right:5px;
+       font-weight:bold;
+    }
+    
+    li.odd {
+      padding-left:5px;
+      border-bottom:1px dotted #bfbfbf;
+    }
+           
+    li.even {
+      padding-left:5px;
+      background:#f5f5f5;
+      border-bottom:1px dotted #bfbfbf;
+    }
+    
+    .apt_cell {
+      display:inline-block;
+      width:30%;
+    }
+    
+    .days_cell {
+      display:inline-block;
+      width:10%;
+    }
+    
+    .tooth_cell {
+      display:inline-block;
+      width:15%;
+    }
+    
+    .drevenue_cell {
+      display:inline-block;
+      width:15%;
+    }
+    
+    .action_cell {
+      display:inline-block;
+
+    }
+    
+    .sorder_cell {
+      display:inline-block;
+      min-width:70px;
+    }
+  </style>
+  
+  <script type="text/javascript">    
+    var key_timeout;
+    var search_in_progress = false;
+   
+   function search_now() {
+      search_in_progress = false;  
+      search_users(); 
+   }
+    
+    function qsearch_key() {    
+      if(search_in_progress)
+        clearTimeout(key_timeout);
+      search_in_progress = true;  
+      key_timeout = setTimeout("body_refresh()",600);
+    }   
+    
+     function apt_qsearch_key() {    
+      if(search_in_progress)
+        clearTimeout(key_timeout);
+      search_in_progress = true;  
+      key_timeout = setTimeout("apt_refresh()",600);
+    }   
+    
+    function init_sort() {
+       Sortable.create('slist',{tag:'li',onUpdate: function(item) {
+         var list = Sortable.options(item).element; 
+         var pass_string = Sortable.serialize(list,{'list':'list'});
+//         alert(pass_string);
+         apt_sort_handler(pass_string);          
+       }});     
+     }
+  </script>
+  
+  
+</head>
+<body>
+<apex:form >
+<apex:actionFunction name="body_refresh" rerender="nav_content,main_holder" />
+
+<div id="nav-fixed">
+<div id="nav-header" style="border:0px;">
+<apex:actionRegion >
+<apex:actionFunction name="nav_to" action="{!navigate_to}" rerender="none" status="ajaxstatus">
+  <apex:param name="navid" value=""  />
+</apex:actionFunction>
+<apex:actionFunction name="center_switch" action="{!change_center}" rerender="nav_content,main_holder" status="ajaxstatus" >
+  <apex:param name="cid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="active_switch" action="{!change_active_view}" rerender="main_holder" status="ajaxstatus">
+  <apex:param name="afilter" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="apt_sort_handler" action="{!modify_sort_order}" rerender="main_holder" oncomplete="init_sort();" status="ajaxstatus">
+  <apex:param name="pthru" value="" />
+</apex:actionFunction>
+
+<apex:actionStatus id="ajaxstatus">
+    <apex:facet name="start">
+      <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1110; background-color: #f2f2f2;">
+        &nbsp;
+      </div>
+      <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1111; margin: 20% 50%">
+        <!--<apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,'Images/5Wits.gif')}"/>-->
+        <!--<img src="http://upload.wikimedia.org/wikipedia/commons/e/ed/Cursor_Windows_Vista.gif" />-->
+        <img src="{!URLFOR($Resource.Dental_Practice_Resources,'Images/Circle-out.gif')}" />
+        <!--<img src="{!URLFOR($Resource.Dental_Practice_Resources,'Images/5Wits.gif')}" />-->
+      </div>
+    </apex:facet>
+  </apex:actionStatus>
+
+<apex:outputpanel id="nav_content" style="width:100%">
+<div class="nav-col-quarter">
+    <apex:outputpanel id="back_holder">
+      <apex:outputpanel rendered="{!if(selected_view=='pot_display',true,false)}"><a href="javascript:window.history.go(-1);" class="nav_color">&lt; Back</a></apex:outputpanel>
+      <apex:outputpanel rendered="{!if(selected_view=='pot_display',false,true)}"><apex:commandLink styleClass="nav_color" status="ajaxstatus" action="{!display_all_pot}" reRender="nav_content,main_holder">&lt; Back</apex:commandLink></apex:outputpanel>
+    </apex:outputpanel>
+  <div class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:black;">
+      <span class="color-box" style="background:{!current_page.nav_color__c};">&nbsp;</span>
+      <apex:outputtext value="{!current_page.name}" />
+    </a>    
+    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">    
+      <apex:repeat var="menu_line" value="{!navigation_menu}" >
+        <!--is menu line a header?-->
+        <apex:outputpanel rendered="{!if(menu_line.menu_type=='Header',true,false)}"> 
+          <li role="presentation" class="dropdown-header"><apex:outputtext value="{!menu_line.menu_name}" /></li>
+        </apex:outputpanel>
+        <!--is menu line a page?-->
+        <apex:outputpanel rendered="{!if(menu_line.menu_type=='Page',true,false)}">
+          <li role="presentation" class="dropdown-lineitem">
+            <a role="menuitem" tabindex="-1" href="javascript:nav_to('{!menu_line.menu_id}');" style="color:#189BEB">
+              <span class="color-box" style="background:{!menu_line.menu_nav_color};">&nbsp;</span><apex:outputtext value="{!menu_line.menu_name}" />
+            </a>
+          </li>
+        </apex:outputpanel>
+        <!--is it a call for a spacer-->
+        <apex:outputpanel rendered="{!if(menu_line.menu_type=='Spacer',true,false)}"><br /></apex:outputpanel>
+      </apex:repeat>      
+    </ul>
+  </div>
+</div>
+
+<div class="nav-col-half">
+  <span class="dropdown drop-hover">
+      <a class="dropdown-toggle nav_color " data-toggle="dropdown"><apex:outputtext value="{!current_center.name}"  style="padding-right:5px;" styleClass="c-pointer"  /><span class="caret"></span></a>
+        <ul class="dropdown-menu overflow-menu" >
+          <apex:repeat var="center" value="{!center_list}">
+            <li class="dropdown-lineitem">
+              <a href="javascript:center_switch('{!center.id}');" style="color:#189BEB"><apex:outputtext value="{!center.name}" /></a>
+            </li>
+          </apex:repeat>
+        </ul>
+    </span>
+    <!--Quick Search Bar-->
+    <apex:outputpanel rendered="{!display_qsearch}"><apex:inputText value="{!quick_search_field}" styleClass="qsearch" onkeyup="qsearch_key();" /><a class="qsearch-btn" >Search</a></apex:outputpanel>
+    <apex:outputpanel rendered="{!display_add_button}">
+    <!--License and Education are being merged into information screen now - no quick link button.  They will have seperate links on the page
+      <apex:outputpanel rendered="{!if(selected_view=='license_display',true,false)}"><span class="add-box" onclick="new_license();">+</span></apex:outputpanel> -->
+    </apex:outputpanel>
+</div>
+
+<div class="nav-col-quarter ag-left">
+  <span class="dropdown drop-hover">
+      <a class="dropdown-toggle nav_color" data-toggle="dropdown"><apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}" width="25" height="25" styleClass="c-pointer"
+        onmouseover="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_black.png')}';"
+        onmouseout="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}';"
+        onclick="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}';"
+         /></a>
+      <ul class="dropdown-menu gear-menu dropdown-menu-right">
+        <apex:repeat var="gitem" value="{!gear_menu}" >
+            <li class="dropdown-lineitem" style="display:inline-block;">
+              <a href="{!gitem.Page_URL__c}" style="color:#189BEB;"  target="{!gitem.hyperlink_target__c}"
+                  onmouseover="this.firstChild.src='{!URLFOR($Resource.Dental_Practice_Resources,gitem.Image_Name_Hover__c)}';this.style.color='black';" 
+                  onmouseout="this.firstChild.src='{!URLFOR($Resource.Dental_Practice_Resources,gitem.Image_Name__c)}';this.style.color='#189BEB';">
+                <apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,gitem.Image_Name__c)}" width="{!if(gitem.name=='Salesforce','30','20')}" height="20" style="display:inline;{!if(gitem.name=='Salesforce','position:relative;left:-7px;margin-right:-6px;','margin-right:5px;')}" />&nbsp;&nbsp;{!gitem.name}
+              </a>
+            </li>
+        </apex:repeat>
+      </ul>        
+    </span>
+</div>
+
+
+</apex:outputPanel>
+</apex:actionRegion>  
+</div>
+</div>
+
+<!--styleClass="mholder"-->
+<apex:outputPanel id="main_holder" styleClass="mm_container" layout="block">
+  <apex:outputpanel layout="block" styleClass="ptop_header">
+  <!--display active/inactive bar here-->
+  <table style="width:100%;">
+  <tr>
+    <td class="back_cell">
+      <apex:outputpanel rendered="{!if(selected_view=='pot_display' && display_new_plan,true,false)}">+&nbsp; <apex:commandLink status="ajaxstatus" value="New Plan of Treatment" styleclass="lblue" action="{!new_pot_form}" rerender="main_holder" /></apex:outputpanel>     
+    </td>
+    <td class="center_cell"><apex:outputtext value="{!body_header}" /></td>
+    <td class="active_cell">
+      <apex:outputpanel rendered="{!display_active_nav}">
+      <span class="{!if(active_filter=='All','selected_active','unselected_active')}" onclick="active_switch('All');">All({!all_count})</span>
+      <span class="{!if(active_filter=='Active','selected_active','unselected_active')}" onclick="active_switch('Active');">Active({!active_count})</span>
+      <span class="{!if(active_filter=='Inactive','selected_active','unselected_active')}" onclick="active_switch('Inactive');" >Inactive({!inactive_count})</span>
+      </apex:outputpanel>&nbsp;
+    </td>
+  </tr>
+  </table>
+  </apex:outputpanel>
+  <apex:messages style="color:red;font-style:italics;" />
+  <br />
+
+  <apex:outputpanel rendered="{!if(selected_view=='pot_display',true,false)}" styleClass="content_holder">    
+    <!--display new treatment plan form--->
+    <apex:outputpanel id="pot_form_holder"> 
+    <apex:outputpanel rendered="{!display_pot_form}">
+      <span class="form-line">
+        <apex:inputfield value="{!new_pot.name}" styleclass="input_standard long-text" onfocus="if(this.value=='Enter Plan Name') {this.value='';}" /><span class="spacer">&nbsp;</span><span class="spacer">&nbsp;</span>    
+        <!-- Pretty sure we want to add a filter here at some point.  I don't have the values right now        
+        <apex:inputfield value="{!new_appointment.Appointment_Filter__c}" styleclass="input_standard" /><span class="spacer">&nbsp;</span>   -->
+        <apex:commandLink status="ajaxstatus" action="{!save_new_pot}" reRender="main_holder" value="Save" styleclass="lblue" oncomplete="document.getElementById('newinsert').scrollIntoView(true);" /><span class="spacer">&nbsp;</span>
+        <apex:commandLink status="ajaxstatus" action="{!hide_pot_form}" reRender="main_holder" value="Cancel" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+        <apex:commandLink status="ajaxstatus" action="{!reset_pot_form}" reRender="main_holder" value="Reset" styleclass="lblue" />
+      </span>
+      <span class="form-line">
+        <apex:inputfield value="{!new_pot.Treatment_Description__c}" type="text"  styleclass="input_standard long-text" onfocus="if(this.value=='Enter Plan Description') {this.value='';}" /><span class="spacer">&nbsp;</span>  
+      </span>
+      <span class="form-line">
+        Upper Arch :&nbsp; <apex:inputfield value="{!new_pot.Upper_Arch__c}" styleclass="lblue" />
+        <span class="spacer">&nbsp;</span>  
+        Lower Arch :&nbsp; <apex:inputfield value="{!new_pot.Lower_Arch__c}" styleclass="lblue" />
+      </span>
+      <br />
+    </apex:outputpanel>  
+    </apex:outputpanel>
+  
+    <!--display plans of treatment here-->
+    <apex:repeat var="top" value="{!pot_list}">
+      <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+        <apex:outputPanel layout="block" styleClass="mm_header-label">{!top.parent_name}</apex:outputPanel>
+      </apex:outputPanel>
+      <apex:repeat var="plan" value="{!top.tplans}" >
+        <!--not editing this record-->
+        <apex:outputpanel rendered="{!if(current_edit==plan.id,false,true)}"> 
+          <table style="width:100%">
+          <tr>
+           <td><apex:outputpanel rendered="{!if(plan.id==last_insert,true,false)}" ><span id="newinsert"></span></apex:outputpanel>
+           <apex:commandlink status="ajaxstatus" rendered="{!if(top.is_standard_plan,false,true)}" value="{!plan.Name}" rerender="main_holder" action="{!edit_plan_of_treatment}" styleclass="lblue" style="font-size:14pt;">
+             <apex:param name="current_edit" value="{!plan.id}" assignTo="{!current_edit}" />
+            </apex:commandlink>
+            <apex:outputtext style="color:black;font-size:14pt;" value="{!plan.Name}" rendered="{!top.is_standard_plan}" />
+            <br />      
+            <apex:outputfield value="{!plan.Treatment_Description__c}" />
+           </td>
+           <td style="width:300px;padding-right:50px;" align="right">           
+             <apex:commandLink status="ajaxstatus" rendered="{!if(top.is_standard_plan,false,true)}"  value="{!if(plan.isActive__c,'Active','Inactive')}" rerender="main_holder" action="{!confirm_activation_pot}" styleclass="lblue" >
+               <apex:param name="activation_id" value="{!plan.id}" assignTo="{!activation_id}" />
+             </apex:commandlink><span class="spacer">&nbsp;</span> 
+             <apex:commandLink status="ajaxstatus" value="Clone" rerender="main_holder" action="{!clone_pot}" styleclass="lblue" >
+               <apex:param name="clone_id" value="{!plan.id}" assignTo="{!clone_id}" />
+             </apex:commandlink><span class="spacer">&nbsp;</span>
+             <apex:commandLink status="ajaxstatus" rendered="{!if(top.is_standard_plan,false,true)}" value="Appointments" action="{!display_apt_detail}" styleclass="lblue" rerender="nav_content,main_holder" oncomplete="init_sort();"   >
+               <apex:param name="pot_id" value="{!plan.id}" assignTo="{!pot_id}" />             
+             </apex:commandLink>
+           </td>
+         </tr>
+        </table>
+        </apex:outputpanel>
+        <!--attempting to edit this record--->
+        <apex:outputpanel rendered="{!if(current_edit==plan.id,true,false)}" >
+          <span class="form-line">
+            <apex:inputfield value="{!new_pot.Name}" styleclass="input_standard long-text"/><span class="spacer">&nbsp;</span>
+            <!--Need to figure out filters first - will add later <apex:inputfield value="{!new_appointment.Appointment_Filter__c}" styleClass="input_standard" /><span class="spacer">&nbsp;</span>-->
+            <apex:commandLink status="ajaxstatus" action="{!save_new_pot}" reRender="main_holder" value="Save" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+            <apex:commandLink status="ajaxstatus" action="{!hide_pot_form}" reRender="main_holder" value="Cancel" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+            <apex:commandLink status="ajaxstatus" action="{!edit_plan_of_treatment}" reRender="main_holder" value="Reset" styleclass="lblue" /> <br />          
+          </span>
+          <span class="form-line">
+            <apex:inputfield value="{!new_pot.Treatment_Description__c}" type="text" styleclass="input_standard long-text" /><span class="spacer">&nbsp;</span>
+          </span>
+          <span class="form-line">
+            Upper Arch :&nbsp; <apex:inputfield value="{!new_pot.Upper_Arch__c}" styleclass="lblue" />
+            <span class="spacer">&nbsp;</span>  
+            Lower Arch :&nbsp; <apex:inputfield value="{!new_pot.Lower_Arch__c}" styleclass="lblue" />
+          </span>
+        </apex:outputpanel>
+        
+        <br />        
+      </apex:repeat>
+      <br /><br />
+    </apex:repeat>
+  </apex:outputpanel>  
+  
+  <!---- Appointment Details ------------------>
+  <apex:outputpanel rendered="{!if(selected_view=='apt_detail_display',true,false)}" styleClass="content_holder">  
+    <apex:actionFunction name="apt_refresh" rerender="apt_match_holder" />
+    <apex:actionFunction name="apt_select" action="{!select_appointment}" rerender="main_holder" oncomplete="init_sort();return false;">
+      <apex:param name="aptid" value="" />
+    </apex:actionFunction>  
+    <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+      <apex:outputPanel layout="block" styleClass="mm_header-label">{!selected_plan.name}</apex:outputPanel>
+    </apex:outputPanel>
+  <!--add appointment button-->
+    <apex:outputpanel rendered="{!if(display_apt_form==true,false,true)}" style="padding-left:40px;">  
+      <apex:commandlink status="ajaxstatus" action="{!new_apt_form}" rerender="main_holder" styleclass="lblue" value="+ Add Appointment">
+        <!--<span class="light-add-box">&#43;</span>&nbsp; Add Appointment-->
+      </apex:commandlink>  
+    </apex:outputpanel>
+  
+  <!--form to add a new appointment-->
+    <apex:outputpanel rendered="{!display_apt_form}" style="padding-left:40px;">
+      <apex:inputText id="pname_holder" value="{!new_apt_name}" styleclass="input_standard" onfocus="if(this.value=='Enter Appointment') {this.value='';}" onkeyup="apt_qsearch_key();" /><span class="spacer">&nbsp;</span>
+      <apex:selectList value="{!apt_filter}" onchange="apt_refresh();" size="1">
+        <apex:selectOptions value="{!apt_category_list}" />
+      </apex:selectList><span class="spacer">&nbsp;</span>
+      <apex:commandLink status="ajaxstatus" action="{!add_appointment_step}" reRender="main_holder" value="Save" styleclass="lblue" oncomplete="init_sort();return false;" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink status="ajaxstatus" action="{!hide_apt_form}" reRender="main_holder" value="Cancel" styleclass="lblue" oncomplete="init_sort();return false;" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink status="ajaxstatus" action="{!reset_apt_form}" reRender="main_holder" value="Reset" styleclass="lblue" oncomplete="init_sort();" /><br /><br />
+      <apex:outputpanel id="apt_match_holder" styleclass="procedure_matches">
+        <apex:repeat var="sresult" value="{!search_appointments}" >
+          <span onclick="apt_select('{!sresult.id}');" class="overflow_option"><apex:outputText value="{!sresult.name}" /></span>
+        </apex:repeat>
+      </apex:outputpanel>
+    </apex:outputpanel>
+    <br /><br />
+  <!--display current appointment plan --->
+    <apex:outputpanel style="padding-left:15px;" layout="block">
+    
+    
+    <!--<table class="bend_table"> 
+      <tr class="bend_header">
+        <th><span class="gray_under">Appointment</span></th>
+        <th><span class="gray_under">Days Out</span></th>
+        <th><span class="gray_under">Tooth Selection</span></th>
+        <th><span class="gray_under">DRevenue</span></th>
+        <td></td>
+      </tr>      -->
+    <ul class="full_row" style="padding-bottom:0;margin-bottom:0;">
+      <li>
+        <span class="apt_cell"><span class="gray_header">Appointment</span></span>
+        <span class="days_cell"><span class="gray_header">Days Out</span></span>
+        <span class="tooth_cell"><span class="gray_header">Tooth Selection</span></span>
+        <span class="drevenue_cell"><span class="gray_header">DRevenue</span></span>
+        <span class="sorder_cell"><span class="gray_header">Sort Order</span></span>
+        <span class="action_cell"></span>
+      </li>
+    </ul>
+    <ul id="slist" class="full_row">  
+    <apex:variable var="rowclassname" value="odd" />
+    <apex:repeat var="apt" value="{!appointment_details}">
+    <!--Display all license records for this staff member-->
+     <li class="{!rowclassname} sortable hidden_parent" id="list_{!apt.id}">
+       <span class="apt_cell">
+         <apex:commandlink status="ajaxstatus" value="{!apt.clinical_appointment__r.name}" rerender="main_holder" action="{!edit_apt_detail}" styleclass="lblue"  rendered="{!if(current_edit==apt.id,false,true)}">
+           <apex:param name="current_edit" value="{!apt.id}" assignTo="{!current_edit}" />
+         </apex:commandlink>
+         <apex:outputtext value="{!new_apt_detail.clinical_appointment__r.name}" rendered="{!if(current_edit==apt.id,true,false)}" />
+       </span>
+       <span class="days_cell">  
+         <apex:outputfield value="{!apt.Days_Out__c}" rendered="{!if(current_edit==apt.id,false,true)}" />
+         <apex:inputfield value="{!new_apt_detail.Days_Out__c}" style="width:50px;" type="number" rendered="{!if(current_edit==apt.id,true,false)}" />
+       </span>
+       <span class="tooth_cell">Holder</span>
+       <span class="drevenue_cell">Holder</span>
+       <span class="sorder_cell">{!apt.Sort_Order__c}</span>
+       <span class="action_cell">  
+         <span class="hidden_hover">
+         <apex:commandlink status="ajaxstatus" value="Remove" rerender="main_holder" action="{!confirm_activation_apt_detail}" styleclass="lblue" rendered="{!if(current_edit==apt.id,false,true)}" oncomplete="init_sort();"  >
+           <apex:param name="activation_id" value="{!apt.id}" assignTo="{!activation_id}" />
+         </apex:commandlink></span>
+         <apex:outputpanel rendered="{!if(current_edit==apt.id,true,false)}" >
+           <apex:commandLink status="ajaxstatus" action="{!save_apt_detail}" reRender="main_holder" value="Save" styleclass="lblue" oncomplete="init_sort();"  /><span class="spacer">&nbsp;</span>
+           <apex:commandLink status="ajaxstatus" action="{!hide_apt_detail_form}" reRender="main_holder" value="Cancel" styleclass="lblue" oncomplete="init_sort();"  /><span class="spacer">&nbsp;</span>
+           <apex:commandLink status="ajaxstatus" action="{!edit_apt_detail}" reRender="main_holder" value="Reset" styleclass="lblue" oncomplete="init_sort();"  />
+         </apex:outputpanel>
+       </span>      
+     </li>
+     <apex:variable var="rowclassname" value="{!if(rowclassname=='odd','even','odd')}" />
+     <!--<tr class="{!rowclassname} hidden_parent">
+     <apex:variable var="rowclassname" value="{!if(rowclassname=='odd','even','odd')}" />
+       <td>
+         <apex:commandlink value="{!apt.clinical_appointment__r.name}" rerender="main_holder" action="{!edit_apt_detail}" styleclass="lblue"  rendered="{!if(current_edit==apt.id,false,true)}">
+           <apex:param name="current_edit" value="{!apt.id}" assignTo="{!current_edit}" />
+         </apex:commandlink>
+         <apex:outputtext value="{!new_apt_detail.clinical_appointment__r.name}" rendered="{!if(current_edit==apt.id,true,false)}" />
+       </td>
+       <td>
+         <apex:outputfield value="{!apt.Days_Out__c}" rendered="{!if(current_edit==apt.id,false,true)}" />
+         <apex:inputfield value="{!new_apt_detail.Days_Out__c}" style="width:50px;" type="number" rendered="{!if(current_edit==apt.id,true,false)}" />
+       </td>
+       <td>
+         Holder
+       </td>
+       <td>
+         Holder
+       </td>
+       <td><span class="hidden_hover">
+         <apex:commandlink value="Remove" rerender="main_holder" action="{!confirm_activation_apt_detail}" styleclass="lblue" rendered="{!if(current_edit==apt.id,false,true)}" >
+           <apex:param name="activation_id" value="{!apt.id}" assignTo="{!activation_id}" />
+         </apex:commandlink></span>
+         <apex:outputpanel rendered="{!if(current_edit==apt.id,true,false)}" >
+           <apex:commandLink action="{!save_apt_detail}" reRender="main_holder" value="Save" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+           <apex:commandLink action="{!hide_apt_detail_form}" reRender="main_holder" value="Cancel" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+           <apex:commandLink action="{!edit_apt_detail}" reRender="main_holder" value="Reset" styleclass="lblue" />
+         </apex:outputpanel>
+       </td>
+       
+      </tr>-->
+    </apex:repeat>
+    </ul>
+    <!--</table>-->
+    <br /><br />
+    </apex:outputpanel>
+  
+  
+  
+  </apex:outputpanel>
+  <!---- End Appointment Details -------------->
+  
+<!-------------------------- Start Modal Holder -------------------------------------------------------------------->  
+  <apex:outputPanel id="modal_holder" style="z-index:3000;" >
+  <apex:actionRegion >
+  <apex:actionFunction oncomplete="default_cursor(this);" action="{!close_modal}" name="close_pop" rerender="modal_holder" />  
+  <apex:actionFunction oncomplete="default_cursor(this);" action="{!update_activation_pot}" name="update_pot" rerender="main_holder" />  
+  <apex:actionFunction action="{!update_activation_apt_detail}" name="update_detail" rerender="main_holder" oncomplete="init_sort();"  />  
+  
+   <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!modal_display}"/>
+    <apex:outputPanel styleClass="modalPopup_outer" layout="block" rendered="{!modal_display}" id="outerpop">
+    <span class="modalPopup_outerheader" onclick="close_pop();">Close X</span> 
+    
+    <apex:outputPanel styleClass="modal_normal"  id="new_payment_form" style="border:0px;" >   
+      <apex:outputpanel rendered="{!if(selected_view=='pot_display',true,false)}">
+        <apex:outputtext value="{!modal_out}" escape="false" /><br /><br /><br />
+        <span class="confirm-btn" onclick="update_pot();">Confirm</span><span class="spacer">&nbsp;</span>
+        <span class="cancel-btn" onclick="close_pop();">Cancel</span>
+      </apex:outputpanel>
+      
+      <apex:outputpanel rendered="{!if(selected_view=='apt_detail_display',true,false)}">
+        <apex:outputtext value="{!modal_out}" escape="false" /><br /><br /><br />
+        <span class="confirm-btn" onclick="update_detail();">Confirm</span><span class="spacer">&nbsp;</span>
+        <span class="cancel-btn" onclick="close_pop();">Cancel</span>
+      </apex:outputpanel>
+ 
+    </apex:outputPanel>
+   
+    
+ </apex:outputpanel>
+ </apex:actionRegion>    
+</apex:outputPanel> 
+<!----end modal holder----->
+
+</apex:outputPanel>
+
+</apex:form>
+</body>
+
+
+</apex:page>

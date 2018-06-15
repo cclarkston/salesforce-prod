@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Doctor Mastery Threshold</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Doctor Mastery Thresholds</value>
+    </caseValues>
+    <fields>
+        <label><!-- Distance to Associate --></label>
+        <name>Distance_to_Associate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Distance to Clinical Director --></label>
+        <name>Distance_to_Clinical_Director__c</name>
+    </fields>
+    <fields>
+        <label><!-- Distance to Diplomate --></label>
+        <name>Distance_to_Diplomate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Distance to Fellow --></label>
+        <name>Distance_to_Fellow__c</name>
+    </fields>
+    <fields>
+        <label><!-- Threshold Direction --></label>
+        <name>Threshold_Direction__c</name>
+        <picklistValues>
+            <masterLabel>greater than</masterLabel>
+            <translation><!-- greater than --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>less than</masterLabel>
+            <translation><!-- less than --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Year --></label>
+        <name>Year__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Treatment Change Request</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Treatment Change Requests</value>
+    </caseValues>
+    <fields>
+        <label><!-- Current Consult Treatment Plan --></label>
+        <name>Current_Consult_Treatment_Plan__c</name>
+        <relationshipLabel><!-- Treatment Change Requests --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Current Initial Cost --></label>
+        <name>Current_Initial_Cost__c</name>
+    </fields>
+    <fields>
+        <label><!-- Current Treatment Amount --></label>
+        <name>Current_Treatment_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Current Treatment Option --></label>
+        <name>Current_Treatment_Option__c</name>
+        <relationshipLabel><!-- Treatment Change Requests --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- New Consult Treatment Plan --></label>
+        <name>New_Consult_Treatment_Plan__c</name>
+        <relationshipLabel><!-- Treatment Change Requests (New Consult Treatment Plan) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- New Initial Cost --></label>
+        <name>New_Initial_Cost__c</name>
+    </fields>
+    <fields>
+        <label><!-- New Treatment Amount --></label>
+        <name>New_Treatment_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- New Treatment Option --></label>
+        <name>New_Treatment_Option__c</name>
+        <relationshipLabel><!-- Treatment Change Requests (New Treatment Option) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Parent Treatment Plan --></label>
+        <name>Parent_Treatment_Plan__c</name>
+        <relationshipLabel><!-- Treatment Change Requests (Parent Treatment Plan) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Reason Notes --></label>
+        <name>Reason_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reason for Change --></label>
+        <name>Reason_for_Change__c</name>
+        <picklistValues>
+            <masterLabel>Dental Necessity Changed</masterLabel>
+            <translation><!-- Dental Necessity Changed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Financial ability changed</masterLabel>
+            <translation><!-- Financial ability changed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other - fill in notes</masterLabel>
+            <translation><!-- Other - fill in notes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Treatment Stage --></label>
+        <name>Treatment_Stage__c</name>
+        <picklistValues>
+            <masterLabel>At Prosth Exam</masterLabel>
+            <translation><!-- At Prosth Exam --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Post Prosth / prior to surgery</masterLabel>
+            <translation><!-- Post Prosth / prior to surgery --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prior to Prosth Exam</masterLabel>
+            <translation><!-- Prior to Prosth Exam --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>post surgery</masterLabel>
+            <translation><!-- post surgery --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Upgrade Doctor --></label>
+        <name>Upgrade_Doctor__c</name>
+        <relationshipLabel><!-- Treatment Change Requests --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

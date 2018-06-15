@@ -1,0 +1,204 @@
+<apex:page controller="lead_referral_in" sidebar="false">
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}"  />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+
+<style type="text/css" media="print">  
+input.btn {
+  display:none;
+}
+
+input#edit_btn {
+  display:none;
+}
+ 
+  td.right_border {
+    border:0px; 
+    right-border:0px;
+  }
+
+  img.skiplink {
+    display:none;
+  }
+
+  div.bodyDiv {
+    border:0px;
+  }
+      
+  div.bPageHeader {
+    display:none;
+  }  
+  
+  div.bPageFooter {
+    display:none;
+  } 
+  
+  div.no_print {
+    display:none; 
+  }    
+</style>  
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+
+</script>
+
+<style>
+  span.section_holder {
+    display:block;
+    padding-bottom:7px;
+    padding-top:10px;
+    padding-left:10px;
+  }
+  
+  span.section_header {
+    font-weight:bold;
+    display:inline-block;
+    width:125px;
+  }
+  
+  span.thank {
+    display:block;
+    padding-bottom:7px;
+    padding-top:10px;
+    font-weight:bold;
+    font-size:12pt;
+    color:blue;
+  }
+</style>
+
+<apex:form >
+<apex:actionfunction name="refresh_contact" rerender="main_holder" />
+<apex:actionFunction action="{!update_lead_reminder_preference}" name="update_preferences"/>
+
+<span style="font-weight:bold;display:inline-block;width:700px;border-bottom:1px dotted black;padding-left:15px;margin-left:15px;font-size:12pt;color:#5789AE;">New Patient Referral</span><br />
+
+<apex:outputpanel id="main_holder" style="padding-left:50px;">
+
+<apex:outputPanel rendered="{!display_lead_form}" id="lead_form" >
+<apex:messages style="color:red;font-weight:bold;" />
+  <span class="section_holder">
+    <span class="section_header">First Name :</span><apex:inputfield value="{!referral_in.firstname}" /></span>
+  <span class="section_holder"><table><tr><td>
+    <span class="section_header">Last Name :</span></td><td><apex:inputfield value="{!referral_in.lastname}" /></td></tr></table></span> 
+  <span class="section_holder">
+    <span class="section_header">Gender :</span><apex:inputfield value="{!referral_in.Gender__c}" /></span>
+  <span class="section_holder">
+    <span class="section_header">Phone # :</span><apex:inputfield value="{!referral_in.Phone}" /></span>
+  <span class="section_holder">
+    <span class="section_header">Email :</span><apex:inputfield value="{!referral_in.Email}" /></span>
+  <span class="section_holder">
+    <span class="section_header">Street Address :</span><apex:inputfield value="{!referral_in.Street}" /></span>    
+  <span class="section_holder">
+    <span class="section_header">City :</span><apex:inputfield value="{!referral_in.City}" /></span>       
+  <span class="section_holder">
+    <span class="section_header" style="vertical-align:top;">State :</span><apex:inputfield value="{!referral_in.State}" /></span>       
+    <span class="section_holder">
+    <span class="section_header">Zip :</span><apex:inputfield value="{!referral_in.PostalCode}" /></span>     
+  <span class="section_holder">
+    <span class="section_header" style="vertical-align:top;">Referral Notes :</span><apex:inputfield value="{!referral_in.Description}" style="width:400px;height:50px;"/></span>
+  <span style="display:inline-block;width:30px;">&nbsp;</span><apex:commandbutton value="Submit Referral" action="{!create_new_referral}" />
+</apex:outputpanel>    
+
+<apex:outputpanel id="schedule_form" rendered="{!display_contact_section}" style="padding-left:50px;" layout="block">
+  <span class="thank">Thank you for the referral.</span>
+
+  <span style="font-weight:bold;font-style:italic;">You can now schedule the patient for a consultation with us,  or choose to have us contact the patient.</span><br /><br />
+
+  <apex:selectRadio value="{!contact_method}" layout="pageDirection" style="padding-bottom:10px;font-weight:bold;color:red;" onchange="refresh_contact();">
+    <apex:selectOptions value="{!contact_methods}"/>
+  </apex:selectRadio><br />
+  <apex:outputpanel rendered="{!if(contact_method=='1',true,false)}" >
+  A member of the ClearChoice team will reach out to the patient,  and try to schedule them in the next few days.
+  </apex:outputpanel>
+  
+  <apex:outputpanel rendered="{!if(contact_method=='2',true,false)}" >
+  <apex:outputpanel id="ctime_holder" layout="block" style="padding-left:10px;">
+    <span style="font-weight:bold;width:150px;display:inline-block;">Consult Scheduled : </span><apex:outputField value="{!referral_in.DateTime_Consult_Scheduled__c}" rendered="{!if(referral_in.DateTime_Consult_Scheduled__c==null,'false','true')}" />
+  </apex:outputPanel><br />   
+    <span style="font-weight:bold;display:block;width:500px;font-size:12pt;border-bottom:1px solid black;color:#5789AE;padding-left:10px;margin-left:10px;">Quick Search</span>  
+    <div style="padding-left:20px;">  
+    <span style="display:block;padding-bottom:.5em;">    
+    <span style="font-weight:bold;display:inline-block;">Day of the week :</span></span>
+    <apex:inputCheckbox value="{!sMonday}" id="Monday" style="position:relative;top:2px;"/><span style="padding-left:10px;">Monday</span>      <span style="display:inline-block;width:15px;"></span> 
+    <apex:inputCheckbox value="{!sTuesday}" id="Tuesday" style="position:relative;top:2px;"/><span style="padding-left:10px;">Tuesday</span><span style="display:inline-block;width:15px;"></span> 
+    <apex:inputCheckbox value="{!sWednesday}" id="Wednesday" style="position:relative;top:2px;"/><span style="padding-left:10px;">Wednesday</span><span style="display:inline-block;width:15px;"></span> 
+    <apex:inputCheckbox value="{!sThursday}" id="Thursday" style="position:relative;top:2px;"/><span style="padding-left:10px;">Thursday</span><span style="display:inline-block;width:15px;"></span><br />
+    <apex:inputCheckbox value="{!sFriday}" id="Friday" style="position:relative;top:2px;"/><span style="padding-left:10px;">Friday</span><span style="display:inline-block;width:15px;"></span> 
+    <apex:inputCheckbox value="{!sSaturday}" id="Saturday" style="position:relative;top:2px;"/><span style="padding-left:10px;">Saturday</span><span style="display:inline-block;width:15px;"></span> 
+    <apex:inputCheckbox value="{!sSunday}" id="Sunday" style="position:relative;top:2px;"/><span style="padding-left:10px;">Sunday</span>    <span style="display:inline-block;width:15px;"></span><br /><br />
+    <span style="display:block;padding-bottom:.5em;">    
+    <span style="font-weight:bold;display:inline-block;width:100px;">Appt Between : </span>
+    <apex:selectList size="1" value="{!stime_filter}" >
+      <apex:selectOptions value="{!between_times}"/>    
+    </apex:selectList>&nbsp;and&nbsp;
+    <apex:selectList size="1" value="{!etime_filter}" >
+      <apex:selectOptions value="{!between_times}"/>    
+    </apex:selectList></span>
+    <span style="display:block;padding-bottom:.5em;padding-top:2px;">    
+    <table><tr><td><span style="font-weight:bold;width:100px;display:inline-block;">Start Date :</span></td><td><apex:inputField value="{!block_form.Apt_Date__c}" style="display:inline;"/></td></tr></table></span>    
+    <span style="display:block;padding-bottom:.5em;padding-top:2px;">
+      <b>Patient Consult Reminders : </b> <apex:inputfield value="{!referral_in.Receive_Text_Reminder__c}" style="position:relative;top:2px;" onclick="update_preferences();"/><span style="padding-left:10px;">Text</span>
+    <span style="display:inline-block;width:10px;">&nbsp;</span>
+    <apex:inputfield value="{!referral_in.Receive_Auto_Reminder__c}" style="position:relative;top:2px;" onclick="update_preferences();"/><span style="padding-left:10px;">Call</span>
+    </span>
+    <apex:commandButton action="{!find_next_avaliable}" value="Search Available Consults" reRender="search_holder"/><span style="display:inline-block;width:5px;">&nbsp;</span>
+  </div>
+  <br />
+  
+  
+  <apex:actionRegion >  
+  <span style="font-weight:bold;display:block;width:500px;font-size:12pt;border-bottom:1px solid black;color:#5789AE;padding-left:10px;margin-left:10px;margin-bottom:5px;">Available Consults</span>        
+  <apex:actionFunction action="{!schedule_consult}" name="schedule" reRender="main_holder">  
+    <apex:param value="" name="aid" />
+  </apex:actionFunction>  
+  <apex:outputPanel layout="block" id="search_holder" style="padding-left:20px;">  
+    <apex:outputText value="{!schedule_issues}"   escape="false" />  
+    <apex:outputText value="{!search_issues}"   escape="false" /><br />
+    <apex:outputPanel layout="block" style="overflow:auto;height:400px;">
+      <apex:variable var="rowclassname" value="accs" />    
+      <table class="accs_details" style="width:500px;">
+      <tr class="control">
+        <td width="15%">Date</td>
+        <td width="15%">DOW</td>
+        <td width="15%">Start</td>
+        <td width="20%">Room</td>
+        <td width="15%">Initiative</td>
+        <td width="20%">&nbsp;</td></tr>        
+      <apex:repeat value="{!search_consult_results}" var="next_aval">
+      <tr class="{!rowclassname}">
+      <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+        <td style="padding-left:5px;"><apex:outputField value="{!next_aval.apt_block.Apt_Date__c}" /></td>
+        <td>{!next_aval.day_of_week}</td>
+        <td>{!next_aval.start_time}</td>    
+        <td><apex:outputText escape="false" value="{!next_aval.room_name}" /></td>            
+        <td><apex:outputText value="{!next_aval.apt_block.Special_Initiative__c}" />&nbsp;</td>  
+        <td><apex:commandLink styleClass="btn" value="Schedule Now" onclick="schedule('{!next_aval.apt_block.id}');return false;" style="text-decoration:none;" /></td>        
+      </tr>      
+      </apex:repeat> 
+      </table> 
+    </apex:outputPanel>  
+  </apex:outputPanel>  
+  </apex:actionRegion>
+
+  </apex:outputpanel>
+  
+</apex:outputpanel>
+
+<apex:outputpanel id="confirmation_holder" rendered="{!display_confirmation}" style="padding-left:20px;">
+  <br /><span class="thank">Thank you for the referral.</span><br /><br />
+  <span style="font-size:11pt;"><span style="color:#5789AE;font-weight:bold;">Success </span> - Patient {!referral_in.firstname} {!referral_in.lastname}, has been scheduled for a consultation on <span style="color:red;font-weight:bold;"><apex:outputtext value="{!formatted_consult_time}" /></span>.<br />  Please contact ClearChoice if any changes need to be made.</span><br /><br />
+</apex:outputpanel>    
+</apex:outputpanel>
+</apex:form>
+</apex:page>

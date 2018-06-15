@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>cmcdowell@clearchoice.com</contactEmail>
+    <iconUrl>https://login.salesforce.com/logos/Salesforce/AppLauncher/icon.png</iconUrl>
+    <label>Android Test App</label>
+    <logoUrl>https://login.salesforce.com/logos/Salesforce/AppLauncher/logo.png</logoUrl>
+    <oauthConfig>
+        <callbackUrl>sfdc://success</callbackUrl>
+        <consumerKey>3MVG9iTxZANhwHQsqOUA59c3JmxOnrDYakjvnOlqYf8DSIeoaKhQc9NGpFRdJGZNXQiJ.VUQyXwd2cifO9N7k</consumerKey>
+        <scopes>Basic</scopes>
+        <scopes>Api</scopes>
+        <scopes>Web</scopes>
+        <scopes>Full</scopes>
+        <scopes>Chatter</scopes>
+        <scopes>CustomApplications</scopes>
+        <scopes>RefreshToken</scopes>
+    </oauthConfig>
+</ConnectedApp>

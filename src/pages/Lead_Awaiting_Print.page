@@ -1,0 +1,64 @@
+<apex:page standardController="Lead"  extensions="lead_bulkprintpending" sidebar="false" showHeader="false">
+<apex:outputPanel rendered="{!isLeadValid}" id="bulk_holder">
+<apex:form >
+<table width="100%">
+<tr>
+  <td style="text-align:center;font-weight:12pt;font-weight:bold;color:#5789AE;">Bulk Printing</td>
+  <td></td>
+  <td style="text-align:center;font-weight:12pt;font-weight:bold;color:#5789AE;">Send Email</td>
+  <td></td>
+  <!-- <td style="text-align:center;font-weight:12pt;font-weight:bold;color:#5789AE;">Single Print</td> -->
+  <td></td>
+</tr>
+<tr>
+  <td width="170px;" style="vertical-align:top;border:1px solid black;padding-top:10px;padding-left:10px;background-color:#4682b4;">
+    <apex:commandButton value="Send BCP Letter" action="{!send_bcp}" reRender="bulk_holder" style="width:150px;margin-bottom:10px;" rendered="{! $Profile.Name != 'Call Center Agent'}"/>
+    <apex:commandButton value="Send Welcome Letter" action="{!send_welcome}" rendered="{!display_confirmationemail}" reRender="bulk_holder" style="width:150px;margin-bottom:10px;" />
+    <apex:commandButton value="Send Seminar Letter" action="{!send_seminar}" rendered="{!display_seminaremail}" reRender="bulk_holder" style="width:150px;margin-bottom:10px;" />
+  </td>
+  <td width="20px;"></td>
+  <td width="170px;" style="vertical-align:top;border:1px solid black;padding-top:10px;padding-left:10px;background-color:#4682b4;">
+    <apex:commandButton value="Email BCP Letter" action="{!send_bcp_email}" reRender="msgHolder" style="width:150px;margin-bottom:10px;" onComplete="slow_fade(100);" rendered="{! $Profile.Name != 'Call Center Agent'}" />
+    <apex:commandButton value="Email Welcome Letter" action="{!send_welcome_email}" rendered="{!display_confirmationemail}" reRender="msgHolder" style="width:150px;margin-bottom:10px;" onComplete="slow_fade(100);"/>
+    <apex:commandButton value="Email Seminar Letter" action="{!send_seminar_email}" rendered="{!display_seminaremail}" reRender="msgHolder" style="width:150px;margin-bottom:10px;" onComplete="slow_fade(100);"/>
+    <apex:commandButton value="Email Confirmation Letter" action="{!send_confirmation_email}" rendered="{!display_confirmationemail}" reRender="msgHolder" style="width:150px;margin-bottom:10px;" onComplete="slow_fade(100);"/>
+  </td>
+  <td width="20px;"></td>
+  <td width="20px;"></td>
+  <td style="vertical-align:top;">
+    <apex:outputText id="msgHolder" value="{!email_result}" escape="false;"/><br /><br />
+    <apex:outputText rendered="{!if(displaybulkprintqueue==true,'true','false')}">
+  <span style="padding-left:20px;margin-left:20px;width:400px;border-bottom:1px solid black;display:block;margin-bottom:5px;font-size:12pt;color:black;font-weight:bold">Pending Print Jobs
+    <apex:commandLink styleclass="btn" target="_blank" value="Open Bulk Queue" action="{!bulk_queue}" rendered="{!display_bulkqueue}" style="text-decoration:none;font-size:10pt;font-weight:normal;margin-left:10px;position:relative;top:-5px;" />
+  </span>
+</apex:outputText>
+<apex:outputText rendered="{!if(displaybulkprintqueue==true,'false','true')}">
+  <span style="font-weight:bold;font-style:italic;">There are no bulk print jobs in the queue</span>
+  <apex:commandLink styleclass="btn" target="_blank" value="Open Bulk Queue" action="{!bulk_queue}" rendered="{!display_bulkqueue}" style="text-decoration:none;font-size:10pt;font-weight:normal;margin-left:10px;"/>
+</apex:outputText>
+<apex:repeat value="{!bulkjobs}" var="bulk_print" rendered="{!displaybulkprintqueue}">
+  <span style="display:block;padding-bottom:10px;"><span style="font-weight:bold;padding-left:40px;width:100px;display:inline-block;">{!bulk_print.print_job.Batch_Form__c}</span> {!bulk_print.print_job.submitted_by__r.name}
+  (<apex:outputField value="{!bulk_print.print_job.Submitted_Time__c}"/>)
+    <apex:commandLink style="margin-left:10px;color:red;text-decoration:none;" action="{!removePrintJob}" value="Delete" reRender="bulk_holder" styleClass="btn" rendered="{!bulk_print.display_delete}">
+      <apex:param name="delrecordid" value="{!bulk_print.print_job.Id}" assignTo="{!delrecordid}"/>
+    </apex:commandLink></span>
+</apex:repeat>
+</td></tr></table>
+<script>
+var target = '{!$Component.msgHolder}';
+function slow_fade(value) {
+  document.getElementById(target).style.opacity = value/100;
+  document.getElementById(target).style.filter = 'alpha(opacity=' + value + ')';
+  if(value<=0)
+    document.getElementById(target).innerHTML = '';
+  else {
+    var time_function = "slow_fade(" + (value-10) + ")";
+    setTimeout(time_function,2000);
+  }
+}
+</script>
+
+</apex:form>
+</apex:outputPanel>
+<apex:outputPanel rendered="{!if(isLeadValid==true,false,true)}"><apex:outputtext escape="false" value="{!lead_valid_errors}" /></apex:outputPanel>
+</apex:page>

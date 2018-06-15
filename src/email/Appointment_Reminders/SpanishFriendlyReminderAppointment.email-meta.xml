@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>false</available>
+    <description>Email Reminder AFTER Confirmation</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>ClearChoice_Letterhead</letterhead>
+    <name>A Friendly Reminder Spanish</name>
+    <style>freeForm</style>
+    <subject>!Estamos emocionados en conocerle¡</subject>
+    <textOnly>Hola {!Lead.FirstName},
+ 
+Queríamos recordarle que su cita ha sido confirmada para el día {!Lead.DateTime_Consult_Scheduled__c}.
+ 
+Hemos reservado una hora para que usted hable con el doctor y un asesor dental.
+ 
+Por favor recuerde que la consulta y la radiografía panorámica son completamente gratuitas.
+  
+Esperamos conocerle.
+
+{!Lead.00N40000002G2cJ}
+Consultor de Implantes Dentales
+ </textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

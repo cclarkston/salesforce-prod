@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Table to hold a history of changes on an appointment.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup to the account that was scheduled to this block when available.</description>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Apt Histories</relationshipLabel>
+        <relationshipName>Apt_Histories</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Action_Reason__c</fullName>
+        <description>Filled out when the action type involves a reason selection. At first this will be used with reschedules, but I could see it branching out to cancellation at a later time and date.</description>
+        <externalId>false</externalId>
+        <label>Action Reason</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Conflict with Schedule</fullName>
+                    <default>false</default>
+                    <label>Conflict with Schedule</label>
+                </value>
+                <value>
+                    <fullName>Emergency/Sick</fullName>
+                    <default>false</default>
+                    <label>Emergency/Sick</label>
+                </value>
+                <value>
+                    <fullName>Late</fullName>
+                    <default>false</default>
+                    <label>Late</label>
+                </value>
+                <value>
+                    <fullName>Schedule Management</fullName>
+                    <default>false</default>
+                    <label>Schedule Management</label>
+                </value>
+                <value>
+                    <fullName>Transporatation Issues</fullName>
+                    <default>false</default>
+                    <label>Transporatation Issues</label>
+                </value>
+                <value>
+                    <fullName>Weather</fullName>
+                    <default>false</default>
+                    <label>Weather</label>
+                </value>
+                <value>
+                    <fullName>Move Up in Schedule</fullName>
+                    <default>false</default>
+                    <label>Move Up in Schedule</label>
+                </value>
+                <value>
+                    <fullName>Center Request</fullName>
+                    <default>false</default>
+                    <label>Center Request</label>
+                </value>
+                <value>
+                    <fullName>GLO</fullName>
+                    <default>false</default>
+                    <label>GLO</label>
+                </value>
+                <value>
+                    <fullName>Aged Effort</fullName>
+                    <default>false</default>
+                    <label>Aged Effort</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Action__c</fullName>
+        <description>name of the action performed on the appointment block</description>
+        <externalId>false</externalId>
+        <label>Action</label>
+        <length>50</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Apts_in_next_seven__c</fullName>
+        <externalId>false</externalId>
+        <label>Apts in next seven</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Cancel_Reason__c</fullName>
+        <description>List of cancellation reasons. I should of put this in action reason and made action the controller field for the picklist, but it&apos;s something I can review later.</description>
+        <externalId>false</externalId>
+        <label>Cancel Reason</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Conflict with Schedule</fullName>
+                    <default>false</default>
+                    <label>Conflict with Schedule</label>
+                </value>
+                <value>
+                    <fullName>Sick</fullName>
+                    <default>false</default>
+                    <label>Sick</label>
+                </value>
+                <value>
+                    <fullName>Emergency</fullName>
+                    <default>false</default>
+                    <label>Emergency</label>
+                </value>
+                <value>
+                    <fullName>Transportation Issues</fullName>
+                    <default>false</default>
+                    <label>Transportation Issues</label>
+                </value>
+                <value>
+                    <fullName>Family Conference</fullName>
+                    <default>false</default>
+                    <label>Family Conference</label>
+                </value>
+                <value>
+                    <fullName>Weather</fullName>
+                    <default>false</default>
+                    <label>Weather</label>
+                </value>
+                <value>
+                    <fullName>Not a Candidate</fullName>
+                    <default>false</default>
+                    <label>Not a Candidate</label>
+                </value>
+                <value>
+                    <fullName>Email/VM/Text - No Reason</fullName>
+                    <default>false</default>
+                    <label>Email/VM/Text - No Reason</label>
+                </value>
+                <value>
+                    <fullName>Consult Sched Too Full</fullName>
+                    <default>false</default>
+                    <label>Consult Sched Too Full</label>
+                </value>
+                <value>
+                    <fullName>Not Interested- Bad Review</fullName>
+                    <default>false</default>
+                    <label>Not Interested- Bad Review</label>
+                </value>
+                <value>
+                    <fullName>Not Interested- Cost</fullName>
+                    <default>false</default>
+                    <label>Not Interested- Cost</label>
+                </value>
+                <value>
+                    <fullName>Not Interested- Distance</fullName>
+                    <default>false</default>
+                    <label>Not Interested- Distance</label>
+                </value>
+                <value>
+                    <fullName>Not Interested- Insurance</fullName>
+                    <default>false</default>
+                    <label>Not Interested- Insurance</label>
+                </value>
+                <value>
+                    <fullName>Not Interested- Went Elsewhere</fullName>
+                    <default>false</default>
+                    <label>Not Interested- Went Elsewhere</label>
+                </value>
+                <value>
+                    <fullName>Duplicate Record/Schedule</fullName>
+                    <default>false</default>
+                    <label>Duplicate Record/Schedule</label>
+                </value>
+                <value>
+                    <fullName>Schedule Management</fullName>
+                    <default>false</default>
+                    <label>Schedule Management</label>
+                </value>
+                <value>
+                    <fullName>Center Request</fullName>
+                    <default>false</default>
+                    <label>Center Request</label>
+                </value>
+                <value>
+                    <fullName>Center Request - Weather</fullName>
+                    <default>false</default>
+                    <label>Center Request - Weather</label>
+                </value>
+                <value>
+                    <fullName>Test Schedule</fullName>
+                    <default>false</default>
+                    <label>Test Schedule</label>
+                </value>
+                <value>
+                    <fullName>Change Center</fullName>
+                    <default>false</default>
+                    <label>Change Center</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Consult_Inventory__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>Link to the appointment block this event was related to.</description>
+        <externalId>false</externalId>
+        <label>Consult Inventory</label>
+        <referenceTo>Consult_Inventory__c</referenceTo>
+        <relationshipLabel>Apt Histories</relationshipLabel>
+        <relationshipName>Apt_Histories</relationshipName>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Delete_Reason__c</fullName>
+        <externalId>false</externalId>
+        <label>Delete Reason</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Doctor Request</fullName>
+                    <default>false</default>
+                    <label>Doctor Request</label>
+                </value>
+                <value>
+                    <fullName>PEC Sick/Schedule</fullName>
+                    <default>false</default>
+                    <label>PEC Sick/Schedule</label>
+                </value>
+                <value>
+                    <fullName>Weather Closures</fullName>
+                    <default>false</default>
+                    <label>Weather Closures</label>
+                </value>
+                <value>
+                    <fullName>Center Request</fullName>
+                    <default>false</default>
+                    <label>Center Request</label>
+                </value>
+                <value>
+                    <fullName>Traveler/master Schedule Update</fullName>
+                    <default>false</default>
+                    <label>Traveler/master Schedule Update</label>
+                </value>
+                <value>
+                    <fullName>Schedule Management</fullName>
+                    <default>false</default>
+                    <label>Schedule Management</label>
+                </value>
+                <value>
+                    <fullName>GLO</fullName>
+                    <default>false</default>
+                    <label>GLO</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Double_Consult__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Double Consult</label>
+        <referenceTo>Consult_Inventory__c</referenceTo>
+        <relationshipLabel>Apt Histories (Double Consult)</relationshipLabel>
+        <relationshipName>Apt_Histories2</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>External_Agent__c</fullName>
+        <description>Name of the agent from an external agency that registered this task or activity.</description>
+        <externalId>false</externalId>
+        <label>External Agent</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Flyover_Appointments__c</fullName>
+        <description>Number of appointments available to a prospective patient between the time they scheduled and an appointment and the appointment date.</description>
+        <externalId>false</externalId>
+        <label>Flyover_Appointments</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lead__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup for lead tied to this appointment block. Only avaliable when a lead was tied to the block in question</description>
+        <externalId>false</externalId>
+        <label>Lead</label>
+        <referenceTo>Lead</referenceTo>
+        <relationshipLabel>Apt Histories</relationshipLabel>
+        <relationshipName>Apt_Histories</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Notes__c</fullName>
+        <description>Details about the change that was performed</description>
+        <externalId>false</externalId>
+        <label>Notes</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Private_Practice_Patient__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Private Practice Patient</label>
+        <referenceTo>Private_Practice_Patient__c</referenceTo>
+        <relationshipLabel>Apt Histories</relationshipLabel>
+        <relationshipName>Apt_Histories</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Rescheduled_From__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Link to the consult inventory block a reschedule was moved from</description>
+        <externalId>false</externalId>
+        <label>Rescheduled From</label>
+        <referenceTo>Consult_Inventory__c</referenceTo>
+        <relationshipLabel>Apt Histories (Rescheduled From)</relationshipLabel>
+        <relationshipName>Apt_Histories1</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>isCancelled__c</fullName>
+        <externalId>false</externalId>
+        <formula>if( Action__c = &apos;Cancel&apos;,1,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>isCancelled</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>isInitialSchedule__c</fullName>
+        <externalId>false</externalId>
+        <formula>if( Action__c ==&apos;Scheduled&apos; &amp;&amp;  Notes__c =&apos;Consultation has been scheduled&apos;, 1 ,0)</formula>
+        <label>isInitialSchedule</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Apt History</label>
+    <nameField>
+        <displayFormat>Evt-{0}</displayFormat>
+        <label>Apt History Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Apt Histories</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <startsWith>Vowel</startsWith>
+    <visibility>Public</visibility>
+</CustomObject>

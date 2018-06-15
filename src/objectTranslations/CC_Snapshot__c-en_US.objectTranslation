@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>C.C. Snapshot</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>C.C. Snapshots</value>
+    </caseValues>
+    <fields>
+        <help><!-- Center Location at the time the snapshot was created --></help>
+        <label><!-- Center Location --></label>
+        <name>Center_Location__c</name>
+    </fields>
+    <fields>
+        <help><!-- Consult: Center Location sort (live data) --></help>
+        <label><!-- Center Location sort --></label>
+        <name>Center_Location_sort__c</name>
+    </fields>
+    <fields>
+        <label><!-- Consult: Center Location --></label>
+        <name>Consult_Center_Location__c</name>
+    </fields>
+    <fields>
+        <label><!-- Consult Completed Date --></label>
+        <name>Consult_Completed_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Consult Completed --></label>
+        <name>Consult_Completed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Consult Name --></label>
+        <name>Consult_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Consult Owner: Role --></label>
+        <name>Consult_Owner_Role__c</name>
+    </fields>
+    <fields>
+        <label><!-- Consult Owner: Traveler Until --></label>
+        <name>Consult_Owner_Traveler_Until__c</name>
+    </fields>
+    <fields>
+        <label><!-- Consult Owner --></label>
+        <name>Consult_Owner__c</name>
+    </fields>
+    <fields>
+        <label><!-- Consult Result --></label>
+        <name>Consult_Result__c</name>
+    </fields>
+    <fields>
+        <label><!-- Consult --></label>
+        <name>Consult__c</name>
+        <relationshipLabel><!-- C.C. Snapshots --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Exclude from Report --></label>
+        <name>Exclude_from_Report__c</name>
+    </fields>
+    <fields>
+        <label><!-- Traveler --></label>
+        <name>Traveler__c</name>
+    </fields>
+    <layouts>
+        <layout>Consult Completion Snapshot Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Traveler Details --></label>
+            <section>Traveler Details</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

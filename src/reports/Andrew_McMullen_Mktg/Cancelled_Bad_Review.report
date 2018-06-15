@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Consult_Inventory__c$Name</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c.Apt_Histories__r$Name</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Consult_Inventory__c.Apt_Histories__r$Cancel_Reason__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Not Interested- Bad Review</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>Consult_Inventory__c$Consult_Room__c.Center_Information__c.Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Consult_Inventory__c$Apt_Date__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Cancelled- Bad Review</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Consult_Inventory_w_History__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Consult_Inventory__c$Apt_Datetime__c</dateColumn>
+        <endDate>2015-11-24</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2015-11-20</startDate>
+    </timeFrameFilter>
+</Report>

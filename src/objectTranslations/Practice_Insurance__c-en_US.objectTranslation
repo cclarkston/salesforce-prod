@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Practice Insurance</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Practice Insurance</value>
+    </caseValues>
+    <fields>
+        <label><!-- Dental Practice --></label>
+        <name>Dental_Practice__c</name>
+        <relationshipLabel><!-- Practice Insurance --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Insurance Option --></label>
+        <name>Insurance_Option__c</name>
+        <relationshipLabel><!-- Practice Insurance --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

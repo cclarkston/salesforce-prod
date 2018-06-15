@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Acxiom Data</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Acxiom Data</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Acxiom Data --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Acxiom Import --></label>
+        <name>Acxiom_Import__c</name>
+    </fields>
+    <fields>
+        <label><!-- Error Code --></label>
+        <name>Error_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Error Details --></label>
+        <name>Error_Details__c</name>
+    </fields>
+    <fields>
+        <label><!-- Error Message --></label>
+        <name>Error_Message__c</name>
+    </fields>
+    <fields>
+        <label><!-- Error Request ID --></label>
+        <name>Error_Request_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead --></label>
+        <name>Lead__c</name>
+        <relationshipLabel><!-- Acxiom Data --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- acquiredAnIRA --></label>
+        <name>acquiredAnIRA__c</name>
+    </fields>
+    <fields>
+        <label><!-- acquiredAny401k --></label>
+        <name>acquiredAny401k__c</name>
+    </fields>
+    <fields>
+        <label><!-- activeInvestments --></label>
+        <name>activeInvestments__c</name>
+    </fields>
+    <fields>
+        <label><!-- affordabilityUS --></label>
+        <name>affordabilityUS__c</name>
+        <picklistValues>
+            <masterLabel>Cushioned comfort</masterLabel>
+            <translation><!-- Cushioned comfort --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Keeping pace</masterLabel>
+            <translation><!-- Keeping pace --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No frills</masterLabel>
+            <translation><!-- No frills --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- annuitiesAcquired --></label>
+        <name>annuitiesAcquired__c</name>
+    </fields>
+    <fields>
+        <label><!-- anyInvestmentsAcquired --></label>
+        <name>anyInvestmentsAcquired__c</name>
+    </fields>
+    <fields>
+        <label><!-- economicStabilityIndicator --></label>
+        <name>economicStabilityIndicator__c</name>
+    </fields>
+    <fields>
+        <label><!-- estimatedIncomeMax --></label>
+        <name>estimatedIncomeMax__c</name>
+    </fields>
+    <fields>
+        <label><!-- estimatedIncomeMin --></label>
+        <name>estimatedIncomeMin__c</name>
+    </fields>
+    <fields>
+        <label><!-- fullServiceInvestor --></label>
+        <name>fullServiceInvestor__c</name>
+    </fields>
+    <fields>
+        <label><!-- haveA529SavingsPlan --></label>
+        <name>haveA529SavingsPlan__c</name>
+    </fields>
+    <fields>
+        <label><!-- haveAnOnlineTradingAccount --></label>
+        <name>haveAnOnlineTradingAccount__c</name>
+    </fields>
+    <fields>
+        <label><!-- haveAny401k --></label>
+        <name>haveAny401k__c</name>
+    </fields>
+    <fields>
+        <label><!-- haveAnyAnnuities --></label>
+        <name>haveAnyAnnuities__c</name>
+    </fields>
+    <fields>
+        <label><!-- haveAnyIRAAccount --></label>
+        <name>haveAnyIRAAccount__c</name>
+    </fields>
+    <fields>
+        <label><!-- haveAnyPrivatelyHeldSharesOfCompanies --></label>
+        <name>haveAnyPrivatelyHeldSharesOfCompanies__c</name>
+    </fields>
+    <fields>
+        <label><!-- haveCorporateBondsOrDebentures --></label>
+        <name>haveCorporateBondsOrDebentures__c</name>
+    </fields>
+    <fields>
+        <label><!-- housingInvestmentPropertiesOwned --></label>
+        <name>housingInvestmentPropertiesOwned__c</name>
+    </fields>
+    <fields>
+        <label><!-- investingInterests --></label>
+        <name>investingInterests__c</name>
+        <picklistValues>
+            <masterLabel>Foreign</masterLabel>
+            <translation><!-- Foreign --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Investing/Finance</masterLabel>
+            <translation><!-- Investing/Finance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Money seekers</masterLabel>
+            <translation><!-- Money seekers --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Personal</masterLabel>
+            <translation><!-- Personal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Real estate</masterLabel>
+            <translation><!-- Real estate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Stocks/Bonds</masterLabel>
+            <translation><!-- Stocks/Bonds --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- investmentServicesConsumerSegment --></label>
+        <name>investmentServicesConsumerSegment__c</name>
+        <picklistValues>
+            <masterLabel>Affluent Couples &amp; Singles</masterLabel>
+            <translation><!-- Affluent Couples &amp; Singles --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Affluent Families w/Children</masterLabel>
+            <translation><!-- Affluent Families w/Children --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Affluent Pre-Retired</masterLabel>
+            <translation><!-- Affluent Pre-Retired --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Comfortable Seniors</masterLabel>
+            <translation><!-- Comfortable Seniors --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Enviables</masterLabel>
+            <translation><!-- Enviables --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Limiteds</masterLabel>
+            <translation><!-- Limiteds --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Luxury Seniors</masterLabel>
+            <translation><!-- Luxury Seniors --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mainstream Couples &amp; Singles</masterLabel>
+            <translation><!-- Mainstream Couples &amp; Singles --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mainstream Families w/Children</masterLabel>
+            <translation><!-- Mainstream Families w/Children --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mainstream Pre-Retired</masterLabel>
+            <translation><!-- Mainstream Pre-Retired --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Restrained Seniors</masterLabel>
+            <translation><!-- Restrained Seniors --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Starting Out</masterLabel>
+            <translation><!-- Starting Out --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- investor --></label>
+        <name>investor__c</name>
+    </fields>
+    <fields>
+        <label><!-- lifestageCluster --></label>
+        <name>lifestageCluster__c</name>
+    </fields>
+    <fields>
+        <label><!-- lifestageGroup --></label>
+        <name>lifestageGroup__c</name>
+    </fields>
+    <fields>
+        <label><!-- netWorthGoldMax --></label>
+        <name>netWorthGoldMax__c</name>
+    </fields>
+    <fields>
+        <label><!-- netWorthGoldMin --></label>
+        <name>netWorthGoldMin__c</name>
+    </fields>
+    <fields>
+        <label><!-- netWorthUltraAffluent --></label>
+        <name>netWorthUltraAffluent__c</name>
+    </fields>
+    <fields>
+        <label><!-- ownsRealEstateProperty --></label>
+        <name>ownsRealEstateProperty__c</name>
+    </fields>
+    <fields>
+        <label><!-- retirementAssets --></label>
+        <name>retirementAssets__c</name>
+    </fields>
+    <fields>
+        <label><!-- selfDirectedInvestor --></label>
+        <name>selfDirectedInvestor__c</name>
+    </fields>
+    <fields>
+        <label><!-- stocksAndBondsInvestor --></label>
+        <name>stocksAndBondsInvestor__c</name>
+    </fields>
+    <fields>
+        <label><!-- totalLiquidInvestibleAssets --></label>
+        <name>totalLiquidInvestibleAssets__c</name>
+    </fields>
+    <layouts>
+        <layout>Acxiom Data Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Vowel</startsWith>
+</CustomObjectTranslation>

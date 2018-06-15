@@ -1,0 +1,17 @@
+<apex:page controller="ctrl_weekly_huddle" sidebar="false" showHeader="false">
+<apex:form >
+<div style="padding-top:5px;padding-left:50px;">
+<table width="600px;">
+<tr>
+  <td style="width:145px;">
+    <apex:commandlink value="Weekly Huddle" action="{!open_huddle}" styleClass="btn" target="_blank" />
+  </td>
+  <td>
+    <apex:outputpanel rendered="{!if(current_week_count==0,true,false)}" style="color:red;font-weight:bold;">You have not submitted a weekly huddle scorecard for this week yet</apex:outputpanel>
+    <apex:outputpanel rendered="{!if(current_week_count>0,true,false)}" style="color:black;font-weight:bold;">You completed your weekly scorecard on &nbsp;<apex:outputtext value="{!current_completed_time}" /></apex:outputpanel>
+  </td>
+</tr>
+</table>
+</div>
+</apex:form>
+</apex:page>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>PP Workshop Member</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>PP Workshop Members</value>
+    </caseValues>
+    <fields>
+        <label><!-- Application Time --></label>
+        <name>Application_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Attendance Time --></label>
+        <name>Attendance_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Doctor Email --></label>
+        <name>Doctor_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Doctor Phone --></label>
+        <name>Doctor_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Doctors Name --></label>
+        <name>Doctors_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Event Status --></label>
+        <name>Event_Status__c</name>
+        <picklistValues>
+            <masterLabel>Application Completed</masterLabel>
+            <translation><!-- Application Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Attended</masterLabel>
+            <translation><!-- Attended --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Registered</masterLabel>
+            <translation><!-- Registered --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Guest Names --></label>
+        <name>Guest_Names__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Guests --></label>
+        <name>Number_of_Guests__c</name>
+    </fields>
+    <fields>
+        <label><!-- PP Workshop --></label>
+        <name>PP_Workshop__c</name>
+        <relationshipLabel><!-- PP Workshop Members --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Practice Doctor --></label>
+        <name>Practice_Doctor__c</name>
+        <relationshipLabel><!-- PP Workshop Members --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>PP Workshop Member Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- Email_GotPatients --></label>
+        <name>Email_GotPatients</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Email_Reminder --></label>
+        <name>Email_Reminder</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Print_Name_Tag --></label>
+        <name>Print_Name_Tag</name>
+    </webLinks>
+</CustomObjectTranslation>

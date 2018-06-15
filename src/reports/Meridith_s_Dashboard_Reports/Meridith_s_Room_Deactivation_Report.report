@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Consult_Rooms__c$Name</field>
+    </columns>
+    <columns>
+        <field>Consult_Rooms__c.Consult_Inventory__r$Apt_Date__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Rooms__c.Consult_Inventory__r$Start_Hour__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Rooms__c.Consult_Inventory__r$Start_Minute__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Rooms__c.Consult_Inventory__r$End_Hour__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Rooms__c.Consult_Inventory__r$End_Minute__c</field>
+    </columns>
+    <description>A quick mock up of how to track down active appointments that would stop you from deactivating a consult room</description>
+    <filter>
+        <criteriaItems>
+            <column>Consult_Rooms__c$Name</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Atlanta OverFlow 2</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Consult_Rooms__c.Consult_Inventory__r$Active__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Consult_Rooms__c.Consult_Inventory__r$Apt_Date__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>greaterOrEqual</operator>
+            <value>TODAY</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Meridith&apos;s Room Deactivation Report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Consult_Inventory_w_Room__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Consult_Rooms__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

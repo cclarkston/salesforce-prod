@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Storing some settings for the consult calendar backup process</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Last_Offset__c</fullName>
+        <externalId>false</externalId>
+        <label>Last Offset</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MBox__c</fullName>
+        <externalId>false</externalId>
+        <label>MBox</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MLog__c</fullName>
+        <externalId>false</externalId>
+        <label>MLog</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Google Settings</label>
+    <visibility>Protected</visibility>
+</CustomObject>

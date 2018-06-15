@@ -1,0 +1,22 @@
+<apex:page sidebar="false" controller="Axciom_CSV_Lead_Importer" showHeader="false">
+	<apex:form >
+		<apex:sectionHeader title="Upload data from CSV file (Should have header row and Lead IDs, max of 1000, in first column of every line after that)"/>
+		<apex:pagemessages />
+		<apex:pageBlock >
+			<!--  Component to allow user to upload file from local machine -->
+			<center>
+				<p>Note: This does not insert Leads. It is intended to get real Acxiom data for a list of existing Leads.</p><br />
+				<apex:inputFile value="{!contentFile}" filename="{!nameFile}" /> <apex:commandButton action="{!ReadFile}" value="Upload File" id="theButton" style="width:70px;"/>
+			</center>
+
+			<!-- After the user clicks the 'Upload File' button, this section displays the inserted data -->
+
+			<apex:pageblocktable value="{!uploadedIDs}" var="lead_ID" rendered="{!NOT(ISNULL(uploadedIDs))}">
+				<apex:column headerValue="Lead ID">
+					<apex:outputText value="{!lead_ID}"/>
+				</apex:column>
+			</apex:pageblocktable>
+
+		</apex:pageBlock>
+	</apex:form>
+</apex:page>

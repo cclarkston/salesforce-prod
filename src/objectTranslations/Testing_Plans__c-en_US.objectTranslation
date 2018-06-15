@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Testing Plan</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Testing Plans</value>
+    </caseValues>
+    <fields>
+        <label><!-- Conclusion --></label>
+        <name>Conclusion__c</name>
+    </fields>
+    <fields>
+        <label><!-- DMA --></label>
+        <name>DMA__c</name>
+        <relationshipLabel><!-- Testing Plans --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- End Date --></label>
+        <name>End_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hypothesis --></label>
+        <name>Hypothesis__c</name>
+    </fields>
+    <fields>
+        <label><!-- Proposed Approach --></label>
+        <name>Proposed_Approach__c</name>
+    </fields>
+    <fields>
+        <label><!-- Proposed Test Length --></label>
+        <name>Proposed_Test_Length__c</name>
+    </fields>
+    <fields>
+        <label><!-- Result --></label>
+        <name>Result__c</name>
+        <picklistValues>
+            <masterLabel>Fail</masterLabel>
+            <translation><!-- Fail --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inconclusive</masterLabel>
+            <translation><!-- Inconclusive --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pass</masterLabel>
+            <translation><!-- Pass --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Risks --></label>
+        <name>Risks__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Date --></label>
+        <name>Start_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Complete</masterLabel>
+            <translation><!-- Complete --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Legacy</masterLabel>
+            <translation><!-- Legacy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Proposed</masterLabel>
+            <translation><!-- Proposed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Scheduled</masterLabel>
+            <translation><!-- Scheduled --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Success Measure --></label>
+        <name>Success_Measure__c</name>
+    </fields>
+    <fields>
+        <label><!-- Summary --></label>
+        <name>Summary__c</name>
+    </fields>
+    <fields>
+        <label><!-- Testing Type --></label>
+        <name>Test_Type__c</name>
+        <picklistValues>
+            <masterLabel>Broadcast Buying</masterLabel>
+            <translation><!-- Broadcast Buying --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Broadcast Creative</masterLabel>
+            <translation><!-- Broadcast Creative --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Business Operations</masterLabel>
+            <translation><!-- Business Operations --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Digital Display</masterLabel>
+            <translation><!-- Digital Display --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Digital Search</masterLabel>
+            <translation><!-- Digital Search --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Direct Mail Campaign</masterLabel>
+            <translation><!-- Direct Mail Campaign --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Email Campaign</masterLabel>
+            <translation><!-- Email Campaign --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Print Buying</masterLabel>
+            <translation><!-- Print Buying --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Print Creative</masterLabel>
+            <translation><!-- Print Creative --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Website Optimization</masterLabel>
+            <translation><!-- Website Optimization --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Testing Plans Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Test Details --></label>
+            <section>Test Details</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- The test date ranges are invalid. --></errorMessage>
+        <name>Valid_Window</name>
+    </validationRules>
+</CustomObjectTranslation>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Clinical_Appointment__c$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Clinical_Appointment__c$Center_Information__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Appointment__c$Name</field>
+    </columns>
+    <columns>
+        <field>Clinical_Appointment__c$Appointment_Description__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Appointment__c$Appointment_Filter__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Clinical_Appointment__c$Center_Information__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Dallas Arlington</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Clinical_Appointment__c$isactive__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Arlington- Appointment List</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Clinical_Appointments_1__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Clinical_Appointment__c$Name</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Clinical_Appointment__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

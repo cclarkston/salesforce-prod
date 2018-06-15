@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Clinical_Appointment__c.Patient_POT_Apts__r.Clinical_Apt_Calendar__r$Account__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Appointment__c.Patient_POT_Apts__r.Clinical_Apt_Calendar__r$Apt_Date__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Appointment__c$Name</field>
+    </columns>
+    <columns>
+        <field>Clinical_Appointment__c.Patient_POT_Apts__r$Name</field>
+    </columns>
+    <columns>
+        <field>Clinical_Appointment__c.Patient_POT_Apts__r$Lab_Time__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Appointment__c.Patient_POT_Apts__r.Clinical_Apt_Calendar__r$Name</field>
+    </columns>
+    <description>Patient apt with lab time to help with lab efficiency</description>
+    <filter>
+        <criteriaItems>
+            <column>Clinical_Appointment__c$Center_Information__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Cleveland</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Clinical_Appointment__c.Patient_POT_Apts__r$Lab_Time__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>0</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Apt With Lab time</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Apt_and_lab_time__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Clinical_Appointment__c.Patient_POT_Apts__r.Clinical_Apt_Calendar__r$Apt_Date__c</dateColumn>
+        <interval>INTERVAL_CURRENT</interval>
+    </timeFrameFilter>
+</Report>

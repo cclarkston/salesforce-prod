@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Patient POT Apt</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Patient POT Apts</value>
+    </caseValues>
+    <fields>
+        <label><!-- Appointment Description --></label>
+        <name>Appointment_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Clinical Appointment --></label>
+        <name>Clinical_Appointment__c</name>
+        <relationshipLabel><!-- Patient POT Apts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Days Out --></label>
+        <name>Days_Out__c</name>
+    </fields>
+    <fields>
+        <label><!-- Doctor Notes --></label>
+        <name>Doctor_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- IsActive --></label>
+        <name>IsActive__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lab Time --></label>
+        <name>Lab_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Padding Time --></label>
+        <name>Padding_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Patient POT --></label>
+        <name>Patient_POT__c</name>
+        <relationshipLabel><!-- Patient POT Apts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Sort Order --></label>
+        <name>Sort_Order__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

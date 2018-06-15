@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Table for parts by center in order to manage inventory, price, and cost on a per-center basis.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Center__c</fullName>
+        <externalId>false</externalId>
+        <label>Center</label>
+        <referenceTo>Center_Information__c</referenceTo>
+        <relationshipLabel>ClearChoice Center Parts</relationshipLabel>
+        <relationshipName>ClearChoice_Center_Parts</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Cost__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Cost</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>4</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <description>Necessary for viewing in list views</description>
+        <externalId>false</externalId>
+        <formula>Part__r.Part_Description__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Description</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Injectable__c</fullName>
+        <externalId>false</externalId>
+        <formula>Part__r.Injectable__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Injectable?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Active__c</fullName>
+        <externalId>false</externalId>
+        <formula>Part__r.Is_Active__c</formula>
+        <label>Is Active</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>New_Shipment_Cost__c</fullName>
+        <description>A temporary field used for adjusting cost when a new shipment arrives. Upon save, a workflow rule will use this new cost and quantity to determine the average cost per unit. Requires the New Shipment Quantity field to also be filled in.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the cost, per unit purchased, from the invoice of the newly received shipment.</inlineHelpText>
+        <label>New Shipment - Cost (per unit)</label>
+        <precision>8</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>New_Shipment_Quantity__c</fullName>
+        <description>A temporary field used for adjusting quantity when a new shipment arrives. Upon save, a workflow rule will add this new quantity to the existing quantity and clear this field. Requires the New Shipment Cost field to also be filled in.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the quantity of product received in the new shipment (NOT the new total after adding this to inventory).</inlineHelpText>
+        <label>New Shipment - Quantity</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Part__c</fullName>
+        <externalId>false</externalId>
+        <label>Master Part</label>
+        <referenceTo>ClearChoice_Part__c</referenceTo>
+        <relationshipLabel>ClearChoice Center Parts</relationshipLabel>
+        <relationshipName>ClearChoice_Center_Parts</relationshipName>
+        <relationshipOrder>1</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Price__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Price</label>
+        <precision>8</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Quantity__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Quantity</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <description>Necessary for creating list views by type</description>
+        <externalId>false</externalId>
+        <formula>TEXT(Part__r.Type__c)</formula>
+        <label>Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>ClearChoice Center Part</label>
+    <listViews>
+        <fullName>Active_Products</fullName>
+        <columns>NAME</columns>
+        <columns>Center__c</columns>
+        <columns>Description__c</columns>
+        <columns>Price__c</columns>
+        <columns>Quantity__c</columns>
+        <columns>Injectable__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Is_Active__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>Type__c</field>
+            <operation>equals</operation>
+            <value>Esthetics Product</value>
+        </filters>
+        <label>Center Parts - Active Products</label>
+    </listViews>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Center__c</columns>
+        <columns>Quantity__c</columns>
+        <columns>Cost__c</columns>
+        <columns>Price__c</columns>
+        <columns>Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Denver_Esthetics_Active_Services</fullName>
+        <columns>NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Is_Active__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>Type__c</field>
+            <operation>equals</operation>
+            <value>Esthetics Service</value>
+        </filters>
+        <label>Denver- Esthetics Active Services</label>
+    </listViews>
+    <listViews>
+        <fullName>Denver_Esthetics_Products</fullName>
+        <columns>NAME</columns>
+        <columns>Description__c</columns>
+        <columns>Quantity__c</columns>
+        <columns>Cost__c</columns>
+        <columns>Price__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Type__c</field>
+            <operation>equals</operation>
+            <value>Esthetics Product</value>
+        </filters>
+        <filters>
+            <field>Center__c</field>
+            <operation>equals</operation>
+            <value>Denver</value>
+        </filters>
+        <label>Denver - Esthetics Products</label>
+    </listViews>
+    <listViews>
+        <fullName>Denver_Esthetics_Products_II</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>Description__c</columns>
+        <columns>Quantity__c</columns>
+        <columns>Cost__c</columns>
+        <columns>Price__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>greaterThan</operation>
+            <value>7/25/2017 12:00 AM</value>
+        </filters>
+        <label>Denver-Esthetics Products II</label>
+    </listViews>
+    <listViews>
+        <fullName>Denver_Esthetics_Services</fullName>
+        <columns>NAME</columns>
+        <columns>Description__c</columns>
+        <columns>Cost__c</columns>
+        <columns>Price__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Center__c</field>
+            <operation>equals</operation>
+            <value>Denver</value>
+        </filters>
+        <filters>
+            <field>Type__c</field>
+            <operation>equals</operation>
+            <value>Esthetics Service</value>
+        </filters>
+        <label>Denver - Esthetics Services</label>
+    </listViews>
+    <listViews>
+        <fullName>Seattle_Esthetics_Services</fullName>
+        <columns>NAME</columns>
+        <columns>Description__c</columns>
+        <columns>Cost__c</columns>
+        <columns>Price__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Center__c</field>
+            <operation>equals</operation>
+            <value>Seattle</value>
+        </filters>
+        <label>Seattle - Esthetics Services</label>
+    </listViews>
+    <nameField>
+        <label>ClearChoice Center Part Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>ClearChoice Center Parts</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Type__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Description__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Quantity__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Cost__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Price__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Center__c</customTabListAdditionalFields>
+        <searchResultsAdditionalFields>Type__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Description__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Quantity__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Cost__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Price__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Center__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>New_Cost_requires_New_Quantity</fullName>
+        <active>true</active>
+        <description>If a New Shipment Cost is provided, a New Shipment Quantity must also be provided</description>
+        <errorConditionFormula>NOT(ISBLANK(New_Shipment_Cost__c)) &amp;&amp; ISBLANK(New_Shipment_Quantity__c)</errorConditionFormula>
+        <errorDisplayField>New_Shipment_Quantity__c</errorDisplayField>
+        <errorMessage>If you provide the cost for an item received in a new shipment, you must also add provide the quantity received.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>New_Cost_too_different</fullName>
+        <active>true</active>
+        <description>Checks the previously assigned cost and prohibits the attempted change if the cost is too different (unless the previous cost was zero). This is an attempt to prevent users from accidentally using the total invoice line cost rather than the cost per unit.</description>
+        <errorConditionFormula>$Profile.Name &lt;&gt; &quot;System Administrator&quot; &amp;&amp; Cost__c  &lt;&gt; 0  &amp;&amp; ((New_Shipment_Cost__c / Cost__c) &lt; 0.7 || (New_Shipment_Cost__c / Cost__c) &gt; 1.3)</errorConditionFormula>
+        <errorDisplayField>New_Shipment_Cost__c</errorDisplayField>
+        <errorMessage>The new cost provided seems like it may be a mistake. If the per-unit cost for this item really has changed by more than 30% of the previous cost, please contact IT to make the inventory change for you.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>New_Quantity_requires_New_Cost</fullName>
+        <active>true</active>
+        <description>If a New Shipment Quantity is provided, a New Shipment Cost must also be provided</description>
+        <errorConditionFormula>NOT(ISBLANK(New_Shipment_Quantity__c)) &amp;&amp; ISBLANK(New_Shipment_Cost__c)</errorConditionFormula>
+        <errorDisplayField>New_Shipment_Cost__c</errorDisplayField>
+        <errorMessage>If you provide the quantity received in a new shipment, you must also provide the cost (per unit) for the item received.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>New_quantity_must_be_greater_than_zero</fullName>
+        <active>true</active>
+        <description>Prohibits zero or negative quantities for New Shipment Quantity</description>
+        <errorConditionFormula>New_Shipment_Quantity__c &lt;= 0</errorConditionFormula>
+        <errorDisplayField>New_Shipment_Quantity__c</errorDisplayField>
+        <errorMessage>The number entered must be greater than zero.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

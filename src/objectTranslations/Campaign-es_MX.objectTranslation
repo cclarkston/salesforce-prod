@@ -1,0 +1,805 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Agency --></label>
+        <name>Agency__c</name>
+        <picklistValues>
+            <masterLabel>AI Media</masterLabel>
+            <translation><!-- AI Media --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BrightWhistle</masterLabel>
+            <translation><!-- BrightWhistle --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CPM Network</masterLabel>
+            <translation><!-- CPM Network --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Centro</masterLabel>
+            <translation><!-- Centro --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ClearChoice Internal Team</masterLabel>
+            <translation><!-- ClearChoice Internal Team --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Havas Edge</masterLabel>
+            <translation><!-- Havas Edge --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IMS</masterLabel>
+            <translation><!-- IMS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>InterMedia</masterLabel>
+            <translation><!-- InterMedia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Precision Demand</masterLabel>
+            <translation><!-- Precision Demand --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Primetime Media</masterLabel>
+            <translation><!-- Primetime Media --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TargetCOM</masterLabel>
+            <translation><!-- TargetCOM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Voltage</masterLabel>
+            <translation><!-- Voltage --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Allocation Costs --></label>
+        <name>Allocation_Costs__c</name>
+    </fields>
+    <fields>
+        <label><!-- CampaignID --></label>
+        <name>CampaignID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Campaign Date Is in the Past --></label>
+        <name>Campaign_Date_Is_in_the_Past__c</name>
+    </fields>
+    <fields>
+        <label><!-- Center --></label>
+        <name>Center__c</name>
+        <relationshipLabel><!-- Campaigns --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Cost_Method --></label>
+        <name>Cost_Method__c</name>
+        <picklistValues>
+            <masterLabel>Per Lead</masterLabel>
+            <translation><!-- Per Lead --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Total Cost</masterLabel>
+            <translation><!-- Total Cost --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Cost Per Attendee --></label>
+        <name>Cost_Per_Attendee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cost_Per_Unit --></label>
+        <name>Cost_Per_Unit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cost per Consult --></label>
+        <name>Cost_per_Consult__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cost per Start --></label>
+        <name>Cost_per_Start__c</name>
+    </fields>
+    <fields>
+        <label><!-- Creative Name --></label>
+        <name>Creative_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- DMA --></label>
+        <name>DMA__c</name>
+        <relationshipLabel><!-- Campaigns --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Deviation from Budget --></label>
+        <name>Deviation_from_Budget__c</name>
+    </fields>
+    <fields>
+        <label><!-- Doctor ID --></label>
+        <name>Doctor_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Google Doc URL --></label>
+        <name>Google_Doc_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- ISCI --></label>
+        <name>ISCI__c</name>
+    </fields>
+    <fields>
+        <label><!-- Location Address --></label>
+        <name>Location_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Location City --></label>
+        <name>Location_City__c</name>
+    </fields>
+    <fields>
+        <label><!-- Location Name --></label>
+        <name>Location_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Location Postal Code --></label>
+        <name>Location_Postal_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Location State --></label>
+        <name>Location_State__c</name>
+        <picklistValues>
+            <masterLabel>AK</masterLabel>
+            <translation><!-- AK --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AL</masterLabel>
+            <translation><!-- AL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AR</masterLabel>
+            <translation><!-- AR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AS</masterLabel>
+            <translation><!-- AS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AZ</masterLabel>
+            <translation><!-- AZ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CA</masterLabel>
+            <translation><!-- CA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CO</masterLabel>
+            <translation><!-- CO --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CT</masterLabel>
+            <translation><!-- CT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DC</masterLabel>
+            <translation><!-- DC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DE</masterLabel>
+            <translation><!-- DE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FL</masterLabel>
+            <translation><!-- FL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GA</masterLabel>
+            <translation><!-- GA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>HI</masterLabel>
+            <translation><!-- HI --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IA</masterLabel>
+            <translation><!-- IA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ID</masterLabel>
+            <translation><!-- ID --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IL</masterLabel>
+            <translation><!-- IL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IN</masterLabel>
+            <translation><!-- IN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KS</masterLabel>
+            <translation><!-- KS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KY</masterLabel>
+            <translation><!-- KY --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA</masterLabel>
+            <translation><!-- LA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MA</masterLabel>
+            <translation><!-- MA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MD</masterLabel>
+            <translation><!-- MD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ME</masterLabel>
+            <translation><!-- ME --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MI</masterLabel>
+            <translation><!-- MI --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MN</masterLabel>
+            <translation><!-- MN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MO</masterLabel>
+            <translation><!-- MO --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MP</masterLabel>
+            <translation><!-- MP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MS</masterLabel>
+            <translation><!-- MS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MT</masterLabel>
+            <translation><!-- MT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC</masterLabel>
+            <translation><!-- NC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ND</masterLabel>
+            <translation><!-- ND --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NE</masterLabel>
+            <translation><!-- NE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NH</masterLabel>
+            <translation><!-- NH --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NJ</masterLabel>
+            <translation><!-- NJ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NM</masterLabel>
+            <translation><!-- NM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NV</masterLabel>
+            <translation><!-- NV --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NY</masterLabel>
+            <translation><!-- NY --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>OH</masterLabel>
+            <translation><!-- OH --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>OK</masterLabel>
+            <translation><!-- OK --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>OR</masterLabel>
+            <translation><!-- OR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PA</masterLabel>
+            <translation><!-- PA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>RI</masterLabel>
+            <translation><!-- RI --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SC</masterLabel>
+            <translation><!-- SC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SD</masterLabel>
+            <translation><!-- SD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TN</masterLabel>
+            <translation><!-- TN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TX</masterLabel>
+            <translation><!-- TX --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>UT</masterLabel>
+            <translation><!-- UT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>VA</masterLabel>
+            <translation><!-- VA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>VT</masterLabel>
+            <translation><!-- VT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>WA</masterLabel>
+            <translation><!-- WA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>WI</masterLabel>
+            <translation><!-- WI --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>WV</masterLabel>
+            <translation><!-- WV --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>WY</masterLabel>
+            <translation><!-- WY --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Location Street --></label>
+        <name>Location_Street__c</name>
+    </fields>
+    <fields>
+        <label><!-- Market --></label>
+        <name>Market__c</name>
+        <relationshipLabel><!-- Campaigns --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Marketing Costs --></label>
+        <name>Marketing_Costs__c</name>
+    </fields>
+    <fields>
+        <label><!-- Media Format --></label>
+        <name>Media_Format__c</name>
+    </fields>
+    <fields>
+        <label><!-- Media Outlet Vendor --></label>
+        <name>Media_Outlet_Vendor__c</name>
+    </fields>
+    <fields>
+        <label><!-- Media Vendor --></label>
+        <name>Media_Vendor__c</name>
+        <relationshipLabel><!-- Campaigns --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Media --></label>
+        <name>Media__c</name>
+        <picklistValues>
+            <masterLabel>Billboard</masterLabel>
+            <translation><!-- Billboard --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Digital</masterLabel>
+            <translation><!-- Digital --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Insert</masterLabel>
+            <translation><!-- Insert --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Newspaper</masterLabel>
+            <translation><!-- Newspaper --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Per Inquiry</masterLabel>
+            <translation><!-- Per Inquiry --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Radio</masterLabel>
+            <translation><!-- Radio --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TV</masterLabel>
+            <translation><!-- TV --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Monday Before Event --></label>
+        <name>Monday_Before_Event__c</name>
+    </fields>
+    <fields>
+        <label><!-- Phone Number --></label>
+        <name>Phone_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Practice ID --></label>
+        <name>Practice_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Public Ad --></label>
+        <name>Public_Ad__c</name>
+        <relationshipLabel><!-- Campaigns --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Seminar CTA Only --></label>
+        <name>Seminar_CTA_Only__c</name>
+    </fields>
+    <fields>
+        <label><!-- Seminar Map Location --></label>
+        <name>Seminar_Map_Location__c</name>
+    </fields>
+    <fields>
+        <label><!-- Seminar Only Cost --></label>
+        <name>Seminar_Only_Cost__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Date DOW --></label>
+        <name>Start_Date_DOW__c</name>
+    </fields>
+    <fields>
+        <label><!-- Time --></label>
+        <name>Time__c</name>
+        <picklistValues>
+            <masterLabel>10:00 AM</masterLabel>
+            <translation><!-- 10:00 AM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:30 AM</masterLabel>
+            <translation><!-- 10:30 AM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:00 AM</masterLabel>
+            <translation><!-- 11:00 AM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:30 AM</masterLabel>
+            <translation><!-- 11:30 AM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:00 PM</masterLabel>
+            <translation><!-- 12:00 PM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:30 PM</masterLabel>
+            <translation><!-- 12:30 PM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>1:00 PM</masterLabel>
+            <translation><!-- 1:00 PM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>1:30 PM</masterLabel>
+            <translation><!-- 1:30 PM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2:00 PM</masterLabel>
+            <translation><!-- 2:00 PM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2:30 PM</masterLabel>
+            <translation><!-- 2:30 PM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3:00 PM</masterLabel>
+            <translation><!-- 3:00 PM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3:30 PM</masterLabel>
+            <translation><!-- 3:30 PM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4:00 PM</masterLabel>
+            <translation><!-- 4:00 PM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4:30 PM</masterLabel>
+            <translation><!-- 4:30 PM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5:00 PM</masterLabel>
+            <translation><!-- 5:00 PM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5:30 PM</masterLabel>
+            <translation><!-- 5:30 PM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6:00 PM</masterLabel>
+            <translation><!-- 6:00 PM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6:30 PM</masterLabel>
+            <translation><!-- 6:30 PM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7:00 AM</masterLabel>
+            <translation><!-- 7:00 AM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7:00 PM</masterLabel>
+            <translation><!-- 7:00 PM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7:30 AM</masterLabel>
+            <translation><!-- 7:30 AM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7:30 PM</masterLabel>
+            <translation><!-- 7:30 PM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8:00 AM</masterLabel>
+            <translation><!-- 8:00 AM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8:00 PM</masterLabel>
+            <translation><!-- 8:00 PM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8:30 AM</masterLabel>
+            <translation><!-- 8:30 AM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8:30 PM</masterLabel>
+            <translation><!-- 8:30 PM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>9:00 AM</masterLabel>
+            <translation><!-- 9:00 AM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>9:00 PM</masterLabel>
+            <translation><!-- 9:00 PM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>9:30 AM</masterLabel>
+            <translation><!-- 9:30 AM --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Total Attended Consult --></label>
+        <name>Total_Attended_Consult__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Attended --></label>
+        <name>Total_Attended__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Booked at Seminar --></label>
+        <name>Total_Booked_at_Seminar__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Consults &amp; Prospective Patients --></label>
+        <name>Total_Cntacts_Prospective_Patients__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Confirmed Guests --></label>
+        <name>Total_Confirmed_Guests__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Confirmed Members and Guests --></label>
+        <name>Total_Confirmed_Members_and_Guests__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Confirmed --></label>
+        <name>Total_Confirmed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Costs --></label>
+        <name>Total_Costs__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Did Not Start --></label>
+        <name>Total_Did_Not_Start__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Guests --></label>
+        <name>Total_Guests__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total No Show (Consult) --></label>
+        <name>Total_No_Show_Consult__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total No-Show Seminar --></label>
+        <name>Total_No_Show_Seminar__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Registered --></label>
+        <name>Total_PTSCG__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Registered Distinct --></label>
+        <name>Total_Registered_Distinct__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Registered Old --></label>
+        <name>Total_Registered__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Scheduled Consult --></label>
+        <name>Total_Scheduled_Consult__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Started --></label>
+        <name>Total_Started__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Starts Lost --></label>
+        <name>Total_Starts_Lost__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Walk-Ins --></label>
+        <name>Total_Walk_Ins__c</name>
+    </fields>
+    <fields>
+        <label><!-- Trans Id --></label>
+        <name>Trans_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Venue &amp; Support Costs --></label>
+        <name>Venue_Support_Costs__c</name>
+    </fields>
+    <layouts>
+        <layout>Campaign Layout</layout>
+        <sections>
+            <label><!-- Campaign Statistics --></label>
+            <section>Campaign Statistics</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Location Information --></label>
+            <section>Location Information</section>
+        </sections>
+        <sections>
+            <label><!-- Planning --></label>
+            <section>Planning</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Campaign Layout - Administrative</layout>
+        <sections>
+            <label><!-- Campaign Statistics --></label>
+            <section>Campaign Statistics</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Location Information --></label>
+            <section>Location Information</section>
+        </sections>
+        <sections>
+            <label><!-- Planning --></label>
+            <section>Planning</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Generic Campaign</layout>
+        <sections>
+            <label><!-- Campaign Statistics --></label>
+            <section>Campaign Statistics</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Location Information --></label>
+            <section>Location Information</section>
+        </sections>
+        <sections>
+            <label><!-- Planning --></label>
+            <section>Planning</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <description><!-- Generic Campaign (non-seminar) --></description>
+        <label><!-- Generic Campaign --></label>
+        <name>Generic_Campaign</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Seminar Campaigns --></description>
+        <label><!-- Seminars --></label>
+        <name>Seminars</name>
+    </recordTypes>
+    <validationRules>
+        <errorMessage><!-- You must complete the following fields before activating a campaign:
+Location Name, Location Address, Seminar Map URL, Center, Market, Start Date, and Time. --></errorMessage>
+        <name>Campaign_Fields_Must_be_Complete</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Link_to_Campaign_Member_Detail_Report --></label>
+        <name>Link_to_Campaign_Member_Detail_Report</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Link_to_Campaign_Member_Report --></label>
+        <name>Link_to_Campaign_Member_Report</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- ViewAllCampaignMembers --></label>
+        <name>ViewAllCampaignMembers</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_ExactTarget_Email --></label>
+        <name>et4ae5__Send_ExactTarget_Email</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- ViewCampaignInfluenceReport --></label>
+        <name>et4ae5__ViewCampaignInfluenceReport</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Run_SMS_Campaign --></label>
+        <name>smagicinteract__Run_SMS_Campaign</name>
+    </webLinks>
+    <workflowTasks>
+        <name>Book_travel</name>
+        <subject><!-- Book travel --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Check_on_Center_travel_time_within_consult_schedule_CA_Katie_and_PEC_director_r</name>
+        <subject><!-- Check on Center travel time within consult schedule (CA, Katie, and PEC director)r --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Information_has_been_sent_to_graphic_designer_to_create_map_as_soon_as_venue_has</name>
+        <subject><!-- Information has been sent to graphic designer to create map: as soon as venue has been selected --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Once_map_has_approval_print_map_for_all_Call_Center_agents_and_Seminar_team_and</name>
+        <subject><!-- Once map has approval, print map for all Call Center agents and Seminar team and stuff envelopes for welcome packets --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Once_map_has_approval_send_to_marketing_team</name>
+        <subject><!-- Once map has approval, send to marketing team --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Purchase_patient_gift_cards</name>
+        <subject><!-- Purchase patient gift cards --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Reserve_consults</name>
+        <subject><!-- Reserve consults --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Reserve_sleeping_rooms_for_traveling_Seminar_Support</name>
+        <subject><!-- Reserve sleeping rooms for traveling Seminar Support --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Send_BEO_to_traveling_Seminar_support</name>
+        <subject><!-- Send BEO to traveling Seminar support --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Send_RSVP_list_to_G5</name>
+        <subject><!-- Send RSVP list to G5 --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Send_e_mail_to_CA_regarding_supplies_for_offsite</name>
+        <subject><!-- Send e-mail to CA regarding supplies for offsite --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Send_map_to_CA_and_venue_contact_for_approval</name>
+        <subject><!-- Send map to CA and venue contact for approval --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Update_Outlook_calendar_with_Seminar_information</name>
+        <subject><!-- Update Outlook calendar with Seminar information --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- (if the venue has not yet been selected, just label it as a ‘seminar’) --></description>
+        <name>Update_Windent_PAT_column_with_the_seminar_information</name>
+        <subject><!-- Update Windent PAT column with the seminar information --></subject>
+    </workflowTasks>
+</CustomObjectTranslation>

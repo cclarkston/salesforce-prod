@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Clinical Room Authorized Apt</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Clinical Room Authorized Apts</value>
+    </caseValues>
+    <fields>
+        <label><!-- Clinical Appointment --></label>
+        <name>Clinical_Appointment__c</name>
+        <relationshipLabel><!-- Clinical Room Authorized Apts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Clinical Room --></label>
+        <name>Clinical_Room__c</name>
+        <relationshipLabel><!-- Clinical Room Authorized Apts --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Consult_Inventory__c$Name</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$External_Agent__c</field>
+    </columns>
+    <columns>
+        <field>Consult_Inventory__c$Scheduled_Time__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Consult_Inventory__c$External_Agent__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Online Schedule</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Todays Online Scheds</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Consult_Inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Consult_Inventory__c$Scheduled_Time__c</dateColumn>
+        <interval>INTERVAL_TODAY</interval>
+    </timeFrameFilter>
+</Report>

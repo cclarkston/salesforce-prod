@@ -1,0 +1,16 @@
+<apex:page showHeader="true" sidebar="false" standardStylesheets="false">
+    <div id="container1"></div>
+    
+    <style type="text/css">
+        body .bodyDiv #bodyTable{
+            padding­bottom:0px !important;
+        }
+        .noSidebarCell, .sidebarCell .fixed{
+            padding:0px !important;
+        }
+    </style>
+    
+    <apex:canvasApp id="expiframe" applicationName="ExpertusONE_for_Salesforce" width="100%" border="0" scrolling="auto"
+    containerId="container1" maxHeight="infinite" rendered="true"
+    entityFields="*" parameters="{SessionId: '{!$Api.Session_ID}',ServerURL:'{!$Api.Enterprise_Server_URL_90}'}"/>
+</apex:page>

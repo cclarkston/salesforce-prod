@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_17110768</developerName>
+        <masterLabel>Outcome</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Campaign.LeadCampaignMembers.Activities$Outcome__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <value>VM/No Ans</value>
+        </values>
+        <values>
+            <value>Non-sales</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Not Scheduled</sourceValue>
+            </sourceValues>
+            <value>Not Sched</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Consult Scheduled</sourceValue>
+            </sourceValues>
+            <value>Consult Sched</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Consult Rescheduled</sourceValue>
+            </sourceValues>
+            <value>Resched</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_52059610</developerName>
+        <masterLabel>RPC</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Campaign.LeadCampaignMembers.Activities$Outcome__c</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Consult Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Not Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Consult Cancelled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Consult Rescheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Refused Reschedule</sourceValue>
+            </sourceValues>
+            <value>RPC</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Busy/No Answer</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Disconnect/Not in Service</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Wrong Number</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>VM - LM</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>VM - no message</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>VM - full</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>LM - 3rd Party</sourceValue>
+            </sourceValues>
+            <value>VM/ No Answer</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Other</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Sent</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>No Call Elected</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>PPT will call back</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Non-Sales Call</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Supervisor</sourceValue>
+            </sourceValues>
+            <value>Non-Sales Call</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>Campaign.LeadCampaignMembers$Name</field>
+    </columns>
+    <columns>
+        <field>Campaign.LeadCampaignMembers.Activities$Subject</field>
+    </columns>
+    <columns>
+        <field>BucketField_52059610</field>
+    </columns>
+    <filter>
+        <booleanFilter>(1 AND 2 AND 3 AND 4 AND 5) OR (6 AND 7 AND 2 AND 3 and 4)</booleanFilter>
+        <criteriaItems>
+            <column>Campaign.LeadCampaignMembers.Activities$Activity_Type__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Outbound Call,Inbound Call</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Campaign.LeadCampaignMembers.Activities$Owner</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Mariann Maestas,Barbara Harshman,chasity Martinez,karen martinez,kris karge,Kristin Yoelin-Lindhe,luciano rocha,melissa padilla,mariann maestas,alycia torrez,david rodriguez,emily fickinger,jennifer keever,kelly sequera,kim goehring,lance marney,lisa suazo,maRIA JIMENEZ,wendy castellano,Alexandra Chavez,Danny Herrera,Devonne Espinoza,Eowyn Suchan,Marianne Mills,Sonja Villalobos,Stan morr,Travis quest,Vanessa Soderstrom</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Campaign.LeadCampaignMembers*Lead$LeadScore__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Green,Yellow</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Campaign.LeadCampaignMembers*CampaignMember$DateTime_Consult_Scheduled__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>lessThan</operator>
+            <value>2/23/2013 12:00 AM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Campaign.LeadCampaignMembers.Activities$Outcome__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Consult Scheduled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Campaign.LeadCampaignMembers.Activities$Activity_Type__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Outbound Call</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Campaign.LeadCampaignMembers.Activities$Outcome__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Consult Rescheduled</value>
+        </criteriaItems>
+    </filter>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>Day</dateGranularity>
+        <field>BucketField_17110768</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Campaign.LeadCampaignMembers.Activities$Owner</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Campaign.LeadCampaignMembers.Activities$Activity_Type__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>GY Schedule by Activity</name>
+    <params>
+        <name>scopeid</name>
+        <value></value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Activites_w_Patient_and_Campaign__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Campaign.LeadCampaignMembers.Activities$CreatedDate</dateColumn>
+        <endDate>2013-02-13</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2013-02-13</startDate>
+    </timeFrameFilter>
+</Report>

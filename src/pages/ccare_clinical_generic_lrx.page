@@ -1,0 +1,192 @@
+<apex:page showheader="false" sidebar="false" standardStylesheets="false" controller="dp_clinical_pot" docType="html-5.0">
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css' />
+<apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/cc-pot.css')}"/>
+
+<style type="text/css" media="print">
+  * {transition: none !important}
+
+  .no_print_section {
+    display:none;
+  }
+  
+  div.pbreak {page-break-after: always;padding-bottom:1em;}
+</style>
+
+<style>
+  .main_holder {
+    display:flex;
+    flex-direction:column;
+  }
+
+  .logo_holder {
+    margin-top: 2em;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    display: flex;
+    padding-bottom: 3em;
+  }
+  
+  .page_type_header {
+    justify-content: center;
+    font-size: 18pt;
+    font-weight: bold;
+    text-decoration: underline;
+    display: flex;
+    margin-bottom:1em;
+  }
+  
+  .center_info_holder {
+    justify-content: center;
+    display: flex;
+    font-size: 12pt;
+    line-height: 1.3;
+    padding-bottom: 3em;
+  }
+  
+  .logo_img {
+    width:250px;
+  }
+  
+  .patient_info_top {
+    margin-left: 40px;
+    padding-bottom: 1em;
+  }
+  
+  .patient_info_bottom {
+    margin-left: 40px;    
+  }
+  
+  .case_notes_holder {
+    margin-left: 15px;
+    margin-right: 15px;
+    background-color: #fafafa;
+    border: 2px solid rgb(153, 153, 153);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 1em;
+  }
+  
+  .patient_info_row {
+    padding-bottom:.5em;
+  }
+  
+  .patient_info_label {
+    font-weight: bold;
+    width: 125px;
+    display: inline-block;
+    font-size: 12pt;
+  }
+  
+  .patient_info_value {
+  
+  }
+  
+  .date_holder {
+    display: flex;
+    justify-content: flex-end;
+    width: 80%;
+    font-weight:bold;
+  }
+  
+  .provider_license_info {
+    font-weight:bold;
+  }
+  
+  .filter_header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    padding-top: 1em;
+    border-bottom: 2px solid black;
+    padding-bottom: 1em;
+  }
+</style>
+<body>
+
+
+<apex:form >
+
+<apex:actionFunction name="toggle_phi" action="{!toggle_phi_display}" rerender="main_holder" />
+
+<apex:outputpanel layout="block" id="report_filters_holder" styleclass="no_print_section" style="">
+  <div class="filter_header">
+    <apex:inputcheckbox value="{!display_phi}" onclick="toggle_phi();" /> Display PHI
+  </div>  
+</apex:outputpanel>  
+
+
+<apex:outputpanel layout="block" styleclass="main_holder" id="main_holder">
+  <div class="logo_holder">
+    <img class="logo_img" src="https://c.na2.content.force.com/servlet/servlet.ImageServer?id=01540000001kEC9&oid=00D400000007ZMu" />
+  </div>
+  <div class="page_type_header">CASE PRESCRIPTION</div>
+  <div class="center_info_holder">
+    ClearChoice Dental Implant Center<br />
+    <apex:outputtext value="{!center_address_line}" escape="false" /><br />
+    Tel: {!current_center.Local_Front_Desk__c} 
+  </div>
+  <div class="patient_info_top">
+    <div class="patient_info_row">
+      <span class="patient_info_label">Patient:</span>
+      <apex:outputpanel rendered="{!display_phi}" styleclass="patient_info_value">{!patient.name}</apex:outputpanel>
+      <apex:outputpanel rendered="{!if(display_phi,false,true)}" styleclass="patient_info_value">{!lab_rx_patient_name}</apex:outputpanel>      
+    </div>
+    <div class="patient_info_row">
+      <span class="patient_info_label">Unique ID:</span>
+      <span class="patient_info_value">{!patient.Warranty_ID__c}</span>      
+    </div>
+    <apex:outputpanel layout="block" styleclass="patient_info_row" rendered="{!display_windent_id}">
+      <span class="patient_info_label">Windent ID:</span>
+      <span class="patient_info_value">{!windent_patient_id}</span>
+    </apex:outputpanel>
+    <div class="patient_info_row">
+      <span class="patient_info_label">Provider:</span>
+      <span class="patient_info_value">{!generic_lab_rx.provider__r.name}, {!generic_lab_rx.provider__r.Doctor_Suffix__c}</span>
+    </div>
+    <div class="patient_info_row">
+      <span class="patient_info_label">Appointment:</span>
+      <span class="patient_info_value">{!generic_lab_rx.reference_appointment__r.name}</span>
+    </div>
+    <div class="patient_info_row" style="color:red;">
+      <span class="patient_info_label">Due Date:</span>
+      <span class="patient_info_value"><apex:outputText value="{0,date,M'/'dd'/'yyyy}">
+                    <apex:param value="{!generic_lab_rx.Due_Date__c}" />
+                  </apex:outputText></span>
+    </div>
+  </div>
+  <div class="case_notes_holder">
+    <span class="patient_info_label">Case Notes:</span><br /><br />
+    <apex:outputfield value="{!generic_lab_rx.Comments__c}" />
+  </div>
+  <div class="patient_info_bottom">
+    <div class="patient_info_row">
+      <span class="patient_info_label">Next Visit:</span>
+      <span class="patient_info_value">{!generic_lab_rx.next_pot_apt__r.name}</span>
+    </div><br />
+    <div class="patient_info_row" style="display:flex;width:100%;">
+      <span class="patient_info_label">Doctor Signature:</span>
+      <span class="date_holder">
+        <apex:outputText value="{0,date,EEEE, MMMM d, yyyy}">
+          <apex:param value="{!generic_lab_rx.createddate}" />
+        </apex:outputText>
+      </span>
+    </div><br /><br />
+    <div class="patient_info_row">
+      <span class="provider_license_info">
+        {!generic_lab_rx.provider__r.name}<br />
+        <apex:outputtext value="{!generic_lab_rx_provider_license}" escape="false" />
+      </span>
+      
+    </div><br />
+  </div>
+  
+</apex:outputpanel>
+
+</apex:form>
+
+</body>
+ 
+</apex:page>

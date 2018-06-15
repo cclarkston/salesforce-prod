@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Account__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Patient_POT_Apt__c.Lab_Time__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Apt_Complete_Time__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Apt_Date__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Name</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Doctor__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c.Clinical_Apt_Histories__r$Patient_POT_Apt__c</field>
+    </columns>
+    <columns>
+        <field>Clinical_Apt_Calendar__c$Patient_POT_Apt__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Clinical_Apt_Calendar__c$Account__c.Center_Location__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Atlanta Alpharetta</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Clinical_Apt_Calendar__c$Patient_POT_Apt__c.Lab_Time__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>0</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Next Week- Lab Time</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Clinical_Apt_Calendar__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Clinical_Apt_Calendar__c$Apt_Date__c</dateColumn>
+        <interval>INTERVAL_NEXTWEEK</interval>
+    </timeFrameFilter>
+</Report>

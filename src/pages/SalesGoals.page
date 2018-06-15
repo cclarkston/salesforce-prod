@@ -1,0 +1,216 @@
+<apex:page controller="ctrl_SalesGoals" sidebar="false" >
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}"  />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<style>
+  span.blank {
+    font-style:italic;
+    font-weight:bold;
+  }
+  tr.control a {
+    text-decoration:none;
+  }
+</style>
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+<script type="text/javascript">
+  function clearcell(target) {
+    var inputElem = document.getElementsByTagName("span");
+    for(var i=0; i<inputElem.length; i++) {
+      if (inputElem[i].className == target) {
+        inputElem[i].innerHTML = '';
+      }
+    }
+  }
+
+  function quickSave(target) {
+    var inputElem = document.getElementsByTagName("span");
+    for(var i=0; i<inputElem.length; i++) {
+      if (inputElem[i].className == target) {
+        inputElem[i].innerHTML = '<span style="font-weight:bold;color:blue;font-sie:10pt;">Updated</span>';
+        setTimeout(function() {clearcell(target);}, 5000);
+      }
+    }
+    save_change();
+  }
+
+  var key_timeout;
+  var search_in_progress = false;
+
+  function search_now() {
+    search_in_progress = false;
+    search_users();
+  }
+
+  function search_key() {
+    if(search_in_progress)
+      clearTimeout(key_timeout);
+    search_in_progress = true;
+    key_timeout = setTimeout("search_now()",600);
+  }
+</script>
+<apex:form style="padding-top:0;display:inline;margin-top:0;"  onsubmit="">
+ <apex:actionregion >
+ <apex:actionstatus id="status_load">
+        <apex:facet name="start">
+            <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;
+                   height: 100%;opacity:0.65;width:100%;">
+                <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+                    <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                    <span class="waitingDescription">Loading...</span>
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionstatus>
+
+ <apex:actionFunction name="search_users" action="{!user_search}" reRender="main_holder" status="status_load">
+ </apex:actionFunction>
+ <apex:actionFunction name="update_time" action="{!refresh_link}" reRender="download_holder" oncomplete="default_cursor(this);" status="status_load">
+ </apex:actionFunction>
+ <apex:actionFunction name="refresh_list" action="{!center_change}" reRender="main_holder" status="status_load">
+ </apex:actionFunction>
+ <apex:actionFunction name="center_update" action="{!center_change}" reRender="main_holder" status="status_load">
+ </apex:actionFunction>
+
+
+<div id="header" style="border-bottom:3px solid black;padding-top:0;margin-top:0;">
+<table style="width:100%;padding-top:0;">
+<tr>
+  <td width="400px;"><br /><span style="font-weight:bold;width:150px;">User Name : </span>
+  <apex:inputText value="{!name_filter}" id="search_filter" onkeyup="search_key();"/> <br />
+  <apex:selectRadio value="{!type_filter}">
+    <apex:selectOptions value="{!typeoptions}"/>
+  </apex:selectRadio>
+  </td>
+  <td width="200px;" style="border-right:2px solid black;"><br />
+  <apex:commandButton value="Search" action="{!user_search}" reRender="main_holder"/>
+    <apex:commandButton value="Ops Dashboard" action="{!display_dashboard}" />
+
+  </td>
+  <td><h1 class="report_header">PEC Sales Goal Targets</h1></td>
+</tr>
+</table>
+</div>
+
+<apex:outputPanel id="main_holder" rendered="true" layout="block" style="padding-top:2em;">
+<span style="font-weight:bold;font-size:12pt;">
+  <span style="padding-right:20px;display:inline-block;">Download Details for :</span>
+  <span style="padding-right:10px;"><apex:selectList value="{!view_month}" size="1" multiselect="false" onchange="use_fancy_cursor(this);update_time();">
+    <apex:selectOptions value="{!MonthOptions}"></apex:selectOptions>
+    </apex:selectList></span>
+  <span style="color:#5789AE;padding-right:10px;"><apex:selectList value="{!view_year}" size="1" multiselect="false" onchange="update_time();">
+    <apex:selectOptions value="{!YearOptions}"></apex:selectOptions>
+    </apex:selectList></span>
+  <apex:outputPanel id="download_holder"><a href="{!download_link}">Click Here</a></apex:outputpanel>
+</span><br /><br />
+
+<!--old comission display
+<table class="accs_details" width="1100px">
+<tr class="control">
+  <td width="19%">User</td>
+  <td width="7%">Active</td>
+  <td width="15%">Center</td>
+  <td width="6%">FOA</td>
+  <td width="8%">Goal</td>
+  <td width="15%">Tier 1 Floor</td>
+  <td width="15%">Tier 2 Floor</td>
+  <td width="15%">Quarter Bonus</td></tr>
+  <apex:variable var="rowclassname" value="accs" />
+  <apex:repeat value="{!peclist}" var="auser">
+  <tr class="{!rowclassname}">
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+    <td class="indent">{!auser.userinfo.name}</td>
+    <td align="center"><span style="font-weight:bold;color:{!if(auser.userinfo.isactive,'blue','red')}">{!if(auser.userinfo.isactive,'Yes','No')} </span></td>
+    <td style="padding-top:3px;"><apex:selectList value="{!auser.userinfo.Center_PEC__c}" size="1" multiselect="false" onchange="center_update();">
+        <apex:selectOptions value="{!Centerlist}"></apex:selectOptions>
+      </apex:selectList></td>
+    <td style="padding-top:3px;" align="center"><apex:inputfield style="margin-top:3px;"  value="{!auser.userinfo.Center_Administrator__c}" /></td>
+    <td style="padding-top:3px;"><apex:selectList value="{!auser.userinfo.Goal_Type__c}" size="1" multiselect="false" onchange="refresh_list();" >
+        <apex:selectOptions value="{!GoalOptions}"></apex:selectOptions>
+    </apex:selectList></td>
+    <td>&nbsp;
+      <apex:inputfield style="margin-top:3px;text-align:right;width:95%;" value="{!auser.userinfo.Tier_1_Floor__c}" rendered="{!if(auser.userinfo.Goal_Type__c=='User',true,false)}" />
+      <apex:outputText style="margin-top:3px;text-align:right"  value="{!auser.center_1_floor}" rendered="{!if(auser.userinfo.Goal_Type__c=='Center',true,false)}" />
+    </td>
+    <td>&nbsp;
+      <apex:inputfield style="margin-top:3px;text-align:right;width:95%;"    value="{!auser.userinfo.Tier_2_Floor__c}" rendered="{!if(auser.userinfo.Goal_Type__c=='User',true,false)}" />
+      <apex:outputText style="margin-top:3px;text-align:right"  value="{!auser.center_2_floor}" rendered="{!if(auser.userinfo.Goal_Type__c=='Center',true,false)}" />
+    </td>
+    <td>&nbsp;
+      <apex:inputfield style="margin-top:3px;text-align:right;width:95%;"    value="{!auser.userinfo.Tier_3_Floor__c}" rendered="{!if(auser.userinfo.Goal_Type__c=='User',true,false)}" />
+      <apex:outputText style="margin-top:3px;text-align:right"  value="{!auser.center_3_floor}" rendered="{!if(auser.userinfo.Goal_Type__c=='Center',true,false)}" />
+    </td>
+  </tr>
+  </apex:repeat>
+</table>-->
+
+<!--New Comission Display - only field to set is baseline target here  -->
+<table class="accs_details" width="100%;">
+<tr class="control">
+  <td>User</td>
+  <td>Active</td>
+  <td>Center</td>
+  <td>OM</td>
+  <td>Regional Traveler</td>
+  <td>Goal</td>
+  <td>Base (TCR)</td>
+  <td>Base (CPC)</td>
+  <td>UltiPro ID</td>
+  <td>Start Date</td>
+  </tr>
+  <apex:variable var="rowclassname" value="accs" />
+  <apex:repeat value="{!peclist}" var="auser">
+  <tr class="{!rowclassname}">
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />
+    <td class="indent">{!auser.userinfo.name}</td>
+    <td align="center"><span style="font-weight:bold;color:{!if(auser.userinfo.isactive,'blue','red')}">{!if(auser.userinfo.isactive,'Yes','No')} </span></td>
+    <td style="padding-top:3px;" align="center"><apex:selectList value="{!auser.userinfo.Center_PEC__c}" size="1" multiselect="false" onchange="center_update();">
+        <apex:selectOptions value="{!Centerlist}"></apex:selectOptions>
+      </apex:selectList></td>
+    <td style="padding-top:3px;" align="center"><apex:inputfield style="margin-top:3px;"  value="{!auser.userinfo.Center_Administrator__c}" /></td>
+    <!-- Regional Traveler checkbox added by Alon W on 4/4/2016 per Scott Lawrence -->
+    <td style="padding-top:3px;" align="center"><apex:inputfield style="margin-top:3px;"  value="{!auser.userinfo.Regional_Traveler__c}" /></td>
+    <td style="padding-top:3px;" align="center"><apex:selectList value="{!auser.userinfo.Goal_Type__c}" size="1" multiselect="false" onchange="refresh_list();" >
+        <apex:selectOptions value="{!GoalOptions}"></apex:selectOptions>
+    </apex:selectList></td>
+    <td>&nbsp;
+      <apex:inputfield style="margin-top:3px;text-align:right;width:95%;max-width:50px;" value="{!auser.userinfo.Baseline_Target__c}" rendered="{!if(auser.userinfo.Goal_Type__c=='User',true,false)}" />
+      <apex:outputText style="margin-top:3px;text-align:right"  value="{!auser.center_base}" rendered="{!if(auser.userinfo.Goal_Type__c=='Center',true,false)}" />
+    </td>
+    <td>&nbsp;
+      <apex:inputfield style="margin-top:3px;text-align:right;width:95%;max-width:50px;" value="{!auser.userinfo.Baseline_Target_CPC__c}" rendered="{!auser.userinfo.Goal_Type__c == 'User'}" />
+      <apex:outputText style="margin-top:3px;text-align:right"  value="{!auser.center_base_cpc}" rendered="{!auser.userinfo.Goal_Type__c=='Center'}" />
+    </td>
+    <td align="center"><apex:inputfield value="{!auser.userinfo.UltiPro_Id__c}" /></td>
+    <td align="center"><apex:inputfield value="{!auser.userinfo.Field_Deploy_Date__c}" /></td>
+  </tr>
+  </apex:repeat>
+</table>
+
+<apex:outputPanel id="msg" layout="block" style="padding-top:1em;" >
+  <apex:commandButton action="{!save}" value="Save" reRender="main_holder" status="status_load"/>
+  <apex:outputtext id="msgholder" value="{!result_msg}" style="display:inline-block;padding-left:10px;font-size:12pt;" escape="false" />
+</apex:outputPanel>
+
+<span class="page_span">Page {!page} of {!num_pages}
+    <apex:commandButton value="Prev" action="{!prev}" rendered="{!if(display_prev==true,true,false)}" style="margin-left:20px;" reRender="main_holder" />
+    <apex:commandButton value="Next" action="{!next}" rendered="{!if(display_next==true,true,false)}" style="margin-left:20px;" reRender="main_holder" />
+  </span>
+
+</apex:outputPanel>
+</apex:actionregion>
+</apex:form>
+</apex:page>

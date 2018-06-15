@@ -1,0 +1,4776 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Dental Practice</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Dental Practices</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account Dormant Reason --></label>
+        <name>Account_Dormant_Reason__c</name>
+        <picklistValues>
+            <masterLabel>Branding</masterLabel>
+            <translation><!-- Branding --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Clinical</masterLabel>
+            <translation><!-- Clinical --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Competition</masterLabel>
+            <translation><!-- Competition --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Engaged/Not Interested</masterLabel>
+            <translation><!-- Not Engaged/Not Interested --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Additional Info for Compliance --></label>
+        <name>Additional_Info_for_Compliance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Alt Phone --></label>
+        <name>Alt_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Alt Phone description --></label>
+        <name>Alt_Phone_description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Are you capturing patient reviews --></label>
+        <name>Are_you_capturing_patient_reviews__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No, but I am interested</masterLabel>
+            <translation><!-- No, but I am interested --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Authorized Signer Name &amp; Title --></label>
+        <name>Authorized_Signer_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Buy Completed Date --></label>
+        <name>Best_Buy_Completed_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Buy date of service --></label>
+        <name>Best_Buy_date_of_service__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Buy rescheduled date --></label>
+        <name>Best_Buy_rescheduled_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Buy site service date --></label>
+        <name>Best_Buy_site_service_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Botox Desirability --></label>
+        <name>Botox_Desirability__c</name>
+        <picklistValues>
+            <masterLabel>Can&apos;t wait to go home</masterLabel>
+            <translation><!-- Can&apos;t wait to go home --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Extremely Happy</masterLabel>
+            <translation><!-- Extremely Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Happy</masterLabel>
+            <translation><!-- Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I don&apos;t offer this service</masterLabel>
+            <translation><!-- I don&apos;t offer this service --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not so Happy</masterLabel>
+            <translation><!-- Not so Happy --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Botox --></label>
+        <name>Botox__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bridge Desirability --></label>
+        <name>Bridge_Desirability__c</name>
+        <picklistValues>
+            <masterLabel>Can&apos;t wait to go home</masterLabel>
+            <translation><!-- Can&apos;t wait to go home --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Extremely Happy</masterLabel>
+            <translation><!-- Extremely Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Happy</masterLabel>
+            <translation><!-- Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I don&apos;t offer this service</masterLabel>
+            <translation><!-- I don&apos;t offer this service --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not so Happy</masterLabel>
+            <translation><!-- Not so Happy --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Brochure Number --></label>
+        <name>Brochure_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Center Information --></label>
+        <name>Center_Information__c</name>
+        <relationshipLabel><!-- Dental Practices --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Chair Notes --></label>
+        <name>Chair_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- # Chairs --></label>
+        <name>Chairs__c</name>
+    </fields>
+    <fields>
+        <label><!-- City --></label>
+        <name>City__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearConnect Complete --></label>
+        <name>ClearConnect_Complete__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearConnect Live Date --></label>
+        <name>ClearConnect_Live_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearConnect Subscription ID --></label>
+        <name>ClearConnect_Subscription_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearConnect UserName --></label>
+        <name>ClearConnect_UserName__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearConnect UserPass --></label>
+        <name>ClearConnect_UserPass__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearTrain Complete --></label>
+        <name>ClearTrain_Complete__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearTrain live training date --></label>
+        <name>ClearTrain_live_training_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearVantage Complete --></label>
+        <name>ClearVantage_Complete__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearVantage Effective Date --></label>
+        <name>ClearVantage_Effective_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearVantage Live Date --></label>
+        <name>ClearVantage_Live_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearViewTV complete --></label>
+        <name>ClearViewTV_complete__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearViewTV installation Type --></label>
+        <name>ClearViewTV_installation_Type__c</name>
+        <picklistValues>
+            <masterLabel>Wired</masterLabel>
+            <translation><!-- Wired --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wireless</masterLabel>
+            <translation><!-- Wireless --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- ClearViewTV order # --></label>
+        <name>ClearViewTV_order__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearViewTV site installation date --></label>
+        <name>ClearViewTV_site_installation_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearWeb Complete --></label>
+        <name>ClearWeb_Complete__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearWeb Domain Name --></label>
+        <name>ClearWeb_Domain_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearWeb Password --></label>
+        <name>ClearWeb_Password__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearWeb Primary Contact --></label>
+        <name>ClearWeb_Primary_Contact__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearWeb Temp URL --></label>
+        <name>ClearWeb_Sample_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- ClearWeb Username --></label>
+        <name>ClearWeb_Username__c</name>
+    </fields>
+    <fields>
+        <label><!-- Close Time --></label>
+        <name>Close_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Completed Ghost Call --></label>
+        <name>Completed_Ghost_Call__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Country --></label>
+        <name>Country__c</name>
+    </fields>
+    <fields>
+        <label><!-- Crown &amp; Bridge --></label>
+        <name>Crown_Bridge__c</name>
+    </fields>
+    <fields>
+        <label><!-- Crown Desirability --></label>
+        <name>Crown_Desirability__c</name>
+        <picklistValues>
+            <masterLabel>Can&apos;t wait to go home</masterLabel>
+            <translation><!-- Can&apos;t wait to go home --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Extremely Happy</masterLabel>
+            <translation><!-- Extremely Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Happy</masterLabel>
+            <translation><!-- Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I don&apos;t offer this service</masterLabel>
+            <translation><!-- I don&apos;t offer this service --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not so Happy</masterLabel>
+            <translation><!-- Not so Happy --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Currently using patient survey tools? --></label>
+        <name>Currently_using_patient_survey_tools__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Dental Assistant (1) --></label>
+        <name>Dental_Assistant_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dental Assistant (2) --></label>
+        <name>Dental_Assistant_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dental Implants --></label>
+        <name>Dental_Implants__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dental Public Health --></label>
+        <name>Dental_Public_Health__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dentures Desirability --></label>
+        <name>Dentures_Desirability__c</name>
+        <picklistValues>
+            <masterLabel>Can&apos;t wait to go home</masterLabel>
+            <translation><!-- Can&apos;t wait to go home --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Extremely Happy</masterLabel>
+            <translation><!-- Extremely Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Happy</masterLabel>
+            <translation><!-- Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I don&apos;t offer this service</masterLabel>
+            <translation><!-- I don&apos;t offer this service --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not so Happy</masterLabel>
+            <translation><!-- Not so Happy --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Dentures --></label>
+        <name>Dentures__c</name>
+    </fields>
+    <fields>
+        <label><!-- Display to Vendor --></label>
+        <name>Display_to_Vendor__c</name>
+    </fields>
+    <fields>
+        <label><!-- Do you advertise your practice --></label>
+        <name>Do_you_advertise_your_practice__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Thinking about it</masterLabel>
+            <translation><!-- Thinking about it --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tried advertising and it did not help</masterLabel>
+            <translation><!-- Tried advertising and it did not help --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Do you belong to a study club --></label>
+        <name>Do_you_belong_to_a_study_club__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No, but I want to join one</masterLabel>
+            <translation><!-- No, but I want to join one --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Do you currently refer all-on-4 patients --></label>
+        <name>Do_you_currently_refer_all_on_4_patients__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Do you have a TV? --></label>
+        <name>Do_you_have_a_TV__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Do you have a patient referral program --></label>
+        <name>Do_you_have_a_patient__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Do you have a reception room tv --></label>
+        <name>Do_you_have_a_reception_room_tv__c</name>
+        <picklistValues>
+            <masterLabel>CASEY</masterLabel>
+            <translation><!-- CASEY --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I have no television in my reception area</masterLabel>
+            <translation><!-- I have no television in my reception area --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I have regular television in my reception area</masterLabel>
+            <translation><!-- I have regular television in my reception area --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NobelVision</masterLabel>
+            <translation><!-- NobelVision --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Do you have an apt reminder system --></label>
+        <name>Do_you_have_an_apt_reminder_system__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No but I am interested in one</masterLabel>
+            <translation><!-- No but I am interested in one --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Do you intend to join the PP program? --></label>
+        <name>Do_you_intend_to_join_the_PP_program__c</name>
+        <picklistValues>
+            <masterLabel>Maybe</masterLabel>
+            <translation><!-- Maybe --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Do you offer team incentives? --></label>
+        <name>Do_you_offer_team_incentives__c</name>
+        <picklistValues>
+            <masterLabel>Considering</masterLabel>
+            <translation><!-- Considering --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Do you track case acceptance --></label>
+        <name>Do_you_track_case_acceptance__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Do you track your patient source --></label>
+        <name>Do_you_track_your_patient_source__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Doctor Name (1) --></label>
+        <name>Doctor_Name_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Doctor Name (2) --></label>
+        <name>Doctor_Name_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Doctor Name (3) --></label>
+        <name>Doctor_Name_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Does the practice have a TV? --></label>
+        <name>Does_the_practice_have_a_TV__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Effective Date --></label>
+        <name>Effective_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Endodontics Desirability --></label>
+        <name>Endodontics_Desirability__c</name>
+        <picklistValues>
+            <masterLabel>Can&apos;t wait to go home</masterLabel>
+            <translation><!-- Can&apos;t wait to go home --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Extremely Happy</masterLabel>
+            <translation><!-- Extremely Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Happy</masterLabel>
+            <translation><!-- Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I don&apos;t offer this service</masterLabel>
+            <translation><!-- I don&apos;t offer this service --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not so Happy</masterLabel>
+            <translation><!-- Not so Happy --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Endodontics --></label>
+        <name>Endodontics__c</name>
+    </fields>
+    <fields>
+        <label><!-- Failed project or plan --></label>
+        <name>Failed_project_or_plan__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fax --></label>
+        <name>Fax__c</name>
+    </fields>
+    <fields>
+        <label><!-- Friday End --></label>
+        <name>Friday_End__c</name>
+        <picklistValues>
+            <masterLabel>05:00</masterLabel>
+            <translation><!-- 05:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>05:30</masterLabel>
+            <translation><!-- 05:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:00</masterLabel>
+            <translation><!-- 06:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:30</masterLabel>
+            <translation><!-- 06:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:00</masterLabel>
+            <translation><!-- 07:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:30</masterLabel>
+            <translation><!-- 07:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:00</masterLabel>
+            <translation><!-- 08:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:30</masterLabel>
+            <translation><!-- 08:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:00</masterLabel>
+            <translation><!-- 09:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:30</masterLabel>
+            <translation><!-- 09:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:00</masterLabel>
+            <translation><!-- 10:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:30</masterLabel>
+            <translation><!-- 10:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:00</masterLabel>
+            <translation><!-- 11:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:30</masterLabel>
+            <translation><!-- 11:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:00</masterLabel>
+            <translation><!-- 12:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:30</masterLabel>
+            <translation><!-- 12:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:00</masterLabel>
+            <translation><!-- 13:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:30</masterLabel>
+            <translation><!-- 13:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:00</masterLabel>
+            <translation><!-- 14:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:30</masterLabel>
+            <translation><!-- 14:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:00</masterLabel>
+            <translation><!-- 15:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:30</masterLabel>
+            <translation><!-- 15:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:00</masterLabel>
+            <translation><!-- 16:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:30</masterLabel>
+            <translation><!-- 16:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:00</masterLabel>
+            <translation><!-- 17:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:30</masterLabel>
+            <translation><!-- 17:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:00</masterLabel>
+            <translation><!-- 18:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:30</masterLabel>
+            <translation><!-- 18:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:00</masterLabel>
+            <translation><!-- 19:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:30</masterLabel>
+            <translation><!-- 19:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:00</masterLabel>
+            <translation><!-- 20:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:30</masterLabel>
+            <translation><!-- 20:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:00</masterLabel>
+            <translation><!-- 21:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:30</masterLabel>
+            <translation><!-- 21:30 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Friday Open --></label>
+        <name>Friday_Open__c</name>
+    </fields>
+    <fields>
+        <label><!-- Friday Start --></label>
+        <name>Friday_Start__c</name>
+        <picklistValues>
+            <masterLabel>05:00</masterLabel>
+            <translation><!-- 05:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>05:30</masterLabel>
+            <translation><!-- 05:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:00</masterLabel>
+            <translation><!-- 06:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:30</masterLabel>
+            <translation><!-- 06:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:00</masterLabel>
+            <translation><!-- 07:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:30</masterLabel>
+            <translation><!-- 07:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:00</masterLabel>
+            <translation><!-- 08:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:30</masterLabel>
+            <translation><!-- 08:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:00</masterLabel>
+            <translation><!-- 09:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:30</masterLabel>
+            <translation><!-- 09:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:00</masterLabel>
+            <translation><!-- 10:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:30</masterLabel>
+            <translation><!-- 10:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:00</masterLabel>
+            <translation><!-- 11:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:30</masterLabel>
+            <translation><!-- 11:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:00</masterLabel>
+            <translation><!-- 12:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:30</masterLabel>
+            <translation><!-- 12:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:00</masterLabel>
+            <translation><!-- 13:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:30</masterLabel>
+            <translation><!-- 13:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:00</masterLabel>
+            <translation><!-- 14:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:30</masterLabel>
+            <translation><!-- 14:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:00</masterLabel>
+            <translation><!-- 15:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:30</masterLabel>
+            <translation><!-- 15:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:00</masterLabel>
+            <translation><!-- 16:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:30</masterLabel>
+            <translation><!-- 16:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:00</masterLabel>
+            <translation><!-- 17:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:30</masterLabel>
+            <translation><!-- 17:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:00</masterLabel>
+            <translation><!-- 18:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:30</masterLabel>
+            <translation><!-- 18:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:00</masterLabel>
+            <translation><!-- 19:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:30</masterLabel>
+            <translation><!-- 19:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:00</masterLabel>
+            <translation><!-- 20:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:30</masterLabel>
+            <translation><!-- 20:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:00</masterLabel>
+            <translation><!-- 21:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:30</masterLabel>
+            <translation><!-- 21:30 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Front Desk Person --></label>
+        <name>Front_Desk_Person__c</name>
+    </fields>
+    <fields>
+        <label><!-- General Practice --></label>
+        <name>General_Practice__c</name>
+    </fields>
+    <fields>
+        <label><!-- Gross Revenue Dedicated to marketing --></label>
+        <name>Gross_Revenue_Dedicated_to_marketing__c</name>
+        <picklistValues>
+            <masterLabel>0.25%</masterLabel>
+            <translation><!-- 0.25% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>0.50%</masterLabel>
+            <translation><!-- 0.50% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>0.75%</masterLabel>
+            <translation><!-- 0.75% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>1%</masterLabel>
+            <translation><!-- 1% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>1.25%</masterLabel>
+            <translation><!-- 1.25% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>1.5%</masterLabel>
+            <translation><!-- 1.5% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>1.75%</masterLabel>
+            <translation><!-- 1.75% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10%</masterLabel>
+            <translation><!-- 10% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11%</masterLabel>
+            <translation><!-- 11% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12%</masterLabel>
+            <translation><!-- 12% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13%</masterLabel>
+            <translation><!-- 13% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14%</masterLabel>
+            <translation><!-- 14% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15%</masterLabel>
+            <translation><!-- 15% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16%</masterLabel>
+            <translation><!-- 16% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17%</masterLabel>
+            <translation><!-- 17% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18%</masterLabel>
+            <translation><!-- 18% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19%</masterLabel>
+            <translation><!-- 19% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2%</masterLabel>
+            <translation><!-- 2% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2.25%</masterLabel>
+            <translation><!-- 2.25% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2.5%</masterLabel>
+            <translation><!-- 2.5% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2.75%</masterLabel>
+            <translation><!-- 2.75% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20% or more</masterLabel>
+            <translation><!-- 20% or more --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3%</masterLabel>
+            <translation><!-- 3% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3.25%</masterLabel>
+            <translation><!-- 3.25% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3.5%</masterLabel>
+            <translation><!-- 3.5% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3.75%</masterLabel>
+            <translation><!-- 3.75% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4%</masterLabel>
+            <translation><!-- 4% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4.25%</masterLabel>
+            <translation><!-- 4.25% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4.5%</masterLabel>
+            <translation><!-- 4.5% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4.75%</masterLabel>
+            <translation><!-- 4.75% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5%</masterLabel>
+            <translation><!-- 5% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5.25%</masterLabel>
+            <translation><!-- 5.25% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5.5%</masterLabel>
+            <translation><!-- 5.5% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5.75%</masterLabel>
+            <translation><!-- 5.75% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6%</masterLabel>
+            <translation><!-- 6% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6.25%</masterLabel>
+            <translation><!-- 6.25% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6.5%</masterLabel>
+            <translation><!-- 6.5% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6.75%</masterLabel>
+            <translation><!-- 6.75% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7%</masterLabel>
+            <translation><!-- 7% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7.25%</masterLabel>
+            <translation><!-- 7.25% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7.5%</masterLabel>
+            <translation><!-- 7.5% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7.75%</masterLabel>
+            <translation><!-- 7.75% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8%</masterLabel>
+            <translation><!-- 8% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8.25%</masterLabel>
+            <translation><!-- 8.25% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8.5%</masterLabel>
+            <translation><!-- 8.5% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8.75%</masterLabel>
+            <translation><!-- 8.75% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>9%</masterLabel>
+            <translation><!-- 9% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>9.25%</masterLabel>
+            <translation><!-- 9.25% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>9.5%</masterLabel>
+            <translation><!-- 9.5% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>9.75%</masterLabel>
+            <translation><!-- 9.75% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>We don&apos;t advertise</masterLabel>
+            <translation><!-- We don&apos;t advertise --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Growth Goal for next 12 months --></label>
+        <name>Growth_Goal_for_next_12_months__c</name>
+        <picklistValues>
+            <masterLabel>+1%</masterLabel>
+            <translation><!-- +1% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+10%</masterLabel>
+            <translation><!-- +10% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+11%</masterLabel>
+            <translation><!-- +11% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+12%</masterLabel>
+            <translation><!-- +12% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+13%</masterLabel>
+            <translation><!-- +13% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+14%</masterLabel>
+            <translation><!-- +14% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+15%</masterLabel>
+            <translation><!-- +15% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+16%</masterLabel>
+            <translation><!-- +16% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+17%</masterLabel>
+            <translation><!-- +17% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+18%</masterLabel>
+            <translation><!-- +18% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+19%</masterLabel>
+            <translation><!-- +19% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+2%</masterLabel>
+            <translation><!-- +2% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+20% or more</masterLabel>
+            <translation><!-- +20% or more --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+3%</masterLabel>
+            <translation><!-- +3% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+4%</masterLabel>
+            <translation><!-- +4% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+5%</masterLabel>
+            <translation><!-- +5% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+6%</masterLabel>
+            <translation><!-- +6% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+7%</masterLabel>
+            <translation><!-- +7% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+8%</masterLabel>
+            <translation><!-- +8% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+9%</masterLabel>
+            <translation><!-- +9% --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Has your perception of CC changed? --></label>
+        <name>Has_your_perception_of_CC_changed__c</name>
+        <picklistValues>
+            <masterLabel>I already liked ClearChoice</masterLabel>
+            <translation><!-- I already liked ClearChoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Maybe,  you guys might not be so bad</masterLabel>
+            <translation><!-- Maybe,  you guys might not be so bad --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No,  you haven&apos;t changed my negative feelings</masterLabel>
+            <translation><!-- No,  you haven&apos;t changed my negative feelings --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes,  you positively impacted my perception</masterLabel>
+            <translation><!-- Yes,  you positively impacted my perception --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Have you provided communication training --></label>
+        <name>Have_you_provided_communication_training__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Thinking about it</masterLabel>
+            <translation><!-- Thinking about it --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tried training team and it did not help</masterLabel>
+            <translation><!-- Tried training team and it did not help --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Have you provided sales training --></label>
+        <name>Have_you_provided_sales_training__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Thinking about it</masterLabel>
+            <translation><!-- Thinking about it --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tried training team and it did not help</masterLabel>
+            <translation><!-- Tried training team and it did not help --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- How do you market your practice --></label>
+        <name>How_do_you_market__c</name>
+        <picklistValues>
+            <masterLabel>Banner Ads</masterLabel>
+            <translation><!-- Banner Ads --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Billboards</masterLabel>
+            <translation><!-- Billboards --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Custom APPs</masterLabel>
+            <translation><!-- Custom APPs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Direct Mail Postcard</masterLabel>
+            <translation><!-- Direct Mail Postcard --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Door Drops</masterLabel>
+            <translation><!-- Door Drops --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Facebook</masterLabel>
+            <translation><!-- Facebook --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Magazine</masterLabel>
+            <translation><!-- Magazine --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Microsite</masterLabel>
+            <translation><!-- Microsite --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mobilesite</masterLabel>
+            <translation><!-- Mobilesite --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Newsletter</masterLabel>
+            <translation><!-- Newsletter --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Newspaper</masterLabel>
+            <translation><!-- Newspaper --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other Social Media</masterLabel>
+            <translation><!-- Other Social Media --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Paid Search</masterLabel>
+            <translation><!-- Paid Search --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Patient Referrals</masterLabel>
+            <translation><!-- Patient Referrals --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Patient Reviews</masterLabel>
+            <translation><!-- Patient Reviews --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pay-Per-Click Advertising</masterLabel>
+            <translation><!-- Pay-Per-Click Advertising --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Print</masterLabel>
+            <translation><!-- Print --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Professional Referral Marketing</masterLabel>
+            <translation><!-- Professional Referral Marketing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>QR Codes</masterLabel>
+            <translation><!-- QR Codes --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Radio</masterLabel>
+            <translation><!-- Radio --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Reception Room Digital Signage</masterLabel>
+            <translation><!-- Reception Room Digital Signage --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Seminars</masterLabel>
+            <translation><!-- Seminars --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Television</masterLabel>
+            <translation><!-- Television --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Twitter</masterLabel>
+            <translation><!-- Twitter --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ValuPak</masterLabel>
+            <translation><!-- ValuPak --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Website</masterLabel>
+            <translation><!-- Website --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yellow Pages</masterLabel>
+            <translation><!-- Yellow Pages --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>You Tube</masterLabel>
+            <translation><!-- You Tube --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>eMail Marketing</masterLabel>
+            <translation><!-- eMail Marketing --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- How do you thank referring patients --></label>
+        <name>How_do_you_thank_referring_patients__c</name>
+    </fields>
+    <fields>
+        <label><!-- How do you track patient source --></label>
+        <name>How_do_you_track_patient_source__c</name>
+        <picklistValues>
+            <masterLabel>Front desk asks how they heard about us</masterLabel>
+            <translation><!-- Front desk asks how they heard about us --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>We ask them when they come into the office</masterLabel>
+            <translation><!-- We ask them when they come into the office --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>We don&apos;t track at all</masterLabel>
+            <translation><!-- We don&apos;t track at all --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>We use call tracking software</masterLabel>
+            <translation><!-- We use call tracking software --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- How many imp specialist do you refer to --></label>
+        <name>How_many_imp_specialist_do_you_refer_to__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4</masterLabel>
+            <translation><!-- 4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5 or more</masterLabel>
+            <translation><!-- 5 or more --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- How many implants do you refer monthly --></label>
+        <name>How_many_implants_do_you_refer_monthly__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10 or more</masterLabel>
+            <translation><!-- 10 or more --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4</masterLabel>
+            <translation><!-- 4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5</masterLabel>
+            <translation><!-- 5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6</masterLabel>
+            <translation><!-- 6 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7</masterLabel>
+            <translation><!-- 7 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8</masterLabel>
+            <translation><!-- 8 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>9</masterLabel>
+            <translation><!-- 9 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- How to measure success --></label>
+        <name>How_to_measure_success__c</name>
+    </fields>
+    <fields>
+        <label><!-- How would patients rate team --></label>
+        <name>How_would_patients_rate_team__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4</masterLabel>
+            <translation><!-- 4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5</masterLabel>
+            <translation><!-- 5 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- How would patients rate the environment --></label>
+        <name>How_would_patients_rate_the_environment__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4</masterLabel>
+            <translation><!-- 4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5</masterLabel>
+            <translation><!-- 5 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- How would patients rate you --></label>
+        <name>How_would_patients_rate_you__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4</masterLabel>
+            <translation><!-- 4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5</masterLabel>
+            <translation><!-- 5 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- How would the team rate environment --></label>
+        <name>How_would_the_team_rate_environment__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4</masterLabel>
+            <translation><!-- 4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5</masterLabel>
+            <translation><!-- 5 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- How would the team rate your performance --></label>
+        <name>How_would_the_team_rate_your_performance__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4</masterLabel>
+            <translation><!-- 4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5</masterLabel>
+            <translation><!-- 5 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- How would you rank PP based on tonight? --></label>
+        <name>How_would_you_rank_PP_based_on_tonight__c</name>
+        <picklistValues>
+            <masterLabel>Dislike</masterLabel>
+            <translation><!-- Dislike --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Exceptional</masterLabel>
+            <translation><!-- Exceptional --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Like</masterLabel>
+            <translation><!-- Like --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Neutral</masterLabel>
+            <translation><!-- Neutral --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Strongly Dislike</masterLabel>
+            <translation><!-- Strongly Dislike --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- How would you rank tonight&apos;s speaker? --></label>
+        <name>How_would_you_rank_tonight_s_speaker__c</name>
+        <picklistValues>
+            <masterLabel>Dislike</masterLabel>
+            <translation><!-- Dislike --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Exceptional</masterLabel>
+            <translation><!-- Exceptional --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Liked</masterLabel>
+            <translation><!-- Liked --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Neutral</masterLabel>
+            <translation><!-- Neutral --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Strongly Dislike</masterLabel>
+            <translation><!-- Strongly Dislike --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Hygiene Desirability --></label>
+        <name>Hygiene_Desirability__c</name>
+        <picklistValues>
+            <masterLabel>Can&apos;t wait to go home</masterLabel>
+            <translation><!-- Can&apos;t wait to go home --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Extremely Happy</masterLabel>
+            <translation><!-- Extremely Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Happy</masterLabel>
+            <translation><!-- Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I don&apos;t offer this service</masterLabel>
+            <translation><!-- I don&apos;t offer this service --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not so Happy</masterLabel>
+            <translation><!-- Not so Happy --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Hygiene --></label>
+        <name>Hygiene__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hygienist (1) --></label>
+        <name>Hygienist_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hygienist (2) --></label>
+        <name>Hygienist_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hygienist (3) --></label>
+        <name>Hygienist_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Insurance Companies Accepted --></label>
+        <name>Insurance_Companies_Accepted__c</name>
+    </fields>
+    <fields>
+        <label><!-- Interest in joining a CC study club --></label>
+        <name>Interest_in_joining_a_CC_study_club__c</name>
+        <picklistValues>
+            <masterLabel>Maybe</masterLabel>
+            <translation><!-- Maybe --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Invisalign Desirability --></label>
+        <name>Invisalign_Desirability__c</name>
+        <picklistValues>
+            <masterLabel>Can&apos;t wait to go home</masterLabel>
+            <translation><!-- Can&apos;t wait to go home --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Extremely Happy</masterLabel>
+            <translation><!-- Extremely Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Happy</masterLabel>
+            <translation><!-- Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I don&apos;t offer this service</masterLabel>
+            <translation><!-- I don&apos;t offer this service --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not so Happy</masterLabel>
+            <translation><!-- Not so Happy --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Invisalign --></label>
+        <name>Invisalign__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Botox a focus? --></label>
+        <name>Is_Botox_a_focus__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Crown &amp; Bridge a focus? --></label>
+        <name>Is_Crown_Bridge_a_focus__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Dental Implants a focus? --></label>
+        <name>Is_Dental_Implants_a_focus__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Dentures a Focus? --></label>
+        <name>Is_Dentures_a_Focus__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Endontics a focus? --></label>
+        <name>Is_Endontics_a_focus__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Hygiene a focus? --></label>
+        <name>Is_Hygiene_a_focus__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Invisalign a focus? --></label>
+        <name>Is_Invisalign_a_focus__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Laser Dentistry a focus? --></label>
+        <name>Is_Laser_Dentistry_a_focus__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Teeth Whitening a focus? --></label>
+        <name>Is_Teeth_Whitening_a_focus__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Traditional Ortho a focus? --></label>
+        <name>Is_Traditional_Ortho_a_focus__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Veneers a focus? --></label>
+        <name>Is_Veneers_a_focus__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Wisdom Teeth Extraction a focus? --></label>
+        <name>Is_Wisdom_Teeth_Extraction_a_focus__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is it HDMI compatible? --></label>
+        <name>Is_it_HDMI_compatible__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Is your TV mounted to the ceiling --></label>
+        <name>Is_your_TV_mounted_to_the_ceiling__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Is your tv mounted to the wall --></label>
+        <name>Is_your_tv_mounted_to_the_wall__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Laser Dentistry Desirability --></label>
+        <name>Laser_Dentistry_Desirability__c</name>
+        <picklistValues>
+            <masterLabel>Can&apos;t wait to go home</masterLabel>
+            <translation><!-- Can&apos;t wait to go home --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Extremely Happy</masterLabel>
+            <translation><!-- Extremely Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Happy</masterLabel>
+            <translation><!-- Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I don&apos;t offer this service</masterLabel>
+            <translation><!-- I don&apos;t offer this service --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not so Happy</masterLabel>
+            <translation><!-- Not so Happy --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Laser Dentistry --></label>
+        <name>Laser_Dentistry__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Referral Date --></label>
+        <name>Last_Referral_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Least effective marketing tool --></label>
+        <name>Least_effective_marketing_tool__c</name>
+    </fields>
+    <fields>
+        <label><!-- Location Code --></label>
+        <name>Location_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Measure for Patient Satisfaction --></label>
+        <name>Measure_for_Patient_Satisfaction__c</name>
+    </fields>
+    <fields>
+        <label><!-- Method for Promoting new services --></label>
+        <name>Method_for_Promoting_new_services__c</name>
+    </fields>
+    <fields>
+        <label><!-- Monday_End --></label>
+        <name>Monday_End__c</name>
+        <picklistValues>
+            <masterLabel>05:00</masterLabel>
+            <translation><!-- 05:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>05:30</masterLabel>
+            <translation><!-- 05:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:00</masterLabel>
+            <translation><!-- 06:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:30</masterLabel>
+            <translation><!-- 06:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:00</masterLabel>
+            <translation><!-- 07:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:30</masterLabel>
+            <translation><!-- 07:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:00</masterLabel>
+            <translation><!-- 08:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:30</masterLabel>
+            <translation><!-- 08:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:00</masterLabel>
+            <translation><!-- 09:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:30</masterLabel>
+            <translation><!-- 09:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:00</masterLabel>
+            <translation><!-- 10:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:30</masterLabel>
+            <translation><!-- 10:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:00</masterLabel>
+            <translation><!-- 11:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:30</masterLabel>
+            <translation><!-- 11:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:00</masterLabel>
+            <translation><!-- 12:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:30</masterLabel>
+            <translation><!-- 12:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:00</masterLabel>
+            <translation><!-- 13:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:30</masterLabel>
+            <translation><!-- 13:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:00</masterLabel>
+            <translation><!-- 14:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:30</masterLabel>
+            <translation><!-- 14:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:00</masterLabel>
+            <translation><!-- 15:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:30</masterLabel>
+            <translation><!-- 15:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:00</masterLabel>
+            <translation><!-- 16:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:30</masterLabel>
+            <translation><!-- 16:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:00</masterLabel>
+            <translation><!-- 17:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:30</masterLabel>
+            <translation><!-- 17:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:00</masterLabel>
+            <translation><!-- 18:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:30</masterLabel>
+            <translation><!-- 18:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:00</masterLabel>
+            <translation><!-- 19:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:30</masterLabel>
+            <translation><!-- 19:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:00</masterLabel>
+            <translation><!-- 20:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:30</masterLabel>
+            <translation><!-- 20:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:00</masterLabel>
+            <translation><!-- 21:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:30</masterLabel>
+            <translation><!-- 21:30 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Monday Open --></label>
+        <name>Monday_Open__c</name>
+    </fields>
+    <fields>
+        <label><!-- Monday_Start --></label>
+        <name>Monday_Start__c</name>
+        <picklistValues>
+            <masterLabel>05:00</masterLabel>
+            <translation><!-- 05:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>05:30</masterLabel>
+            <translation><!-- 05:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:00</masterLabel>
+            <translation><!-- 06:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:30</masterLabel>
+            <translation><!-- 06:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:00</masterLabel>
+            <translation><!-- 07:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:30</masterLabel>
+            <translation><!-- 07:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:00</masterLabel>
+            <translation><!-- 08:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:30</masterLabel>
+            <translation><!-- 08:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:00</masterLabel>
+            <translation><!-- 09:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:30</masterLabel>
+            <translation><!-- 09:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:00</masterLabel>
+            <translation><!-- 10:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:30</masterLabel>
+            <translation><!-- 10:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:00</masterLabel>
+            <translation><!-- 11:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:30</masterLabel>
+            <translation><!-- 11:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:00</masterLabel>
+            <translation><!-- 12:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:30</masterLabel>
+            <translation><!-- 12:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:00</masterLabel>
+            <translation><!-- 13:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:30</masterLabel>
+            <translation><!-- 13:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:00</masterLabel>
+            <translation><!-- 14:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:30</masterLabel>
+            <translation><!-- 14:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:00</masterLabel>
+            <translation><!-- 15:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:30</masterLabel>
+            <translation><!-- 15:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:00</masterLabel>
+            <translation><!-- 16:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:30</masterLabel>
+            <translation><!-- 16:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:00</masterLabel>
+            <translation><!-- 17:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:30</masterLabel>
+            <translation><!-- 17:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:00</masterLabel>
+            <translation><!-- 18:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:30</masterLabel>
+            <translation><!-- 18:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:00</masterLabel>
+            <translation><!-- 19:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:30</masterLabel>
+            <translation><!-- 19:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:00</masterLabel>
+            <translation><!-- 20:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:30</masterLabel>
+            <translation><!-- 20:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:00</masterLabel>
+            <translation><!-- 21:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:30</masterLabel>
+            <translation><!-- 21:30 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Most effective marketing tool --></label>
+        <name>Most_effective_marketing_tool__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of active patients --></label>
+        <name>Number_of_active_patients__c</name>
+        <picklistValues>
+            <masterLabel>1001 to 1999</masterLabel>
+            <translation><!-- 1001 to 1999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2000 to 3000</masterLabel>
+            <translation><!-- 2000 to 3000 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3001 or more</masterLabel>
+            <translation><!-- 3001 or more --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Under 1000</masterLabel>
+            <translation><!-- Under 1000 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Number of dormant patients --></label>
+        <name>Number_of_dormant_patients__c</name>
+        <picklistValues>
+            <masterLabel>1001 to 1999</masterLabel>
+            <translation><!-- 1001 to 1999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2000 to 3000</masterLabel>
+            <translation><!-- 2000 to 3000 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3001 or more</masterLabel>
+            <translation><!-- 3001 or more --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Under 1000</masterLabel>
+            <translation><!-- Under 1000 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Office has internet access? --></label>
+        <name>Office_has_internet_access__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Days --></label>
+        <name>Open_Days__c</name>
+    </fields>
+    <fields>
+        <label><!-- Open Time --></label>
+        <name>Open_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Oral and Maxillofacial Pathology --></label>
+        <name>Oral_and_Maxillofacial_Pathology__c</name>
+    </fields>
+    <fields>
+        <label><!-- Oral and Maxillofacial Radiology --></label>
+        <name>Oral_and_Maxillofacial_Radiology__c</name>
+    </fields>
+    <fields>
+        <label><!-- Oral and Maxillofacial Surgery --></label>
+        <name>Oral_and_Maxillofacial_Surgery__c</name>
+    </fields>
+    <fields>
+        <label><!-- Orthodontics and Dentofacial Orthopedics --></label>
+        <name>Orthodontics_and_Dentofacial_Orthopedics__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other Desirability --></label>
+        <name>Other_Desirability__c</name>
+        <picklistValues>
+            <masterLabel>Can&apos;t wait to go home</masterLabel>
+            <translation><!-- Can&apos;t wait to go home --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Extremely Happy</masterLabel>
+            <translation><!-- Extremely Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Happy</masterLabel>
+            <translation><!-- Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I don&apos;t offer this service</masterLabel>
+            <translation><!-- I don&apos;t offer this service --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not so Happy</masterLabel>
+            <translation><!-- Not so Happy --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Other Implants Restored --></label>
+        <name>Other_Implants_Restored__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other Practice Management Software --></label>
+        <name>Other_Practice_Management_Software__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other Services Offered --></label>
+        <name>Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- PSA Contract Completed --></label>
+        <name>PSA_Contract_Completed__c</name>
+    </fields>
+    <fields>
+        <label><!-- PSA Effective Date --></label>
+        <name>PSA_Effective_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pediatric Dentistry --></label>
+        <name>Pediatric_Dentistry__c</name>
+    </fields>
+    <fields>
+        <label><!-- Periodontics --></label>
+        <name>Periodontics__c</name>
+    </fields>
+    <fields>
+        <label><!-- Phase Type --></label>
+        <name>Phase_Type__c</name>
+        <picklistValues>
+            <masterLabel>Phase I</masterLabel>
+            <translation><!-- Phase I --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phase II &apos;A&apos;</masterLabel>
+            <translation><!-- Phase II &apos;A&apos; --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phase II &apos;B&apos;</masterLabel>
+            <translation><!-- Phase II &apos;B&apos; --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phase III</masterLabel>
+            <translation><!-- Phase III --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Phone Clean --></label>
+        <name>Phone_Clean__c</name>
+    </fields>
+    <fields>
+        <label><!-- Office Phone --></label>
+        <name>Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Placing Dental Implants Desirability --></label>
+        <name>Placing_Dental_Implants_Desirability__c</name>
+        <picklistValues>
+            <masterLabel>Can&apos;t wait to go home</masterLabel>
+            <translation><!-- Can&apos;t wait to go home --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Extremely Happy</masterLabel>
+            <translation><!-- Extremely Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Happy</masterLabel>
+            <translation><!-- Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I don&apos;t offer this service</masterLabel>
+            <translation><!-- I don&apos;t offer this service --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not so Happy</masterLabel>
+            <translation><!-- Not so Happy --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Planned work days current year --></label>
+        <name>Planned_work_days_current_year__c</name>
+    </fields>
+    <fields>
+        <label><!-- Postal Code --></label>
+        <name>Postal_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Practice Formal Name --></label>
+        <name>Practice_Formal_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Practice Growth from Last Year --></label>
+        <name>Practice_Growth_from_Last_Year__c</name>
+        <picklistValues>
+            <masterLabel>+1%</masterLabel>
+            <translation><!-- +1% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+10%</masterLabel>
+            <translation><!-- +10% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+11%</masterLabel>
+            <translation><!-- +11% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+12%</masterLabel>
+            <translation><!-- +12% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+13%</masterLabel>
+            <translation><!-- +13% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+14%</masterLabel>
+            <translation><!-- +14% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+15%</masterLabel>
+            <translation><!-- +15% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+16%</masterLabel>
+            <translation><!-- +16% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+17%</masterLabel>
+            <translation><!-- +17% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+18%</masterLabel>
+            <translation><!-- +18% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+19%</masterLabel>
+            <translation><!-- +19% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+2%</masterLabel>
+            <translation><!-- +2% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+20% or more</masterLabel>
+            <translation><!-- +20% or more --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+3%</masterLabel>
+            <translation><!-- +3% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+4%</masterLabel>
+            <translation><!-- +4% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+5%</masterLabel>
+            <translation><!-- +5% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+6%</masterLabel>
+            <translation><!-- +6% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+7%</masterLabel>
+            <translation><!-- +7% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+8%</masterLabel>
+            <translation><!-- +8% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>+9%</masterLabel>
+            <translation><!-- +9% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>-1%</masterLabel>
+            <translation><!-- -1% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>-10%</masterLabel>
+            <translation><!-- -10% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>-11%</masterLabel>
+            <translation><!-- -11% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>-12%</masterLabel>
+            <translation><!-- -12% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>-13%</masterLabel>
+            <translation><!-- -13% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>-14%</masterLabel>
+            <translation><!-- -14% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>-15%</masterLabel>
+            <translation><!-- -15% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>-16%</masterLabel>
+            <translation><!-- -16% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>-17%</masterLabel>
+            <translation><!-- -17% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>-18%</masterLabel>
+            <translation><!-- -18% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>-19%</masterLabel>
+            <translation><!-- -19% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>-2%</masterLabel>
+            <translation><!-- -2% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>-20% or more</masterLabel>
+            <translation><!-- -20% or more --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>-3%</masterLabel>
+            <translation><!-- -3% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>-4%</masterLabel>
+            <translation><!-- -4% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>-5%</masterLabel>
+            <translation><!-- -5% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>-6%</masterLabel>
+            <translation><!-- -6% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>-7%</masterLabel>
+            <translation><!-- -7% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>-8%</masterLabel>
+            <translation><!-- -8% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>-9%</masterLabel>
+            <translation><!-- -9% --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>0% growth</masterLabel>
+            <translation><!-- 0% growth --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Practice Location --></label>
+        <name>Practice_Location__c</name>
+    </fields>
+    <fields>
+        <label><!-- Practice Management Software --></label>
+        <name>Practice_Management_Software__c</name>
+        <picklistValues>
+            <masterLabel>CareStream</masterLabel>
+            <translation><!-- CareStream --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CurveDental</masterLabel>
+            <translation><!-- CurveDental --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DataCon</masterLabel>
+            <translation><!-- DataCon --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DentiMax</masterLabel>
+            <translation><!-- DentiMax --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dentrix</masterLabel>
+            <translation><!-- Dentrix --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EagleSoft</masterLabel>
+            <translation><!-- EagleSoft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Exact</masterLabel>
+            <translation><!-- Exact --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MaxiDent</masterLabel>
+            <translation><!-- MaxiDent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mogo</masterLabel>
+            <translation><!-- Mogo --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>OpenDental</masterLabel>
+            <translation><!-- OpenDental --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PlanetDDS</masterLabel>
+            <translation><!-- PlanetDDS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PracticeWorks</masterLabel>
+            <translation><!-- PracticeWorks --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SoftDent</masterLabel>
+            <translation><!-- SoftDent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tracker</masterLabel>
+            <translation><!-- Tracker --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>WinDent</masterLabel>
+            <translation><!-- WinDent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>XLDent</masterLabel>
+            <translation><!-- XLDent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>iDentalSoft</masterLabel>
+            <translation><!-- iDentalSoft --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Practice_Owner(s) --></label>
+        <name>Practice_Owner__c</name>
+    </fields>
+    <fields>
+        <label><!-- Practice Performance --></label>
+        <name>Practice_Performance__c</name>
+        <picklistValues>
+            <masterLabel>Our practice is down</masterLabel>
+            <translation><!-- Our practice is down --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Our practice is flat</masterLabel>
+            <translation><!-- Our practice is flat --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Our practice is up</masterLabel>
+            <translation><!-- Our practice is up --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Practice Status Modified --></label>
+        <name>Practice_Status_Modified__c</name>
+    </fields>
+    <fields>
+        <label><!-- Practice Status --></label>
+        <name>Practice_Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Active (No PSA)</masterLabel>
+            <translation><!-- Active (No PSA) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Center Visit</masterLabel>
+            <translation><!-- Center Visit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inactive</masterLabel>
+            <translation><!-- Inactive --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inactive (No PSA)</masterLabel>
+            <translation><!-- Inactive (No PSA) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PSA Executed</masterLabel>
+            <translation><!-- PSA Executed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prospect</masterLabel>
+            <translation><!-- Prospect --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Practice Type --></label>
+        <name>Practice_Type__c</name>
+        <picklistValues>
+            <masterLabel>General Dentistry</masterLabel>
+            <translation><!-- General Dentistry --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Oral Surgeon</masterLabel>
+            <translation><!-- Oral Surgeon --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Orthodontist</masterLabel>
+            <translation><!-- Orthodontist --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Periodontist</masterLabel>
+            <translation><!-- Periodontist --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prosthodontist</masterLabel>
+            <translation><!-- Prosthodontist --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Practice Website --></label>
+        <name>Practice_Website__c</name>
+    </fields>
+    <fields>
+        <label><!-- Previous perception of CC? --></label>
+        <name>Previous_perception_of_CC__c</name>
+        <picklistValues>
+            <masterLabel>Didn&apos;t know much about ClearChoice</masterLabel>
+            <translation><!-- Didn&apos;t know much about ClearChoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Negative</masterLabel>
+            <translation><!-- Negative --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Positive</masterLabel>
+            <translation><!-- Positive --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Primary Contact Email --></label>
+        <name>Primary_Contact_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Primary Contact Name --></label>
+        <name>Primary_Contact_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Primary Contact Role --></label>
+        <name>Primary_Contact_Role__c</name>
+    </fields>
+    <fields>
+        <label><!-- Program Elements interested in --></label>
+        <name>Program_Elements_interested_in__c</name>
+        <picklistValues>
+            <masterLabel>ClearLeads</masterLabel>
+            <translation><!-- ClearLeads --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ClearRefer</masterLabel>
+            <translation><!-- ClearRefer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ClearStudy</masterLabel>
+            <translation><!-- ClearStudy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ClearTrain</masterLabel>
+            <translation><!-- ClearTrain --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ClearVantage</masterLabel>
+            <translation><!-- ClearVantage --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ClearViewTV</masterLabel>
+            <translation><!-- ClearViewTV --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ClearWeb</masterLabel>
+            <translation><!-- ClearWeb --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SmileLoc</masterLabel>
+            <translation><!-- SmileLoc --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Treatment Assurance Model</masterLabel>
+            <translation><!-- Treatment Assurance Model --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Prospect Source --></label>
+        <name>Prospect_Path__c</name>
+        <picklistValues>
+            <masterLabel>Center Staff Contacts</masterLabel>
+            <translation><!-- Center Staff Contacts --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cold Calling</masterLabel>
+            <translation><!-- Cold Calling --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Colleague</masterLabel>
+            <translation><!-- Colleague --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Marketing</masterLabel>
+            <translation><!-- Marketing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Patient in Common</masterLabel>
+            <translation><!-- Patient in Common --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Vendor Relationships</masterLabel>
+            <translation><!-- Vendor Relationships --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Prosthodontics --></label>
+        <name>Prosthodontics__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approved by Compliance --></label>
+        <name>Refer_to_this_practice__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referred By --></label>
+        <name>Referred_By__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referred to us --></label>
+        <name>Referred_to_us__c</name>
+    </fields>
+    <fields>
+        <label><!-- Restoring Dental Implants Desirability --></label>
+        <name>Restoring_Dental_Implants_Desirability__c</name>
+        <picklistValues>
+            <masterLabel>Can&apos;t wait to go home</masterLabel>
+            <translation><!-- Can&apos;t wait to go home --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Extremely Happy</masterLabel>
+            <translation><!-- Extremely Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Happy</masterLabel>
+            <translation><!-- Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I don&apos;t offer this service</masterLabel>
+            <translation><!-- I don&apos;t offer this service --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not so Happy</masterLabel>
+            <translation><!-- Not so Happy --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Saturday End --></label>
+        <name>Saturday_End__c</name>
+        <picklistValues>
+            <masterLabel>05:00</masterLabel>
+            <translation><!-- 05:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>05:30</masterLabel>
+            <translation><!-- 05:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:00</masterLabel>
+            <translation><!-- 06:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:30</masterLabel>
+            <translation><!-- 06:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:00</masterLabel>
+            <translation><!-- 07:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:30</masterLabel>
+            <translation><!-- 07:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:00</masterLabel>
+            <translation><!-- 08:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:30</masterLabel>
+            <translation><!-- 08:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:00</masterLabel>
+            <translation><!-- 09:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:30</masterLabel>
+            <translation><!-- 09:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:00</masterLabel>
+            <translation><!-- 10:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:30</masterLabel>
+            <translation><!-- 10:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:00</masterLabel>
+            <translation><!-- 11:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:30</masterLabel>
+            <translation><!-- 11:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:00</masterLabel>
+            <translation><!-- 12:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:30</masterLabel>
+            <translation><!-- 12:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:00</masterLabel>
+            <translation><!-- 13:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:30</masterLabel>
+            <translation><!-- 13:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:00</masterLabel>
+            <translation><!-- 14:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:30</masterLabel>
+            <translation><!-- 14:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:00</masterLabel>
+            <translation><!-- 15:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:30</masterLabel>
+            <translation><!-- 15:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:00</masterLabel>
+            <translation><!-- 16:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:30</masterLabel>
+            <translation><!-- 16:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:00</masterLabel>
+            <translation><!-- 17:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:30</masterLabel>
+            <translation><!-- 17:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:00</masterLabel>
+            <translation><!-- 18:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:30</masterLabel>
+            <translation><!-- 18:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:00</masterLabel>
+            <translation><!-- 19:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:30</masterLabel>
+            <translation><!-- 19:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:00</masterLabel>
+            <translation><!-- 20:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:30</masterLabel>
+            <translation><!-- 20:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:00</masterLabel>
+            <translation><!-- 21:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:30</masterLabel>
+            <translation><!-- 21:30 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Saturday Open --></label>
+        <name>Saturday_Open__c</name>
+    </fields>
+    <fields>
+        <label><!-- Saturday Start --></label>
+        <name>Saturday_Start__c</name>
+        <picklistValues>
+            <masterLabel>05:00</masterLabel>
+            <translation><!-- 05:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>05:30</masterLabel>
+            <translation><!-- 05:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:00</masterLabel>
+            <translation><!-- 06:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:30</masterLabel>
+            <translation><!-- 06:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:00</masterLabel>
+            <translation><!-- 07:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:30</masterLabel>
+            <translation><!-- 07:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:00</masterLabel>
+            <translation><!-- 08:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:30</masterLabel>
+            <translation><!-- 08:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:00</masterLabel>
+            <translation><!-- 09:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:30</masterLabel>
+            <translation><!-- 09:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:00</masterLabel>
+            <translation><!-- 10:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:30</masterLabel>
+            <translation><!-- 10:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:00</masterLabel>
+            <translation><!-- 11:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:30</masterLabel>
+            <translation><!-- 11:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:00</masterLabel>
+            <translation><!-- 12:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:30</masterLabel>
+            <translation><!-- 12:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:00</masterLabel>
+            <translation><!-- 13:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:30</masterLabel>
+            <translation><!-- 13:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:00</masterLabel>
+            <translation><!-- 14:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:30</masterLabel>
+            <translation><!-- 14:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:00</masterLabel>
+            <translation><!-- 15:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:30</masterLabel>
+            <translation><!-- 15:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:00</masterLabel>
+            <translation><!-- 16:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:30</masterLabel>
+            <translation><!-- 16:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:00</masterLabel>
+            <translation><!-- 17:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:30</masterLabel>
+            <translation><!-- 17:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:00</masterLabel>
+            <translation><!-- 18:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:30</masterLabel>
+            <translation><!-- 18:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:00</masterLabel>
+            <translation><!-- 19:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:30</masterLabel>
+            <translation><!-- 19:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:00</masterLabel>
+            <translation><!-- 20:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:30</masterLabel>
+            <translation><!-- 20:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:00</masterLabel>
+            <translation><!-- 21:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:30</masterLabel>
+            <translation><!-- 21:30 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Scheduled ghost call --></label>
+        <name>Scheduled_ghost_call__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- # Seats in the office --></label>
+        <name>Seats_in_the_office__c</name>
+    </fields>
+    <fields>
+        <label><!-- Secondary Contact Email --></label>
+        <name>Secondary_Contact_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Secondary Contact Role --></label>
+        <name>Secondary_Contact_Role__c</name>
+    </fields>
+    <fields>
+        <label><!-- Secondary Contact Name --></label>
+        <name>Secondary_Contact__c</name>
+    </fields>
+    <fields>
+        <label><!-- Serial # of the TV --></label>
+        <name>Serial_of_the_TV__c</name>
+    </fields>
+    <fields>
+        <label><!-- Serial # of the media player --></label>
+        <name>Serial_of_the_media_player__c</name>
+    </fields>
+    <fields>
+        <label><!-- Services Offered --></label>
+        <name>Services_Offered__c</name>
+    </fields>
+    <fields>
+        <label><!-- State/Province --></label>
+        <name>State_Province__c</name>
+    </fields>
+    <fields>
+        <label><!-- Street --></label>
+        <name>Street__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sunday End --></label>
+        <name>Sunday_End__c</name>
+        <picklistValues>
+            <masterLabel>05:00</masterLabel>
+            <translation><!-- 05:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>05:30</masterLabel>
+            <translation><!-- 05:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:00</masterLabel>
+            <translation><!-- 06:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:30</masterLabel>
+            <translation><!-- 06:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:00</masterLabel>
+            <translation><!-- 07:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:30</masterLabel>
+            <translation><!-- 07:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:00</masterLabel>
+            <translation><!-- 08:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:30</masterLabel>
+            <translation><!-- 08:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:00</masterLabel>
+            <translation><!-- 09:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:30</masterLabel>
+            <translation><!-- 09:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:00</masterLabel>
+            <translation><!-- 10:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:30</masterLabel>
+            <translation><!-- 10:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:00</masterLabel>
+            <translation><!-- 11:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:30</masterLabel>
+            <translation><!-- 11:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:00</masterLabel>
+            <translation><!-- 12:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:30</masterLabel>
+            <translation><!-- 12:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:00</masterLabel>
+            <translation><!-- 13:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:30</masterLabel>
+            <translation><!-- 13:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:00</masterLabel>
+            <translation><!-- 14:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:30</masterLabel>
+            <translation><!-- 14:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:00</masterLabel>
+            <translation><!-- 15:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:30</masterLabel>
+            <translation><!-- 15:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:00</masterLabel>
+            <translation><!-- 16:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:30</masterLabel>
+            <translation><!-- 16:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:00</masterLabel>
+            <translation><!-- 17:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:30</masterLabel>
+            <translation><!-- 17:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:00</masterLabel>
+            <translation><!-- 18:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:30</masterLabel>
+            <translation><!-- 18:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:00</masterLabel>
+            <translation><!-- 19:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:30</masterLabel>
+            <translation><!-- 19:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:00</masterLabel>
+            <translation><!-- 20:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:30</masterLabel>
+            <translation><!-- 20:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:00</masterLabel>
+            <translation><!-- 21:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:30</masterLabel>
+            <translation><!-- 21:30 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sunday Open --></label>
+        <name>Sunday_Open__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sunday Start --></label>
+        <name>Sunday_Start__c</name>
+        <picklistValues>
+            <masterLabel>05:00</masterLabel>
+            <translation><!-- 05:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>05:30</masterLabel>
+            <translation><!-- 05:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:00</masterLabel>
+            <translation><!-- 06:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:30</masterLabel>
+            <translation><!-- 06:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:00</masterLabel>
+            <translation><!-- 07:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:30</masterLabel>
+            <translation><!-- 07:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:00</masterLabel>
+            <translation><!-- 08:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:30</masterLabel>
+            <translation><!-- 08:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:00</masterLabel>
+            <translation><!-- 09:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:30</masterLabel>
+            <translation><!-- 09:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:00</masterLabel>
+            <translation><!-- 10:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:30</masterLabel>
+            <translation><!-- 10:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:00</masterLabel>
+            <translation><!-- 11:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:30</masterLabel>
+            <translation><!-- 11:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:00</masterLabel>
+            <translation><!-- 12:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:30</masterLabel>
+            <translation><!-- 12:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:00</masterLabel>
+            <translation><!-- 13:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:30</masterLabel>
+            <translation><!-- 13:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:00</masterLabel>
+            <translation><!-- 14:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:30</masterLabel>
+            <translation><!-- 14:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:00</masterLabel>
+            <translation><!-- 15:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:30</masterLabel>
+            <translation><!-- 15:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:00</masterLabel>
+            <translation><!-- 16:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:30</masterLabel>
+            <translation><!-- 16:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:00</masterLabel>
+            <translation><!-- 17:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:30</masterLabel>
+            <translation><!-- 17:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:00</masterLabel>
+            <translation><!-- 18:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:30</masterLabel>
+            <translation><!-- 18:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:00</masterLabel>
+            <translation><!-- 19:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:30</masterLabel>
+            <translation><!-- 19:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:00</masterLabel>
+            <translation><!-- 20:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:30</masterLabel>
+            <translation><!-- 20:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:00</masterLabel>
+            <translation><!-- 21:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:30</masterLabel>
+            <translation><!-- 21:30 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Teams Communication Skills --></label>
+        <name>Teams_Communication_Skills__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4</masterLabel>
+            <translation><!-- 4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5</masterLabel>
+            <translation><!-- 5 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Teams Overall Performace --></label>
+        <name>Teams_Overall_Performace__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4</masterLabel>
+            <translation><!-- 4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5</masterLabel>
+            <translation><!-- 5 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Teams greatest challenge to work --></label>
+        <name>Teams_greatest_challenge_to_work__c</name>
+    </fields>
+    <fields>
+        <label><!-- Three greatest obstacles in the practice --></label>
+        <name>Teams_greatest_obstacle__c</name>
+    </fields>
+    <fields>
+        <label><!-- Teeth Whitening Desirability --></label>
+        <name>Teeth_Whitening_Desirability__c</name>
+        <picklistValues>
+            <masterLabel>Can&apos;t wait to go home</masterLabel>
+            <translation><!-- Can&apos;t wait to go home --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Extremely Happy</masterLabel>
+            <translation><!-- Extremely Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Happy</masterLabel>
+            <translation><!-- Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I don&apos;t offer this service</masterLabel>
+            <translation><!-- I don&apos;t offer this service --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not so Happy</masterLabel>
+            <translation><!-- Not so Happy --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Teeth Whitening --></label>
+        <name>Teeth_Whitening__c</name>
+    </fields>
+    <fields>
+        <label><!-- Telephone/Sales training description --></label>
+        <name>Telephone_Sales_training_description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Testing a new field --></label>
+        <name>Testing_a_new_field__c</name>
+    </fields>
+    <fields>
+        <label><!-- Thursday End --></label>
+        <name>Thursday_End__c</name>
+        <picklistValues>
+            <masterLabel>05:00</masterLabel>
+            <translation><!-- 05:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>05:30</masterLabel>
+            <translation><!-- 05:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:00</masterLabel>
+            <translation><!-- 06:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:30</masterLabel>
+            <translation><!-- 06:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:00</masterLabel>
+            <translation><!-- 07:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:30</masterLabel>
+            <translation><!-- 07:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:00</masterLabel>
+            <translation><!-- 08:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:30</masterLabel>
+            <translation><!-- 08:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:00</masterLabel>
+            <translation><!-- 09:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:30</masterLabel>
+            <translation><!-- 09:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:00</masterLabel>
+            <translation><!-- 10:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:30</masterLabel>
+            <translation><!-- 10:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:00</masterLabel>
+            <translation><!-- 11:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:30</masterLabel>
+            <translation><!-- 11:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:00</masterLabel>
+            <translation><!-- 12:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:30</masterLabel>
+            <translation><!-- 12:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:00</masterLabel>
+            <translation><!-- 13:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:30</masterLabel>
+            <translation><!-- 13:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:00</masterLabel>
+            <translation><!-- 14:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:30</masterLabel>
+            <translation><!-- 14:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:00</masterLabel>
+            <translation><!-- 15:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:30</masterLabel>
+            <translation><!-- 15:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:00</masterLabel>
+            <translation><!-- 16:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:30</masterLabel>
+            <translation><!-- 16:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:00</masterLabel>
+            <translation><!-- 17:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:30</masterLabel>
+            <translation><!-- 17:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:00</masterLabel>
+            <translation><!-- 18:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:30</masterLabel>
+            <translation><!-- 18:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:00</masterLabel>
+            <translation><!-- 19:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:30</masterLabel>
+            <translation><!-- 19:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:00</masterLabel>
+            <translation><!-- 20:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:30</masterLabel>
+            <translation><!-- 20:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:00</masterLabel>
+            <translation><!-- 21:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:30</masterLabel>
+            <translation><!-- 21:30 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Thursday Open --></label>
+        <name>Thursday_Open__c</name>
+    </fields>
+    <fields>
+        <label><!-- Thursday Start --></label>
+        <name>Thursday_Start__c</name>
+        <picklistValues>
+            <masterLabel>05:00</masterLabel>
+            <translation><!-- 05:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>05:30</masterLabel>
+            <translation><!-- 05:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:00</masterLabel>
+            <translation><!-- 06:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:30</masterLabel>
+            <translation><!-- 06:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:00</masterLabel>
+            <translation><!-- 07:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:30</masterLabel>
+            <translation><!-- 07:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:00</masterLabel>
+            <translation><!-- 08:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:30</masterLabel>
+            <translation><!-- 08:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:00</masterLabel>
+            <translation><!-- 09:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:30</masterLabel>
+            <translation><!-- 09:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:00</masterLabel>
+            <translation><!-- 10:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:30</masterLabel>
+            <translation><!-- 10:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:00</masterLabel>
+            <translation><!-- 11:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:30</masterLabel>
+            <translation><!-- 11:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:00</masterLabel>
+            <translation><!-- 12:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:30</masterLabel>
+            <translation><!-- 12:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:00</masterLabel>
+            <translation><!-- 13:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:30</masterLabel>
+            <translation><!-- 13:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:00</masterLabel>
+            <translation><!-- 14:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:30</masterLabel>
+            <translation><!-- 14:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:00</masterLabel>
+            <translation><!-- 15:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:30</masterLabel>
+            <translation><!-- 15:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:00</masterLabel>
+            <translation><!-- 16:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:30</masterLabel>
+            <translation><!-- 16:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:00</masterLabel>
+            <translation><!-- 17:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:30</masterLabel>
+            <translation><!-- 17:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:00</masterLabel>
+            <translation><!-- 18:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:30</masterLabel>
+            <translation><!-- 18:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:00</masterLabel>
+            <translation><!-- 19:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:30</masterLabel>
+            <translation><!-- 19:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:00</masterLabel>
+            <translation><!-- 20:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:30</masterLabel>
+            <translation><!-- 20:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:00</masterLabel>
+            <translation><!-- 21:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:30</masterLabel>
+            <translation><!-- 21:30 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Trade Name --></label>
+        <name>Trade_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Traditional Orthodontics Desirability --></label>
+        <name>Traditional_Orthodontics_Desirability__c</name>
+        <picklistValues>
+            <masterLabel>Can&apos;t wait to go home</masterLabel>
+            <translation><!-- Can&apos;t wait to go home --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Extremely Happy</masterLabel>
+            <translation><!-- Extremely Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Happy</masterLabel>
+            <translation><!-- Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I don&apos;t offer this service</masterLabel>
+            <translation><!-- I don&apos;t offer this service --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not so Happy</masterLabel>
+            <translation><!-- Not so Happy --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Traditional Orthodontics --></label>
+        <name>Traditional_Orthodontics__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tuesday End --></label>
+        <name>Tuesday_End__c</name>
+        <picklistValues>
+            <masterLabel>05:00</masterLabel>
+            <translation><!-- 05:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>05:30</masterLabel>
+            <translation><!-- 05:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:00</masterLabel>
+            <translation><!-- 06:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:30</masterLabel>
+            <translation><!-- 06:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:00</masterLabel>
+            <translation><!-- 07:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:30</masterLabel>
+            <translation><!-- 07:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:00</masterLabel>
+            <translation><!-- 08:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:30</masterLabel>
+            <translation><!-- 08:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:00</masterLabel>
+            <translation><!-- 09:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:30</masterLabel>
+            <translation><!-- 09:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:00</masterLabel>
+            <translation><!-- 10:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:30</masterLabel>
+            <translation><!-- 10:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:00</masterLabel>
+            <translation><!-- 11:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:30</masterLabel>
+            <translation><!-- 11:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:00</masterLabel>
+            <translation><!-- 12:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:30</masterLabel>
+            <translation><!-- 12:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:00</masterLabel>
+            <translation><!-- 13:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:30</masterLabel>
+            <translation><!-- 13:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:00</masterLabel>
+            <translation><!-- 14:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:30</masterLabel>
+            <translation><!-- 14:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:00</masterLabel>
+            <translation><!-- 15:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:30</masterLabel>
+            <translation><!-- 15:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:00</masterLabel>
+            <translation><!-- 16:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:30</masterLabel>
+            <translation><!-- 16:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:00</masterLabel>
+            <translation><!-- 17:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:30</masterLabel>
+            <translation><!-- 17:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:00</masterLabel>
+            <translation><!-- 18:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:30</masterLabel>
+            <translation><!-- 18:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:00</masterLabel>
+            <translation><!-- 19:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:30</masterLabel>
+            <translation><!-- 19:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:00</masterLabel>
+            <translation><!-- 20:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:30</masterLabel>
+            <translation><!-- 20:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:00</masterLabel>
+            <translation><!-- 21:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:30</masterLabel>
+            <translation><!-- 21:30 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Tuesday Open --></label>
+        <name>Tuesday_Open__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tuesday Start --></label>
+        <name>Tuesday_Start__c</name>
+        <picklistValues>
+            <masterLabel>05:00</masterLabel>
+            <translation><!-- 05:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>05:30</masterLabel>
+            <translation><!-- 05:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:00</masterLabel>
+            <translation><!-- 06:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:30</masterLabel>
+            <translation><!-- 06:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:00</masterLabel>
+            <translation><!-- 07:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:30</masterLabel>
+            <translation><!-- 07:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:00</masterLabel>
+            <translation><!-- 08:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:30</masterLabel>
+            <translation><!-- 08:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:00</masterLabel>
+            <translation><!-- 09:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:30</masterLabel>
+            <translation><!-- 09:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:00</masterLabel>
+            <translation><!-- 10:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:30</masterLabel>
+            <translation><!-- 10:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:00</masterLabel>
+            <translation><!-- 11:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:30</masterLabel>
+            <translation><!-- 11:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:00</masterLabel>
+            <translation><!-- 12:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:30</masterLabel>
+            <translation><!-- 12:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:00</masterLabel>
+            <translation><!-- 13:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:30</masterLabel>
+            <translation><!-- 13:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:00</masterLabel>
+            <translation><!-- 14:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:30</masterLabel>
+            <translation><!-- 14:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:00</masterLabel>
+            <translation><!-- 15:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:30</masterLabel>
+            <translation><!-- 15:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:00</masterLabel>
+            <translation><!-- 16:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:30</masterLabel>
+            <translation><!-- 16:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:00</masterLabel>
+            <translation><!-- 17:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:30</masterLabel>
+            <translation><!-- 17:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:00</masterLabel>
+            <translation><!-- 18:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:30</masterLabel>
+            <translation><!-- 18:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:00</masterLabel>
+            <translation><!-- 19:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:30</masterLabel>
+            <translation><!-- 19:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:00</masterLabel>
+            <translation><!-- 20:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:30</masterLabel>
+            <translation><!-- 20:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:00</masterLabel>
+            <translation><!-- 21:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:30</masterLabel>
+            <translation><!-- 21:30 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Vantage OfficeID --></label>
+        <name>Vantage_OfficeID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Veneers Desirability --></label>
+        <name>Veneers_Desirability__c</name>
+        <picklistValues>
+            <masterLabel>Can&apos;t wait to go home</masterLabel>
+            <translation><!-- Can&apos;t wait to go home --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Extremely Happy</masterLabel>
+            <translation><!-- Extremely Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Happy</masterLabel>
+            <translation><!-- Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I don&apos;t offer this service</masterLabel>
+            <translation><!-- I don&apos;t offer this service --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not so Happy</masterLabel>
+            <translation><!-- Not so Happy --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Veneers --></label>
+        <name>Veneers__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wednesday End --></label>
+        <name>Wednesday_End__c</name>
+        <picklistValues>
+            <masterLabel>05:00</masterLabel>
+            <translation><!-- 05:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>05:30</masterLabel>
+            <translation><!-- 05:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:00</masterLabel>
+            <translation><!-- 06:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:30</masterLabel>
+            <translation><!-- 06:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:00</masterLabel>
+            <translation><!-- 07:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:30</masterLabel>
+            <translation><!-- 07:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:00</masterLabel>
+            <translation><!-- 08:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:30</masterLabel>
+            <translation><!-- 08:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:00</masterLabel>
+            <translation><!-- 09:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:30</masterLabel>
+            <translation><!-- 09:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:00</masterLabel>
+            <translation><!-- 10:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:30</masterLabel>
+            <translation><!-- 10:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:00</masterLabel>
+            <translation><!-- 11:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:30</masterLabel>
+            <translation><!-- 11:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:00</masterLabel>
+            <translation><!-- 12:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:30</masterLabel>
+            <translation><!-- 12:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:00</masterLabel>
+            <translation><!-- 13:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:30</masterLabel>
+            <translation><!-- 13:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:00</masterLabel>
+            <translation><!-- 14:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:30</masterLabel>
+            <translation><!-- 14:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:00</masterLabel>
+            <translation><!-- 15:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:30</masterLabel>
+            <translation><!-- 15:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:00</masterLabel>
+            <translation><!-- 16:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:30</masterLabel>
+            <translation><!-- 16:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:00</masterLabel>
+            <translation><!-- 17:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:30</masterLabel>
+            <translation><!-- 17:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:00</masterLabel>
+            <translation><!-- 18:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:30</masterLabel>
+            <translation><!-- 18:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:00</masterLabel>
+            <translation><!-- 19:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:30</masterLabel>
+            <translation><!-- 19:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:00</masterLabel>
+            <translation><!-- 20:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:30</masterLabel>
+            <translation><!-- 20:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:00</masterLabel>
+            <translation><!-- 21:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:30</masterLabel>
+            <translation><!-- 21:30 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Wednesday Open --></label>
+        <name>Wednesday_Open__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wednesday Start --></label>
+        <name>Wednesday_Start__c</name>
+        <picklistValues>
+            <masterLabel>05:00</masterLabel>
+            <translation><!-- 05:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>05:30</masterLabel>
+            <translation><!-- 05:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:00</masterLabel>
+            <translation><!-- 06:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06:30</masterLabel>
+            <translation><!-- 06:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:00</masterLabel>
+            <translation><!-- 07:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07:30</masterLabel>
+            <translation><!-- 07:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:00</masterLabel>
+            <translation><!-- 08:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08:30</masterLabel>
+            <translation><!-- 08:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:00</masterLabel>
+            <translation><!-- 09:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09:30</masterLabel>
+            <translation><!-- 09:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:00</masterLabel>
+            <translation><!-- 10:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10:30</masterLabel>
+            <translation><!-- 10:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:00</masterLabel>
+            <translation><!-- 11:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11:30</masterLabel>
+            <translation><!-- 11:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:00</masterLabel>
+            <translation><!-- 12:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12:30</masterLabel>
+            <translation><!-- 12:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:00</masterLabel>
+            <translation><!-- 13:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13:30</masterLabel>
+            <translation><!-- 13:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:00</masterLabel>
+            <translation><!-- 14:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14:30</masterLabel>
+            <translation><!-- 14:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:00</masterLabel>
+            <translation><!-- 15:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15:30</masterLabel>
+            <translation><!-- 15:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:00</masterLabel>
+            <translation><!-- 16:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16:30</masterLabel>
+            <translation><!-- 16:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:00</masterLabel>
+            <translation><!-- 17:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17:30</masterLabel>
+            <translation><!-- 17:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:00</masterLabel>
+            <translation><!-- 18:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18:30</masterLabel>
+            <translation><!-- 18:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:00</masterLabel>
+            <translation><!-- 19:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19:30</masterLabel>
+            <translation><!-- 19:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:00</masterLabel>
+            <translation><!-- 20:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20:30</masterLabel>
+            <translation><!-- 20:30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:00</masterLabel>
+            <translation><!-- 21:00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21:30</masterLabel>
+            <translation><!-- 21:30 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- What implants do you prefer restoring --></label>
+        <name>What_implants_do_you_prefer_restoring__c</name>
+        <picklistValues>
+            <masterLabel>3i</masterLabel>
+            <translation><!-- 3i --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Astra Tech</masterLabel>
+            <translation><!-- Astra Tech --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BioHorizons</masterLabel>
+            <translation><!-- BioHorizons --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Camlog</masterLabel>
+            <translation><!-- Camlog --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dentsply</masterLabel>
+            <translation><!-- Dentsply --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nobel Biocare</masterLabel>
+            <translation><!-- Nobel Biocare --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Straumann</masterLabel>
+            <translation><!-- Straumann --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Zimmer</masterLabel>
+            <translation><!-- Zimmer --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- What&apos;s holding you back from joining? --></label>
+        <name>What_s_holding_you_back_from_joining__c</name>
+    </fields>
+    <fields>
+        <label><!-- When did the site go live? --></label>
+        <name>When_did_the_site_go_live__c</name>
+    </fields>
+    <fields>
+        <label><!-- Why was it rescheduled --></label>
+        <name>Why_was_it_rescheduled__c</name>
+        <picklistValues>
+            <masterLabel>Reasons not provided to CM</masterLabel>
+            <translation><!-- Reasons not provided to CM --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Willing to provide internet access --></label>
+        <name>Willing_to_provide_internet_access__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Windows server type --></label>
+        <name>Windows_server_type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wisdom Teeth Extractions Desirability --></label>
+        <name>Wisdom_Teeth_Extractions_Desirability__c</name>
+        <picklistValues>
+            <masterLabel>Can&apos;t wait to go home</masterLabel>
+            <translation><!-- Can&apos;t wait to go home --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Extremely Happy</masterLabel>
+            <translation><!-- Extremely Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Happy</masterLabel>
+            <translation><!-- Happy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I don&apos;t offer this service</masterLabel>
+            <translation><!-- I don&apos;t offer this service --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not so Happy</masterLabel>
+            <translation><!-- Not so Happy --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Wisdom Teeth Extractions --></label>
+        <name>Wisdom_Teeth_Extractions__c</name>
+    </fields>
+    <fields>
+        <label><!-- Would like a JumpStart campaign? --></label>
+        <name>Would_like_a_JumpStart_campaign__c</name>
+        <picklistValues>
+            <masterLabel>Maybe</masterLabel>
+            <translation><!-- Maybe --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Would you like to vist the CC center? --></label>
+        <name>Would_you_like_to_vist_the_CC_center__c</name>
+        <picklistValues>
+            <masterLabel>Maybe</masterLabel>
+            <translation><!-- Maybe --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Would you use another imp specialist --></label>
+        <name>Would_you_use_another_imp_specialist__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Under the right circumstances</masterLabel>
+            <translation><!-- Under the right circumstances --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Dental Practice Layout</layout>
+        <sections>
+            <label><!-- ClearTrain --></label>
+            <section>ClearTrain</section>
+        </sections>
+        <sections>
+            <label><!-- ClearVantage --></label>
+            <section>ClearVantage</section>
+        </sections>
+        <sections>
+            <label><!-- ClearView TV --></label>
+            <section>ClearView TV</section>
+        </sections>
+        <sections>
+            <label><!-- ClearWeb --></label>
+            <section>ClearWeb</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Hours Of Operation --></label>
+            <section>Hours Of Operation</section>
+        </sections>
+        <sections>
+            <label><!-- Insurance Info --></label>
+            <section>Insurance Info</section>
+        </sections>
+        <sections>
+            <label><!-- Marketing Information --></label>
+            <section>Marketing Information</section>
+        </sections>
+        <sections>
+            <label><!-- Practice Image --></label>
+            <section>Practice Image</section>
+        </sections>
+        <sections>
+            <label><!-- Practice Information --></label>
+            <section>Practice Information</section>
+        </sections>
+        <sections>
+            <label><!-- Services Offered --></label>
+            <section>Services Offered</section>
+        </sections>
+        <sections>
+            <label><!-- Team Members, Incentives, &amp; Training --></label>
+            <section>Team Members, Incentives, &amp; Training</section>
+        </sections>
+        <sections>
+            <label><!-- Website Information --></label>
+            <section>Website Information</section>
+        </sections>
+        <sections>
+            <label><!-- Workshop Survey Results --></label>
+            <section>Workshop Survey Results</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Dental Practice Layout - Admin</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Hours of Operation --></label>
+            <section>Hours of Operation</section>
+        </sections>
+        <sections>
+            <label><!-- Practice Information --></label>
+            <section>Practice Information</section>
+        </sections>
+        <sections>
+            <label><!-- Services Offered --></label>
+            <section>Services Offered</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Dental Practice Layout - Field</layout>
+        <sections>
+            <label><!-- ClearTrain --></label>
+            <section>ClearTrain</section>
+        </sections>
+        <sections>
+            <label><!-- ClearVantage --></label>
+            <section>ClearVantage</section>
+        </sections>
+        <sections>
+            <label><!-- ClearView TV --></label>
+            <section>ClearView TV</section>
+        </sections>
+        <sections>
+            <label><!-- ClearWeb --></label>
+            <section>ClearWeb</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Hours Of Operation --></label>
+            <section>Hours Of Operation</section>
+        </sections>
+        <sections>
+            <label><!-- Insurance Info --></label>
+            <section>Insurance Info</section>
+        </sections>
+        <sections>
+            <label><!-- Marketing Information --></label>
+            <section>Marketing Information</section>
+        </sections>
+        <sections>
+            <label><!-- Practice Image --></label>
+            <section>Practice Image</section>
+        </sections>
+        <sections>
+            <label><!-- Practice Information --></label>
+            <section>Practice Information</section>
+        </sections>
+        <sections>
+            <label><!-- Services Offered --></label>
+            <section>Services Offered</section>
+        </sections>
+        <sections>
+            <label><!-- Team Members, Incentives, &amp; Training --></label>
+            <section>Team Members, Incentives, &amp; Training</section>
+        </sections>
+        <sections>
+            <label><!-- Website Information --></label>
+            <section>Website Information</section>
+        </sections>
+        <sections>
+            <label><!-- Workshop Survey Results --></label>
+            <section>Workshop Survey Results</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>PEC Test</layout>
+        <sections>
+            <label><!-- ClearTrain --></label>
+            <section>ClearTrain</section>
+        </sections>
+        <sections>
+            <label><!-- ClearVantage --></label>
+            <section>ClearVantage</section>
+        </sections>
+        <sections>
+            <label><!-- ClearView TV --></label>
+            <section>ClearView TV</section>
+        </sections>
+        <sections>
+            <label><!-- ClearWeb --></label>
+            <section>ClearWeb</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Hours Of Operation --></label>
+            <section>Hours Of Operation</section>
+        </sections>
+        <sections>
+            <label><!-- Insurance Info --></label>
+            <section>Insurance Info</section>
+        </sections>
+        <sections>
+            <label><!-- Marketing Information --></label>
+            <section>Marketing Information</section>
+        </sections>
+        <sections>
+            <label><!-- Practice Image --></label>
+            <section>Practice Image</section>
+        </sections>
+        <sections>
+            <label><!-- Practice Information --></label>
+            <section>Practice Information</section>
+        </sections>
+        <sections>
+            <label><!-- Services Offered --></label>
+            <section>Services Offered</section>
+        </sections>
+        <sections>
+            <label><!-- Team Members, Incentives, &amp; Training --></label>
+            <section>Team Members, Incentives, &amp; Training</section>
+        </sections>
+        <sections>
+            <label><!-- Website Information --></label>
+            <section>Website Information</section>
+        </sections>
+        <sections>
+            <label><!-- Workshop Survey Results --></label>
+            <section>Workshop Survey Results</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Standard</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Hours of Operation --></label>
+            <section>Hours of Operation</section>
+        </sections>
+        <sections>
+            <label><!-- Practice Information --></label>
+            <section>Practice Information</section>
+        </sections>
+        <sections>
+            <label><!-- Services Offered --></label>
+            <section>Services Offered</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- Add Activity --></label>
+        <name>Add_Activity</name>
+    </quickActions>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- Email_Compliance_Form --></label>
+        <name>Email_Compliance_Form</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Email_Next_Steps --></label>
+        <name>Email_Next_Steps</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- PSA_Request_Form --></label>
+        <name>PSA_Request_Form</name>
+    </webLinks>
+</CustomObjectTranslation>

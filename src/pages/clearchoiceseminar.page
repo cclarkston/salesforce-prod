@@ -1,0 +1,79 @@
+<apex:page title="ClearChoice Seminar" showHeader="false" cache="false"
+    sidebar="false" standardStylesheets="true" standardController="Lead"
+    extensions="ClearChoiceSeminar">
+    <style>
+    
+ body > span:first-child{
+	 display:none;
+ }
+.errorMsg td {
+    color: #dd4c39;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center
+}
+
+.CampaignHeader {
+    font-size: 25px;
+}
+</style>
+    <apex:composition template="{!$Site.Template}">
+        <apex:define name="body">
+            <img src="https://na2.salesforce.com/resource/1300312283000/ClearChoiceLogo" title="ClearChoice" width="200" style="margin-bottom: 10px; margin-top: 10px;" />
+    		<apex:form rendered="{!IF(IsSeminarSet == false,true,false)}">
+                <apex:pageBlock mode="edit">
+                    <apex:messages id="error" styleClass="errorMsg" layout="table"
+                        style="margin-top:1em;" />
+                    <apex:pageBlockSection title="Seminar" collapsible="false"
+                        columns="1">
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="Secret Key" for="SecretKey" />
+                            <input type="text" id="SecretKey" name="SecretKey"
+                                value="{!mySecretKey}" />
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="Campaign" for="Campaign" />
+                            <apex:selectList value="{!myCampaign}" size="1" id="Campaign"
+                                title="Campaign">
+                                <apex:selectOptions value="{!campaign_list}"></apex:selectOptions>
+                            </apex:selectList>
+                        </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                    <apex:pageBlockButtons location="bottom">
+                        <apex:commandButton value="Save Seminar" action="{!saveSeminar}" />
+                    </apex:pageBlockButtons>
+                </apex:pageBlock>
+            </apex:form>
+            <apex:form rendered="{!IF(IsSeminarSet == true,true,false)}">
+                <apex:pageBlock mode="edit">
+                    <apex:messages id="error" styleClass="errorMsg" layout="table"
+                        style="margin-top:1em;" />
+                    <apex:pageBlockSection title="Lead" collapsible="false" columns="1">
+                        <h1 class='CampaignHeader'>{!mySelectedCampaign.Name}</h1>
+                        <apex:inputField value="{!Lead.FirstName}" />
+                        <apex:inputField value="{!Lead.LastName}" />
+                        <apex:inputField value="{!Lead.Gender__c}" />
+                        <apex:inputField value="{!Lead.Email}" />
+                        <apex:inputField value="{!Lead.Phone}" />
+                        <apex:inputField value="{!Lead.MobilePhone}" />
+                        <apex:inputField value="{!Lead.Street}" />
+                        <apex:inputField value="{!Lead.City}" />
+                        <apex:inputField value="{!Lead.State}" />
+                        <apex:inputField value="{!Lead.PostalCode}" />
+                    </apex:pageBlockSection>
+                    <apex:pageBlockButtons location="bottom">
+                        <apex:commandButton value="Save" action="{!saveLead}" />
+                    </apex:pageBlockButtons>
+                </apex:pageBlock>
+            </apex:form>
+            <apex:form rendered="{!IF(IsSeminarSet == true,true,false)}">
+                 <apex:pageBlock mode="edit">
+                <apex:pageBlockButtons location="bottom">
+                    <sub> <apex:commandLink value="[Cancel]"
+                        action="{!resetSeminar}" /></sub>
+                </apex:pageBlockButtons>
+                </apex:pageBlock>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

@@ -1,0 +1,7 @@
+<b>Link to sender :</b> <a href="https://na2.salesforce.com/{!smagicinteract__Incoming_SMS__c.LeadId__c}">Click Here</a><br /><br />
+
+<b>Message Date/Time :</b> {!smagicinteract__Incoming_SMS__c.CreatedDate}<br /><br />
+
+<b>Sent from Mobile # </b>: {!smagicinteract__Incoming_SMS__c.smagicinteract__Mobile_Number__c}<br /><br />
+
+<b>Text Message :</b> {!smagicinteract__Incoming_SMS__c.smagicinteract__SMS_Text__c}<br /><br />

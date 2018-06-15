@@ -1,0 +1,2 @@
+<apex:page controller="Ctrl_BulkPrintLetters" cache="false" contentType="text/csv#{!filename}" language="en-US"  readonly="true">{!file_header}<apex:repeat value="{!file_details}" var="output_lines">{!output_lines.output_line}</apex:repeat>  
+</apex:page>

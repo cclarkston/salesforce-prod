@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Template Apt</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Template Apts</value>
+    </caseValues>
+    <fields>
+        <label><!-- Active --></label>
+        <name>Active__c</name>
+    </fields>
+    <fields>
+        <label><!-- Color Code --></label>
+        <name>Color_Code__c</name>
+        <picklistValues>
+            <masterLabel>Light Blue</masterLabel>
+            <translation><!-- Light Blue --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Light Brown</masterLabel>
+            <translation><!-- Light Brown --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Light Green</masterLabel>
+            <translation><!-- Light Green --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Light Grey</masterLabel>
+            <translation><!-- Light Grey --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Light Orange</masterLabel>
+            <translation><!-- Light Orange --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Light Purple</masterLabel>
+            <translation><!-- Light Purple --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Light Red</masterLabel>
+            <translation><!-- Light Red --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Light Yellow</masterLabel>
+            <translation><!-- Light Yellow --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Network Purple</masterLabel>
+            <translation><!-- Network Purple --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Ending Hour --></label>
+        <name>Ending_Hour__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ending Minutes --></label>
+        <name>Ending_Minutes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pre-Screen Type --></label>
+        <name>Pre_Screen_Type__c</name>
+        <picklistValues>
+            <masterLabel>Any</masterLabel>
+            <translation><!-- Any --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Green/Yellow</masterLabel>
+            <translation><!-- Green/Yellow --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Green/Yellow Only</masterLabel>
+            <translation><!-- Green/Yellow Only --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Red/Blue Only</masterLabel>
+            <translation><!-- Red/Blue Only --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Schedule Template --></label>
+        <name>Schedule_Template__c</name>
+        <relationshipLabel><!-- Template Apts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Special Initiative --></label>
+        <name>Special_Initiative__c</name>
+        <picklistValues>
+            <masterLabel>Double Decker</masterLabel>
+            <translation><!-- Double Decker --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Firm Appt Date</masterLabel>
+            <translation><!-- Firm Appt Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Group Consult</masterLabel>
+            <translation><!-- Group Consult --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hard Stop</masterLabel>
+            <translation><!-- Hard Stop --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Orange Crush</masterLabel>
+            <translation><!-- Orange Crush --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Red Rally</masterLabel>
+            <translation><!-- Red Rally --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ruby Red</masterLabel>
+            <translation><!-- Ruby Red --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>V2</masterLabel>
+            <translation><!-- V2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>V2 GY ONLY</masterLabel>
+            <translation><!-- V2 GY ONLY --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wait List</masterLabel>
+            <translation><!-- Wait List --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>White Glove</masterLabel>
+            <translation><!-- White Glove --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Workshop</masterLabel>
+            <translation><!-- Workshop --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Start Hour --></label>
+        <name>Start_Hour__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Min Int --></label>
+        <name>Start_Min_Int__c</name>
+    </fields>
+    <fields>
+        <label><!-- Starting Hour Int --></label>
+        <name>Starting_Hour_Int__c</name>
+    </fields>
+    <fields>
+        <label><!-- Starting Minutes --></label>
+        <name>Starting_Minutes__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

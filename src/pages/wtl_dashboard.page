@@ -1,0 +1,114 @@
+<apex:page controller="WTl_breakout" sidebar="false" readOnly="true" >
+<apex:stylesheet value="{!URLFOR($Resource.StandardVFStyle,'my_style.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.tooltip_test,'tooltip/style.css')}" />
+<apex:includeScript value="{!URLFOR($Resource.tooltip_test,'tooltip/script.js')}"/>
+<style type="text/css" media="print">
+  div.bPageHeader {
+    display:none;
+  }  
+  
+  p.form_holder {
+    display:none; 
+  }
+  
+  a.dlink {
+    display:none;
+  }  
+</style>
+
+
+<style>
+  tr.control td {
+    color:#5789AE;
+  }  
+  
+  table.accs_details td.indent {
+    padding-left:25px;      
+    font-weight:bold; 
+    font-style:italic;
+    empty-cells:hide;      
+  }
+</style>
+
+<script>
+function use_fancy_cursor(t) {
+  document.body.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+  t.style.cursor = "url({!URLFOR($Resource.Cursor)}), wait";
+}
+
+function default_cursor(t) {
+  document.body.style.cursor = 'default';
+  t.style.cursor='default';
+}
+</script>
+
+<apex:form style="padding-top:0;display:inline;margin-top:0;" >
+ <apex:actionRegion >
+ <div id="header" style="border-bottom:3px solid black;padding-top:0;margin-top:0;">
+<table style="width:100%;padding-top:0;">
+<tr>
+  <td width="300px;"><br />
+  <table><tr><td><span style="font-weight:bold;width:150px;">Start Date : </span></td><td><apex:inputField value="{!sholder.Apt_Date__c}" /></td></tr>
+  <tr><td><span style="font-weight:bold;width:150px;">End Date : </span></td><td><apex:inputField value="{!eholder.Apt_Date__c}" /></td></tr></table>
+  </td>
+  <td width="300px;" style="border-right:2px solid black;"><br />
+  <apex:commandButton value="Run Report" action="{!rerun_report}" reRender="main_holder" status="update_status" onclick="use_fancy_cursor(this);"  oncomplete="default_cursor(this);"   />
+  <apex:commandButton value="CC Dashboard" action="{!view_dashboard}" style="margin-left:10px;"/>
+  <apex:commandButton value="View Utilization" action="{!view_utilization}" style="margin-left:10px;"/>
+  </td>
+  <td><h1 class="report_header">WTL Dashboard</h1></td>  
+</tr>
+</table>
+</div>
+</apex:actionRegion>
+
+<apex:outputPanel id="main_holder" rendered="true" layout="block" style="padding-top:2em;">
+<apex:actionStatus startStyle="font-weight:bold;color:red;" stoptext="" id="update_status">
+  <apex:facet name="start">Running Report...Please Wait</apex:facet>        
+</apex:actionStatus><br />      
+<apex:outputText escape="false" style="color:red;font-style:italic;font-weight:bold;" value="{!error_messages}" /><br />
+<h2>Data for&nbsp;<apex:outputfield value="{!sholder.Apt_Date__c}" /> - <apex:outputfield value="{!eholder.Apt_Date__c}" /></h2>
+<table class="accs_details" >
+<tr class="control" style="font-size:10pt;vertical-align:bottom;">
+  <td style="width:175px;">Center</td>
+  <apex:repeat value="{!wtl_names}" var="wtl_name">
+    <td style="width:75px;">{!wtl_name}</td>    
+  </apex:repeat>    
+  <td style="width:75px;">Web-Phone</td>    
+  <td style="width:75px;">Total<br />WTL<br />Rec</td>
+  <td style="width:75px;">WTL<br />Inquires</td>
+  <td style="width:75px;">WTL<br />Inquiries<br />Sched</td>  
+  <td style="width:75px;">WTL<br />Inquiries<br />Sched Rate</td>
+  <td style="width:75px;">Revived<br />WTL<br />Sched</td>
+  <td style="width:75px;">Total<br />WTL<br />Sched</td>
+  <td style="width:75px;">GY% Sched<br />WTLs</td></tr>
+  
+<apex:variable var="rowclassname" value="accs" />
+<apex:repeat value="{!center_WTL_stats}" var="all_centers" >
+  <tr class="{!if(all_centers.my_center.name=='Totals','footer',rowclassname)}">  
+  <apex:variable var="rowclassname" value="{!if(rowclassname=='accs','accs_b','accs')}" />  
+  <td class="indent">{!all_centers.my_center.name}</td>
+  <apex:repeat value="{!all_centers.wtl_breakout}" var="wtl_num">
+    <td class="right">{!wtl_num}</td>
+  </apex:repeat>    
+  <td class="right">{!all_centers.web_phone}</td>   
+  <td class="right">{!all_centers.total_wtl}</td>   
+  <td class="right">{!all_centers.di_leads}</td>   
+  <td class="right">{!all_centers.di_scheduled}</td>  
+  <td class="right"><apex:outputText value="{0,number,##,##,##0 %}" >
+    <apex:param value="{!if(all_centers.di_scheduled==0,0,(all_centers.di_scheduled/all_centers.di_leads))}" />   
+  </apex:outputtext></td>   
+  <td class="right">{!all_centers.revived_scheduled}</td>  
+  <td class="right">{!all_centers.total_wtl_scheduled}</td>  
+  <td class="right"><apex:outputText value="{0,number,##,##,##0 %}" >
+    <apex:param value="{!if(all_centers.total_wtl_scheduled==0,0,((all_centers.di_scheduled_gy + all_centers.revived_scheduled_gy)/all_centers.total_wtl_scheduled))}" />   
+  </apex:outputtext></td>     
+</tr> 
+</apex:repeat>
+</table>
+<apex:outputLink target="__blank" value="{!csv_link}" style="display:block;padding-top:1em;color:blue;font-weight:bold;">Download WTL CSV File</apex:outputLink>
+</apex:outputPanel>
+</apex:form>
+
+
+</apex:page>

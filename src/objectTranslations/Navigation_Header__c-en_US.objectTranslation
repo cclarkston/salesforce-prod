@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Navigation Header</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Navigation Headers</value>
+    </caseValues>
+    <fields>
+        <label><!-- Sort Order --></label>
+        <name>Sort_Order__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sub System --></label>
+        <name>Sub_System__c</name>
+        <picklistValues>
+            <masterLabel>Clinical Navigation</masterLabel>
+            <translation><!-- Clinical Navigation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Gear</masterLabel>
+            <translation><!-- Gear --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Setup</masterLabel>
+            <translation><!-- Setup --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

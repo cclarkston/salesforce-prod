@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_55359354</developerName>
+        <masterLabel>Consult Status</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <sourceColumnName>Lead$Status</sourceColumnName>
+        <useOther>false</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Consult Scheduled</sourceValue>
+            </sourceValues>
+            <sourceValues>
+                <sourceValue>Rescheduled Consult</sourceValue>
+            </sourceValues>
+            <value>Scheduled</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>No Show</sourceValue>
+            </sourceValues>
+            <value>No Show</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Consult Completed</sourceValue>
+            </sourceValues>
+            <value>Completed</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Patient Left</sourceValue>
+            </sourceValues>
+            <value>Patient Left</value>
+        </values>
+    </buckets>
+    <buckets>
+        <bucketType>picklist</bucketType>
+        <developerName>BucketField_76499068</developerName>
+        <masterLabel>Status</masterLabel>
+        <nullTreatment>n</nullTreatment>
+        <otherBucketLabel>Other</otherBucketLabel>
+        <sourceColumnName>Lead.Consult_Inventory__r$Consult_Room__c.Room_Type__c</sourceColumnName>
+        <useOther>true</useOther>
+        <values>
+            <sourceValues>
+                <sourceValue>Normal</sourceValue>
+            </sourceValues>
+            <value>Normal</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>Unconfirmed</sourceValue>
+            </sourceValues>
+            <value>Unconfirmed</value>
+        </values>
+        <values>
+            <sourceValues>
+                <sourceValue>OverFlow</sourceValue>
+            </sourceValues>
+            <value>Overflow</value>
+        </values>
+    </buckets>
+    <columns>
+        <field>Lead$DateTime_Consult_Scheduled__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Consult_Inventory__r$Consult_PEC__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Consult_Inventory__r$Leadscore_At_Schedule_Time__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Name</field>
+    </columns>
+    <columns>
+        <field>Lead.Consult_Inventory__r$Confirmation_Status__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Date_Booked__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Dental_Condition__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Address</field>
+    </columns>
+    <columns>
+        <field>Lead$Distance_To_Center__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Fees_Quoted__c</field>
+    </columns>
+    <filter>
+        <booleanFilter>(1 AND 2 AND ((3 AND 4) or 5))</booleanFilter>
+        <criteriaItems>
+            <column>Lead$Center_Location__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Chicago</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Consult_Inventory__r$Consult_Room__c.Room_Type__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Unconfirmed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Status</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Consult Completed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Consult_Inventory__r$Consult_PEC__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Status</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Consult Completed</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Lead.Consult_Inventory__r$Consult_Show_Status__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Today&apos;s Appointments</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Lead_w_Consult_Inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead$DateTime_Consult_Scheduled__c</dateColumn>
+        <interval>INTERVAL_TODAY</interval>
+    </timeFrameFilter>
+</Report>

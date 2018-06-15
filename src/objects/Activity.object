@@ -1,0 +1,752 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ComposeGmail</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>LogCall</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>MailMerge</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>RequestUpdate</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SendEmail</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ViewAll</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Activity_Hour__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(VALUE(MID(TEXT(  CreatedDate  ),12,2)) &lt; 6, 24-(6-VALUE(MID(TEXT( CreatedDate ),12,2))), VALUE(MID(TEXT( CreatedDate ),12,2)) - 6)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Activity Hour</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Activity_Type__c</fullName>
+        <description>Field I&apos;ll be using in place of Type until I can write a script and get the old data cleaned up. The old type field will be broken out into two different fields in the new format - activity type and outcome</description>
+        <externalId>false</externalId>
+        <label>Activity Type</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Chat</fullName>
+                    <default>false</default>
+                    <label>Chat</label>
+                </value>
+                <value>
+                    <fullName>Inbound Call</fullName>
+                    <default>false</default>
+                    <label>Inbound Call</label>
+                </value>
+                <value>
+                    <fullName>Inbound Email</fullName>
+                    <default>false</default>
+                    <label>Inbound Email</label>
+                </value>
+                <value>
+                    <fullName>Mail</fullName>
+                    <default>false</default>
+                    <label>Mail</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>Outbound Call</fullName>
+                    <default>false</default>
+                    <label>Outbound Call</label>
+                </value>
+                <value>
+                    <fullName>Outbound Email</fullName>
+                    <default>false</default>
+                    <label>Outbound Email</label>
+                </value>
+                <value>
+                    <fullName>Sales Call</fullName>
+                    <default>false</default>
+                    <label>Sales Call</label>
+                </value>
+                <value>
+                    <fullName>Incoming Text</fullName>
+                    <default>false</default>
+                    <label>Incoming Text</label>
+                </value>
+                <value>
+                    <fullName>Outgoing Text</fullName>
+                    <default>false</default>
+                    <label>Outgoing Text</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Attempt__c</fullName>
+        <description>Should auto-populate via trigger (WelcomePktSent) with the current number of outbound calls (+1) made for this contact/lead.</description>
+        <externalId>false</externalId>
+        <label>Attempt</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Call_No_Answer__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>No Patient Contact</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Call_QA_d__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(Was_call_QA_d__c ,&apos;Yes&apos;,&apos;No&apos;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Call QA&apos;d?</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CreatedDatetime__c</fullName>
+        <externalId>false</externalId>
+        <formula>CreatedDate</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>CreatedDatetime</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Eloqua_Campaign_ID__c</fullName>
+        <description>Campaign ID from Eloqua (correlative in Salesforce)</description>
+        <externalId>false</externalId>
+        <label>Eloqua Campaign ID</label>
+        <length>40</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>External_Agent__c</fullName>
+        <description>Name of the agent from an external agency that registered this taks or activity.</description>
+        <externalId>false</externalId>
+        <label>External Agent</label>
+        <length>150</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LP__Chat_Transcript_Id__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Chat Transcript Id</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LP__Chat_Transcript__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Link to the Chat Transcript record</description>
+        <externalId>false</externalId>
+        <formula>IF( OR(ISNULL(LP__Chat_Transcript_Id__c),LEN(LP__Chat_Transcript_Id__c) == 0),&quot;&quot;,  HYPERLINK(&apos;/&apos; + LP__Chat_Transcript_Id__c , &apos;View&apos;,&apos;_self&apos;))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Link to the Chat Transcript record</inlineHelpText>
+        <label>Chat Transcript</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Objection__c</fullName>
+        <externalId>false</externalId>
+        <label>Objection</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Outcome__c</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Not Checked</fullName>
+                    <default>false</default>
+                    <label>Not Checked</label>
+                </value>
+                <value>
+                    <fullName>Calling for someone else</fullName>
+                    <default>false</default>
+                    <label>Calling for someone else</label>
+                </value>
+                <value>
+                    <fullName>Consult sched too full</fullName>
+                    <default>false</default>
+                    <label>Consult sched too full</label>
+                </value>
+                <value>
+                    <fullName>Cost prohibitive</fullName>
+                    <default>false</default>
+                    <label>Cost prohibitive</label>
+                </value>
+                <value>
+                    <fullName>Family Conference</fullName>
+                    <default>false</default>
+                    <label>Family Conference</label>
+                </value>
+                <value>
+                    <fullName>Future Candidate</fullName>
+                    <default>false</default>
+                    <label>Future Candidate</label>
+                </value>
+                <value>
+                    <fullName>Health Issues</fullName>
+                    <default>false</default>
+                    <label>Health Issues</label>
+                </value>
+                <value>
+                    <fullName>Hung up</fullName>
+                    <default>false</default>
+                    <label>Hung up</label>
+                </value>
+                <value>
+                    <fullName>Information Gathering</fullName>
+                    <default>false</default>
+                    <label>Information Gathering</label>
+                </value>
+                <value>
+                    <fullName>Insurance Issues</fullName>
+                    <default>false</default>
+                    <label>Insurance Issues</label>
+                </value>
+                <value>
+                    <fullName>Location/Distance</fullName>
+                    <default>false</default>
+                    <label>Location/Distance</label>
+                </value>
+                <value>
+                    <fullName>Price shopping</fullName>
+                    <default>false</default>
+                    <label>Price shopping</label>
+                </value>
+                <value>
+                    <fullName>Scheduling Issues</fullName>
+                    <default>false</default>
+                    <label>Scheduling Issues</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>Agent Not Available</fullName>
+                    <default>false</default>
+                    <label>Agent Not Available</label>
+                </value>
+                <value>
+                    <fullName>Changed mind during call</fullName>
+                    <default>false</default>
+                    <label>Changed mind during call</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Not Scheduled</controllingFieldValue>
+                <valueName>Calling for someone else</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Not Scheduled</controllingFieldValue>
+                <valueName>Consult sched too full</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Not Scheduled</controllingFieldValue>
+                <valueName>Cost prohibitive</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Not Scheduled</controllingFieldValue>
+                <valueName>Family Conference</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Not Scheduled</controllingFieldValue>
+                <valueName>Future Candidate</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Not Scheduled</controllingFieldValue>
+                <valueName>Health Issues</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Not Scheduled</controllingFieldValue>
+                <valueName>Hung up</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Not Scheduled</controllingFieldValue>
+                <valueName>Information Gathering</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Not Scheduled</controllingFieldValue>
+                <valueName>Insurance Issues</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Not Scheduled</controllingFieldValue>
+                <valueName>Location/Distance</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Not Scheduled</controllingFieldValue>
+                <valueName>Price shopping</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Not Scheduled</controllingFieldValue>
+                <valueName>Scheduling Issues</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Not Scheduled</controllingFieldValue>
+                <valueName>Other</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Not Scheduled</controllingFieldValue>
+                <valueName>Agent Not Available</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Not Scheduled</controllingFieldValue>
+                <valueName>Changed mind during call</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Outcome__c</fullName>
+        <description>Selection indicating the outcome of a task. This will be used to potentially update campaign status vai trigger in some instances (WelcomePktSent)</description>
+        <externalId>false</externalId>
+        <label>Outcome</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Activity_Type__c</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Busy/No Answer</fullName>
+                    <default>false</default>
+                    <label>Busy/No Answer</label>
+                </value>
+                <value>
+                    <fullName>Disconnect/Not in Service</fullName>
+                    <default>false</default>
+                    <label>Disconnect/Not in Service</label>
+                </value>
+                <value>
+                    <fullName>Wrong Number</fullName>
+                    <default>false</default>
+                    <label>Wrong Number</label>
+                </value>
+                <value>
+                    <fullName>Hung Up</fullName>
+                    <default>false</default>
+                    <label>Hung Up</label>
+                </value>
+                <value>
+                    <fullName>VM - LM</fullName>
+                    <default>false</default>
+                    <label>VM - LM</label>
+                </value>
+                <value>
+                    <fullName>VM - no message</fullName>
+                    <default>false</default>
+                    <label>VM - no message</label>
+                </value>
+                <value>
+                    <fullName>VM - full</fullName>
+                    <default>false</default>
+                    <label>VM - full</label>
+                </value>
+                <value>
+                    <fullName>LM - 3rd Party</fullName>
+                    <default>false</default>
+                    <label>LM - 3rd Party</label>
+                </value>
+                <value>
+                    <fullName>Not Scheduled</fullName>
+                    <default>false</default>
+                    <label>Not Scheduled</label>
+                </value>
+                <value>
+                    <fullName>Consult Scheduled</fullName>
+                    <default>false</default>
+                    <label>Consult Scheduled</label>
+                </value>
+                <value>
+                    <fullName>Consult Confirmed</fullName>
+                    <default>false</default>
+                    <label>Consult Confirmed</label>
+                </value>
+                <value>
+                    <fullName>Consult Confirmed &amp; Retained</fullName>
+                    <default>false</default>
+                    <label>Consult Confirmed &amp; Retained</label>
+                </value>
+                <value>
+                    <fullName>Consult Rescheduled</fullName>
+                    <default>false</default>
+                    <label>Consult Rescheduled</label>
+                </value>
+                <value>
+                    <fullName>Consult Cancelled</fullName>
+                    <default>false</default>
+                    <label>Consult Cancelled</label>
+                </value>
+                <value>
+                    <fullName>Refused Reschedule</fullName>
+                    <default>false</default>
+                    <label>Refused Reschedule</label>
+                </value>
+                <value>
+                    <fullName>PPT will call back</fullName>
+                    <default>false</default>
+                    <label>PPT will call back</label>
+                </value>
+                <value>
+                    <fullName>No Call Elected</fullName>
+                    <default>false</default>
+                    <label>No Call Elected</label>
+                </value>
+                <value>
+                    <fullName>Sent</fullName>
+                    <default>false</default>
+                    <label>Sent</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>Non-Sales Call</fullName>
+                    <default>false</default>
+                    <label>Non-Sales Call</label>
+                </value>
+                <value>
+                    <fullName>Supervisor</fullName>
+                    <default>false</default>
+                    <label>Supervisor</label>
+                </value>
+                <value>
+                    <fullName>Callback Consult Scheduled</fullName>
+                    <default>false</default>
+                    <label>Callback Consult Scheduled</label>
+                </value>
+                <value>
+                    <fullName>Callback Consult Rescheduled</fullName>
+                    <default>false</default>
+                    <label>Callback Consult Rescheduled</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Chat</controllingFieldValue>
+                <controllingFieldValue>Inbound Call</controllingFieldValue>
+                <controllingFieldValue>Inbound Email</controllingFieldValue>
+                <controllingFieldValue>Mail</controllingFieldValue>
+                <controllingFieldValue>Outgoing Text</controllingFieldValue>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <controllingFieldValue>Outbound Call</controllingFieldValue>
+                <controllingFieldValue>Outbound Email</controllingFieldValue>
+                <controllingFieldValue>Sales Call</controllingFieldValue>
+                <controllingFieldValue>Incoming Text</controllingFieldValue>
+                <valueName>Hung Up</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chat</controllingFieldValue>
+                <controllingFieldValue>Inbound Call</controllingFieldValue>
+                <controllingFieldValue>Inbound Email</controllingFieldValue>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <controllingFieldValue>Outbound Call</controllingFieldValue>
+                <controllingFieldValue>Incoming Text</controllingFieldValue>
+                <valueName>Not Scheduled</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chat</controllingFieldValue>
+                <controllingFieldValue>Inbound Call</controllingFieldValue>
+                <controllingFieldValue>Inbound Email</controllingFieldValue>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <controllingFieldValue>Outbound Call</controllingFieldValue>
+                <controllingFieldValue>Incoming Text</controllingFieldValue>
+                <valueName>Consult Scheduled</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Inbound Call</controllingFieldValue>
+                <controllingFieldValue>Inbound Email</controllingFieldValue>
+                <controllingFieldValue>Outbound Call</controllingFieldValue>
+                <controllingFieldValue>Incoming Text</controllingFieldValue>
+                <valueName>Consult Confirmed</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Inbound Call</controllingFieldValue>
+                <controllingFieldValue>Inbound Email</controllingFieldValue>
+                <controllingFieldValue>Outbound Call</controllingFieldValue>
+                <controllingFieldValue>Incoming Text</controllingFieldValue>
+                <valueName>Consult Rescheduled</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Inbound Call</controllingFieldValue>
+                <controllingFieldValue>Inbound Email</controllingFieldValue>
+                <controllingFieldValue>Outbound Call</controllingFieldValue>
+                <controllingFieldValue>Incoming Text</controllingFieldValue>
+                <valueName>Consult Cancelled</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Inbound Call</controllingFieldValue>
+                <controllingFieldValue>Inbound Email</controllingFieldValue>
+                <controllingFieldValue>Outbound Call</controllingFieldValue>
+                <controllingFieldValue>Incoming Text</controllingFieldValue>
+                <valueName>Non-Sales Call</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Inbound Email</controllingFieldValue>
+                <controllingFieldValue>Outbound Call</controllingFieldValue>
+                <valueName>Callback Consult Scheduled</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Inbound Email</controllingFieldValue>
+                <controllingFieldValue>Outbound Call</controllingFieldValue>
+                <valueName>Callback Consult Rescheduled</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Mail</controllingFieldValue>
+                <controllingFieldValue>Outgoing Text</controllingFieldValue>
+                <controllingFieldValue>Outbound Email</controllingFieldValue>
+                <valueName>Sent</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Other</controllingFieldValue>
+                <valueName>Supervisor</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Outbound Call</controllingFieldValue>
+                <controllingFieldValue>Sales Call</controllingFieldValue>
+                <valueName>Busy/No Answer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Outbound Call</controllingFieldValue>
+                <controllingFieldValue>Sales Call</controllingFieldValue>
+                <valueName>Disconnect/Not in Service</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Outbound Call</controllingFieldValue>
+                <controllingFieldValue>Sales Call</controllingFieldValue>
+                <valueName>Wrong Number</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Outbound Call</controllingFieldValue>
+                <controllingFieldValue>Sales Call</controllingFieldValue>
+                <valueName>VM - LM</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Outbound Call</controllingFieldValue>
+                <controllingFieldValue>Sales Call</controllingFieldValue>
+                <valueName>VM - no message</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Outbound Call</controllingFieldValue>
+                <controllingFieldValue>Sales Call</controllingFieldValue>
+                <valueName>VM - full</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Outbound Call</controllingFieldValue>
+                <controllingFieldValue>Sales Call</controllingFieldValue>
+                <valueName>LM - 3rd Party</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Outbound Call</controllingFieldValue>
+                <valueName>Consult Confirmed &amp; Retained</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Outbound Call</controllingFieldValue>
+                <valueName>Refused Reschedule</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Outbound Call</controllingFieldValue>
+                <valueName>PPT will call back</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Outbound Call</controllingFieldValue>
+                <valueName>No Call Elected</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Sales Call</controllingFieldValue>
+                <valueName>Other</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Sales_Activity__c</fullName>
+        <description>Used by Practice Development</description>
+        <externalId>false</externalId>
+        <label>Sales Activity</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Cold Call</fullName>
+                    <default>false</default>
+                    <label>Cold Call</label>
+                </value>
+                <value>
+                    <fullName>Center Visit</fullName>
+                    <default>false</default>
+                    <label>Center Visit</label>
+                </value>
+                <value>
+                    <fullName>GP Meeting</fullName>
+                    <default>false</default>
+                    <label>GP Meeting</label>
+                </value>
+                <value>
+                    <fullName>Training</fullName>
+                    <default>false</default>
+                    <label>Training</label>
+                </value>
+                <value>
+                    <fullName>In Office</fullName>
+                    <default>false</default>
+                    <label>In Office</label>
+                </value>
+                <value>
+                    <fullName>Training in CC Practice</fullName>
+                    <default>false</default>
+                    <label>Training in CC Practice</label>
+                </value>
+                <value>
+                    <fullName>Drop-In</fullName>
+                    <default>false</default>
+                    <label>Drop-In</label>
+                </value>
+                <value>
+                    <fullName>Telephone Call</fullName>
+                    <default>false</default>
+                    <label>Telephone Call</label>
+                </value>
+                <value>
+                    <fullName>Email/Marketing/Training</fullName>
+                    <default>false</default>
+                    <label>Email/Marketing/Training</label>
+                </value>
+                <value>
+                    <fullName>Misc./General</fullName>
+                    <default>false</default>
+                    <label>Misc./General</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Sort_Date__c</fullName>
+        <description>Field used by top 10 callback system to sort tasks. If activity date is not blank, that field will be the value. Otherwise, it should default to createddate</description>
+        <externalId>false</externalId>
+        <formula>if(isblank(ActivityDate), DATEVALUE(CreatedDate) ,ActivityDate)</formula>
+        <label>Sort Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Was_call_QA_d__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Was call QA&apos;d</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Why_not_Schedule__c</fullName>
+        <externalId>false</externalId>
+        <label>Why not Schedule</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <listViews>
+        <fullName>MyActivities</fullName>
+        <filterScope>Mine</filterScope>
+        <label>My Activities</label>
+    </listViews>
+    <listViews>
+        <fullName>MyDelegatedActivities</fullName>
+        <filterScope>Delegated</filterScope>
+        <label>My Delegated Activities</label>
+    </listViews>
+    <listViews>
+        <fullName>MyTeamsActivities</fullName>
+        <filterScope>Team</filterScope>
+        <label>My Team&apos;s Activities</label>
+    </listViews>
+    <listViews>
+        <fullName>TodaysTasks</fullName>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>TASK.CLOSED</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>ACTIVITY.TASK</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>TASK.DUE_DATE</field>
+            <operation>lessThan</operation>
+            <value>TOMORROW</value>
+        </filters>
+        <label>Today&apos;s Tasks</label>
+    </listViews>
+    <listViews>
+        <fullName>UpcomingEvents</fullName>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>ACTIVITY.TASK</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>TASK.DUE_DATE</field>
+            <operation>greaterThan</operation>
+            <value>YESTERDAY</value>
+        </filters>
+        <label>Upcoming Events</label>
+    </listViews>
+    <searchLayouts>
+        <searchResultsAdditionalFields>TASK.SUBJECT</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>TASK.WHO_NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>TASK.WHAT_NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>TASK.DUE_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USERS.ALIAS</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

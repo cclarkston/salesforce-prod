@@ -1,0 +1,53 @@
+<messaging:emailTemplate subject="We are excited to see you at our seminar!" recipientType="Lead" replyTo="promotions@clearchoice.com">
+<messaging:plainTextEmailBody >
+Congratulations – you’ve taken the first step toward a healthy, radiant smile that can last a lifetime! 
+Dear {!Recipient.FirstName},
+This letter is to confirm that your seat for the ClearChoice Patient Information Seminar on 
+<c:ConsultTime_Format LeadId="{!Recipient.Id}" DFormat="EEEE, M/dd/yyyy"/> at <c:ConsultTime_Format LeadId="{!Recipient.Id}" DFormat="h:mm a"/> at <c:Last_Seminar_Name LeadId="{!Recipient.Id}"/>  has been reserved. Your confirmation number is <c:Seminar_ConfirmationNumber LeadId="{!Recipient.Id}"/>.
+
+At the Seminar, you can look forward to:
+
+•   Learning how dental implants provide permanent solutions to your dental problems 
+•   Getting answers to questions about your dental condition generally and dental implants specifically 
+•   Hearing from past patient’s about their experience with ClearChoice
+•   Talking with ClearChoice professional staff 
+
+ClearChoice is America’s #1 Choice for dental implants because it’s all we do.  Our revolutionary one-day procedure will allow you to enjoy the life you’ve earned. You’re not just restoring your teeth, but getting back to a full, active lifestyle!  Our seminar will show you how.
+
+We have enclosed a map to <c:Last_Seminar_Name LeadId="{!Recipient.Id}"/>. Please feel free to call {!Recipient.Center_Phone_Number__c} if you need further directions. 
+<c:Seminar_Directions LeadId="{!Recipient.Id}" html_on="0" />
+
+Sincerely, 
+
+{!Recipient.Call_Center_Agent__r.Name}
+Dental Implant Consultant
+
+ClearChoice Dental Implant Centers are locally owned and operated by licensed local dentists, and are part of a professional affiliation of implant practices operated by oral surgeons, prosthodontists and restorative dentists across the United States.
+† America's #1 Choice determined by an Independent Patient Survey 2011. *Qualified patients can have their procedure in one day after initial workup without additional bone graft surgery.  Results may vary in individual cases. +Limited services available at satellite offices. 
+</messaging:plainTextEmailBody>
+<messaging:htmlEmailBody >
+<img id="theImage" src="http://www.clearchoice.com/files/images/EmailTemplates/ClearChoiceLogo.png" width="387" height="114"/> 
+<br/>
+<hr color="DarkBlue"/>
+<p style="font-family:Bookman Old Style;text-align:center;"><span style="font-size:18pt;font-weight:bold;">Congratulations – you’ve taken the first step toward a healthy, radiant smile that can last a lifetime!</span><br /></p>
+<p style="font-family:Bookman Old Style;font-size:11pt;text-align:justify;">Dear {!Recipient.FirstName},<br /><br />
+This letter is to confirm that your seat for the ClearChoice Patient Information Seminar on 
+<c:ConsultTime_Format LeadId="{!Recipient.Id}" DFormat="EEEE, M/dd/yyyy"/> at <c:ConsultTime_Format LeadId="{!Recipient.Id}" DFormat="h:mm a"/> at <b><c:Last_Seminar_Name LeadId="{!Recipient.Id}"/></b> has been reserved. 
+Your confirmation number is <c:Seminar_ConfirmationNumber LeadId="{!Recipient.Id}"/>.<br /><br />
+At the Seminar, you can look forward to:</p><ul style="margin-left:20px;padding-left:0px;font-family:Bookman Old Style;font-size:11pt;">
+<li>Learning how dental implants provide permanent solutions to your dental problems</li>
+<li>Getting answers to questions about your dental condition generally and dental implants specifically</li>
+<li>Hearing from past patient’s about their experience with ClearChoice</li>
+<li>Talking with ClearChoice professional staff</li></ul>
+<p style="font-family:Bookman Old Style;font-size:11pt;text-align:justify;">ClearChoice is America’s #1 Choice for dental implants because it’s all we do.  Our revolutionary one-day procedure will allow you to enjoy the life you’ve earned. You’re not just restoring your teeth, but getting back to a full, active lifestyle!  Our seminar will show you how.<br /><br />
+We have enclosed a map to <b><c:Last_Seminar_Name LeadId="{!Recipient.Id}"/></b>. Please feel free to call <span style="font-weight:bold;color:#365F91;">{!Recipient.Center_Phone_Number__c}</span> if you need further directions.<br />
+<c:Seminar_Directions LeadId="{!Recipient.Id}" html_on="0" /><br /><br />
+Sincerely,<br /><br />
+{!Recipient.Call_Center_Agent__r.Name}
+<br />Dental Implant Consultant<br /></p>
+<p style="text-align:center;font-size:6pt;font-family:Arial;font-weight:bold;font-style:italic">ClearChoice Dental Implant Centers are locally owned and operated by licensed local dentists, and are part of a professional affiliation of implant practices operated by oral surgeons, prosthodontists and restorative dentists across the United States.</p>
+<span style="font-family:arial;font-size:6pt;">&#8224; America's #1 Choice determined by an Independent Patient Survey 2011. *Qualified patients can have their procedure in one day after initial workup without additional bone graft surgery.  Results may vary in individual cases. +Limited services available at satellite offices. </span>
+
+
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

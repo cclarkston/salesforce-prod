@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Office Form</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Office Forms</value>
+    </caseValues>
+    <fields>
+        <label><!-- Forms Category --></label>
+        <name>Forms_Category__c</name>
+        <picklistValues>
+            <masterLabel>General</masterLabel>
+            <translation><!-- General --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phased Forms</masterLabel>
+            <translation><!-- Phased Forms --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Post OP Instruction</masterLabel>
+            <translation><!-- Post OP Instruction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prosth Consent</masterLabel>
+            <translation><!-- Prosth Consent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Release Forms</masterLabel>
+            <translation><!-- Release Forms --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Surgical Consent</masterLabel>
+            <translation><!-- Surgical Consent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Surgical Notes</masterLabel>
+            <translation><!-- Surgical Notes --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Treatment Completion</masterLabel>
+            <translation><!-- Treatment Completion --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- isRemovable --></label>
+        <name>isRemovable__c</name>
+    </fields>
+    <fields>
+        <label><!-- isUpload --></label>
+        <name>isUpload__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

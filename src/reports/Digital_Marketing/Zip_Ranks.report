@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Zip_Demographic__c$Nearest_Center_2016__c</field>
+    </columns>
+    <columns>
+        <field>Zip_Demographic__c$Primary_DMA__c</field>
+    </columns>
+    <columns>
+        <field>Zip_Demographic__c$Name</field>
+    </columns>
+    <columns>
+        <field>Zip_Demographic__c$In_DMA_Index__c</field>
+    </columns>
+    <columns>
+        <field>Zip_Demographic__c$In_50m_Index__c</field>
+    </columns>
+    <columns>
+        <field>Zip_Demographic__c$IM_Buying_Index__c</field>
+    </columns>
+    <filter>
+        <booleanFilter>((1 OR 2)) AND 3</booleanFilter>
+        <criteriaItems>
+            <column>Zip_Demographic__c$In_DMA_Index__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Zip_Demographic__c$In_50m_Index__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Zip_Demographic__c$Nearest_Center_2016__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Atlanta</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Zip Ranks</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Zip_Demographics__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Zip_Demographic__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

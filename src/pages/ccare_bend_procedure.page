@@ -1,0 +1,617 @@
+<apex:page controller="dp_admin_procedure" sidebar="false" showHeader="false" docType="html-5.0">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!--  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css' />
+  <apex:stylesheet value="{!URLFOR($Resource.Modal_Resources,'modal/style.css')}" />
+  <apex:includeScript value="{!URLFOR($Resource.Modal_Resources,'modal/script.js')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/mmenu_nav.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Dental_Practice_Resources, 'css/dp_css_main.css')}"/>   
+  
+  <script type="text/javascript">    
+    var key_timeout;
+    var search_in_progress = false;
+   
+   function search_now() {
+      search_in_progress = false;  
+      search_users(); 
+   }
+    
+    function qsearch_key() {    
+      if(search_in_progress)
+        clearTimeout(key_timeout);
+      search_in_progress = true;  
+      key_timeout = setTimeout("body_refresh()",600);
+    }   
+    
+    function form_qsearch_key() {    
+      if(search_in_progress)
+        clearTimeout(key_timeout);
+      search_in_progress = true;  
+      key_timeout = setTimeout("form_refresh()",600);
+    }  
+  </script>
+  
+  
+</head>
+<body>
+<apex:form >
+<apex:actionFunction name="body_refresh" rerender="main_holder" />
+<div id="nav-fixed">
+<div id="nav-header" style="border:0px;">
+<apex:actionRegion >
+<apex:actionFunction name="nav_to" action="{!navigate_to}" rerender="none" status="ajaxstatus">
+  <apex:param name="navid" value=""  />
+</apex:actionFunction>
+<apex:actionFunction name="center_switch" action="{!change_center}" rerender="nav_content,main_holder" status="ajaxstatus" >
+  <apex:param name="cid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="active_switch" action="{!change_active_view}" rerender="main_holder" status="ajaxstatus">
+  <apex:param name="afilter" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="new_procedure" action="{!new_procedure_form}" rerender="procedure_form_holder" status="ajaxstatus" />
+<apex:actionFunction name="financial_info" action="{!display_financial_info}" rerender="nav_content,main_holder" status="ajaxstatus" >
+  <apex:param name="procid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="scheduling_info" action="{!display_scheduling_info}" rerender="nav_content,main_holder" status="ajaxstatus" >
+  <apex:param name="procid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="form_info" action="{!display_form_info}" rerender="nav_content,main_holder" status="ajaxstatus" >
+  <apex:param name="procid" value="" />
+</apex:actionFunction>
+<apex:actionFunction name="form_select" action="{!select_office_form}" rerender="main_holder" status="ajaxstatus" >
+  <apex:param name="ofid" value="" />
+</apex:actionFunction>
+
+<apex:actionStatus id="ajaxstatus">
+    <apex:facet name="start">
+      <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1110; background-color: #f2f2f2;">
+        &nbsp;
+      </div>
+      <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1111; margin: 20% 50%">
+        <!--<apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,'Images/5Wits.gif')}"/>-->
+        <!--<img src="http://upload.wikimedia.org/wikipedia/commons/e/ed/Cursor_Windows_Vista.gif" />-->
+        <img src="{!URLFOR($Resource.Dental_Practice_Resources,'Images/Circle-out.gif')}" />
+        <!--<img src="{!URLFOR($Resource.Dental_Practice_Resources,'Images/5Wits.gif')}" />-->
+      </div>
+    </apex:facet>
+  </apex:actionStatus>
+
+
+<apex:outputpanel id="nav_content" style="width:100%;">
+<!--<table style="width:100%">
+<tr style="height:35px;">
+  <td class="back_cell">
+    <apex:outputpanel id="back_holder">
+      <apex:outputpanel rendered="{!if(selected_view=='procedure_display',true,false)}"><a href="javascript:window.history.go(-1);" class="nav_color">&lt; Back</a></apex:outputpanel>
+      <apex:outputpanel rendered="{!if(selected_view=='procedure_display',false,true)}"><apex:commandLink styleClass="nav_color" status="ajaxstatus" action="{!back_to_procedure}" reRender="nav_content,main_holder" oncomplete="document.getElementById('newinsert').scrollIntoView(true);">&lt; Back</apex:commandLink></apex:outputpanel>
+    </apex:outputpanel>
+  </td>
+  <td class="center_cell">  
+    <span class="dropdown drop-hover">
+      <a class="dropdown-toggle nav_color" data-toggle="dropdown"><apex:outputtext value="{!current_center.name}" styleClass="c-pointer" style="padding-right:5px;"/><span class="caret"></span></a>
+        <ul class="dropdown-menu overflow-menu" >
+          <apex:repeat var="center" value="{!center_list}">
+            <li class="dropdown-lineitem">
+              <a href="javascript:center_switch('{!center.id}');" style="color:#189BEB"><apex:outputtext value="{!center.name}" /></a>
+            </li>
+          </apex:repeat>
+        </ul>
+    </span>        
+  </td>
+  <td class="gear_cell"><span class="dropdown drop-hover">
+      <a class="dropdown-toggle nav_color" data-toggle="dropdown"><apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}" width="25" height="25" styleClass="c-pointer"
+        onmouseover="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_black.png')}';"
+        onmouseout="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}';" /></a>
+      <ul class="dropdown-menu gear-menu dropdown-menu-right">
+        <apex:repeat var="gitem" value="{!gear_menu}" >
+            <li class="dropdown-lineitem" style="display:inline-block;">
+              <a href="{!gitem.Page_URL__c}" style="color:#189BEB;"  
+                  onmouseover="this.firstChild.src='{!URLFOR($Resource.Dental_Practice_Resources,gitem.Image_Name_Hover__c)}';this.style.color='black';" 
+                  onmouseout="this.firstChild.src='{!URLFOR($Resource.Dental_Practice_Resources,gitem.Image_Name__c)}';this.style.color='#189BEB';">
+                <apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,gitem.Image_Name__c)}" width="{!if(gitem.name=='Salesforce','30','20')}" height="20" style="display:inline;{!if(gitem.name=='Salesforce','position:relative;left:-7px;margin-right:-6px;','margin-right:5px;')}" />&nbsp;&nbsp;{!gitem.name}
+              </a>
+            </li>
+        </apex:repeat>
+        
+      </ul>        
+    </span></td>
+</tr>
+<tr>
+  <td>
+  <!--Quick Page Navigation-->
+<!--  <div class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:black;">
+      <span class="color-box" style="background:{!current_page.nav_color__c};">&nbsp;</span>
+      <apex:outputtext value="{!current_page.name}" />
+    </a>    
+    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">    
+      <apex:repeat var="menu_line" value="{!navigation_menu}" >
+        <!--is menu line a header?-->
+       <!-- <apex:outputpanel rendered="{!if(menu_line.menu_type=='Header',true,false)}"> 
+          <li role="presentation" class="dropdown-header"><apex:outputtext value="{!menu_line.menu_name}" /></li>
+        </apex:outputpanel>
+        <!--is menu line a page?-->
+        <!--<apex:outputpanel rendered="{!if(menu_line.menu_type=='Page',true,false)}">
+          <li role="presentation" class="dropdown-lineitem">
+            <a role="menuitem" tabindex="-1" href="javascript:nav_to('{!menu_line.menu_id}');" style="color:#189BEB">
+              <span class="color-box" style="background:{!menu_line.menu_nav_color};">&nbsp;</span><apex:outputtext value="{!menu_line.menu_name}" />
+            </a>
+          </li>
+        </apex:outputpanel>
+        <!--is it a call for a spacer-->
+        <!--<apex:outputpanel rendered="{!if(menu_line.menu_type=='Spacer',true,false)}"><br /></apex:outputpanel>
+      </apex:repeat>      
+    </ul>
+  </div>
+  </td>
+  <td align="center">
+  <!--Quick Search Bar-->
+  <!--<apex:outputpanel rendered="{!display_qsearch}"><apex:inputText value="{!quick_search_field}" styleClass="qsearch" onkeyup="qsearch_key();" /><a class="qsearch-btn" >Search</a></apex:outputpanel>
+    <apex:outputpanel rendered="{!display_add_button}">
+      <apex:outputpanel rendered="{!if(selected_view=='procedure_display',true,false)}"><span class="add-box" onclick="new_procedure();">+</span></apex:outputpanel>
+    </apex:outputpanel>
+  </td>
+  <td>
+  <!--nothing-->
+<!--  </td>
+</tr>
+</table>  -->
+<div class="nav-col-quarter">
+    <apex:outputpanel id="back_holder">
+      <apex:outputpanel rendered="{!if(selected_view=='procedure_display',true,false)}"><a href="javascript:window.history.go(-1);" class="nav_color">&lt; Back</a></apex:outputpanel>
+      <apex:outputpanel rendered="{!if(selected_view=='procedure_display',false,true)}"><apex:commandLink styleClass="nav_color" status="ajaxstatus" action="{!back_to_procedure}" reRender="nav_content,main_holder" oncomplete="document.getElementById('newinsert').scrollIntoView(true);">&lt; Back</apex:commandLink></apex:outputpanel>
+    </apex:outputpanel>
+  <div class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:black;">
+      <span class="color-box" style="background:{!current_page.nav_color__c};">&nbsp;</span>
+      <apex:outputtext value="{!current_page.name}" />
+    </a>    
+    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">    
+      <apex:repeat var="menu_line" value="{!navigation_menu}" >
+        <!--is menu line a header?-->
+        <apex:outputpanel rendered="{!if(menu_line.menu_type=='Header',true,false)}"> 
+          <li role="presentation" class="dropdown-header"><apex:outputtext value="{!menu_line.menu_name}" /></li>
+        </apex:outputpanel>
+        <!--is menu line a page?-->
+        <apex:outputpanel rendered="{!if(menu_line.menu_type=='Page',true,false)}">
+          <li role="presentation" class="dropdown-lineitem">
+            <a role="menuitem" tabindex="-1" href="javascript:nav_to('{!menu_line.menu_id}');" style="color:#189BEB">
+              <span class="color-box" style="background:{!menu_line.menu_nav_color};">&nbsp;</span><apex:outputtext value="{!menu_line.menu_name}" />
+            </a>
+          </li>
+        </apex:outputpanel>
+        <!--is it a call for a spacer-->
+        <apex:outputpanel rendered="{!if(menu_line.menu_type=='Spacer',true,false)}"><br /></apex:outputpanel>
+      </apex:repeat>      
+    </ul>
+  </div>
+</div>
+
+<div class="nav-col-half">
+  <span class="dropdown drop-hover">
+      <a class="dropdown-toggle nav_color " data-toggle="dropdown"><apex:outputtext value="{!current_center.name}"  style="padding-right:5px;" styleClass="c-pointer"  /><span class="caret"></span></a>
+        <ul class="dropdown-menu overflow-menu" >
+          <apex:repeat var="center" value="{!center_list}">
+            <li class="dropdown-lineitem">
+              <a href="javascript:center_switch('{!center.id}');" style="color:#189BEB"><apex:outputtext value="{!center.name}" /></a>
+            </li>
+          </apex:repeat>
+        </ul>
+    </span>
+  <!--Quick Search Bar-->
+  <apex:outputpanel rendered="{!display_qsearch}"><apex:inputText value="{!quick_search_field}" styleClass="qsearch" onkeyup="qsearch_key();" /><a class="qsearch-btn" >Search</a></apex:outputpanel>
+    <apex:outputpanel rendered="{!display_add_button}">
+      <apex:outputpanel rendered="{!if(selected_view=='procedure_display',true,false)}"><span class="add-box" onclick="new_procedure();">+</span></apex:outputpanel>
+    </apex:outputpanel>
+</div>
+
+<div class="nav-col-quarter ag-left">
+  <span class="dropdown drop-hover">
+      <a class="dropdown-toggle nav_color" data-toggle="dropdown"><apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}" width="25" height="25" styleClass="c-pointer"
+        onmouseover="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_black.png')}';"
+        onmouseout="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}';"
+        onclick="this.src='{!URLFOR($Resource.Dental_Practice_Resources,'Images/gear_blue.png')}';"
+         /></a>
+      <ul class="dropdown-menu gear-menu dropdown-menu-right">
+        <apex:repeat var="gitem" value="{!gear_menu}" >
+            <li class="dropdown-lineitem" style="display:inline-block;">
+              <a href="{!gitem.Page_URL__c}" style="color:#189BEB;"  target="{!gitem.hyperlink_target__c}"  
+                  onmouseover="this.firstChild.src='{!URLFOR($Resource.Dental_Practice_Resources,gitem.Image_Name_Hover__c)}';this.style.color='black';" 
+                  onmouseout="this.firstChild.src='{!URLFOR($Resource.Dental_Practice_Resources,gitem.Image_Name__c)}';this.style.color='#189BEB';">
+                <apex:image url="{!URLFOR($Resource.Dental_Practice_Resources,gitem.Image_Name__c)}" width="{!if(gitem.name=='Salesforce','30','20')}" height="20" style="display:inline;{!if(gitem.name=='Salesforce','position:relative;left:-7px;margin-right:-6px;','margin-right:5px;')}" />&nbsp;&nbsp;{!gitem.name}
+              </a>
+            </li>
+        </apex:repeat>
+      </ul>        
+    </span>
+</div>
+
+</apex:outputPanel>
+</apex:actionRegion>  
+</div>
+</div>
+
+<!--styleClass="mholder"-->
+<apex:outputPanel id="main_holder" styleClass="mm_container" layout="block">
+<apex:messages style="color:red;font-style:italics;" />
+  <apex:outputpanel styleClass="ptop_header" layout="block">
+  <!--display active/inactive bar here-->
+  <table style="width:100%">
+  <tr>
+    <td class="back_cell">
+      <apex:outputpanel rendered="{!if(selected_view=='procedure_display',true,false)}">+&nbsp; <apex:commandLink status="ajaxstatus" value="New Procedure" styleclass="lblue" action="{!new_procedure_form}" rerender="procedure_form_holder" /></apex:outputpanel>
+    </td>
+    <td class="center_cell"><apex:outputtext value="{!body_header}" /></td>
+    <td class="active_cell">
+      <apex:outputpanel rendered="{!display_active_nav}">
+      <span class="{!if(active_filter=='All','selected_active','unselected_active')}" onclick="active_switch('All');">All({!all_count})</span>
+      <span class="{!if(active_filter=='Active','selected_active','unselected_active')}" onclick="active_switch('Active');">Active({!active_count})</span>
+      <span class="{!if(active_filter=='Inactive','selected_active','unselected_active')}" onclick="active_switch('Inactive');" >Inactive({!inactive_count})</span>
+      </apex:outputpanel>
+    </td>
+  </tr>
+  </table>
+  </apex:outputpanel>
+  <br />
+
+  <apex:outputpanel rendered="{!if(selected_view=='procedure_display',true,false)}" styleClass="content_holder">    
+  <!--new procedure form-->
+  <apex:outputpanel id="procedure_form_holder"> 
+    <apex:outputpanel rendered="{!display_procedure_form}">
+      <span class="form-line">
+      <apex:inputfield value="{!new_procedure.name}" styleclass="input_standard long-text" type="text" onfocus="if(this.value=='Enter Procedure Name') {this.value='';}" /><span class="spacer">&nbsp;</span>
+      <apex:inputfield value="{!new_procedure.Procedure_Filter__c}" styleclass="input_standard" /><span class="spacer">&nbsp;</span><span class="spacer">&nbsp;</span>
+      
+      <apex:commandLink status="ajaxstatus" action="{!save_new_procedure}" reRender="main_holder" value="Save" styleclass="lblue" oncomplete="document.getElementById('newinsert').scrollIntoView(true);" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink status="ajaxstatus" action="{!hide_procedure_form}" reRender="main_holder" value="Cancel" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink status="ajaxstatus"  action="{!reset_procedure_form}" reRender="main_holder" value="Reset" styleclass="lblue" /></span>
+      <apex:inputfield value="{!new_procedure.Procedure_Description__c}" type="text"  styleclass="input_standard long-text" onfocus="if(this.value=='Enter Procedure Description') {this.value='';}" /><span class="spacer">&nbsp;</span>
+      <br /><br />
+    </apex:outputpanel>  
+   </apex:outputpanel>
+
+    <!--category filter bar--------->
+    <apex:commandLink action="{!change_category_filter}" status="ajaxstatus" reRender="main_holder" value="All ({!all_count})" styleclass="{!if(category_filter=='All','selected_category','unselected_category')}" >
+      <apex:param name="cfilter" value="All" />
+    </apex:commandlink><span class="spacer">&nbsp;</span>
+    <apex:commandLink action="{!change_category_filter}" status="ajaxstatus" reRender="main_holder" value="Prosth ({!prosth_count})" styleclass="{!if(category_filter=='Prosth','selected_category','unselected_category')}" >
+      <apex:param name="cfilter" value="Prosth" />
+    </apex:commandlink><span class="spacer">&nbsp;</span>
+    <apex:commandLink action="{!change_category_filter}" status="ajaxstatus" reRender="main_holder" value="Surgical ({!surgical_count})" styleclass="{!if(category_filter=='Surgical','selected_category','unselected_category')}" >
+      <apex:param name="cfilter" value="Surgical" />
+    </apex:commandlink><span class="spacer">&nbsp;</span>
+    <apex:commandLink action="{!change_category_filter}" status="ajaxstatus" reRender="main_holder" value="Misc ({!misc_count})" styleclass="{!if(category_filter=='Misc','selected_category','unselected_category')}" >
+      <apex:param name="cfilter" value="Misc" />
+    </apex:commandlink><span class="spacer">&nbsp;</span>
+
+    <!--display prosth procedures-->  
+    <apex:outputpanel rendered="{!if((category_filter=='All' || category_filter=='Prosth'),true,false)}" styleClass="content_holder" >           
+      <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+        <apex:outputPanel layout="block" styleClass="mm_header-label">Prosth</apex:outputPanel>
+      </apex:outputPanel> 
+    
+      <apex:repeat var="procedure" value="{!prosth_list}">
+      <!--Display all license records for this staff member-->
+        <!--not editing this record-->        
+        <apex:outputpanel rendered="{!if(current_edit==procedure.id,false,true)}"> 
+          <table style="width:100%">
+          <tr>
+           <td><apex:outputpanel rendered="{!if(procedure.id==last_insert,true,false)}" ><span id="newinsert"></span></apex:outputpanel>
+           <apex:commandlink value="{!procedure.Name}" status="ajaxstatus" rerender="main_holder" action="{!edit_clinical_procedure}" styleclass="lblue" style="font-size:14pt;">
+             <apex:param name="current_edit" value="{!procedure.id}" assignTo="{!current_edit}" />
+            </apex:commandlink><br />      
+            <apex:outputfield value="{!procedure.Procedure_Description__c}" />
+           </td>
+           <td style="width:375px;padding-right:50px;" align="right">
+             <apex:commandlink value="{!if(procedure.isactive__c,'Active','Inactive')}" status="ajaxstatus" rerender="main_holder" action="{!confim_activation_procedure}" styleclass="lblue">
+               <apex:param name="activation_id" value="{!procedure.id}" assignTo="{!activation_id}" />
+             </apex:commandlink>
+             <span class="detail_nav_link" onclick="scheduling_info('{!procedure.id}');">Scheduling</span>
+             <span class="detail_nav_link" onclick="financial_info('{!procedure.id}');">Financial</span>
+             <span class="detail_nav_link" onclick="form_info('{!procedure.id}');">Form</span>
+           </td>
+         </tr>
+        </table>
+        </apex:outputpanel>
+        <!--attempting to edit this record-->
+        <apex:outputpanel rendered="{!if(current_edit==procedure.id,true,false)}" >
+          <span class="form-line">
+          <apex:inputfield value="{!new_procedure.Name}" styleclass="input_standard long-text"/><span class="spacer">&nbsp;</span>
+          <apex:inputfield value="{!new_procedure.Procedure_Filter__c}" styleclass="input_standard" /><span class="spacer">&nbsp;</span><span class="spacer">&nbsp;</span>
+          <apex:commandLink action="{!save_new_procedure}" status="ajaxstatus" reRender="main_holder" value="Save" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+          <apex:commandLink action="{!hide_procedure_form}" status="ajaxstatus" reRender="main_holder" value="Cancel" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+          <apex:commandLink action="{!edit_clinical_procedure}" status="ajaxstatus" reRender="main_holder" value="Reset" styleclass="lblue" /></span>
+          <apex:inputfield value="{!new_procedure.Procedure_Description__c}" type="text" styleclass="input_standard long-text" /><span class="spacer">&nbsp;</span><br />
+        </apex:outputpanel>
+        <br />
+      </apex:repeat>  
+    </apex:outputpanel>
+    
+    <!--display surgical procedures-->  
+    <apex:outputpanel rendered="{!if((category_filter=='All' || category_filter=='Surgical'),true,false)}" styleClass="content_holder" >           
+      <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+        <apex:outputPanel layout="block" styleClass="mm_header-label">Surgical</apex:outputPanel>
+      </apex:outputPanel> 
+    
+      <apex:repeat var="procedure" value="{!surgical_list}">
+      <!--Display all license records for this staff member-->
+        <!--not editing this record-->        
+        <apex:outputpanel rendered="{!if(current_edit==procedure.id,false,true)}"> 
+          <table style="width:100%">
+          <tr>
+           <td><apex:outputpanel rendered="{!if(procedure.id==last_insert,true,false)}" ><span id="newinsert"></span></apex:outputpanel>
+           <apex:commandlink value="{!procedure.Name}" status="ajaxstatus" rerender="main_holder" action="{!edit_clinical_procedure}" styleclass="lblue" style="font-size:14pt;">
+             <apex:param name="current_edit" value="{!procedure.id}" assignTo="{!current_edit}" />
+            </apex:commandlink><br />      
+            <apex:outputfield value="{!procedure.Procedure_Description__c}" />
+           </td>
+           <td style="width:375px;padding-right:50px;" align="right">
+             <apex:commandlink value="{!if(procedure.isactive__c,'Active','Inactive')}" status="ajaxstatus" rerender="main_holder" action="{!confim_activation_procedure}" styleclass="lblue">
+               <apex:param name="activation_id" value="{!procedure.id}" assignTo="{!activation_id}" />
+             </apex:commandlink>
+             <span class="detail_nav_link" onclick="scheduling_info('{!procedure.id}');">Scheduling</span>
+             <span class="detail_nav_link" onclick="financial_info('{!procedure.id}');">Financial</span>
+             <span class="detail_nav_link" onclick="form_info('{!procedure.id}');">Form</span>
+           </td>
+         </tr>
+        </table>
+        </apex:outputpanel>
+        <!--attempting to edit this record-->
+        <apex:outputpanel rendered="{!if(current_edit==procedure.id,true,false)}" >
+          <span class="form-line">
+          <apex:inputfield value="{!new_procedure.Name}" styleclass="input_standard long-text"/><span class="spacer">&nbsp;</span>
+          <apex:inputfield value="{!new_procedure.Procedure_Filter__c}" styleclass="input_standard" /><span class="spacer">&nbsp;</span><span class="spacer">&nbsp;</span>
+          <apex:commandLink action="{!save_new_procedure}" status="ajaxstatus" reRender="main_holder" value="Save" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+          <apex:commandLink action="{!hide_procedure_form}" status="ajaxstatus" reRender="main_holder" value="Cancel" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+          <apex:commandLink action="{!edit_clinical_procedure}" status="ajaxstatus" reRender="main_holder" value="Reset" styleclass="lblue" /></span>
+          <apex:inputfield value="{!new_procedure.Procedure_Description__c}" type="text" styleclass="input_standard long-text" /><span class="spacer">&nbsp;</span><br />
+        </apex:outputpanel>
+        <br />
+      </apex:repeat>  
+    </apex:outputpanel>
+    
+    <!--display prosth procedures-->  
+    <apex:outputpanel rendered="{!if((category_filter=='All' || category_filter=='Misc'),true,false)}" styleClass="content_holder" >           
+      <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+        <apex:outputPanel layout="block" styleClass="mm_header-label">Misc</apex:outputPanel>
+      </apex:outputPanel> 
+    
+      <apex:repeat var="procedure" value="{!misc_list}">
+      <!--Display all license records for this staff member-->
+        <!--not editing this record-->        
+        <apex:outputpanel rendered="{!if(current_edit==procedure.id,false,true)}"> 
+          <table style="width:100%">
+          <tr>
+           <td><apex:outputpanel rendered="{!if(procedure.id==last_insert,true,false)}" ><span id="newinsert"></span></apex:outputpanel>
+           <apex:commandlink value="{!procedure.Name}" status="ajaxstatus" rerender="main_holder" action="{!edit_clinical_procedure}" styleclass="lblue" style="font-size:14pt;">
+             <apex:param name="current_edit" value="{!procedure.id}" assignTo="{!current_edit}" />
+            </apex:commandlink><br />      
+            <apex:outputfield value="{!procedure.Procedure_Description__c}" />
+           </td>
+           <td style="width:375px;padding-right:50px;" align="right">
+             <apex:commandlink value="{!if(procedure.isactive__c,'Active','Inactive')}" status="ajaxstatus" rerender="main_holder" action="{!confim_activation_procedure}" styleclass="lblue">
+               <apex:param name="activation_id" value="{!procedure.id}" assignTo="{!activation_id}" />
+             </apex:commandlink>
+             <span class="detail_nav_link" onclick="scheduling_info('{!procedure.id}');">Scheduling</span>
+             <span class="detail_nav_link" onclick="financial_info('{!procedure.id}');">Financial</span>
+             <span class="detail_nav_link" onclick="form_info('{!procedure.id}');">Form</span>
+           </td>
+         </tr>
+        </table>
+        </apex:outputpanel>
+        <!--attempting to edit this record-->
+        <apex:outputpanel rendered="{!if(current_edit==procedure.id,true,false)}" >
+          <span class="form-line">
+          <apex:inputfield value="{!new_procedure.Name}" styleclass="input_standard long-text"/><span class="spacer">&nbsp;</span>
+          <apex:inputfield value="{!new_procedure.Procedure_Filter__c}" styleclass="input_standard" /><span class="spacer">&nbsp;</span><span class="spacer">&nbsp;</span>
+          <apex:commandLink action="{!save_new_procedure}" status="ajaxstatus" reRender="main_holder" value="Save" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+          <apex:commandLink action="{!hide_procedure_form}" status="ajaxstatus" reRender="main_holder" value="Cancel" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+          <apex:commandLink action="{!edit_clinical_procedure}" status="ajaxstatus" reRender="main_holder" value="Reset" styleclass="lblue" /></span>
+          <apex:inputfield value="{!new_procedure.Procedure_Description__c}" type="text" styleclass="input_standard long-text" /><span class="spacer">&nbsp;</span><br />
+        </apex:outputpanel>
+        <br />
+      </apex:repeat>  
+    </apex:outputpanel>
+  </apex:outputpanel>
+  
+  <!--start display form section--->
+  <apex:outputpanel rendered="{!if(selected_view=='form_display',true,false)}" style="padding-left:50px;" layout="block" styleClass="content_holder">   
+    <apex:actionFunction name="form_refresh" rerender="form_match_holder" /> 
+    <!--display forms tied to this procedure--->
+    <apex:outputPanel layout="block" styleClass="mm_header" style="margin-bottom:7px;">
+      <apex:outputPanel layout="block" styleClass="mm_header-label">Office Forms</apex:outputPanel>
+    </apex:outputPanel> 
+    <!--html form to add a new office form-->
+    <apex:outputpanel rendered="{!display_office_form}" style="padding-left:40px;">
+      <apex:inputText id="pname_holder" value="{!new_form_name}" styleclass="input_standard" onfocus="if(this.value=='Enter form') {this.value='';}" onkeyup="form_qsearch_key();" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!add_office_form}" reRender="main_holder" value="Save" styleclass="lblue" status="ajaxstatus" /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!hide_office_form}" reRender="main_holder" value="Cancel" styleclass="lblue" status="ajaxstatus"  /><span class="spacer">&nbsp;</span>
+      <apex:commandLink action="{!reset_office_form}" reRender="main_holder" value="Reset" styleclass="lblue" status="ajaxstatus"  /><br /><br />
+      <apex:outputpanel id="form_match_holder" styleclass="procedure_matches">
+        <apex:repeat var="sresult" value="{!search_forms}" >
+          <span onclick="form_select('{!sresult.id}');" class="overflow_option"><apex:outputText value="{!sresult.name}" /></span>
+        </apex:repeat>
+      </apex:outputpanel>
+    </apex:outputpanel>
+    <!--end new office form--->
+    
+    <!--add form button-->
+    <apex:outputpanel rendered="{!if(display_procedure_form==true,false,true)}" style="padding-left:40px;">  
+      <apex:commandlink action="{!new_office_form}" rerender="main_holder" styleclass="lblue" value="+ Add Form" status="ajaxstatus" >
+        <!--<span class="light-add-box">&#43;</span>&nbsp; Add Procedure-->
+      </apex:commandlink>  
+    </apex:outputpanel>
+    
+    <!--work through form list-->
+    <div class="section_details" style="padding-top:5px;">  
+      <ul id="namelist">
+      <apex:repeat value="{!procedure_forms}" var="form" >
+        <li id="list_{!form.id}" class="sortable"><span class="hidden_parent">{!form.office_form__r.name}<span class="spacer">&nbsp;</span><span class="spacer">&nbsp;</span>
+          <span class="hidden_hover"><apex:commandlink value="Remove" rerender="main_holder" action="{!confim_remove_form}" styleclass="lblue" status="ajaxstatus" >
+             <apex:param name="activation_id" value="{!form.id}" assignTo="{!activation_id}" />
+           </apex:commandlink></span>
+           </span>
+        </li>
+      </apex:repeat>
+      </ul>
+    </div>
+    <br />
+    
+    
+    
+  </apex:outputpanel>
+  <!--end display form section-->
+  
+  <apex:outputpanel rendered="{!if(selected_view=='financial_display',true,false)}" style="padding-left:50px;" layout="block" styleClass="content_holder">    
+  <!--displaying financial info-->
+  <apex:outputpanel rendered="{!if(current_edit==new_procedure.id,false,true)}" >
+    <span class="form-line">
+      <span class="form-label" style="width:200px;">ADA Code</span>
+      <apex:outputtext value="{!if(new_procedure.ADA_Code__c=='','N/A',new_procedure.ADA_Code__c)}" />
+    </span>
+    <span class="form-line">
+      <span class="form-label" style="width:200px;">Insurance Fee</span>
+      <apex:outputPanel rendered="{!if(new_procedure.Insurance_Fee__c==null,true,false)}">Null</apex:outputPanel>
+      <apex:outputField value="{!new_procedure.Insurance_Fee__c}" rendered="{!if(new_procedure.Insurance_Fee__c==null,false,true)}" />
+    </span>
+    <span class="form-line">
+      <span class="form-label" style="width:200px;">Cost</span>
+      <apex:outputPanel rendered="{!if(new_procedure.Cost__c==null,true,false)}">Null</apex:outputPanel>
+      <apex:outputField value="{!new_procedure.Cost__c}" rendered="{!if(new_procedure.Cost__c==null,false,true)}" />
+    </span>
+    <span class="form-line">
+      <span class="form-label" style="width:200px;">Markup Min</span>
+      <apex:outputPanel rendered="{!if(new_procedure.Markup_Min__c==null,true,false)}">N/A</apex:outputPanel>
+      <apex:outputField value="{!new_procedure.Markup_Min__c}" rendered="{!if(new_procedure.Markup_Min__c==null,false,true)}" />
+    </span>
+    <span class="form-line">
+      <span class="form-label" style="width:200px;">Markup Max</span>
+      <apex:outputPanel rendered="{!if(new_procedure.Markup_Max__c==null,true,false)}">N/A</apex:outputPanel>
+      <apex:outputField value="{!new_procedure.Markup_Max__c}" rendered="{!if(new_procedure.Markup_Max__c==null,false,true)}" />
+    </span>
+    <apex:commandLink action="{!edit_financial_info}" status="ajaxstatus"  reRender="main_holder" value="Edit" styleclass="lblue" />
+  </apex:outputpanel>
+  <!--editing financial info--->
+  <apex:outputpanel rendered="{!if(current_edit==new_procedure.id,true,false)}" >
+    <span class="form-line">
+      <span class="form-label" style="width:200px;">ADA Code</span>
+      <apex:inputfield value="{!new_procedure.ADA_Code__c}" />
+    </span>
+    <span class="form-line">
+      <span class="form-label" style="width:200px;">Insurance Fee</span>
+      <apex:inputField value="{!new_procedure.Insurance_Fee__c}" />
+    </span>
+    <span class="form-line">
+      <span class="form-label" style="width:200px;">Cost</span>
+      <apex:inputField value="{!new_procedure.Cost__c}" />
+    </span>
+    <span class="form-line">
+      <span class="form-label" style="width:200px;">Markup Min</span>
+      <apex:inputField value="{!new_procedure.Markup_Min__c}" />
+    </span>
+    <span class="form-line">
+      <span class="form-label" style="width:200px;">Markup Max</span>
+      <apex:inputField value="{!new_procedure.Markup_Max__c}" />
+    </span>    
+    <apex:commandLink action="{!save_financial_info}" status="ajaxstatus"  reRender="main_holder" value="Save" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+    <apex:commandLink action="{!hide_financial_form}" status="ajaxstatus"  reRender="main_holder" value="Cancel" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+    <apex:commandLink action="{!reset_financial_info}" status="ajaxstatus"  reRender="main_holder" value="Reset" styleclass="lblue" /> <br />
+  </apex:outputpanel>
+  </apex:outputpanel>
+  
+  <apex:outputpanel rendered="{!if(selected_view=='scheduling_display',true,false)}" style="padding-left:50px;" layout="block" styleClass="content_holder">    
+  <!--displaying financial info-->
+  <apex:outputpanel rendered="{!if(current_edit==new_procedure.id,false,true)}" >
+    <span class="form-line">
+      <span class="form-label" style="width:200px;">Time</span>
+      <apex:outputPanel rendered="{!if(new_procedure.Time_Required__c==null,true,false)}">Null</apex:outputPanel>
+      <apex:outputField value="{!new_procedure.Time_Required__c}" rendered="{!if(new_procedure.Time_Required__c==null,false,true)}" />
+    </span>
+    <span class="form-line">
+      <span class="form-label" style="width:200px;">Doctor Required</span>
+      <apex:outputField value="{!new_procedure.Doctor_Required__c}"  />
+    </span>
+    <span class="form-line">
+      <span class="form-label" style="width:200px;">Assistants Needed</span>
+      <apex:outputPanel rendered="{!if(new_procedure.Assistants_Needed__c==null,true,false)}">Null</apex:outputPanel>
+      <apex:outputField value="{!new_procedure.Assistants_Needed__c}" rendered="{!if(new_procedure.Assistants_Needed__c==null,false,true)}" />
+    </span>    
+    <span class="form-line">
+      <span class="form-label" style="width:200px;">Tooth Selection</span>
+      <apex:outputField value="{!new_procedure.Allow_Tooth_Selection__c}"  />
+    </span>    
+    <apex:outputpanel styleclass="form-line" rendered="{!new_procedure.Allow_Tooth_Selection__c}">
+      <span class="form-label" style="width:200px;">Default Teeth</span>
+      <apex:outputField value="{!new_procedure.Default_Teeth_Selection__c}"  />
+    </apex:outputpanel>    
+    <apex:commandLink action="{!edit_financial_info}" status="ajaxstatus"  reRender="main_holder" value="Edit" styleclass="lblue" />
+  </apex:outputpanel>
+  <apex:outputpanel rendered="{!if(current_edit==new_procedure.id,true,false)}" >
+    <span class="form-line">
+      <span class="form-label" style="width:200px;">Time</span>
+      <apex:inputField value="{!new_procedure.Time_Required__c}" type="number" />
+    </span>
+    <span class="form-line">
+      <span class="form-label" style="width:200px;">Doctor Required</span>
+      <apex:inputField value="{!new_procedure.Doctor_Required__c}"  />
+    </span>
+    <span class="form-line">
+      <span class="form-label" style="width:200px;">Assistants Needed</span>
+      <apex:inputField value="{!new_procedure.Assistants_Needed__c}" type="number" />
+    </span>    
+    <span class="form-line">
+      <span class="form-label" style="width:200px;">Tooth Selection</span>
+      <apex:inputField value="{!new_procedure.Allow_Tooth_Selection__c}"  />
+    </span>
+    <apex:outputpanel styleclass="form-line">
+      <span class="form-label" style="width:200px;">Default Teeth</span>
+      <apex:inputField value="{!new_procedure.Default_Teeth_Selection__c}"  />
+    </apex:outputpanel>
+    <apex:commandLink action="{!save_scheduling_info}" status="ajaxstatus"  reRender="main_holder" value="Save" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+    <apex:commandLink action="{!hide_financial_form}" status="ajaxstatus"  reRender="main_holder" value="Cancel" styleclass="lblue" /><span class="spacer">&nbsp;</span>
+    <apex:commandLink action="{!reset_financial_info}" status="ajaxstatus" reRender="main_holder" value="Reset" styleclass="lblue" /> <br />
+  </apex:outputpanel>
+  </apex:outputpanel>
+    
+<!-------------------------- Start Modal Holder -------------------------------------------------------------------->  
+  <apex:outputPanel id="modal_holder" style="z-index:3000;" >
+  <apex:actionRegion >
+  <apex:actionFunction oncomplete="default_cursor(this);" action="{!close_modal}" name="close_pop" rerender="modal_holder" />  
+  <apex:actionFunction oncomplete="default_cursor(this);" action="{!update_activation_procedure}" name="update_procedure" rerender="main_holder" />  
+  <apex:actionFunction oncomplete="default_cursor(this);" action="{!update_activation_form}" name="update_form" rerender="main_holder" />  
+
+   <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!modal_display}"/>
+    <apex:outputPanel styleClass="modalPopup_outer" layout="block" rendered="{!modal_display}" id="outerpop">
+    <span class="modalPopup_outerheader" onclick="close_pop();">Close X</span> 
+    
+    <!-- rendered="{!if(modal_display && modal_type=='new_payment',true,false)}"  -->
+    <apex:outputPanel styleClass="modal_normal"  id="new_payment_form" style="border:0px;">   
+      <apex:outputpanel rendered="{!if(selected_view=='procedure_display',true,false)}">
+      <apex:outputtext value="{!modal_out}" escape="false" /><br /><br /><br />
+      <span class="confirm-btn" onclick="update_procedure();">Confirm</span><span class="spacer">&nbsp;</span>
+      <span class="cancel-btn" onclick="close_pop();">Cancel</span>
+      </apex:outputpanel>
+      
+      <apex:outputpanel rendered="{!if(selected_view=='form_display',true,false)}">
+      <apex:outputtext value="{!modal_out}" escape="false" /><br /><br /><br />
+      <span class="confirm-btn" onclick="update_form();">Confirm</span><span class="spacer">&nbsp;</span>
+      <span class="cancel-btn" onclick="close_pop();">Cancel</span>
+      </apex:outputpanel>
+    </apex:outputPanel>
+    
+    
+ </apex:outputpanel>
+ </apex:actionRegion>    
+</apex:outputPanel> 
+<!----end modal holder----->
+
+</apex:outputPanel>
+
+</apex:form>
+</body>
+</apex:page>

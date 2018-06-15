@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Baseline Target CPC --></label>
+        <name>Baseline_Target_CPC__c</name>
+    </fields>
+    <fields>
+        <label><!-- Baseline Target TCR --></label>
+        <name>Baseline_Target__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bulk Printing --></label>
+        <name>Bulk_Printing__c</name>
+    </fields>
+    <fields>
+        <label><!-- Call Center Team --></label>
+        <name>Call_Center_Team__c</name>
+        <picklistValues>
+            <masterLabel>Confirmation</masterLabel>
+            <translation><!-- Confirmation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IMP - FN</masterLabel>
+            <translation><!-- IMP - FN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IMP - KV</masterLabel>
+            <translation><!-- IMP - KV --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IMP - MM</masterLabel>
+            <translation><!-- IMP - MM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IMP - MV</masterLabel>
+            <translation><!-- IMP - MV --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Imp - IMC API</masterLabel>
+            <translation><!-- Imp - IMC API --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Imp - IMC Mansfield</masterLabel>
+            <translation><!-- Imp - IMC Mansfield --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Imp - IMC NewCastle</masterLabel>
+            <translation><!-- Imp - IMC NewCastle --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Imp - Mean Green</masterLabel>
+            <translation><!-- Imp - Mean Green --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Imp - Tooth Avengers</masterLabel>
+            <translation><!-- Imp - Tooth Avengers --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Implant Consultant</masterLabel>
+            <translation><!-- Implant Consultant --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Online Sched</masterLabel>
+            <translation><!-- Online Sched --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Outbound</masterLabel>
+            <translation><!-- Outbound --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>QAM - SM</masterLabel>
+            <translation><!-- QAM - SM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Seminar</masterLabel>
+            <translation><!-- Seminar --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Web To Lead</masterLabel>
+            <translation><!-- Web To Lead --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Center Administrator --></label>
+        <name>Center_Administrator__c</name>
+    </fields>
+    <fields>
+        <label><!-- Center PEC --></label>
+        <name>Center_PEC__c</name>
+    </fields>
+    <fields>
+        <label><!-- Clinic Calendar --></label>
+        <name>Clinic_Calendar__c</name>
+        <picklistValues>
+            <masterLabel>Atlanta</masterLabel>
+            <translation><!-- Atlanta --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Atlanta Alpharetta</masterLabel>
+            <translation><!-- Atlanta Alpharetta --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Austin</masterLabel>
+            <translation><!-- Austin --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Boston Woburn</masterLabel>
+            <translation><!-- Boston Woburn --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Charlotte</masterLabel>
+            <translation><!-- Charlotte --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chicago</masterLabel>
+            <translation><!-- Chicago --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chicago Deerfield/Northbrook</masterLabel>
+            <translation><!-- Chicago Deerfield/Northbrook --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chicago Downers Grove</masterLabel>
+            <translation><!-- Chicago Downers Grove --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chicago Evanston</masterLabel>
+            <translation><!-- Chicago Evanston --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chicago Naperville</masterLabel>
+            <translation><!-- Chicago Naperville --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chicago Schaumburg</masterLabel>
+            <translation><!-- Chicago Schaumburg --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cincinnati</masterLabel>
+            <translation><!-- Cincinnati --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cleveland</masterLabel>
+            <translation><!-- Cleveland --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Colorado Springs</masterLabel>
+            <translation><!-- Colorado Springs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Columbia</masterLabel>
+            <translation><!-- Columbia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dallas</masterLabel>
+            <translation><!-- Dallas --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dallas Arlington</masterLabel>
+            <translation><!-- Dallas Arlington --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dallas Fort Worth</masterLabel>
+            <translation><!-- Dallas Fort Worth --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denver</masterLabel>
+            <translation><!-- Denver --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Detroit Southfield</masterLabel>
+            <translation><!-- Detroit Southfield --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Houston</masterLabel>
+            <translation><!-- Houston --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Houston Woodlands</masterLabel>
+            <translation><!-- Houston Woodlands --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Kansas City</masterLabel>
+            <translation><!-- Kansas City --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Las Vegas</masterLabel>
+            <translation><!-- Las Vegas --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Los Angeles Orange County</masterLabel>
+            <translation><!-- Los Angeles Orange County --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Los Angeles Torrence</masterLabel>
+            <translation><!-- Los Angeles Torrence --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Los Angeles West Covina</masterLabel>
+            <translation><!-- Los Angeles West Covina --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Metro Detroit</masterLabel>
+            <translation><!-- Metro Detroit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Miami</masterLabel>
+            <translation><!-- Miami --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Miami Fort Lauderdale</masterLabel>
+            <translation><!-- Miami Fort Lauderdale --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Minneapolis</masterLabel>
+            <translation><!-- Minneapolis --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Minneapolis Roseville</masterLabel>
+            <translation><!-- Minneapolis Roseville --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Monterey</masterLabel>
+            <translation><!-- Monterey --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>New Jersey - Dental Arts of South Jersey</masterLabel>
+            <translation><!-- New Jersey - Dental Arts of South Jersey --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>New Jersey Roseland</masterLabel>
+            <translation><!-- New Jersey Roseland --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Orlando Maitland</masterLabel>
+            <translation><!-- Orlando Maitland --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Philadelphia - By Design Dental Implant Center</masterLabel>
+            <translation><!-- Philadelphia - By Design Dental Implant Center --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Philadelphia Fort Washington</masterLabel>
+            <translation><!-- Philadelphia Fort Washington --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Philadelphia Mount Laurel</masterLabel>
+            <translation><!-- Philadelphia Mount Laurel --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phoenix</masterLabel>
+            <translation><!-- Phoenix --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phoenix Mesa</masterLabel>
+            <translation><!-- Phoenix Mesa --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Portland</masterLabel>
+            <translation><!-- Portland --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sacramento</masterLabel>
+            <translation><!-- Sacramento --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salt Lake City</masterLabel>
+            <translation><!-- Salt Lake City --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>San Antonio</masterLabel>
+            <translation><!-- San Antonio --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>San Diego</masterLabel>
+            <translation><!-- San Diego --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>San Francisco Daly City</masterLabel>
+            <translation><!-- San Francisco Daly City --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>San Francisco Oakland</masterLabel>
+            <translation><!-- San Francisco Oakland --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>San Jose</masterLabel>
+            <translation><!-- San Jose --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Seattle</masterLabel>
+            <translation><!-- Seattle --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>St. Louis</masterLabel>
+            <translation><!-- St. Louis --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tampa</masterLabel>
+            <translation><!-- Tampa --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tucson</masterLabel>
+            <translation><!-- Tucson --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unknown</masterLabel>
+            <translation><!-- Unknown --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Walnut Creek</masterLabel>
+            <translation><!-- Walnut Creek --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Washington Rockville</masterLabel>
+            <translation><!-- Washington Rockville --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Washington Tysons Corner</masterLabel>
+            <translation><!-- Washington Tysons Corner --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>West Palm Beach</masterLabel>
+            <translation><!-- West Palm Beach --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Collections Threshold --></label>
+        <name>Collections_Threshold__c</name>
+    </fields>
+    <fields>
+        <help><!-- Please enter account creation and deactivation information: Request by. Completed by. Completed date. --></help>
+        <label><!-- Comments --></label>
+        <name>Comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Custom Screenpop --></label>
+        <name>Custom_Screenpop__c</name>
+    </fields>
+    <fields>
+        <label><!-- DOB --></label>
+        <name>DOB__c</name>
+    </fields>
+    <fields>
+        <label><!-- Default Calendar Color View --></label>
+        <name>Default_Calendar_Color_View__c</name>
+    </fields>
+    <fields>
+        <label><!-- Default Calendar Room --></label>
+        <name>Default_Calendar_Room__c</name>
+    </fields>
+    <fields>
+        <label><!-- Default Calendar View --></label>
+        <name>Default_Calendar_View__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dental Practice --></label>
+        <name>Dental_Practice__c</name>
+    </fields>
+    <fields>
+        <label><!-- Doctor Scorecard Admin --></label>
+        <name>Doctor_Scorecard_Admin__c</name>
+    </fields>
+    <fields>
+        <label><!-- Doctor Suffix --></label>
+        <name>Doctor_Suffix__c</name>
+    </fields>
+    <fields>
+        <label><!-- DoseSpot User ID --></label>
+        <name>DoseSpot_User_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Enable Patient Quick Search --></label>
+        <name>Enable_Patient_Quick_Search__c</name>
+    </fields>
+    <fields>
+        <label><!-- Field Deploy Date --></label>
+        <name>Field_Deploy_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Goal Type --></label>
+        <name>Goal_Type__c</name>
+        <picklistValues>
+            <masterLabel>Center</masterLabel>
+            <translation><!-- Center --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>User</masterLabel>
+            <translation><!-- User --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- InContact Agent Number --></label>
+        <name>InContact_Agent_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Calendar Date --></label>
+        <name>Last_Calendar_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- National Provider Identifier --></label>
+        <name>National_Provider_Identifier__c</name>
+    </fields>
+    <fields>
+        <label><!-- On End Tags --></label>
+        <name>On_End_Tags__c</name>
+    </fields>
+    <fields>
+        <label><!-- PaychexID --></label>
+        <name>PaychexID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Practice Privileges Provider --></label>
+        <name>Practice_Privileges_Provider__c</name>
+        <picklistValues>
+            <masterLabel>ClearConnect</masterLabel>
+            <translation><!-- ClearConnect --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ClearTrain</masterLabel>
+            <translation><!-- ClearTrain --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ClearVantage</masterLabel>
+            <translation><!-- ClearVantage --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ClearViewTV</masterLabel>
+            <translation><!-- ClearViewTV --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ClearWeb</masterLabel>
+            <translation><!-- ClearWeb --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Qualify Scorecards --></label>
+        <name>Qualify_Scorecards__c</name>
+    </fields>
+    <fields>
+        <label><!-- Region_PEC --></label>
+        <name>Region_PEC__c</name>
+        <picklistValues>
+            <masterLabel>Central</masterLabel>
+            <translation><!-- Central --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>East</masterLabel>
+            <translation><!-- East --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>West</masterLabel>
+            <translation><!-- West --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Regional Traveler --></label>
+        <name>Regional_Traveler__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remove from Comission Report --></label>
+        <name>Remove_from_Comission_Report__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reset Override --></label>
+        <name>Reset_Override__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC Query Result --></label>
+        <name>SFDC_Query_Result__c</name>
+    </fields>
+    <fields>
+        <label><!-- SSN --></label>
+        <name>SSN__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Goal --></label>
+        <name>Sales_Goal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier 1 Floor --></label>
+        <name>Tier_1_Floor__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tier 2 Floor --></label>
+        <name>Tier_2_Floor__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quarter Target --></label>
+        <name>Tier_3_Floor__c</name>
+    </fields>
+    <fields>
+        <help><!-- The month end date when this PEC is no longer traveling; if travel ends on 8/15/2010 for example, enter 8/31/2010. --></help>
+        <label><!-- Traveler Until --></label>
+        <name>Traveler_Until__c</name>
+    </fields>
+    <fields>
+        <label><!-- UltiPro_Id --></label>
+        <name>UltiPro_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- User License Reporting Lookup --></label>
+        <name>User_License_Reporting_Lookup__c</name>
+    </fields>
+    <fields>
+        <label><!-- User Role --></label>
+        <name>User_Role__c</name>
+    </fields>
+    <fields>
+        <label><!-- Default Marketing Cloud Page --></label>
+        <name>et4ae5__Default_ET_Page__c</name>
+    </fields>
+    <fields>
+        <label><!-- Default MID --></label>
+        <name>et4ae5__Default_MID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Marketing Cloud for AppExchange Admin --></label>
+        <name>et4ae5__ExactTargetForAppExchangeAdmin__c</name>
+    </fields>
+    <fields>
+        <label><!-- Marketing Cloud for AppExchange User --></label>
+        <name>et4ae5__ExactTargetForAppExchangeUser__c</name>
+    </fields>
+    <fields>
+        <label><!-- Marketing Cloud Username --></label>
+        <name>et4ae5__ExactTargetUsername__c</name>
+    </fields>
+    <fields>
+        <label><!-- @deprecated --></label>
+        <name>et4ae5__ExactTarget_OAuth_Token__c</name>
+    </fields>
+    <fields>
+        <label><!-- Valid Marketing Cloud Admin --></label>
+        <name>et4ae5__ValidExactTargetAdmin__c</name>
+    </fields>
+    <fields>
+        <label><!-- Valid Marketing Cloud User --></label>
+        <name>et4ae5__ValidExactTargetUser__c</name>
+    </fields>
+    <fields>
+        <label><!-- inContact Custom Screenpop --></label>
+        <name>icAgentConsole__incCustomScreenpop__c</name>
+    </fields>
+    <layouts>
+        <layout>User Layout</layout>
+        <sections>
+            <label><!-- Call Center Settings --></label>
+            <section>Call Center Settings</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- HRX Info --></label>
+            <section>HRX Info</section>
+        </sections>
+        <sections>
+            <label><!-- Sales Goals --></label>
+            <section>Sales Goals</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>
